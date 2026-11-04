@@ -48,16 +48,26 @@ This does not add HTTP seed support to a request builder that lacks it.
 This is an experimental integration, not a newly qualified model release.
 The branch has focused tests for the actual compact probability reduction,
 eligibility, fallback behavior, explicit generators, and per-instance wiring.
-Run them in the compatible environment:
+On 2026-11-04, commit `69b498f20b0f2ad598396683e3ade35b19edb661` passed
+all **64 CPU runtime tests**, with zero failures, errors, or skips. The run
+included captured-logit replay from Granite BF16 and INT8 models, **32 frames
+each**. The fast sampler remains opt-in and disabled by default. This CPU-only
+run did not execute a model or device, qualify an end-to-end configuration, or
+measure a sampler speedup.
+
+Run the tests in the compatible environment, supplying local capture files to
+include the replay test:
 
 ```bash
-VLLM_PLUGINS='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTEST_ADDOPTS='' PYTEST_PLUGINS='' \
+  VLLM_PLUGINS='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+  NEURON_SAMPLER_CAPTURE_PATHS='/path/to/bf16-captures.pt:/path/to/int8-captures.pt' \
   python -m pytest test/cpu_sampler -q
 ```
 
+Without `NEURON_SAMPLER_CAPTURE_PATHS`, the optional replay test is skipped.
 On the shared Trn1 host, native CPU tests use the same serial queue as existing
-experiments. Unexecuted tests are not recorded as passed. There is no
-branch-specific end-to-end throughput result yet.
+experiments. There is no branch-specific end-to-end throughput result yet.
 
 Earlier experimental evidence motivates this port:
 
@@ -70,6 +80,7 @@ Earlier experimental evidence motivates this port:
 
 Recorded sources:
 
+- `ultra-sampler-runtime-tests-terminal-20261104-v1.json`: SHA-256 `bd50c8be8e0cb0a5aa36fadc6db4de16e6673386a558d0b4ab78c2ce002df2dd`
 - `cpu_bounded_sampler.py`: SHA-256 `6ec785c4d29c5cd633d96bede33fa52476f75f427be69c2ee428a26567c6f80f`
 - `cpu_debug_guard.py`: SHA-256 `a02400eaa224d73a698396fd5321af20c54b73cdcf4e5021c8bbc17e3c4b73ab`
 - `cpu-bounded-sampler-both-precisions-validation.json`: SHA-256 `60487f4556c4478b0e946a735cd43fb177614bf232529a3f9f14cbf2947ae624`
