@@ -27,6 +27,7 @@ from vllm.v1.worker.gpu_input_batch import CachedRequestState, InputBatch
 from vllm.v1.worker.lora_model_runner_mixin import LoRAModelRunnerMixin
 
 from vllm_neuron.worker.constants import NEURON_MULTI_MODAL_MODELS
+from vllm_neuron.worker.cpu_sampler import maybe_enable_cpu_sampler
 from vllm_neuron.worker.neuronx_distributed_model_loader import \
     get_neuron_model
 
@@ -141,6 +142,7 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin):
 
         # Initialize CPU sampler for when on-device sampling is not available
         self.cpu_sampler = Sampler()
+        maybe_enable_cpu_sampler(self.cpu_sampler)
 
     def initialize_kv_cache(self, kv_cache_config: KVCacheConfig):
         """
@@ -1302,40 +1304,41 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin):
                 raise ValueError(
                     f"Expected logits to be 2D tensor [batch_size, vocab_size], "
                     f"got {logits.dim()}D tensor with shape {logits.shape}")
-            # Debug logging for logits inspection
-            logger.debug("=== CPU SAMPLING DEBUG ===")
-            logger.debug(
-                f"Logits tensor - shape: {logits.shape}, dtype: {logits.dtype}, device: {logits.device}"
-            )
-            logger.debug(
-                f"Logits statistics - min: {logits.min().item():.4f}, max: {logits.max().item():.4f}"
-            )
-            logger.debug(
-                f"Logits statistics - mean: {logits.mean().item():.4f}, std: {logits.std().item():.4f}"
-            )
-
-            # Show top-k logits for first sequence to verify they look like real logits
-            if logits.shape[0] > 0:
-                first_seq_logits = logits[0]
-                top_k_values, top_k_indices = torch.topk(first_seq_logits, k=5)
+            if logger.isEnabledFor(logging.DEBUG):
+                # Debug logging for logits inspection
+                logger.debug("=== CPU SAMPLING DEBUG ===")
                 logger.debug(
-                    f"First sequence top-5 logits: values={top_k_values.tolist()}, token_ids={top_k_indices.tolist()}"
+                    f"Logits tensor - shape: {logits.shape}, dtype: {logits.dtype}, device: {logits.device}"
+                )
+                logger.debug(
+                    f"Logits statistics - min: {logits.min().item():.4f}, max: {logits.max().item():.4f}"
+                )
+                logger.debug(
+                    f"Logits statistics - mean: {logits.mean().item():.4f}, std: {logits.std().item():.4f}"
                 )
 
-                # Check for suspicious patterns that might indicate pre-sampled tokens
-                if logits.dtype in [torch.int32, torch.int64]:
+                # Show top-k logits for first sequence to verify they look like real logits
+                if logits.shape[0] > 0:
+                    first_seq_logits = logits[0]
+                    top_k_values, top_k_indices = torch.topk(first_seq_logits, k=5)
                     logger.debug(
-                        "WARNING: Logits tensor has integer dtype - might be pre-sampled tokens!"
-                    )
-                if (logits >= 0).all() and (
-                        logits < self.model_config.get_vocab_size()).all():
-                    logger.debug(
-                        "WARNING: All logits values look like token IDs - might be pre-sampled!"
+                        f"First sequence top-5 logits: values={top_k_values.tolist()}, token_ids={top_k_indices.tolist()}"
                     )
 
-            logger.debug(
-                f"Request IDs being processed: {model_input.request_ids}")
-            logger.debug("=== END CPU SAMPLING DEBUG ===")
+                    # Check for suspicious patterns that might indicate pre-sampled tokens
+                    if logits.dtype in [torch.int32, torch.int64]:
+                        logger.debug(
+                            "WARNING: Logits tensor has integer dtype - might be pre-sampled tokens!"
+                        )
+                    if (logits >= 0).all() and (
+                            logits < self.model_config.get_vocab_size()).all():
+                        logger.debug(
+                            "WARNING: All logits values look like token IDs - might be pre-sampled!"
+                        )
+
+                logger.debug(
+                    f"Request IDs being processed: {model_input.request_ids}")
+                logger.debug("=== END CPU SAMPLING DEBUG ===")
 
             batch_size, vocab_size = logits.shape
             expected_vocab_size = self.model_config.get_vocab_size()

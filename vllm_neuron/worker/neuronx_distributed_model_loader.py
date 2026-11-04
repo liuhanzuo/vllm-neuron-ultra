@@ -44,7 +44,7 @@ from vllm.config import (CacheConfig, ModelConfig, ParallelConfig,
                          SchedulerConfig, SpeculativeConfig)
 from vllm.model_executor.layers.logits_processor import LogitsProcessor
 from vllm.v1.outputs import SamplerOutput
-from vllm.v1.sample import sampler as Sampler
+from vllm.v1.sample.sampler import Sampler
 
 from vllm_neuron.worker.constants import (NEURON_MULTI_MODAL_MODELS,
                                           TORCH_DTYPE_TO_NEURON_AMP)
