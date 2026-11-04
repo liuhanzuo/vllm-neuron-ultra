@@ -97,7 +97,10 @@ long-decode, and paired quality checks. Both sides of that cache comparison used
 the same fast CPU sampler. Porting its model adapter and NKI dependencies still
 requires fresh qualification in this branch.
 
-SmolLM3, Phi-4, Qwen3.5, MiniCPM5 and other ongoing work remain separate until
+An opt-in [SmolLM3 integration](smollm3.md) now packages the model adapter and
+combined NKI cache candidate; it remains unqualified in this branch.
+
+Phi-4, Qwen3.5, MiniCPM5 and other ongoing work remain separate until
 their original gates pass. New integrations retain full-vocabulary numerical
 checks, cold caches, long decoding, request-slot reuse, quality evaluation, and
 matched workloads. A local operator test does not qualify a complete model or

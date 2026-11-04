@@ -40,6 +40,9 @@ setup(
     install_requires=read_requirements(),
     entry_points={
         "vllm.platform_plugins": ["neuron = vllm_neuron:register"],
+        "vllm.general_plugins": [
+            "neuron_smollm3 = vllm_neuron.models.smollm3:register"
+        ],
     },
     include_package_data=True,
 )
