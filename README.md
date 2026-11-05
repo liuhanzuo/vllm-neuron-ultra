@@ -1,8 +1,10 @@
 # vLLM User Guide for AWS Neuron
 
-This is the `trn1-sdk227-optimizations` compatibility branch for **Neuron SDK
-2.27 and vLLM 0.11.0**. See [Trn1 optimizations](docs/trn1-optimizations.md)
-for the optional CPU sampler, validation status, and experiment evidence.
+This is the `smollm3-experimental` branch, based on the **Neuron SDK 2.27 /
+vLLM 0.11.0** compatibility branch. It adds opt-in SmolLM3 support and NKI
+cache movement. See [SmolLM3 setup](docs/smollm3.md), its
+[qualified comparison](docs/smollm3-results-20261105.md), and
+[Trn1 optimizations](docs/trn1-optimizations.md) for the separate optional CPU sampler.
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).

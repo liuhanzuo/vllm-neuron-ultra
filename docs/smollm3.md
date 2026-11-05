@@ -1,16 +1,18 @@
 # Experimental SmolLM3 integration
 
 The source integration adds original-weight SmolLM3-3B support and an optional
-combined NKI decode-cache reader/writer. **This branch integration has not passed
-native or full-model qualification.** NKI is disabled by default. There is no
-new branch throughput result.
+combined NKI decode-cache reader/writer. **The packaged integration passed its defined full-model protocol on
+2026-11-05**, using fresh artifacts from commit
+`e2d1e28b83411863acef5f12ff3db1f887866a76`. NKI remains disabled by default.
+See [measured results and limits](smollm3-results-20261105.md) for the matched
+baseline, correctness evidence and throughput comparison.
 
 Initial scope is Trn1, original BF16 SmolLM3-3B revision
 `a07cc9a04f16550a088caea529712d1d335b0ac1`, TP2, physical decode B4, prefill B1,
 context2048 and minimum decode bucket2048. Original 36-layer RoPE/NoPE, tied
 embeddings and per-rank `[4,2,2048,128]` caches are preserved. Prefix/block KV,
 chunked prefill, LoRA, speculation and other precision/TP/batch/context routes
-are unsupported. Keep `NEURON_CPU_SAMPLER_FAST=0` for initial qualification.
+are unsupported. The qualified comparison uses `NEURON_CPU_SAMPLER_FAST=0` on both sides.
 
 ## Preparation and interface
 
@@ -37,7 +39,7 @@ The initial software versions are pinned:
 
 Reference and NKI variants need distinct new artifact directories under an
 existing parent. Compilation additionally requires `NEURON_SMOLLM3_ALLOW_COMPILE=1`;
-remove it for cached startup. This interface still requires native validation:
+remove it for cached startup. This interface was exercised by the native preflight and fresh-artifact comparison:
 
 ```bash
 export NEURON_SMOLLM3=1
@@ -74,7 +76,7 @@ artifact is automatically repaired or replaced.
 To revert, stop the worker, select its reference artifact, set the NKI flag to0
 and restart with fresh live KV state. In-request switching is unsupported.
 
-## Evidence and remaining qualification
+## Evidence and remaining work
 
 The frozen `smollm3-samefloor-full-v1` experiment combined NKI DMA cache reads and
 predicated-copy writes, preserving prefill and remaining attention arithmetic.
@@ -83,16 +85,19 @@ workloads. Its original runner measured about7.92–8.07× deterministic single 
 7.32–7.85× concurrent throughput over three sequential rounds. There is no
 read-only/write-only attribution or statistical significance claim.
 
-Those ratios do not describe this branch: its DEBUG statistics handling already
-differs, and packaged model/registration/admission require fresh checks. Old
-small-bucket NaNs and other failed routes remain failed evidence.
+Those earlier ratios do not describe this branch. The new packaged comparison
+uses fresh builds from the exact commit named above; its results are recorded
+[separately](smollm3-results-20261105.md). Old small-bucket NaNs and other failed
+routes remain failed evidence.
 
 SDK source identity includes live bucket generation, padding, TP layers,
 collectives/casts and relevant configuration/build helpers. The first build
 records the inspected source hashes; it does not prove those sources equal
 every source of the old experiment. NKI/compiler distribution versions are
-pinned, but this source-only change has not executed or qualified their native
-binaries. Fresh qualification must freeze the actual complete environment.
+pinned. Native preflight v6 authenticated the installed environment and exercised
+wheel installation, parent/spawn plugin loading and configuration checks. Full
+v3 then built and ran both packaged variants. This qualification applies to the
+recorded environment and scope; it does not certify other SDK installations.
 
 The focused stdlib admission tests use tiny fake artifacts, without model/SDK
 execution. They can be run with:
@@ -101,14 +106,21 @@ execution. They can be run with:
 python -m unittest discover -s test/smollm3 -p 'test_*.py'
 ```
 
-Before qualification, freeze the integrated commit and run both variants through
+The completed comparison froze the integrated commit and ran both variants through
 original numeric32 thresholds, seven independent cold starts/84 frames and the
-complete1529-step trajectory/84 checkpoints. Retain all1537 forwards, including
-slot reuse, decode after reuse, partial batch and inactive resume. Run smoke,
-quality96, initial120 and five workloads×3 rounds. Verify actual decode mask2048
-and cache alias order. Compare76 deterministic decoded texts/usage plus real
-finalizer mutation rejection controls; report stochastic differences. Both sides
-use the same branch runner/sampler. No automatic best-known promotion occurs.
+complete1529-step trajectory/84 checkpoints. It retained all1537 forwards, including
+slot reuse, decode after reuse, partial batch and inactive resume. Smoke, quality96, initial120 and five workloads×3 rounds also completed. Runtime
+routing checks covered decode mask2048 and cache alias order; all76 deterministic
+decoded texts and usage pairs matched. Stochastic text equality is not required.
+Both sides used the same branch runner and standard CPU sampler. No automatic
+best-known promotion occurred.
+
+Long validation uses exact native cached HF trajectories. The historical
+full-causal reference still fails two position510 comparisons; an inherited
+boolean field in the long report does not establish that it passed. Context
+length2048 and minimum decode bucket2048 remain required. Further optimization
+and broader support need fresh qualification; this is not a claim that the
+model family is fully optimized.
 
 ## Source and license
 
