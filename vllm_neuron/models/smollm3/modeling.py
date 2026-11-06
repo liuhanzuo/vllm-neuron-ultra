@@ -7,7 +7,7 @@ from neuronx_distributed.parallel_layers.layers import ParallelEmbedding,ColumnP
 from neuronx_distributed_inference.models.config import InferenceConfig,NeuronConfig
 from neuronx_distributed_inference.models.model_base import NeuronBaseModel, NeuronBaseForCausalLM
 from .text_core import Attention, Layer, RMSNorm
-from .identity import AdmissionError, validate_scope
+from .identity import AdmissionError, CACHE_VARIANTS, validate_scope
 
 
 class SmolLM3InferenceConfig(InferenceConfig):
@@ -71,12 +71,13 @@ class NeuronSmolLM3Model(NeuronBaseModel):
         def row(a,b):return RowParallelLinear(a,b,bias=False,input_is_parallel=True,dtype=dtype)
         self.layers=nn.ModuleList()
         identity=(c.metadata or {}).get('smollm3_ultra')
-        if not identity or identity['variant'] not in ('reference', 'nki_read_write'):
+        if not identity or identity['variant'] not in CACHE_VARIANTS:
             raise AdmissionError('SmolLM3 requires an admitted build identity before model construction')
         attention_cls=Attention
-        if identity['variant']=='nki_read_write':
-            from .cache_attention import NkiAttention
-            attention_cls=NkiAttention
+        if identity['variant']!='reference':
+            from .cache_attention import NkiAttention, NkiReadAttention, NkiWriteAttention
+            attention_cls={'nki_read':NkiReadAttention, 'nki_write':NkiWriteAttention,
+                           'nki_read_write':NkiAttention}[identity['variant']]
         for i in range(c.num_hidden_layers):
             layer=Layer(vars(c),i,attention_cls=attention_cls);a=layer.self_attn
             a.q_proj=col(h,a.h*a.dim);a.k_proj=col(h,a.kvh*a.dim);a.v_proj=col(h,a.kvh*a.dim)

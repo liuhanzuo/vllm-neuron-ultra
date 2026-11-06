@@ -18,7 +18,7 @@
 """Per-model decode cache candidate; prefill keeps the original attention."""
 import torch
 import torch.nn.functional as F
-from .text_core import Attention
+from .text_core import Attention, store_slots
 
 
 def read_cache(cache,slots):
@@ -29,6 +29,10 @@ def read_cache(cache,slots):
 def write_cache(cache,updates,slots):
     from .nki_write_torch import store_slots_nki_predicated
     return store_slots_nki_predicated(cache,updates,slots)
+
+
+def read_reference(cache,slots):
+    return cache[slots.clamp_min(0)]
 
 
 def attention_forward(self, x, cache, slots, positions, lengths, prefill):
@@ -60,8 +64,8 @@ def attention_forward(self, x, cache, slots, positions, lengths, prefill):
         (sk, sv) = (F.pad(z * valid[:, None, :, None], (0, 0, 0, kc.shape[2] - t)) for z in (k, v))
     else:
         idx = positions[:, None, :, None].expand(b, self.kvh, 1, self.dim)
-        sk = torch.scatter(read_cache(kc, slots), 2, idx, k)
-        sv = torch.scatter(read_cache(vc, slots), 2, idx, v)
+        sk = torch.scatter(self.read_cache(kc, slots), 2, idx, k)
+        sv = torch.scatter(self.read_cache(vc, slots), 2, idx, v)
         (all_k, all_v) = (sk, sv)
     keys = torch.arange(all_k.shape[2], device=x.device)[None, None, None, :]
     allowed = (keys <= positions[:, None, :, None]) & (keys < lengths[:, None, None, None])
@@ -69,8 +73,18 @@ def attention_forward(self, x, cache, slots, positions, lengths, prefill):
     scores = q @ all_k.transpose(-1, -2) * self.dim ** (-0.5)
     scores = scores + torch.where(allowed, torch.zeros_like(scores), torch.full_like(scores, torch.finfo(scores.dtype).min))
     out = (scores.softmax(-1, dtype=torch.float32).to(q.dtype) @ all_v).transpose(1, 2).reshape(b, t, -1)
-    return (self.o_proj(out), (write_cache(kc, sk, slots), write_cache(vc, sv, slots)))
+    return (self.o_proj(out), (self.write_cache(kc, sk, slots), self.write_cache(vc, sv, slots)))
 
 
 class NkiAttention(Attention):
     forward = attention_forward
+    read_cache = staticmethod(read_cache)
+    write_cache = staticmethod(write_cache)
+
+
+class NkiReadAttention(NkiAttention):
+    write_cache = staticmethod(store_slots)
+
+
+class NkiWriteAttention(NkiAttention):
+    read_cache = staticmethod(read_reference)

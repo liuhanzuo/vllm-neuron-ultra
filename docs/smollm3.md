@@ -78,6 +78,21 @@ and restart with fresh live KV state. In-request switching is unsupported.
 
 ## Evidence and remaining work
 
+This successor branch adds two **unqualified** cache ablation variants to measure
+the separate contribution of NKI reads and writes. Select exactly one of
+`reference`, `nki_read`, `nki_write`, or `nki_read_write` with
+`NEURON_SMOLLM3_CACHE_VARIANT`, leaving `NEURON_SMOLLM3_NKI_CACHE` unset.
+The legacy flag retains its existing default and 0/1 behavior. Setting both
+selectors is rejected, even when they would select the same implementation.
+
+`nki_read` uses the original write operation; `nki_write` uses the original
+cache indexing operation. Both retain original prefill and all remaining
+attention arithmetic. The selected variant is bound into the artifact identity,
+so the four modes require separate artifacts. Source changes also require new
+builds; the results linked above apply only to their recorded commit. The new
+variants must pass the original numeric32, cold84, full long/reuse protocol,
+quality96 and five workloads with three rounds before any speed claim.
+
 The frozen `smollm3-samefloor-full-v1` experiment combined NKI DMA cache reads and
 predicated-copy writes, preserving prefill and remaining attention arithmetic.
 It passed numeric32, cold84, long84 checkpoints, smoke, quality96 and matched

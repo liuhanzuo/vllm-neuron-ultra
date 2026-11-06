@@ -52,6 +52,7 @@ SCOPE = {
     "apply_seq_ids_mask": True,
     "cpu_sampler": "standard",
 }
+CACHE_VARIANTS = ("reference", "nki_read", "nki_write", "nki_read_write")
 
 
 class AdmissionError(RuntimeError):
@@ -146,11 +147,16 @@ def verify_view(path):
 def selected_variant():
     require(os.environ.get("NEURON_SMOLLM3") == "1",
             "SmolLM3 support requires NEURON_SMOLLM3=1")
+    explicit = os.environ.get("NEURON_SMOLLM3_CACHE_VARIANT")
+    if explicit is not None:
+        require(explicit in CACHE_VARIANTS, "Unsupported SmolLM3 cache variant")
+        require("NEURON_SMOLLM3_NKI_CACHE" not in os.environ,
+                "Set only one SmolLM3 cache selector")
     value = os.environ.get("NEURON_SMOLLM3_NKI_CACHE", "0")
     require(value in ("0", "1"), "NEURON_SMOLLM3_NKI_CACHE must be 0 or 1")
     require(os.environ.get("NEURON_CPU_SAMPLER_FAST", "0") == "0",
             "Initial SmolLM3 qualification requires the standard CPU sampler")
-    return "nki_read_write" if value == "1" else "reference"
+    return explicit if explicit is not None else ("nki_read_write" if value == "1" else "reference")
 
 
 def validate_scope(model, neuron):

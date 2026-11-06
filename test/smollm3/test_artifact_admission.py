@@ -105,6 +105,22 @@ class AdmissionTests(unittest.TestCase):
                 self.assertEqual(self.calls, [])
                 self.assertEqual(before, self.snapshot())
 
+    def test_cache_variants_never_share_compiled_artifacts(self):
+        base=self.path
+        for compiled in identity.CACHE_VARIANTS:
+            self.path=base.with_name("compiled-"+compiled)
+            self.identity["variant"]=compiled
+            with patch.dict(os.environ,{"NEURON_COMPILED_ARTIFACTS":str(self.path)}):
+                self.complete();before=self.snapshot()
+                for requested in identity.CACHE_VARIANTS:
+                    if requested==compiled:continue
+                    changed=copy.deepcopy(self.identity);changed["variant"]=requested
+                    with self.subTest(compiled=compiled,requested=requested), \
+                            patch.object(artifacts,"build_identity",return_value=changed):
+                        with self.assertRaises(AdmissionError):self.invoke()
+                    self.assertEqual(self.calls,[])
+                    self.assertEqual(self.snapshot(),before)
+
     def test_corrupted_artifact_rejects_without_rebuild(self):
         self.complete()
         (self.path / "model.pt").write_text("changed")
@@ -345,6 +361,23 @@ class CanonicalConfigurationTests(unittest.TestCase):
 
 
 class DisabledPluginTests(unittest.TestCase):
+    def test_explicit_cache_variants_and_legacy_selection(self):
+        base={"NEURON_SMOLLM3":"1", "NEURON_CPU_SAMPLER_FAST":"0"}
+        for variant in identity.CACHE_VARIANTS:
+            with self.subTest(variant=variant), patch.dict(os.environ, base, clear=True):
+                os.environ["NEURON_SMOLLM3_CACHE_VARIANT"]=variant
+                self.assertEqual(selected_variant(),variant)
+                # Reject even equivalent dual selectors: artifacts have one route.
+                for value in ("0","1"):
+                    os.environ["NEURON_SMOLLM3_NKI_CACHE"]=value
+                    with self.assertRaises(AdmissionError):selected_variant()
+        for value,variant in (("0","reference"),("1","nki_read_write")):
+            with patch.dict(os.environ,dict(base,NEURON_SMOLLM3_NKI_CACHE=value),clear=True):
+                self.assertEqual(selected_variant(),variant)
+        for value in ("","read","write","both","REFERENCE"):
+            with patch.dict(os.environ,dict(base,NEURON_SMOLLM3_CACHE_VARIANT=value),clear=True):
+                with self.assertRaises(AdmissionError):selected_variant()
+
     def test_disabled_path_imports_no_model_library(self):
         original = builtins.__import__
         def restricted(name, *args, **kwargs):
