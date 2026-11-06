@@ -40,6 +40,8 @@ setup(
     install_requires=read_requirements(),
     entry_points={
         "vllm.platform_plugins": ["neuron = vllm_neuron:register"],
+        "vllm.general_plugins": ["lfm3 = vllm_neuron.models.lfm3:register"],
     },
+    package_data={"vllm_neuron.models.lfm3": ["tokenizer_fixtures.json", "licenses/*.txt"]},
     include_package_data=True,
 )

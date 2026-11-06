@@ -1,0 +1,176 @@
+{
+  "schema": "lfm3-historical-v4-evidence-v1",
+  "repository_integration_qualified": false,
+  "repository_native_tests_executed": false,
+  "repository_performance_retested": false,
+  "model": "LiquidAI/LFM3-1.7B",
+  "revision": "ac2586a34f1a1c03329dbdcdefabd8b6478ddaa7",
+  "historical_scope": {
+    "dtype": "BF16",
+    "tp": 2,
+    "batch": 4,
+    "context": 2048,
+    "hardware": "trn1.2xlarge",
+    "sampler": "Both historical variants used TRN1_CPU_SAMPLER_FAST=1",
+    "writer": "one row original; multiple decode rows NKI predicated copy"
+  },
+  "historical_reports": {
+    "lfm3-nki-predicated-slot-full/paired-comparison.json": "acdefa95261cc9c92d20e5246d7a665cc7dccbef99ab0bfc40afdaffeb02d212",
+    "lfm3-nki-predicated-slot-resume/qualification-audit.json": "d16ce3e703ffe82868408f81354315ec8966a7d7b2a0c071fea677065aa40aab"
+  },
+  "historical_correctness": {
+    "numerical32": true,
+    "cold96": true,
+    "cold96_bitwise_equal": 90,
+    "long_steps": 1529,
+    "long_checkpoints": 84,
+    "long_all_top1_match": true,
+    "quality": {
+      "reference_correct": 63,
+      "candidate_correct": 63,
+      "total": 96,
+      "identical_texts": 96,
+      "lost_correct": [],
+      "gained_correct": []
+    }
+  },
+  "historical_workloads": {
+    "short_decode": {
+      "single": {
+        "reference_tok_s": 29.783355147254976,
+        "candidate_tok_s": 61.29245166481455,
+        "ratio": 2.0579431485060087
+      },
+      "concurrent": {
+        "reference_tok_s": 104.1362063927004,
+        "candidate_tok_s": 188.82762309370176,
+        "ratio": 1.813275417212989
+      }
+    },
+    "medium_prompt": {
+      "single": {
+        "reference_tok_s": 28.916087263116726,
+        "candidate_tok_s": 55.013436057132104,
+        "ratio": 1.9025200593893377
+      },
+      "concurrent": {
+        "reference_tok_s": 98.25459599445612,
+        "candidate_tok_s": 166.76592945705852,
+        "ratio": 1.697283753184106
+      }
+    },
+    "long_prompt": {
+      "single": {
+        "reference_tok_s": 5.307930609754452,
+        "candidate_tok_s": 45.204321189087146,
+        "ratio": 8.516373802252536
+      },
+      "concurrent": {
+        "reference_tok_s": 20.41172784791812,
+        "candidate_tok_s": 136.38885625134145,
+        "ratio": 6.681886867566302
+      }
+    },
+    "short_stochastic": {
+      "single": {
+        "reference_tok_s": 29.240025356674384,
+        "candidate_tok_s": 58.35278283465102,
+        "ratio": 1.9956474771432202
+      },
+      "concurrent": {
+        "reference_tok_s": 97.63017744599584,
+        "candidate_tok_s": 169.63313591785092,
+        "ratio": 1.7375071966010052
+      }
+    },
+    "mixed_lengths": {
+      "concurrent": {
+        "reference_tok_s": 20.69347971823974,
+        "candidate_tok_s": 122.0689443499277,
+        "ratio": 5.89890854568713
+      }
+    }
+  },
+  "historical_measurement_scope": "Same original BF16/TP2/B4/context2048 and fast CPU sampler. Original writer then NKI writer, five workloads, three rounds each; raw input/output counts, sampling and elapsed times checked. Sequential paired measurements, not randomized or a statistical significance claim. Quality reported separately; no claim of full model-family optimization completion.",
+  "earlier_qualification_performance_flag": false,
+  "earlier_qualification_note": "This report preceded the completed workload/raw-count audit; use the later paired-comparison for historical performance.",
+  "repository_validation_remaining": [
+    "Original 1648 CPU cases",
+    "9 device graphs / 43 checks",
+    "12 persistent-alias graphs / 60 checks",
+    "6 HF prompt and 96 quality-token equality with real TF4 tokenizer",
+    "32 numeric frames",
+    "96 independent cold buckets",
+    "1529 long-decode steps /84 checkpoints and reuse",
+    "96 exact quality cases/texts",
+    "five workloads x three sequential rounds with raw count/time audit",
+    "packaged NEURON_CPU_SAMPLER_FAST matched qualification on both variants"
+  ],
+  "sampler_migration": "Existing repository NEURON_CPU_SAMPLER_FAST retained. It differs from historical global sampler patch; no equivalence claimed.",
+  "not_claimed": [
+    "randomized measurement",
+    "statistical significance",
+    "repository performance reproduced",
+    "entire model-family optimization complete"
+  ],
+  "source_metadata_sha256": {
+    "research/LiquidAI__LFM3-1.7B.metadata.json": "b831b2d9cf7def22261ae86d5c50621a4fc2f7846159649bbe310bfdaae6524a",
+    "research/LiquidAI__LFM3-1.7B.config.json": "3d0d90df0d85cdb9aa861bebe67118b0c7de1fdc6679fca9900959cb6d75287e",
+    "research/lfm3-reference-package-manifest.json": "210e751a7e5f88d6d9a773f753c637962bbff8899cd14851d75e9c5715d13d0f",
+    "lfm3-tokenizer-view-manifest.json": "8319d5f2ee57b3e930cb250e03ded7750e25b2f3f7675e52ac4f16aad66cbf4e",
+    "lfm3-nki-predicated-slot-resume/plan.json": "947b8db498e1bf698a252d33ea30ab298409678c42b77306e335f18235fc7166"
+  },
+  "software_version_metadata": {
+    "torch-neuronx": {
+      "version": "2.8.0.2.12.22436+0f1dac25",
+      "metadata_sha256": "f80a6048df29078b6353b95d3e7fe4cf52b98d01b1eb7ad9326e9932f5556b37"
+    },
+    "torch": {
+      "version": "2.8.0",
+      "metadata_sha256": "57ede492698857503164f9ab76185bc0d70aafd1e0078e3ea4f137a56320433c"
+    },
+    "vllm": {
+      "version": "0.11.0",
+      "metadata_sha256": "7faa4f3a4a2588709bc8e7bf3bb0fd80c4f0a22ef559ada8e34793f4ada36e8f"
+    },
+    "neuronx-distributed-inference": {
+      "version": "0.8.16251+f3ca5575",
+      "metadata_sha256": "739871500b36569a49af69ccd62eea8dd26d5d3ce6b1308a7b45d835e82b00d7"
+    },
+    "neuronx-cc": {
+      "version": "2.23.6484.0+3b612583",
+      "metadata_sha256": "cb8d5ae74efe0a7403198ec68e91f920b612ba2339605de2bd1dc8f2f802fac2"
+    },
+    "neuronx-distributed": {
+      "version": "0.17.26814+4b18de63",
+      "metadata_sha256": "3ac3d0d896495380b734e3414682458c5ac1a3f9d21ce13551b276c4e721bdfc"
+    },
+    "transformers": {
+      "version": "4.57.6",
+      "metadata_sha256": "91601044a74fe02571a825356754dbbaa9e1d3e3dd3c2237254c15e903e421e3"
+    }
+  },
+  "historical_bucket_contract": {
+    "root_config_sha256": "243df3eba317cf196efcde6c5eee47da39c1edaf13adb4ccab9d022a3751a0ba",
+    "root_buckets": [
+      2048
+    ],
+    "cold_decode_routes": [
+      128,
+      256,
+      512,
+      1024,
+      2048
+    ],
+    "minimum_decode_floor_override": false
+  },
+  "original_numeric_thresholds": {
+    "cosine_min": 0.995,
+    "kl_max": 0.02,
+    "max_abs_error_max": 2,
+    "high_margin_threshold": 0.5,
+    "high_margin_top1_required": true,
+    "aggregate_argmax_rate_min": 0.9,
+    "finite_outputs_required": true
+  }
+}
