@@ -1,0 +1,2747 @@
+{
+  "schema": "minicpm5_original32_full_down_independent_metadata_review_v1",
+  "reviewer": "/root/mini_full_down_result_review",
+  "observed_at": "2026-11-07T23:32:20.288139+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_full_down_metadata_independent_20261107_v1.py",
+    "sha256": "a555efe7f0a089c3d8a1d84eb0952201f3e0b1dc3512f5cb9725738ca312d2ae"
+  },
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-root-exit-r1-20261107-v1.json",
+    "sha256": "22af7835e3ef15bebd90c1c7f14ecc925275887511a6248877856a082d74fcb9"
+  },
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-input-plan.json",
+    "sha256": "8d7b6b76cc9af0c638e1cb97e827e2817279ed5953f93d52c0f136f9c5548a8a"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-execution-spec.json",
+    "sha256": "da8995fa53580546d53903642c4783d04a402f50e367dd1db8dae5b247f07d5b"
+  },
+  "metadata_checks_passed": true,
+  "blockers_to_metadata_acceptance": [],
+  "summaries": {
+    "strict_anchor_s0": {
+      "complete": true,
+      "frames": 32,
+      "prefill_frames": 8,
+      "decode_frames": 24,
+      "passed": false,
+      "failed_frames": [
+        1,
+        9,
+        13
+      ],
+      "prefill_failed": 1,
+      "decode_failed": 2,
+      "argmax_match_fraction": 1.0,
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 0.75,
+          "mean_abs_error": 0.10412118583917618,
+          "cosine": 0.9987252354621887,
+          "kl_reference_to_neuron": 0.10126954317092896,
+          "argmax_match": true,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 1062
+        },
+        "failed_criteria": [
+          "KL"
+        ]
+      },
+      "full_model_qualified": false
+    },
+    "strict_layer0_full_bf16_down": {
+      "complete": true,
+      "frames": 32,
+      "prefill_frames": 8,
+      "decode_frames": 24,
+      "passed": false,
+      "failed_frames": [
+        1,
+        13
+      ],
+      "prefill_failed": 1,
+      "decode_failed": 1,
+      "argmax_match_fraction": 0.96875,
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 0.8125,
+          "mean_abs_error": 0.13068631291389465,
+          "cosine": 0.9979925155639648,
+          "kl_reference_to_neuron": 0.196322962641716,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      },
+      "full_model_qualified": false
+    }
+  },
+  "newly_failed_frames": [],
+  "recovered_frames": [
+    9
+  ],
+  "newly_top1_mismatched_frames": [
+    1
+  ],
+  "comparisons": [
+    {
+      "frame": {
+        "index": 0,
+        "fixture": 0,
+        "slot": 3,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.3203125,
+        "mean_abs_error": 0.050001759082078934,
+        "cosine": 0.9997166395187378,
+        "kl_reference_to_neuron": 2.6362300559412688e-05,
+        "argmax_match": true,
+        "reference_margin": 5.875,
+        "reference_top1": 50480,
+        "neuron_top1": 50480
+      },
+      "candidate": {
+        "max_abs_error": 0.328125,
+        "mean_abs_error": 0.059654004871845245,
+        "cosine": 0.9996048212051392,
+        "kl_reference_to_neuron": 4.265471034159418e-06,
+        "argmax_match": true,
+        "reference_margin": 5.875,
+        "reference_top1": 50480,
+        "neuron_top1": 50480
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.75,
+        "mean_abs_error": 0.10412118583917618,
+        "cosine": 0.9987252354621887,
+        "kl_reference_to_neuron": 0.10126954317092896,
+        "argmax_match": true,
+        "reference_margin": 1.125,
+        "reference_top1": 1062,
+        "neuron_top1": 1062
+      },
+      "candidate": {
+        "max_abs_error": 0.8125,
+        "mean_abs_error": 0.13068631291389465,
+        "cosine": 0.9979925155639648,
+        "kl_reference_to_neuron": 0.196322962641716,
+        "argmax_match": false,
+        "reference_margin": 1.125,
+        "reference_top1": 1062,
+        "neuron_top1": 15182
+      },
+      "baseline_failed": [
+        "KL"
+      ],
+      "candidate_failed": [
+        "KL",
+        "high_margin_argmax"
+      ]
+    },
+    {
+      "frame": {
+        "index": 2,
+        "fixture": 2,
+        "slot": 0,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.4375,
+        "mean_abs_error": 0.06864462792873383,
+        "cosine": 0.9994516968727112,
+        "kl_reference_to_neuron": 0.00044237819383852184,
+        "argmax_match": true,
+        "reference_margin": 3.25,
+        "reference_top1": 1746,
+        "neuron_top1": 1746
+      },
+      "candidate": {
+        "max_abs_error": 0.515625,
+        "mean_abs_error": 0.07728546112775803,
+        "cosine": 0.9993069767951965,
+        "kl_reference_to_neuron": 0.0038968559820204973,
+        "argmax_match": true,
+        "reference_margin": 3.25,
+        "reference_top1": 1746,
+        "neuron_top1": 1746
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 3,
+        "fixture": 5,
+        "slot": 2,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.328125,
+        "mean_abs_error": 0.057222213596105576,
+        "cosine": 0.9997134804725647,
+        "kl_reference_to_neuron": 0.0003297587390989065,
+        "argmax_match": true,
+        "reference_margin": 4.75,
+        "reference_top1": 115320,
+        "neuron_top1": 115320
+      },
+      "candidate": {
+        "max_abs_error": 0.4375,
+        "mean_abs_error": 0.058665867894887924,
+        "cosine": 0.9996822476387024,
+        "kl_reference_to_neuron": 0.0006947866640985012,
+        "argmax_match": true,
+        "reference_margin": 4.75,
+        "reference_top1": 115320,
+        "neuron_top1": 115320
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 4,
+        "fixture": 0,
+        "slot": 3,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.3125,
+        "mean_abs_error": 0.047463152557611465,
+        "cosine": 0.9996688961982727,
+        "kl_reference_to_neuron": 1.7047378264578583e-07,
+        "argmax_match": true,
+        "reference_margin": 10.875,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 0.3125,
+        "mean_abs_error": 0.04810226336121559,
+        "cosine": 0.9996840953826904,
+        "kl_reference_to_neuron": 6.45363513740449e-08,
+        "argmax_match": true,
+        "reference_margin": 10.875,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 5,
+        "fixture": 7,
+        "slot": 1,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.65625,
+        "mean_abs_error": 0.09401891380548477,
+        "cosine": 0.9987539649009705,
+        "kl_reference_to_neuron": 8.190513511863173e-08,
+        "argmax_match": true,
+        "reference_margin": 11.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 0.765625,
+        "mean_abs_error": 0.1485263854265213,
+        "cosine": 0.9972866773605347,
+        "kl_reference_to_neuron": 9.286543445341522e-08,
+        "argmax_match": true,
+        "reference_margin": 11.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 6,
+        "fixture": 2,
+        "slot": 0,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 1.0,
+        "mean_abs_error": 0.15150466561317444,
+        "cosine": 0.997905433177948,
+        "kl_reference_to_neuron": 6.752553599653766e-05,
+        "argmax_match": true,
+        "reference_margin": 5.625,
+        "reference_top1": 39310,
+        "neuron_top1": 39310
+      },
+      "candidate": {
+        "max_abs_error": 0.90625,
+        "mean_abs_error": 0.1402822881937027,
+        "cosine": 0.9981487393379211,
+        "kl_reference_to_neuron": 6.633796147070825e-05,
+        "argmax_match": true,
+        "reference_margin": 5.625,
+        "reference_top1": 39310,
+        "neuron_top1": 39310
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 7,
+        "fixture": 5,
+        "slot": 2,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.28125,
+        "mean_abs_error": 0.045908354222774506,
+        "cosine": 0.9997231364250183,
+        "kl_reference_to_neuron": 1.970796802197583e-06,
+        "argmax_match": true,
+        "reference_margin": 0.75,
+        "reference_top1": 354,
+        "neuron_top1": 354
+      },
+      "candidate": {
+        "max_abs_error": 0.453125,
+        "mean_abs_error": 0.06291812658309937,
+        "cosine": 0.9995062351226807,
+        "kl_reference_to_neuron": 1.0591899808787275e-05,
+        "argmax_match": true,
+        "reference_margin": 0.75,
+        "reference_top1": 354,
+        "neuron_top1": 354
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 8,
+        "fixture": 0,
+        "slot": 3,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.59375,
+        "mean_abs_error": 0.09983290731906891,
+        "cosine": 0.9989601969718933,
+        "kl_reference_to_neuron": 7.229220500448719e-05,
+        "argmax_match": true,
+        "reference_margin": 7.3125,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 0.65625,
+        "mean_abs_error": 0.10494299232959747,
+        "cosine": 0.9988868236541748,
+        "kl_reference_to_neuron": 1.996938226511702e-05,
+        "argmax_match": true,
+        "reference_margin": 7.3125,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 9,
+        "fixture": 7,
+        "slot": 1,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 1.125,
+        "mean_abs_error": 0.17521408200263977,
+        "cosine": 0.9977738261222839,
+        "kl_reference_to_neuron": 0.028122015297412872,
+        "argmax_match": true,
+        "reference_margin": 0.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 0.96875,
+        "mean_abs_error": 0.17202474176883698,
+        "cosine": 0.9978349804878235,
+        "kl_reference_to_neuron": 0.00846694316715002,
+        "argmax_match": true,
+        "reference_margin": 0.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [
+        "KL"
+      ],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 10,
+        "fixture": 2,
+        "slot": 0,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.75,
+        "mean_abs_error": 0.1207551509141922,
+        "cosine": 0.998471736907959,
+        "kl_reference_to_neuron": 4.420840468810638e-06,
+        "argmax_match": true,
+        "reference_margin": 10.625,
+        "reference_top1": 220,
+        "neuron_top1": 220
+      },
+      "candidate": {
+        "max_abs_error": 0.884765625,
+        "mean_abs_error": 0.1564008593559265,
+        "cosine": 0.9975764751434326,
+        "kl_reference_to_neuron": 7.095694627423654e-07,
+        "argmax_match": true,
+        "reference_margin": 10.625,
+        "reference_top1": 220,
+        "neuron_top1": 220
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 11,
+        "fixture": 5,
+        "slot": 2,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.296875,
+        "mean_abs_error": 0.0537494458258152,
+        "cosine": 0.9997012615203857,
+        "kl_reference_to_neuron": 0.0007506656111218035,
+        "argmax_match": true,
+        "reference_margin": 2.125,
+        "reference_top1": 3034,
+        "neuron_top1": 3034
+      },
+      "candidate": {
+        "max_abs_error": 0.36328125,
+        "mean_abs_error": 0.06574458628892899,
+        "cosine": 0.9995898008346558,
+        "kl_reference_to_neuron": 4.363363404991105e-05,
+        "argmax_match": true,
+        "reference_margin": 2.125,
+        "reference_top1": 3034,
+        "neuron_top1": 3034
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 12,
+        "fixture": 0,
+        "slot": 3,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 1.65625,
+        "mean_abs_error": 0.2154097557067871,
+        "cosine": 0.9956506490707397,
+        "kl_reference_to_neuron": 0.0003190240531694144,
+        "argmax_match": true,
+        "reference_margin": 1.0,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 1.34375,
+        "mean_abs_error": 0.17656481266021729,
+        "cosine": 0.997097909450531,
+        "kl_reference_to_neuron": 0.0008013219921849668,
+        "argmax_match": true,
+        "reference_margin": 1.0,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 13,
+        "fixture": 7,
+        "slot": 1,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 1.126953125,
+        "mean_abs_error": 0.19864898920059204,
+        "cosine": 0.9962618350982666,
+        "kl_reference_to_neuron": 0.04872628301382065,
+        "argmax_match": true,
+        "reference_margin": 0.125,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "candidate": {
+        "max_abs_error": 1.375,
+        "mean_abs_error": 0.2268604040145874,
+        "cosine": 0.9952625632286072,
+        "kl_reference_to_neuron": 0.049903418868780136,
+        "argmax_match": true,
+        "reference_margin": 0.125,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "baseline_failed": [
+        "KL"
+      ],
+      "candidate_failed": [
+        "KL"
+      ]
+    },
+    {
+      "frame": {
+        "index": 14,
+        "fixture": 2,
+        "slot": 0,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.6015625,
+        "mean_abs_error": 0.09261349588632584,
+        "cosine": 0.9991133809089661,
+        "kl_reference_to_neuron": 3.052088140975684e-05,
+        "argmax_match": true,
+        "reference_margin": 5.0,
+        "reference_top1": 8869,
+        "neuron_top1": 8869
+      },
+      "candidate": {
+        "max_abs_error": 0.59375,
+        "mean_abs_error": 0.10146814584732056,
+        "cosine": 0.9989632964134216,
+        "kl_reference_to_neuron": 5.69650401303079e-05,
+        "argmax_match": true,
+        "reference_margin": 5.0,
+        "reference_top1": 8869,
+        "neuron_top1": 8869
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 15,
+        "fixture": 5,
+        "slot": 2,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.05302481725811958,
+        "cosine": 0.9996246099472046,
+        "kl_reference_to_neuron": 0.00012261958909220994,
+        "argmax_match": true,
+        "reference_margin": 4.125,
+        "reference_top1": 317,
+        "neuron_top1": 317
+      },
+      "candidate": {
+        "max_abs_error": 0.390625,
+        "mean_abs_error": 0.07243414223194122,
+        "cosine": 0.9993866682052612,
+        "kl_reference_to_neuron": 0.00045934575609862804,
+        "argmax_match": true,
+        "reference_margin": 4.125,
+        "reference_top1": 317,
+        "neuron_top1": 317
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 1.125,
+        "mean_abs_error": 0.16635869443416595,
+        "cosine": 0.9969666600227356,
+        "kl_reference_to_neuron": 0.018798664212226868,
+        "argmax_match": true,
+        "reference_margin": 0.125,
+        "reference_top1": 608,
+        "neuron_top1": 608
+      },
+      "candidate": {
+        "max_abs_error": 0.921875,
+        "mean_abs_error": 0.155565544962883,
+        "cosine": 0.9973843097686768,
+        "kl_reference_to_neuron": 0.012476093135774136,
+        "argmax_match": true,
+        "reference_margin": 0.125,
+        "reference_top1": 608,
+        "neuron_top1": 608
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 17,
+        "fixture": 1,
+        "slot": 1,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.6875,
+        "mean_abs_error": 0.12014298141002655,
+        "cosine": 0.998630166053772,
+        "kl_reference_to_neuron": 0.010951168835163116,
+        "argmax_match": true,
+        "reference_margin": 1.625,
+        "reference_top1": 1216,
+        "neuron_top1": 1216
+      },
+      "candidate": {
+        "max_abs_error": 0.65625,
+        "mean_abs_error": 0.12958495318889618,
+        "cosine": 0.9984513521194458,
+        "kl_reference_to_neuron": 0.016635235399007797,
+        "argmax_match": true,
+        "reference_margin": 1.625,
+        "reference_top1": 1216,
+        "neuron_top1": 1216
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 18,
+        "fixture": 6,
+        "slot": 0,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.4306640625,
+        "mean_abs_error": 0.06468525528907776,
+        "cosine": 0.9997507333755493,
+        "kl_reference_to_neuron": 0.0010462721111252904,
+        "argmax_match": true,
+        "reference_margin": 1.875,
+        "reference_top1": 2842,
+        "neuron_top1": 2842
+      },
+      "candidate": {
+        "max_abs_error": 0.466796875,
+        "mean_abs_error": 0.07213501632213593,
+        "cosine": 0.999701201915741,
+        "kl_reference_to_neuron": 0.00019895151490345597,
+        "argmax_match": true,
+        "reference_margin": 1.875,
+        "reference_top1": 2842,
+        "neuron_top1": 2842
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 19,
+        "fixture": 3,
+        "slot": 2,
+        "step": 0
+      },
+      "baseline": {
+        "max_abs_error": 0.7138671875,
+        "mean_abs_error": 0.11596866697072983,
+        "cosine": 0.9988172054290771,
+        "kl_reference_to_neuron": 0.00020364686497487128,
+        "argmax_match": true,
+        "reference_margin": 6.5,
+        "reference_top1": 1746,
+        "neuron_top1": 1746
+      },
+      "candidate": {
+        "max_abs_error": 0.765625,
+        "mean_abs_error": 0.12228519469499588,
+        "cosine": 0.9987046122550964,
+        "kl_reference_to_neuron": 0.0002069497131742537,
+        "argmax_match": true,
+        "reference_margin": 6.5,
+        "reference_top1": 1746,
+        "neuron_top1": 1746
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 20,
+        "fixture": 4,
+        "slot": 3,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.06325522810220718,
+        "cosine": 0.9995101690292358,
+        "kl_reference_to_neuron": 0.00684988871216774,
+        "argmax_match": true,
+        "reference_margin": 0.375,
+        "reference_top1": 2871,
+        "neuron_top1": 2871
+      },
+      "candidate": {
+        "max_abs_error": 0.37890625,
+        "mean_abs_error": 0.08169734477996826,
+        "cosine": 0.9992742538452148,
+        "kl_reference_to_neuron": 0.003499092534184456,
+        "argmax_match": true,
+        "reference_margin": 0.375,
+        "reference_top1": 2871,
+        "neuron_top1": 2871
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 21,
+        "fixture": 1,
+        "slot": 1,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.43359375,
+        "mean_abs_error": 0.09307179600000381,
+        "cosine": 0.9996498227119446,
+        "kl_reference_to_neuron": 5.943121504969895e-05,
+        "argmax_match": true,
+        "reference_margin": 6.875,
+        "reference_top1": 1101,
+        "neuron_top1": 1101
+      },
+      "candidate": {
+        "max_abs_error": 0.28125,
+        "mean_abs_error": 0.04903225600719452,
+        "cosine": 0.999805212020874,
+        "kl_reference_to_neuron": 4.206756784697063e-05,
+        "argmax_match": true,
+        "reference_margin": 6.875,
+        "reference_top1": 1101,
+        "neuron_top1": 1101
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 22,
+        "fixture": 6,
+        "slot": 0,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.0530804842710495,
+        "cosine": 0.9996920824050903,
+        "kl_reference_to_neuron": 3.1634817787562497e-06,
+        "argmax_match": true,
+        "reference_margin": 9.25,
+        "reference_top1": 1562,
+        "neuron_top1": 1562
+      },
+      "candidate": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.05387112870812416,
+        "cosine": 0.9996614456176758,
+        "kl_reference_to_neuron": 5.550160949496785e-06,
+        "argmax_match": true,
+        "reference_margin": 9.25,
+        "reference_top1": 1562,
+        "neuron_top1": 1562
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 23,
+        "fixture": 3,
+        "slot": 2,
+        "step": 1
+      },
+      "baseline": {
+        "max_abs_error": 0.78125,
+        "mean_abs_error": 0.12283682078123093,
+        "cosine": 0.9984102249145508,
+        "kl_reference_to_neuron": 5.730180419050157e-06,
+        "argmax_match": true,
+        "reference_margin": 9.75,
+        "reference_top1": 3103,
+        "neuron_top1": 3103
+      },
+      "candidate": {
+        "max_abs_error": 0.640625,
+        "mean_abs_error": 0.10534106940031052,
+        "cosine": 0.9988265633583069,
+        "kl_reference_to_neuron": 4.5486258386517875e-06,
+        "argmax_match": true,
+        "reference_margin": 9.75,
+        "reference_top1": 3103,
+        "neuron_top1": 3103
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 24,
+        "fixture": 4,
+        "slot": 3,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.640625,
+        "mean_abs_error": 0.09086846560239792,
+        "cosine": 0.9992521405220032,
+        "kl_reference_to_neuron": 0.00012214966409374028,
+        "argmax_match": true,
+        "reference_margin": 6.625,
+        "reference_top1": 4219,
+        "neuron_top1": 4219
+      },
+      "candidate": {
+        "max_abs_error": 0.40625,
+        "mean_abs_error": 0.06804534047842026,
+        "cosine": 0.9995508790016174,
+        "kl_reference_to_neuron": 1.1568025911401492e-05,
+        "argmax_match": true,
+        "reference_margin": 6.625,
+        "reference_top1": 4219,
+        "neuron_top1": 4219
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 25,
+        "fixture": 1,
+        "slot": 1,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.28125,
+        "mean_abs_error": 0.052818987518548965,
+        "cosine": 0.9998735189437866,
+        "kl_reference_to_neuron": -6.464787105642245e-08,
+        "argmax_match": true,
+        "reference_margin": 12.875,
+        "reference_top1": 242,
+        "neuron_top1": 242
+      },
+      "candidate": {
+        "max_abs_error": 0.28125,
+        "mean_abs_error": 0.07545740157365799,
+        "cosine": 0.9998586177825928,
+        "kl_reference_to_neuron": 3.507826562554328e-08,
+        "argmax_match": true,
+        "reference_margin": 12.875,
+        "reference_top1": 242,
+        "neuron_top1": 242
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 26,
+        "fixture": 6,
+        "slot": 0,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.3125,
+        "mean_abs_error": 0.057868897914886475,
+        "cosine": 0.9995952844619751,
+        "kl_reference_to_neuron": -2.51715648325046e-09,
+        "argmax_match": true,
+        "reference_margin": 14.625,
+        "reference_top1": 285,
+        "neuron_top1": 285
+      },
+      "candidate": {
+        "max_abs_error": 0.301025390625,
+        "mean_abs_error": 0.056517284363508224,
+        "cosine": 0.9995918273925781,
+        "kl_reference_to_neuron": 1.0246407278202696e-08,
+        "argmax_match": true,
+        "reference_margin": 14.625,
+        "reference_top1": 285,
+        "neuron_top1": 285
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 27,
+        "fixture": 3,
+        "slot": 2,
+        "step": 2
+      },
+      "baseline": {
+        "max_abs_error": 0.5625,
+        "mean_abs_error": 0.07944668084383011,
+        "cosine": 0.9997445940971375,
+        "kl_reference_to_neuron": 3.0083390356594464e-07,
+        "argmax_match": true,
+        "reference_margin": 12.375,
+        "reference_top1": 220,
+        "neuron_top1": 220
+      },
+      "candidate": {
+        "max_abs_error": 0.4609375,
+        "mean_abs_error": 0.0727124959230423,
+        "cosine": 0.9997731447219849,
+        "kl_reference_to_neuron": -4.07090610110572e-08,
+        "argmax_match": true,
+        "reference_margin": 12.375,
+        "reference_top1": 220,
+        "neuron_top1": 220
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 28,
+        "fixture": 4,
+        "slot": 3,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.75,
+        "mean_abs_error": 0.12309383600950241,
+        "cosine": 0.9991025328636169,
+        "kl_reference_to_neuron": 0.0008244505152106285,
+        "argmax_match": true,
+        "reference_margin": 3.75,
+        "reference_top1": 357,
+        "neuron_top1": 357
+      },
+      "candidate": {
+        "max_abs_error": 0.53125,
+        "mean_abs_error": 0.09387053549289703,
+        "cosine": 0.9994314312934875,
+        "kl_reference_to_neuron": 0.0002094539813697338,
+        "argmax_match": true,
+        "reference_margin": 3.75,
+        "reference_top1": 357,
+        "neuron_top1": 357
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 29,
+        "fixture": 1,
+        "slot": 1,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.3125,
+        "mean_abs_error": 0.04696177691221237,
+        "cosine": 0.9998264312744141,
+        "kl_reference_to_neuron": 7.217369812906327e-08,
+        "argmax_match": true,
+        "reference_margin": 13.5,
+        "reference_top1": 45,
+        "neuron_top1": 45
+      },
+      "candidate": {
+        "max_abs_error": 0.28125,
+        "mean_abs_error": 0.04403284937143326,
+        "cosine": 0.9998534917831421,
+        "kl_reference_to_neuron": -4.125800856513706e-08,
+        "argmax_match": true,
+        "reference_margin": 13.5,
+        "reference_top1": 45,
+        "neuron_top1": 45
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 30,
+        "fixture": 6,
+        "slot": 0,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.3271484375,
+        "mean_abs_error": 0.0559585839509964,
+        "cosine": 0.9996531009674072,
+        "kl_reference_to_neuron": 9.685815882676252e-08,
+        "argmax_match": true,
+        "reference_margin": 11.75,
+        "reference_top1": 8259,
+        "neuron_top1": 8259
+      },
+      "candidate": {
+        "max_abs_error": 0.4375,
+        "mean_abs_error": 0.0779237225651741,
+        "cosine": 0.9994202852249146,
+        "kl_reference_to_neuron": 2.4900062456367777e-08,
+        "argmax_match": true,
+        "reference_margin": 11.75,
+        "reference_top1": 8259,
+        "neuron_top1": 8259
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    },
+    {
+      "frame": {
+        "index": 31,
+        "fixture": 3,
+        "slot": 2,
+        "step": 3
+      },
+      "baseline": {
+        "max_abs_error": 0.45703125,
+        "mean_abs_error": 0.12513357400894165,
+        "cosine": 0.9997095465660095,
+        "kl_reference_to_neuron": 2.665972715476528e-06,
+        "argmax_match": true,
+        "reference_margin": 8.0,
+        "reference_top1": 3375,
+        "neuron_top1": 3375
+      },
+      "candidate": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.06593015044927597,
+        "cosine": 0.9998070597648621,
+        "kl_reference_to_neuron": 1.1318436008878052e-05,
+        "argmax_match": true,
+        "reference_margin": 8.0,
+        "reference_top1": 3375,
+        "neuron_top1": 3375
+      },
+      "baseline_failed": [],
+      "candidate_failed": []
+    }
+  ],
+  "propagation": [
+    {
+      "call": 0,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 1,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 2,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 3,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 4,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 5,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 6,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 7,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 8,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 9,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 10,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 11,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 12,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "call": 13,
+      "first_changed_tap": "layers.0.mlp",
+      "changed_tap_count": 209,
+      "logits_changed": true,
+      "changed_post_cache_entries": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    }
+  ],
+  "strict_baseline_all28_calls_exact": true,
+  "all42_oproj_unchanged_metadata": true,
+  "full_layer0_upstream_and_kv_equal_metadata": true,
+  "actual_gather_rank_pair_metadata_consistent": true,
+  "both_rank_logits_metadata_equal": true,
+  "each_arm_own84_cache_chain": true,
+  "raw_payload_read_hash_stat": false,
+  "native_imports": false,
+  "production_validator_called": false,
+  "root_exit_and_physical_drain_received_as_evidence_only": true,
+  "raw_logits_recomputation_pending": true,
+  "remaining_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "source_references": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-00/result.json",
+      "sha256": "5d3be93950d7d5a735ba26a893e921dec6c9c7259c72d45f774ced43bf27e310"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "9141f970060fb3ba0857b482c4f79505e72da48734cfae763ceb473e8684c74a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-02/result.json",
+      "sha256": "fcf97a337b162fb87981b884b5b4539bd988ba53ad4955aea4e4be48cba8480c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-03/result.json",
+      "sha256": "2ebf78e55068b00727585708771a690a8bfdae0d3368d5959df524e21d184321"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-04/result.json",
+      "sha256": "e707bdc95391da71d15bb4ec993a8494663b969dce71eb1ade3e04eea4dce477"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-05/result.json",
+      "sha256": "55b5fe8451025ba18ef170e02e16c43b2a991dbe6b739379481a606991837336"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-06/result.json",
+      "sha256": "942bc96206ea117d86637c6225e545f1e18a527ecb2391496753868c74257890"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-07/result.json",
+      "sha256": "de90e592fde3941f8e02da6efca7c6323dfcea8cc0e3c6c842cde6947426f58b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-08/result.json",
+      "sha256": "301b349bef2e4a459ab7140366bf1236df381ce875ed4636dacbad5d015f8784"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-09/result.json",
+      "sha256": "33b3c48e70cdf19ac65c451602fa6a8d8659a52ed54f2a670825483d7a56c281"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-10/result.json",
+      "sha256": "5475aa8d9a05e1d9f95ce25c7517f2204b17829a8e2b405242286c049cb9931b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-11/result.json",
+      "sha256": "bc47c08449246b371da87348b131c64892491cf260a434bdd1b41a1eb3fa9736"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-12/result.json",
+      "sha256": "1c1896afc11ddafcbc5da76b3e0d5690040d5a4c1511fafbeae260235bba2fa6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-13/result.json",
+      "sha256": "8f99526871801707cb9a3eb862663a790acdf6976091551499c0f4d9424af891"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/result.json",
+      "sha256": "303d0a6813c15082f2c7a804aeb33de27e6a599e0e2d661494f96649496d88fa"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-00/result.json",
+      "sha256": "f08c10a4e59fae810396b8b2fb96c00a15b54cc2b86795aa5d6fd0e42f7697c3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-01/result.json",
+      "sha256": "ad6e2b6b45a40752d556e9556caf5b150c8dcec4375ead30a1cac9c0f3be7a38"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-02/result.json",
+      "sha256": "4ed730c5cff1241aff5ea1fedba7e116d64b4b10354b4997b7b35fc065c66940"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-03/result.json",
+      "sha256": "9b0459b846a8e113d2d5949dbc6943f6be822eb787b1055f702a44a6c8a16b6d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-04/result.json",
+      "sha256": "bb46de4713413ace4f873204fb3dfa5d380813be4e0a469676dfb84b296b53ae"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-05/result.json",
+      "sha256": "a10fd7b0d42392f60e954a5d967d752de6967232534689def4d91d64b4ac6c83"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-06/result.json",
+      "sha256": "181593598e8c737aa580a0ece00b5e1b7a3b54a6aae1a4f6e4cea23fe7e301b2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-07/result.json",
+      "sha256": "3e2cc31d9ddddd7b73b4dcb5372a778f364d0d83c81075cda95f0e56659268f8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-08/result.json",
+      "sha256": "4ba21e5d55bab51ddf0f76eed6453d45565b6fa72d1901a586c231213a77b11e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-09/result.json",
+      "sha256": "d06539667deb2ba14f490eb027c6bedee54ad42a1e847c1fc2f5b3760fc2f41c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-10/result.json",
+      "sha256": "50e174b7b38496be9ec7146b08032c7c9fb3187fba915c2fb25ae69aac7225ab"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-11/result.json",
+      "sha256": "0414b12632d438eb99537184138fa97240750a0c9d8304ccc79a16e082cd1824"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-12/result.json",
+      "sha256": "0d7baed5d966e026a9cc5132d1745226883dc3867391a6d9707edb6b35e1ba93"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-13/result.json",
+      "sha256": "e43cecb8538d57f6141f268e4d30efa9505efb66b518b91c01fc1f9a7bd5e997"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/result.json",
+      "sha256": "eb58673a71cac918f5c750fdf0c7c6e099c18734048d6d704ebb749b21d2fe25"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-00/result.json",
+      "sha256": "7dc2f29b350c040acc01f40d019ba674ee872d07d7718182673d20c28f822d66"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-01/result.json",
+      "sha256": "6e315aa0a88a7d52fb87f362a882e50b06d8089d92e5d6d6113b621f54b18523"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-02/result.json",
+      "sha256": "2af14168123bdbe7cbc77668aa2a5329047e44cb49a21510c27889c4596c3de1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-03/result.json",
+      "sha256": "a5cbad20a04e12f7874363befe6db131374dd50b64d0a4ea936ae715b677a3f3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-04/result.json",
+      "sha256": "c98745de464d76257ac7a296e2586fa2b5b2d78118c206fd54b38ad023c1934b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-05/result.json",
+      "sha256": "8839ba96475e79d279d6234af095b45507ad85a9e59513f88b8027c762ba8f55"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-06/result.json",
+      "sha256": "cac019cfa4134916edde5b1d9901633cd414a9bc3cb436ae66787f91994a4d2a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-07/result.json",
+      "sha256": "cd13f0691e87ecd8b06e27d9c29330ca70ede97b641bebc9e7664d6e75c5c0c0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-08/result.json",
+      "sha256": "75b1d3f2159c388c0011ba543c0882967f2418fdc7e5c20781dfc88e23a724ae"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-09/result.json",
+      "sha256": "e01f44e02ede90c75036c5091169cba98609ae126f8272cc0ac00a46ae75263c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-10/result.json",
+      "sha256": "4151c22582f9918167f894ac3039cc3bdcfc91508b83e8b25d7a36ca283ae121"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-11/result.json",
+      "sha256": "234250d38887f017bfa0ee553da541f0c3caa4c814d7689244a17f0d84c2fa3b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-12/result.json",
+      "sha256": "9d4a667d1a55f7f64011c9976eaa195097710add99b1e1176a3dc8798717988f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-13/result.json",
+      "sha256": "43c70029b74a7092b6eabae5d6f9e4a33c85935c73d8680f403ae4df4a313a78"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/result.json",
+      "sha256": "c8cf781e788951b3ec49b72abd745296ab50e6484a48926055a7f0ce81351ec0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-00/result.json",
+      "sha256": "51c69b64279232cd65e7e35cfc0f1032e0db37bff78eb73785eae04f63d9a9ff"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-01/result.json",
+      "sha256": "c3fa439b94e72e88e6762d3937e08fbb388c541f5bd5f2cb79377389886bfff2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-02/result.json",
+      "sha256": "eaf5b86f6f615d72efcf5a34e7d41fb4438abaca8a353247ebdce7fa3c8c05e4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-03/result.json",
+      "sha256": "4b3fd143a4a2113ab889fc3df3952bd3d86d075de7dde6f6025e3fbf6c6bb6f1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-04/result.json",
+      "sha256": "321a85d8a72ca496d7d480e83fe030ed2cc90ee769e917463755a96480214489"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-05/result.json",
+      "sha256": "e6f4b66671e4a9c3ab39c7dfbe5bab31938379a9e37c7ad11b2910c874612591"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-06/result.json",
+      "sha256": "303678d5ed2433f8c1416949c29ff5c958a851d7eff68624b94abe04c6479dad"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-07/result.json",
+      "sha256": "d8a184589b4d69822f9c6445f1a1ff9e21655f2207400adb7461f1ed78d82f87"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-08/result.json",
+      "sha256": "9f9b8a5d7fc88993cc4bf0b45b1fc6417c8859fb417cd91cfc1200e8391072b9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-09/result.json",
+      "sha256": "87cdd5f9c37d3391969688701058cf5ad5d9d49ffc0f019c764d4e86fa5a62ec"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-10/result.json",
+      "sha256": "fc2ee35d26bcfff02e2a8771b6c2f92149338255a86a5205bcb8185a5ca717f6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-11/result.json",
+      "sha256": "074c4348c9e8acf63857b4b9e98da3a2c4a8f041f27a0e55ab4cd71b71a5ccfc"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-12/result.json",
+      "sha256": "99b6a8fb2964d219dcaa2e9ad22839731334d35d67d4e6e6df80b82013c86f9c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-13/result.json",
+      "sha256": "86bb2c2138753936b535699cfe0665cb5b7eca769263e2370bd37c46578d8500"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/result.json",
+      "sha256": "4f5a7617ba39d0b7709bcb8c4821029cd22e3759ecc3f9af94c73065b80220a2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/rank0-result.json",
+      "sha256": "2a9cced3fc1175f951ffac669cfdd912a43832fecb100dc93e1951c5f6a0cc4b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/rank1-result.json",
+      "sha256": "86c70a1a0f6424adab851b4e728dc06305598beedb7daf1b8471627f1b0b5152"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-00/result.json",
+      "sha256": "18256d14c808c252828287aa206586902d789154048fa62956e955a83286e309"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-01/result.json",
+      "sha256": "92d3d05cee0b2c7e63c4b343ce0ae8580bcd7447b6a841632f4883bdedba6586"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-02/result.json",
+      "sha256": "46e855ddb3d0db8caccf346339ec703f721dfd547218a4cc45eafc40416b0d03"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-03/result.json",
+      "sha256": "f869b711c21b61a9c9d6e58f280942cce2711f8fa31926aef1289b49ac636d39"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-04/result.json",
+      "sha256": "d9022928733c788941f1fec8090a6c8d32a0289337b7e9e828729d5fda26a1fd"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-05/result.json",
+      "sha256": "e555390b429a955912c4cb1077a77af36bfb26e0040e7f428ced64b0eba7a66e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-06/result.json",
+      "sha256": "24c4ad9524f588b2a76884d0a935063ecb66deb1c5e144e9fdcb4c8d38af5154"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-07/result.json",
+      "sha256": "56b8fc2ea38e87d339166959c98ce76211ec842c5e1ff6c4f584a1e22cfff1e7"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-08/result.json",
+      "sha256": "964e18f8558b965689c48a341ab089c8e6cb1989cc4a21b9df98b5207c88ed3c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-09/result.json",
+      "sha256": "feafe2ec5b034e838b8b35acc1fc9100e495049b03f2e83c1aa6b9b36bdd9dfb"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-10/result.json",
+      "sha256": "fac2bc61c2dad02db49f8d3cf9dd8a24b55735d33bb6717cbe50a8cb38676baf"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-11/result.json",
+      "sha256": "0f9d38c22a8a358208f7093272afa900fc91e8bf2cadc9f2a5a2dbc840595955"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-12/result.json",
+      "sha256": "601f32755ea442f5c682593d4fcae72df55fff6526e45210222cc0c18818573c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-13/result.json",
+      "sha256": "ec674462ee4674b7da50a15798236109fa48933b2abb77fcbfdb6c185dbd58a6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-00/result.json",
+      "sha256": "9665e53bc2305072b661a97be1d37996cdad15048a65c9866af13978da9d1fec"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-01/result.json",
+      "sha256": "031b17b9fb9942d2e2d5ab8275b579ffe0f8e881ba634a205f86376984417c0e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-02/result.json",
+      "sha256": "044f59535f6d2cb73165c8788c1b26f0f84ffd7c2631f5dd11dde73caf44175b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-03/result.json",
+      "sha256": "d9b53610ef34045bbca8d05eb3779eadb1994141239e57ba9dec2f756f7cc54e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-04/result.json",
+      "sha256": "f98e7a83e670429490ed5f20c5d84af29622b16b833cf1387ff218693277ac5c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-05/result.json",
+      "sha256": "eacdfa9f0a06bc699c97dd65868812c654e706937fa1dca46dc14da2e1a02754"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-06/result.json",
+      "sha256": "b3545461421daff838b1bfbe7d54685274d5c9e9cca190ea62209792d599492e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-07/result.json",
+      "sha256": "ac764a6999667dbd44223022547937b94bdb3973cd466409f32c35e0e949a4f4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-08/result.json",
+      "sha256": "6fa942e4d6a81c7a3e81639b6642b7c77b9050f66da1fd8812e43033962a6dff"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-09/result.json",
+      "sha256": "2efee2068687fe24250294ef50088bc56b48e966596555af391824776178c094"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-10/result.json",
+      "sha256": "ec3e0cdc438a593bf50e41dc181f7d11984a3489c3c161872e961ac69329664f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-11/result.json",
+      "sha256": "35abab0ac0d4bdb94bfad295230034188d6d16afdf485587e52e283a2afbb1eb"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-12/result.json",
+      "sha256": "3843c223c7ed0236a3825bd26ed4c5c834b1041994170190e3113b64ea4ef77b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-13/result.json",
+      "sha256": "86e4e036fc9cf5b47c557529ad66f8a91f96c92025633ff56d624aee7332ef1b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-2b-readiness-20261104-v1/safetensors-header.json",
+      "sha256": "689cfb1f213bfbaf9098b559c51b66db79c3e04540eaa3f7b80943efa6831b8d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-execution-spec.json",
+      "sha256": "da8995fa53580546d53903642c4783d04a402f50e367dd1db8dae5b247f07d5b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-input-plan.json",
+      "sha256": "8d7b6b76cc9af0c638e1cb97e827e2817279ed5953f93d52c0f136f9c5548a8a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-root-exit-r1-20261107-v1.json",
+      "sha256": "22af7835e3ef15bebd90c1c7f14ecc925275887511a6248877856a082d74fcb9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-root-live-r1-20261107-v1.json",
+      "sha256": "1600ff0cf0b18b3fcb55fbbe6a5e4c989ba61c5481bbf8b36498a33fc3d1fa77"
+    }
+  ]
+}

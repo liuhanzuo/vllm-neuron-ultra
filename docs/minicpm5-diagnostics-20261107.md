@@ -841,3 +841,82 @@ long-decode, slot reuse/inactive-slot, quality96 and paired-serving gates remain
 - [Actual successful exit](evidence/minicpm5-frame17-mlp-20261107/actual-exit.json)
 - [Retained first failure](evidence/minicpm5-frame17-mlp-20261107/first-attempt-exit.json)
 - [Export manifest](evidence/minicpm5-frame17-mlp-20261107/manifest.json)
+
+## Full layer-0 BF16 down projection across the original 32 frames
+
+The full-model CPU TP2 diagnostic completed with actual tool exit 0. Both ranks
+ran two complete 14-call trajectories with their own cache histories, covering
+the original 32 frames per arm. This is a numerical diagnostic; no throughput
+measurement or Neuron candidate qualification was performed.
+
+The control reproduces the frozen strict CPU baseline exactly: all 14 calls,
+213 observed boundaries, 84 cache states, inputs, routes and logits metadata.
+The candidate changes only the actual layer-0 MLP down projection in prefill
+and decode: gather the two real 3,072-wide BF16 activation shards in rank order,
+then apply the official complete BF16 [2048,6144] matrix. All 42 attention output
+projections remain unchanged. Complete layer-0 postnorm/gate/up/product and
+layer-0 KV agree between arms; later layers follow their own actual histories.
+
+| Arm | Frames passing original numerical gates | Matching top-1 tokens | Failed frames |
+|---|---:|---:|---|
+| Strict CPU control | 29/32 | 32/32 | 1, 9, 13 |
+| Full layer-0 BF16 down | 30/32 | 31/32 | 1, 13 |
+
+Frame 9 recovers (KL 0.028122 → 0.008467), but frame 1 regresses:
+KL increases from 0.101270 to 0.196323, and top-1 changes from the reference
+1062 to 15182 despite a reference margin of 1.125. Frame 13 remains above
+the KL threshold (0.048726 → 0.049903). The original cosine ≥0.995, KL ≤0.02,
+maximum absolute error ≤2 and high-margin top-1 requirements were retained.
+The candidate therefore remains rejected despite the larger passing-frame count.
+
+Every paired call first differs at the layer-0 MLP boundary. The 209 downstream
+observed boundaries and the later 82 cache entries differ in each paired call.
+This establishes propagation from the single intervention under these inputs;
+it does not identify a universally better kernel or isolate the underlying
+accumulation/rounding mechanism. The two ranks are replication checks and do
+not double the number of independent model frames.
+
+The official checkpoint was streamed once per rank for authentication; the
+additional complete down-matrix interval read was 24 MiB per rank. It would
+be incorrect to describe total checkpoint I/O as only 24 MiB.
+
+Cold-cache84, long decoding (2049 calls / 93 checkpoints), slot reuse and
+inactive-slot resume, quality96 and paired serving remain mandatory. This
+CPU result is distinct from the earlier Neuron 30/32 result. No speedup was
+added to the performance tables, and the candidate was not enabled.
+
+- [Per-frame comparison](evidence/minicpm5-full-down-20261107/frames.csv)
+- [Root summary](evidence/minicpm5-full-down-20261107/root-summary.json)
+- [Independent metadata review](evidence/minicpm5-full-down-20261107/independent-metadata-review.json)
+- [Actual experiment exit](evidence/minicpm5-full-down-20261107/actual-exit.json)
+
+### Independent saved-logits verification
+
+A separate, bounded CPU audit read the 56 saved output files and the original
+HF reference, totaling **83,659,525 bytes**. It hashed each opened file before
+loading it, verified full-vocabulary logical tensor digests, and independently
+recomputed all eight metrics for **128 rank/arm/frame records** (64 independent
+arm/frame cases). With the original shape/stride/offset reconstructed, every
+metric and every original gate reproduced exactly; both ranks also agree.
+The model and its weights were not loaded by this audit.
+
+The first audit failed its exact-metric check and is retained. The outputs were
+saved as contiguous clones, whereas decode outputs originally had strides
+[1,4,4]. In the successful follow-up, a controlled comparison using identical
+logical values found **96 cosine metrics** changed by contiguous layout, with
+maximum absolute difference **0.00008809566497802734**. Recreating the two
+original finite layouts restored exact agreement for all 128 records. The
+original storage objects or addresses were not recreated. The first failure
+log did not save its specific frame/value, so the follow-up is documented as
+a new controlled observation, not a fabricated missing failure trace.
+
+Both raw-audit attempts retain actual tool exits, observed live owners, service
+resource/identity acknowledgments and complete physical-drain evidence. The
+successful audit changes neither model's qualification status and adds no
+performance result.
+
+- [Full raw-logits audit and layout comparisons](evidence/minicpm5-full-down-20261107/raw-logits-review.json)
+- [Raw verifier source](evidence/minicpm5-full-down-20261107/raw-verifier.py)
+- [Actual successful audit exit](evidence/minicpm5-full-down-20261107/raw-review-actual-exit.json)
+- [Retained failed audit](evidence/minicpm5-full-down-20261107/retained-raw-review-first-failure.json)
+- [Export manifest](evidence/minicpm5-full-down-20261107/manifest.json)

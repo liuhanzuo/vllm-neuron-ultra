@@ -1,0 +1,169 @@
+{
+  "schema": "minicpm5_original32_full_down_cpu_root_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-07T23:31:35.993102+00:00",
+  "root_live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-root-live-r1-20261107-v1.json",
+    "sha256": "1600ff0cf0b18b3fcb55fbbe6a5e4c989ba61c5481bbf8b36498a33fc3d1fa77"
+  },
+  "owner": {
+    "pid": 2406369,
+    "start_ticks": "387398293",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "-u",
+      "minicpm5_original32_full_down_cpu_runner_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-execution-spec.json",
+      "--spec-sha256",
+      "da8995fa53580546d53903642c4783d04a402f50e367dd1db8dae5b247f07d5b",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-root-execution-review.json",
+      "--review-sha256",
+      "eb3d4b159fe229bf5adeea864cc2a67621c8cfc527f4f2eab343b93a0150a782"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "coordinator": {
+    "pid": 2408586,
+    "start_ticks": "387401490",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_full_down_cpu_runner_v1.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/admission.json",
+      "--admission-sha256",
+      "9ae2c92518775c2473b385240c66b67fed893ca5fc6c4fedb7103ed7620222d4"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-full-down-r1-20261107.service",
+    "unit": "trn1-mini-original32-full-down-r1-20261107",
+    "invocation_id": "46888bb145234ae5b0d72070713b60b9"
+  },
+  "ranks": [
+    {
+      "pid": 2408590,
+      "start_ticks": "387401566",
+      "ppid": 2408586,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_full_down_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/admission.json",
+        "--admission-sha256",
+        "9ae2c92518775c2473b385240c66b67fed893ca5fc6c4fedb7103ed7620222d4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-full-down-r1-20261107.service"
+    },
+    {
+      "pid": 2408591,
+      "start_ticks": "387401566",
+      "ppid": 2408586,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_full_down_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/admission.json",
+        "--admission-sha256",
+        "9ae2c92518775c2473b385240c66b67fed893ca5fc6c4fedb7103ed7620222d4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-full-down-r1-20261107.service"
+    }
+  ],
+  "actual_execution_handle": {
+    "kind": "tool_session",
+    "session_id": 32830
+  },
+  "actual_exit_observed": true,
+  "actual_exit_code": 0,
+  "tool_chunk_id": "d9e62d",
+  "outputs": {
+    "outer_result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/outer-result.json",
+      "sha256": "83fe7025f698ce5ec5f61f8d6245034dbbf9d4cdebdcec004b114030f412310c"
+    },
+    "coordinator_result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/coordinator-result.json",
+      "sha256": "4b1fd749b0cda76e7dde2f75403e3cb4163224d9d3b1b65f89046aa42f9d8fe8"
+    },
+    "service_exit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/service-exit.json",
+      "sha256": "47c27eaa9386bf3904808ff3ff7d5ff77ea4ca0f18205fff368a6443d080c3f2"
+    },
+    "children_exits": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/children-exits.json",
+      "sha256": "da73d0cf711685580f1a378a4e636c0772f3836579d5abc78f66905a5ac3c540"
+    },
+    "rank0_result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/rank0-result.json",
+      "sha256": "2a9cced3fc1175f951ffac669cfdd912a43832fecb100dc93e1951c5f6a0cc4b"
+    },
+    "rank1_result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/rank1-result.json",
+      "sha256": "86c70a1a0f6424adab851b4e728dc06305598beedb7daf1b8471627f1b0b5152"
+    }
+  },
+  "service_properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "0",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "2408586",
+    "ExecMainCode": "1",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=0d1338d382b7d7a859fb2d957e2c6fd3 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_full_down_cpu_runner_v1.py --mode coordinator --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/admission.json --admission-sha256 9ae2c92518775c2473b385240c66b67fed893ca5fc6c4fedb7103ed7620222d4 ; ignore_errors=no ; start_time=[Sat 2026-11-07 23:18:26 UTC] ; stop_time=[Sat 2026-11-07 23:31:11 UTC] ; pid=2408586 ; code=exited ; status=0 }",
+    "ControlGroup": "",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-original32-full-down-r1-20261107.service",
+    "BindsTo": "",
+    "After": "basic.target app.slice -.mount",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "Job": "",
+    "InvocationID": "46888bb145234ae5b0d72070713b60b9",
+    "ExecStopPost": ""
+  },
+  "all_four_processes_gone": true,
+  "cgroup_empty": true,
+  "drain": {
+    "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-full-down-r1-20261107.service",
+    "absent": true
+  },
+  "descendant_helpers_also_drained": true,
+  "canonical_unchanged": true,
+  "canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "source_pins_rehashed": 2039,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
