@@ -906,7 +906,9 @@ saved as contiguous clones, whereas decode outputs originally had strides
 logical values found **96 cosine metrics** changed by contiguous layout, with
 maximum absolute difference **0.00008809566497802734**. Recreating the two
 original finite layouts restored exact agreement for all 128 records. The
-original storage objects or addresses were not recreated. The first failure
+original storage objects or addresses were not recreated. An independent JSON
+review confirmed that **zero gate decisions changed** between contiguous and
+original-layout metrics. The first failure
 log did not save its specific frame/value, so the follow-up is documented as
 a new controlled observation, not a fabricated missing failure trace.
 
@@ -920,3 +922,5 @@ performance result.
 - [Actual successful audit exit](evidence/minicpm5-full-down-20261107/raw-review-actual-exit.json)
 - [Retained failed audit](evidence/minicpm5-full-down-20261107/retained-raw-review-first-failure.json)
 - [Export manifest](evidence/minicpm5-full-down-20261107/manifest.json)
+
+- [Independent verification addendum](evidence/minicpm5-full-down-20261107/raw-review-independent-addendum.json)

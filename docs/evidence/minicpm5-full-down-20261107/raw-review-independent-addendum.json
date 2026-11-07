@@ -1,0 +1,349 @@
+{
+  "schema": "minicpm5_full_down_raw_r2_independent_metadata_addendum_v1",
+  "reviewer": "/root/mini_full_down_result_review",
+  "observed_at": "2026-11-07T23:50:19.088432+00:00",
+  "raw_result": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-independent-raw-r2-20261107-v2.json",
+    "sha256": "9af11e905ac9f80960f514fc3969a0688f7868f943514424e3eea33cfdecd815"
+  },
+  "actual_root_terminal": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-r2-root-terminal-20261107-v1.json",
+    "sha256": "8d7e848e9af23d60e66a28b9f4e5a00bf7e84f18fc9f106a63267cf81668f860"
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_full_down_raw_metadata_20261107_v2.py",
+    "sha256": "e50b12467df336b10699184321602e3ffe6ec23f3c0ac9e4f9f07adf4b1fa877"
+  },
+  "accepted": true,
+  "blockers": [],
+  "derived_counts": {
+    "raw_payload_files": 57,
+    "output_logits_files": 56,
+    "total_payload_bytes": 83659525,
+    "scored_rows": 128,
+    "unique_arm_frames": 64,
+    "restored_exact_rows": 128,
+    "contiguous_cosine_mismatch_rows": 96,
+    "unchanged_prefill_rows": 32,
+    "changed_gate_rows": 0
+  },
+  "largest_absolute_cosine_delta": 8.809566497802734e-05,
+  "mismatch_metric_fields": [
+    "cosine"
+  ],
+  "all_original_metrics_and_gates_reproduced": true,
+  "original_thresholds_unchanged": true,
+  "both_rank_summaries": {
+    "strict_anchor_s0": {
+      "frames": 32,
+      "passed_frames": 29,
+      "failed_frames": [
+        1,
+        9,
+        13
+      ],
+      "top1_matches": 32,
+      "numerical_gates_passed": false,
+      "original_metadata_summary_exact": true
+    },
+    "strict_layer0_full_bf16_down": {
+      "frames": 32,
+      "passed_frames": 30,
+      "failed_frames": [
+        1,
+        13
+      ],
+      "top1_matches": 31,
+      "numerical_gates_passed": false,
+      "original_metadata_summary_exact": true
+    }
+  },
+  "conclusion": "Same saved logical values with original shape/stride/offset reproduce all128 original metric rows exactly. Contiguous decode layout changes only cosine for96 rows, without crossing any original gate. This explains failure of the contiguous-only exact checker under this runtime; r1 did not save its first failing frame.",
+  "physical_drain_received_as_root_evidence": true,
+  "native_imports": false,
+  "raw_payload_read_hash_stat": false,
+  "production_validator_called": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "remaining_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "references": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-00/result.json",
+      "sha256": "5d3be93950d7d5a735ba26a893e921dec6c9c7259c72d45f774ced43bf27e310"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "9141f970060fb3ba0857b482c4f79505e72da48734cfae763ceb473e8684c74a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-02/result.json",
+      "sha256": "fcf97a337b162fb87981b884b5b4539bd988ba53ad4955aea4e4be48cba8480c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-03/result.json",
+      "sha256": "2ebf78e55068b00727585708771a690a8bfdae0d3368d5959df524e21d184321"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-04/result.json",
+      "sha256": "e707bdc95391da71d15bb4ec993a8494663b969dce71eb1ade3e04eea4dce477"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-05/result.json",
+      "sha256": "55b5fe8451025ba18ef170e02e16c43b2a991dbe6b739379481a606991837336"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-06/result.json",
+      "sha256": "942bc96206ea117d86637c6225e545f1e18a527ecb2391496753868c74257890"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-07/result.json",
+      "sha256": "de90e592fde3941f8e02da6efca7c6323dfcea8cc0e3c6c842cde6947426f58b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-08/result.json",
+      "sha256": "301b349bef2e4a459ab7140366bf1236df381ce875ed4636dacbad5d015f8784"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-09/result.json",
+      "sha256": "33b3c48e70cdf19ac65c451602fa6a8d8659a52ed54f2a670825483d7a56c281"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-10/result.json",
+      "sha256": "5475aa8d9a05e1d9f95ce25c7517f2204b17829a8e2b405242286c049cb9931b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-11/result.json",
+      "sha256": "bc47c08449246b371da87348b131c64892491cf260a434bdd1b41a1eb3fa9736"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-12/result.json",
+      "sha256": "1c1896afc11ddafcbc5da76b3e0d5690040d5a4c1511fafbeae260235bba2fa6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-13/result.json",
+      "sha256": "8f99526871801707cb9a3eb862663a790acdf6976091551499c0f4d9424af891"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-00/result.json",
+      "sha256": "f08c10a4e59fae810396b8b2fb96c00a15b54cc2b86795aa5d6fd0e42f7697c3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-01/result.json",
+      "sha256": "ad6e2b6b45a40752d556e9556caf5b150c8dcec4375ead30a1cac9c0f3be7a38"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-02/result.json",
+      "sha256": "4ed730c5cff1241aff5ea1fedba7e116d64b4b10354b4997b7b35fc065c66940"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-03/result.json",
+      "sha256": "9b0459b846a8e113d2d5949dbc6943f6be822eb787b1055f702a44a6c8a16b6d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-04/result.json",
+      "sha256": "bb46de4713413ace4f873204fb3dfa5d380813be4e0a469676dfb84b296b53ae"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-05/result.json",
+      "sha256": "a10fd7b0d42392f60e954a5d967d752de6967232534689def4d91d64b4ac6c83"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-06/result.json",
+      "sha256": "181593598e8c737aa580a0ece00b5e1b7a3b54a6aae1a4f6e4cea23fe7e301b2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-07/result.json",
+      "sha256": "3e2cc31d9ddddd7b73b4dcb5372a778f364d0d83c81075cda95f0e56659268f8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-08/result.json",
+      "sha256": "4ba21e5d55bab51ddf0f76eed6453d45565b6fa72d1901a586c231213a77b11e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-09/result.json",
+      "sha256": "d06539667deb2ba14f490eb027c6bedee54ad42a1e847c1fc2f5b3760fc2f41c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-10/result.json",
+      "sha256": "50e174b7b38496be9ec7146b08032c7c9fb3187fba915c2fb25ae69aac7225ab"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-11/result.json",
+      "sha256": "0414b12632d438eb99537184138fa97240750a0c9d8304ccc79a16e082cd1824"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-12/result.json",
+      "sha256": "0d7baed5d966e026a9cc5132d1745226883dc3867391a6d9707edb6b35e1ba93"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_layer0_full_bf16_down/call-13/result.json",
+      "sha256": "e43cecb8538d57f6141f268e4d30efa9505efb66b518b91c01fc1f9a7bd5e997"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-00/result.json",
+      "sha256": "7dc2f29b350c040acc01f40d019ba674ee872d07d7718182673d20c28f822d66"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-01/result.json",
+      "sha256": "6e315aa0a88a7d52fb87f362a882e50b06d8089d92e5d6d6113b621f54b18523"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-02/result.json",
+      "sha256": "2af14168123bdbe7cbc77668aa2a5329047e44cb49a21510c27889c4596c3de1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-03/result.json",
+      "sha256": "a5cbad20a04e12f7874363befe6db131374dd50b64d0a4ea936ae715b677a3f3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-04/result.json",
+      "sha256": "c98745de464d76257ac7a296e2586fa2b5b2d78118c206fd54b38ad023c1934b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-05/result.json",
+      "sha256": "8839ba96475e79d279d6234af095b45507ad85a9e59513f88b8027c762ba8f55"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-06/result.json",
+      "sha256": "cac019cfa4134916edde5b1d9901633cd414a9bc3cb436ae66787f91994a4d2a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-07/result.json",
+      "sha256": "cd13f0691e87ecd8b06e27d9c29330ca70ede97b641bebc9e7664d6e75c5c0c0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-08/result.json",
+      "sha256": "75b1d3f2159c388c0011ba543c0882967f2418fdc7e5c20781dfc88e23a724ae"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-09/result.json",
+      "sha256": "e01f44e02ede90c75036c5091169cba98609ae126f8272cc0ac00a46ae75263c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-10/result.json",
+      "sha256": "4151c22582f9918167f894ac3039cc3bdcfc91508b83e8b25d7a36ca283ae121"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-11/result.json",
+      "sha256": "234250d38887f017bfa0ee553da541f0c3caa4c814d7689244a17f0d84c2fa3b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-12/result.json",
+      "sha256": "9d4a667d1a55f7f64011c9976eaa195097710add99b1e1176a3dc8798717988f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-13/result.json",
+      "sha256": "43c70029b74a7092b6eabae5d6f9e4a33c85935c73d8680f403ae4df4a313a78"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-00/result.json",
+      "sha256": "51c69b64279232cd65e7e35cfc0f1032e0db37bff78eb73785eae04f63d9a9ff"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-01/result.json",
+      "sha256": "c3fa439b94e72e88e6762d3937e08fbb388c541f5bd5f2cb79377389886bfff2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-02/result.json",
+      "sha256": "eaf5b86f6f615d72efcf5a34e7d41fb4438abaca8a353247ebdce7fa3c8c05e4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-03/result.json",
+      "sha256": "4b3fd143a4a2113ab889fc3df3952bd3d86d075de7dde6f6025e3fbf6c6bb6f1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-04/result.json",
+      "sha256": "321a85d8a72ca496d7d480e83fe030ed2cc90ee769e917463755a96480214489"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-05/result.json",
+      "sha256": "e6f4b66671e4a9c3ab39c7dfbe5bab31938379a9e37c7ad11b2910c874612591"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-06/result.json",
+      "sha256": "303678d5ed2433f8c1416949c29ff5c958a851d7eff68624b94abe04c6479dad"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-07/result.json",
+      "sha256": "d8a184589b4d69822f9c6445f1a1ff9e21655f2207400adb7461f1ed78d82f87"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-08/result.json",
+      "sha256": "9f9b8a5d7fc88993cc4bf0b45b1fc6417c8859fb417cd91cfc1200e8391072b9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-09/result.json",
+      "sha256": "87cdd5f9c37d3391969688701058cf5ad5d9d49ffc0f019c764d4e86fa5a62ec"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-10/result.json",
+      "sha256": "fc2ee35d26bcfff02e2a8771b6c2f92149338255a86a5205bcb8185a5ca717f6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-11/result.json",
+      "sha256": "074c4348c9e8acf63857b4b9e98da3a2c4a8f041f27a0e55ab4cd71b71a5ccfc"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-12/result.json",
+      "sha256": "99b6a8fb2964d219dcaa2e9ad22839731334d35d67d4e6e6df80b82013c86f9c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_layer0_full_bf16_down/call-13/result.json",
+      "sha256": "86bb2c2138753936b535699cfe0665cb5b7eca769263e2370bd37c46578d8500"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-independent-metadata-review-20261107-v1.json",
+      "sha256": "44596ec541ca67e0f3b7a9d925ddfe538e62dd7825abcd153af4bcd575710ce9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-independent-raw-r2-20261107-v2.json",
+      "sha256": "9af11e905ac9f80960f514fc3969a0688f7868f943514424e3eea33cfdecd815"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-r1-20261107-input-plan.json",
+      "sha256": "8d7b6b76cc9af0c638e1cb97e827e2817279ed5953f93d52c0f136f9c5548a8a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-r2-root-terminal-20261107-v1.json",
+      "sha256": "8d7e848e9af23d60e66a28b9f4e5a00bf7e84f18fc9f106a63267cf81668f860"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/outer-ack.json",
+      "sha256": "19834325cade7ab387a6ce6aa22dc35dc09481fd8b5414ca10face4e877baf60"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/outer-ready.json",
+      "sha256": "4af59b2d86a062d6a0bcf3a5beba22bda79b8e37ef7421fe465fd3aa5f44f898"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/outer-result.json",
+      "sha256": "8371adfcddc81d51e4e74ee0024efddf3a04d84313c5fef7a919062b5531b8d5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/service-exit.json",
+      "sha256": "db40be87e6d1f13419a1c3d754f0a36d9a79bebd87d351ff94a6c371a8e52eba"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/service-owner.json",
+      "sha256": "9fb61abbf66e5ba47ff14b5f9f9a8065b0f855a0b04f02a7ecc91c0e7adb3549"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/worker-ack.json",
+      "sha256": "123098f600e0299c9f84d6f8f8f22091863a83c8c5c36e84ae480f5026451413"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/worker-ready.json",
+      "sha256": "e1ffd42e62922538ae8e0e0d216de629304d16f8f73c7e7878bf54fbde2cf386"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-raw-root-r2-20261107/worker-result.json",
+      "sha256": "a078e24bd51f696dc5bd629fdeb7e78a438302da5c4f3e45a74bae2d8e67ddd3"
+    }
+  ]
+}
