@@ -1,6 +1,6 @@
 # Experimental LFM3 v4 integration
 
-This branch prepares the historical LFM3-1.7B v4 predicated decode writer for repository review. It is **not yet repository-qualified**: only standard-library source/admission/mock checks have run. No native import, tokenizer execution, compilation, installation, device test or workload was run for this migration.
+The LFM3-1.7B v4 predicated decode writer passed the defined packaged paired comparison at implementation commit `822e1bd826321dc078226c2da3f199e1d385146f`. See the [2026-11-07 results and raw evidence](lfm3-results-20261107.md) for fresh compilation, correctness, quality, sampler and three-round throughput checks. Qualification is limited to the configuration below; the writer remains opt-in.
 
 The integration is disabled unless `NEURON_LFM3=1`. Its reference variant is the default; `NEURON_LFM3_NKI_WRITER=1` selects the historical multi-row decode writer. The one-row prefill writer is preserved. No later typed-writer pilot is included. The kernel retains capacity/rows ≤4 and width divisible by 128.
 
@@ -19,13 +19,13 @@ Only original BF16 `LiquidAI/LFM3-1.7B` revision `ac2586a34f1a1c03329dbdcdefabd8
 | neuronx-cc | 2.23.6484.0+3b612583 |
 | Transformers | 4.57.6 |
 
-The broad repository requirements do not replace this matrix. The package fingerprints relevant installed SDK sources and NKI modules through distribution metadata, without hard-coded environment or `.so` paths. This review did not import or hash those binaries.
+The broad repository requirements do not replace this matrix. The package fingerprints relevant installed SDK sources and NKI modules through distribution metadata, without hard-coded environment or `.so` paths. The original source review did not import or hash those binaries; the linked paired run subsequently exercised the native stack.
 
 The historical saved root `neuron_config.buckets` was `[2048]` (SHA256 `243df3eba317cf196efcde6c5eee47da39c1edaf13adb4ccab9d022a3751a0ba`, pinned by the v4 resume plan). This is **not a minimum decode floor**: the historical cold checks observed decode buckets 128, 256, 512, 1024 and 2048. The package keeps LFM's original NxDI routing and does not install Smol's `get_target_bucket` floor override.
 
 ## Prepare a fresh view
 
-The following are future validation commands, not records of execution. Fetch the pinned model separately under its own license. Do not enable remote Python execution. Run preparation outside any timed/shared benchmark window:
+The following commands illustrate setup; the linked results record the tested execution. Fetch the pinned model separately under its own license. Do not enable remote Python execution. Run preparation outside any timed/shared benchmark window:
 
 ```bash
 python -m vllm_neuron.models.lfm3.prepare_view /data/LFM3-1.7B /data/LFM3-1.7B-lfm3-view-v1
@@ -35,7 +35,7 @@ Preparation refuses an existing destination, verifies pinned Hub Git-blob/LFS id
 
 ## Matched reference and candidate
 
-Use the same pinned package checkout, input fixtures, sampling and resource limits for both variants. Each variant requires a new, distinct artifact directory. The existing repository CPU sampler is enabled by `NEURON_CPU_SAMPLER_FAST=1`; the historical experiment used `TRN1_CPU_SAMPLER_FAST=1` and a different global patch. That patch is not copied here, and packaged sampler equivalence remains a required paired test.
+Use the same pinned package checkout, input fixtures, sampling and resource limits for both variants. Each variant requires a new, distinct artifact directory. The existing repository CPU sampler is enabled by `NEURON_CPU_SAMPLER_FAST=1`; the historical experiment used `TRN1_CPU_SAMPLER_FAST=1` and a different global patch. That patch is not copied here. The linked paired run checked sampler migration in the stated finite scope; explicit request generators and HTTP seed support remain unqualified.
 
 Reference, initial explicit build:
 
@@ -65,7 +65,7 @@ For reuse set `NEURON_LFM3_ALLOW_COMPILE=0`. The default is off. Existing missin
 
 The historical services used reference MemoryMax/High 22/20 GiB and candidate 26/24 GiB, 8 GiB swap, and startup bounds 3600/5400s. Those are reproduction context, not an implemented service manager. This package adds no service controller and does not arrange benchmark scheduling.
 
-## Historical evidence and pending repository gates
+## Historical evidence and repository gates
 
 [Historical evidence](evidence/lfm3-20261031.json) records the original 2026-10-31 experiment. Original numeric32, cold96, long1529/84 and quality96 passed; both variants scored 63/96 with 96 identical texts. In three sequential rounds, historical short_decode was 29.783→61.292 tok/s single request and 104.136→188.828 tok/s at four concurrent requests. These are **historical experiment results, not a retest of this branch**. Measurements were sequential, not randomized, and do not establish statistical significance or whole-family optimization completion.
 
@@ -73,7 +73,7 @@ The historical services used reference MemoryMax/High 22/20 GiB and candidate 26
 
 The original numerical gates require finite outputs, cosine ≥ 0.995, KL ≤ 0.02, max absolute error ≤ 2, exact top1 when reference margin > 0.5, and aggregate argmax match ≥ 90%. They remain the thresholds for all new numeric/cold/long validation.
 
-Before admitting this package:
+The [2026-11-07 paired run](lfm3-results-20261107.md) completed these gates for the pinned scope. Repeat them when admitting a changed implementation or configuration:
 
 - Review the source diff, registry collisions, spawn registration and scope/artifact rejection checks.
 - Re-run original CPU1648 cases, 9 device graphs/43 checks and 12 persistent-alias graphs/60 checks.
