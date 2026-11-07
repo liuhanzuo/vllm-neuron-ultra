@@ -1,0 +1,45 @@
+{
+  "schema": "minicpm5_call4_mask_root_execution_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-07T15:36:56.995366+00:00",
+  "passed": true,
+  "blockers": [],
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-execution-spec-20261107-v1.json",
+    "sha256": "85db8d9f8a4031b8f75fa8a595304a8a3441916eea3319f1bd071de1dc5795f1"
+  },
+  "independent_source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-independent-source-review-20261107-v1.json",
+    "sha256": "80fb0f5da1bd41517a158e2c6e3dfab2f9ee4e39c884c9ba22964521d8021a75"
+  },
+  "worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_worker_v1.py",
+    "sha256": "54f4e2222bc6e6c6bea1e245878667bcf83d2b089e39c1f6537c99852212816c"
+  },
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_runner_v1.py",
+    "sha256": "4a713b0f9a7e434af173e5efb6686e45bc5d41a4154b369a88f87e22653f3a50"
+  },
+  "checks": {
+    "author_worker_rerun_passed": 55,
+    "author_final_runner_rerun_passed": 21,
+    "independent_mock_passed": 8,
+    "independent_checker": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_call4_mask_independent_20261107_v1.py",
+      "sha256": "7e8b64fd4081d3bb72bfee89f28de46b24a53bae3984dce98bb89afd703339ff"
+    }
+  },
+  "scope": "One serial TP2 CPU call4 pair. Reproduce original inclusive endpoint before strict mask. No full32/device/serving launch.",
+  "preserved_constraints": [
+    "official weights and all 7357 original input bindings",
+    "same device-before history, full42 layers, bucket2048, full130560 vocab",
+    "control output/213 taps/84 input/84 post endpoints exact on both ranks",
+    "only four prior-mask cells differ; strict endpoint differences recorded",
+    "original thresholds and prefill failure retained",
+    "16GiB job, no swap, CPUs6-7, 64MiB output cap, 28GiB root floor",
+    "actual outer/service/children exits required"
+  ],
+  "runtime_started": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

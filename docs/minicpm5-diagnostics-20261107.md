@@ -6,9 +6,10 @@ boundaries. Inputs, K projection, RoPE coefficients and rotated K agree exactly
 in the observed comparisons; Q and V have a small number of differing elements.
 Saved decode masks also confirm an input-contract error in the diagnostic
 harness: it admits the current cache address in the historical branch, while
-the SDK separately processes the current token. Its effect on final logits
-has not yet been measured. The cause of the full-model discrepancy remains
-unresolved. Details and
+the SDK separately processes the current token. A controlled four-frame CPU
+replay now changes the numeric pass count from 1/4 to 4/4 after correcting only
+that mask. The complete model, including its
+original prefill failure, remains unqualified. Details and
 independent result reviews are below; the earlier observer failure is retained
 as historical evidence.
 
@@ -210,8 +211,9 @@ the present work establishes its separate MiniCPM5 input lineage.
 
 The original 32-frame result contains one prefill failure and 14 decode
 failures. A decode-only change cannot resolve the retained prefill failure
-(frame 1, fixture 7, KL 0.1016956 versus the unchanged 0.02 limit). No corrected
-model replay or speed measurement has been performed for this finding.
+(frame 1, fixture 7, KL 0.1016956 versus the unchanged 0.02 limit). The bounded
+corrected CPU replay below measures four first-decode frames; no speed
+measurement has been performed for this finding.
 
 - [Decode-mask observation summary](evidence/minicpm5-decode-mask-20261107/summary.json)
 - [Independent result review](evidence/minicpm5-decode-mask-20261107/independent-review.json)
@@ -219,14 +221,65 @@ model replay or speed measurement has been performed for this finding.
 - [Historical precedent](evidence/minicpm5-decode-mask-20261107/historical-precedent.json)
 - [Export manifest and original source hashes](evidence/minicpm5-decode-mask-20261107/manifest.json)
 
+## Completed same-width mask intervention
+
+A fresh TP2 SDK CPU replay has now measured the effect of correcting this
+harness input. Both ranks reproduced the original inclusive control exactly:
+the complete output vocabulary, all 213 saved taps, all 84 post-state hashes
+and unchanged input states. Only after both controls passed did the strict
+arm run. Each arm executed one full 42-layer decode forward.
+
+Both arms imported the same original device-before history and retained bucket
+width 2048, official weights and teacher tokens. The strict arm changed exactly
+four mask cells from 1 to 0 at the four physical current positions; all other
+arguments and layouts were preserved. This is a CPU execution of the SDK model,
+not a new execution on Neuron devices.
+
+**Under the unchanged per-frame numeric criteria, pass count increased from
+1/4 to 4/4.** The two ranks have identical full-output digests and metrics;
+there are four unique frames, not eight independent examples. Thresholds remain
+cosine ≥ 0.995, reference-to-output KL ≤ 0.02, maximum absolute logit error ≤ 2,
+and matching top token when the reference margin exceeds 0.5.
+
+| Frame / fixture | Cosine: control → strict | Max absolute error: control → strict | KL: control → strict | Per-frame result |
+|---|---:|---:|---:|---|
+| 4 / 0 | 0.970919 → 0.999642 | 3.031250 → 0.375000 | 2.43375744e-05 → 6.63042556e-07 | Fail → Pass |
+| 5 / 7 | 0.994647 → 0.996950 | 1.187500 → 0.812500 | 1.4395539e-07 → 1.11796794e-07 | Fail → Pass |
+| 6 / 2 | 0.968678 → 0.997953 | 4.117188 → 0.882812 | 0.00169280497 → 6.33683521e-05 | Fail → Pass |
+| 7 / 5 | 0.998516 → 0.999686 | 0.609375 → 0.375000 | 0.00167035998 → 0.00167199771 | Pass → Pass |
+
+All four top-token predictions match the reference in both arms. Frame 7's
+KL increases slightly, while remaining below the threshold; not every metric
+improves. The first changed recorded tap is layer 0 attention output. Each
+rank has 211/213 changed taps and 82/84 changed post-state hashes (indices
+2 through 83). These are intervention effects, not failed reproduction
+requirements for the strict arm, and they do not identify a single causal layer.
+
+The controlled intervention establishes that the extra prior-mask cell affects
+these CPU outputs and explains the three local pass/fail changes. It does not
+establish a corrected complete history trajectory, explain the original
+prefill failure, or qualify MiniCPM5 on Neuron. Both arms still start from the
+original device-generated history. No latency, throughput or speedup was measured.
+
+The two rank processes, coordinator service and outer launcher exited with
+code 0; root separately observed the live outer process and its actual exit,
+and verified the service group drained. Independent review covers saved JSON
+metadata and the source/exit chain, not an independent payload recomputation.
+
+- [Four-frame result summary](evidence/minicpm5-call4-mask-20261107/root-result-summary.json)
+- [Independent metadata review](evidence/minicpm5-call4-mask-20261107/independent-result-review.json)
+- [Actual root-observed exit](evidence/minicpm5-call4-mask-20261107/root-exit.json)
+- [Source review and export provenance](evidence/minicpm5-call4-mask-20261107/manifest.json)
+
 ## Next validation
 
 Ten later attention boundaries remain incomplete; the decode-mask slice above
-does not cover prefill or complete the cache comparison. The immediate next
-experiment is a matched control with the same before-state, weights, teacher
-tokens and physical bucket, changing only the prior mask to `j < p`.
-The original inclusive control must reproduce its saved endpoints. SDK-inferred
-mask width is a separate possible follow-up because it may change bucket routing.
+does not cover prefill or complete the cache comparison. The next experiment
+will reuse the compiled Neuron artifact for a complete original 32-frame
+trajectory with the strict prior-mask contract, retaining all eight prefills and their original
+thresholds. It must measure history generated by the corrected trajectory
+and retain the original prefill failure. SDK-inferred mask width remains a
+separate possible follow-up because it may change bucket routing.
 
 Active V values, prior cache, current writes and prefill masks still need
 comparison. Expected cache manifests must

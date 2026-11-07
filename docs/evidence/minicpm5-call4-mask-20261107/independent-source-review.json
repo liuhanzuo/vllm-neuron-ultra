@@ -1,0 +1,140 @@
+{
+  "schema": "minicpm5_call4_mask_independent_source_review_v1",
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "observed_at": "2026-11-07T15:34:28.498506+00:00",
+  "decision": "SOURCE_ONLY_ACCEPTED",
+  "passed": true,
+  "blockers": [],
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_runner_v1.py",
+    "sha256": "4a713b0f9a7e434af173e5efb6686e45bc5d41a4154b369a88f87e22653f3a50"
+  },
+  "worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_worker_v1.py",
+    "sha256": "54f4e2222bc6e6c6bea1e245878667bcf83d2b089e39c1f6537c99852212816c"
+  },
+  "execution_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-input-plan-20261107-v1.json",
+    "sha256": "2de3ec58269a69dbf0ff0ee9a8acebb0204b6c0521007007438f474c2b6dcc25"
+  },
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-execution-spec-20261107-v1.json",
+    "sha256": "85db8d9f8a4031b8f75fa8a595304a8a3441916eea3319f1bd071de1dc5795f1"
+  },
+  "checks": {
+    "author_worker_rerun_passed": 55,
+    "author_final_runner_rerun_passed": 21,
+    "independent_mock_passed": 8,
+    "independent_checker": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_call4_mask_independent_20261107_v1.py",
+      "sha256": "7e8b64fd4081d3bb72bfee89f28de46b24a53bae3984dce98bb89afd703339ff"
+    }
+  },
+  "worker_findings": [
+    "Four physical rows map to HF fixture/step as reviewed: frame4/5/6/7 -> row3/1/0/2, fixture0/7/2/5, step1. Both scoring vectors have full130560 vocabulary before metrics.",
+    "One42-layer decode model/rank, bucket2048, exactly two arm forwards. Read-only attention prehooks require the matching mask/position route at every layer.",
+    "Each arm reloads and verifies all84 original before states per rank. Only four mask cells change; six other inputs retain object identity and metadata.",
+    "Control uses the original output/213tap/84input/84post endpoint. Both ranks participate in all_reduce MIN followed by barrier after control checks and before strict; one failed control prevents strict.",
+    "Strict skips original endpoint equality, retaining full output, all213 tap comparisons and84 post hashes. Unchanged shape/layout/input/finite-value requirements remain.",
+    "Official constructor, SDK initialization transition, cache/weight input authentication and original helper guards remain unchanged."
+  ],
+  "runner_findings": [
+    "Exact root review binds the fresh execution spec; spec and input plan have equal source closure and output root. Runner and worker are pinned. RuntimeContext permit uses the fresh plan digest and fresh per-rank output binding.",
+    "Outer holds the inherited serial lock while a single16GiB systemd group contains coordinator plus two directly observed rank children. Child guards authenticate outer lock ownership and coordinator identity; native imports occur after context/source validation.",
+    "Original finalized predecessor catalog plus later mask-analysis exits are inherited through existing helper prerequisites; actual admission checks remain root responsibilities.",
+    "Coordinator waits for actual rank process exit0 and matches result process identities. Outer checks actual service exit and group drain; self-exit claims remain false.",
+    "Fixed draft defects: launch attempt recorded before command return; main-process terminal alone no longer skips cleanup; resource validation failure no longer prevents identity-authenticated stop.",
+    "Independent integrated mock with real service validators confirms invalid MemoryMax fails normal validation but still stops the exact admitted job, records failure/terminal/group evidence, then releases lock. Wrong command or invocation is refused."
+  ],
+  "fresh_plan_comparison": {
+    "unchanged_except": [
+      "output_root",
+      "source_sha256",
+      "call4_intervention"
+    ],
+    "original_source_pins_preserved": true,
+    "added_sources": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_worker_v1.py": "54f4e2222bc6e6c6bea1e245878667bcf83d2b089e39c1f6537c99852212816c",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_runner_v1.py": "4a713b0f9a7e434af173e5efb6686e45bc5d41a4154b369a88f87e22653f3a50",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_decode_mask_analysis_v1.py": "6eff41371dc6a78b59ffea14019d65fbac1f3eaa7d4285f4a53791e337d4b139",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_rope_analysis_v1.py": "ab3bf6a789df5440fd28a5c73c72c9bf0e284b1d62e0103e121e7aae4f4e1ad4",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1"
+    },
+    "source_count": 1989,
+    "inherited_input_count": 7357,
+    "raw_inputs_unchanged": true,
+    "effective_output_cap_bytes": 67108864,
+    "legacy_helper_output_cap_not_admission": true
+  },
+  "limitations": [
+    "Finite source and inert mocks only; no live process/service/lock/admission probes and no payload/weight/native library reads or model imports.",
+    "The inherited RuntimeContext schema is helper compatibility, not old88 runtime authorization. Fresh root source approval/admission and actual exit observations are still required.",
+    "The64MiB total tree guard is periodically sampled, with per-file limits; this is not a filesystem quota or measured peak-memory proof.",
+    "No actual control reproduction, strict result, causal operator, complete model qualification or speedup is established by this review."
+  ],
+  "authenticated_source_metadata_pins": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_runner_v1.py",
+      "sha256": "4a713b0f9a7e434af173e5efb6686e45bc5d41a4154b369a88f87e22653f3a50"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_worker_v1.py",
+      "sha256": "54f4e2222bc6e6c6bea1e245878667bcf83d2b089e39c1f6537c99852212816c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_call4_mask_worker_20261107_v1.py",
+      "sha256": "7606324de8deaeb4a564831774014c4eba59a1b627b985a02569a38230dad3cb"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_call4_mask_runner_20261107_v1.py",
+      "sha256": "b09963c8ac0ca87623be5a972811d0cfe06de753857c87835c1c71f0161c9481"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-worker-source-handoff-20261107-v1.json",
+      "sha256": "3d75ff5b7fa7638c4e46a608e7f59278b2fd7ac408b408e41cc8e1e6dc166fd6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-runner-source-handoff-20261107-v1.json",
+      "sha256": "991ab1e9435101d50dd7cd1eaa5573f2ab9b324cf451c6cb7b66a5e7481eb25c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-input-plan-20261107-v1.json",
+      "sha256": "2de3ec58269a69dbf0ff0ee9a8acebb0204b6c0521007007438f474c2b6dcc25"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-execution-spec-20261107-v1.json",
+      "sha256": "85db8d9f8a4031b8f75fa8a595304a8a3441916eea3319f1bd071de1dc5795f1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-python-trace-inputs-20261107-v1.json",
+      "sha256": "17849dbee01a34f232a72432919fb7d042d7052797fd1d25290382703ab6c196"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_worker_v1.py",
+      "sha256": "54f4e2222bc6e6c6bea1e245878667bcf83d2b089e39c1f6537c99852212816c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_call4_mask_runner_v1.py",
+      "sha256": "4a713b0f9a7e434af173e5efb6686e45bc5d41a4154b369a88f87e22653f3a50"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_decode_mask_analysis_v1.py",
+      "sha256": "6eff41371dc6a78b59ffea14019d65fbac1f3eaa7d4285f4a53791e337d4b139"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_rope_analysis_v1.py",
+      "sha256": "ab3bf6a789df5440fd28a5c73c72c9bf0e284b1d62e0103e121e7aae4f4e1ad4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py",
+      "sha256": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1"
+    }
+  ],
+  "runtime_started": false,
+  "runtime_admitted": false,
+  "actual_raw_reads_hashes_stats": 0,
+  "native_imports": 0,
+  "process_service_queue_lock_probes": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

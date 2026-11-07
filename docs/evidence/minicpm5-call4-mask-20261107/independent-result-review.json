@@ -1,0 +1,309 @@
+{
+  "schema": "minicpm5_call4_mask_independent_result_metadata_review_v1",
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "observed_at": "2026-11-07T15:41:17.297678+00:00",
+  "passed": true,
+  "decision": "ACCEPTED_FINITE_RESULT_METADATA",
+  "blockers": [],
+  "scope": "JSON-only review of completed call4 two-arm full42-layer CPU replay; no raw or model execution by reviewer",
+  "root_actual_exit_ref": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-root-exit-r1-20261107-v1.json",
+    "sha256": "d11c23e3f000425ba736a549f5a8580dabe2d37ceada6c2b840cb6114aabf5ae"
+  },
+  "actual_tool_session": 11091,
+  "actual_root_observed_exit_code": 0,
+  "checks": {
+    "complete_rank_results": 2,
+    "arm_reports": 4,
+    "unique_logical_frames": 4,
+    "synchronized_forwards": 2,
+    "rank_local_forwards": 4,
+    "source_design_and_fresh_admission_bound": true,
+    "exact_original_control_endpoints_both_ranks": true,
+    "both_rank_gate_preserved_in_reviewed_source_and_completed_records": true,
+    "synthetic_stdlib_mask_hashes_match_all_layers": true,
+    "strict_changes_only_four_cells": true,
+    "both_arms_original_before_reimported": true,
+    "HF_threshold_decisions_independently_recomputed": true,
+    "rank_outputs_and_HF_metrics_identical": true,
+    "actual_exit_identity_chain_consistent": true
+  },
+  "rank_summaries": [
+    {
+      "rank": 0,
+      "control_endpoint_exact": true,
+      "control_gate_passed": true,
+      "control_pass_frames": [
+        7
+      ],
+      "strict_pass_frames": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "changed_taps": 211,
+      "changed_post_states": 82,
+      "first_changed_retained_tap": "layers.0.self_attn"
+    },
+    {
+      "rank": 1,
+      "control_endpoint_exact": true,
+      "control_gate_passed": true,
+      "control_pass_frames": [
+        7
+      ],
+      "strict_pass_frames": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "changed_taps": 211,
+      "changed_post_states": 82,
+      "first_changed_retained_tap": "layers.0.self_attn"
+    }
+  ],
+  "HF_rows": [
+    {
+      "frame": 4,
+      "fixture": 0,
+      "physical_row": 3,
+      "step": 1,
+      "control_metrics": {
+        "max_abs_error": 3.03125,
+        "mean_abs_error": 0.49463021755218506,
+        "cosine": 0.9709192514419556,
+        "kl_reference_to_neuron": 2.4337574359378777e-05,
+        "argmax_match": true,
+        "reference_margin": 10.875,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "strict_metrics": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.05067829787731171,
+        "cosine": 0.9996420741081238,
+        "kl_reference_to_neuron": 6.630425559706055e-07,
+        "argmax_match": true,
+        "reference_margin": 10.875,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "control_failed": [
+        "cosine",
+        "max_abs"
+      ],
+      "strict_failed": []
+    },
+    {
+      "frame": 5,
+      "fixture": 7,
+      "physical_row": 1,
+      "step": 1,
+      "control_metrics": {
+        "max_abs_error": 1.1875,
+        "mean_abs_error": 0.19928228855133057,
+        "cosine": 0.9946470856666565,
+        "kl_reference_to_neuron": 1.439553898308077e-07,
+        "argmax_match": true,
+        "reference_margin": 11.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "strict_metrics": {
+        "max_abs_error": 0.8125,
+        "mean_abs_error": 0.15472714602947235,
+        "cosine": 0.9969497323036194,
+        "kl_reference_to_neuron": 1.1179679404449416e-07,
+        "argmax_match": true,
+        "reference_margin": 11.625,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "control_failed": [
+        "cosine"
+      ],
+      "strict_failed": []
+    },
+    {
+      "frame": 6,
+      "fixture": 2,
+      "physical_row": 0,
+      "step": 1,
+      "control_metrics": {
+        "max_abs_error": 4.1171875,
+        "mean_abs_error": 0.5798022150993347,
+        "cosine": 0.9686781764030457,
+        "kl_reference_to_neuron": 0.0016928049735724926,
+        "argmax_match": true,
+        "reference_margin": 5.625,
+        "reference_top1": 39310,
+        "neuron_top1": 39310
+      },
+      "strict_metrics": {
+        "max_abs_error": 0.8828125,
+        "mean_abs_error": 0.14819294214248657,
+        "cosine": 0.9979526996612549,
+        "kl_reference_to_neuron": 6.336835213005543e-05,
+        "argmax_match": true,
+        "reference_margin": 5.625,
+        "reference_top1": 39310,
+        "neuron_top1": 39310
+      },
+      "control_failed": [
+        "cosine",
+        "max_abs"
+      ],
+      "strict_failed": []
+    },
+    {
+      "frame": 7,
+      "fixture": 5,
+      "physical_row": 2,
+      "step": 1,
+      "control_metrics": {
+        "max_abs_error": 0.609375,
+        "mean_abs_error": 0.11613579839468002,
+        "cosine": 0.9985158443450928,
+        "kl_reference_to_neuron": 0.0016703599831089377,
+        "argmax_match": true,
+        "reference_margin": 0.75,
+        "reference_top1": 354,
+        "neuron_top1": 354
+      },
+      "strict_metrics": {
+        "max_abs_error": 0.375,
+        "mean_abs_error": 0.04813669994473457,
+        "cosine": 0.9996857643127441,
+        "kl_reference_to_neuron": 0.001671997713856399,
+        "argmax_match": true,
+        "reference_margin": 0.75,
+        "reference_top1": 354,
+        "neuron_top1": 354
+      },
+      "control_failed": [],
+      "strict_failed": []
+    }
+  ],
+  "aggregate": {
+    "control_pass_frames": 1,
+    "strict_pass_frames": 4,
+    "frames": 4,
+    "control_top1_matches": 4,
+    "strict_top1_matches": 4,
+    "strict_control_changed_logits": 513308,
+    "total_logits": 522240,
+    "max_strict_control_abs": 4.046875,
+    "changed_taps_per_rank": 211,
+    "total_taps_per_rank": 213,
+    "changed_post_states_per_rank": 82,
+    "total_post_states_per_rank": 84,
+    "frame7_KL_increases_but_stays_below_original_threshold": true,
+    "output_allocated_bytes": 28475392
+  },
+  "interpretation": "Under the same official weights, original device-before states and bucket2048, changing only the prior-mask predicate across all42 layers changes full-model CPU outputs and brings all four call4 frames within original per-frame thresholds; control had only frame7 passing. This establishes a local input-mask intervention effect for this CPU call, not a unique-layer cause or general repair.",
+  "limitations": [
+    "Root observed actual tool/service/rank exits; reviewer verified bound JSON chain only and did not independently probe runtime.",
+    "Tensor digests and numerical metrics are runtime records; reviewer did not reread tensors or independently recompute floating-point metrics. Only threshold decisions, mask hashes from explicit expected values, and metadata crosslinks were recomputed.",
+    "Frame7 KL slightly worsens; do not describe every metric as improving.",
+    "The two ranks are witnesses of the same four frames, not eight independent examples.",
+    "Inherited prefill failure, later decode frames, Neuron device behavior, cold/long/slot-reuse/quality/performance qualification remain unresolved.",
+    "No speedup, full-model qualification, serving equivalence, or unique causal layer claim."
+  ],
+  "authenticated_metadata": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-root-exit-r1-20261107-v1.json",
+      "sha256": "d11c23e3f000425ba736a549f5a8580dabe2d37ceada6c2b840cb6114aabf5ae"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-root-live-r1-20261107-v1.json",
+      "sha256": "82c8ccd773b41a573f6bb1020c65a5eb7c775f4939374ab2f348025062dcacda"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/admission.json",
+      "sha256": "17e25dcce7c5fe68c4190670937e379cd82d6b068f0a425a3d516f38b5648146"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/outer-result.json",
+      "sha256": "9461414d831815ffa28a3f7270e547f500927c5b74425c9af33eae850408f89c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/service-exit.json",
+      "sha256": "d65e1345791bfae7f01cd86c8ec0a74786a76f63a004f58b2f687861c62026b1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/coordinator-result.json",
+      "sha256": "1a89dea7a7638b59a70cad9d1aa4368d8067133d69808bb8bfa443f00c936734"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/children-exits.json",
+      "sha256": "dae4a05d0ccde431dceb479bd5e7a5d0432a6f316b5feb1d2c596cd08a2b4be7"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/rank0-result.json",
+      "sha256": "8d6a06a198a14ba42a41a7ac601ef1da6a846b62184b15258d665689ff51ce5d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/rank1-result.json",
+      "sha256": "9024a807e118194319a3a70cf0ee226e9ffcd8ffbe1b0b636907b6a8e7f61639"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-execution-spec-20261107-v1.json",
+      "sha256": "85db8d9f8a4031b8f75fa8a595304a8a3441916eea3319f1bd071de1dc5795f1"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-input-plan-20261107-v1.json",
+      "sha256": "2de3ec58269a69dbf0ff0ee9a8acebb0204b6c0521007007438f474c2b6dcc25"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-root-execution-review-20261107-v1.json",
+      "sha256": "461832e586a2f05cc50878d215db1ae33914ad64af64f50296c4b2e7771602d6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-call4-mask-independent-source-review-20261107-v1.json",
+      "sha256": "80fb0f5da1bd41517a158e2c6e3dfab2f9ee4e39c884c9ba22964521d8021a75"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-04/before/manifest.json",
+      "sha256": "86161d1a4ef9578085290e15ae6058248c22fa5df950a6ff32455c58999d046f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-history-crossover-v1/cpu_control/cpu-rank0/call-04/result.json",
+      "sha256": "1902dc6d3233563b0ec8cc16eef97610f4aef21df97dec01cafd8bf80cd32b59"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-history-crossover-v1/cpu_control/cpu-rank0/call-04/after/manifest.json",
+      "sha256": "bda76a95d991d54c40aa0f55fc5e96b8a9e723da9ca877f707007808a547c8b8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/cpu-rank0/original_inclusive_control/result.json",
+      "sha256": "e7920dff966922a7aef404316bb7d69ff24b549c51193600df91251c17d07fb2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/cpu-rank0/strict_prior_same_width/result.json",
+      "sha256": "8847d5cdc6800f51a4eb6b3980b20397222f39cb1de778f6c7fe846479839fa8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-history-crossover-v1/cpu_control/cpu-rank1/call-04/result.json",
+      "sha256": "d8298e7da0fe32300341a7375a9d8d94cc12e45495054fc67b4c520ba5f6201d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-history-crossover-v1/cpu_control/cpu-rank1/call-04/after/manifest.json",
+      "sha256": "b7f18ddba37b48dfc9e762ecc456541abf142468ad459655c545dacae7bb8b89"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/cpu-rank1/original_inclusive_control/result.json",
+      "sha256": "9e49bebb83b2fa852b5b9342655eed57429518b12775b26d48b0f7aa300530c0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-call4-mask-contrast-r1-20261107-v1/cpu-rank1/strict_prior_same_width/result.json",
+      "sha256": "af0768b447839211d90616c4d8c980513ab1a48fb2e203967b34a279ee4bf8a4"
+    }
+  ],
+  "actual_raw_reads_hashes_stats": 0,
+  "native_imports": 0,
+  "process_service_queue_lock_probes": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
