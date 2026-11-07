@@ -1,0 +1,106 @@
+{
+  "schema": "minicpm5_original32_oproj_cpu_root_live_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-07T17:32:32.541192+00:00",
+  "actual_identity_verified": true,
+  "owner": {
+    "pid": 2178459,
+    "start_ticks": "385321917",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-oproj-cpu-execution-spec-20261107-v1.json",
+      "--spec-sha256",
+      "c6960316d9e8f8b0c926cf8936fb3eaafe9117b4c85d0f01387e94d9a50e858d",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-oproj-cpu-root-execution-review-20261107-v1.json",
+      "--review-sha256",
+      "a1a01d2784c4b48dc12db0df51625216c11b164f81fb3396f937a431e0864435"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "coordinator": {
+    "pid": 2179633,
+    "start_ticks": "385323651",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+      "--admission-sha256",
+      "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service",
+    "unit": "trn1-mini-original32-oproj-r1-20261107-v1",
+    "invocation_id": "e70b4a9e311b4b4994c8a9e356ea982b"
+  },
+  "ranks": [
+    {
+      "pid": 2179644,
+      "start_ticks": "385323721",
+      "ppid": 2179633,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "--admission-sha256",
+        "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+    },
+    {
+      "pid": 2179645,
+      "start_ticks": "385323722",
+      "ppid": 2179633,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "--admission-sha256",
+        "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+    }
+  ],
+  "actual_execution_handle": {
+    "kind": "tool_session",
+    "session_id": 49173
+  },
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+    "sha256": "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "actual_proc_locks_line": "1: FLOCK  ADVISORY  WRITE 2178459 103:02:8294421 0 EOF",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-oproj-cpu-execution-spec-20261107-v1.json",
+    "sha256": "c6960316d9e8f8b0c926cf8936fb3eaafe9117b4c85d0f01387e94d9a50e858d"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-oproj-cpu-root-execution-review-20261107-v1.json",
+    "sha256": "a1a01d2784c4b48dc12db0df51625216c11b164f81fb3396f937a431e0864435"
+  },
+  "output_root": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1",
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

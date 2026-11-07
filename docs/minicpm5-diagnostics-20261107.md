@@ -15,6 +15,13 @@ numerical difference at the output projection path; causality for the remaining
 final-model failures is unproven. Independent result reviews are below; the
 earlier observer failure is retained as historical evidence.
 
+The subsequent full-model CPU TP2 experiment has completed. Its strict-mask
+baseline and exact repeat pass 29/32 frames; promoting all 42 attention output
+projections to FP32 local products and reduction passes only 27/32. This
+candidate is rejected. It adds two failing frames and changes a high-margin
+top-1 prediction. The CPU result is separate from the earlier **30/32 Neuron
+device result**. Neither establishes a qualified model or a new speedup.
+
 ## Earlier dispatch observer failure
 
 Five fresh CPU reference runs show that entering the current dispatch observer
@@ -546,10 +553,10 @@ The controlled full-shape comparisons establish useful limits:
   differ in all 24 full outputs; 22/24 final queries agree. Local kernel/order
   effects remain separate from the controlled rounding contrast.
 
-This supports a full-model CPU experiment targeting only the 42 attention
+This motivated a full-model CPU experiment targeting only the 42 attention
 output-projection instances: keep official BF16 parameters, compute local
-products and actual TP2 reduction in FP32, then cast once to BF16. The planned
-order is original inclusive-mask trajectory reproduction, strict-mask baseline,
+products and actual TP2 reduction in FP32, then cast once to BF16. Its execution
+order was original inclusive-mask trajectory reproduction, strict-mask baseline,
 an independent exact baseline repeat, then a strict-mask candidate. Each arm
 must carry its own actual caches through all 14 calls / 32 frames. The original
 HF logits thresholds and every downstream qualification gate remain unchanged.
@@ -566,3 +573,73 @@ KL failures and its 30/32 result are unchanged. There is no new speedup ratio.
 - [Independent result review](evidence/minicpm5-oproj-fullshape-20261107/independent-result-review.json)
 - [Actual exit record](evidence/minicpm5-oproj-fullshape-20261107/actual-exit.json)
 - [Export manifest](evidence/minicpm5-oproj-fullshape-20261107/manifest.json)
+
+## Full-model CPU output-projection trial: candidate rejected
+
+The four-arm CPU TP2/Gloo run completed with exit code 0. Every arm executes
+the complete original 14-call / 32-frame trajectory. It imports the original
+call-0 cache seed once, then carries its own 84 cache tensors per rank across
+prefill/decode transitions and the group reset at call 7. No baseline cache is
+injected into the candidate midway through the run. The two replicated ranks
+are counted once in the table.
+
+| CPU arm | All per-frame numeric gates | Prefill | Decode | Top-1 matches |
+|---|---:|---:|---:|---:|
+| Original inclusive-mask control | 16/32 | 7/8 | 9/24 | 31/32 |
+| Strict-mask baseline S0 | 29/32 | 7/8 | 22/24 | 32/32 |
+| Independent strict-mask repeat S1 | 29/32 | 7/8 | 22/24 | 32/32 |
+| Strict mask + all 42 FP32 output projections | **27/32** | **6/8** | **21/24** | **31/32** |
+
+The original control reproduces all 14 saved complete outputs, the original
+213 intermediate signatures, and all cache-state signatures on both ranks.
+S1 exactly reproduces S0's complete output and intermediate/cache metadata
+through all 14 calls. These are reproducibility checks; the HF-reference
+numeric pass counts are a separate comparison.
+
+Only the 42 exact `layers.N.self_attn.o_proj.o_proj` instance forwards change
+in the candidate. Original BF16 weights and inputs are cast to FP32 for the
+local projection; the actual TP2 reduction stays in FP32, followed by one
+BF16 cast. All official output-projection weight column shards are checked,
+and the original parameter objects and bytes are unchanged at cleanup.
+No MLP, language-model head, global dtype or configuration change is included.
+
+The candidate rescues **zero** previously failing frames and introduces
+failures at frames **5 and 16**. All frame indices below are zero-based.
+
+| Frame / fixture / phase | Strict S0 KL | Candidate KL | Candidate failure |
+|---|---:|---:|---|
+| 1 / 7 / prefill | 0.101270 | 0.197038 | KL; high-margin top-1 changes from reference 1062 to 15182 |
+| 5 / 7 / decode step 1 | 0.0000000819 | 0.0000002351 | New cosine failure: 0.993273 |
+| 9 / 7 / decode step 2 | 0.028122 | 0.021217 | KL remains above 0.02 |
+| 13 / 7 / decode step 3 | 0.048726 | 0.038259 | KL remains above 0.02 |
+| 16 / 4 / prefill | 0.018799 | 0.021150 | New cosine (0.994612) and KL failures |
+
+The unchanged thresholds are cosine at least 0.995, KL at most 0.02,
+maximum absolute error at most 2, aggregate top-1 agreement at least 90%,
+and exact top-1 agreement whenever the reference margin exceeds 0.5.
+Frame 1 has reference margin 1.125, so the candidate's aggregate 31/32
+top-1 agreement does not excuse that failure. Strict S0 itself still fails
+frames 1, 9 and 13. Correcting the inclusive mask improves the overall pass
+count, but per-frame KL improves in 17 frames, ties in 8, and worsens in 7;
+it does not improve every metric at every frame.
+
+The saved layer-0 projection improvement therefore did **not** generalize to
+this full-model, all-42-layer intervention. This does not invalidate the local
+rounding observation or identify the cause of the remaining errors. The
+candidate is not enabled in the plugin and will not be compiled for Neuron
+on the strength of this result. New intermediate/cache payloads were not saved
+in this run; their hashes establish equality or difference, not numerical
+error magnitude or a causal operator.
+
+This run exercised the full model on CPU, including actual Gloo collectives.
+It did not compile or run a new Neuron candidate, and it measured no serving
+speedup. Cold-cache, long-decode, slot reuse/inactive-slot, quality96 and paired
+serving requirements remain outstanding. The earlier device result remains
+30/32; the CPU strict baseline is 29/32. All 15 model families remain in scope.
+
+- [Per-frame metrics](evidence/minicpm5-oproj-cpu-fullmodel-20261107/frames.csv)
+- [Root summary](evidence/minicpm5-oproj-cpu-fullmodel-20261107/root-summary.json)
+- [Independent metadata/source review](evidence/minicpm5-oproj-cpu-fullmodel-20261107/independent-result-review.json)
+- [Actual exit record](evidence/minicpm5-oproj-cpu-fullmodel-20261107/actual-exit.json)
+- [Worker source](evidence/minicpm5-oproj-cpu-fullmodel-20261107/worker.py)
+- [Export manifest](evidence/minicpm5-oproj-cpu-fullmodel-20261107/manifest.json)

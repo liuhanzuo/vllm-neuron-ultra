@@ -1,0 +1,1468 @@
+{
+  "complete": true,
+  "rank_exits": [
+    0,
+    0
+  ],
+  "rank_owners": [
+    {
+      "pid": 2179644,
+      "start_ticks": "385323721",
+      "ppid": 2179633,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "--admission-sha256",
+        "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+    },
+    {
+      "pid": 2179645,
+      "start_ticks": "385323722",
+      "ppid": 2179633,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "--admission-sha256",
+        "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+    }
+  ],
+  "results": [
+    {
+      "schema": "minicpm5_original32_oproj_cpu_rank_v1",
+      "complete": true,
+      "rank": 0,
+      "arms": [
+        "inclusive_ownhistory_control",
+        "strict_cpu_s0",
+        "strict_cpu_s1",
+        "strict_fp32_oproj_candidate"
+      ],
+      "arm_reports": [
+        {
+          "arm": "inclusive_ownhistory_control",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/inclusive_ownhistory_control/result.json",
+          "sha256": "787d2340f461483c8f620988e4e60539aa6763c79a3f4714412a8542c2e1e568"
+        },
+        {
+          "arm": "strict_cpu_s0",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/result.json",
+          "sha256": "caef19b9f673ef0b92aeaa5b4bf3807c4736b99691bc0d6fbb747868c75ae968"
+        },
+        {
+          "arm": "strict_cpu_s1",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s1/result.json",
+          "sha256": "f8a36a4c3303631f3ec6e853935e8ee97b84bea13d108fa6238568a8cf16b5a7"
+        },
+        {
+          "arm": "strict_fp32_oproj_candidate",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_fp32_oproj_candidate/result.json",
+          "sha256": "af0e182f362111e3d54ffa1b5272fce60c7a644deaa89c0c9d96fedfc83daa24"
+        }
+      ],
+      "summaries": {
+        "inclusive_ownhistory_control": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            4,
+            6,
+            8,
+            9,
+            10,
+            12,
+            13,
+            14,
+            20,
+            21,
+            23,
+            24,
+            27,
+            28,
+            31
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 15,
+          "argmax_match_fraction": 0.96875,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_cpu_s0": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            9,
+            13
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 2,
+          "argmax_match_fraction": 1.0,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_cpu_s1": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            9,
+            13
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 2,
+          "argmax_match_fraction": 1.0,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_fp32_oproj_candidate": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            5,
+            9,
+            13,
+            16
+          ],
+          "prefill_failed": 2,
+          "decode_failed": 3,
+          "argmax_match_fraction": 0.96875,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 1.0,
+              "mean_abs_error": 0.12522676587104797,
+              "cosine": 0.998150110244751,
+              "kl_reference_to_neuron": 0.19703838229179382,
+              "argmax_match": false,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 15182
+            },
+            "failed_criteria": [
+              "KL",
+              "high_margin_argmax"
+            ]
+          },
+          "full_model_qualified": false
+        }
+      },
+      "model_forwards": 56,
+      "seed_import_count": 4,
+      "S1_repeat_all14_exact": true,
+      "native32_evidence": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-00.json",
+            "sha256": "0fe85202d88341d47d257b7c34cfa7b3f5616949d7fdb2326187c78b86cbab9b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2203dcfb6ced0450068df547ad1b49ce2538d7ee13cd148ad2a8ebd7a8bc0dc2"
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-01.json",
+            "sha256": "8d086df2cb1b54c9a6db94efc6590a3ae819fbce080f12a2bc70ac02dd47cd9e"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "6d0b72994d99a034d8c3b7e3613d8636c4ee5e8b5a4efacfc2fc682dbd04ca68"
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-02.json",
+            "sha256": "f8253f74f101e00637e66883e93d8a3a2ab97e1bc1abef8bfcf0362521a6c4af"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "8bcb6e37fb9ba43dac9f866fdd659599c43086c2e4e560e406bdf34c37efe3bc"
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-03.json",
+            "sha256": "347b9073066f8f9f4889d6915a1e3d91d577f3a771601e1b8bdb48ef0ff9b2ab"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "b4af353a60dccd0a8dc9d86d2109de88f083930ee557ffa4f0a2a956d88603b6"
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-04.json",
+            "sha256": "ef23a8560b2243d0726dcd8ecef5399a53928f32db6c006ccd20f45e3b4544d8"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "e48191f47fba8536e3ab4d3fc7bfff18ff3638c9ba490500514fc15287015b77"
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-05.json",
+            "sha256": "0e44aa2fb6d1c40aa914c458846bd970108e083092619bf77075d667375ac27f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "e12f897ced80001a1dc1293c63135ccec471bea263b8dc9a2e8d739accb06c1b"
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-06.json",
+            "sha256": "52135afa784eb0814198f07fb1b7156548859d7806b3eb265c46c18caf917147"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "55675145722897d5dcdc7569cf6c0200dfda6372d80de8967a93fd0b128ec9d9"
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-07.json",
+            "sha256": "8f080b40d3883918cbb722ade1757d51f312cea4ab3302818d0a4db44e0f54f5"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "0faff0e2e1f1d8e7a1c8d86ab0bed1203f5a0b5ea9e988a0475c209ccc123ccd"
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-08.json",
+            "sha256": "7901a08f8891a604e2fad54404e2e1b1176a92ab6e22df9e9d074517ac167185"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "a6233c1472f12243e691c761b7d7575825dc38b17ad4675011dc7c7894fd0b52"
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-09.json",
+            "sha256": "0614192cb119378cdab27e1ce11e9cf897afb68165ef81b8370de9d89b9d425c"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f0cc403d7285d65be7cf85d7c7c2c61d8d0b49e89977498cc29f0684b6500f79"
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-10.json",
+            "sha256": "dc7c529eb9cb492150488bd5458bab1b1da44a8d1fc867b4178448ecd7d78570"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f22e62eaff26c53245fb82acf6cd4ded5d982c6d2cacb3ac8fbd37c36e1ab297"
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-11.json",
+            "sha256": "08ccc7e767063b54cf894ae1beabf8a63edacb7b5a6302a32271b4da3276b153"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2b9bcd8887001c5fb2de9151ab652f412a720cdf015b463f0372b4f146024b88"
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-12.json",
+            "sha256": "ca7b6f8716e1cca368c9fb09bd6dbb306f75acb0b2fc9822ff063001d11d97ed"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "a4c62b49b997dc89db6e9f4fb1f36f352c4625a980116851756ff8b969729799"
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-13.json",
+            "sha256": "9e2869958572542a763bcdd4d5242afbbca971ab7a22fc57f1342bc754751802"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "fbf47878804807ba7ed3a0187c95be3a56014372169c5c3e033a7f28e4a24e26"
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-14.json",
+            "sha256": "eee4187d735e1148dca28dcf8f96799ee86dcd903db907146c9cc2d910107759"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "af96699cf6accf873e7ad8e931dc98ae156b7c99aff57800962d66343db96af9"
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-15.json",
+            "sha256": "1be27296bd57bd19a54ca280887fcce78a8610cb0b6efa7ec38321fd4d023ef0"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2af452b7eb5650cf01334419c08c14262d48b5811a6551147d8f01d07b433beb"
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-16.json",
+            "sha256": "ea7b3ca2b9dc6814424ec303833ecd3b6eaad8af8b65070bd157fcb26f2b97ce"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "0ae2a57c9f135d464e941e46d6e7c828571444b52d4b5435ac9e344594d90d9d"
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-17.json",
+            "sha256": "d72944caa08fabb3988f488d9ae744408994152438fda7ff50dec90b8bb2c91a"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "bd16f61016f5f9d6f3f4c72ffafa10e2a396a25f4e7c1d30920a92e2030901a3"
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-18.json",
+            "sha256": "c9d86b774e068b4556772efcf2d112c276538d22f01f2ca2473ebd102b520e9f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "af73e407db1a73333d2493d8409b0524c80d2a1a9e993eb62a1e651d25568d75"
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-19.json",
+            "sha256": "c81c12a37b5a7e2cfccab433f4d1d13223440dbc9bd2c563596a6782fe4c285f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "4ea1fe18ddd11f361e5606d384edc2cdac3b9d2bc73e15d67d89c2c7f3e4fc91"
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-20.json",
+            "sha256": "999bcbe601456c7d15fdfb4b9b1d24def32d1b8f29a590fcaaab284cf552c0b3"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "71e8c664fdd4c0e110d363f56e81aaea6cb8b36738205f27c2e5d8349fc27c3a"
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-21.json",
+            "sha256": "5e5f49b8e173ab45edcac44d3e245f465da0f8f85d512a2db427bc871fc43548"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "3c35a4c856c2aa973585721216236b878b5085acfa52ec34139581c10053ac4e"
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-22.json",
+            "sha256": "b01d65ae7c594cc4eecb024b1a7d82c25ac7e463e2229dbf6bfc5e0807eabd5b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "551e045bff5d2e440693430bf848566dc39a435253121dae2d4564753b9453d1"
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-23.json",
+            "sha256": "939eff7068f8bf990df6b88678158f279ed07a88b6fcb3866e646e5e141c9575"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "724344d2c90772393b4036091aee0ab15fd70af756ea94b0601459769e2978a5"
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-24.json",
+            "sha256": "e93d5152a30e6c5ac03ed273ca78f43e8d845164add5d22c0526ee701e6a507a"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "22c5dbfbf9462e8841ff18258021f09777222642dbedfd634a375772b4582679"
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-25.json",
+            "sha256": "1e0d57997f4224a250d615f6b1092af08eabd59b9aa75b4a14b6b4495c976aa1"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "3edbe44fce3f4cf09326c6d1fe5852a81f80a39f089cdd4d896d351bdaa72f07"
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-26.json",
+            "sha256": "bacb2972619ce74ae379aae247e2fcd44ff6d36c1bae08a840d82934abe46b6b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "ca23d2266686b4effbbf2b0adfde270869cdb20752b782dfc2fd4a0c948b105b"
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-27.json",
+            "sha256": "be7a3fb60072357814f252fe48c2ab6db19cdc835bcf368b99223712fbd34c73"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "c76523bc9b7451316bc66138758ab037ae47b636c11de2a526d5982a1824fbb7"
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-28.json",
+            "sha256": "7f7d23f25324de60ee7f3d110f272fb43021c96ec1db6536ab7b3fb04f424065"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "81fde329c47b98b4d4c83d35ddca4fb4c9955a8262782107edbc6ec5e1bb6a99"
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-29.json",
+            "sha256": "9addc8db0f7131eab7434801b04e8628a3a6d9a704c466aa2496852c14f0b9b8"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "41ed3d1c4117bfdf2e14c3f6fb34c7b19bbf49998eacf45b870bc345bde67a0a"
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-30.json",
+            "sha256": "b098dfdc2a23895f72fc634b9f5ae4f3401b874df24651a22bf921fc9dbb33b5"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f31042b0406ea790d79cbef6bce60d4f5a7af6fecad949e7be17cd43e5ff27c4"
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-31.json",
+            "sha256": "b76ae2df427d74dc5df9f9a107f299fdec46a4ad09c1184fb98b95bf53c8d221"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "787fef2493579f25b22e8cf252e555694e2f78d2780afe83453addb3e239b8b6"
+        }
+      ],
+      "original_HF_reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+        "sha256": "6cd455e1d9f37c935981f056ba6c33733acf3079faeb8a2cf91b0c030cfe36dd",
+        "identity": {
+          "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+          "device": 66306,
+          "inode": 8526513,
+          "size": 16722957,
+          "mtime_ns": 1793809562096223676,
+          "ctime_ns": 1793809562096223676
+        }
+      },
+      "full_cache_payloads_written": 0,
+      "tap_payloads_written": 0,
+      "original_remaining_gates": {
+        "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+        "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+        "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+        "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+        "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+      },
+      "self_exit_claimed": false,
+      "root_must_observe_actual_exit": true,
+      "full_model_qualified": false,
+      "new_speedup_claim": false,
+      "process": {
+        "pid": 2179644,
+        "start_ticks": "385323721",
+        "ppid": 2179633,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+          "--mode",
+          "rank",
+          "--admission",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+          "--admission-sha256",
+          "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+      },
+      "admission": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "sha256": "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      }
+    },
+    {
+      "schema": "minicpm5_original32_oproj_cpu_rank_v1",
+      "complete": true,
+      "rank": 1,
+      "arms": [
+        "inclusive_ownhistory_control",
+        "strict_cpu_s0",
+        "strict_cpu_s1",
+        "strict_fp32_oproj_candidate"
+      ],
+      "arm_reports": [
+        {
+          "arm": "inclusive_ownhistory_control",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/inclusive_ownhistory_control/result.json",
+          "sha256": "246cea46ca71fb4051370ee309121d90dad1aeb2ab24e8cd86c000ef959e72ef"
+        },
+        {
+          "arm": "strict_cpu_s0",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/result.json",
+          "sha256": "e011aee0d6dbbfb25a2e4a9f58adb4e36f5da97ecbb5706f1cf9a8c848f4b0fe"
+        },
+        {
+          "arm": "strict_cpu_s1",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s1/result.json",
+          "sha256": "e6d0010886e500372a9078b2fe9010e3d82daea2123e520a503c53a88f3d280d"
+        },
+        {
+          "arm": "strict_fp32_oproj_candidate",
+          "report": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_fp32_oproj_candidate/result.json",
+          "sha256": "dd80d013962cd9737330456dfaebc1ca2e1b63efa7b9b93fe2e676622aa53974"
+        }
+      ],
+      "summaries": {
+        "inclusive_ownhistory_control": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            4,
+            6,
+            8,
+            9,
+            10,
+            12,
+            13,
+            14,
+            20,
+            21,
+            23,
+            24,
+            27,
+            28,
+            31
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 15,
+          "argmax_match_fraction": 0.96875,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_cpu_s0": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            9,
+            13
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 2,
+          "argmax_match_fraction": 1.0,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_cpu_s1": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            9,
+            13
+          ],
+          "prefill_failed": 1,
+          "decode_failed": 2,
+          "argmax_match_fraction": 1.0,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          "full_model_qualified": false
+        },
+        "strict_fp32_oproj_candidate": {
+          "complete": true,
+          "frames": 32,
+          "prefill_frames": 8,
+          "decode_frames": 24,
+          "passed": false,
+          "failed_frames": [
+            1,
+            5,
+            9,
+            13,
+            16
+          ],
+          "prefill_failed": 2,
+          "decode_failed": 3,
+          "argmax_match_fraction": 0.96875,
+          "frame1": {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 1.0,
+              "mean_abs_error": 0.12522676587104797,
+              "cosine": 0.998150110244751,
+              "kl_reference_to_neuron": 0.19703838229179382,
+              "argmax_match": false,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 15182
+            },
+            "failed_criteria": [
+              "KL",
+              "high_margin_argmax"
+            ]
+          },
+          "full_model_qualified": false
+        }
+      },
+      "model_forwards": 56,
+      "seed_import_count": 4,
+      "S1_repeat_all14_exact": true,
+      "native32_evidence": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-00.json",
+            "sha256": "0fe85202d88341d47d257b7c34cfa7b3f5616949d7fdb2326187c78b86cbab9b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2203dcfb6ced0450068df547ad1b49ce2538d7ee13cd148ad2a8ebd7a8bc0dc2"
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-01.json",
+            "sha256": "8d086df2cb1b54c9a6db94efc6590a3ae819fbce080f12a2bc70ac02dd47cd9e"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "6d0b72994d99a034d8c3b7e3613d8636c4ee5e8b5a4efacfc2fc682dbd04ca68"
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-02.json",
+            "sha256": "f8253f74f101e00637e66883e93d8a3a2ab97e1bc1abef8bfcf0362521a6c4af"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "8bcb6e37fb9ba43dac9f866fdd659599c43086c2e4e560e406bdf34c37efe3bc"
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-03.json",
+            "sha256": "347b9073066f8f9f4889d6915a1e3d91d577f3a771601e1b8bdb48ef0ff9b2ab"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "b4af353a60dccd0a8dc9d86d2109de88f083930ee557ffa4f0a2a956d88603b6"
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-04.json",
+            "sha256": "ef23a8560b2243d0726dcd8ecef5399a53928f32db6c006ccd20f45e3b4544d8"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "e48191f47fba8536e3ab4d3fc7bfff18ff3638c9ba490500514fc15287015b77"
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-05.json",
+            "sha256": "0e44aa2fb6d1c40aa914c458846bd970108e083092619bf77075d667375ac27f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "e12f897ced80001a1dc1293c63135ccec471bea263b8dc9a2e8d739accb06c1b"
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-06.json",
+            "sha256": "52135afa784eb0814198f07fb1b7156548859d7806b3eb265c46c18caf917147"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "55675145722897d5dcdc7569cf6c0200dfda6372d80de8967a93fd0b128ec9d9"
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-07.json",
+            "sha256": "8f080b40d3883918cbb722ade1757d51f312cea4ab3302818d0a4db44e0f54f5"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "0faff0e2e1f1d8e7a1c8d86ab0bed1203f5a0b5ea9e988a0475c209ccc123ccd"
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-08.json",
+            "sha256": "7901a08f8891a604e2fad54404e2e1b1176a92ab6e22df9e9d074517ac167185"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "a6233c1472f12243e691c761b7d7575825dc38b17ad4675011dc7c7894fd0b52"
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-09.json",
+            "sha256": "0614192cb119378cdab27e1ce11e9cf897afb68165ef81b8370de9d89b9d425c"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f0cc403d7285d65be7cf85d7c7c2c61d8d0b49e89977498cc29f0684b6500f79"
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-10.json",
+            "sha256": "dc7c529eb9cb492150488bd5458bab1b1da44a8d1fc867b4178448ecd7d78570"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f22e62eaff26c53245fb82acf6cd4ded5d982c6d2cacb3ac8fbd37c36e1ab297"
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-11.json",
+            "sha256": "08ccc7e767063b54cf894ae1beabf8a63edacb7b5a6302a32271b4da3276b153"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2b9bcd8887001c5fb2de9151ab652f412a720cdf015b463f0372b4f146024b88"
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-12.json",
+            "sha256": "ca7b6f8716e1cca368c9fb09bd6dbb306f75acb0b2fc9822ff063001d11d97ed"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "a4c62b49b997dc89db6e9f4fb1f36f352c4625a980116851756ff8b969729799"
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-13.json",
+            "sha256": "9e2869958572542a763bcdd4d5242afbbca971ab7a22fc57f1342bc754751802"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "fbf47878804807ba7ed3a0187c95be3a56014372169c5c3e033a7f28e4a24e26"
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-14.json",
+            "sha256": "eee4187d735e1148dca28dcf8f96799ee86dcd903db907146c9cc2d910107759"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "af96699cf6accf873e7ad8e931dc98ae156b7c99aff57800962d66343db96af9"
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-15.json",
+            "sha256": "1be27296bd57bd19a54ca280887fcce78a8610cb0b6efa7ec38321fd4d023ef0"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "2af452b7eb5650cf01334419c08c14262d48b5811a6551147d8f01d07b433beb"
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-16.json",
+            "sha256": "ea7b3ca2b9dc6814424ec303833ecd3b6eaad8af8b65070bd157fcb26f2b97ce"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "0ae2a57c9f135d464e941e46d6e7c828571444b52d4b5435ac9e344594d90d9d"
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-17.json",
+            "sha256": "d72944caa08fabb3988f488d9ae744408994152438fda7ff50dec90b8bb2c91a"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "bd16f61016f5f9d6f3f4c72ffafa10e2a396a25f4e7c1d30920a92e2030901a3"
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-18.json",
+            "sha256": "c9d86b774e068b4556772efcf2d112c276538d22f01f2ca2473ebd102b520e9f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "af73e407db1a73333d2493d8409b0524c80d2a1a9e993eb62a1e651d25568d75"
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-19.json",
+            "sha256": "c81c12a37b5a7e2cfccab433f4d1d13223440dbc9bd2c563596a6782fe4c285f"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "4ea1fe18ddd11f361e5606d384edc2cdac3b9d2bc73e15d67d89c2c7f3e4fc91"
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-20.json",
+            "sha256": "999bcbe601456c7d15fdfb4b9b1d24def32d1b8f29a590fcaaab284cf552c0b3"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "71e8c664fdd4c0e110d363f56e81aaea6cb8b36738205f27c2e5d8349fc27c3a"
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-21.json",
+            "sha256": "5e5f49b8e173ab45edcac44d3e245f465da0f8f85d512a2db427bc871fc43548"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "3c35a4c856c2aa973585721216236b878b5085acfa52ec34139581c10053ac4e"
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-22.json",
+            "sha256": "b01d65ae7c594cc4eecb024b1a7d82c25ac7e463e2229dbf6bfc5e0807eabd5b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "551e045bff5d2e440693430bf848566dc39a435253121dae2d4564753b9453d1"
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-23.json",
+            "sha256": "939eff7068f8bf990df6b88678158f279ed07a88b6fcb3866e646e5e141c9575"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "724344d2c90772393b4036091aee0ab15fd70af756ea94b0601459769e2978a5"
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-24.json",
+            "sha256": "e93d5152a30e6c5ac03ed273ca78f43e8d845164add5d22c0526ee701e6a507a"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "22c5dbfbf9462e8841ff18258021f09777222642dbedfd634a375772b4582679"
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-25.json",
+            "sha256": "1e0d57997f4224a250d615f6b1092af08eabd59b9aa75b4a14b6b4495c976aa1"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "3edbe44fce3f4cf09326c6d1fe5852a81f80a39f089cdd4d896d351bdaa72f07"
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-26.json",
+            "sha256": "bacb2972619ce74ae379aae247e2fcd44ff6d36c1bae08a840d82934abe46b6b"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "ca23d2266686b4effbbf2b0adfde270869cdb20752b782dfc2fd4a0c948b105b"
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-27.json",
+            "sha256": "be7a3fb60072357814f252fe48c2ab6db19cdc835bcf368b99223712fbd34c73"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "c76523bc9b7451316bc66138758ab037ae47b636c11de2a526d5982a1824fbb7"
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-28.json",
+            "sha256": "7f7d23f25324de60ee7f3d110f272fb43021c96ec1db6536ab7b3fb04f424065"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "81fde329c47b98b4d4c83d35ddca4fb4c9955a8262782107edbc6ec5e1bb6a99"
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-29.json",
+            "sha256": "9addc8db0f7131eab7434801b04e8628a3a6d9a704c466aa2496852c14f0b9b8"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "41ed3d1c4117bfdf2e14c3f6fb34c7b19bbf49998eacf45b870bc345bde67a0a"
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-30.json",
+            "sha256": "b098dfdc2a23895f72fc634b9f5ae4f3401b874df24651a22bf921fc9dbb33b5"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "f31042b0406ea790d79cbef6bce60d4f5a7af6fecad949e7be17cd43e5ff27c4"
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "record": {
+            "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-31.json",
+            "sha256": "b76ae2df427d74dc5df9f9a107f299fdec46a4ad09c1184fb98b95bf53c8d221"
+          },
+          "original_logits_raw_exact": true,
+          "hf_reference_logits_sha256": "787fef2493579f25b22e8cf252e555694e2f78d2780afe83453addb3e239b8b6"
+        }
+      ],
+      "original_HF_reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+        "sha256": "6cd455e1d9f37c935981f056ba6c33733acf3079faeb8a2cf91b0c030cfe36dd",
+        "identity": {
+          "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+          "device": 66306,
+          "inode": 8526513,
+          "size": 16722957,
+          "mtime_ns": 1793809562096223676,
+          "ctime_ns": 1793809562096223676
+        }
+      },
+      "full_cache_payloads_written": 0,
+      "tap_payloads_written": 0,
+      "original_remaining_gates": {
+        "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+        "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+        "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+        "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+        "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+      },
+      "self_exit_claimed": false,
+      "root_must_observe_actual_exit": true,
+      "full_model_qualified": false,
+      "new_speedup_claim": false,
+      "process": {
+        "pid": 2179645,
+        "start_ticks": "385323722",
+        "ppid": 2179633,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_oproj_cpu_runner_v1.py",
+          "--mode",
+          "rank",
+          "--admission",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+          "--admission-sha256",
+          "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-oproj-r1-20261107-v1.service"
+      },
+      "admission": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/admission.json",
+        "sha256": "94f47a5c0276fde95e5d11641c59265393d0b5d575fd67227ec5934cd0a59eab"
+      }
+    }
+  ],
+  "validated": {
+    "complete": true,
+    "rank_count": 2,
+    "arm_count": 4,
+    "calls_per_rank": 56,
+    "HF_frames_per_arm": 32,
+    "cross_rank_full_logits_tensor_hashes_equal": true,
+    "cross_rank_HF_metrics_equal": true,
+    "raw_payloads_read": false
+  },
+  "self_exit_claimed": false
+}
