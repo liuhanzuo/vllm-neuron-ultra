@@ -1,0 +1,122 @@
+{
+  "schema": "minicpm5_python_trace_external_invocations_v1",
+  "reviewer": "/root",
+  "passed": true,
+  "actual_state_checked_by_root": true,
+  "all_external_invocations_accounted_for": true,
+  "all_recovery_invocations_accounted_for": true,
+  "all_parent_processes_accounted_for": true,
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-spec-20261107-v3.json",
+    "sha256": "6ea3e3cef5966c190cb869646a98ea24d93f9295ca7a736f5d0be303afd2a1e7"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-root-execution-review-20261107-v3.json",
+    "sha256": "cbb7b672ab8ad09c3b07f728024c0e6a8d4c9e468e34794e23576a0ed80bd349"
+  },
+  "root_release": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-python-trace-control-v3/root-release.json",
+    "sha256": "daeb73dc22163fd849f65944a5a93cb4c51da9b4e0323e57c8249868fffa9575"
+  },
+  "invocations": [
+    {
+      "owner": {
+        "pid": 1803606,
+        "start_ticks": "383188919",
+        "ppid": 1803572,
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_python_trace_execute_v4.py",
+          "--launch",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-spec-20261107-v3.json",
+          "--spec-sha256",
+          "6ea3e3cef5966c190cb869646a98ea24d93f9295ca7a736f5d0be303afd2a1e7",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-root-execution-review-20261107-v3.json",
+          "--review-sha256",
+          "cbb7b672ab8ad09c3b07f728024c0e6a8d4c9e468e34794e23576a0ed80bd349"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+      },
+      "mode": "launch",
+      "release_failed": false,
+      "live_capture": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-child-live.json",
+        "sha256": "b6e0bee5da910120d1586d547d2e464392e24dab34d0f528c2016af36b72aac9"
+      },
+      "exit_evidence": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-child-exit.json",
+        "sha256": "6d58251c6e784b7e7447645f362e305a097b69e639cf0eb8c0dda3419cde9131"
+      }
+    }
+  ],
+  "parent_processes": [
+    {
+      "owner": {
+        "pid": 1803572,
+        "start_ticks": "383188266",
+        "ppid": 433847,
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_python_trace_external_root_20261107_v4.py",
+          "--execute",
+          "--mode",
+          "launch",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-spec-20261107-v3.json",
+          "--spec-sha256",
+          "6ea3e3cef5966c190cb869646a98ea24d93f9295ca7a736f5d0be303afd2a1e7",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-root-execution-review-20261107-v3.json",
+          "--review-sha256",
+          "cbb7b672ab8ad09c3b07f728024c0e6a8d4c9e468e34794e23576a0ed80bd349",
+          "--receipt-prefix",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+      },
+      "live_capture": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-root-live.json",
+        "sha256": "93f8b59834168ae4601acac343bfaef3eb2a0bd39f1d59657ee4874267e4166a"
+      },
+      "exit_evidence": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-root-exit.json",
+        "sha256": "07a1cd35cc567e016cdeda957d289d8ba8c32b1784c903dc58a614010ef5885b"
+      },
+      "parent_ready": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-parent-ready.json",
+        "sha256": "05a283a41f122849f5b436a0f648d6853a1d0c6573f2e74bd2c5c49683008c70"
+      },
+      "root_ack": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-external-resume-launch-v3-parent-root-ack.json",
+        "sha256": "58a660f2aca8ca4327eab6b02cf869242bb82b67f9c070d4278d1be1f56ffd5c"
+      },
+      "child_owners": [
+        {
+          "pid": 1803606,
+          "start_ticks": "383188919",
+          "ppid": 1803572,
+          "argv": [
+            "/usr/bin/python3",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_python_trace_execute_v4.py",
+            "--launch",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-spec-20261107-v3.json",
+            "--spec-sha256",
+            "6ea3e3cef5966c190cb869646a98ea24d93f9295ca7a736f5d0be303afd2a1e7",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-python-trace-resume-root-execution-review-20261107-v3.json",
+            "--review-sha256",
+            "cbb7b672ab8ad09c3b07f728024c0e6a8d4c9e468e34794e23576a0ed80bd349"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        }
+      ]
+    }
+  ],
+  "observed_at": "2026-11-07T11:52:20.050957+00:00"
+}

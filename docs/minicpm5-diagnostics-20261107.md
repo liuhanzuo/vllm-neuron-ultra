@@ -60,19 +60,61 @@ In particular, three teacher-forced decode steps do not establish long-decode
 stability. This experiment neither compares Neuron throughput nor proves that
 the port preserves native model quality.
 
+## Completed Python trace validation
+
+A fresh five-arm Python trace run now reproduces **160/160 original endpoints**.
+Each arm matches all eight prefill and 24 decode frames, and all ten arm pairs
+match in 32/32 frames. This resolves the observation-method blocker for these
+native reference inputs; it does not establish SDK observer invariance or a
+qualified Neuron model.
+
+| Arm | Exact original endpoint matches |
+|---|---:|
+| Unobserved | 32/32 |
+| Historical 213 hooks | 32/32 |
+| Noop wrappers | 32/32 |
+| Noop Python trace | 32/32 |
+| Full Python trace capture | 32/32 |
+
+The trace reads the actual scaled attention local immediately after its
+assignment and before masking. It preserves the original function, returned
+objects and complete-vocabulary endpoint gate. The source AST establishes
+Python multiplication; no aten operator callback is claimed, and the scaled
+tensor is not recomputed. The noop and full trace arms independently observed
+32 authenticated scale boundaries each; only full trace copied the tensors.
+
+An earlier attempt completed the first three arms (96 exact frames), then
+stopped before the first noop-trace frame during Python code authentication.
+Compiling an isolated function had omitted its module import context under
+Python 3.12. The successor compiles the entire authenticated module without
+executing it, selects the original function code, and retains the bytecode,
+qualified-scope and line-table checks. The failed attempt remains separate;
+its partial outputs are not included in the new run.
+
+The independent post-audit re-read and hashed all **1,552 raw files**
+(**314,961,320 logical bytes**), verified all four witnesses for all 160 frames,
+and reproduced the complete arm and pairwise results. Root observed the actual
+launcher and post-auditor exits as code 0, verified all six planned service
+groups drained, and appended the run to the complete predecessor catalog.
+No tolerance, model configuration, teacher tokens or final qualification gate
+was changed. This is a CPU reference diagnostic and adds no speedup ratio.
+
+- [Complete trace results and pairwise comparisons](evidence/minicpm5-python-trace-v3-20261107/completion.json)
+- [Independent raw-file audit](evidence/minicpm5-python-trace-v3-20261107/root-audit.json)
+- [Actual post-auditor exit](evidence/minicpm5-python-trace-v3-20261107/post-auditor-exit.json)
+- [Root finalization summary](evidence/minicpm5-python-trace-v3-20261107/root-finalization-summary.json)
+- [Export manifest and original record hashes](evidence/minicpm5-python-trace-v3-20261107/manifest.json)
+
+The finalization summary omits the repeated predecessor-drain array; its full
+local source hash is retained in the manifest. Publication copies only saved
+metadata and does not repeat the raw-payload audit.
+
 ## Next validation
 
-A separately reviewed Python line-trace candidate reads the original scaled
-attention local before masking, without entering dispatch mode or recomputing
-the scaled tensor. Its source review is not evidence of native invariance.
-The next fresh five-arm experiment must retain all 160 endpoints and compare
-unobserved, historical hooks, noop wrappers, noop trace and full trace. Python
-source evidence for an operation must remain distinct from observing an aten
-dispatcher callback.
-
-Only after that succeeds can the original 88-capture investigation proceed:
-32 native frames, 28 CPU/device-history controls and 28 CPU/native-history
-generation contexts, preserving both SDK ranks and all original intermediate
+The original 88-capture investigation can now proceed after its SDK trace
+implementation and runtime admission are independently reviewed:
+32 native frames, 28 CPU/device-history controls and 28 CPU-generated-history
+contexts, preserving both SDK ranks and all original intermediate
 boundaries. Full-model numeric checks, all 84 cold-state frames, long decode,
 request-slot reuse, the 96-case quality suite and paired serving measurements
 remain required before any model or performance qualification.
