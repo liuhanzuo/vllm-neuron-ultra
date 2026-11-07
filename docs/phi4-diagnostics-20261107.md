@@ -209,17 +209,74 @@ and physical drain. No model qualification or speedup is claimed.
 These files are unchanged copies of result metadata. Tensor payloads and weights
 are not bundled or rehashed for publication.
 
-## Next experiment: fixed-input QKV and upstream hidden differences
+## Completed b3 fixed-input QKV replay
 
-The [updated next design](evidence/phi4-alignment-a1-20261107/next-design.md)
-has not run. Its primary QKV witness is frame 21, with frame 20 from the same
-candidate call as a matched current-token control. It first requires exact
-source-geometry reproduction, then compares a complete B4 input with concatenated
-B1 row views and an isolated B1 offset control. Only the required QKV weight and
-any bias may be resolved from the pinned checkpoint under separate admission;
-they are not assumed present in the saved p1 capture.
+The fixed-input QKV experiment has now completed. The exact installed CPU
+`torch.nn.Linear` reproduced all **seven complete saved source outputs** across
+frames 21, 25 and 29: three original B4 outputs, three native B1 witness outputs
+and the primary B1 control. Only after these exact reproductions passed did the
+experiment compare B4 execution with four B1 row views and selected isolated B1
+copies. The conditional frames 25 and 29 ran after the primary witness and
+control met the original expansion conditions.
 
-The 223 hidden-first cases require a separate upstream investigation. Reuse the
+The replay used the original Python 3.12 / PyTorch 2.9.1 CPU environment with two
+threads and the authenticated BF16 layer-1 QKV weight, shape `[5120,3072]`.
+It read a bounded checkpoint header and the exact **30 MiB** tensor slice; it
+neither loaded the full model nor rehashed the entire checkpoint shard. This is
+the same biasless CPU projection used by the original HF and dense-port paths,
+not a Neuron parallel projection or a device benchmark.
+
+| Witness frame / decode step | B4 versus B1 fields that differ | Witness maximum absolute difference | B1 row view = isolated copy = native B1 |
+|---|---|---:|---|
+| 21 / 1 | Q and V | 0.000030517578125 | Yes, exact bytes |
+| 25 / 2 | K | 0.0009765625 | Yes, exact bytes |
+| 29 / 3 | K | 0.0009765625 | Yes, exact bytes |
+
+These are the **same Reasoning candidate request, fixture 3 / slot 1, at three
+successive decode steps**, not three independent trials. The complete B4-versus-
+row-view maximum differences were 0.0009765625, 0.001953125 and 0.0009765625,
+respectively; those maxima can occur in another row. The primary control in row 0
+was exact across B4, B1 view, isolated copy and native B1. That does not generalize
+to every later row: frame 25 row 0 still has a V difference.
+
+With fixed saved inputs and weights, this supports a **CPU BF16 Linear batch-
+grouping effect** for the selected QKV discrepancies. Matching row views and
+isolated copies rules out their tested storage-offset difference as necessary
+for these witnesses. It does not identify a particular low-level kernel or
+prove that splitting all model projections is a correct or faster solution.
+
+The earlier a1/p1 finding remains decisive for interpretation: all corresponding
+selected attention contrasts against the same native-single anchor were exact.
+These QKV differences therefore do not explain a selected-attention discrepancy
+in those tests or establish the cause of the failed final logits. All **18
+original full-output gate outcomes remain unchanged**. No model promotion or
+speedup is claimed.
+
+The root observed the computation process exit with code 0. An independent
+terminal audit rehashed all **14 new output payloads (327,680 bytes)** and checked
+physical drain, retained history and unchanged canonical state. The publication
+copies JSON metadata; weights and raw tensor payloads are not bundled.
+
+- [Replay result and all row comparisons](evidence/phi4-qkv-b3-20261107/result.json)
+- [Independent metadata interpretation](evidence/phi4-qkv-b3-20261107/analysis.json)
+- [Root terminal audit](evidence/phi4-qkv-b3-20261107/root-audit.json)
+- [Actual process exit](evidence/phi4-qkv-b3-20261107/root-exit.json)
+- [Export manifest](evidence/phi4-qkv-b3-20261107/manifest.json)
+
+The earlier b1 attempt failed at the root acknowledgement before weight/native
+work; b2 authenticated the weight slice but failed before projection because
+of a code-identity check. Source-only diagnosis reproduced a Python 3.12
+compilation-context mismatch when extracting a class from its module. Science
+v2 compiles the complete authenticated module without executing it, then
+extracts the method code; all original comparison fields remain enforced. The
+b3 native identity checks passed. Earlier failure records remain retained.
+
+## Next experiment: upstream hidden differences
+
+The fixed-input QKV portion of the [earlier design](evidence/phi4-alignment-a1-20261107/next-design.md)
+is complete. It does not resolve the 223 hidden-first alignment cases.
+
+Those cases require a separate upstream investigation. Reuse the
 saved layer-0 down-projection inputs and outputs first; only missing boundaries
 justify a small residual/add-to-layer-1-normalization capture. Any generated-prefix
 intervention must retain sham and reciprocal controls and the original attention

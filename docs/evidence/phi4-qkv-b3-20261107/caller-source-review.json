@@ -1,0 +1,161 @@
+{
+  "schema": "phi4_same_input_qkv_caller_independent_source_review_b3_v1",
+  "reviewer": "/root/phi_provider_phase_review_20261107",
+  "passed": true,
+  "independent_review": true,
+  "source_only": true,
+  "runtime_admitted": false,
+  "blockers": [],
+  "source_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-caller-source-handoff-b3.json",
+    "sha256": "641d67aa90ef51226a44d3dff4692e0d4ab4142a60d326dd4b07e2de94414355"
+  },
+  "caller": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_phi4_same_input_qkv_control_b3.py",
+    "sha256": "d805a80ed19f1935774f37870ae4b049a89d8df608c10d091abcd376d362d79c",
+    "bytes": 28055
+  },
+  "predecessor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_phi4_same_input_qkv_control_b2.py",
+    "sha256": "852a632ab2c5ad689e8ebaff9376a78aa9f78fb048868e573e21897eabc04a35",
+    "bytes": 28055
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_phi4_same_input_qkv_b3_independent_20261107_v1.py",
+    "sha256": "c4c02331686b632001e8a8ca762e045acaeee5d47995fc25c32bc02a686fec73",
+    "bytes": 12557
+  },
+  "executions": [
+    {
+      "kind": "actual_b3_check",
+      "command": "python3 -B research/run_phi4_same_input_qkv_control_b3.py --check",
+      "tool_chunk": "068563",
+      "exit_code": 0,
+      "base_rows": 372,
+      "base_processes": 24
+    },
+    {
+      "kind": "independent_focused_source_mock",
+      "command": "python3 -B research/check_phi4_same_input_qkv_b3_independent_20261107_v1.py",
+      "tool_chunk": "04a2aa",
+      "exit_code": 0,
+      "controls": 61
+    },
+    {
+      "kind": "original_author_mock_regression_against_b3",
+      "checker": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_phi4_same_input_qkv_control_b1.py",
+        "sha256": "b31b782c69a284220353f5710db18d6d3d2e482823527c8b48eafbd009d90fae",
+        "bytes": 16319
+      },
+      "substitution": "In-memory only source caller filename b1\u2192b3; every other byte unchanged; no copied checker or runtime output.",
+      "tool_chunk": "ff21ed",
+      "exit_code": 0,
+      "controls": 70
+    }
+  ],
+  "exact_delta": {
+    "changed_assignments": [
+      "SELF",
+      "DEST",
+      "SCIENCE_HANDOFF",
+      "SCIENCE_REVIEW",
+      "ROOT_SCIENCE_ACCEPTANCE",
+      "PINS"
+    ],
+    "one_changed_helper_import": "phi4_same_input_qkv_replay_v2",
+    "whole_text_matches_explicit_substitutions": true,
+    "whole_AST_matches_explicit_substitutions": true,
+    "unchanged_full_AST": [
+      "catalog_check",
+      "ProcessPolicy",
+      "ImportPolicy",
+      "Guard",
+      "Output",
+      "await_ack",
+      "validate_result",
+      "execute",
+      "main"
+    ],
+    "scientific_result_schema": "phi4_same_input_qkv_replay_v1",
+    "incorrect_result_schema_v2_rejected": true
+  },
+  "preserved": {
+    "address_space_bytes": 17179869184,
+    "rss_guard_bytes": 4294967296,
+    "cpu": [
+      6,
+      7
+    ],
+    "cpu_threads": 2,
+    "nice": 19,
+    "wall_seconds": 1800,
+    "ack_seconds": 300,
+    "root_entry_bytes": 32212254720,
+    "root_floor_bytes": 30064771072,
+    "nvme_floor_bytes": 5368709120,
+    "total_output_bytes": 16777216,
+    "new_raw_bytes": 1048576,
+    "result_bytes": 262144,
+    "max_tensor_bytes": 40960,
+    "record_cap_bytes": 4194304,
+    "error_reserve_bytes": 2097152,
+    "original18_gates": true,
+    "conditional": [
+      25,
+      29
+    ],
+    "primary": 21,
+    "full_B4_B1_reproduction_first": true,
+    "process_policy": "Only existing synchronous exact readonly systemctl query; all other Python process creation denied; actual own children inventory checked in runtime.",
+    "ACK": "Exact real Output.bytes five-field ready reference path/sha256/bytes/durable:true/exclusive:true; missing/modified/extra fields reject.",
+    "source_setup_before_native": true,
+    "root_ACK_before_weight_slice_and_native": true
+  },
+  "current_catalog": {
+    "reference": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/root-post-phi4-qkv-b2-failed-complete-predecessors-20261107-v1.json",
+      "sha256": "6eb2b8e31a7516a441e4fe975c7ba2c83dc9281dd7063ca6906664b74b450c05"
+    },
+    "rows": 372,
+    "processes": 26,
+    "b2_failed_exit_ref": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-b2-root-exit.json",
+      "sha256": "b903bb6f017da9f71878bd146d9b98436ea1af4e1098c580e35c4a874b56a140"
+    },
+    "b2_exit_code": 1,
+    "b2_failure_phase": "native-leaf-setup",
+    "b2_new_raw_bytes": 0,
+    "b2_scientific_outputs": 0,
+    "future_process27_append_mock_passed": true,
+    "baseline372_24_preserved": true,
+    "old_row_process_source_failure_metadata_removal_rejected": true,
+    "prospective_root_review_latest_catalog_binding_mock_passed": true
+  },
+  "science_v2": {
+    "handoff": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-source-handoff-20261107-v2.json",
+      "sha256": "d7b38a87fbede3448cbf98c1f2cbd12e30772d486502058417bca2dc90251385"
+    },
+    "acceptance": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-root-source-acceptance-20261107-v2.json",
+      "sha256": "89220ed9ea218b12802e2b50a4c0b8898aa1aeb4060623fe8660902ba922f57f"
+    },
+    "all_declared_source_acceptance_pins_rechecked": true,
+    "original_result_schema_unchanged": true,
+    "actual_native_compatibility_not_tested": true
+  },
+  "limitations": [
+    "Caller --check authenticates the frozen372/24 base only. It is not latest-catalog discovery or current runtime admission.",
+    "The new root caller review must explicitly bind exact current372/26 catalog plus every later append. Current catalog validation intentionally remains unchanged from b2.",
+    "No actual native module, QKV weight slice, saved tensor payload, process/service/lock probe or real --execute occurred. All execution-driver tests use mocks.",
+    "Source/mock passing does not establish real native identity, source B4/B1 self-reproduction, fullmodel qualification or performance gain.",
+    "Runtime still requires root ACK, actual tool exit and independent final process/drain proof."
+  ],
+  "actual_runtime_spec_written": false,
+  "actual_output_namespace_created": false,
+  "actual_native_raw_weight_process_service_lock": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-07T08:44:28.735025+00:00"
+}

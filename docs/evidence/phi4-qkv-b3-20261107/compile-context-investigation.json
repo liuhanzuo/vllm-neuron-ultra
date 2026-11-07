@@ -1,0 +1,166 @@
+{
+  "schema": "phi4_same_input_qkv_b2_code_context_source_investigation_v1",
+  "author": "/root/smol_capture_ipc_v6_source",
+  "source_only": true,
+  "passed": true,
+  "old_adapter": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_same_input_qkv_replay_v1.py",
+    "sha256": "b651fe5091c727e4415bf3a2dbacc997bb980db2c51051e5aa6c5878968fb93e",
+    "bytes": 18191
+  },
+  "scientific_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-source-plan-20261107-v1.json",
+    "sha256": "3baef21de1066124667cb929b3abbd053eae4a40f9f89a63c7963eb8b2a68529",
+    "bytes": 16641
+  },
+  "failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-same-input-qkv-control-b2/failure.json",
+    "sha256": "86ab82f4590fe21d3e0f2c808ce7dab3052c996d3ec5bd53d845fbb86b15e73d",
+    "bytes": 1662
+  },
+  "latest_historical_catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/root-post-phi4-qkv-b2-failed-complete-predecessors-20261107-v1.json",
+    "sha256": "6eb2b8e31a7516a441e4fe975c7ba2c83dc9281dd7063ca6906664b74b450c05",
+    "bytes": 2054601
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_phi4_same_input_qkv_code_context_20261107_v2.py",
+    "sha256": "118c4615d540568033b06f4d46cafdabb9ad950d3a05c3bdbb7e3e48437356b0",
+    "bytes": 8433
+  },
+  "controls": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-same-input-qkv-code-context-controls-20261107-v2.json",
+    "sha256": "3a2d3a2a81cad8f10a9a7bb372b3c15a7b148575ceb2b6870340a219464fc0b0",
+    "bytes": 10342
+  },
+  "finding": "Extracting only a class loses module import-binding context used by Python3.12 compiler; an exact original method can fail same_code although full-module source is unchanged.",
+  "reproduced_in": {
+    "python": "3.12.16 (main, Oct 26 2026, 14:08:45) [Clang 23.1.3 ]",
+    "optimize": 0,
+    "no_site": true,
+    "no_bytecode_writes": true,
+    "native_imports": false
+  },
+  "observed_source_differences": [
+    {
+      "role": "linear",
+      "method": "forward",
+      "different_fields": [
+        "co_code"
+      ],
+      "whole": {
+        "name": "Linear.forward",
+        "firstline": 130,
+        "flags": 3,
+        "code_sha256": "484c9665fca354a108f95ecb72256fc36fd11dc4a4ddd7a0699fa58afa1fe8d4",
+        "linetable_sha256": "589885baad3a4d86c845d03621c8445cfa6a6f5b2b23b2fd512ccf3d1064b675",
+        "nested": []
+      },
+      "extracted": {
+        "name": "Linear.forward",
+        "firstline": 130,
+        "flags": 3,
+        "code_sha256": "8c94f5d18857f3a006178c62ea3d7eada2fbda8f58dc13497a751c39fa948070",
+        "linetable_sha256": "589885baad3a4d86c845d03621c8445cfa6a6f5b2b23b2fd512ccf3d1064b675",
+        "nested": []
+      }
+    },
+    {
+      "role": "module",
+      "method": "_wrapped_call_impl",
+      "different_fields": [],
+      "whole": {
+        "name": "Module._wrapped_call_impl",
+        "firstline": 1771,
+        "flags": 15,
+        "code_sha256": "e529b9cb3bac6692eec708a282394064776a1149229895650848533628b511c0",
+        "linetable_sha256": "2cba52d8a2b41c960c031c6643bdee9c0c4fd23aa71c9cd4e175939f22c142c8",
+        "nested": []
+      },
+      "extracted": {
+        "name": "Module._wrapped_call_impl",
+        "firstline": 1771,
+        "flags": 15,
+        "code_sha256": "e529b9cb3bac6692eec708a282394064776a1149229895650848533628b511c0",
+        "linetable_sha256": "2cba52d8a2b41c960c031c6643bdee9c0c4fd23aa71c9cd4e175939f22c142c8",
+        "nested": []
+      }
+    },
+    {
+      "role": "module",
+      "method": "_call_impl",
+      "different_fields": [
+        "co_code",
+        "co_consts"
+      ],
+      "whole": {
+        "name": "Module._call_impl",
+        "firstline": 1779,
+        "flags": 15,
+        "code_sha256": "b4e84dc88f33679f62c8631f274bb279e4d3436e1eafcc24d6c39f693cb330ea",
+        "linetable_sha256": "2600c375201189fb1de7069dc01e2811f89af911cb3224c952abcb1df01aae03",
+        "nested": [
+          {
+            "name": "Module._call_impl.<locals>.inner",
+            "firstline": 1791,
+            "flags": 19,
+            "code_sha256": "7826058255ff18f9f2783f94cd4eb39f3769d3f7ba86d3b5bcfb5b62aca8fe9c",
+            "linetable_sha256": "a8358dd32e244a529af59ba17991f8ddababd4f8389c3fbfa0319b4b5c728eb2",
+            "nested": [
+              {
+                "name": "Module._call_impl.<locals>.inner.<locals>.<genexpr>",
+                "firstline": 1859,
+                "flags": 51,
+                "code_sha256": "b231fe19bcaa6c19e072f9f08ff64719c7a90b57352688520ac69f00c58ad1fc",
+                "linetable_sha256": "c1ceb25a80184728d714a57fa622d0f2c82684eca5b4dbb3871b01dd8c76b280",
+                "nested": []
+              }
+            ]
+          }
+        ]
+      },
+      "extracted": {
+        "name": "Module._call_impl",
+        "firstline": 1779,
+        "flags": 15,
+        "code_sha256": "3bb7ff0aa1c6c7e5262cc25f5b8059f8ad70920693bf9c32a3415b8f900be48d",
+        "linetable_sha256": "2600c375201189fb1de7069dc01e2811f89af911cb3224c952abcb1df01aae03",
+        "nested": [
+          {
+            "name": "Module._call_impl.<locals>.inner",
+            "firstline": 1791,
+            "flags": 19,
+            "code_sha256": "0188548056a0ed3aba598aa5720e8d8a56eb9fbedff2a8f59865ce264796cdbc",
+            "linetable_sha256": "a8358dd32e244a529af59ba17991f8ddababd4f8389c3fbfa0319b4b5c728eb2",
+            "nested": [
+              {
+                "name": "Module._call_impl.<locals>.inner.<locals>.<genexpr>",
+                "firstline": 1859,
+                "flags": 51,
+                "code_sha256": "b231fe19bcaa6c19e072f9f08ff64719c7a90b57352688520ac69f00c58ad1fc",
+                "linetable_sha256": "c1ceb25a80184728d714a57fa622d0f2c82684eca5b4dbb3871b01dd8c76b280",
+                "nested": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "minimal_control": "Unexecuted from unused_module import functional as F alters LOAD_GLOBAL/LOAD_ATTR null-call convention; blanking only this import matches extracted-class code.",
+  "ruled_out_as_required_explanation": [
+    "Both pinned modules have no future imports.",
+    "Difference reproduces at optimize0; optimization flags are not needed.",
+    "No compiled module is executed, no native modules or pyc files are imported/read."
+  ],
+  "evidence_limits": [
+    "Actual loaded b2 method fields were not retained in its failure receipt. This is a proven source-side false-rejection mechanism, not a claim that every actual runtime field is now observed.",
+    "Current root catalog and failure are authenticated saved metadata, not a new live process/drain observation."
+  ],
+  "successor_fix": "Compile complete authenticated source (dont_inherit=True, unchanged interpreter optimization), then extract class/method. Retain every original same_code field and native identity gate.",
+  "actual_native_import": false,
+  "actual_raw_weight_reads_or_hashes": false,
+  "actual_process_service_lock_runtime": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
