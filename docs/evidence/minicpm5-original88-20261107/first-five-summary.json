@@ -1,0 +1,65 @@
+{
+  "schema": "minicpm5_original88_first_five_analysis_v1",
+  "binding": {
+    "finalization": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-final-r2-20261107-v1-audit.json",
+      "sha256": "398ff32c45a125307ac7ad8ece04ee15319384673b32bc92a40dbfa57c0652d4"
+    },
+    "catalog": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-final-r2-20261107-v1-catalog.json",
+      "sha256": "5e1ed9f65232c1dffa6f5f0eae2c14965f0ea29fd60825bea791aa59d0f4ce95"
+    },
+    "finalizer_exit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-finalizer-root-exit-r2-20261107-v1.json",
+      "sha256": "37d77afb9295f9aa769da0390b1d680cd443b018b05d85d4b0c8d113c217eb0d"
+    },
+    "finalizer_live": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-finalizer-root-live-r2-20261107-v1.json",
+      "sha256": "a0adc59246a151aac2fbab296aae7c29c12d0c8e8cde94610464151a41cbe642"
+    }
+  },
+  "frames": 32,
+  "frame_rank_pairs": 192,
+  "implemented_boundaries": [
+    "positions",
+    "normalized_input",
+    "q_projection",
+    "k_projection",
+    "v_projection"
+  ],
+  "pending_boundaries": [
+    "qk_rope_inputs",
+    "rope_parameters",
+    "qk_post_rope",
+    "active_values",
+    "cache_prior",
+    "cache_after",
+    "mask_semantics",
+    "score_unscaled",
+    "score_scaled",
+    "score_masked",
+    "probabilities",
+    "context_before_o",
+    "attention_output"
+  ],
+  "full_attention_analyzed": false,
+  "complete_coverage": true,
+  "original_remaining_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "original_logits_thresholds": {
+    "cosine_min": 0.995,
+    "kl_max": 0.02,
+    "max_abs_max": 2,
+    "aggregate_argmax_min": 0.9,
+    "hf_margin_gt_0_5_must_match": true
+  },
+  "new_thresholds": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "causal_operator_proven": false
+}
