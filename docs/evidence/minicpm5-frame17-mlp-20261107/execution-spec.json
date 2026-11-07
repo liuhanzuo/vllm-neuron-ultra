@@ -1,0 +1,145 @@
+{
+  "schema": "minicpm5_frame17_mlp_spec_v2",
+  "base_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-input-plan-20261107-v1.json",
+    "sha256": "ce599a2beae22df0a05c13591854cfab8ba57519df11ee93a0d25ad4392306c8"
+  },
+  "base_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-execution-spec-20261107-v1.json",
+    "sha256": "4d7d017541ba2088a0d69fe10447d87046b9f466570f011edaf4a0388dd6ad58"
+  },
+  "design_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-layer0-mlp-root-design-review-20261107-v1.json",
+    "sha256": "9646ab9caa222cfebd8277f3b16bb222d39cd2fbd4e803ab151c4f7d1b31cfd6"
+  },
+  "failed_attempt_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-exit-r1-20261107-v1.json",
+    "sha256": "39ef5348974579a4f0e397cfb7f11d5a0d2d034e9ea8a3494b20758446722ce9"
+  },
+  "worker": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_worker_v2.py",
+  "replay": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_replay_v2.py",
+  "runner": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+  "new_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_worker_v2.py": "c32c3f83d61616179bed2b4121d4c36810428aa88039b9d3999dc5746fc380a3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_replay_v2.py": "d5faf86069c1d65289e6c1309c211fd696c6ad67e5cc47f6eb2f572b092a56b5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py": "57af2bf85c9291b0c2442242180d73e308b4543346d3c9983495b0f99ddd3b2f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/activations.py": "5b20c0a3625edc0001a98f09ce3c6b5baa1100e1d7ad8dee649e4d45c8468665",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/activations.py": "3dd5a81b1e5e0c5371256f00efec19df52255420318737db1e03430a98cf4264"
+  },
+  "added_json": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-08/result.json": {
+      "sha256": "67460299b51610d599e74daa6cb0d99f40dca696ff3338f0f024a86895510755",
+      "identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+        "device": 66306,
+        "inode": 9299802,
+        "size": 212601,
+        "mtime_ns": 1794076519054089978,
+        "ctime_ns": 1794076519054089978
+      }
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-08/result.json": {
+      "sha256": "cf897fb670cc40f3763fd48dc9a1189a0c26f6377218d9704e93d689ad97a9f1",
+      "identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+        "device": 66306,
+        "inode": 9299801,
+        "size": 212601,
+        "mtime_ns": 1794076519054089978,
+        "ctime_ns": 1794076519054089978
+      }
+    }
+  },
+  "output_root": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2",
+  "output_cap_bytes": 33554432,
+  "root_floor_bytes": 30064771072,
+  "units": {
+    "native": "trn1-mini-f17-mlp-native-r2-20261107-v2",
+    "cpu": "trn1-mini-f17-mlp-cpu-r2-20261107-v2",
+    "replay": "trn1-mini-f17-mlp-replay-r2-20261107-v2"
+  },
+  "master_port": 29724,
+  "resources": {
+    "native": {
+      "MemoryMax": "17179869184",
+      "MemoryHigh": "15032385536",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6-7",
+      "CPUAffinity": "6-7",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "600",
+      "TimeoutStopSec": "15"
+    },
+    "cpu": {
+      "MemoryMax": "17179869184",
+      "MemoryHigh": "15032385536",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6-7",
+      "CPUAffinity": "6-7",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "600",
+      "TimeoutStopSec": "15"
+    },
+    "replay": {
+      "MemoryMax": "4294967296",
+      "MemoryHigh": "3221225472",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6",
+      "CPUAffinity": "6",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "120",
+      "TimeoutStopSec": "15"
+    }
+  },
+  "canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "science": {
+    "frame": {
+      "index": 17,
+      "fixture": 1,
+      "slot": 1,
+      "step": 0
+    },
+    "capture_fields": [
+      "input",
+      "gate",
+      "up",
+      "down_input",
+      "output"
+    ],
+    "cpu_anchors": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+        "sha256": "67460299b51610d599e74daa6cb0d99f40dca696ff3338f0f024a86895510755"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+        "sha256": "cf897fb670cc40f3763fd48dc9a1189a0c26f6377218d9704e93d689ad97a9f1"
+      }
+    ]
+  },
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

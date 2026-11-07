@@ -1,0 +1,370 @@
+{
+  "schema": "minicpm5_frame17_mlp_root_exit_r2_v1",
+  "observed_at": "2026-11-07T20:56:21.723369+00:00",
+  "actual_tool_session": 35853,
+  "actual_tool_exit_chunk": "ea4adf",
+  "actual_exit_observed": true,
+  "actual_exit_code": 0,
+  "result": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/result.json",
+    "sha256": "a72067714ed8d53c1c83d15f2c6498fe003eb7d81b37fd0eaccda0e4669d52b9"
+  },
+  "report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/replay.json",
+    "sha256": "a895956e772e9068ae628d56be737ddddef64be72a49976a5eb8ff9cd2c24e9e"
+  },
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+    "sha256": "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+  },
+  "owners": [
+    {
+      "pid": 2278239,
+      "start_ticks": "386527265",
+      "ppid": 2278229,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-execution-spec-20261107-v2.json",
+        "--spec-sha256",
+        "7f75acf5bb5d0d2ee88be9e475443280f903b98abbcbe7f0f0a5b9c903e4e730",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-execution-review-20261107-v2.json",
+        "--review-sha256",
+        "5cba98964531de25c8f183ca5b6dfc523607efe86c63e6b3a31075c2f84f7b02"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 2279248,
+      "start_ticks": "386528977",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "phase",
+        "--phase",
+        "native",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+        "--admission-sha256",
+        "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-native-r2-20261107-v2.service",
+      "unit": "trn1-mini-f17-mlp-native-r2-20261107-v2",
+      "invocation_id": "2d22dd772fab49b298ebea97d5d665f6"
+    },
+    {
+      "pid": 2279418,
+      "start_ticks": "386530060",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "phase",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+        "--admission-sha256",
+        "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-cpu-r2-20261107-v2.service",
+      "unit": "trn1-mini-f17-mlp-cpu-r2-20261107-v2",
+      "invocation_id": "f297b9f982174d83b05b7b98545c876e"
+    },
+    {
+      "pid": 2279968,
+      "start_ticks": "386532592",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "phase",
+        "--phase",
+        "replay",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+        "--admission-sha256",
+        "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-replay-r2-20261107-v2.service",
+      "unit": "trn1-mini-f17-mlp-replay-r2-20261107-v2",
+      "invocation_id": "d9f33dd15aa941f2844fab2be94ba9a0"
+    },
+    {
+      "pid": 2279425,
+      "start_ticks": "386530140",
+      "ppid": 2279418,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "rank",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+        "--admission-sha256",
+        "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-cpu-r2-20261107-v2.service"
+    },
+    {
+      "pid": 2279426,
+      "start_ticks": "386530140",
+      "ppid": 2279418,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+        "--mode",
+        "rank",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+        "--admission-sha256",
+        "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-cpu-r2-20261107-v2.service"
+    }
+  ],
+  "all_six_named_owners_gone": true,
+  "stages": [
+    {
+      "phase": "native",
+      "exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/native-exit.json",
+        "sha256": "2cf79637aa97b1e1067905e8f8421cd920f0931517488e99d5e7a858734793e5"
+      },
+      "owner": {
+        "pid": 2279248,
+        "start_ticks": "386528977",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/model_reference_2026/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+          "--mode",
+          "phase",
+          "--phase",
+          "native",
+          "--admission",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+          "--admission-sha256",
+          "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-native-r2-20261107-v2.service",
+        "unit": "trn1-mini-f17-mlp-native-r2-20261107-v2",
+        "invocation_id": "2d22dd772fab49b298ebea97d5d665f6"
+      },
+      "properties": {
+        "TimeoutStopUSec": "15s",
+        "RuntimeMaxUSec": "10min",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainPID": "2279248",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=16743beb29a073bee355d11514ed4086 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py --mode phase --phase native --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json --admission-sha256 469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1 ; ignore_errors=no ; start_time=[Sat 2026-11-07 20:53:01 UTC] ; stop_time=[Sat 2026-11-07 20:53:11 UTC] ; pid=2279248 ; code=exited ; status=0 }",
+        "ControlGroup": "",
+        "AllowedCPUs": "6-7",
+        "MemoryHigh": "15032385536",
+        "MemoryMax": "17179869184",
+        "MemorySwapMax": "0",
+        "TasksMax": "128",
+        "Environment": "",
+        "LimitFSIZE": "4194304",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+        "Nice": "19",
+        "CPUAffinity": "6-7",
+        "KillMode": "control-group",
+        "SendSIGKILL": "yes",
+        "Id": "trn1-mini-f17-mlp-native-r2-20261107-v2.service",
+        "BindsTo": "",
+        "After": "-.mount app.slice basic.target",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "Job": "",
+        "InvocationID": "2d22dd772fab49b298ebea97d5d665f6",
+        "ExecStopPost": ""
+      },
+      "current_group": {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-native-r2-20261107-v2.service",
+        "absent": true
+      }
+    },
+    {
+      "phase": "cpu",
+      "exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/cpu-exit.json",
+        "sha256": "9b23022889324d736d2af6a0d4b5302613b25db898e516beba79c0153ff3d75b"
+      },
+      "owner": {
+        "pid": 2279418,
+        "start_ticks": "386530060",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+          "--mode",
+          "phase",
+          "--phase",
+          "cpu",
+          "--admission",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+          "--admission-sha256",
+          "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-cpu-r2-20261107-v2.service",
+        "unit": "trn1-mini-f17-mlp-cpu-r2-20261107-v2",
+        "invocation_id": "f297b9f982174d83b05b7b98545c876e"
+      },
+      "properties": {
+        "TimeoutStopUSec": "15s",
+        "RuntimeMaxUSec": "10min",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainPID": "2279418",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=16743beb29a073bee355d11514ed4086 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py --mode phase --phase cpu --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json --admission-sha256 469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1 ; ignore_errors=no ; start_time=[Sat 2026-11-07 20:53:12 UTC] ; stop_time=[Sat 2026-11-07 20:53:37 UTC] ; pid=2279418 ; code=exited ; status=0 }",
+        "ControlGroup": "",
+        "AllowedCPUs": "6-7",
+        "MemoryHigh": "15032385536",
+        "MemoryMax": "17179869184",
+        "MemorySwapMax": "0",
+        "TasksMax": "128",
+        "Environment": "",
+        "LimitFSIZE": "4194304",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+        "Nice": "19",
+        "CPUAffinity": "6-7",
+        "KillMode": "control-group",
+        "SendSIGKILL": "yes",
+        "Id": "trn1-mini-f17-mlp-cpu-r2-20261107-v2.service",
+        "BindsTo": "",
+        "After": "basic.target app.slice -.mount",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "Job": "",
+        "InvocationID": "f297b9f982174d83b05b7b98545c876e",
+        "ExecStopPost": ""
+      },
+      "current_group": {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-cpu-r2-20261107-v2.service",
+        "absent": true
+      }
+    },
+    {
+      "phase": "replay",
+      "exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/replay-exit.json",
+        "sha256": "5be1c8daeecd2bb9645df0235e79de7b70c58ddd470df26050410e563d1e5cb5"
+      },
+      "owner": {
+        "pid": 2279968,
+        "start_ticks": "386532592",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+          "--mode",
+          "phase",
+          "--phase",
+          "replay",
+          "--admission",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json",
+          "--admission-sha256",
+          "469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-replay-r2-20261107-v2.service",
+        "unit": "trn1-mini-f17-mlp-replay-r2-20261107-v2",
+        "invocation_id": "d9f33dd15aa941f2844fab2be94ba9a0"
+      },
+      "properties": {
+        "TimeoutStopUSec": "15s",
+        "RuntimeMaxUSec": "2min",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "success",
+        "ExecMainPID": "2279968",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=16743beb29a073bee355d11514ed4086 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py --mode phase --phase replay --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/admission.json --admission-sha256 469051fdfa1db6a0a9437d84dfa6de601df45fdf51cebc2c6db9761b173820a1 ; ignore_errors=no ; start_time=[Sat 2026-11-07 20:53:37 UTC] ; stop_time=[Sat 2026-11-07 20:53:41 UTC] ; pid=2279968 ; code=exited ; status=0 }",
+        "ControlGroup": "",
+        "AllowedCPUs": "6",
+        "MemoryHigh": "3221225472",
+        "MemoryMax": "4294967296",
+        "MemorySwapMax": "0",
+        "TasksMax": "128",
+        "Environment": "",
+        "LimitFSIZE": "4194304",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+        "Nice": "19",
+        "CPUAffinity": "6",
+        "KillMode": "control-group",
+        "SendSIGKILL": "yes",
+        "Id": "trn1-mini-f17-mlp-replay-r2-20261107-v2.service",
+        "BindsTo": "",
+        "After": "-.mount basic.target app.slice",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "Job": "",
+        "InvocationID": "d9f33dd15aa941f2844fab2be94ba9a0",
+        "ExecStopPost": ""
+      },
+      "current_group": {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f17-mlp-replay-r2-20261107-v2.service",
+        "absent": true
+      }
+    }
+  ],
+  "all_phase_cgroups_empty": true,
+  "lock_actual_reacquire_release": true,
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "canonical_unchanged": true,
+  "output_usage": {
+    "allocated_bytes": 8507392,
+    "files": 38
+  },
+  "live_root_receipts": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-live-r2-start-20261107-v1.json",
+      "sha256": "6817f9070ef1d170c12d41bee0408fa3e47ad550da85780bb8b91301d826be06"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-live-r2-native-20261107-v1.json",
+      "sha256": "07507d74b541a3622d53ba666388b8eacd6e7061970ac336eef99c1d8500e056"
+    }
+  ],
+  "live_limit": "Root retained outer/native live snapshots. Root also observed CPU coordinator live in tool chunk d1f024; attempted later full coordinator/ranks snapshot found exit already complete. No separate full CPU/rank or replay live receipt claimed. Runner parent ACKs and all actual successful stage exits retained.",
+  "classification": "down_path_sufficient_for_this_fixed_input_not_final_KL_causality",
+  "model_qualified": false,
+  "new_speedup_claim": false
+}

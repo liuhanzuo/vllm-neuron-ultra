@@ -759,3 +759,85 @@ requirements remain unchanged.
 - [Actual model exit](evidence/minicpm5-layer0-phase-20261107/actual-exit.json)
 - [Actual numerical replay exit](evidence/minicpm5-layer0-phase-20261107/numeric-actual-exit.json)
 - [Export manifest](evidence/minicpm5-layer0-phase-20261107/manifest.json)
+
+
+## One-fixture MLP capture and replay
+
+The next diagnostic completed with exit code 0: native capture, real CPU TP2
+capture, and serial numerical replay all exited successfully. It tests only
+frame 17 / fixture 1: a 28-token prefill, processed in the SDK's original
+128-token bucket. The CPU arm retains the previously rejected layer-0
+prefill-only FP32 attention output projection so that its exact saved
+intermediate observations can be reproduced; it is a diagnostic control,
+not an accepted optimization.
+
+Each capture executes embedding and layer 0, then stops before later layers.
+The native and both CPU ranks reproduce all six original prediction anchors:
+embedding, input normalization, attention, post-attention normalization, MLP,
+and layer output. Five complete MLP tensors are saved per role (input, gate,
+up, SiLU-times-up product, output), totaling 8,077,312 bytes across the three
+roles. Official BF16 gate/up/down weights and actual TP2 shards are checked.
+The ordinary prefill route consumes no prior CPU KV history; this is not a
+replay of the complete model's cache trajectory.
+
+Before the intervention, replay reproduces all **15 complete tensors and their
+layouts exactly**, including the captured real TP2 outputs. It then compares
+three calculations on the **same CPU input, original [1,128,2048] layout,
+official BF16 weights, library and one-thread setting**:
+
+- **S:** the original SDK split gate/up and split down projections.
+- **F:** complete BF16 gate/up and complete BF16 down projections, a new
+  counterfactual reference on the same input.
+- **D:** reuse S's actual gate/up/activation product; concatenate its two
+  3,072-wide shards in official order and use one complete BF16 down projection.
+
+The gate, up and activation product are byte-exact between S and F across all
+128 rows. The output comparison is:
+
+| Output comparison | Different elements, all 128 rows | Different elements, real 28 rows | Different elements, prediction row |
+|---|---:|---:|---:|
+| Original split S versus full F | 88,577 / 262,144 | 18,367 / 57,344 | 664 / 2,048 |
+| Down-only change D versus full F | **0 / 262,144** | **0 / 57,344** | **0 / 2,048** |
+
+S versus F has maximum absolute error 0.015625 across all rows, and
+0.00048828125 on the prediction row (mean 0.00003656495). D matches F byte for
+byte. Thus, **the split down-projection path is sufficient to explain this
+local fixed-input MLP difference**. This does not separate kernel accumulation,
+local BF16 rounding and reduction order, and does not establish that this
+change fixes the final model's KL failure. Replay matches the captured Gloo
+result exactly, but does not itself reexecute Gloo.
+
+The new full inputs also expose a limit of the earlier prediction-vector
+observations: native and CPU post-normalization inputs differ in **2 of 57,344**
+elements over the 28 real tokens, despite their prediction row being identical.
+Therefore F must not be described as the original native observation; its
+input and 128-row geometry are held fixed to the CPU capture.
+
+The first attempt failed before any forward call because a metadata comparison
+helper was passed raw bytes. The immutable successor uses direct byte equality
+at both raw sites and direct equality for the role set; both original Python
+environments passed the focused regression checks. The failed attempt and its
+zero-payload result are retained.
+
+The root observed the second attempt's outer and native processes live and
+observed the CPU coordinator running. Separate complete CPU-rank and replay
+live snapshots were not obtained before completion. Parent acknowledgments,
+all three successful stage exits, actual tool exit 0, all six named processes
+gone, empty service groups and lock release were verified. No missing live
+snapshot is claimed to exist.
+
+An independent review verified the source, metadata, 15 complete controls,
+18 historical prediction anchors and terminal states. It did not reread raw
+tensors or independently recompute their numerical values.
+
+This result is a local diagnostic, with no new full-model candidate,
+Neuron compilation or speedup. The strict CPU 29/32 and prior device 30/32
+results, all rejected precision candidates, and all original cold-cache,
+long-decode, slot reuse/inactive-slot, quality96 and paired-serving gates remain.
+
+- [Root interpretation](evidence/minicpm5-frame17-mlp-20261107/root-summary.json)
+- [Full replay metrics](evidence/minicpm5-frame17-mlp-20261107/replay-result.json)
+- [Independent result review](evidence/minicpm5-frame17-mlp-20261107/independent-result-review.json)
+- [Actual successful exit](evidence/minicpm5-frame17-mlp-20261107/actual-exit.json)
+- [Retained first failure](evidence/minicpm5-frame17-mlp-20261107/first-attempt-exit.json)
+- [Export manifest](evidence/minicpm5-frame17-mlp-20261107/manifest.json)

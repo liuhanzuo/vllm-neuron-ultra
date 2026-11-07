@@ -1,0 +1,275 @@
+{
+  "schema": "minicpm5_frame17_mlp_implementation_handoff_v2",
+  "author": "/root/mini_original32_final_review_20261107",
+  "created_at": "2026-11-07T20:51:48.964689+00:00",
+  "status": "source_complete_frozen_runtime_not_admitted",
+  "design_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-layer0-mlp-root-design-review-20261107-v1.json",
+    "sha256": "9646ab9caa222cfebd8277f3b16bb222d39cd2fbd4e803ab151c4f7d1b31cfd6"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-execution-spec-20261107-v2.json",
+    "sha256": "7f75acf5bb5d0d2ee88be9e475443280f903b98abbcbe7f0f0a5b9c903e4e730"
+  },
+  "implementation": {
+    "worker": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_worker_v2.py",
+      "sha256": "c32c3f83d61616179bed2b4121d4c36810428aa88039b9d3999dc5746fc380a3"
+    },
+    "replay": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_replay_v2.py",
+      "sha256": "d5faf86069c1d65289e6c1309c211fd696c6ad67e5cc47f6eb2f572b092a56b5"
+    },
+    "runner": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+      "sha256": "57af2bf85c9291b0c2442242180d73e308b4543346d3c9983495b0f99ddd3b2f"
+    }
+  },
+  "source_tooling": {
+    "check_minicpm5_frame17_mlp_source_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_minicpm5_frame17_mlp_source_v2.py",
+      "sha256": "b34ee1a8efb87a874903005754467c601fc2b9e60361345de428efad3dd5d757"
+    },
+    "prepare_minicpm5_frame17_mlp_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/prepare_minicpm5_frame17_mlp_v2.py",
+      "sha256": "4300f5e74acc463fceb3b5a71c61b5176d401143a1a463aeadccf085db18c4ce"
+    }
+  },
+  "source_controls": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-source-controls-20261107-v2.json",
+    "sha256": "f1ae1aa3c8d10beb247d71436683bff2fa74d3c109beb6ed34a9af2ff6d937e7"
+  },
+  "spec_expansion_source_check": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-spec-expansion-source-check-20261107-v2.json",
+    "sha256": "053656ee28ff4d302c38e1419a252cf8938785ac167677b15d86fe2f2961077b"
+  },
+  "passed_inert_controls": 79,
+  "admitted_source_count": 2027,
+  "input_metadata_refs": 7400,
+  "activation_dispatch": "Pinned original functional SiLUActivation.forward code and nn global; exact original decorator; active wrappers or overrides rejected without replacement.",
+  "phase_start_ack": "Only exact Python argv is acknowledged; exact env transient/absent PID may wait within one 30-second deadline; unrelated argv, cgroup drift, terminal state, timeout fail.",
+  "root_command_template": [
+    "/usr/bin/python3",
+    "-B",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+    "--mode",
+    "outer",
+    "--spec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-execution-spec-20261107-v2.json",
+    "--spec-sha256",
+    "7f75acf5bb5d0d2ee88be9e475443280f903b98abbcbe7f0f0a5b9c903e4e730",
+    "--review",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-execution-review-20261107-v2.json",
+    "--review-sha256",
+    "<ROOT_REVIEW_SHA256>"
+  ],
+  "root_review_path_proposed": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-execution-review-20261107-v2.json",
+  "root_review_created_by_child": false,
+  "required_user_bus_environment": {
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus"
+  },
+  "resources": {
+    "native": {
+      "MemoryMax": "17179869184",
+      "MemoryHigh": "15032385536",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6-7",
+      "CPUAffinity": "6-7",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "600",
+      "TimeoutStopSec": "15"
+    },
+    "cpu": {
+      "MemoryMax": "17179869184",
+      "MemoryHigh": "15032385536",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6-7",
+      "CPUAffinity": "6-7",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "600",
+      "TimeoutStopSec": "15"
+    },
+    "replay": {
+      "MemoryMax": "4294967296",
+      "MemoryHigh": "3221225472",
+      "MemorySwapMax": "0",
+      "TasksMax": "128",
+      "AllowedCPUs": "6",
+      "CPUAffinity": "6",
+      "Nice": "19",
+      "KillMode": "control-group",
+      "RemainAfterExit": "yes",
+      "SendSIGKILL": "yes",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "LimitFSIZE": "4194304",
+      "RuntimeMaxSec": "120",
+      "TimeoutStopSec": "15"
+    }
+  },
+  "stage_runtime_limits_seconds": {
+    "native": 600,
+    "cpu": 600,
+    "replay": 120
+  },
+  "outer_allowance_seconds": 1500,
+  "phase_runtime_limit_sum_seconds": 1320,
+  "strict_twenty_minute_total_claim": false,
+  "output_root": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2",
+  "output_cap_bytes": 33554432,
+  "output_file_cap": 96,
+  "output_single_file_cap_bytes": 4194304,
+  "root_free_floor_bytes": 30064771072,
+  "initial_required_free_bytes": 30098325504,
+  "capture_raw_bytes": {
+    "native": 1261568,
+    "cpu_rank0": 3407872,
+    "cpu_rank1": 3407872,
+    "total": 8077312
+  },
+  "added_mlp_interval_reader_bytes": 75497472,
+  "inherited_runtime_IO": "Original full model/shard verification and all42 o_proj proof remain in reused constructors/patch. The72MiB figure bounds only the newly added MLP interval reader.",
+  "capture": {
+    "frame": {
+      "index": 17,
+      "fixture": 1,
+      "slot": 1,
+      "step": 0
+    },
+    "actual_prefixes": {
+      "native": 1,
+      "cpu_rank0": 1,
+      "cpu_rank1": 1
+    },
+    "fields": [
+      "input",
+      "gate",
+      "up",
+      "down_input",
+      "output"
+    ],
+    "prediction_anchors": [
+      "embed_tokens",
+      "layers.0.input_layernorm",
+      "layers.0.self_attn",
+      "layers.0.post_attention_layernorm",
+      "layers.0.mlp",
+      "layers.0"
+    ],
+    "native_shape": [
+      1,
+      28,
+      2048
+    ],
+    "cpu_shape": [
+      1,
+      128,
+      2048
+    ],
+    "stop": "layer0 post-hook after six prediction hooks",
+    "cpu_history_consumption_forbidden": true,
+    "native_cache_must_be_fresh": true
+  },
+  "replay": {
+    "controls": "All15 observed full tensors, each raw hash, original shape/stride/offset/dtype, before any contrast.",
+    "native_own28_threads": 2,
+    "sdk_own128_threads": 1,
+    "contrast_threads": 1,
+    "arms": {
+      "S": "Original SDK BF16 TP2 arithmetic",
+      "F": "Complete unsharded BF16 MLP on fixed actual Xc",
+      "D": "Observed SDK gate/up/product reused; down alone becomes complete BF16 linear"
+    },
+    "fixed_input": "Actual full candidate postnorm Xc, including original feature-major stride; no isolated-query replay.",
+    "metrics": [
+      "full128",
+      "real28",
+      "prediction_row27"
+    ],
+    "new_fp32_intervention": false
+  },
+  "remaining_limits": [
+    "No capture or replay executed by this agent; root owns runtime/source admission, lock, live process observations, actual exits, and publication.",
+    "Root must review exact spec/source and bind its review JSON to spec; source expansion used an explicit in-memory review stub only.",
+    "No original full-history trajectory replay: ordinary prefill is allowed only if no history is consumed. No zero-history substitution claim.",
+    "Six historical prediction vectors do not prove full native-versus-candidate input equality; fresh full tensors must establish the actual relation.",
+    "Replay uses one SDK interpreter/library and local BF16 addition, not another Gloo execution; native-own28 and SDK-own128 exact controls are required.",
+    "Any local down result is not unique final-KL causality, full-model qualification, or speedup evidence.",
+    "The predecessor selected-tap run has an actual root exit receipt but lacked an independent live /proc receipt; that caveat remains.",
+    "Original32, cold-cache, long-decode, slot reuse/inactive, quality96 and paired-serving gates remain unchanged.",
+    "R1 failed before forward after official model loading; no independent live /proc receipt was obtained. Its terminal and lock-drain evidence are preserved, and no failed-stage data are reused."
+  ],
+  "raw_payload_reads": 0,
+  "raw_payload_hashes": 0,
+  "raw_payload_stat_calls": 0,
+  "native_imports": 0,
+  "experiment_launches": 0,
+  "canonical_files_modified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "previous_immutable_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-implementation-handoff-20261107-v1.json",
+    "sha256": "76d6c4f187fdc2f2c2a6502bde3bdfdfe364fa31157e2e12b91914bfe4b31b65"
+  },
+  "previous_attempt_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-exit-r1-20261107-v1.json",
+    "sha256": "39ef5348974579a4f0e397cfb7f11d5a0d2d034e9ea8a3494b20758446722ce9"
+  },
+  "previous_attempt_actual_drain": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-drain-r1-20261107-v1.json",
+    "sha256": "246e2b54ecfac696c19e3b3a2afbfba0416ce21055e1083d16b229fc50ca3ec4"
+  },
+  "previous_attempt_outcome": {
+    "actual_tool_session": 35087,
+    "actual_exit": 1,
+    "tool_exit_chunk": "3d517e",
+    "model_forward_executed": false,
+    "captured_payloads": 0,
+    "cpu_replay_started": false,
+    "failure": "JSON metadata comparator cannot serialize raw bytes",
+    "independent_live_proc_receipt_obtained": false
+  },
+  "narrow_v2_changes": [
+    "Both raw-byte comparison sites use strict bytes operands and direct equality; no encoding/JSON conversion.",
+    "Replay capture-role set uses direct equality; worker metadata comparisons retain original JSON comparator.",
+    "Fresh r2-v2 source/spec/output/units and port29724; r1 actual exit and runtime owner/cgroup drain retained under existing lock."
+  ],
+  "helper_operand_audit": {
+    "worker": {
+      "same_call_count": 26,
+      "raw_or_set_operand_call_lines": [],
+      "comparison_contract": "JSON-serializable metadata only"
+    },
+    "replay": {
+      "same_call_count": 12,
+      "raw_or_set_operand_call_lines": [],
+      "comparison_contract": "JSON-serializable metadata only"
+    },
+    "runner": {
+      "same_call_count": 36,
+      "raw_or_set_operand_call_lines": [
+        77
+      ],
+      "comparison_contract": "Type-preserving recursive equality; existing finite set comparison supported"
+    }
+  },
+  "units": {
+    "native": "trn1-mini-f17-mlp-native-r2-20261107-v2",
+    "cpu": "trn1-mini-f17-mlp-cpu-r2-20261107-v2",
+    "replay": "trn1-mini-f17-mlp-replay-r2-20261107-v2"
+  },
+  "master_port": 29724,
+  "original_science_and_fullshape_controls_unchanged": true
+}

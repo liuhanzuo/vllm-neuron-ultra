@@ -1,0 +1,70 @@
+{
+  "schema": "minicpm5_frame17_mlp_root_execution_review_v2",
+  "reviewer": "/root",
+  "created_at": "2026-11-07T20:51:49.266741+00:00",
+  "passed": true,
+  "blockers": [],
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-execution-spec-20261107-v2.json",
+    "sha256": "7f75acf5bb5d0d2ee88be9e475443280f903b98abbcbe7f0f0a5b9c903e4e730"
+  },
+  "controls": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-controls-native-20261107-v2.json",
+      "sha256": "f1ae1aa3c8d10beb247d71436683bff2fa74d3c109beb6ed34a9af2ff6d937e7"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-controls-sdk-20261107-v2.json",
+      "sha256": "f1ae1aa3c8d10beb247d71436683bff2fa74d3c109beb6ed34a9af2ff6d937e7"
+    }
+  ],
+  "actual_control_exit_codes": [
+    0,
+    0
+  ],
+  "source_review_findings": [
+    "Native and actual TP2 capture original28/128 shapes, five actual full MLP tensors; six old prediction anchors must match.",
+    "Original SiLUActivation fallback and exact official gate/up/down shards checked without replacing activation.",
+    "No-history route and downstream-stop guards; private completion signal cannot hide unrelated failure.",
+    "15 exact fullshape/stride controls precede fixed-input S/F/down-only D contrast.",
+    "Exact controlled env, source closure, parent ACKs, serial native/CPU/replay stages and actual drained exits retained.",
+    "Only exact expected env argv may precede final Python argv within one fixed startup deadline."
+  ],
+  "runtime_scope": "one frame17 layer0 prefix per native/rank, then local MLP replay; no fullmodel/device/serving qualification",
+  "memory_max_gib": {
+    "native": 16,
+    "cpu": 16,
+    "replay": 4
+  },
+  "root_floor_gib": 28,
+  "output_cap_bytes": 33554432,
+  "stage_runtime_seconds": {
+    "native": 600,
+    "cpu": 600,
+    "replay": 120
+  },
+  "outer_timeout_seconds": 1500,
+  "all_original_acceptance_gates_unchanged": true,
+  "model_execution_already_performed": false,
+  "new_speedup_claim": false,
+  "predecessor_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-execution-review-20261107-v1.json",
+    "sha256": "2f33152ac9a39a56cb5af3d43fbd1d96e9c4f94b9abd2d13205b8c6dfb29fb36"
+  },
+  "frozen_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_worker_v2.py": "c32c3f83d61616179bed2b4121d4c36810428aa88039b9d3999dc5746fc380a3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_replay_v2.py": "d5faf86069c1d65289e6c1309c211fd696c6ad67e5cc47f6eb2f572b092a56b5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py": "57af2bf85c9291b0c2442242180d73e308b4543346d3c9983495b0f99ddd3b2f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/activations.py": "5b20c0a3625edc0001a98f09ce3c6b5baa1100e1d7ad8dee649e4d45c8468665",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/activations.py": "3dd5a81b1e5e0c5371256f00efec19df52255420318737db1e03430a98cf4264"
+  },
+  "failed_attempt": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-exit-r1-20261107-v1.json",
+    "sha256": "39ef5348974579a4f0e397cfb7f11d5a0d2d034e9ea8a3494b20758446722ce9"
+  },
+  "failed_attempt_drain": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-drain-r1-20261107-v1.json",
+    "sha256": "246e2b54ecfac696c19e3b3a2afbfba0416ce21055e1083d16b229fc50ca3ec4"
+  },
+  "repair": "Use direct exact bytes equality at2raw sites and direct role-set equality; no math/gates changed. Both exact interpreters passed79focusedcontrols."
+}

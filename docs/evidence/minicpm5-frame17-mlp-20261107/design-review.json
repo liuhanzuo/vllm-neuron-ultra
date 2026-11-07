@@ -1,0 +1,29 @@
+{
+  "schema": "minicpm5_frame17_mlp_root_design_review_v1",
+  "created_at": "2026-11-07T20:23:16.252502+00:00",
+  "design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-layer0-mlp-capture-replay-design-20261107-v1.md",
+    "sha256": "8a13e9006fca031ad047d3705218924a3a1bf3da956c1731dadcf5849f37f911"
+  },
+  "evidence_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-layer0-mlp-capture-replay-design-20261107-v1-handoff.json",
+    "sha256": "f7583b9e3e4c1a33cbd9e990584681eafead8eeb4838d041f6d4743c4f41f5d6"
+  },
+  "decision": "approve_narrow_source_implementation;runtime_pending",
+  "basis": [
+    "All8prefill prediction postnorm hashes agree with native but MLP differs; full input equality remains unproven.",
+    "Single28token fixture17; fresh full-shape captures, exact original prediction anchors, realTP2 original path.",
+    "Keep candidate full input and actual layout fixed; reuse exact front-half product for down-only BF16 path contrast.",
+    "Actual native and SDK full-shape captures must replay exactly before mechanism comparison.",
+    "Preserve original thresholds and fullmodel acceptance gates."
+  ],
+  "implementation_requirements": [
+    "No claimed full-input equality or history replay without actual evidence. Stop if no-history prefill guards fail.",
+    "Separate phase resources: existing16GiB capture constraints; choose enforceable memory bound for torch replay without presuming2GiB address-space limit suffices.",
+    "If old hooks cannot preserve original outputs or control fails, preserve failure; no automatic shape/precision sweep.",
+    "Source checks should exercise routing/layout/cleanup/failures; reuse existing harness, no generic proof framework."
+  ],
+  "actual_model_executed": false,
+  "new_speedup_claim": false,
+  "full_model_qualified": false
+}

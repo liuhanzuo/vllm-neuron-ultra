@@ -1,0 +1,134 @@
+{
+  "schema": "minicpm5_frame17_mlp_root_summary_v1",
+  "created_at": "2026-11-07T20:56:21.724461+00:00",
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-exit-r2-20261107-v1.json",
+    "sha256": "7fb95b7a8aea24f65bfe8bd499da4b3ec6c4af43e2f68c845c907d90595f89b5"
+  },
+  "report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame17-mlp-r2-20261107-v2/replay.json",
+    "sha256": "a895956e772e9068ae628d56be737ddddef64be72a49976a5eb8ff9cd2c24e9e"
+  },
+  "frame": {
+    "index": 17,
+    "fixture": 1,
+    "slot": 1,
+    "step": 0
+  },
+  "all15_fullshape_and_layout_controls_exact": true,
+  "six_old_prediction_anchors_per_native_rank_exact": true,
+  "raw_capture_bytes": 8077312,
+  "same_input_front_half_gate_up_product_all_exact": true,
+  "contrasts": {
+    "S_vs_F": {
+      "full": {
+        "raw_exact": false,
+        "different_elements": 88577,
+        "compared_elements": 262144,
+        "nonfinite_elements": 0,
+        "max_abs": 0.015625,
+        "mean_abs": 6.835363072354994e-05,
+        "cosine": 0.9999964836712745
+      },
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 18367,
+        "compared_elements": 57344,
+        "nonfinite_elements": 0,
+        "max_abs": 0.015625,
+        "mean_abs": 6.092205944696616e-05,
+        "cosine": 0.999996762199552
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 664,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.00048828125,
+        "mean_abs": 3.656494664028287e-05,
+        "cosine": 0.9999970577099536
+      }
+    },
+    "D_vs_F": {
+      "full": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 262144,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      },
+      "real_tokens": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 57344,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      },
+      "prediction": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      }
+    },
+    "D_vs_S": {
+      "full": {
+        "raw_exact": false,
+        "different_elements": 88577,
+        "compared_elements": 262144,
+        "nonfinite_elements": 0,
+        "max_abs": 0.015625,
+        "mean_abs": 6.835363072354994e-05,
+        "cosine": 0.9999964836712745
+      },
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 18367,
+        "compared_elements": 57344,
+        "nonfinite_elements": 0,
+        "max_abs": 0.015625,
+        "mean_abs": 6.092205944696616e-05,
+        "cosine": 0.999996762199552
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 664,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.00048828125,
+        "mean_abs": 3.656494664028287e-05,
+        "cosine": 0.9999970577099536
+      }
+    }
+  },
+  "observed_native_vs_cpu_input": {
+    "raw_exact": false,
+    "different_elements": 2,
+    "compared_elements": 57344,
+    "nonfinite_elements": 0,
+    "max_abs": 0.00048828125,
+    "mean_abs": 1.0111502238682339e-08,
+    "cosine": 0.9999999999196773
+  },
+  "interpretation": "For this fixed candidate Xc [1,128,2048], same BF16 weights/library/thread, gate/up/product match full MLP. The split BF16 down path differs; reusing its exact product with one full BF16 down projection matches F byte-exact at all128rows. This establishes down-path sufficiency for this local fixed-input contrast only.",
+  "limits": [
+    "Original native28 versus CPU128 actual first28 postnorm inputs differ in2/57344elements; matching prediction vector did not imply full-input equality.",
+    "Full-vs-split path combines matrix geometry/kernel/local-rounding/reduction order; no unique internal rounding or collective cause proven.",
+    "Replayed SDK output exactly matches actual captured TP2 output, but replay did not itself reexecute Gloo.",
+    "No fullmodel candidate, new Neuron compile, cold/long/slot/quality96/paired-serving run or speedup.",
+    "Root live snapshot limits in actualexit record remain."
+  ],
+  "failed_r1": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame17-mlp-root-exit-r1-20261107-v1.json",
+    "sha256": "39ef5348974579a4f0e397cfb7f11d5a0d2d034e9ea8a3494b20758446722ce9"
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
