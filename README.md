@@ -4,6 +4,10 @@ This is the `trn1-sdk227-optimizations` compatibility branch for **Neuron SDK
 2.27 and vLLM 0.11.0**. See [Trn1 optimizations](docs/trn1-optimizations.md)
 for the optional CPU sampler, validation status, and experiment evidence.
 
+This `minicpm5-diagnostics-20261107` branch also records the
+[MiniCPM5 observer ablation](docs/minicpm5-diagnostics-20261107.md).
+It contains diagnostic evidence; MiniCPM5 performance is not qualified here.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 
