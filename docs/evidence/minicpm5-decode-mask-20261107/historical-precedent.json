@@ -1,0 +1,65 @@
+{
+  "causal_operator_proven": false,
+  "fix_claimed": false,
+  "frozen_current_v1_preserved": true,
+  "full_model_qualified": false,
+  "historical_precedent": {
+    "first_discovery_claim": false,
+    "interpretation": "The inclusive-vs-strict-prior harness contract issue was documented on 2026-11-02. The current Mini work traces that known issue into its own baseline/matched/history/original88 input chain; it is not a first discovery. Prior family results are cited from the frozen audit, not rerun or revalidated here.",
+    "observed_at": "2026-11-02T12:16:39.605962+00:00",
+    "prior_families": [
+      "Granite adapter",
+      "NxDI Qwen3",
+      "DeepSeek Qwen3 YaRN adapter"
+    ],
+    "prior_paths": [
+      "validate_real_logits.py",
+      "diagnose_granite_postpad_dtype_v2.py"
+    ],
+    "prior_serving_formula": "cached_index < current_position",
+    "prior_validation_formula": "cached_index <= current_position"
+  },
+  "metadata_only": true,
+  "mini_retained_failures": {
+    "aggregate_argmax_matches": 31,
+    "decode_failed": 14,
+    "frames": 32,
+    "interpretation": "A decode-only mask change cannot by itself resolve the retained prefill failure. No causal effect or corrected-run outcome is established.",
+    "per_frame_failed_count": 15,
+    "prefill_failed": 1,
+    "prefill_failure": [
+      {
+        "failed_criteria": [
+          "KL"
+        ],
+        "fixture": 7,
+        "frame": 1,
+        "phase": "prefill",
+        "slot": 1,
+        "step": 0
+      }
+    ]
+  },
+  "model_numpy_native_imports": 0,
+  "new_source_scan_of_other_families": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-07T15:07:17.287623+00:00",
+  "raw_reads": 0,
+  "refs": {
+    "current_scope_review": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-inclusive-decode-mask-source-scope-review-20261107-v1.json",
+      "sha256": "5f696b6f2e557349de4793bfa1dfba6673268f325b01a42a284281df2af94a72"
+    },
+    "mini_phase_review": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-failure-phase-metadata-review-20261107-v2.json",
+      "sha256": "f8f459cf9319ede00464044d80829980584f64f5ab629ce6051701859458ebc8"
+    },
+    "prior_audit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/decode-mask-contract-source-audit-v1.json",
+      "sha256": "b54942525821adc3b6bba94338b80b7608b7e5906110805cc43bb20a564f2cf4"
+    }
+  },
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "schema": "minicpm5_inclusive_decode_mask_historical_precedent_addendum_v1",
+  "source_edits": 0
+}

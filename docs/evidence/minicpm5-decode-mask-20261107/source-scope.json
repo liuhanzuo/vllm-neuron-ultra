@@ -1,0 +1,379 @@
+{
+  "answers": {
+    "harness": "Yes at the input-contract level: baseline explicitly supplies j<=p, including the current logical position, to SDK decode whose ordinary decomposed prior interface requires j<p. This matches the HF full past+current mask convention but does not prove how or why the harness author chose it.",
+    "installed_regular_service": "The inspected installed ordinary text serving path does not use the same inclusive construction: runner carries full=p+1,computed=p; loader passes attention_mask=None; SDK single-token inference computes j<=p-1. This is source evidence about that path, not observation of a running server or a blanket guarantee for every configuration.",
+    "responsibility_location": "The explicit input construction is in baseline_neuron_v5 numeric294/cold350/long404 (same inclusive construction in v4). matched32/history/original88 reproduce these frozen inputs; CPUAdapter84 enforces the inherited inclusive convention. The source mismatch is upstream of SDK prior/active computation, not newly introduced by the observer."
+  },
+  "causal_operator_proven": false,
+  "contract_comparison": {
+    "HF": "Native driver passes p+1 mask ones because native attention consumes prior plus current as a joined logical domain.",
+    "SDK_prior": "compute_for_token_gen explicitly documents true only for index<computed_context_len; masks prior_scores separately, then computes active current K/V and combines the branches.",
+    "explicit_harness": "j<=p includes bucket slot p in the prior mask. _create_simple_attn_mask only expands/casts; it does not subtract/remove currentposition.",
+    "illustrative_source_semantics_only": {
+      "SDK_contract_prior_allowed": "0..23",
+      "harness_prior_allowed": "0..24",
+      "note": "The extra prior slot24 is cached storage, not proven equal to the freshly computed current K/V; do not describe this as necessarily duplicating identical current values.",
+      "p": 24,
+      "separate_active_current": "logical24"
+    },
+    "normal_serving": "attention_mask=None triggers _infer_attention_mask, which uses position_ids-1 and j<=p-1 for single-token decode. Runner full_context_lens=p+1 is not itself an inclusive attentionmask; computed_context_lens=p remains separately available.",
+    "p": "Zero-based current input token position, equal to number of already computed prior tokens on the ordinary one-token decode path."
+  },
+  "design_basis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-cache-mask-four-boundary-interface-design-20261107-v1.json",
+    "sha256": "6e512fdc69a4ebd0eee07ac80dcb409a9a16129755cb55da8d678f6098088f5a"
+  },
+  "fix_claimed": false,
+  "full_model_qualified": false,
+  "input_lineage": {
+    "baseline": "baseline_v5._numeric explicitmask -> _load.forward -> official SDK model.forward with explicitattention_mask; inference fallback is bypassed.",
+    "example_decode_graph_metadata": {
+      "bucket": 2048,
+      "call": {
+        "frames": [
+          {
+            "fixture": 0,
+            "index": 4,
+            "slot": 3,
+            "step": 1
+          },
+          {
+            "fixture": 7,
+            "index": 5,
+            "slot": 1,
+            "step": 1
+          },
+          {
+            "fixture": 2,
+            "index": 6,
+            "slot": 0,
+            "step": 1
+          },
+          {
+            "fixture": 5,
+            "index": 7,
+            "slot": 2,
+            "step": 1
+          }
+        ],
+        "group": 0,
+        "index": 4,
+        "logical_positions": [
+          24,
+          1231,
+          28,
+          27
+        ],
+        "phase": "decode"
+      },
+      "payload": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-04/inputs-output.pt",
+      "payload_sha256": "3564e69edf90916f216e035338b9c7db8d310a503a5f7d710077c4d69d0cfa59"
+    },
+    "frozen_plan_ref": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-runtime-inputs-20261107-v1.json",
+      "sha256": "b8d84596f9fa6b54c0fa599af6ad976f051e47544a2d8c76027136efe2254800"
+    },
+    "history": "history_tensors.source/graph_inputs supplies saved control inputs to CPU and device paths; C_Hd/C_Hc change history origin only, retaining maskvalues.",
+    "matched32": "device_v2 wraps graph _forward, records all7 actual padded inputs, then calls original baseline._numeric; CPUv2 loads exactly those inputs and widens integerdtype losslessly.",
+    "original88": "CPUAdapter loads pinned graph payload; capture driver retains graph inputs and verifies inclusive position/mask invariant before model forward.",
+    "payload_paths_are_metadata_only": "No referenced pt/raw/zlib file was statted, read, hashed, decompressed or executed in this review."
+  },
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-07T15:02:45.234402+00:00",
+  "operations": {
+    "existing_source_edits": 0,
+    "live_process_service_queue_lock_probes": 0,
+    "numpy_model_native_imports": 0,
+    "raw_pt_zlib_reads_hashes_stats": 0,
+    "source_metadata_reads_only": true
+  },
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "schema": "minicpm5_inclusive_decode_mask_source_scope_review_v1",
+  "scope_limits": [
+    "No actual mask bytes were decoded here; the separate saved-mask analyzer must establish observed allowed-key values.",
+    "No causal link to prior numerical failures, first-five/RoPE discrepancies, cache history differences or final logits is established.",
+    "No model/source/input changes, mask repair, arithmetic replay or new baseline is performed.",
+    "Installed path identified through editable finder metadata; no running service/modules inspected.",
+    "Serving conclusion limited to inspected standard text continuous-batching, single-token, ordinary SDK decode path; prefix/chunked/speculative/multimodal and historical code versions are not certified.",
+    "Cold and long baseline use same inclusive source expressions; their actual results and model gates are not reevaluated by this source review."
+  ],
+  "source_evidence": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_baseline_neuron_v5.py",
+      "role": "baseline_v5",
+      "sections": [
+        {
+          "end_line": 251,
+          "source": "    def forward(ids,mask,positions,slots):\n        prefill = ids.shape[1] > 1 or bool((positions == 0).all())\n        expected.update(tag='context_encoding_model' if prefill else 'token_generation_model',\n            bucket=expected_bucket(int(mask.shape[1])))\n        before = len(routes)\n        with NeuronModelBase._reordered(order,slots,input_ids=ids,attention_mask=mask,\n                position_ids=positions,sampling_params=model.default_sampling_params[:ids.shape[0]]) as (seq,inputs,restore):\n            values = restore(call_with_options(model.forward,seq_ids=seq,**inputs).logits)",
+          "start_line": 244
+        },
+        {
+          "end_line": 295,
+          "source": "                for step in range(3):\n                    ids=torch.tensor([[item['continuation_ids'][step]] for item in group])\n                    positions=torch.tensor([[len(item['input_ids'])+step] for item in group])\n                    mask=(torch.arange(int(positions.max())+1)[None]<=positions).long()\n                    values=forward(ids,mask,positions,torch.tensor(slots))",
+          "start_line": 291
+        },
+        {
+          "end_line": 351,
+          "source": "                        position=prefix+step-1\n                        ids=torch.tensor([[refs[prefix,slot%2]['input_ids'][position]] for slot in range(4)])\n                        positions=torch.full((4,1),position,dtype=torch.long)\n                        mask=(torch.arange(position+1)[None]<=positions).long()\n                        values=forward(ids,mask,positions,torch.arange(4))",
+          "start_line": 347
+        },
+        {
+          "end_line": 405,
+          "source": "                else:\n                    ids=torch.tensor([[protocol['fixtures'][r['fixture']]['input_ids'][r['position']]] for r in requests])\n                    positions=torch.tensor([[r['position']] for r in requests])\n                    mask=(torch.arange(int(positions.max())+1)[None]<=positions).long()\n                values=forward(ids,mask,positions,torch.tensor([r['slot'] for r in requests]))",
+          "start_line": 401
+        }
+      ],
+      "sha256": "ced8e002549bad059a9765ae18ee7b964783151483d0570dc3eb269da5ce0bce"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_baseline_neuron_v4.py",
+      "role": "baseline_v4",
+      "sections": [
+        {
+          "end_line": 329,
+          "source": "                for step in range(3):\n                    ids=torch.tensor([[item['continuation_ids'][step]] for item in group])\n                    positions=torch.tensor([[len(item['input_ids'])+step] for item in group])\n                    mask=(torch.arange(int(positions.max())+1)[None]<=positions).long()\n                    values=forward(ids,mask,positions,torch.tensor(slots))",
+          "start_line": 325
+        },
+        {
+          "end_line": 385,
+          "source": "                        position=prefix+step-1\n                        ids=torch.tensor([[refs[prefix,slot%2]['input_ids'][position]] for slot in range(4)])\n                        positions=torch.full((4,1),position,dtype=torch.long)\n                        mask=(torch.arange(position+1)[None]<=positions).long()\n                        values=forward(ids,mask,positions,torch.arange(4))",
+          "start_line": 381
+        },
+        {
+          "end_line": 439,
+          "source": "                else:\n                    ids=torch.tensor([[protocol['fixtures'][r['fixture']]['input_ids'][r['position']]] for r in requests])\n                    positions=torch.tensor([[r['position']] for r in requests])\n                    mask=(torch.arange(int(positions.max())+1)[None]<=positions).long()\n                values=forward(ids,mask,positions,torch.tensor([r['slot'] for r in requests]))",
+          "start_line": 435
+        }
+      ],
+      "sha256": "157cb99e0f622992cdf65db0985f7515b997e16dd3b71971f5ac913a3202c8e8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_matched32_device_v2.py",
+      "role": "matched32_device_v2",
+      "sections": [
+        {
+          "end_line": 10,
+          "source": "    import minicpm5_baseline_neuron_v5 as baseline",
+          "start_line": 10
+        },
+        {
+          "end_line": 41,
+          "source": "            original=wrapper._forward\n            def observe(*args,wrapper=wrapper,original=original):\n                index=len(reports); assert index<14; spec=expected_calls[index]\n                assert len(args)==7",
+          "start_line": 38
+        },
+        {
+          "end_line": 53,
+          "source": "                assert args[3].tolist()==([spec['frames'][0]['slot']] if spec['phase']=='prefill' else [0,1,2,3])\n                before=t.device_state(model,folder/'before',expected_binding)\n                inputs=[x.detach().cpu().clone(memory_format=torch.contiguous_format) for x in args]\n                input_bytes=t.write_graph_inputs(folder/'graph-inputs',inputs)\n                p.once(folder/'before-forward.json',dict(call=spec,input_metadata=metadata,graph=route,bucket=bucket,before=before,compressed_inputs=input_bytes))\n                output=original(*args)",
+          "start_line": 48
+        },
+        {
+          "end_line": 72,
+          "source": "            wrapper._forward=observe\n        return result\n    cls.load,cls.compile=load,forbidden\n    caught=None\n    try:\n        baseline._numeric(context)\n    except AssertionError as error:\n        caught=str(error); assert caught=='Original 32-frame numerical gate failed'",
+          "start_line": 65
+        }
+      ],
+      "sha256": "0e6d77062265bfa71d3577a2f8f642d53e7af9df30e012e8d475cc3b5dd4630d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_minicpm5_matched32_cpu_v2.py",
+      "role": "matched32_cpu_v2",
+      "sections": [
+        {
+          "end_line": 48,
+          "source": "            path = Path(source['payload'])\n            assert p.identity(path) == source['payload_identity'] and p.sha(path) == source['payload_sha256']\n            data = torch.load(path, map_location='cpu', weights_only=True); inputs = data['inputs']\n            assert len(inputs) == 7\n            p.check_input_metadata(source['input_metadata'], spec['phase'])\n            for value, meta in zip(inputs, source['input_metadata']):\n                assert list(value.shape) == meta['shape'] and str(value.dtype) == meta['dtype'] and t.digest(t.raw(value)) == meta['sha256']\n            t.verify_graph_inputs(source['compressed_inputs'],inputs)\n            placeholder_inputs = inputs[5:]\n            inputs, integer_widening = t.cpu_indices(inputs)\n            assert all(a is b for a, b in zip(placeholder_inputs, inputs[5:]))",
+          "start_line": 38
+        }
+      ],
+      "sha256": "a56b2c63761cfbbe762cfb89b156b6054b96761330fc72db1c10290fd20ff250"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_history_tensors_v1.py",
+      "role": "history_inputs",
+      "sections": [
+        {
+          "end_line": 115,
+          "source": "def source(index):\n    control=p.read(p.DEST/'control-result.json');p.check_control(control);ref=control['reports'][index]\n    assert p.text_sha(ref['path'])==ref['sha256'];row=p.read(ref['path'])\n    assert row['call']==p.calls()[index];return row\n\n\ndef payload(row):\n    import torch\n    path=Path(row['payload']);assert p.identity(path)==row['payload_identity'] and p.sha(path)==row['payload_sha256']\n    return torch.load(path,map_location='cpu',weights_only=True)\n\n\ndef graph_inputs(row):\n    values=payload(row)['inputs'];assert len(values)==7\n    assert [meta(x) for x in values]==row['input_metadata']\n    p.check_input_metadata(row['input_metadata'],row['call']['phase']);verify_graph_inputs(row['compressed_inputs'],values)",
+          "start_line": 100
+        }
+      ],
+      "sha256": "a44b0f99301f97236ee7cc20ebf6f303c56716d6f43f96a8eb3b9531aa580127"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_minicpm5_history_cpu_v1.py",
+      "role": "history_cpu",
+      "sections": [
+        {
+          "end_line": 48,
+          "source": "        with torch.inference_mode():\n            for spec in c.calls():\n                source=t.source(spec['index']);inputs=t.graph_inputs(source)\n                untouched=[t.meta(x) for x in inputs];placeholders=inputs[5:]\n                inputs,widening=t.cpu_indices(inputs);assert all(a is b for a,b in zip(placeholders,inputs[5:]))\n                if current_phase!=spec['phase']:\n                    if observer is not None:observer.close()\n                    observer=None;model=None;gc.collect()\n                    model,proof=constructor.build(rank,spec['phase'])\n                    constructions.append(dict(before_call=spec['index'],proof=proof))\n                    observer=t.PredictionHooks(model);current_phase=spec['phase']\n                origin=c.history_origin(arm,spec['index'])\n                ref=source['before'] if origin['kind']=='frozen_v2_device_before' else previous['after']\n                history=dict(origin=origin,logical_state=c.logical_state(spec['index']),manifest=ref,\n                  duplicate_payload_written=False,zero_history_substituted=False)",
+          "start_line": 34
+        }
+      ],
+      "sha256": "fe29a219d27c018f0715c1e21b9f27471500a98cc22f75c50e2c60383b2906a4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_history_device_v1.py",
+      "role": "history_device",
+      "sections": [
+        {
+          "end_line": 34,
+          "source": "        with torch.inference_mode():\n            for spec in c.calls():\n                index=spec['index'];source=t.source(index);args=t.graph_inputs(source);logical=c.logical_state(index)\n                if logical['reset_before']:reset_without_zero(index)\n                wrapper=model.context_encoding_model if spec['phase']=='prefill' else model.token_generation_model\n                assert not wrapper.async_mode and not wrapper.pipeline_execution",
+          "start_line": 29
+        },
+        {
+          "end_line": 50,
+          "source": "                    folder=directory/f'call-{index:02d}'/arm;folder.mkdir(parents=True,exist_ok=False)\n                    imported=t.import_device(model,ref,expected)\n                    output=wrapper._forward(*args)",
+          "start_line": 48
+        }
+      ],
+      "sha256": "b60109019d49cd1f1ff1a9ac9e306915282b24babf7478180ed7f66fbde7c4f2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_cpu_adapter_v2.py",
+      "role": "original88_cpu_adapter",
+      "sections": [
+        {
+          "end_line": 28,
+          "source": "    def graph_inputs(self,graph):\n        self.guard();require(graph in self.context.plan['graph_calls'],'Unknown graph record')\n        values=self.context.load_pt(graph['payload'],32*MIB)['inputs'];require(len(values)==7,'All seven graph inputs')\n        require([self.tensor_metadata(x) for x in values]==graph['input_metadata'],'Original graph metadata')\n        for row,value in zip(graph['compressed_inputs'],values):\n            packed=self.context.read_bytes(row['path'],16*MIB);decoder=zlib.decompressobj();raw=decoder.decompress(packed,row['raw_bytes']+1)\n            require(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail,'Graph zlib framing')\n            require(len(raw)==row['raw_bytes'] and hashlib.sha256(raw).hexdigest()==row['raw_sha256']==self.tensor_metadata(value)['sha256'],'Graph reversible exact bytes')\n        self.inputs_before=graph['input_metadata'];self.placeholders=values[5:];return values",
+          "start_line": 20
+        },
+        {
+          "end_line": 84,
+          "source": "    def verify_original_positions_masks(self,inputs,call,fixtures):\n        self.guard();ids,mask,positions,slots,sampling,hidden,adapters=inputs;seq=slots.tolist()\n        require(seq==([call['frames'][0]['slot']] if call['phase']=='prefill' else [0,1,2,3]),'Physical seq ids')\n        require(hidden.tolist()==adapters.tolist()==[0]*len(seq),'Original zero placeholders')\n        for frame in call['frames']:\n            row=seq.index(frame['slot']);fixture=fixtures[frame['fixture']];length=len(fixture['input_ids']);logical=length+frame['step']-1\n            tokens=ids[row].tolist();pos=positions[row].tolist();m=mask[row].tolist();require(set(m)<={0,1},'Binary attention mask')\n            if frame['step']==0:\n                require(tokens[:length]==fixture['input_ids'] and pos[:length]==list(range(length)) and m==[1]*length+[0]*(len(m)-length),'Original prefill logical inputs')\n            else:require(tokens==[fixture['continuation_ids'][frame['step']-1]] and pos==[logical] and m==[1]*(logical+1)+[0]*(len(m)-logical-1),'Original decode logical inputs')",
+          "start_line": 75
+        }
+      ],
+      "sha256": "2268212c9ae381b17e30956f9059e6ce3353dcb3f35545bc71745b6a90865cbd"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_capture_cpu_driver_v3.py",
+      "role": "original88_cpu_driver",
+      "sections": [
+        {
+          "end_line": 31,
+          "source": "            for call,expected,graph in zip(plan['calls'],expected_calls,graph_calls):\n                admission_guard();require(expected['call']==graph['call']==call and expected['arm']==arm and expected['rank']==rank,'Original call identity')\n                # Original graphinputs and CPUindex widening preserve placeholders.\n                inputs=runtime.graph_inputs(graph);require(len(inputs)==7,'Original7inputs')\n                require([runtime.tensor_metadata(x) for x in inputs]==expected['input_metadata'],'Original graphinput values/layout')\n                inputs,widening=runtime.cpu_indices(inputs)\n                require(widening==expected['integer_widening'] and [runtime.tensor_metadata(x) for x in inputs]==expected['execution_input_metadata'],'Original CPUindex adaptation')\n                require(inputs[3].tolist()==([call['frames'][0]['slot']] if call['phase']=='prefill' else [0,1,2,3]),'Actual physical seq_ids')\n                rowmap=endpoint.physical_rows(call,inputs[3].tolist())\n                runtime.verify_original_positions_masks(inputs,call,plan['fixtures'])",
+          "start_line": 22
+        },
+        {
+          "end_line": 51,
+          "source": "                if arm=='C_Hc_history_generation' and call['index']>0:\n                    require(previous_post is not None and previous_expected is not None,'Missing generated CPU history')\n                    require(expected['history']['origin']==dict(kind='cpu_history_previous_post',arm=arm,call=call['index']-1),'History generation order')\n                    endpoint.verify_states(torch,previous_post,before_records,rank,'previous generated post')\n                    # Includes logical reset between groups; never zero or replace\n                    # the generated history with a fresh device-cache snapshot.\n                    for parameter,value in zip(model.kv_mgr.past_key_values,previous_post):parameter.copy_(value)\n                else:\n                    require(expected['history']['origin']==dict(kind='frozen_v2_device_before',call=call['index']),'Original frozen before history')\n                    for parameter,record in zip(model.kv_mgr.past_key_values,before_records):parameter.copy_(runtime.load_state(record))",
+          "start_line": 42
+        }
+      ],
+      "sha256": "0872f06f862167023a7fe5ca1ef10c247e44c23b81cbd24238c3d3c53c03936e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_capture_native_driver_v3.py",
+      "role": "native_hf_driver",
+      "sections": [
+        {
+          "end_line": 33,
+          "source": "                    admission_guard();frame=mapping[(fixture['id'],step)];logical=length+step-1\n                    if step==0:\n                        args=dict(input_ids=torch.tensor([fixture['input_ids']]),attention_mask=torch.ones((1,length),dtype=torch.long),position_ids=torch.arange(length)[None],use_cache=True,logits_to_keep=1)\n                    else:\n                        token=fixture['continuation_ids'][step-1];require(token==int(saved['logits'][step-1].argmax()),'Original teacher-forced token changed')\n                        args=dict(input_ids=torch.tensor([[token]]),attention_mask=torch.ones((1,length+step),dtype=torch.long),position_ids=torch.tensor([[logical]]),past_key_values=output.past_key_values,use_cache=True,logits_to_keep=1)",
+          "start_line": 28
+        }
+      ],
+      "sha256": "0de6415c2c930d622dd9f5898b0dd19e8677d0d88225bb264eb6484b1ff838cd"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py",
+      "role": "sdk_model_base",
+      "sections": [
+        {
+          "end_line": 271,
+          "source": "    def _create_simple_attn_mask(self, attention_mask):\n        batch_size = attention_mask.shape[0]\n\n        return (\n            attention_mask[:, None, None, :].expand(batch_size, 1, 1, self.n_positions).to(torch.bool)\n        )",
+          "start_line": 266
+        },
+        {
+          "end_line": 417,
+          "source": "        if is_for_speculation:\n            return self._create_spec_attn_mask(attention_mask)\n        return self._create_simple_attn_mask(attention_mask)",
+          "start_line": 415
+        },
+        {
+          "end_line": 3331,
+          "source": "        # infer attention_mask from position_ids if not provided\n        if attention_mask is None:\n            attention_mask = self._infer_attention_mask(\n                position_ids, full_context_lens, computed_context_lens,\n            )",
+          "start_line": 3327
+        },
+        {
+          "end_line": 3554,
+          "source": "    def _infer_attention_mask(\n        self,\n        position_ids,\n        full_context_lens: Optional[torch.LongTensor] = None,\n        computed_context_lens: Optional[torch.LongTensor] = None,\n    ):\n        assert (\n            position_ids is not None\n        ), \"need to call forward with position_ids if attention_mask is not provided\"\n\n        batch_size, seq_len = position_ids.shape\n        if position_ids.shape[-1] != 1:\n            seq_len = position_ids.shape[-1]\n            position_ids_to_compare = position_ids\n        else:\n            seq_len = torch.max(position_ids)\n            position_ids_to_compare = position_ids.expand(batch_size, seq_len) - 1\n        mask = torch.arange(seq_len).view(1, -1).expand(batch_size, seq_len)\n        attention_mask = (position_ids_to_compare >= mask).to(dtype=position_ids.dtype)\n        return attention_mask",
+          "start_line": 3535
+        }
+      ],
+      "sha256": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py",
+      "role": "sdk_attention",
+      "sections": [
+        {
+          "end_line": 2016,
+          "source": "        This implementation decomposes TKG attention into a prior part and an\n        active part, to read the KV cache and compute matmul in parallel. More\n        details are available in document lqdaAJbPvsfV.\n\n        To correctly use this decomposed TKG attention, ensure that the\n        attention_mask is a boolean mask of shape (batch_size, num_kv_heads,\n        q_seq_len, kv_seq_len), and attention_mask[:, :, :, i] = True only\n        when i < computed_context_len.",
+          "start_line": 2009
+        },
+        {
+          "end_line": 2038,
+          "source": "        K_prior = past_key_value[0]\n        V_prior = past_key_value[1]\n        K_prior = repeat_kv(K_prior, self.num_key_value_groups)\n        V_prior = repeat_kv(V_prior, self.num_key_value_groups)\n        if not self.k_cache_transposed:\n            K_prior = K_prior.transpose(2, 3)\n        prior_scores = torch.matmul(Q, K_prior) / math.sqrt(self.head_dim)\n\n        # pad the attention mask if the KV cache is padded\n        if prior_scores.shape[-1] > attention_mask.shape[-1] and self.neuron_config.apply_seq_ids_mask:\n            attention_mask = F.pad(attention_mask, (0, prior_scores.shape[-1] - attention_mask.shape[-1]), \"constant\", 0)\n\n        prior_scores = torch.where(\n            attention_mask, prior_scores, torch.finfo(prior_scores.dtype).min",
+          "start_line": 2025
+        },
+        {
+          "end_line": 2049,
+          "source": "        # ii. active (current/new) KV\n        K_active = repeat_kv(K, self.num_key_value_groups)\n        V_active = repeat_kv(V, self.num_key_value_groups)\n        active_scores = torch.matmul(Q, K_active.transpose(2, 3)) / math.sqrt(self.head_dim)\n        if is_speculation or is_prefix_caching:\n            active_scores = torch.where(\n                active_mask, active_scores, torch.finfo(active_scores.dtype).min\n            )\n        active_scores = active_scores.to(torch.float32)",
+          "start_line": 2041
+        },
+        {
+          "end_line": 2071,
+          "source": "        # iii. attention scores\n        softmax_prior, softmax_active = manual_softmax(\n            prior_scores, active_scores, is_speculation or is_prefix_caching\n        )\n\n        if learned_sinks is not None:\n            softmax_prior = softmax_prior[..., :-1]\n\n        softmax_prior, softmax_active = softmax_prior.to(Q.dtype), softmax_active.to(Q.dtype)\n        attn_prior = torch.matmul(softmax_prior, V_prior)\n        attn_active = torch.matmul(softmax_active, V_active)\n        attn_output = attn_prior + attn_active",
+          "start_line": 2060
+        }
+      ],
+      "sha256": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/__editable___vllm_neuron_0_2_2_lts_finder.py",
+      "role": "installed_editable_mapping",
+      "sections": [
+        {
+          "end_line": 9,
+          "source": "MAPPING: dict[str, str] = {'test': '/home/ubuntu/src/vllm-neuron/test', 'vllm_neuron': '/home/ubuntu/src/vllm-neuron/vllm_neuron'}",
+          "start_line": 9
+        }
+      ],
+      "sha256": "44998894985332f2df183563b724e8f078e91c05e5ed25dd929d09e76176b6da"
+    },
+    {
+      "path": "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "role": "installed_vllm_runner",
+      "sections": [
+        {
+          "end_line": 213,
+          "source": "        return len(state.prompt_token_ids) + len(state.output_token_ids) - 1",
+          "start_line": 213
+        },
+        {
+          "end_line": 650,
+          "source": "        hidden_states = self.model(\n            input_ids=model_input.input_tokens,\n            position_ids=model_input.position_ids,\n            input_block_ids=model_input.input_block_ids,\n            slot_mapping=model_input.slot_mapping,\n            block_tables=model_input.block_tables,\n            full_context_lens=model_input.full_context_lens,\n            computed_context_lens=model_input.computed_context_lens,",
+          "start_line": 643
+        },
+        {
+          "end_line": 926,
+          "source": "        data.input_tokens.append([state.output_token_ids[-1]])\n\n        position = self._get_last_token_position(state)\n\n        data.position_ids.append([position])\n        data.input_block_ids.append(\n            self.vllm_req_to_neuron_seq_id_mapping[req_id])\n\n        data.full_context_lens.append(position + 1)\n        data.computed_context_lens.append(position)",
+          "start_line": 917
+        }
+      ],
+      "sha256": "3ea2fc8a6b9fea84bc488e17e71a90083218009d0f873d8d39d526cb77b45e68"
+    },
+    {
+      "path": "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_loader.py",
+      "role": "installed_vllm_loader",
+      "sections": [
+        {
+          "end_line": 357,
+          "source": "    def forward(self, input_ids, input_block_ids, **kwargs):\n        with self._reordered(input_block_ids, input_ids=input_ids,\n                             **kwargs) as (sorted_ids, inputs, restore):\n            output = self.model(\n                inputs['input_ids'],\n                attention_mask=None,\n                seq_ids=sorted_ids,\n                block_table=inputs['block_tables'],\n                **{\n                    k: v\n                    for k, v in inputs.items() if k not in\n                    ['input_ids', 'block_tables', 'prefill_completion_state']\n                })",
+          "start_line": 345
+        }
+      ],
+      "sha256": "328ddd70fa0c47939400d6275612a37a790d82a0aa1d27421414b641e395c994"
+    }
+  ],
+  "source_only": true,
+  "status": "SOURCE_SCOPE_IDENTIFIED_NO_RUNTIME_OR_CAUSAL_CLAIM"
+}

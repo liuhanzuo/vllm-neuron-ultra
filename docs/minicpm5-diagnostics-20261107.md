@@ -4,7 +4,11 @@ The replacement Python trace has completed the 88-context acquisition. Saved
 data comparisons now cover the first five attention boundaries and three RoPE
 boundaries. Inputs, K projection, RoPE coefficients and rotated K agree exactly
 in the observed comparisons; Q and V have a small number of differing elements.
-The cause of the full-model discrepancy remains unresolved. Details and
+Saved decode masks also confirm an input-contract error in the diagnostic
+harness: it admits the current cache address in the historical branch, while
+the SDK separately processes the current token. Its effect on final logits
+has not yet been measured. The cause of the full-model discrepancy remains
+unresolved. Details and
 independent result reviews are below; the earlier observer failure is retained
 as historical evidence.
 
@@ -175,10 +179,57 @@ identify the cause of the full-model output discrepancy.
 These exports reuse audited metadata. They do not include weights or raw tensor
 payloads, and publication did not rerun model inference or the raw audit.
 
+## Actual decode-mask finding
+
+A bounded saved-data inspection completed normally and retained all 120
+observations: 24 native decode frames and 96 CPU frame/rank/arm mappings.
+It reads only captured masks and positions, without recomputing attention.
+The 96 unique mask/position payload files total 114,066 recorded bytes.
+
+For every CPU mapping, the actual prior mask permits indices `0..p`, where `p`
+is the current token position. The authenticated ordinary SDK route separately
+processes one unmasked current K/V. The historical branch should permit
+`0..p-1`. Thus all 96 CPU mappings fail the current-position-exactly-once gate;
+all 144 cross-arm comparison mappings remain blocked. Native joined masks
+permit `0..p` as expected in all 24 frames. No later allowed index, missing
+historical index, unsupported mask value or position mismatch was observed.
+
+For example, frame 4 uses position 24: the CPU prior branch permits 25 cache
+positions rather than 24, then processes the active current token separately.
+The extra cached value at address 24 may be stale or zero; this does **not**
+establish that identical current K/V values were counted twice.
+
+Source tracing places the inclusive `j <= p` construction in our offline
+baseline's numeric, cold and long-decode tests. The matched/history captures
+reuse those inputs. The installed ordinary text-serving loader instead passes
+`attention_mask=None`; SDK inference constructs `j < p` for one-token decode.
+The observed harness error therefore does not establish the same error in a
+running vLLM-Neuron service or an upstream SDK defect. An earlier November 2
+audit had already documented this contract issue in other validation harnesses;
+the present work establishes its separate MiniCPM5 input lineage.
+
+The original 32-frame result contains one prefill failure and 14 decode
+failures. A decode-only change cannot resolve the retained prefill failure
+(frame 1, fixture 7, KL 0.1016956 versus the unchanged 0.02 limit). No corrected
+model replay or speed measurement has been performed for this finding.
+
+- [Decode-mask observation summary](evidence/minicpm5-decode-mask-20261107/summary.json)
+- [Independent result review](evidence/minicpm5-decode-mask-20261107/independent-review.json)
+- [Harness and installed service source comparison](evidence/minicpm5-decode-mask-20261107/source-scope.json)
+- [Historical precedent](evidence/minicpm5-decode-mask-20261107/historical-precedent.json)
+- [Export manifest and original source hashes](evidence/minicpm5-decode-mask-20261107/manifest.json)
+
 ## Next validation
 
-Ten later attention boundaries remain. Next are active V values, prior cache,
-current cache writes and actual mask semantics. Expected cache manifests must
+Ten later attention boundaries remain incomplete; the decode-mask slice above
+does not cover prefill or complete the cache comparison. The immediate next
+experiment is a matched control with the same before-state, weights, teacher
+tokens and physical bucket, changing only the prior mask to `j < p`.
+The original inclusive control must reproduce its saved endpoints. SDK-inferred
+mask width is a separate possible follow-up because it may change bucket routing.
+
+Active V values, prior cache, current writes and prefill masks still need
+comparison. Expected cache manifests must
 not be treated as captured numeric post-cache tensors. Decode must account for
 logical prior positions and the current token exactly once; actual captured
 masks must establish this before any canonical-key comparison.
