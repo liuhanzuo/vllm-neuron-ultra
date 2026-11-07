@@ -8,10 +8,10 @@ Saved decode masks also confirm an input-contract error in the diagnostic
 harness: it admits the current cache address in the historical branch, while
 the SDK separately processes the current token. A controlled four-frame CPU
 replay now changes the numeric pass count from 1/4 to 4/4 after correcting only
-that mask. The complete model, including its
-original prefill failure, remains unqualified. Details and
-independent result reviews are below; the earlier observer failure is retained
-as historical evidence.
+that mask. A complete 32-frame replay on the compiled Neuron artifact improves
+pass count from 17/32 to 30/32. One prefill and one decode frame still fail KL;
+the model remains unqualified. Independent result reviews are below; the
+earlier observer failure is retained as historical evidence.
 
 ## Earlier dispatch observer failure
 
@@ -271,15 +271,81 @@ metadata and the source/exit chain, not an independent payload recomputation.
 - [Actual root-observed exit](evidence/minicpm5-call4-mask-20261107/root-exit.json)
 - [Source review and export provenance](evidence/minicpm5-call4-mask-20261107/manifest.json)
 
+## Completed compiled-device trajectory
+
+The same-width mask correction has now been tested on the existing compiled
+Neuron artifact, using the original official weights and two Neuron cores.
+Each arm completes all 14 graph calls and 32 frames: eight prefill frames and
+three teacher-forced decode steps for each fixture. Official model loading
+and default warmup occur separately from these 28 replay calls.
+
+The complete inclusive control first reproduces every original output and all
+168 post-cache hashes at each of its 14 calls. Each arm imports the same
+initial cache exactly once. Subsequent calls consume that arm's actual produced
+cache, including the transition between request groups: bookkeeping resets
+preserve all cache values. The strict trajectory changes 24 current-position
+mask cells across six decode calls, with the same physical mask widths and
+compiled graph routes. Prefill inputs are unchanged.
+
+| Original criteria | Inclusive control | Strict prior mask |
+|---|---:|---:|
+| All numeric criteria passed | 17/32 | **30/32** |
+| Prefill passed | 7/8 | 7/8 |
+| Decode passed | 10/24 | **23/24** |
+| Highest-logit token matches reference | 31/32 | **32/32** |
+
+Thirteen formerly failing decode frames now pass, and no previously passing
+frame becomes a failure. Only the six decode calls have changed output digests;
+all eight prefill outputs remain exactly the same between the two arms.
+These pass counts use the original cosine, KL and maximum-error thresholds,
+plus the original high-margin top-token rule. The aggregate top-token match
+floor also remains 0.9.
+
+Two failures remain, both in fixture 7:
+
+| Frame / phase | Control KL | Strict KL | Required maximum |
+|---|---:|---:|---:|
+| 1 / prefill | 0.101695620 | 0.101695620 | 0.02 |
+| 13 / third decode step | 0.072239228 | 0.042208157 | 0.02 |
+
+Frame 13 now passes cosine and maximum-error checks, but its KL remains above
+the limit. Matching the highest-logit token does not imply that the complete
+output probability distribution passes. Both arms therefore retain an overall
+numeric failure. The shared fixture is a lead for further diagnosis, not proof
+that its prefill and decode errors have the same cause.
+
+This experiment establishes an improvement on the compiled device under the
+explicit same-width mask contract and each trajectory's own cache history.
+It does not validate ordinary serving's inferred-mask width, long generation,
+quality or performance. **No new speedup ratio is reported.** The harness is
+the source of the corrected mask; this result does not establish an equivalent
+upstream SDK or ordinary vLLM-Neuron service defect.
+
+An earlier attempt loaded and warmed the device model, then stopped during the
+first control call's verification because its input list omitted the old
+post-cache manifests. It produced no completed call report and never entered
+the strict arm. The successor added the 14 manifests and their 2,352 recorded
+cache identities, retained the model worker unchanged, and required the failed
+process and service group to drain. That failure is preserved separately and
+is not a numeric or post-cache mismatch result. The successful successor and
+its device service both have root-observed actual exit code 0 and an empty group.
+
+- [Complete 32-frame comparison and remaining failures](evidence/minicpm5-device32-mask-20261107/root-result-summary.json)
+- [All per-frame metrics as CSV](evidence/minicpm5-device32-mask-20261107/results.csv)
+- [Independent result metadata review](evidence/minicpm5-device32-mask-20261107/independent-result-review.json)
+- [Successful actual exit](evidence/minicpm5-device32-mask-20261107/root-exit-r2.json)
+- [Preserved failed attempt](evidence/minicpm5-device32-mask-20261107/root-exit-r1.json)
+- [Export source hashes](evidence/minicpm5-device32-mask-20261107/manifest.json)
+
 ## Next validation
 
-Ten later attention boundaries remain incomplete; the decode-mask slice above
-does not cover prefill or complete the cache comparison. The next experiment
-will reuse the compiled Neuron artifact for a complete original 32-frame
-trajectory with the strict prior-mask contract, retaining all eight prefills and their original
-thresholds. It must measure history generated by the corrected trajectory
-and retain the original prefill failure. SDK-inferred mask width remains a
-separate possible follow-up because it may change bucket routing.
+The immediate next diagnostic target is fixture 7: retain the unchanged
+prefill KL failure and the remaining third-decode KL failure, and compare their
+attention/cache boundaries against the original native reference. The earlier
+four-frame CPU contrast and the full device trajectory are distinct experiments.
+SDK-inferred mask width remains a separate follow-up because it may change
+bucket routing. Ten later attention boundaries have not yet received the full
+saved-data comparisons.
 
 Active V values, prior cache, current writes and prefill masks still need
 comparison. Expected cache manifests must

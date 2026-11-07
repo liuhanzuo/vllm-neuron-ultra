@@ -1,0 +1,204 @@
+{
+  "schema": "minicpm5_original32_mask_device_result_v1",
+  "complete": true,
+  "arms": [
+    {
+      "arm": "original_inclusive_control_trajectory",
+      "summary": {
+        "complete": true,
+        "frames": 32,
+        "prefill_frames": 8,
+        "decode_frames": 24,
+        "passed": false,
+        "failed_frames": [
+          1,
+          4,
+          6,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          20,
+          21,
+          23,
+          24,
+          27,
+          28
+        ],
+        "prefill_failed": 1,
+        "decode_failed": 14,
+        "argmax_match_fraction": 0.96875,
+        "frame1": {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.11938606202602386,
+            "cosine": 0.9983096122741699,
+            "kl_reference_to_neuron": 0.10169561952352524,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        "full_model_qualified": false
+      },
+      "result": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/result.json"
+    },
+    {
+      "arm": "strict_prior_same_width_trajectory",
+      "summary": {
+        "complete": true,
+        "frames": 32,
+        "prefill_frames": 8,
+        "decode_frames": 24,
+        "passed": false,
+        "failed_frames": [
+          1,
+          13
+        ],
+        "prefill_failed": 1,
+        "decode_failed": 1,
+        "argmax_match_fraction": 1.0,
+        "frame1": {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.11938606202602386,
+            "cosine": 0.9983096122741699,
+            "kl_reference_to_neuron": 0.10169561952352524,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        "full_model_qualified": false
+      },
+      "result": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/result.json"
+    }
+  ],
+  "replay_calls": 28,
+  "replay_scored_frames": 64,
+  "official_load": {
+    "official_load_completed": true,
+    "default_official_warmup_enabled": true,
+    "skip_warmup_override": false,
+    "new_compilation": false,
+    "warmup_in_replay_call_count": false,
+    "warmup_call_count_not_measured": true,
+    "artifacts": {
+      "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/model.pt": {
+        "sha256": "df1cad65b0b8f62ac8b7b4b2a1f2c5d1952d0ffc415f20b80f82c19c8196a01d",
+        "identity": {
+          "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/model.pt",
+          "device": 66304,
+          "inode": 13369713,
+          "size": 109081643,
+          "mtime_ns": 1793813874530130070,
+          "ctime_ns": 1793813874530130070
+        }
+      },
+      "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/weights/tp0_sharded_checkpoint.safetensors": {
+        "sha256": "e6424fca79230b341044c60060a568e67ed314bbd9dfb401ca7bca8439010118",
+        "identity": {
+          "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/weights/tp0_sharded_checkpoint.safetensors",
+          "device": 66304,
+          "inode": 13369715,
+          "size": 2516977532,
+          "mtime_ns": 1793813880504998476,
+          "ctime_ns": 1793813880504998476
+        }
+      },
+      "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/weights/tp1_sharded_checkpoint.safetensors": {
+        "sha256": "4cb27a78b27ca6c12aebf1c9cf2a45baa28d168e62bad5996d86ea34fb641ab8",
+        "identity": {
+          "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/weights/tp1_sharded_checkpoint.safetensors",
+          "device": 66304,
+          "inode": 13369716,
+          "size": 2516977532,
+          "mtime_ns": 1793813887885833513,
+          "ctime_ns": 1793813887885833513
+        }
+      },
+      "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/neuron_config.json": {
+        "sha256": "ac677fd7424745d961e889894c7e91d2998d20f470560e90859f941640d6913a",
+        "identity": {
+          "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/neuron_config.json",
+          "device": 66304,
+          "inode": 13369641,
+          "size": 5828,
+          "mtime_ns": 1793813038490524831,
+          "ctime_ns": 1793813038490524831
+        }
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-2b-readiness-20261104-v1/config.json": {
+        "sha256": "59613157e5357d62bcb121e04cb90f2170b43d789b142380c12c3d4277d95180",
+        "identity": {
+          "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-2b-readiness-20261104-v1/config.json",
+          "device": 66306,
+          "inode": 8588534,
+          "size": 704,
+          "mtime_ns": 1793771242413008939,
+          "ctime_ns": 1793771242413008939
+        }
+      }
+    },
+    "compiled_receipt": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v5/compile.json",
+      "sha256": "9351bdf9c062435f9249c3b2081c34d7cb8c351f59a4709eb7a5eeae314413fd"
+    }
+  },
+  "original_prefill_retained": true,
+  "full_cache_payloads_written": 0,
+  "compiled_new_model": false,
+  "same_width_explicit_mask": true,
+  "serving_inferred_mask_tested": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "self_exit_claimed": false,
+  "root_must_observe_actual_exit": true,
+  "process": {
+    "pid": 2133546,
+    "start_ticks": "384823652",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_mask_device_runner_v2.py",
+      "--mode",
+      "worker",
+      "--admission",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/admission.json",
+      "--admission-sha256",
+      "5ab6ae4eb417f6653ab84fa04d788c0a8342ff47eca0439eb5d4d526f14e6268"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-mask-r2-20261107-v1.service"
+  },
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/admission.json",
+    "sha256": "5ab6ae4eb417f6653ab84fa04d788c0a8342ff47eca0439eb5d4d526f14e6268"
+  }
+}

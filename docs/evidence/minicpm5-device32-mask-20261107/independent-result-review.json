@@ -1,0 +1,197 @@
+{
+  "schema": "minicpm5_original32_mask_device_independent_result_review_v1",
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "passed": true,
+  "blockers": [],
+  "root_actual_exit_ref": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-root-exit-r2-20261107-v1.json",
+    "sha256": "c044c8105ae85d7ae5d4606cad491d85e609c8ec6268c65fe999c4574540a847"
+  },
+  "root_summary_ref": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-root-result-summary-20261107-v1.json",
+    "sha256": "29d19e9347563a7c756f0e892cf6e39d1d9d88ee41801b80f8aae6f40af6e4fa"
+  },
+  "actual_exit_accepted": true,
+  "control_original14_output_and168post_endpoints_exact": true,
+  "calls": 28,
+  "scored_frames": 64,
+  "per_arm_seed_imports": 1,
+  "per_arm_actual_cache_chain_edges": 13,
+  "reset_calls": [
+    0,
+    7
+  ],
+  "strict_changed_mask_cells": 24,
+  "decode_widths": [
+    2048,
+    128
+  ],
+  "changed_output_calls": [
+    4,
+    5,
+    6,
+    11,
+    12,
+    13
+  ],
+  "control_passed": 17,
+  "strict_passed": 30,
+  "control_decode_passed": 10,
+  "strict_decode_passed": 23,
+  "prefill_passed_each": 7,
+  "control_top1_matches": 31,
+  "strict_top1_matches": 32,
+  "corrected_failure_frames": [
+    4,
+    6,
+    8,
+    9,
+    10,
+    12,
+    14,
+    20,
+    21,
+    23,
+    24,
+    27,
+    28
+  ],
+  "remaining_failed_rows": [
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "physical_row": 0,
+      "current_position": 1230,
+      "metrics": {
+        "max_abs_error": 0.75,
+        "mean_abs_error": 0.11938606202602386,
+        "cosine": 0.9983096122741699,
+        "kl_reference_to_neuron": 0.10169561952352524,
+        "argmax_match": true,
+        "reference_margin": 1.125,
+        "reference_top1": 1062,
+        "neuron_top1": 1062
+      },
+      "failed_criteria": [
+        "KL"
+      ]
+    },
+    {
+      "frame": {
+        "index": 13,
+        "fixture": 7,
+        "slot": 1,
+        "step": 3
+      },
+      "physical_row": 1,
+      "current_position": 1233,
+      "metrics": {
+        "max_abs_error": 1.24609375,
+        "mean_abs_error": 0.20495888590812683,
+        "cosine": 0.995969831943512,
+        "kl_reference_to_neuron": 0.04220815747976303,
+        "argmax_match": true,
+        "reference_margin": 0.125,
+        "reference_top1": 130073,
+        "neuron_top1": 130073
+      },
+      "failed_criteria": [
+        "KL"
+      ]
+    }
+  ],
+  "new_failure_frames": [],
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "limits": [
+    "JSON-only cross-check of reviewed runtime receipts; no raw metrics recomputation",
+    "Explicit-mask teacher-forced original32 trajectory only; serving mask=None and free generation not tested",
+    "Remaining two KL failures have same fixture; common cause not established",
+    "Cold, long decode, slot reuse, inactive slots, quality96 and paired performance qualification remain required"
+  ],
+  "actual_raw_reads": 0,
+  "actual_native_imports": 0,
+  "actual_process_service_queue_lock_probes": 0,
+  "metadata_reads": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3-cache-ablation-full-v8/status.json": "064d9de95940ee7bbf76729f757b1c14695d18217c07874651688b10e30b778c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-paired-full-v2/status.json": "daa5edb9e166cab18da35bbb3afd58defa609bd84e7c24a28e01a40ae9f671c0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-root-exit-r2-20261107-v1.json": "c044c8105ae85d7ae5d4606cad491d85e609c8ec6268c65fe999c4574540a847",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-root-result-summary-20261107-v1.json": "29d19e9347563a7c756f0e892cf6e39d1d9d88ee41801b80f8aae6f40af6e4fa",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-root-live-r2-20261107-v1.json": "b5dd01b228e46ba1488e9304ad01f043949f81ba4a8642ec8c91d726ee28e171",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/admission.json": "5ab6ae4eb417f6653ab84fa04d788c0a8342ff47eca0439eb5d4d526f14e6268",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/service-exit.json": "39dd6af702d058d4f9781730c5677eac5d216074e6b1c8a1ce4d05a70e0b3ee9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device-owner.json": "124e8a9c24e2482890078856678833a80411e3856e95700ae2a339703cdef9e7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device-result.json": "04de8ce47573496348b417faa8269782c9e99f5476d77f9d60a6424264790301",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/outer-result.json": "82e277a749c89b41d9077038a8531dc90537d794ff0ce1901662bd396d567ebf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/result.json": "564fb057cf01dab22ba82ff524f95e33c3f0d4c918d7ef0516423d4329c6ebc8",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/official-load.json": "c4b9a5c0cf6adda5c0c0c341a4da855a983786354bbc9fc6db6439b642295c2d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-execution-spec-20261107-v2.json": "50d1b9002fde217908e13fcabf80909ab66215f2fcae8faef89916d40127ada6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-mask-device-input-plan-20261107-v2.json": "0eec34e835b8550c9b5b9987d70b674e79061197ced0e63466446d3dfa08463d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/result.json": "7a79b46cb82279198ea12a9518a93188a43225d477467a0743a84bf31a98cd7e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-00/result.json": "92d708074f7ba48b25b10b864e57eb5f8db5cf2a6cdab3f1ee0ea4ecfeccbb90",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-01/result.json": "8bf0d6885e40689a0079a00c7b7aa3988ce81b7aa43d4095ff459d24db8b3152",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-02/result.json": "f2789167a8b8ceb79d9c9e8b2ee82c7754a3dc2df24110365b729e02d9f7e40f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-03/result.json": "03bc7c9719e95fe871f5ac4ead0318a0b798bd6f0e57afd5c15611407b18c12a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-04/result.json": "da6061b940736bca15d968bd9e296c281e10990590da176f97908d536fb3bf3c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-05/result.json": "98ac525c715775fc36be80a17eade5b84d4feb34a1bdf9bd8e5a4f1e6279459d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-06/result.json": "8a3e5d4becfa2490e6a1a3adbb5ad812ca4766022e28f37a00e9428d1af13ec2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-07/result.json": "9c161eb10b7bc125e2933909402c192a7dd5fb48ac0ddd5abd79b1a760cf01fc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-08/result.json": "b48573d687f74a0ac50741fc7431cdbb4802940f2189243ee1782da7a4529bef",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-09/result.json": "73c629a961a93ff9a09354505b9940f1ddcf528cc68707bd9376e73e4ebfe993",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-10/result.json": "878633db747c644d7c894c2b15df8c7b48e4394b5fdd4922b403fefb119297e9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-11/result.json": "d73d7885b8459e06f999031528096aeef2584ebbb3e7e72fb3c887e9134f6c91",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-12/result.json": "2b0c939235151e15f080e7c4d5ee5d8a0d0055537a83a9fd3d4a33e137660799",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/original_inclusive_control_trajectory/call-13/result.json": "9dffd6bbc7798bed63dc8505bf310a7000d535049451df9e2d71971330522a78",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-00/before/manifest.json": "b8d260c3c1c5ab3b9ef7d89057dabde68c469ec9ffe09cba12642d21f72afe0d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-00/after/manifest.json": "44cf94b7b89da715b9180f109482a3f6d7c0138e46a370dc53441220761f0c8a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-01/before/manifest.json": "b177bff3c2fd277a2a0c47245140a94363320ed9331a10574d0c6340636617f9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-01/after/manifest.json": "6b589886b880e347176e8fce083a4046b7b43c7cada514b437ef965b2bcb367f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-02/before/manifest.json": "1d1355ab1c3b25e00ed1448cf3ca58f885b4bbc4022c8a74b0e556f04575bdbe",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-02/after/manifest.json": "63594414c2022100c81aa99503b089c03a3a9104c100ec6ef7efee5136e68db9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-03/before/manifest.json": "0a55f61dd37dea17e1f6583b7e8c5e851716a55ded4ffd85c925a8643e726929",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-03/after/manifest.json": "d0430a6a4ea69d657d16c5c34700fdf9762621411002be0f73c65eeaf3750894",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-04/before/manifest.json": "86161d1a4ef9578085290e15ae6058248c22fa5df950a6ff32455c58999d046f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-04/after/manifest.json": "21efad6c529415f536fc3af6fc369a3fd1f4bbb61ba18284f6a7c8dbf1169beb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-05/before/manifest.json": "307b7af28a737aca7d4d13dfb3bb9d2715370097b7269a6dbf7c3fb7176da261",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-05/after/manifest.json": "4654a7b4e1130ac1c96a4acd79ab5b52d77ad028a20818ff656e2e71aa551198",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-06/before/manifest.json": "edd8ca812d19854c53273a099948a992c03682b180569320f9228b760ba65ee0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-06/after/manifest.json": "603ece76ce0566781a61966174d4ac761c703a0e6b52f4f402ad8a41bb81cc13",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-07/before/manifest.json": "73ec7fb0a3396f9bdf64f39887d31802aba3e6884f6885362b7c8b4ad6108d34",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-07/after/manifest.json": "59496dad127b6faf467097d27019fe1306cfa8151ba1f97ff42f4735e65d81b4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-08/before/manifest.json": "91a0cdbb1536803de84273363ce8ecf1dc4d000c056fa165d0844f73ada31172",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-08/after/manifest.json": "b0113062a347031c6e5bd6d17e3e5639d36be911fa176125c00d29a831db0b5c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-09/before/manifest.json": "470a3486bb083154f100c496a723c7be38078a6842ccdb0c0c0c5d962d1557bc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-09/after/manifest.json": "70e6590a0eb688d66e0962421ebe4a55fcd0a8afeb4986791f68e11a98629d57",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-10/before/manifest.json": "1382e693a6385f6e79cb2dd8067b2f29991730bfbcc01dd2a8d913883eaf9b00",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-10/after/manifest.json": "585de08b3a78b1f4dc054537ac91b88a381fc3ac7478850c3b5c2e1167cee1c5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-11/before/manifest.json": "fbfe1c894d76711bcdec4269bfaefc648da3a8770afcbbb2dceff48f3a7e63e4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-11/after/manifest.json": "313f2aab6f396bd1d39665d531035136fb21a8454b8116fdf1c3ec97a444f8fa",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-12/before/manifest.json": "75fdc04b87c952edf9f7a4cc542cdee746b6591a306aa71112df648f6b2c3ab5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-12/after/manifest.json": "15d8693e5ae9d30567926aa5f55a5827096ff76bba58e782ad03b4bd90f327d0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-13/before/manifest.json": "72e42260ed4dd479fd5e113f9413cf1c5b6f1ac5c51fb831675928a73d172e0e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-matched32-v2/control/call-13/after/manifest.json": "358dcf0a7f795b86c4ef09ee13ae19b65feb24ea23d5ca7d849454dd660a5662",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/result.json": "c899b59a9cd7ab757aa69dcdd4997ac96da553aeb7b273013ed738918ac42b14",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-00/result.json": "758451fc46a3916a89219234a0da17660f1fbeed3d78203e1f402e313e9ef6b6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-01/result.json": "f5e385c9caed3586298969f7a5a93ac100d032eea44321c41b59db6ba51b9719",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-02/result.json": "dca06c6703daf5dd1f1cdd5f1e2c0a564d4a5ba67d403b44394511efbc94c8f3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-03/result.json": "592f831d13839cf7cb96a5b6adf5d55bbc13bcd4592006ea6ffe71f6837b5306",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-04/result.json": "00c8261dde5a57779a2df654a6407268a1f299d6424e7d13ed4b5abe56a056d1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-05/result.json": "c37f7abcf5a9f62173c2e0dbec517c91e25050f93ebd0b419ecdba2bf5e061ed",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-06/result.json": "fe7ac98de9deae90311fdbd157fdde9f95c3e11ed09b4854a71c2c53529325e5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-07/result.json": "a6b801fc2296e282ad2b7ce069c70bd7ec91b4aa44792d8f6730c06de0cd45fe",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-08/result.json": "bf118df5190ff5e6d2bd4e8de2c191cc1c6e1da39f67be43b3bbe233b284429a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-09/result.json": "6ea5557ae591d5b6ea70e67a749d666a976151b398552727e76e17eb0c959995",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-10/result.json": "44d5ccfb3ea8e8794b6f0c0414cd9ac2b60b32f2a07d293028056fb69ebd480f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-11/result.json": "82d0f95258a59be62ba87dfd70742e22948cbeb4b28fdda2bafcc137573a7cf7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-12/result.json": "d92e19c8bdb7bb752f5093727de3ce918c97d22337d4d6ab55093328d87efc7c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-strict-prior-device-r2-20261107-v1/device/strict_prior_same_width_trajectory/call-13/result.json": "0d069e368a9267e10edd82abaa0127d076515a68bdb0e9d3749174082a823c46"
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_original32_mask_device_result_20261107_v1.py",
+    "sha256": "e8ee3ef91ded6ac4614744a61f5ee6afb9071726f044ea49a8dd3675a850f25e"
+  }
+}
