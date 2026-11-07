@@ -271,16 +271,45 @@ v2 compiles the complete authenticated module without executing it, then
 extracts the method code; all original comparison fields remain enforced. The
 b3 native identity checks passed. Earlier failure records remain retained.
 
-## Next experiment: upstream hidden differences
+## Completed c1 saved down-projection alignment
+
+The next saved-data check completed for two preselected prefill witnesses. It
+compared all valid prompt tokens at layer-0 down-projection input, its output,
+and the normalized hidden input to layer 1. Saved tensors were interpreted as
+logical contiguous BF16 values; original padded shapes, strides and offsets
+remain provenance rather than offsets into those saved files.
+
+| Variant / fixture | Valid prompt tokens | First unequal token (zero-based) | Unequal tokens at each of the three boundaries |
+|---|---:|---:|---:|
+| Instruct / 5 | 1,101 | 550 | 18 |
+| Reasoning / 0 | 29 | 14 | 1 |
+
+Within each witness, the per-token equality pattern is identical across all
+three boundaries. Differences therefore already exist at the down-projection
+input in these cases. This observation does not identify the first differing
+operator or prove that the same explanation covers all 223 hidden-first cases.
+It also does not exclude a downstream operator from changing error magnitude.
+
+The process read 12 authenticated existing payloads (94,789,632 bytes), created
+no new raw tensors and recomputed no projection. The root observed exit code 0
+and completed physical-drain and metadata verification. All 18 original model
+gate outcomes remain unchanged; no model qualification or speedup is claimed.
+
+- [Both complete witness records](evidence/phi4-down-c1-20261107/result.json)
+- [Root terminal audit](evidence/phi4-down-c1-20261107/root-audit.json)
+- [Actual process exit](evidence/phi4-down-c1-20261107/root-exit.json)
+- [Original bounded analysis plan](evidence/phi4-down-c1-20261107/source-plan.json)
+- [Export manifest](evidence/phi4-down-c1-20261107/manifest.json)
+
+## Next experiment: before the down-projection input
 
 The fixed-input QKV portion of the [earlier design](evidence/phi4-alignment-a1-20261107/next-design.md)
-is complete. It does not resolve the 223 hidden-first alignment cases.
-
-Those cases require a separate upstream investigation. Reuse the
-saved layer-0 down-projection inputs and outputs first; only missing boundaries
-justify a small residual/add-to-layer-1-normalization capture. Any generated-prefix
-intervention must retain sham and reciprocal controls and the original attention
-layout witnesses. Local byte differences alone do not justify a deployed change.
+and the two-witness saved down-projection alignment are complete. The next
+boundary investigation should move earlier than the down-projection input in
+these witnesses, using existing captured data where available. New captures
+need their own output-invariance controls. Any generated-prefix intervention
+must retain sham and reciprocal controls and the original attention layout
+witnesses. Local byte differences alone do not justify a deployed change.
 
 These witness tests cannot replace full coverage. Any justified candidate must
 retain both variants, three arms, three anchors and all original 32 frames,
