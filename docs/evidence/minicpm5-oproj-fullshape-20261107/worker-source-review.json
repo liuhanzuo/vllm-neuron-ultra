@@ -1,0 +1,58 @@
+{
+  "schema": "minicpm5_saved_oproj_fullshape_worker_independent_source_review_v1",
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "created_at": "2026-11-07T17:03:10.938581+00:00",
+  "verdict": "accepted_finite_fullshape_worker_source_runtime_unexecuted",
+  "worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_saved_oproj_fullshape_intervention_worker_v1.py",
+    "sha256": "452e7e08fdf35feaa8becec7e0d6c971a28a8f57cb8d27b10597eb5d4739685e"
+  },
+  "design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-oproj-fullshape-intervention-design-20261107-v2.json",
+    "sha256": "dcfa57c14ff4bc3bbc05a7cbd74262c258ca6582ff9beb1d32af6fed3c3fe897"
+  },
+  "author_source_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-oproj-fullshape-source-checks-20261107-v1.json",
+    "sha256": "1e3fc1db8b7050c013fab07bafed9f1d712c11f0ba36b468ded7c43625d5fe53"
+  },
+  "previous_worker_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-oproj-intervention-independent-source-review-20261107-v2.json",
+    "sha256": "553f96e2aea01294f6b92ad411a738d720510b471cbec80a02aa8c4b2bd522bb"
+  },
+  "findings": [
+    "Native formulas receive the original whole [1,L,2048] context. CPU formulas receive a full contiguous concatenation of actual saved [1,E,1024] rank blocks; no padding is synthesized and no native-padded context is substituted.",
+    "All6 formulas execute at full L/E. The only pre-arithmetic slices split input FEATURES into1024 ranks. Temporal valid-token/prediction slicing occurs only while computing metrics after complete outputs exist. Formula shape gate requires sequence>1 and output shape equal x.",
+    "Native control and every native formula use2threads; CPU control and every CPU formula use1thread. No thread mutation occurs within one six-formula case. Input and reconstructed partial/weight shapes and strides are recorded.",
+    "Original24 independent fullshape controls remain: native fullBF16 linear and both CPU arms actual einsum+standalone sum with both saved rank outputs. Each formula case repeats its own fullshape baseline against saved source and retains strict finite/raw exact eligibility.",
+    "Same actual x and official weight are used within a case. BF16 sum contrasts reuse the same BF16 partials; local rounding contrasts reuse the same FP32 partials. Independent AST comparison confirms unchanged parts/bf/fp/all6 expressions.",
+    "Full,valid-token,prediction metrics against same-input fullBF16 and source endpoints are separate. Added CPU-versus-saved-native metrics include inherited context/geometry differences and are explicitly not causal single-change contrasts.",
+    "prepare inherits actual finalized successor checks from v2, with exact immutable plan/canonical/output namespace/science transform; actual-bound checker passes8contexts80payloads without replacing bound.",
+    "Official bounded8MiB weight IO,digest/metric functions and original failure preservation retained. Successful body followed by thread-restoration failure still fails; secondary receipt/restore/print failure preserves primary.",
+    "Pinned previous73920 report/exit unchanged. All5 previous shape1 failures independently matched against report values and remain in new summary; prior19/24 is not promoted or used as new proof."
+  ],
+  "verification": {
+    "python310_AST": true,
+    "weight_io_digest_metric_AST_unchanged": true,
+    "six_arithmetic_expressions_and_partials_AST_unchanged": true,
+    "original_capture_weight_controls_design_unchanged": true,
+    "previous5failure_rows_exact": true,
+    "author_actual_finalized_bound": true,
+    "author_metadata_contexts": 8,
+    "author_payloads": 80,
+    "author_negative_controls": 8,
+    "author_doublefailure_AST_controls": 3,
+    "independent_native_or_raw_execution": false
+  },
+  "remaining": [
+    "Root must bind this exact worker/review in new runner and account for actual73920 owner exit/drain along with existing predecessors.",
+    "Fresh24fullshape controls and case baselines are actual runtime gates; source/mocks cannot predict their outcomes.",
+    "This review covers only saved layer0 fullshape arithmetic, not design future42layer model candidate, actualGloo/device,finalKLcause or speedup."
+  ],
+  "new_source_blockers": [],
+  "runtime_admitted": false,
+  "raw_weight_native_payload_read_hash_stat_operations": 0,
+  "numpy_torch_imports": 0,
+  "process_or_queue_probes": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

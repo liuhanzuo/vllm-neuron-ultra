@@ -506,3 +506,63 @@ weight-reading functions are identical between worker versions.
 - [Independent result review](evidence/minicpm5-oproj-intervention-20261107/independent-result-review.json)
 - [Actual exit](evidence/minicpm5-oproj-intervention-20261107/actual-exit.json)
 - [Export manifest](evidence/minicpm5-oproj-intervention-20261107/manifest.json)
+
+## Full-shape output-projection intervention
+
+All six formulas have now been evaluated on each complete original input shape,
+including the CPU padding width, before extracting real-token or last-query
+metrics. The serial CPU replay exited successfully. All 24 saved-output controls
+and all 24 per-case controls reproduce exactly; the 144 formula outcomes cover
+eight fixtures and three input labels. Both CPU history labels have identical
+results and are counted once below. The five historical single-row control
+failures remain recorded; this new trial does not retroactively clear them.
+
+| Comparison with saved native layer-0 output, one CPU history arm | BF16 split projection | FP32 local products and sum, final BF16 |
+|---|---:|---:|
+| Different elements across all real tokens / 2,922,496 | 932,494 | 4,041 |
+| Maximum absolute difference, all real tokens | 0.0078125 | 0.00390625 |
+| Different elements at eight final queries / 16,384 | 5,580 | 5 |
+| Maximum absolute difference, final queries | 0.0078125 | 0.000003814697265625 |
+| Final queries exactly matching saved native | 0/8 | 4/8 |
+
+All eight fixtures improve in different-element count, maximum error and mean
+error, for both real-token and last-query domains. Fixture 7 retains most of
+the difference: 3,868 real-token elements and one final-query element. Comparing
+against a full BF16 projection of the **same CPU input**, rather than saved
+native, reduces the real-token difference from 932,238 to 1,087 elements.
+The saved-native comparison includes pre-existing context and geometry
+differences and is not by itself a controlled operator comparison.
+
+The controlled full-shape comparisons establish useful limits:
+
+- Widening only the sum of the same BF16 partials still changes nothing: 24/24
+  full outputs match.
+- Inserting intermediate BF16 rounding into the same FP32 partials changes all
+  24 full outputs.
+- FP32 full projection and FP32 split projection **differ in all 24 full outputs**;
+  only 18/24 final queries agree. The earlier single-row equality does not
+  generalize to complete shapes.
+- BF16 local kernels and FP32 local kernels followed by local BF16 rounding also
+  differ in all 24 full outputs; 22/24 final queries agree. Local kernel/order
+  effects remain separate from the controlled rounding contrast.
+
+This supports a full-model CPU experiment targeting only the 42 attention
+output-projection instances: keep official BF16 parameters, compute local
+products and actual TP2 reduction in FP32, then cast once to BF16. The planned
+order is original inclusive-mask trajectory reproduction, strict-mask baseline,
+an independent exact baseline repeat, then a strict-mask candidate. Each arm
+must carry its own actual caches through all 14 calls / 32 frames. The original
+HF logits thresholds and every downstream qualification gate remain unchanged.
+
+No full model, Gloo collective or Neuron kernel ran in this saved-layer trial.
+Replay under the SDK interpreter is not proof of native-runtime equivalence.
+The weight check covers the authenticated 8 MiB projection interval and inherited
+checkpoint identity, not a fresh whole-checkpoint hash. The remaining device
+KL failures and its 30/32 result are unchanged. There is no new speedup ratio.
+
+- [All formula metrics](evidence/minicpm5-oproj-fullshape-20261107/formulas.csv)
+- [Complete report](evidence/minicpm5-oproj-fullshape-20261107/report.json)
+- [Deduplicated root summary](evidence/minicpm5-oproj-fullshape-20261107/root-summary.json)
+- [Independent result review](evidence/minicpm5-oproj-fullshape-20261107/independent-result-review.json)
+- [Actual exit record](evidence/minicpm5-oproj-fullshape-20261107/actual-exit.json)
+- [Export manifest](evidence/minicpm5-oproj-fullshape-20261107/manifest.json)
