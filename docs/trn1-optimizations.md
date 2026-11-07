@@ -45,7 +45,7 @@ This does not add HTTP seed support to a request builder that lacks it.
 
 ## Validation status and evidence
 
-This is an experimental integration, not a newly qualified model release.
+The fast CPU sampler is an experimental integration; its tests do not qualify a model release.
 The branch has focused tests for the actual compact probability reduction,
 eligibility, fallback behavior, explicit generators, and per-instance wiring.
 On 2026-11-04, commit `69b498f20b0f2ad598396683e3ade35b19edb661` passed
@@ -67,7 +67,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTEST_ADDOPTS='' PYTEST_PLUGINS='' \
 
 Without `NEURON_SAMPLER_CAPTURE_PATHS`, the optional replay test is skipped.
 On the shared Trn1 host, native CPU tests use the same serial queue as existing
-experiments. There is no branch-specific end-to-end throughput result yet.
+experiments. There is no branch-specific end-to-end throughput result for the fast CPU sampler yet.
 
 Earlier experimental evidence motivates this port:
 
@@ -87,7 +87,8 @@ Recorded sources:
 - `lfm3-optimization-retry/paired-comparison.json`: SHA-256 `061f10abda61c0a79afdb8d74ec0da0a2bd9e5cdfc4337342038444d4ffaa529`
 
 Original reports remain in the experiment workspace. Model weights, compiled
-artifacts, logs, credentials, and private workspace paths are not included here.
+artifacts, logs, and credentials are not included here. The separate SmolLM3
+terminal audit records local evidence paths alongside hashes for traceability.
 
 ## Further integration
 
@@ -97,7 +98,13 @@ long-decode, and paired quality checks. Both sides of that cache comparison used
 the same fast CPU sampler. Porting its model adapter and NKI dependencies still
 requires fresh qualification in this branch.
 
-SmolLM3, Phi-4, Qwen3.5, MiniCPM5 and other ongoing work remain separate until
+An opt-in [SmolLM3 integration](smollm3.md) now packages the model adapter and
+combined NKI cache candidate. Its fresh packaged comparison passed the defined
+BF16/TP2/B4/context2048/floor2048 protocol; see the [measured results and
+reference limits](smollm3-results-20261105.md). Natural-bucket and historical
+full-causal reference failures remain unresolved.
+
+Phi-4, Qwen3.5, MiniCPM5 and other ongoing work remain separate until
 their original gates pass. New integrations retain full-vocabulary numerical
 checks, cold caches, long decoding, request-slot reuse, quality evaluation, and
 matched workloads. A local operator test does not qualify a complete model or

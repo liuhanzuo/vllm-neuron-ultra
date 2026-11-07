@@ -173,6 +173,13 @@ class NeuronModelBase(nn.Module):
             return load_or_compile(self, model_name_or_path, neuronx_model_cls,
                                    config, kwargs)
 
+        if getattr(config, "model_type", None) == "smollm3_neuron_text":
+            # This narrow opt-in path owns its artifact admission. Keep it
+            # before default path deletion and ValueError -> compile fallback.
+            from vllm_neuron.models.smollm3.artifacts import load_or_compile
+            return load_or_compile(self, model_name_or_path, neuronx_model_cls,
+                                   config, kwargs)
+
         # If fused speculation is enabled, attach the draft model config.
         if getattr(neuron_config, "enable_fused_speculation", False):
             assert kwargs.get("speculative_config") is not None, (
