@@ -78,6 +78,12 @@ and restart with fresh live KV state. In-request switching is unsupported.
 
 ## Evidence and remaining work
 
+The latest [four-variant experiment](smollm3-ablation-20261107.md) failed:
+write-only changed57/76 deterministic texts. Its timing is not a qualified
+speedup result. Read-only had no measured gain; combined matched the saved
+texts, but its final comparison phase was not reached. The previous qualified
+combined result remains scoped to its recorded commit.
+
 This successor branch adds two **unqualified** cache ablation variants to measure
 the separate contribution of NKI reads and writes. Select exactly one of
 `reference`, `nki_read`, `nki_write`, or `nki_read_write` with

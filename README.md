@@ -1,5 +1,10 @@
 # vLLM User Guide for AWS Neuron
 
+The [latest SmolLM3 cache ablation](docs/smollm3-ablation-20261107.md) found a
+deterministic output regression in the write-only variant. Its measured speed
+is not a qualified result; the previously validated combined version is reported
+separately below.
+
 This is the `smollm3-experimental` branch, based on the **Neuron SDK 2.27 /
 vLLM 0.11.0** compatibility branch. It adds opt-in SmolLM3 support and NKI
 cache movement. See [SmolLM3 setup](docs/smollm3.md), its
