@@ -1,0 +1,190 @@
+{
+  "schema": "minicpm5_saved_oproj_root_summary_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-07T16:56:58.508847+00:00",
+  "report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-oproj-intervention-r1-20261107-v2.json",
+    "sha256": "192f310c92de4ff8141047bd329a27c4b4056026c4bad581c290f1f6fe8832e4"
+  },
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-oproj-intervention-root-exit-r1-20261107-v1.json",
+    "sha256": "031eacc6babb8b812a7d2ae83d7dad937a57dde754fe819494acc53a603092e3"
+  },
+  "coverage": {
+    "frames": 8,
+    "fullshape_controls": 24,
+    "fullshape_controls_exact": 24,
+    "lastrow_cases": 24,
+    "lastrow_exact": 19,
+    "formula_results": 144
+  },
+  "lastrow_mismatches": [
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "arm": "HF_native",
+      "metrics": {
+        "raw_exact": false,
+        "different_elements": 2,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 3.814697265625e-06,
+        "mean_abs": 3.725290298461914e-09,
+        "cosine": 0.9999999999935677
+      }
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "arm": "HF_native",
+      "metrics": {
+        "raw_exact": false,
+        "different_elements": 3,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 9.5367431640625e-07,
+        "mean_abs": 6.998561730142683e-10,
+        "cosine": 0.99999999999975
+      }
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "arm": "C_Hd_control",
+      "metrics": {
+        "raw_exact": false,
+        "different_elements": 1,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 7.62939453125e-06,
+        "mean_abs": 3.725290298461914e-09,
+        "cosine": 0.9999999999872076
+      }
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "arm": "C_Hc_history_generation",
+      "metrics": {
+        "raw_exact": false,
+        "different_elements": 1,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 7.62939453125e-06,
+        "mean_abs": 3.725290298461914e-09,
+        "cosine": 0.9999999999872076
+      }
+    },
+    {
+      "frame": {
+        "index": 18,
+        "fixture": 6,
+        "slot": 0,
+        "step": 0
+      },
+      "arm": "HF_native",
+      "metrics": {
+        "raw_exact": false,
+        "different_elements": 2,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 3.0517578125e-05,
+        "mean_abs": 1.501757651567459e-08,
+        "cosine": 0.9999999998084887
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "left": "hf_bf16_full",
+      "right": "sdk_bf16_split",
+      "interpretation": "Full-vs-split combined operator/order/local output rounding, fixed X; not uniquely collective cause.",
+      "rows": 24,
+      "exact": 0,
+      "different_elements": 16738,
+      "max_abs": 0.0078125
+    },
+    {
+      "left": "sdk_bf16_split",
+      "right": "bf16_split_wide_sum",
+      "interpretation": "Same BF16 partials, only two-term sum precision. May be identical after final BF16.",
+      "rows": 24,
+      "exact": 24,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "left": "fp32_split_final",
+      "right": "fp32_split_round_local",
+      "interpretation": "Same FP32 partials; only intermediate BF16 quantization. Clean local-output quantization intervention.",
+      "rows": 24,
+      "exact": 0,
+      "different_elements": 16731,
+      "max_abs": 0.0078125
+    },
+    {
+      "left": "fp32_full_final",
+      "right": "fp32_split_final",
+      "interpretation": "FP32 full vs split operator/order; not exact mathematical reference.",
+      "rows": 24,
+      "exact": 24,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "left": "sdk_bf16_split",
+      "right": "fp32_split_round_local",
+      "interpretation": "Underlying BF16-kernel local output vs FP32-kernel local output then BF16; internal accumulator/kernel confounded.",
+      "rows": 24,
+      "exact": 21,
+      "different_elements": 3,
+      "max_abs": 7.62939453125e-06
+    }
+  ],
+  "cpu_history_arms_identical": true,
+  "eligible_comparisons_vs_same_input_hf": {
+    "rows": 19,
+    "fp32_split_final_exact": 19,
+    "bf16_split_different": 19,
+    "fp32_round_local_equals_sdk": 19
+  },
+  "weight_interval": {
+    "bytes_read": 8388608,
+    "sha256": "f641e83dd6533cd4c9ea6f5b3689d4c952c86ca18c7e765db0399adfd259ed78",
+    "whole_checkpoint_freshly_rehashed": false
+  },
+  "runtime": {
+    "python": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+    "torch_version": "2.8.0+cu128",
+    "threads_native_control": 2,
+    "threads_sdk_and_formulas": 1,
+    "no_actual_collective": true,
+    "original_native_interpreter_different": true
+  },
+  "limits": [
+    "Three source labels per fixture include repeated CPU history data;24cases are not24independent prompts.",
+    "All24 fullshape outputs reproduce saved endpoints in the SDK interpreter; no original native runtime or Gloo was rerun.",
+    "Five lastrow baseline mismatches preserved and excluded from original-execution-eligible interpretation; these remain valid local arithmetic trials.",
+    "Only layer0 CPU output projection, not fullmodel, Neuron accumulator, finalKL causal proof or performance.",
+    "Intermediate BF16 local quantization changes identical FP32 partials; changing only sum dtype on identical BF16 partials does not change these results.",
+    "The19eligible FP32split-final outputs match same-input HF BF16 lastrow. This does not promise native wholemodel equivalence."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

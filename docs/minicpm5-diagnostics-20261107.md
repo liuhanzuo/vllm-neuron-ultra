@@ -434,3 +434,75 @@ quality96 and paired-serving qualification remain required.
 - [Source mapping and limits](evidence/minicpm5-prefill-attention-20261107/source-mapping.json)
 - [Actual analyzer exit](evidence/minicpm5-prefill-attention-20261107/actual-exit.json)
 - [Export manifest](evidence/minicpm5-prefill-attention-20261107/manifest.json)
+
+## Controlled output-projection arithmetic replay
+
+A saved-layer CPU replay completed with actual exit code 0. It reads only the
+8 MiB official layer-0 `o_proj` matrix and existing context/output captures.
+All **24 complete-shape controls** reproduce their saved output bits: eight
+native contexts at length L and two CPU history arms at their original padded
+bucket E. Native controls use two CPU threads; SDK controls use one. The replay
+runs in the SDK Python environment and uses standalone addition; it does not
+rerun the original native interpreter or a Gloo collective.
+
+The six formulas then use the same final-query input within each case. This
+reduces the input to one row, and that shape change is checked rather than
+assumed harmless. **19/24 one-row baseline controls match; five do not.**
+
+| One-row control mismatch | Different output elements | Maximum absolute difference |
+|---|---:|---:|
+| Frame 1 / fixture 7, native input | 2 / 2,048 | 0.000003814697265625 |
+| Frame 16 / fixture 4, native input | 3 / 2,048 | 0.00000095367431640625 |
+| Frame 16 / fixture 4, CPU device-history input | 1 / 2,048 | 0.00000762939453125 |
+| Frame 16 / fixture 4, CPU own-history input | 1 / 2,048 | 0.00000762939453125 |
+| Frame 18 / fixture 6, native input | 2 / 2,048 | 0.000030517578125 |
+
+These five remain in the result matrix as local arithmetic trials and are
+excluded from interpretation as exact reproductions of the original execution.
+The two CPU history arms give identical results; 24 labeled cases represent
+eight fixtures, not 24 independent prompts. There are only nine distinct input
+byte digests. Equal bytes across source arms do not guarantee the same tensor
+layout: native and CPU one-row views retain different leading strides in some
+cases. Their results must not be treated as a controlled stride experiment.
+
+| Controlled comparison | Same final BF16 output | What it establishes on these inputs |
+|---|---:|---|
+| Same BF16 partial outputs: BF16 sum versus FP32 sum then BF16 | 24/24 | Increasing only sum precision has no observed effect. |
+| Same FP32 partial outputs: retain FP32 until sum versus round each partial to BF16 first | 0/24 | Intermediate BF16 quantization changes the result; 16,731 differing elements across labeled cases. |
+| FP32 full projection versus FP32 split projection, final BF16 | 24/24 | These two FP32 arithmetic forms agree after final conversion in this trial. |
+| SDK BF16 partials versus FP32 partials rounded individually to BF16, then summed | 21/24 | The underlying local kernels still differ slightly in three frame-16 cases; this is not a pure dtype comparison. |
+
+For all **19 cases passing both control gates**, FP32 split projection with only
+one final BF16 conversion matches the same-input HF BF16 one-row result exactly.
+The BF16 split result differs in all 19; rounding FP32 partials individually back
+to BF16 reproduces that BF16 split result in all 19. This supports investigating
+the timing of local-output rounding, rather than treating a wider collective
+alone as the candidate correction.
+
+In the failing fixture-7 prefill, both CPU-input one-row controls reproduce the
+saved SDK output exactly. Keeping local partials and their sum in FP32 changes
+694 elements relative to that saved SDK output and matches the same-input HF
+one-row projection. The native-input one-row control for this fixture fails by
+two elements and is explicitly excluded. No conclusion here says the complete
+native trajectory or final logits now match.
+
+This is a layer-0 CPU arithmetic experiment, **not a full-model repair, Neuron
+accumulator test or speed measurement**. The device trajectory remains 30/32
+under the unchanged numeric gates. A next candidate needs complete original
+shapes, a strict-mask CPU baseline, actual TP2 model execution, and the original
+cold/long/reuse/inactive/quality96/paired-serving requirements.
+
+The first metadata integration attempt exposed a preparation error: the worker
+compared the original science plan with its finalized successor as whole files.
+Only output namespace, source closure and capture contexts differ. Version 2
+validates the exact previously accepted transformation and retains the real
+finalized plan; all scientific fields remain unchanged. No weights or operators
+were read/run in that failed metadata attempt. The mathematical and bounded
+weight-reading functions are identical between worker versions.
+
+- [All 144 formula results](evidence/minicpm5-oproj-intervention-20261107/formulas.csv)
+- [Complete replay report](evidence/minicpm5-oproj-intervention-20261107/report.json)
+- [Root summary and five preserved mismatches](evidence/minicpm5-oproj-intervention-20261107/root-summary.json)
+- [Independent result review](evidence/minicpm5-oproj-intervention-20261107/independent-result-review.json)
+- [Actual exit](evidence/minicpm5-oproj-intervention-20261107/actual-exit.json)
+- [Export manifest](evidence/minicpm5-oproj-intervention-20261107/manifest.json)
