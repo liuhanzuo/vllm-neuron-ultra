@@ -40,6 +40,8 @@ setup(
     install_requires=read_requirements(),
     entry_points={
         "vllm.platform_plugins": ["neuron = vllm_neuron:register"],
+        "vllm.general_plugins": ["nemotron9b = vllm_neuron.models.nemotron9b:register"],
     },
+    package_data={"vllm_neuron.models.nemotron9b": ["tokenizer_fixtures.json", "core_contract.json", "neuron_config_contract.json", "licenses/*.txt"]},
     include_package_data=True,
 )

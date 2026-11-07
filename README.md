@@ -1,8 +1,15 @@
 # vLLM User Guide for AWS Neuron
 
-This is the `trn1-sdk227-optimizations` compatibility branch for **Neuron SDK
+This is the `nemotron9b-experimental-v1` branch, based on the
+`trn1-sdk227-optimizations` compatibility branch for **Neuron SDK
 2.27 and vLLM 0.11.0**. See [Trn1 optimizations](docs/trn1-optimizations.md)
 for the optional CPU sampler, validation status, and experiment evidence.
+
+**Nemotron Nano 9B v2 is an opt-in experimental source migration. This package
+has not yet passed fresh device or end-to-end qualification.** The recorded
+13.18 / 51.06 token/s figures are historical absolute results, not measurements
+of this branch and not an optimization speedup. See [setup and required
+validation](docs/nemotron9b.md) and [historical evidence](docs/nemotron9b-results-historical-20261103.md).
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).

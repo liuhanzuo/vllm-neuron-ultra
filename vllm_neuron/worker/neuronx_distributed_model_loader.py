@@ -166,6 +166,10 @@ class NeuronModelBase(nn.Module):
             neuron_config,
             load_config=load_pretrained_config(model_name_or_path))
 
+        if getattr(config, "model_type", None) == "nemotron9b_neuron_text":
+            from vllm_neuron.models.nemotron9b.artifacts import load_or_compile
+            return load_or_compile(self, model_name_or_path, neuronx_model_cls, config, kwargs)
+
         # If fused speculation is enabled, attach the draft model config.
         if getattr(neuron_config, "enable_fused_speculation", False):
             assert kwargs.get("speculative_config") is not None, (
