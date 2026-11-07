@@ -150,21 +150,80 @@ The export removes repeated token-index arrays and stores the root audit's full
 source/evidence pin map once in the manifest. Original record hashes identify
 the unmodified local evidence. No weights or binary tensor payloads are bundled.
 
-## Next experiment: prefix generation and local layout effects
+## Completed a1 logical-token alignment
 
-The [next design](evidence/phi4-attention-cross-p1-20261107/next-design.md) is
-prepared but has not run. It first reuses the saved p1 evidence to align every
-prefix token with its generating call, then compares normalized hidden states,
-pre-RoPE QKV, rotated K, V and effective cache contents. This distinguishes a
-generator receiving different input from the same logical input executing
-differently; a local execution difference can later become historical K/V.
+The saved-data alignment stage has now completed all **576 comparisons**, retaining
+the same two variants, three arms, three anchors and 32 ordered frames. It freshly
+verified all 2,678 capture files (8,815,954,800 logical bytes), then read the 1,608
+captured inputs needed to align tokens with their generating calls. The earlier
+full 5,192-file audit remains inherited evidence; a1 does not claim to have
+rehashed that entire larger set. It executed no model or numerical operator and
+created no new raw tensors.
 
-Only an implicated generator gets a small same-input crossover with exact
-source-reproduction controls. Its generated prefix is then substituted into a
-fixed attention recipient, with sham and reciprocal controls. The three
-original-layout witnesses receive a separate layout/path test with an equal
-control. QKV weights are not assumed to be among the p1 saved tensors; resolving
-them from the pinned checkpoint requires separate resource admission.
+For every compared request history, the analysis follows normalized hidden,
+packed and split QKV, post-RoPE Q/K, positions, rotary coefficients and effective
+K/V. It verifies the logical generated-to-cache chain, including slot reuse and
+the native-batch padding map. This compares saved logical bytes, not a replay of
+physical memory layouts.
+
+| First differing saved boundary in the complete request history | Comparisons |
+|---|---:|
+| None among the recorded boundaries | 350 |
+| Normalized hidden input | 223 |
+| QKV, with aligned hidden inputs equal | 3 |
+
+These are descriptive comparisons, not independent trials or model acceptance
+counts. The three QKV cases are **one Reasoning candidate request at successive
+decode steps**, compared with native single-request execution:
+
+| Frame ordinal | Fixture / slot / step | Current logical token | Current difference |
+|---|---|---:|---|
+| 21 | 3 / 1 / 1 | 32 | Pre-RoPE Q and V |
+| 25 | 3 / 1 / 2 | 33 | K |
+| 29 | 3 / 1 / 3 | 34 | K |
+
+Earlier differences accumulate into the later prefix histories. Equality of
+this request's hidden vectors does not establish equality of the full four-row
+physical input. Across all comparisons, 34 rows have equal **current-token**
+hidden and unequal current QKV; that different criterion must not be confused
+with the three equal-**whole-history** cases above.
+
+Crucially, all p1 attention contrasts for those three cases against the same
+native-single anchor were byte-equal in both layout panels. The local QKV
+differences therefore do not explain a selected-attention discrepancy in those
+tests, much less the failed final logits. Against another anchor, native batch,
+the later state contrasts differ; that is a distinct input comparison.
+
+All 18 original full-output gate outcomes remain unchanged. In particular, all
+six original-HF comparisons fail, and the Instruct candidate also fails against
+native batch and original port. A1's process completed with a root-observed exit
+code 0, and the root terminal audit verified the full matrix, metadata bindings
+and physical drain. No model qualification or speedup is claimed.
+
+- [All 576 alignment records](evidence/phi4-alignment-a1-20261107/result.json)
+- [Independent interpretation and exact generating-call mappings](evidence/phi4-alignment-a1-20261107/analysis.json)
+- [Root terminal audit](evidence/phi4-alignment-a1-20261107/root-audit.json)
+- [Actual process exit](evidence/phi4-alignment-a1-20261107/root-exit.json)
+- [Export manifest](evidence/phi4-alignment-a1-20261107/manifest.json)
+
+These files are unchanged copies of result metadata. Tensor payloads and weights
+are not bundled or rehashed for publication.
+
+## Next experiment: fixed-input QKV and upstream hidden differences
+
+The [updated next design](evidence/phi4-alignment-a1-20261107/next-design.md)
+has not run. Its primary QKV witness is frame 21, with frame 20 from the same
+candidate call as a matched current-token control. It first requires exact
+source-geometry reproduction, then compares a complete B4 input with concatenated
+B1 row views and an isolated B1 offset control. Only the required QKV weight and
+any bias may be resolved from the pinned checkpoint under separate admission;
+they are not assumed present in the saved p1 capture.
+
+The 223 hidden-first cases require a separate upstream investigation. Reuse the
+saved layer-0 down-projection inputs and outputs first; only missing boundaries
+justify a small residual/add-to-layer-1-normalization capture. Any generated-prefix
+intervention must retain sham and reciprocal controls and the original attention
+layout witnesses. Local byte differences alone do not justify a deployed change.
 
 These witness tests cannot replace full coverage. Any justified candidate must
 retain both variants, three arms, three anchors and all original 32 frames,
