@@ -92,11 +92,13 @@ terminal audit records local evidence paths alongside hashes for traceability.
 
 ## Further integration
 
-The LFM3 NKI cache writer is the next device-side candidate. Its existing
-BF16/TP2/batch4/context2048 experiment passed the original numerical, cold-cache,
-long-decode, and paired quality checks. Both sides of that cache comparison used
-the same fast CPU sampler. Porting its model adapter and NKI dependencies still
-requires fresh qualification in this branch.
+The LFM3 model adapter and NKI cache writer have now passed a fresh packaged
+BF16/TP2/batch4/context2048 comparison at implementation `822e1bd`, including
+the original numerical, cold-cache, long-decode, slot-reuse and quality checks.
+Both sides used the same fast CPU sampler; see the
+[paired results](lfm3-results-20261107.md). The [unified branch](multi-model.md)
+combines this package with SmolLM3 and Nemotron, and still needs fresh runtime
+qualification of its merged source identities.
 
 An opt-in [SmolLM3 integration](smollm3.md) now packages the model adapter and
 combined NKI cache candidate. Its fresh packaged comparison passed the defined

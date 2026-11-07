@@ -1,0 +1,226 @@
+{
+  "schema": "nemotron9b_historical_evidence_v1",
+  "recorded_at": "2026-11-03T07:30:59.689508+00:00",
+  "package_runtime_qualified": false,
+  "package_performance_measured": false,
+  "model": "NVIDIA-Nemotron-Nano-9B-v2",
+  "revision": "6533e8de2c68e4536bf7c411d7a3ce5734111476",
+  "historical_configuration": {
+    "name": "latest-nemotron9b-bf16-cpu-tp2-b4-ctx4096-split-nki-v5",
+    "model_path": "/mnt/nvme/models/NVIDIA-Nemotron-Nano-9B-v2-neuron-text-exp20261031",
+    "served_name": "nemotron-nano-9b-v2",
+    "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-nemotron9b-bf16-cpu-tp2-b4-ctx4096-split-nki-v5",
+    "batch": 4,
+    "tp": 2,
+    "max_model_len": 4096,
+    "cpu": true,
+    "adapter": "nemotron9b_text",
+    "compile_workers": 1,
+    "skip_sampling_probe": true,
+    "extra_overrides": {
+      "apply_seq_ids_mask": true,
+      "context_encoding_buckets": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ]
+    },
+    "host_limits": {
+      "memory_max_gib": 26,
+      "memory_high_gib": 25,
+      "swap_gib": 12
+    },
+    "startup_wait_limit_s": 14100,
+    "startup_runtime_limit_s": 14400,
+    "note": "Fresh split-corrected nki-cache trial. Original BF16 weights, FP32 Mamba state, TP2/B4/context4096 and standard CPU sampler. All six prefill and six decode buckets. Original default thinking template and disclosed dt0..inf remain unchanged. Full numerical/cache/long/quality gates mandatory before performance; no success implied.",
+    "torchinductor_compile_threads": 1,
+    "nemotron9b_split_variant": "nki",
+    "split_correction_sha256": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+    "cpu_fast_sampler": false,
+    "no_retry": true,
+    "nemotron9b_nki_mamba_cache": true,
+    "nemotron9b_nki_cache_sha256": "3d16b7f154fb2f656fbdeafca0cb982d30953be511efa6085e488bacd873ae89"
+  },
+  "historical_gates": {
+    "numerical_frames": 32,
+    "cold_frames": 84,
+    "raw_zero_states_checked": 868,
+    "long_decode_steps": 2041,
+    "long_frames": 93,
+    "prior_state_copy_reused": true,
+    "new_device_copy_executed": false
+  },
+  "historical_quality": {
+    "quality_correct": 55,
+    "quality_total": 96,
+    "quality_length_capped": 41
+  },
+  "historical_quality_groups": {
+    "gsm8k64": {
+      "correct": 55,
+      "total": 64,
+      "request_errors": 0,
+      "length_capped": 9
+    },
+    "arithmetic8": {
+      "correct": 0,
+      "total": 8,
+      "request_errors": 0,
+      "length_capped": 8
+    },
+    "json8": {
+      "correct": 0,
+      "total": 8,
+      "request_errors": 0,
+      "length_capped": 8
+    },
+    "retrieval8": {
+      "correct": 0,
+      "total": 8,
+      "request_errors": 0,
+      "length_capped": 8
+    },
+    "list8": {
+      "correct": 0,
+      "total": 8,
+      "request_errors": 0,
+      "length_capped": 8
+    }
+  },
+  "historical_absolute_workloads": {
+    "short_decode": {
+      "single_best_tok_s": 13.187707121657223,
+      "single_median_tok_s": 13.182313138823925,
+      "concurrent_best_tok_s": 51.064407172196574,
+      "concurrent_median_tok_s": 51.06033417627942,
+      "streaming_ttft_ms": [
+        176.77334789186716,
+        343.25660998001695,
+        260.058393701911,
+        93.57063518837094
+      ],
+      "streaming_mean_token_interval_ms": [
+        78.11721496889095,
+        77.78974603351256,
+        77.95382148737485,
+        78.28022918979221
+      ]
+    },
+    "medium_prompt": {
+      "single_best_tok_s": 12.784428867367843,
+      "single_median_tok_s": 12.782881205974254,
+      "concurrent_best_tok_s": 45.746451739500344,
+      "concurrent_median_tok_s": 45.67492228266516,
+      "streaming_ttft_ms": [
+        921.5030553750694,
+        1226.3402249664068,
+        310.26049982756376,
+        616.1891459487379
+      ],
+      "streaming_mean_token_interval_ms": [
+        80.96543587304241,
+        78.56517537738982,
+        85.78022183322413,
+        83.37427163863276
+      ]
+    },
+    "long_prompt": {
+      "single_best_tok_s": 11.938020140532378,
+      "single_median_tok_s": 11.935690591607504,
+      "concurrent_best_tok_s": 38.51962385296409,
+      "concurrent_median_tok_s": 38.503549047656705,
+      "streaming_ttft_ms": [
+        2320.825002156198,
+        1548.2443030923605,
+        3092.5506902858615,
+        777.2904341109097
+      ],
+      "streaming_mean_token_interval_ms": [
+        86.4861100787429,
+        92.56727883489582,
+        80.41144240882218,
+        98.64529343981913
+      ]
+    },
+    "short_stochastic": {
+      "single_best_tok_s": 11.426852851569356,
+      "single_median_tok_s": 11.409686242023417,
+      "concurrent_best_tok_s": 32.15456412253597,
+      "concurrent_median_tok_s": 32.14439945649077,
+      "streaming_ttft_ms": [
+        298.58573200181127,
+        394.64425994083285,
+        201.9467270001769,
+        105.39208492264152
+      ],
+      "streaming_mean_token_interval_ms": [
+        124.10422566541837,
+        123.91546246943788,
+        124.29208277748377,
+        124.4824339704927
+      ]
+    },
+    "mixed_lengths": {
+      "median_tok_s": 26.863929101107928
+    }
+  },
+  "original_baseline_qualified": false,
+  "speedup_claim": false,
+  "family_optimization_complete": false,
+  "reference_semantics": "Original HF CPU cached oracle with disclosed dt0..inf; no CUDA equivalence claim",
+  "historical_serving_repo_head": "ad82965376f1eab5dcfecb6b1bae99ae8e262a8d",
+  "package_base": "5e5ac4c9c9abb74bbf6c1cc3afa3e2d1b487f994",
+  "runner_difference": "Ultra base skips costly DEBUG logits statistics even with fast sampling off; historical rates do not qualify the new package.",
+  "evidence": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-nki-state-reset-full-v2/summary.json",
+      "sha256": "981201bb037b7fd58177c47b7b473ef77bf47e5a7a0d6306b7da08f8828e9b64",
+      "size": 12125
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-nki-state-reset-full-v2/qualified-experimental-record-v1.json",
+      "sha256": "28bd6604704c0bede7272e369e3d92c4b00e4284c4feba5a0d335424f7f48f38",
+      "size": 4999
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-nki-state-reset-full-v2/completion-metadata-audit-v1.json",
+      "sha256": "edec9f4ad49676b710730269a61361a3c7745c3b40c8ecea57c66052739f9ef5",
+      "size": 16713
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-nki-state-reset-full-v2/plan.json",
+      "sha256": "6fd4144da534f3f2149d4d06788918847c4b7437f87ce76c65cdc8ae74ea1950",
+      "size": 103465
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b/tokenizer-view-validation.json",
+      "sha256": "58aa82c36a346975477d290a8a00ce8d15e54a5075f41db792d04c7faba34677",
+      "size": 16491
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b/text-view-manifest.json",
+      "sha256": "bfb6ee53cd967e145b1747d66e3ed2c0a392defb5a66f9b015a70dc977c8f320",
+      "size": 1416
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot-cache-read-write-diagnostic/summary.json",
+      "sha256": "9b1cd0051a71592c1cda1fcb4d7c2873caf654ba0b04697e7320cbcb648f4b9f",
+      "size": 25335
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend-split-correction-v2/summary.json",
+      "sha256": "a69493872a1e97c60c3bacc03e3beb1907001351d1ab7c6b12fd5cfc0674191a",
+      "size": 55368
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qualified-path-package-gap-20261107-v1.json",
+      "sha256": "6c0c41cd1e706b9e509280e1d1588d959b75bc44b75c13f1065ddd813b775815",
+      "size": 15789
+    }
+  ],
+  "payloads_read_or_hashed_during_packaging": false,
+  "native_libraries_imported_during_packaging": false
+}

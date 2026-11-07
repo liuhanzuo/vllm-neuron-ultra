@@ -43,8 +43,15 @@ setup(
         "vllm.general_plugins": [
             "lfm3 = vllm_neuron.models.lfm3:register",
             "neuron_smollm3 = vllm_neuron.models.smollm3:register",
+            "nemotron9b = vllm_neuron.models.nemotron9b:register",
         ],
     },
-    package_data={"vllm_neuron.models.lfm3": ["tokenizer_fixtures.json", "licenses/*.txt"]},
+    package_data={
+        "vllm_neuron.models.lfm3": ["tokenizer_fixtures.json", "licenses/*.txt"],
+        "vllm_neuron.models.nemotron9b": [
+            "tokenizer_fixtures.json", "core_contract.json",
+            "neuron_config_contract.json", "licenses/*.txt",
+        ],
+    },
     include_package_data=True,
 )

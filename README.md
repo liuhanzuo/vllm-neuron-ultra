@@ -1,15 +1,21 @@
 # vLLM User Guide for AWS Neuron
 
-The [latest SmolLM3 cache ablation](docs/smollm3-ablation-20261107.md) found a
-deterministic output regression in the write-only variant. Its measured speed
-is not a qualified result; the previously validated combined version is reported
-separately below.
+This is the `trn1-multi-model-experimental-20261107` branch for **Neuron SDK
+2.27 / vLLM 0.11.0**. It combines three optional model integrations and the
+[optional CPU sampler](docs/trn1-optimizations.md). Model integrations and
+optimized paths require explicit opt-in. See the [installation and qualification
+guide](docs/multi-model.md) before using this branch.
 
-This is the `smollm3-experimental` branch, based on the **Neuron SDK 2.27 /
-vLLM 0.11.0** compatibility branch. It adds opt-in SmolLM3 support and NKI
-cache movement. See [SmolLM3 setup](docs/smollm3.md), its
-[qualified comparison](docs/smollm3-results-20261105.md), and
-[Trn1 optimizations](docs/trn1-optimizations.md) for the separate optional CPU sampler.
+**The merged branch has not passed fresh device or end-to-end qualification.**
+The results below belong to the named implementation commits and matched
+reference adapters; they do not qualify the merged source or compare against
+unmodified upstream vLLM-Neuron.
+
+| Integration | Evidence and current status |
+|---|---|
+| [LFM3-1.7B](docs/lfm3.md) | Implementation `822e1bd`: [qualified paired results](docs/lfm3-results-20261107.md), short single/C4 **2.02× / 1.80×**, long single/C4 **8.51× / 6.70×**. |
+| [SmolLM3-3B](docs/smollm3.md) | Combined reader/writer implementation `e2d1e28`: [qualified scoped results](docs/smollm3-results-20261105.md), short single/C4 **8.16× / 8.05×**. The later [write-only ablation](docs/smollm3-ablation-20261107.md) failed deterministic output equality and is not qualified. |
+| [Nemotron Nano 9B v2](docs/nemotron9b.md) | Experimental source migration, awaiting fresh device and full-model checks. [Historical 13.18 / 51.06 tok/s](docs/nemotron9b-results-historical-20261103.md) are absolute rates, not speedups. |
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
