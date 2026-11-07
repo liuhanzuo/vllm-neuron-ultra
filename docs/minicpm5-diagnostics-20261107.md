@@ -10,7 +10,9 @@ the SDK separately processes the current token. A controlled four-frame CPU
 replay now changes the numeric pass count from 1/4 to 4/4 after correcting only
 that mask. A complete 32-frame replay on the compiled Neuron artifact improves
 pass count from 17/32 to 30/32. One prefill and one decode frame still fail KL;
-the model remains unqualified. Independent result reviews are below; the
+the model remains unqualified. Saved prefill comparisons now locate a further
+numerical difference at the output projection path; causality for the remaining
+final-model failures is unproven. Independent result reviews are below; the
 earlier observer failure is retained as historical evidence.
 
 ## Earlier dispatch observer failure
@@ -371,3 +373,64 @@ publication does not perform another raw-data audit. The archived metadata
 analyzer refers to that original experiment tree and is not a standalone
 inference runner. Earlier failed attempts remain separate historical evidence.
 No model family is declared fully optimized.
+
+## Layer-0 prefill attention comparison
+
+Saved-data analysis now covers all eight original prefill fixtures: 40 native/CPU
+capture contexts, 576 numeric comparisons, 40 mask observations, 48 pair gates
+and 200 physical score/probability observations. The serial analyzer completed
+with exit code 0 and authenticated 560 saved payloads (124,556,034 bytes).
+No model was rerun and no attention values were reconstructed.
+
+Every real-query mask is causal and excludes padding. For the **captured final
+prediction query only**, unscaled QK scores, scaled scores, masked scores and
+both FP32 and BF16 probabilities agree bitwise for all eight fixtures and both
+ranks. All saved padding probabilities are zero. These results do not cover
+scores or probabilities for the earlier query rows, which were not captured.
+
+The table compares native reference with one CPU arm. K/V, context and output
+cover every real input token. The output after projection is replicated on both
+ranks, so its element counts are deduplicated to eight complete output tensors.
+
+| Saved layer-0 component | Exact mapped rows | Different elements | Maximum absolute difference |
+|---|---:|---:|---:|
+| Active V, effective K/V, returned current K/V (each) | 16/16 | 0 / 365,312 | 0 |
+| Unscaled/scaled/masked score, FP32/BF16 probability (each, final query only) | 16/16 | 0 / 22,832 | 0 |
+| Context entering output projection | 14/16 | 28 / 2,922,496 | 0.00048828125 |
+| Complete attention output, deduplicated across ranks | 0/8 | 932,494 / 2,922,496 | 0.0078125 |
+
+Both CPU history arms agree exactly in all 192 comparison rows. Their identical
+findings are not independent new samples.
+
+All 28 context differences occur in frame 1 / fixture 7, the 1,231-token prefill:
+17 elements on rank 0 and 11 on rank 1. At its final query, rank 0 differs in only
+one context element by 1.862645149230957e-9; rank 1 is exact. Its final 2,048-wide
+attention output differs in 695 elements, maximum 0.00048828125. Replication on
+rank 1 does not double that count.
+
+For the other seven prefills, the complete real-token context agrees but the
+output projection does not. This localizes an observed numerical difference to
+the projection/collective path on those inputs. It **does not establish that this
+difference causes the failing final-model KL**, and the failing long prefill has
+small context differences as well. The current captures do not separate local
+projection rounding from collective rounding.
+
+Source inspection gives a concrete next experiment: HF uses one 2048-wide output
+projection; SDK TP2 computes two 1024-wide partial projections and then sums them.
+The configured SDK reduction dtype falls back to BF16. A controlled replay using
+the same saved context and official weights can isolate the projection and
+rounding choices. Changing only collective dtype cannot recover precision already
+lost in a local BF16 projection and is not yet an accepted fix.
+
+The saved prefill result neither clears the remaining device frame 1/13 KL
+failures nor supplies a speedup ratio. Old decode captures still use the inclusive
+mask and are unsuitable for that aligned comparison. Full CPU post-cache backing
+was not captured. Cold-cache, long-decode, request-slot reuse, inactive-slot,
+quality96 and paired-serving qualification remain required.
+
+- [Per-comparison CSV](evidence/minicpm5-prefill-attention-20261107/comparisons.csv)
+- [Root summary with deduplicated output counts](evidence/minicpm5-prefill-attention-20261107/root-summary.json)
+- [Independent result review](evidence/minicpm5-prefill-attention-20261107/independent-result-review.json)
+- [Source mapping and limits](evidence/minicpm5-prefill-attention-20261107/source-mapping.json)
+- [Actual analyzer exit](evidence/minicpm5-prefill-attention-20261107/actual-exit.json)
+- [Export manifest](evidence/minicpm5-prefill-attention-20261107/manifest.json)

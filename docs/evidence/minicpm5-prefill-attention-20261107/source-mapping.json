@@ -1,0 +1,1039 @@
+{
+  "schema": "minicpm5_prefill_attention_source_mapping_v1",
+  "reviewer": "/root/smol_capture_ipc_v6_source",
+  "scope": "Finite source and small-JSON diagnosis; no new framework/runtime",
+  "sources": {
+    "hf": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/llama/modeling_llama.py",
+      "sha256": "363df58c077a8fcfd3593b2817538e53f90eeab32294d3c6bbb7241f094669de"
+    },
+    "sdk_attention": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py",
+      "sha256": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8"
+    },
+    "sdk_llama": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/llama/modeling_llama.py",
+      "sha256": "cf5a9966d234fc943ca416ae744ace06931ce7821b92c62e71251aec16cb7e62"
+    },
+    "sdk_cpu_rmsnorm": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py",
+      "sha256": "31bf660a663259134324bc65da4e155951dc89c5ca46471d2325a9938e859e26"
+    },
+    "gqa": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py",
+      "sha256": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22"
+    },
+    "parallel": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py",
+      "sha256": "b179b02c512c2c29a59dcdcfae958fc4f4a55f11cb0b2bbe9c004aef341276ab"
+    },
+    "utils": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/utils.py",
+      "sha256": "282142ea4a2a761e4287d8d6962f7e11d8ca8e57261feb74c038535d13319016"
+    },
+    "custom_rmsnorm": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/custom_calls.py",
+      "sha256": "6521f5418013f1e142dd80f67bad4d57354b056d8ce2aa79aabddff58fd26e7a"
+    }
+  },
+  "configuration": {
+    "path": "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/neuron_config.json",
+    "sha256": "ac677fd7424745d961e889894c7e91d2998d20f470560e90859f941640d6913a",
+    "values": {
+      "torch_dtype": "bfloat16",
+      "attention_dtype": null,
+      "rpl_reduce_dtype": null,
+      "logical_nc_config": 1,
+      "attn_kernel_enabled": null,
+      "cp_degree": 1,
+      "tp_degree": 2,
+      "qk_layernorm": false,
+      "qkv_kernel_enabled": false,
+      "mlp_kernel_enabled": false,
+      "out_proj_kernel_enabled": false,
+      "qkv_kernel_fuse_residual_add": false,
+      "mlp_kernel_fuse_residual_add": false
+    }
+  },
+  "findings": [
+    {
+      "topic": "QK scaling and output dtype",
+      "source_locations": {
+        "hf": [
+          193,
+          215
+        ],
+        "sdk_attention": [
+          532,
+          536
+        ]
+      },
+      "observation": "HF uses matmul(Q,K.T) * head_dim**-0.5; SDK uses matmul(Q,K.T) / sqrt(head_dim). Both actual fixture7 unscaled/scaled score captures are BF16, with no source float32 promotion before scaling. Mathematical scale is identical for head_dim128.",
+      "existing_capture_checks": [
+        "Compare qk0_unscaled then qk0_scaled for each rank over selected query1230 and valid keys0:1231.",
+        "Use saved scale_operation provenance for actual Python operator/scalar; do not replace observation with recomputed scores."
+      ],
+      "limitation": "BF16 output dtype does not establish internal matmul accumulator dtype. Multiply/divide can differ by rounding, but source distinction alone neither proves a mismatch nor explains final KL."
+    },
+    {
+      "topic": "QK reduction and layout",
+      "source_locations": {
+        "hf": [
+          193,
+          243,
+          245
+        ],
+        "sdk_attention": [
+          532,
+          608,
+          614
+        ],
+        "utils": [
+          200,
+          230
+        ]
+      },
+      "observation": "HF has16 Q heads and2 KV heads; each SDK TP2 rank has8 Q heads and1 KV head, repeating KV8 times in both. QK reduction dimension remains128 per head: there is no cross-rank QK reduction. SDK makes heads contiguous; HF keeps transposed layout. Fixture7 HF length1231 versus SDK padded2048 changes matrix shapes.",
+      "existing_capture_checks": [
+        "Match full effective K rows, selected Q query and v_heads before interpreting qk0_unscaled.",
+        "HF rank head slices [0:8] or [8:16]; SDK local head slice all8."
+      ],
+      "limitation": "Kernel choice/reduction order may depend on shape/stride; neither a different reduction order nor its numerical effect is established by source alone."
+    },
+    {
+      "topic": "Mask and softmax",
+      "source_locations": {
+        "hf": [
+          194,
+          199
+        ],
+        "sdk_attention": [
+          534,
+          536,
+          888,
+          906
+        ]
+      },
+      "observation": "HF adds additive mask; SDK uses bool where with finfo(score.dtype).min. Both call functional.softmax(dim=-1,dtype=float32) then cast to Q.dtype (BF16), followed by BF16 probability/value matmul. Fixture7 metadata independently confirms BF16 softmax input, FP32 probabilities and BF16 probabilities.",
+      "existing_capture_checks": [
+        "Compare valid-key qk0_scaled\u2192softmax_input\u2192probabilities_fp32\u2192probabilities_bf16.",
+        "SDK padded tail [1231:2048] must be audited separately for masking/probability mass; do not compare its min sentinel against nonexistent HF columns."
+      ],
+      "limitation": "Softmax reduction length1231 versus2048 is a real shape difference even if padding mass is zero. Captures retain only final real query scores; this cannot locate every earlier prompt-query divergence."
+    },
+    {
+      "topic": "Prefill branch and absent extra normalizations",
+      "source_locations": {
+        "sdk_attention": [
+          231,
+          247,
+          510,
+          536,
+          738,
+          907,
+          1330,
+          1385
+        ],
+        "sdk_llama": [
+          996,
+          1011
+        ]
+      },
+      "observation": "Frozen config logical_nc_config=1,attn_kernel_enabled=null,cp_degree=1 and fixture7 bucket2048 select non-flash prefill. Actual sdk_prefill capture includes scaled_qk/softmax events. qk_layernorm=false; NeuronLlamaAttention does not enable use_qk_norm or learned_sinks.",
+      "existing_capture_checks": [
+        "Use actual_route/dispatch_flags and real events, not config alone, to confirm capture path."
+      ],
+      "limitation": "Do not extrapolate this route to bucket4096: source automatically enables unsharded flash there when not explicitly disabled."
+    },
+    {
+      "topic": "Attention value reduction and output projection",
+      "source_locations": {
+        "hf": [
+          199,
+          200,
+          268,
+          269
+        ],
+        "sdk_attention": [
+          2491,
+          2497
+        ],
+        "gqa": [
+          1213,
+          1223,
+          1296,
+          1303
+        ],
+        "parallel": [
+          462,
+          879,
+          997,
+          1009,
+          1032,
+          1051
+        ]
+      },
+      "observation": "HF computes one full-width o_proj over2048 features. SDK computes local1024-feature projection on each TP2 rank via einsum and then sums2048-wide partial outputs. Frozen rpl_reduce_dtype=null is explicitly passed into RowParallelLinear, whose fallback is layer dtype BF16; local output is cast to this dtype before all-reduce and cast back after. Softmax/P@V key reduction length also differs by padding.",
+      "existing_capture_checks": [
+        "Compare probabilities_bf16 and v_heads to context_before_o at matching real query; then compare context_before_o to attention_output.",
+        "For context_before_o compare each SDK1024 block against HF rank*1024:(rank+1)*1024. For attention_output compare entire2048 vectors because SDK is already reduced."
+      ],
+      "limitation": "The88 capture does not save local o_proj pre-all-reduce output, so it cannot separate local dot-product rounding from collective rounding. Setting only reduce_dtype=float32 cannot recover precision already lost in local BF16 outputs; with just2 ranks, wider addition may even downcast to the same result. No fix or cause is established."
+    },
+    {
+      "topic": "RMSNorm",
+      "source_locations": {
+        "hf": [
+          61,
+          66
+        ],
+        "sdk_cpu_rmsnorm": [
+          62,
+          67
+        ],
+        "sdk_llama": [
+          136,
+          147
+        ],
+        "custom_rmsnorm": [
+          28,
+          41
+        ]
+      },
+      "observation": "Official HF and CPU SDK RMSNorm implement the same FP32 mean(x\u00b2), FP32 rsqrt(x\u00b2+eps), cast normalized value to original dtype, then gamma multiply; eps is1e-6. Device SDK routes through CustomRMSNorm: input promoted FP32, RmsNorm.apply with gamma, final cast.",
+      "existing_capture_checks": [
+        "Existing normalized_input is after input RMSNorm and is exact over all1231 real tokens for fixture7 both ranks/arms.",
+        "213-stage saved boundaries include input_layernorm and post_attention_layernorm across42 layers."
+      ],
+      "limitation": "No explicit variance/rsqrt/pre-gamma intermediate is in88 capture. Device internal RmsNorm accumulator/order is not inferred from wrapper. CPU SDK also fails fixture7, so device-only custom norm cannot by itself explain the shared CPU discrepancy."
+    },
+    {
+      "topic": "Residual and MiniCPM scaling",
+      "source_locations": {
+        "hf": [
+          294,
+          312
+        ],
+        "sdk_llama": [
+          1213,
+          1223,
+          1243,
+          1297
+        ]
+      },
+      "observation": "Both active official Llama paths apply residual + attention_output, post-attention RMSNorm, MLP, residual + MLP output. Frozen qkv/mlp kernel and residual fusion flags are false. Official MiniCPM5-2B config identifies LlamaForCausalLM and contains no scale_depth,dim_model_base or scale_emb; neither path applies old MiniCPM residual-depth scaling.",
+      "existing_capture_checks": [
+        "attention_output is before first residual add. Saved213 boundaries provide layers.N.self_attn, post_attention_layernorm, mlp and full layer output."
+      ],
+      "limitation": "The standalone post-attention residual sum is not captured by88; post_attention_layernorm combines residual addition and normalization, so divergence there cannot isolate either operator. Do not add MiniCPM-old scaling unsupported by this model config."
+    }
+  ],
+  "fixture7_capture_metadata": {
+    "left_receipt": {
+      "qk0_unscaled": {
+        "source_shape": [
+          1,
+          16,
+          1231,
+          1231
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          16,
+          1,
+          1231
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "qk0_scaled": {
+        "source_shape": [
+          1,
+          16,
+          1231,
+          1231
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          16,
+          1,
+          1231
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "softmax_input": {
+        "source_shape": [
+          1,
+          16,
+          1231,
+          1231
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          16,
+          1,
+          1231
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "probabilities_fp32": {
+        "source_shape": [
+          1,
+          16,
+          1231,
+          1231
+        ],
+        "source_dtype": "torch.float32",
+        "selected_shape": [
+          1,
+          16,
+          1,
+          1231
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "probabilities_bf16": {
+        "source_shape": [
+          1,
+          16,
+          1231,
+          1231
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          16,
+          1,
+          1231
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "context_before_o": {
+        "source_shape": [
+          1,
+          1231,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          1231,
+          2048
+        ],
+        "selection": null
+      },
+      "attention_output": {
+        "source_shape": [
+          1,
+          1231,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          1231,
+          2048
+        ],
+        "selection": null
+      }
+    },
+    "right_receipt": {
+      "qk0_unscaled": {
+        "source_shape": [
+          1,
+          8,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          8,
+          1,
+          2048
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "qk0_scaled": {
+        "source_shape": [
+          1,
+          8,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          8,
+          1,
+          2048
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "softmax_input": {
+        "source_shape": [
+          1,
+          8,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          8,
+          1,
+          2048
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "probabilities_fp32": {
+        "source_shape": [
+          1,
+          8,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.float32",
+        "selected_shape": [
+          1,
+          8,
+          1,
+          2048
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "probabilities_bf16": {
+        "source_shape": [
+          1,
+          8,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          8,
+          1,
+          2048
+        ],
+        "selection": {
+          "kind": "prediction_query_rows",
+          "axis": 2,
+          "positions": [
+            1230
+          ]
+        }
+      },
+      "context_before_o": {
+        "source_shape": [
+          1,
+          2048,
+          1024
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          2048,
+          1024
+        ],
+        "selection": null
+      },
+      "attention_output": {
+        "source_shape": [
+          1,
+          2048,
+          2048
+        ],
+        "source_dtype": "torch.bfloat16",
+        "selected_shape": [
+          1,
+          2048,
+          2048
+        ],
+        "selection": null
+      }
+    }
+  },
+  "fixture7_existing_firstfive_rows": [
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "positions",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json",
+        "sha256": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "normalized_input",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json",
+        "sha256": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "q_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json",
+        "sha256": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": false,
+      "different_elements": 1,
+      "max_abs": 0.0009765625
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "k_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json",
+        "sha256": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "v_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json",
+        "sha256": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "positions",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank0-call01/capture.json",
+        "sha256": "92df9668908f280c1daada9cbf087a29925520b0566ad6a95335e6be5afea5d8",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "normalized_input",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank0-call01/capture.json",
+        "sha256": "92df9668908f280c1daada9cbf087a29925520b0566ad6a95335e6be5afea5d8",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "q_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank0-call01/capture.json",
+        "sha256": "92df9668908f280c1daada9cbf087a29925520b0566ad6a95335e6be5afea5d8",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": false,
+      "different_elements": 1,
+      "max_abs": 0.0009765625
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "k_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank0-call01/capture.json",
+        "sha256": "92df9668908f280c1daada9cbf087a29925520b0566ad6a95335e6be5afea5d8",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 0,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "v_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank0-call01/capture.json",
+        "sha256": "92df9668908f280c1daada9cbf087a29925520b0566ad6a95335e6be5afea5d8",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "positions",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank1-call01/capture.json",
+        "sha256": "7ebf5976357dea4c043d274968a7077744116b9f8b3e88abbfdb98aacff00944",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "normalized_input",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank1-call01/capture.json",
+        "sha256": "7ebf5976357dea4c043d274968a7077744116b9f8b3e88abbfdb98aacff00944",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "q_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank1-call01/capture.json",
+        "sha256": "7ebf5976357dea4c043d274968a7077744116b9f8b3e88abbfdb98aacff00944",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "k_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank1-call01/capture.json",
+        "sha256": "7ebf5976357dea4c043d274968a7077744116b9f8b3e88abbfdb98aacff00944",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hd_control",
+      "stage": "v_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank1-call01/capture.json",
+        "sha256": "7ebf5976357dea4c043d274968a7077744116b9f8b3e88abbfdb98aacff00944",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "positions",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank1-call01/capture.json",
+        "sha256": "34d087d46a10b35a28f7abc2fcfc513d801a533b9e72b454e35514ce159247c7",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "normalized_input",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank1-call01/capture.json",
+        "sha256": "34d087d46a10b35a28f7abc2fcfc513d801a533b9e72b454e35514ce159247c7",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "q_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank1-call01/capture.json",
+        "sha256": "34d087d46a10b35a28f7abc2fcfc513d801a533b9e72b454e35514ce159247c7",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "k_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank1-call01/capture.json",
+        "sha256": "34d087d46a10b35a28f7abc2fcfc513d801a533b9e72b454e35514ce159247c7",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rank": 1,
+      "left_arm": "HF_native",
+      "right_arm": "C_Hc_history_generation",
+      "stage": "v_projection",
+      "left_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json",
+        "sha256": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+        "raw_bytes": 43503540
+      },
+      "right_receipt": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/history-rank1-call01/capture.json",
+        "sha256": "34d087d46a10b35a28f7abc2fcfc513d801a533b9e72b454e35514ce159247c7",
+        "raw_bytes": 61636608
+      },
+      "raw_exact": true,
+      "different_elements": 0,
+      "max_abs": 0.0
+    }
+  ],
+  "source_mapping_recommendation": "Use full eight-prefill saved boundaries. Score/probability rows exist only at last real query; keep all8 and both SDK arms/ranks. Locate observed divergence without changing thresholds or claiming first causal operator.",
+  "causal_operator_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "raw_reads": 0,
+  "model_native_imports": 0,
+  "runtime_probes": 0,
+  "metadata_and_source_reads": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3-cache-ablation-full-v8/status.json": "064d9de95940ee7bbf76729f757b1c14695d18217c07874651688b10e30b778c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-paired-full-v2/status.json": "daa5edb9e166cab18da35bbb3afd58defa609bd84e7c24a28e01a40ae9f671c0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-runtime-inputs-20261107-v1.json": "b8d84596f9fa6b54c0fa599af6ad976f051e47544a2d8c76027136efe2254800",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/llama/modeling_llama.py": "363df58c077a8fcfd3593b2817538e53f90eeab32294d3c6bbb7241f094669de",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/llama/modeling_llama.py": "cf5a9966d234fc943ca416ae744ace06931ce7821b92c62e71251aec16cb7e62",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py": "31bf660a663259134324bc65da4e155951dc89c5ca46471d2325a9938e859e26",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py": "b179b02c512c2c29a59dcdcfae958fc4f4a55f11cb0b2bbe9c004aef341276ab",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/utils.py": "282142ea4a2a761e4287d8d6962f7e11d8ca8e57261feb74c038535d13319016",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/custom_calls.py": "6521f5418013f1e142dd80f67bad4d57354b056d8ce2aa79aabddff58fd26e7a",
+    "/mnt/nvme/neuron-artifacts/latest-20261031-minicpm5-2b-bf16-cpu-tp2-b4-ctx4096-baseline-v4/neuron_config.json": "ac677fd7424745d961e889894c7e91d2998d20f470560e90859f941640d6913a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-first-five-r1-20261107-v2.json": "622782d1e297a3b3a59dfc95cfede70b48cbf1024c602bebb55a3d7cca8b44fd",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/native-frame-01/capture.json": "0ee6855df792856e623ee1969b220c13c65a7fc47d671dff57ed38ad0b30ed5a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original88-python-trace-r1-20261107-output/control-rank0-call01/capture.json": "afdeca584569e5f0acf40b27c4640f976f422ff1e29839c8403457f0a26bfdac"
+  }
+}

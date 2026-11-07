@@ -1,0 +1,568 @@
+{
+  "binding": {
+    "finalization": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-final-r2-20261107-v1-audit.json",
+      "sha256": "398ff32c45a125307ac7ad8ece04ee15319384673b32bc92a40dbfa57c0652d4"
+    },
+    "catalog": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-final-r2-20261107-v1-catalog.json",
+      "sha256": "5e1ed9f65232c1dffa6f5f0eae2c14965f0ea29fd60825bea791aa59d0f4ce95"
+    },
+    "finalizer_exit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-finalizer-root-exit-r2-20261107-v1.json",
+      "sha256": "37d77afb9295f9aa769da0390b1d680cd443b018b05d85d4b0c8d113c217eb0d"
+    },
+    "finalizer_live": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original88-finalizer-root-live-r2-20261107-v1.json",
+      "sha256": "a0adc59246a151aac2fbab296aae7c29c12d0c8e8cde94610464151a41cbe642"
+    },
+    "code": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_prefill_attention_analysis_v1.py",
+      "sha256": "08b927ef894a63cfab59105abc9b48ffeb9ffa38d6dde4273f801c40a1246261"
+    },
+    "first_five_library": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py",
+      "sha256": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1"
+    }
+  },
+  "frames": [
+    {
+      "frame": {
+        "index": 0,
+        "fixture": 0,
+        "slot": 3,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 64,
+      "different": 8,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "context_before_o",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "context_before_o",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "context_before_o",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "context_before_o",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 2,
+        "fixture": 2,
+        "slot": 0,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 3,
+        "fixture": 5,
+        "slot": 2,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 17,
+        "fixture": 1,
+        "slot": 1,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 18,
+        "fixture": 6,
+        "slot": 0,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    },
+    {
+      "frame": {
+        "index": 19,
+        "fixture": 3,
+        "slot": 2,
+        "step": 0
+      },
+      "rows": 72,
+      "mask_observations": 5,
+      "mask_gate": true,
+      "exact": 68,
+      "different": 4,
+      "blocked": 0,
+      "first_observed": [
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 0,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hd_control",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "HF_native",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": "attention_output",
+          "status": "comparable_different",
+          "causal_operator_proven": false
+        },
+        {
+          "rank": 1,
+          "left_arm": "C_Hd_control",
+          "right_arm": "C_Hc_history_generation",
+          "first_nonexact_selected_stage": null,
+          "status": "all_selected_stages_exact",
+          "causal_operator_proven": false
+        }
+      ]
+    }
+  ],
+  "numeric_rows": 576,
+  "mask_observations": 40,
+  "implemented_stages": [
+    "active_value",
+    "effective_key",
+    "effective_value",
+    "returned_current_key",
+    "returned_current_value",
+    "qk0_unscaled",
+    "qk0_scaled",
+    "softmax_input",
+    "probabilities_fp32",
+    "probabilities_bf16",
+    "context_before_o",
+    "attention_output"
+  ],
+  "first_observed_is_not_causal": true,
+  "score_probability_query_scope": "Only prediction query L-1 was captured; not a complete score matrix.",
+  "all_other_score_queries": "unavailable_in_original88",
+  "full_cpu_post_payload": "unavailable_actual_post_payload_in_original88",
+  "prefill_prior": "not_applicable_no_prior",
+  "decode": "blocked_old_inclusive_prior_alignment; not analyzed by this prefill slice",
+  "full_attention_analyzed": false,
+  "full_model_qualified": false,
+  "causal_operator_proven": false,
+  "new_speedup_claim": false
+}
