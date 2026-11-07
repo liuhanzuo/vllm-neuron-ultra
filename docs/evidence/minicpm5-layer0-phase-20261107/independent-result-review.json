@@ -1,0 +1,1067 @@
+{
+  "schema": "minicpm5_layer0_phase_cpu_independent_result_review_v1",
+  "reviewer": "/root/mini_original32_final_review_20261107",
+  "created_at": "2026-11-07T18:46:15.902588+00:00",
+  "passed": true,
+  "blockers": [],
+  "scope": "Complete three-arm metadata/source review; no tensor metrics recomputed or raw payload stat/read/hash.",
+  "actual_session": 46999,
+  "root_observed_tool_chunk": "0ac031",
+  "actual_exit_directly_observed_by_reviewer": false,
+  "root_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-root-exit-r1-20261107-v1.json",
+    "sha256": "8a0acf6851550ada88bcc2b86d3d925b4c645d76e233dc54dd3fa0e78b23c967",
+    "bytes": 5434
+  },
+  "root_summary": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-root-summary-r1-20261107-v1.json",
+    "sha256": "a97e4ccf3d2e0034ff54ec05c81d7504dccb9a15e925e069846242eaa3eb38d3",
+    "bytes": 106607
+  },
+  "current_original_process_checks": [
+    {
+      "pid": 2206201,
+      "original_start": "385631691",
+      "current_start": null
+    },
+    {
+      "pid": 2207196,
+      "original_start": "385633405",
+      "current_start": null
+    },
+    {
+      "pid": 2207241,
+      "original_start": "385633474",
+      "current_start": null
+    },
+    {
+      "pid": 2207242,
+      "original_start": "385633474",
+      "current_start": null
+    }
+  ],
+  "whole_original_cgroup_empty_now": true,
+  "canonical_unchanged": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "checks": 5568,
+  "checked_call_reports": 84,
+  "checked_arm_reports": 6,
+  "all14per_rank_frozen_S0_anchor_exact": true,
+  "own84cache_history_and_phase_reset_preserved": true,
+  "candidate_first4prefills_exact": true,
+  "candidate_firstdecode_incoming84cache_exact": true,
+  "selected_projection_only_layer0_with_exact_phase_policy": true,
+  "all4tap_metadata_physical_row_order_and_rank_digests_equal": true,
+  "all32HF_thresholds_unchanged": true,
+  "summaries": {
+    "strict_anchor_s0": {
+      "frames": 32,
+      "passed_frames": 29,
+      "passed_prefill": 7,
+      "passed_decode": 22,
+      "top1_matches": 32,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.10412118583917618,
+            "cosine": 0.9987252354621887,
+            "kl_reference_to_neuron": 0.10126954317092896,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "physical_row": 1,
+          "current_position": 1232,
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.17521408200263977,
+            "cosine": 0.9977738261222839,
+            "kl_reference_to_neuron": 0.028122015297412872,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.126953125,
+            "mean_abs_error": 0.19864898920059204,
+            "cosine": 0.9962618350982666,
+            "kl_reference_to_neuron": 0.04872628301382065,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    },
+    "strict_layer0_oproj_fp32_prefill_only": {
+      "frames": 32,
+      "passed_frames": 27,
+      "passed_prefill": 5,
+      "passed_decode": 22,
+      "top1_matches": 30,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 1.3046875,
+            "mean_abs_error": 0.1687658131122589,
+            "cosine": 0.9966601133346558,
+            "kl_reference_to_neuron": 0.2823401689529419,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "physical_row": 1,
+          "current_position": 1231,
+          "metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.337479829788208,
+            "cosine": 0.9883117079734802,
+            "kl_reference_to_neuron": -1.1099239749512435e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "cosine"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.169921875,
+            "mean_abs_error": 0.19801242649555206,
+            "cosine": 0.9961934089660645,
+            "kl_reference_to_neuron": 0.04906253516674042,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 26,
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.18619561195373535,
+            "cosine": 0.9962804317474365,
+            "kl_reference_to_neuron": 0.025318507105112076,
+            "argmax_match": false,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 13701
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 27,
+          "metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.1348280906677246,
+            "cosine": 0.9983083605766296,
+            "kl_reference_to_neuron": 0.028214486315846443,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    },
+    "strict_layer0_oproj_fp32_both_phases": {
+      "frames": 32,
+      "passed_frames": 27,
+      "passed_prefill": 5,
+      "passed_decode": 22,
+      "top1_matches": 30,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 1.3046875,
+            "mean_abs_error": 0.1687658131122589,
+            "cosine": 0.9966601133346558,
+            "kl_reference_to_neuron": 0.2823401689529419,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "physical_row": 1,
+          "current_position": 1231,
+          "metrics": {
+            "max_abs_error": 1.5,
+            "mean_abs_error": 0.3692341148853302,
+            "cosine": 0.9861358404159546,
+            "kl_reference_to_neuron": 9.727500582812354e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "cosine"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.3125,
+            "mean_abs_error": 0.19729144871234894,
+            "cosine": 0.9962252378463745,
+            "kl_reference_to_neuron": 0.06879715621471405,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 26,
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.18619561195373535,
+            "cosine": 0.9962804317474365,
+            "kl_reference_to_neuron": 0.025318507105112076,
+            "argmax_match": false,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 13701
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 27,
+          "metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.1348280906677246,
+            "cosine": 0.9983083605766296,
+            "kl_reference_to_neuron": 0.028214486315846443,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    }
+  },
+  "conclusion": "Both layer0 candidates are negative:27/32 versus strict29/32, rescuing9 but adding5,16,17; both candidates top1=30/32. Layer0 prefill intervention alone suffices for frame1 high-margin top1 regression in this trajectory. This is not proof of a unique numerical cause and not model qualification.",
+  "limitations": [
+    "CPU TP2/Gloo only; previous device30/32 remains separate.",
+    "Two candidate policies have equal pass totals/failure sets but different decode numeric metrics and outputs.",
+    "Bundle digests/layout reviewed from metadata; upcoming serialized raw analysis must authenticate actual payload bytes.",
+    "Current14call32frame checks do not substitute for cold-cache,long-decode,slot/inactive,quality96 or paired-serving suites.",
+    "Do not migrate these failed candidates to Neuron or claim new speedup."
+  ],
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-input-plan-20261107-v1.json",
+      "sha256": "ce599a2beae22df0a05c13591854cfab8ba57519df11ee93a0d25ad4392306c8",
+      "bytes": 4087706
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-root-exit-r1-20261107-v1.json",
+      "sha256": "8a0acf6851550ada88bcc2b86d3d925b4c645d76e233dc54dd3fa0e78b23c967",
+      "bytes": 5434
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-root-summary-r1-20261107-v1.json",
+      "sha256": "a97e4ccf3d2e0034ff54ec05c81d7504dccb9a15e925e069846242eaa3eb38d3",
+      "bytes": 106607
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-root-live-r1-20261107-v1.json",
+      "sha256": "cd7502be25f7d41f5be7ff21160881123a69504bb0e2f293d144b3cbcc8df5ba",
+      "bytes": 4460
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/result.json",
+      "sha256": "3b5db8d1fe985a4674c06edaf5c8ed4843202e4de0081290db2814e2e50bb87a",
+      "bytes": 775638
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-00/result.json",
+      "sha256": "8d76696a4aa7581e0f0c599498a2341fcfe6157de38650672d4f5b2ceb6df34b",
+      "bytes": 212188
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-00/result.json",
+      "sha256": "18256d14c808c252828287aa206586902d789154048fa62956e955a83286e309",
+      "bytes": 208118
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "04a6334a2950b16f9fb4c8dc3870603584b5c6e0da010bc8fab7583c98c7ffc0",
+      "bytes": 213511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-01/result.json",
+      "sha256": "92d3d05cee0b2c7e63c4b343ce0ae8580bcd7447b6a841632f4883bdedba6586",
+      "bytes": 209425
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-02/result.json",
+      "sha256": "5e9095f366f39aac51a4636657d9d359b7044c85705afb91d5fb1d3ed3cfc3a4",
+      "bytes": 212192
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-02/result.json",
+      "sha256": "46e855ddb3d0db8caccf346339ec703f721dfd547218a4cc45eafc40416b0d03",
+      "bytes": 208122
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-03/result.json",
+      "sha256": "b46e29be74733144c0f1d4389d4258373d5206219cf0d900395ecc956b39960b",
+      "bytes": 212198
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-03/result.json",
+      "sha256": "f869b711c21b61a9c9d6e58f280942cce2711f8fa31926aef1289b49ac636d39",
+      "bytes": 208128
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-04/result.json",
+      "sha256": "5232a023fabe5dce7d23f8a930144673140833fbb0a984a689ef87b85c519429",
+      "bytes": 220970
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-04/result.json",
+      "sha256": "d9022928733c788941f1fec8090a6c8d32a0289337b7e9e828729d5fda26a1fd",
+      "bytes": 216578
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-05/result.json",
+      "sha256": "e5647978e03552d8347bb87fb65b90d8af569a59aa2013af09a1d3bebdf94ed5",
+      "bytes": 220998
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-05/result.json",
+      "sha256": "e555390b429a955912c4cb1077a77af36bfb26e0040e7f428ced64b0eba7a66e",
+      "bytes": 216598
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-06/result.json",
+      "sha256": "f841906e2342c8a275c8385f4c304e02092ad31ab045d98249f85547f91fc03b",
+      "bytes": 221016
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-06/result.json",
+      "sha256": "24c4ad9524f588b2a76884d0a935063ecb66deb1c5e144e9fdcb4c8d38af5154",
+      "bytes": 216608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-07/result.json",
+      "sha256": "185745d374b300e6c8ad4b3cf44a79fe7ac16a0514d0a5d8a7d6288f34050ad4",
+      "bytes": 212194
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-07/result.json",
+      "sha256": "56b8fc2ea38e87d339166959c98ce76211ec842c5e1ff6c4f584a1e22cfff1e7",
+      "bytes": 208120
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-08/result.json",
+      "sha256": "726b7c390ae9f6866f774d4210417d04714bea15d73fcee81b32cd75afd77d3e",
+      "bytes": 212197
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-08/result.json",
+      "sha256": "964e18f8558b965689c48a341ab089c8e6cb1989cc4a21b9df98b5207c88ed3c",
+      "bytes": 208123
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-09/result.json",
+      "sha256": "76cb2a8abb161206c2b44e4fc770f767beaa84bc8964e0507bca1896e77d86db",
+      "bytes": 212205
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-09/result.json",
+      "sha256": "feafe2ec5b034e838b8b35acc1fc9100e495049b03f2e83c1aa6b9b36bdd9dfb",
+      "bytes": 208131
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-10/result.json",
+      "sha256": "7c2ee751a1b0c72d9dc66f0de7dcddbc3ad3d487c62b5ac9f89f98be837d33cb",
+      "bytes": 212206
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-10/result.json",
+      "sha256": "fac2bc61c2dad02db49f8d3cf9dd8a24b55735d33bb6717cbe50a8cb38676baf",
+      "bytes": 208131
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-11/result.json",
+      "sha256": "4311bba23cdd3e54c65a3391b7a797533c11055750a16744aac5662cf218973e",
+      "bytes": 220766
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-11/result.json",
+      "sha256": "0f9d38c22a8a358208f7093272afa900fc91e8bf2cadc9f2a5a2dbc840595955",
+      "bytes": 216357
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-12/result.json",
+      "sha256": "92fe2c06cf6599e2be907ed1eae8c650773cc85e87e1cc3b26300ec0eb8b5c37",
+      "bytes": 220772
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-12/result.json",
+      "sha256": "601f32755ea442f5c682593d4fcae72df55fff6526e45210222cc0c18818573c",
+      "bytes": 216363
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-13/result.json",
+      "sha256": "d7379cf80f7e5c7532abc139aa611a42d5f5a1c91bcec9a9c26410998eaf5dd4",
+      "bytes": 220764
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank0/strict_cpu_s0/call-13/result.json",
+      "sha256": "ec674462ee4674b7da50a15798236109fa48933b2abb77fcbfdb6c185dbd58a6",
+      "bytes": 216355
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/result.json",
+      "sha256": "4cd958a25b28d88388a623d5709cffa7f564b85161c25442dfc28164829c1609",
+      "bytes": 776142
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-00/result.json",
+      "sha256": "89569a59a48d167b8a3cce35573965bbb813b7f90b4a77605a8d6c30bb38c704",
+      "bytes": 212188
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-00/result.json",
+      "sha256": "9665e53bc2305072b661a97be1d37996cdad15048a65c9866af13978da9d1fec",
+      "bytes": 208118
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-01/result.json",
+      "sha256": "d1cac9b1a0f1c6095a4dd6a885a782251da9cab7bed3d0f254e14201aa357d02",
+      "bytes": 213511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-01/result.json",
+      "sha256": "031b17b9fb9942d2e2d5ab8275b579ffe0f8e881ba634a205f86376984417c0e",
+      "bytes": 209425
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-02/result.json",
+      "sha256": "300fdaf98cad853b37fe4e0bca030bd8404e18e02b3ed9049688173ef1694fce",
+      "bytes": 212192
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-02/result.json",
+      "sha256": "044f59535f6d2cb73165c8788c1b26f0f84ffd7c2631f5dd11dde73caf44175b",
+      "bytes": 208122
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-03/result.json",
+      "sha256": "7ca7c199f27b21ffb26605b4404101c69308bb685e7c0c84bab9eb97f217389b",
+      "bytes": 212198
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-03/result.json",
+      "sha256": "d9b53610ef34045bbca8d05eb3779eadb1994141239e57ba9dec2f756f7cc54e",
+      "bytes": 208128
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-04/result.json",
+      "sha256": "a45fb119ef5019743931d8bbb1b2d2b28ff3feeb1aa55ea20fd696cf6a1dfb31",
+      "bytes": 220970
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-04/result.json",
+      "sha256": "f98e7a83e670429490ed5f20c5d84af29622b16b833cf1387ff218693277ac5c",
+      "bytes": 216578
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-05/result.json",
+      "sha256": "30c1739d8a43e07a4a9fd975546fbee95aa24a1a868d26fff19fcdeea5a6ca6f",
+      "bytes": 220998
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-05/result.json",
+      "sha256": "eacdfa9f0a06bc699c97dd65868812c654e706937fa1dca46dc14da2e1a02754",
+      "bytes": 216598
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-06/result.json",
+      "sha256": "0fa1ddd0ae10b7e045496a8714dbf91881b5ee7eff8953bbccf457aa074bdaf1",
+      "bytes": 221016
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-06/result.json",
+      "sha256": "b3545461421daff838b1bfbe7d54685274d5c9e9cca190ea62209792d599492e",
+      "bytes": 216608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-07/result.json",
+      "sha256": "1b9de651b8666d59c4643b23bef7378f52887ee38d561f1bc7912677bbaf2df2",
+      "bytes": 212194
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-07/result.json",
+      "sha256": "ac764a6999667dbd44223022547937b94bdb3973cd466409f32c35e0e949a4f4",
+      "bytes": 208120
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-08/result.json",
+      "sha256": "f2744e8c872776d0065745a1520e0ed42e90c0c3e1d5af97ebf7c1d798ede1d3",
+      "bytes": 212197
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-08/result.json",
+      "sha256": "6fa942e4d6a81c7a3e81639b6642b7c77b9050f66da1fd8812e43033962a6dff",
+      "bytes": 208123
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-09/result.json",
+      "sha256": "cfdc7217c370422024df2e266f37323e7b137c1a248898b0a16c791bc85b6472",
+      "bytes": 212205
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-09/result.json",
+      "sha256": "2efee2068687fe24250294ef50088bc56b48e966596555af391824776178c094",
+      "bytes": 208131
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-10/result.json",
+      "sha256": "5a820fd79766a4d2040c037ebd68f11a3b7ab7d7d88aae8e6e9db2d59d8d501a",
+      "bytes": 212206
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-10/result.json",
+      "sha256": "ec3e0cdc438a593bf50e41dc181f7d11984a3489c3c161872e961ac69329664f",
+      "bytes": 208131
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-11/result.json",
+      "sha256": "3eecb596ff596ea14af0f4bee356761efc0aac9c52106b331cf9dec172f5a5b0",
+      "bytes": 220766
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-11/result.json",
+      "sha256": "35abab0ac0d4bdb94bfad295230034188d6d16afdf485587e52e283a2afbb1eb",
+      "bytes": 216357
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-12/result.json",
+      "sha256": "57083be1e6e7bddc7754a4b53b9a88a3d86818db9411ddccd5ceb6ac70b3706f",
+      "bytes": 220772
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-12/result.json",
+      "sha256": "3843c223c7ed0236a3825bd26ed4c5c834b1041994170190e3113b64ea4ef77b",
+      "bytes": 216363
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-13/result.json",
+      "sha256": "1268a241626801f6fa4a93fa85ad83ecab68cd0bfdf0bfce5064453d2db7eb5c",
+      "bytes": 220764
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-oproj-cpu-r1-20261107-v1/cpu-rank1/strict_cpu_s0/call-13/result.json",
+      "sha256": "86e4e036fc9cf5b47c557529ad66f8a91f96c92025633ff56d624aee7332ef1b",
+      "bytes": 216355
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/outer-result.json",
+      "sha256": "d9a96eb64458e89c3a14bdef7a32922dc77ccdd47e6bc3b56c7efd12003fcea8",
+      "bytes": 1633
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/coordinator-result.json",
+      "sha256": "c258059d7814812916abf779ff290a9e36b09b3bd7bf04ca6977503d55469a0e",
+      "bytes": 53571
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/service-exit.json",
+      "sha256": "31bd34fb415698d592c6040875a5f3ad2dbef292ce915b3e19b1a48c24ebfa8f",
+      "bytes": 3965
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/children-exits.json",
+      "sha256": "e63c50c7b8be17a8c311fc3f094465508cfcb778f0f13d168bf2fa9ffc6ccc0b",
+      "bytes": 1549
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/rank0-result.json",
+      "sha256": "e600e5cca2a92035e6e448ceb989b88279f489ad865cd41c03f6a0596a63e850",
+      "bytes": 23164
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/rank1-result.json",
+      "sha256": "0b175f11a356dd5b5f9a1ac11ac745898326c072461915eb92bb1d5b4aaa8a28",
+      "bytes": 23164
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-execution-spec-20261107-v1.json",
+      "sha256": "4d7d017541ba2088a0d69fe10447d87046b9f466570f011edaf4a0388dd6ad58",
+      "bytes": 387922
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/continuation-state.json",
+      "sha256": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+      "bytes": 1407173
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/roadmap.json",
+      "sha256": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+      "bytes": 1265979
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/best-known-configurations.json",
+      "sha256": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d",
+      "bytes": 4835
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/result.json",
+      "sha256": "9ad81ff5e1366d823f1006b81b2fdce6e10cc516f9186f59d2e5e8925fc37547",
+      "bytes": 776471
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-00/result.json",
+      "sha256": "b814587bbd6c44d51f21a906e9b167daaedc8e5a76867ee572ff3aacf8eb061d",
+      "bytes": 212570
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-01/result.json",
+      "sha256": "cd103979d80b665306c836bed69cea26c38f60111e8a70259d4e9703a2cc675e",
+      "bytes": 213934
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-02/result.json",
+      "sha256": "901e0ed71319b921b47cf303515d4083f6da697ca64f00e34493308fef943a00",
+      "bytes": 212577
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-03/result.json",
+      "sha256": "558a3d646434b353f8f7adfb43882cb933fe92111d2b56fe85c91d4a6db2b53a",
+      "bytes": 212581
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-04/result.json",
+      "sha256": "a112768dde77752afc9426ca784d3552d112e59ca18bb4f47a432afdcba6c536",
+      "bytes": 220672
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-05/result.json",
+      "sha256": "e25d7d4e660de89738092a448b0ba112132e66b76347fc5067b49d02f98eb7ba",
+      "bytes": 220666
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-06/result.json",
+      "sha256": "122e16a7bb1d43f1137c85f150c376eaf836f2ad2e69692be81625ad1426e6da",
+      "bytes": 220693
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-07/result.json",
+      "sha256": "afb970f742e2952d34938427b3faa73acc284c43ddd5352d4344af78d2dd4e30",
+      "bytes": 212602
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+      "sha256": "67460299b51610d599e74daa6cb0d99f40dca696ff3338f0f024a86895510755",
+      "bytes": 212601
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-09/result.json",
+      "sha256": "1aff5a560828e6eb43ba5ad5c3ede004451409ffe88dce7dbadc356cf1749bcd",
+      "bytes": 212584
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-10/result.json",
+      "sha256": "45497af95c940b3021d78902c3148e8f539a45c03d269a5e789e1853605fd32d",
+      "bytes": 212582
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-11/result.json",
+      "sha256": "4919c52b4747bfc2b2b62d1023215c70aea9e2fabb710945e6c2909107b5560a",
+      "bytes": 220448
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-12/result.json",
+      "sha256": "a38f24df20dd1d573ecf562820162c3e34ebefc121277c9c101a9f44d5420b5f",
+      "bytes": 220452
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_prefill_only/call-13/result.json",
+      "sha256": "d1c4afaeb2a22385528d0b2ba1ca09395f2b74dbe98cf6b013609ee4f97b799e",
+      "bytes": 220435
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/result.json",
+      "sha256": "3c9f7ca654b7f83eb5406a0ce00bda33b22112624129d91462f56040183ac21e",
+      "bytes": 776561
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-00/result.json",
+      "sha256": "529a41d36683c8b294c4af62d5d8d734a90fdf78c286447c1bac78a97896dee4",
+      "bytes": 212702
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-01/result.json",
+      "sha256": "85bd966ce33f150109e81783f6ff2e3ad19dd43157345ec4a34915b80418c0e3",
+      "bytes": 214066
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-02/result.json",
+      "sha256": "7a916d2db8d06f2bfde5fedb19922a99a3c556d6dda1c3af252612bf73ae000a",
+      "bytes": 212709
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-03/result.json",
+      "sha256": "ce76b3c3623fceb6e589f68ea20b6d76b24d566a1f5f0d018a4283d51b518aed",
+      "bytes": 212713
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-04/result.json",
+      "sha256": "d3c577f116b05ccad830a988747a94055c2fcb331f0968885d1d583721088d41",
+      "bytes": 221374
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-05/result.json",
+      "sha256": "4b0b9e002da4abe6ff7821fdc4294c79be6e0191288332cf1a611c09c48e560e",
+      "bytes": 221363
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-06/result.json",
+      "sha256": "721c5c811eef296bbdcc168e3bc10ecbe07737e91e27348ed62a5ed3cc368a25",
+      "bytes": 221398
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-07/result.json",
+      "sha256": "2e9492a594aa9804cfe7442644660473c2476062d78ca06a91e755fcf431f724",
+      "bytes": 212598
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-08/result.json",
+      "sha256": "da3b74d261428319c8822c8f4e8102e44890c4ca51043fc3991ccba043f807c5",
+      "bytes": 212597
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-09/result.json",
+      "sha256": "94af1208a7e0e1fd508a9fd6604ae7ab5d578104395acf9061e07cb77eda916d",
+      "bytes": 212580
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-10/result.json",
+      "sha256": "b6bd0376222d42cef88ce986ad60306dd0c8805ea96b0631068e06cbf86fa081",
+      "bytes": 212578
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-11/result.json",
+      "sha256": "0266d022aa582817762cb21d4b85d267cfa71b555971e72ccfbe3e4d785c8d5d",
+      "bytes": 221146
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-12/result.json",
+      "sha256": "87ca6bf103e1a64908de5787c02906d5a38fb01fd05bf9d26fb8d68b10c6dcfc",
+      "bytes": 221142
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_layer0_oproj_fp32_both_phases/call-13/result.json",
+      "sha256": "08c2355f76a08c5bffe9702e8b1039ab416f53d0d4bbb29d656c94fa982dabff",
+      "bytes": 221142
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/result.json",
+      "sha256": "6a5168596550bac95831fed368a0c02a65a77dc44074422054f97955e1cfab14",
+      "bytes": 776975
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-00/result.json",
+      "sha256": "bedf388e96107fea5102ff109bbf462042d9a1de0e9e46f16fb4b6c65fcfe3c7",
+      "bytes": 212570
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-01/result.json",
+      "sha256": "47d84d32008e1c50e08cc71a011cd7de053fff22ef5e6dad2cb51405cf66cf72",
+      "bytes": 213934
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-02/result.json",
+      "sha256": "6f256ce7d608b267db3e96ce206cbf583ad866bdd05f5c08410a5a6123e36462",
+      "bytes": 212577
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-03/result.json",
+      "sha256": "6c4bc1bd26d18cd35d0428cbb00ea31c3a9d821a2637b1245d0466a5f4f95537",
+      "bytes": 212581
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-04/result.json",
+      "sha256": "6004ba405b8a6ba76be2e5c97f137c095deaec09b6cab63177e53e6b82af73a6",
+      "bytes": 220672
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-05/result.json",
+      "sha256": "093063274a564ca52a4c00eb51b4ccd5c1fe6ef85bda7537f57a31117d4f3102",
+      "bytes": 220666
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-06/result.json",
+      "sha256": "100cb23d7fec1cf142bfd64dd4dedcb59cd2e9f600162b1e98972c15fdfbb031",
+      "bytes": 220693
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-07/result.json",
+      "sha256": "ab5e193be17c49d825d7ea4cc1cf87579fb5ebaf8a86e8d83411db725b4f493b",
+      "bytes": 212602
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-08/result.json",
+      "sha256": "cf897fb670cc40f3763fd48dc9a1189a0c26f6377218d9704e93d689ad97a9f1",
+      "bytes": 212601
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-09/result.json",
+      "sha256": "d2ef64dd12b58e360857bbf8e72e357f24f4d9621d5ad49d7a5d4ce1b8c68e47",
+      "bytes": 212584
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-10/result.json",
+      "sha256": "ec6a697bff937bb9b810ba0e7268686050394568b90800091345b60d1d21de99",
+      "bytes": 212582
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-11/result.json",
+      "sha256": "98e242836c97101c7fabcd6a622ae6a90885eeb7dcc6ade64188838287b87f83",
+      "bytes": 220448
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-12/result.json",
+      "sha256": "58f156a8886a5c21f03fdda4c36781f032e1355e47743ac1aea9d8e8c50ed73a",
+      "bytes": 220452
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_prefill_only/call-13/result.json",
+      "sha256": "9a212a3c8c6468519aaa46dbad6ae8e0b0df024253c9ddda283ff604e591feac",
+      "bytes": 220435
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/result.json",
+      "sha256": "539c9ea4cee295ce08724f6baa4e1c6b96b52ef650201748cfb606ffca7a35e3",
+      "bytes": 777065
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-00/result.json",
+      "sha256": "6aea24834d8a8f0186c8a413a4cc6957670e6816d46ced92b5bd437a0e1f2c09",
+      "bytes": 212702
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-01/result.json",
+      "sha256": "7a7ef346bd6ed507ee54671c10f12792645dc7cf91f4bf7fecbd5581f1a23abf",
+      "bytes": 214066
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-02/result.json",
+      "sha256": "59d3e9db6e35fe61da5b09e6321c8fe2ab8ce3ff3798b22aeaec0f1104ffe3b6",
+      "bytes": 212709
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-03/result.json",
+      "sha256": "10fad620dfdf523abd2056e04a362a87346f08b45b8f628c3c26855f62db870f",
+      "bytes": 212713
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-04/result.json",
+      "sha256": "6f4e42681c6e28b706a9a2c22ed7f0253114a407e644b5dd3ad56f22ee373865",
+      "bytes": 221374
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-05/result.json",
+      "sha256": "14f474b2860b4e982ce8cee4d484e8d35ae70a48b852b2796c59bbe5cc0186c7",
+      "bytes": 221363
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-06/result.json",
+      "sha256": "837c8b16c2fc663481997e7bc466d98d5e6b6c241d0343751e10d228035a2480",
+      "bytes": 221398
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-07/result.json",
+      "sha256": "81d95e4e804dcbf8568a2cb19c88b77559d5fce74183a3772fdab2c44bcb5673",
+      "bytes": 212598
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-08/result.json",
+      "sha256": "95b78e1f9819a4420e87055e4a9d2d07810450ba9227415ebdf9f482d4955841",
+      "bytes": 212597
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-09/result.json",
+      "sha256": "0bebd2ec11fb227f6f82210f0af0cb7c650f3da288c7346af7a0698c7d338f5b",
+      "bytes": 212580
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-10/result.json",
+      "sha256": "a23e2d33f82a7f8ff07864f2ff79f3647e3bcde07b11d1f73a5d371425f88bbb",
+      "bytes": 212578
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-11/result.json",
+      "sha256": "069544f6452a156359d814e0e4b4353b8498567d46b4a766bf04318a7336a034",
+      "bytes": 221146
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-12/result.json",
+      "sha256": "5747ab0ed5e278a2dd91c22db9f84f7e1995dfee9f38b36e619706db3c1cd1e6",
+      "bytes": 221142
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_layer0_oproj_fp32_both_phases/call-13/result.json",
+      "sha256": "101cf26f7d53493ea7341861841da546f3c90843b24811cee995cdc6050c31a6",
+      "bytes": 221142
+    }
+  ],
+  "raw_payload_read_hash_stat_operations": 0,
+  "model_or_native_imports": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "neuron_migration_admitted": false
+}

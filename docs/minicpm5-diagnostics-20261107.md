@@ -22,6 +22,12 @@ candidate is rejected. It adds two failing frames and changes a high-margin
 top-1 prediction. The CPU result is separate from the earlier **30/32 Neuron
 device result**. Neither establishes a qualified model or a new speedup.
 
+The targeted follow-up also completed: changing only layer 0 during prefill,
+or during both prefill and decode, passes 27/32 in each case against the exact
+29/32 strict CPU control. Both candidates are rejected. Layer-0 prefill
+promotion alone is sufficient to reproduce the high-margin frame-1 regression
+in this workload; promotion of later layers is not necessary for that failure.
+
 ## Earlier dispatch observer failure
 
 Five fresh CPU reference runs show that entering the current dispatch observer
@@ -643,3 +649,113 @@ serving requirements remain outstanding. The earlier device result remains
 - [Actual exit record](evidence/minicpm5-oproj-cpu-fullmodel-20261107/actual-exit.json)
 - [Worker source](evidence/minicpm5-oproj-cpu-fullmodel-20261107/worker.py)
 - [Export manifest](evidence/minicpm5-oproj-cpu-fullmodel-20261107/manifest.json)
+
+## Layer-0 and phase-restricted follow-up
+
+The targeted three-arm CPU TP2 run completed with exit code 0. The strict
+control exactly reproduces the previous S0 through all 14 calls / 32 frames
+on both ranks. Each arm retains its own actual cache history. Official weight
+checks cover all 42 layers; only the layer-0 attention output-projection
+instance is changed when its selected phase is active.
+
+| CPU arm | All per-frame numeric gates | Prefill | Decode | Top-1 matches |
+|---|---:|---:|---:|---:|
+| Exact strict S0 control | 29/32 | 7/8 | 22/24 | 32/32 |
+| Layer-0 FP32 projection during prefill only | **27/32** | **5/8** | **22/24** | **30/32** |
+| Layer-0 FP32 projection during both phases | **27/32** | **5/8** | **22/24** | **30/32** |
+
+Both candidates pass the formerly failing frame 9, introduce failures at
+frames 5, 16 and 17, and still fail frames 1 and 13. Equal pass counts do not
+mean equal outputs. The two candidates exactly match through their first four
+prefill calls and enter the first decode call with equal cache states; their
+complete logits differ at that decode call. Subsequent differences include
+the effects of their separately accumulated cache histories.
+
+| Zero-based frame | Strict control | Prefill-only candidate | Both-phases candidate |
+|---|---:|---:|---:|
+| 1: KL | 0.101270 | 0.282340 | 0.282340 |
+| 5: cosine | 0.998754 | 0.988312 | 0.986136 |
+| 9: KL | 0.028122 | 0.018686 | 0.017490 |
+| 13: KL | 0.048726 | 0.049063 | 0.068797 |
+| 16: KL | 0.018799 | 0.025319 | 0.025319 |
+| 17: KL | 0.010951 | 0.028214 | 0.028214 |
+
+Frame 1 changes top-1 from reference 1062 to 15182 with reference margin
+1.125 in both candidates. Frame 16 also changes top-1, with a smaller reference
+margin of 0.125; its KL independently exceeds the unchanged 0.02 threshold.
+The original high-margin, aggregate top-1, cosine, KL and max-error gates all
+remain in force. Neither candidate is enabled in the plugin or admitted for
+Neuron compilation.
+
+The targeted run saves four **prediction-query vectors**, at layer-0 attention,
+layer-0 output, layer-41 attention and layer-41 output. These are finite BF16
+bundles totaling 3 MiB across all three arms and both ranks. Decode rows follow
+physical slot order: the first decode bundle maps to frames `[6, 5, 7, 4]`,
+while the metric report retains original frame order `[4, 5, 6, 7]`. Explicit
+mapping prevents comparing different requests by accident. Full-sequence
+intermediates and complete cache payloads are not exported.
+
+### Saved numerical comparison
+
+A separate serial analysis completed with exit code 0. It authenticated and
+read all 84 selected bundles plus the 32 original native prediction archives:
+58,078,560 bytes in total. Both ranks' selected bytes agree and are counted
+once. The report contains all 768 comparisons: six reference/arm pairings,
+32 frames and four boundaries. Native archives are bound both to the original
+HF32 metadata and to the original88 native endpoint receipts.
+
+| Mean absolute difference from native, all 32 prediction vectors | Strict control | Layer-0 prefill only | Layer-0 both phases |
+|---|---:|---:|---:|
+| Layer-0 attention output | 0.000035009 | 0.000028721 | 0.000025579 |
+| Layer-0 layer output | 0.000145600 | 0.000126837 | 0.000125623 |
+| Layer-41 attention output | 0.0250380 | 0.0271865 | 0.0262389 |
+| Layer-41 layer output | 0.0885306 | 0.0946100 | 0.0931349 |
+
+For the both-phases candidate, the layer-0 attention prediction error improves
+in **all 32 frames** by mean absolute difference. At the final layer output,
+the same measure improves in 12 frames and worsens in 20. The prefill-only
+candidate improves the first two layer-0 boundaries in all eight prefills
+and leaves their 24 decode vectors unchanged, while final-layer error worsens
+in 21 of 32 frames. These per-frame observations are more informative than
+an aggregate local improvement alone.
+
+Two examples make the limitation concrete:
+
+- Frame 1: layer-0 attention differs from native in 695 elements under the
+  control and only **one** element under either candidate. Its mean error
+  falls from 0.000020505 to approximately 0.000000001863. Nevertheless,
+  final-layer mean error rises from 0.118588 to 0.185853 and final-logit KL
+  rises from 0.101270 to 0.282340, with a high-margin top-1 mismatch.
+- Frame 17: the candidate's layer-0 attention output is **byte-exact** to
+  the native prediction vector. Final-layer mean error still rises from
+  0.124774 to 0.152546 and final-logit KL from 0.010951 to 0.028214.
+
+Thus local agreement at the measured attention boundary does not guarantee
+agreement after the rest of the model. This does not identify a unique
+downstream operator or justify adding per-layer errors together. Native
+unsharded execution and padded CPU TP2 execution use different geometry and
+cache histories; the comparison is between corresponding semantic prediction
+boundaries, not an isolated same-input operator experiment. Intermediate
+errors are not scored using the final-logit thresholds.
+
+The numerical replay finished before an independent live `/proc` observation
+could be obtained. Its actual tool exit code 0, emitted start identity,
+authenticated result and subsequent process/lock cleanup are recorded; a
+separate live-process receipt is **not** claimed. The independent result
+review checks source, metadata and report arithmetic, without a second raw
+tensor recomputation.
+
+No accepted optimization or speedup results from these trials. Device,
+cold-cache, long-decode, slot reuse/inactive-slot, quality96 and paired-serving
+requirements remain unchanged.
+
+- [Endpoint metrics](evidence/minicpm5-layer0-phase-20261107/frames.csv)
+- [Endpoint summary](evidence/minicpm5-layer0-phase-20261107/root-summary.json)
+- [Independent full-model result review](evidence/minicpm5-layer0-phase-20261107/independent-result-review.json)
+- [Selected-vector numerical rows](evidence/minicpm5-layer0-phase-20261107/selected-taps.csv)
+- [Complete numerical report](evidence/minicpm5-layer0-phase-20261107/selected-taps.json)
+- [Interpretation and per-frame contrasts](evidence/minicpm5-layer0-phase-20261107/numeric-interpretation.json)
+- [Independent numerical report review](evidence/minicpm5-layer0-phase-20261107/numeric-independent-review.json)
+- [Actual model exit](evidence/minicpm5-layer0-phase-20261107/actual-exit.json)
+- [Actual numerical replay exit](evidence/minicpm5-layer0-phase-20261107/numeric-actual-exit.json)
+- [Export manifest](evidence/minicpm5-layer0-phase-20261107/manifest.json)

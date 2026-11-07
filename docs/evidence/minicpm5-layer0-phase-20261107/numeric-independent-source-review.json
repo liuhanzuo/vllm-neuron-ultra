@@ -1,0 +1,76 @@
+{
+  "schema": "minicpm5_layer0_phase_selected_tap_independent_source_review_v1",
+  "reviewer": "/root/mini_after_oproj_negative_design_20261107",
+  "observed_at": "2026-11-07T18:34:40.900609+00:00",
+  "passed": true,
+  "blockers": [],
+  "analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_phase_selected_tap_analysis_v1.py",
+    "sha256": "4432d540bec8e442f8ac3582b3d18485e1c771cc548bf0c256a79548866ee7c0"
+  },
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_phase_selected_tap_runner_v1.py",
+    "sha256": "5df602916f5940133c50d132e8066e29e2309c0bb9aea6cb7b26c1f162f3f7f6"
+  },
+  "reader": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/audit_nemotron_cached_trajectory.py",
+    "sha256": "0a6553732c41dd6b236c77384a6b41fdd562190504761614613e13a0d73076c5"
+  },
+  "author_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-selected-tap-analysis-source-checks-20261107-v1.json",
+    "sha256": "d5b1a5284676d007a038e17418a9d4bf07c098e44fc90cb81157f78d2ac3c25a"
+  },
+  "independent_checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_minicpm5_layer0_phase_selected_tap_independent_v1.py",
+    "sha256": "34ff2e9f4ff1d22bb0c49b1b33b2afa1ff40899ce856d9b6c488a813541b6bab"
+  },
+  "independent_controls": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-selected-tap-independent-controls-20261107-v1.json",
+    "sha256": "f23f7052fc863807cfc30314d870c57487e75860097fdebfaf9e0d7b4484f49e"
+  },
+  "independent_control_count": 23,
+  "author_checks_replayed": {
+    "exit_code": 0,
+    "checks": 68,
+    "negative_controls": 30,
+    "tool_chunk": "68f0c5"
+  },
+  "findings_resolved": [
+    {
+      "issue": "Exact singleton strides unsupported before raw inspection",
+      "resolution": "Frozen analyzer permits positive singleton strides with last stride1,shape1x1x2048,offset0,2048element storage and exact digest. Inert padded singleton stride accepted; last-stride2 rejected."
+    },
+    {
+      "issue": "Wrapper soft address-space limit alone did not enforce stated hard limit",
+      "resolution": "Frozen wrapper requires0<soft<=hard<=4GiB; inert tests reject unlimited/oversized hard limit."
+    },
+    {
+      "issue": "Final result write after last output guard",
+      "resolution": "Frozen wrapper performs final guard after result write; inert injected guard failure propagates and releases lock."
+    }
+  ],
+  "source_review": [
+    "prepare_inputs only small JSON; binds fixed plan/spec, root actual exit and live identity, exact output tree, outer/coordinator/rank reports, every arm/call, original physical mapping and selected bundle identities. No raw path access in preparation.",
+    "Native manifest ties32 original HF frame/tap metadata archives to completed original88 native endpoint receipts and unchanged full original HF reference; selected original prediction positions checked.",
+    "Raw reads are separately admitted after model46999 actual exit and all predecessor drains. Each file path/identity/opened inode/size/full SHA/unchanged trailing identity checked around read; guarded before/after.",
+    "Each four-tap bundle exact length/fullhash/fixednames/disjointoffsets/per-entryhash/sourcehash validated; physical-row permutation maps decode data to semantic frames. Both rank actual selected bytes must agree before counting once.",
+    "Native .pt reader permits only known inert pickle globals and bounded CPU BF16/FP32 descriptors; unique stored ZIP members, bounded pickle/uncompressed bytes, one namespace, little-endian, exact raw tap digest. No Torch pickle loader/model imports.",
+    "BF16 decoding shifts16bit words into IEEE FP32 bit positions; reports exact bytes separately from numeric equality, rejects nonfinite and explicitly marks zero-norm cosine undefined. Mixed signed vector and subnormal controls checked.",
+    "Report covers768 comparisons:6contrasts x32frames x4selected2048element prediction vectors. No full-shape intermediate or causal operator claim. All original remaining gates preserved.",
+    "Wrapper exact new source and frozen CPU runner hashes, root review binding to actual exit+output, CPUs6-7/threadvars,soft+hard4GiBAS,28GiB+16MiB reserve,10minute cooperative guard and16MiB bounded output validated.",
+    "Wrapper retains22 prior owner chain plus targeted4named owners and whole targeted cgroup drain, therefore includes all6helper descendants through empty-group proof. Lock acquisition precedes raw work; success/failure/release error handling tested inertly.",
+    "Root-proposed external timeout660s with15s kill grace, CPUtime600s, filesize8MiB and AS4GiB limits are launch preconditions external to this source review. Root must bind actual argv/env/resource limits and record independent live/exit evidence."
+  ],
+  "limits": [
+    "All checks here used source,smallJSON and synthetic in-memory BF16/archive values only. No actual raw tensor reads/stat/hash,model import,compiler or launch.",
+    "Current model runtime46999 remains separately active at review time; this review does not grant parallel raw execution. Numeric analysis must wait root-observed successful actual exit and entire group drainage.",
+    "Existing native payload descriptor compatibility is source/inert tested; actual decoding still may fail against bounded exact stored archives and must be reported as such.",
+    "Native versus CPU distances include different padded geometry and history; between targeted arms after controlled first prefill group differences include propagated histories. No unique downstream cause follows.",
+    "No optimization acceptance,speedup or full model qualification from source checks."
+  ],
+  "runtime_admitted": false,
+  "model_runtime_executed": false,
+  "raw_payload_operations": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

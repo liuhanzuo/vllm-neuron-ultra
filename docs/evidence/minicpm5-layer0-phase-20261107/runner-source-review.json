@@ -1,0 +1,95 @@
+{
+  "schema": "minicpm5_original32_layer0_phase_cpu_runner_independent_source_review_v1",
+  "reviewer": "/root/mini_after_oproj_negative_design_20261107",
+  "observed_at": "2026-11-07T18:22:40.072662+00:00",
+  "passed": true,
+  "blockers": [],
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_phase_cpu_runner_v1.py",
+    "sha256": "304962388c6ad09bd2da39555714dee6678c7bc20a2a165875988445c6b3dd9b"
+  },
+  "worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_phase_cpu_worker_v1.py",
+    "sha256": "e352c545d98cc5126bb5c3746f66f1236d37673a401e87dbaba79a658ddbec2f"
+  },
+  "root_report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_phase_cpu_root_report_v2.py",
+    "sha256": "1b9f795d7fd25aae27c1252639e2ed226a2ae6ffcc801d0e7d030e36fe6562f2"
+  },
+  "author_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-layer0-phase-cpu-runner-source-checks-20261107-v1.json",
+    "sha256": "b23b60b4c678f9a3858bb2ba03ee740eccfeb6db215b631e277f000ce6f90cbd"
+  },
+  "independent_checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_minicpm5_original32_layer0_phase_cpu_runner_independent_v1.py",
+    "sha256": "53a03e28f0f04ffd2f8565c9d4dad25b4df30102bfabf297324465ff5a842c99"
+  },
+  "independent_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-original32-layer0-phase-cpu-runner-independent-controls-20261107-v1.json",
+    "sha256": "0d66df8ec758a5564848f058a3d5fc9a965fe81dccc768abe5c8256af69835d0"
+  },
+  "author_controls_replayed": {
+    "exit_code": 0,
+    "negative_controls": 31,
+    "primary_exception_controls": 5,
+    "tool_session": 73717,
+    "final_chunk": "d3a835",
+    "note": "Replayed before root message requesting avoid duplicate full suite; subsequent checks focused on independent cases."
+  },
+  "independent_control_count": 21,
+  "independent_controls": [
+    "floor_exact_boundary",
+    "Root below28GiB rejected",
+    "File above16MiB rejected",
+    "Rank above128MiB rejected",
+    "Total above256MiB rejected",
+    "Above512files rejected",
+    "Allocated blocks counted above logical bytes",
+    "Output symlink rejected",
+    "Output hardlink rejected",
+    "Output wrong_owner rejected",
+    "reserve28GiB_plus256MiB_before_output_and_launch",
+    "Valid worker-compatible synthetic report pair",
+    "Coherent before/inputafter cache splice rejected by previous-post chain",
+    "Call7 seed reset rejected",
+    "Decode bundle fixture-order frame labels rejected",
+    "Decode layer0 witness on prefill-only rejected",
+    "Aggregate top1 gate cannot be dropped",
+    "Postprocessor v2 provenance ref(outer['path']) == outer",
+    "Postprocessor v2 provenance ref(coordinator_ref['path']) == coordinator_ref",
+    "Postprocessor v2 provenance ref(path)['sha256'] == arm_ref['sha256']",
+    "Postprocessor v2 provenance ref(call_path)['sha256'] == item['sha256']"
+  ],
+  "reviewed_interfaces": [
+    "Exact three worker arms; anchor compares every original REPEAT_FIELD plus endpoint metrics, frame mapping and preservation to frozen strict S0; anchor references authenticated from predecessor actual exit rank/arm/call chain.",
+    "Prefill-only patch is absent in decode, both-phases patch present at all14calls; exactly one original layer0 target and FP32 local/reduce/BF16 final output witness when enabled.",
+    "All14calls/32frames, all42official shard proofs, 7inputs,213prediction tap hashes/layouts,84state before/inputafter/post chain and42mask routes are checked. Call7 may not reimport a seed.",
+    "Candidate calls0..3 exact across targeted arms and call4 before-state identical; later own histories are allowed to differ. Embedding/layer0 inputnorm hashes+metadata match anchor on all calls.",
+    "One finite selected-taps.bf16 bundle/call; fixed4names/order/offsets/shapes/dtypes/per-entry existing stage digests and complete physical-row permutation. Decode fixture order is explicitly rejected for frame labels.",
+    "Per-arm raw selected bytes524288; per-rank1572864; both-rank3145728. Bundle identity/stat and cross-rank fullbundle digests checked without rereading raw payloads.",
+    "Admission reserves28GiB+256MiB before output mutation/launch; output usage counts allocated blocks, file16MiB/tree256MiB/per-rank128MiB/512files plus ownership/symlink/hardlink rules.",
+    "Actual outer/coordinator/rank service identities and invocation ID are bound; failure cleanup terminates/reaps children, stops only identified service, checks empty cgroup and retains primary exception on cleanup/receipt errors.",
+    "Previous18 owner lineage inherited via exact predecessor runner/check_prerequisites; completed fourarm actual owners2178459/2179633/2179644/2179645 appended for22. This source review verifies chain logic and author metadata controls, not a fresh live process probe.",
+    "Root report v2 closes reviewed v1 provenance gap: root exit binds outer hash, outer binds coordinator hash, coordinator embeds actual rank/arm path+hash, arm binds call reports. Threshold recomputation and paired rank endpoint metrics retained."
+  ],
+  "findings": [
+    {
+      "component": "root_report_v1",
+      "severity": "material_provenance_gap",
+      "description": "v1 could read rewritten arm and matching call refs without binding arm hash to actual coordinator output.",
+      "resolution": "Root created immutable v2 with full chain; v1 remains historical and must not be used.",
+      "resolved": true
+    }
+  ],
+  "limits": [
+    "All controls source/inert/smallJSON only. No actual model execution, Torch/NumPy/SDK import, Neuron device/compiler, raw tensor read/hash/stat or live process/service probe.",
+    "Runner validates worker-reported raw digests against stage digests and identities; it does not independently recompute raw bundle or logits digests. A separate bounded numeric postprocessor must authenticate actual bytes before numerical analysis.",
+    "Selected tap metadata describes original full tensor geometry, but saved bytes contain gathered prediction queries only. Hash differences do not measure numeric error.",
+    "This accepts source/interfaces, not runtime admission; root owns concrete spec/review, current free-space and process checks, actual live/exit receipts.",
+    "Fullmodel all42 candidate remains rejected; CPU29/32 is not prior device30/32. No candidate acceptance or speedup follows source tests."
+  ],
+  "runtime_admitted": false,
+  "model_runtime_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
