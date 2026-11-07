@@ -1,0 +1,340 @@
+{
+  "already_done_not_to_repeat": [
+    "same-input down projection batch versus batch-row views",
+    "canonical full-scope attention path 576/576 comparison"
+  ],
+  "author": "/root/phi_provider_phase_review_20261107",
+  "authority": {
+    "analysis": {
+      "bytes": 279994,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-attention-cross-p1-metadata-analysis-20261107-v1.json",
+      "sha256": "cac5a5f0250b8b7713edd7eb385a930db2f3e5817490e85fc87014c5af048423"
+    },
+    "root_audit": {
+      "bytes": 118237,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-attention-cross-p1-final-root-audit-20261107-v1.json",
+      "sha256": "a3366f801fc2afaf22b133aa7b28cc48c7be91280f8cbaa813eb70e45426fe37"
+    },
+    "summary": {
+      "bytes": 10912,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-attention-cross-metadata-p1/summary.json",
+      "sha256": "6bb5152076ef2225f22fa0f579ca155edf28f1ba97afd3cca246a2180b7b0b92"
+    }
+  },
+  "conditional_only": [
+    "K-only/V-only decomposition",
+    "smallest missing upstream capture",
+    "full coverage after witness result justifies candidate"
+  ],
+  "design": {
+    "bytes": 10443,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-history-generation-next-step-design-20261107-v1.md",
+    "sha256": "6e610aa9454030fcf0de7159f14c80e5f2199a33251c1877d4ae78cf9e8f2f76"
+  },
+  "design_input_scope": "bounded metadata and source only; raw files and model/tensor payloads were neither opened nor hashed",
+  "eventual_goal": [
+    "original full-model gate matrix from actual tokens/empty caches with own generated history",
+    "cold cache",
+    "long decode",
+    "request-slot reuse/inactive checks",
+    "output/quality checks",
+    "fresh paired performance"
+  ],
+  "inspected_source_refs": [
+    {
+      "bytes": 12136,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_attention_cross_contract_v1.py",
+      "sha256": "9d0ae97bb28256d24324ee5d8d481d97c2591f3c54f846c8bcd87f76090a16a9"
+    },
+    {
+      "bytes": 19037,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_attention_cross_capture_v1.py",
+      "sha256": "7b56b4c792af94725bce12d97f96453ad520e4a554f2c532ccab25b634ab1b9b"
+    },
+    {
+      "bytes": 13608,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_attention_cross_replay_v1.py",
+      "sha256": "af08b2815c5142b3dc26767ab080adc5d421a90536cd504da03c4882b337bf72"
+    },
+    {
+      "bytes": 7621,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_attention_cross_store_v1.py",
+      "sha256": "71f4870206b5e29c804fd11f37ad8ba996589086036f6739d5c0422b0f624601"
+    }
+  ],
+  "minimum_stages": [
+    "reuse saved token-aligned generation/cache metadata and later admitted payloads",
+    "only implicated QKV or RoPE same-input execution/layout crossover with exact source self-reproduction",
+    "fixed Q/current KV canonical attention with generated-prefix swap, sham and reciprocal controls",
+    "three original-layout witness occurrences plus equal control to separate layout from implementation"
+  ],
+  "missing_input_caution": "p1 explicitly saves down_proj weight only; resolve exact QKV weight/bias from pinned original checkpoint under future admission, without assuming it exists in p1 raw closure",
+  "next_scientific_question": "Which captured generation boundary first differs for prefix K/V, and does changing generator execution on identical logical input mediate the selected attention output difference?",
+  "original18_gates": {
+    "instruct/candidate": {
+      "native_batch": false,
+      "original_hf": false,
+      "original_port": false
+    },
+    "instruct/unchanged": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "instruct/wrapper": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/candidate": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/unchanged": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/wrapper": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    }
+  },
+  "original_gate_criteria": {
+    "all_reference_margins_gt_0_5_must_match": true,
+    "argmax_match_fraction_min": 0.9,
+    "cosine_min": 0.995,
+    "kl_max_nats": 0.02,
+    "max_abs_error_max": 2.0
+  },
+  "queue": {
+    "after": "Mini",
+    "canonical_or_installed_source_changed": false,
+    "existing_serial_admission_only": true,
+    "github_action": false,
+    "no_deletion_or_expansion_performed": true,
+    "p1_post_auditor_exit_pending_at_audit_write": true,
+    "process_or_service_probed": false,
+    "raw_or_tensor_payload_read_or_hashed": false,
+    "requires_fresh_live_catalog_and_drain": true,
+    "runtime_implementation_created": false,
+    "runtime_launched": false,
+    "serial_lock_accessed": false,
+    "unchanged_resource_floors_and_caps": true
+  },
+  "results": {
+    "all10_self_replay_controls_passed": true,
+    "arm_repetition_is_not_independent_evidence": true,
+    "cells": 4608,
+    "contrasts": [
+      {
+        "cases": 576,
+        "contrast": "path_with_anchor_state",
+        "max_abs": 0.0,
+        "panel": "canonical_layout",
+        "raw_equal": 576
+      },
+      {
+        "cases": 576,
+        "contrast": "state_on_anchor_path",
+        "max_abs": 0.0048828125,
+        "panel": "canonical_layout",
+        "raw_equal": 402
+      },
+      {
+        "cases": 576,
+        "contrast": "state_on_port_path",
+        "max_abs": 0.0048828125,
+        "panel": "canonical_layout",
+        "raw_equal": 402
+      },
+      {
+        "cases": 576,
+        "contrast": "path_with_anchor_state",
+        "max_abs": 0.0001220703125,
+        "panel": "original_layout",
+        "raw_equal": 567
+      },
+      {
+        "cases": 576,
+        "contrast": "state_on_anchor_path",
+        "max_abs": 0.0048828125,
+        "panel": "original_layout",
+        "raw_equal": 402
+      },
+      {
+        "cases": 576,
+        "contrast": "state_on_port_path",
+        "max_abs": 0.0048828125,
+        "panel": "original_layout",
+        "raw_equal": 402
+      }
+    ],
+    "first_observed_state_unequal": [
+      {
+        "anchor": "native_batch",
+        "arm": "candidate",
+        "key": {
+          "fixture": 2,
+          "phase": "decode",
+          "slot": 0,
+          "step": 2
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 10,
+        "variant": "instruct"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "candidate",
+        "key": {
+          "fixture": 5,
+          "phase": "prefill",
+          "slot": 1
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 1,
+        "variant": "instruct"
+      },
+      {
+        "anchor": "port",
+        "arm": "candidate",
+        "key": {
+          "fixture": 2,
+          "phase": "decode",
+          "slot": 0,
+          "step": 2
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 10,
+        "variant": "instruct"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "unchanged",
+        "key": {
+          "fixture": 5,
+          "phase": "prefill",
+          "slot": 1
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 1,
+        "variant": "instruct"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "wrapper",
+        "key": {
+          "fixture": 5,
+          "phase": "prefill",
+          "slot": 1
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 1,
+        "variant": "instruct"
+      },
+      {
+        "anchor": "native_batch",
+        "arm": "candidate",
+        "key": {
+          "fixture": 0,
+          "phase": "decode",
+          "slot": 3,
+          "step": 2
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 8,
+        "variant": "reasoning"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "candidate",
+        "key": {
+          "fixture": 0,
+          "phase": "prefill",
+          "slot": 3
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 0,
+        "variant": "reasoning"
+      },
+      {
+        "anchor": "port",
+        "arm": "candidate",
+        "key": {
+          "fixture": 0,
+          "phase": "decode",
+          "slot": 3,
+          "step": 2
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 8,
+        "variant": "reasoning"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "unchanged",
+        "key": {
+          "fixture": 0,
+          "phase": "prefill",
+          "slot": 3
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 0,
+        "variant": "reasoning"
+      },
+      {
+        "anchor": "native_single",
+        "arm": "wrapper",
+        "key": {
+          "fixture": 0,
+          "phase": "prefill",
+          "slot": 3
+        },
+        "max_abs": 0.00048828125,
+        "ordinal": 0,
+        "variant": "reasoning"
+      }
+    ],
+    "original_layout_unequal_appearances": 9,
+    "original_layout_witness_ordinals": {
+      "instruct/native_single": [
+        1
+      ],
+      "reasoning/native_batch": [
+        12,
+        30
+      ]
+    },
+    "unique_2x2_groups": 1152
+  },
+  "reuse_saved_fields": [
+    "layer1 normalized hidden",
+    "layer1 complete packed pre-RoPE QKV",
+    "post-RoPE query/current K",
+    "cos/sin/positions",
+    "complete before/after/effective KV",
+    "layer0 down input/output and saved weight",
+    "selected head references"
+  ],
+  "schema": "phi4_history_generation_next_step_design_v1",
+  "stage_limits": {
+    "attention_endpoint_substitution_is_full_model_trajectory": false,
+    "evidence_runtime": "CPU reference-boundary diagnostic; not a Neuron performance measurement",
+    "full_model_qualified": false,
+    "global_first_cause_proven": false,
+    "new_speedup_claim": false,
+    "original_gates_replaced": false,
+    "prefill_prefix_includes_same_call_earlier_tokens": true
+  },
+  "status": "frozen_design_only",
+  "supporting_metadata": {
+    "reasoning_unchanged_native_batch_cross": {
+      "bytes": 714838,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-attention-cross-metadata-p1/cross-reasoning-unchanged-native_batch.json",
+      "sha256": "b9fdb13f371a780ef72ab7447f19290851212a30987406ec78234bb8fb62da82"
+    }
+  }
+}

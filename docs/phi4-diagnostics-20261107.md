@@ -5,6 +5,12 @@ to the native single-request reference, but **neither Phi-4-mini variant passes
 the original full-output numerical gates**. This candidate is not promoted.
 No inference speedup was measured by this diagnostic.
 
+The subsequent **p1 attention crossover has now completed**. With identical
+captured inputs in a common layout, both attention paths produced identical
+selected outputs in 576/576 cases. Changing earlier prefix K/V changed 174/576
+selected outputs. These CPU boundary results narrow the next investigation;
+they do not identify a global first cause or repair the failed full-output gates.
+
 The experiment uses original BF16 weights for:
 
 - `microsoft/Phi-4-mini-instruct`, revision `cfbefacb99257ffa30c83adab238a50856ac3083`.
@@ -72,17 +78,96 @@ This evidence bundle includes analysis metadata and archival source, not model
 weights, binary tensor payloads or a standalone inference runner. Absolute
 paths in archived records refer to the original experiment machine.
 
-## Next experiment
+## Completed p1 attention crossover
 
 Matching one selected query row does not establish that the full attention
 inputs match. Prefill attention already differs in 2/8 Instruct and 7/8
 Reasoning rows despite matching selected-row QKV. Decode cache history therefore
 cannot be asserted as the sole cause.
 
-The next planned diagnostic captures complete Q/K/V, masks, positions and
-prefix-cache versions, then crosses attention implementation and prefix state.
-It separates original physical layouts from a common-layout control, and
-requires each original path to reproduce its captured output before interpreting
-crossed results. A same-input down-projection control tests the remaining
-projection discrepancy. This experiment is not yet executed. Cold-cache,
-long-decode, slot-reuse, quality and serving-performance requirements remain.
+The completed p1 run captured complete Q/K/V, masks, positions and prefix-cache
+versions, then crossed attention path and prefix state. It retained both the
+original recipient layouts and a common-layout panel. All **10 source
+self-replays passed** before interpreting the crossed results. The root audit
+verified diagnostic completion, all 5,192 raw-file hashes, and the original
+4,608-cell scope. This document update reads only saved JSON metadata; it does
+not repeat that payload audit or run a model.
+
+Each contrast in each panel contains **576 selected-output cases**:
+2 model variants × 3 arms × 3 reference anchors × 32 ordered frame occurrences.
+There are 1,152 two-by-two groups across two panels, each with four cells,
+giving 4,608 cells. Those cells and repeated arm appearances are not independent
+trials. The following counts describe exact selected-output bytes, not the
+number of full-model numerical gates passed.
+
+| Comparison | Exact cases | Largest absolute difference |
+|---|---:|---:|
+| Same anchor prefix state, common layout, two attention paths | **576/576** | 0 |
+| Same anchor prefix state, original recipient layouts and paths | **567/576** | 0.0001220703125 |
+| Anchor versus arm prefix state, fixed attention path | **402/576** | 0.0048828125 |
+
+The last row holds separately for each path in each layout panel; it does not
+pool four denominators. The intervention holds **all logical Q and the final
+token's K/V fixed**, replacing only earlier valid K/V. During prefill, those
+earlier tokens are generated within the same call. Thus this is an endpoint
+substitution, not a consistent model trajectory or proof that prior decode
+cache updates caused the original error.
+
+Common-layout equality applies to these captured selected outputs. The
+original-layout comparison also changes batch grouping, shape, padding,
+strides, offsets or mask representation, so it cannot isolate implementation
+alone. Its nine unequal appearances reduce to **three distinct ordered witness
+occurrences**, each repeated across the unchanged, wrapper and candidate arms:
+
+| Variant / anchor | Frame ordinal | Fixture / phase / step / slot |
+|---|---:|---|
+| Instruct / native single | 1 | 5 / prefill / — / 1 |
+| Reasoning / native batch | 12 | 0 / decode / 3 / 3 |
+| Reasoning / native batch | 30 | 0 / decode / 3 / 0 |
+
+The two Reasoning occurrences also reuse one fixture. These are selected-output
+witnesses, not nine independent discoveries or the earliest differing internal
+operations.
+
+The same-input down-projection control also completed. For B4 decode, all four
+Instruct source streams had 0/6 byte-equal calls between batched execution and
+concatenated row-view execution. Reasoning native-batch, unchanged and wrapper
+streams had 1/6; its candidate had 0/6. Splitting the batch preserves the token
+axis. B1 prefill is a no-op for this split, so this control does not test padded
+versus unpadded prefill.
+
+All **18 original gate outcomes remain unchanged**: all six original-HF
+comparisons fail, and the Instruct candidate additionally fails against native
+batch and original port. No local crossover upgrades these outcomes. p1 is a
+CPU reference-boundary diagnostic; it supplies no Neuron throughput or full-model
+qualification result.
+
+- [Compact p1 analysis and all 18 gate outcomes](evidence/phi4-attention-cross-p1-20261107/analysis.json)
+- [Root audit metadata](evidence/phi4-attention-cross-p1-20261107/root-audit.json)
+- [Export hashes, original records and complete source/evidence references](evidence/phi4-attention-cross-p1-20261107/manifest.json)
+
+The export removes repeated token-index arrays and stores the root audit's full
+source/evidence pin map once in the manifest. Original record hashes identify
+the unmodified local evidence. No weights or binary tensor payloads are bundled.
+
+## Next experiment: prefix generation and local layout effects
+
+The [next design](evidence/phi4-attention-cross-p1-20261107/next-design.md) is
+prepared but has not run. It first reuses the saved p1 evidence to align every
+prefix token with its generating call, then compares normalized hidden states,
+pre-RoPE QKV, rotated K, V and effective cache contents. This distinguishes a
+generator receiving different input from the same logical input executing
+differently; a local execution difference can later become historical K/V.
+
+Only an implicated generator gets a small same-input crossover with exact
+source-reproduction controls. Its generated prefix is then substituted into a
+fixed attention recipient, with sham and reciprocal controls. The three
+original-layout witnesses receive a separate layout/path test with an equal
+control. QKV weights are not assumed to be among the p1 saved tensors; resolving
+them from the pinned checkpoint requires separate resource admission.
+
+These witness tests cannot replace full coverage. Any justified candidate must
+retain both variants, three arms, three anchors and all original 32 frames,
+then undergo full-model validation from original tokens and empty caches with
+its own generated history. Cold-cache, long-decode, request-slot reuse, quality
+and fresh paired serving-performance checks remain required.
