@@ -57,6 +57,12 @@ The model package trees are preserved from these source branches:
 - SmolLM3: `smollm3-ablation-results-20261107`, commit `e3dc962`.
 - Nemotron: `nemotron9b-experimental-v1`, commit `60ab7f54a2c54ef0bc9b498621a45719ee7f0e84`.
 
+The repository also preserves the [historical four-model INT8 comparison](dense-int8-results-20261030.md)
+for Qwen3-8B, Qwen2.5-7B, DeepSeek-R1-Distill-Qwen-7B and Mistral-7B: C4 gains
+of 1.53×, 2.02×, 2.08× and 1.62× respectively. These used device greedy sampling
+and an earlier small validation suite. They are not new merged-branch results
+or evidence of lossless quantization.
+
 The included SmolLM3 successor adds experimental ablation variants. Its
 [write-only candidate failed deterministic output equality](smollm3-ablation-20261107.md),
 so its measured speed is not a qualified improvement. The older combined

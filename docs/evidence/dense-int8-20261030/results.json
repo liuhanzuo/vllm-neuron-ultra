@@ -1,0 +1,2454 @@
+[
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "name": "qwen3-bf16-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-ks-baseline",
+      "direct": true
+    },
+    "status": "passed",
+    "startup_s": 58.15545143606141,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 29.728946628972007,
+      "single_median_tok_s": 29.70143179750118,
+      "concurrent_best_tok_s": 115.27152285356149,
+      "concurrent_median_tok_s": 115.26691681558309,
+      "streaming_ttft_ms": [
+        170.3748619183898,
+        133.26415326446295,
+        96.58442670479417,
+        59.99318603426218
+      ],
+      "streaming_mean_token_interval_ms": [
+        33.584421257950176,
+        33.89646882238258,
+        34.20749301200404,
+        34.51726248706965
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen3-bf16-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "name": "qwen3-int8-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-ks-int8",
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8",
+      "direct": true
+    },
+    "status": "passed",
+    "startup_s": 70.19464533682913,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 45.49784257995562,
+      "single_median_tok_s": 45.37090230777262,
+      "concurrent_best_tok_s": 177.13398104751226,
+      "concurrent_median_tok_s": 176.4441440541611,
+      "streaming_ttft_ms": [
+        38.56549598276615,
+        123.53731598705053,
+        95.5397360958159,
+        67.22344690933824
+      ],
+      "streaming_mean_token_interval_ms": [
+        22.73985428907791,
+        22.021954714813653,
+        22.25952120028248,
+        22.497805899807386
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen3-int8-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "name": "qwen3-bf16-cpu-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-nodevsample",
+      "cpu": true
+    },
+    "status": "passed",
+    "startup_s": 78.20602051587775,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 28.61036684476934,
+      "single_median_tok_s": 28.59532931777033,
+      "concurrent_best_tok_s": 103.63568471600608,
+      "concurrent_median_tok_s": 103.40592603423984,
+      "streaming_ttft_ms": [
+        172.18704568222165,
+        133.73930612578988,
+        95.90629441663623,
+        58.21797205135226
+      ],
+      "streaming_mean_token_interval_ms": [
+        37.88862939720519,
+        38.208962496401384,
+        38.5276856793075,
+        38.846355714216955
+      ]
+    },
+    "sampling": {
+      "outputs": {
+        "greedy": [
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "topk1": [
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "random": [
+          "星爪咖啡馆",
+          "星际喵爪咖啡馆",
+          "星际喵爪咖啡厅",
+          "星爪咖啡馆",
+          "星喵驿站",
+          "星喵咖啡馆"
+        ]
+      },
+      "greedy_unique": 1,
+      "topk1_unique": 1,
+      "random_unique": 5,
+      "note": "Behavioral sampling probe; diversity alone does not prove distributional correctness."
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "name": "qwen3-int8-cpu-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-cpu-tp2-b4",
+      "cpu": true,
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8"
+    },
+    "status": "passed",
+    "startup_s": 778.8503157207742,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 43.19444930988653,
+      "single_median_tok_s": 42.819523233230214,
+      "concurrent_best_tok_s": 149.96346708930776,
+      "concurrent_median_tok_s": 149.88768433759975,
+      "streaming_ttft_ms": [
+        48.50653326138854,
+        138.99887818843126,
+        109.00312196463346,
+        79.22018179669976
+      ],
+      "streaming_mean_token_interval_ms": [
+        26.790111638730814,
+        26.029072991501884,
+        26.27666713669896,
+        26.53255296025832
+      ]
+    },
+    "sampling": {
+      "outputs": {
+        "greedy": [
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆"
+        ],
+        "topk1": [
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "random": [
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星际喵爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星爪咖啡厅"
+        ]
+      },
+      "greedy_unique": 1,
+      "topk1_unique": 2,
+      "random_unique": 3,
+      "note": "Behavioral sampling probe; diversity alone does not prove distributional correctness."
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 8,
+      "tp": 2,
+      "name": "qwen3-int8-tp2-b8",
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-ks-int8-bs8",
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8"
+    },
+    "status": "passed",
+    "startup_s": 42.11176478629932,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 44.30500777021796,
+      "single_median_tok_s": 44.29020111858255,
+      "concurrent_best_tok_s": 329.61926689400053,
+      "concurrent_median_tok_s": 329.61608153262824,
+      "streaming_ttft_ms": [
+        38.20884088054299,
+        123.08539170771837,
+        151.9640078768134,
+        236.63044720888138,
+        180.33578200265765,
+        65.99539332091808,
+        94.73929041996598,
+        209.3216059729457
+      ],
+      "streaming_mean_token_interval_ms": [
+        24.324520624109677,
+        23.608782907807026,
+        23.362403805954617,
+        22.652251845491783,
+        23.127052706016713,
+        24.08908530208869,
+        23.847088898618182,
+        22.89094649521368
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 1,
+      "name": "qwen3-int8-tp1-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-tp1-b4",
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8"
+    },
+    "status": "failed",
+    "error": "trn1-bench-qwen3-int8-tp1-b4 ended before readiness: deactivating",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 204, in run_case\n    rec={'case':case,'status':'running'}\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 138, in server\n    return unit,wait_server(unit,port)\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 77, in wait_server\n    if active not in ['active','activating']: raise RuntimeError(f'{unit} ended before readiness: {active}')\nRuntimeError: trn1-bench-qwen3-int8-tp1-b4 ended before readiness: deactivating\n"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen2.5-7B-Instruct",
+      "served_name": "Qwen2.5-7B-Instruct",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": false,
+      "name": "qwen25-bf16-tp2-b4",
+      "int8": false,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen25-bf16-tp2-b4"
+    },
+    "status": "passed",
+    "startup_s": 612.3123821141198,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 23.499093541370616,
+      "single_median_tok_s": 23.36693642315733,
+      "concurrent_best_tok_s": 91.48613380014484,
+      "concurrent_median_tok_s": 91.46019438724187,
+      "streaming_ttft_ms": [
+        161.20573598891497,
+        207.03720627352595,
+        114.57052268087864,
+        68.5685551725328
+      ],
+      "streaming_mean_token_interval_ms": [
+        42.872739897086085,
+        42.483990209787585,
+        43.26378170619993,
+        43.649325699021084
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen25-bf16-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen2.5-7B-Instruct",
+      "served_name": "Qwen2.5-7B-Instruct",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": false,
+      "name": "qwen25-int8-tp2-b4",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen25-int8-tp2-b4",
+      "quant_path": "/mnt/nvme/models/Qwen2.5-7B-Instruct-int8-exp20261030",
+      "bias_shim": true
+    },
+    "status": "passed",
+    "startup_s": 54.16625977586955,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 48.125740701547834,
+      "single_median_tok_s": 48.04330623265174,
+      "concurrent_best_tok_s": 185.43346600103897,
+      "concurrent_median_tok_s": 184.9555531061737,
+      "streaming_ttft_ms": [
+        140.58509096503258,
+        107.98431001603603,
+        42.66237514093518,
+        75.69479290395975
+      ],
+      "streaming_mean_token_interval_ms": [
+        20.83901223577872,
+        21.110953461817083,
+        21.659156201923846,
+        21.38271730220994
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen25-int8-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen2.5-7B-Instruct",
+      "served_name": "Qwen2.5-7B-Instruct",
+      "batch": 8,
+      "tp": 2,
+      "reasoning": false,
+      "name": "qwen25-int8-tp2-b8",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen25-int8-tp2-b8",
+      "quant_path": "/mnt/nvme/models/Qwen2.5-7B-Instruct-int8-exp20261030",
+      "bias_shim": true
+    },
+    "status": "passed",
+    "startup_s": 42.112546221818775,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 45.30623995568879,
+      "single_median_tok_s": 45.05806863208102,
+      "concurrent_best_tok_s": 331.6615150266391,
+      "concurrent_median_tok_s": 331.028133986398,
+      "streaming_ttft_ms": [
+        74.70051385462284,
+        41.79189587011933,
+        106.71949712559581,
+        234.91573007777333,
+        203.2350217923522,
+        138.328667730093,
+        171.02194298058748,
+        268.247090280056
+      ],
+      "streaming_mean_token_interval_ms": [
+        23.8193673113001,
+        24.090022142162592,
+        23.54938941890327,
+        22.46012514018837,
+        22.73068455744441,
+        23.278012766088008,
+        23.004012585406294,
+        22.188042677907635
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/DeepSeek-R1-Distill-Qwen-7B",
+      "served_name": "DeepSeek-R1-Distill-Qwen-7B",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": true,
+      "name": "deepseek-r1-bf16-tp2-b4",
+      "int8": false,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-deepseek-r1-bf16-tp2-b4"
+    },
+    "status": "passed",
+    "startup_s": 602.4963376177475,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国有很多城市，比如巴黎、里昂、马赛这些，但哪个是首都呢？巴黎好像是比较著名的，对吧？对，巴黎是法国的政治中心，也是文化中心，所以应该就是首都在那里。对了，我好像在课本上学过，法国的首都叫做巴黎。所以答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。首先，我需要确认一下日本的首都到底在哪里。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该仔细想一想或者查证一下。\n\n首先，日本是一个岛国，由多个岛屿组成，其中最大的岛屿是 Honshu。东京位于 Honshu 的北部，是一个非常大的城市，人口非常多，经济也很发达。所以，东京应该是日本的首都。\n\n不过，有时候可能会有其他的疑问，比如日本是否有其他的中心城市，或者是否有其他的定义。比如，有人可能会提到大阪或者名古屋，但这些都是日本的非常重要的城市，但不是首都。首都通常是指政治和行政中心，所以东京应该是正确的。\n\n另外，我还记得一些关于日本历史的知识，比如明治维新之后，日本的国家制度发生了变化，东京成为了首都。所以，这也支持东京作为首都的说法。\n\n再想想，日本的官方文件和媒体报道中，通常都会提到东京作为首都。所以，综合这些信息，我可以确定日本的首都是东京。\n</think>\n\n日本的首都是东京。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国有很多城市，比如巴黎、里昂、马赛这些，但哪个是首都呢？巴黎好像是比较著名的，对吧？对，巴黎是法国的政治中心，也是文化中心，所以应该就是首都在那里。对了，我好像在课本上学过，法国的首都叫做巴黎。所以答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。首先，我需要确认一下日本的首都到底在哪里。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该仔细想一想或者查证一下。\n\n首先，日本是一个岛国，由多个岛屿组成，其中最大的岛屿是 Honshu。东京位于 Honshu 的北部，是一个非常大的城市，人口非常多，经济也很发达。所以，东京应该是日本的首都。\n\n不过，有时候可能会有其他的疑问，比如日本是否有其他的中心城市，或者是否有其他的定义。比如，有人可能会提到大阪或者名古屋，但这些都是日本的非常重要的城市，但不是首都。首都通常是指政治和行政中心，所以东京应该是正确的。\n\n另外，我还记得一些关于日本历史的知识，比如明治维新之后，日本的国家制度发生了变化，东京成为了首都。所以，这也支持东京作为首都的说法。\n\n再想想，日本的官方文件和媒体报道中，通常都会提到东京作为首都。所以，综合这些信息，我可以确定日本的首都是东京。\n</think>\n\n日本的首都是东京。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 24.1948991014973,
+      "single_median_tok_s": 24.14901289139085,
+      "concurrent_best_tok_s": 94.37577431601288,
+      "concurrent_median_tok_s": 94.1530549360348,
+      "streaming_ttft_ms": [
+        159.53783877193928,
+        205.64290788024664,
+        112.92593833059072,
+        66.29098625853658
+      ],
+      "streaming_mean_token_interval_ms": [
+        41.55524598606745,
+        41.164479562777935,
+        41.94327947847983,
+        42.34194941818714
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/deepseek-r1-bf16-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/DeepSeek-R1-Distill-Qwen-7B",
+      "served_name": "DeepSeek-R1-Distill-Qwen-7B",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": true,
+      "name": "deepseek-r1-int8-tp2-b4",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-deepseek-r1-int8-tp2-b4",
+      "quant_path": "/mnt/nvme/models/DeepSeek-R1-Distill-Qwen-7B-int8-exp20261030",
+      "bias_shim": true
+    },
+    "status": "passed",
+    "startup_s": 652.4600803349167,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国有很多城市，比如巴黎、里昂、马赛这些，但哪个是首都呢？巴黎好像是比较著名的，对吧？对，巴黎是法国的政治中心，也是文化中心，还有 lots of famous landmarks like the Eiffel Tower and the Louvre Museum。所以，答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。好，我先回忆一下关于日本首都的知识。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该详细想一想。\n\n首先，日本是一个岛国，主要由四个大岛组成，包括本岛、北海道、四国和九州。东京位于本岛的最北端，是一个非常大的城市，人口非常多，经济也很发达。我记得东京是日本的政治、经济和文化中心，所以它应该是首都。\n\n不过，有时候可能会有其他的说法，比如“首都”有时候可能指的是行政中心，而东京确实是日本的首都，但有时候可能会有其他的解释。不过，根据我的记忆，东京是正确的答案。\n\n另外，我还记得一些关于日本首都的其他信息，比如东京的地铁系统非常发达，覆盖整个城市，这可能也是它作为首都的原因之一。此外，东京的国际影响力也非常大，很多国际会议和活动都会在东京举行。\n\n再想想，日本的首都名称有时候可能会有不同的拼写，比如“東京”是正式的名称，而有时候可能用“东市”或者“东京市”来指代。但问题里只问",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国有很多城市，比如巴黎、里昂、马赛这些，但哪个是首都呢？巴黎好像是比较著名的，对吧？对，巴黎是法国的政治中心，也是文化中心，还有 lots of famous landmarks like the Eiffel Tower and the Louvre Museum。所以，答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。好，我先回忆一下关于日本首都的知识。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该详细想一想。\n\n首先，日本是一个岛国，主要由四个大岛组成，包括本岛、北海道、四国和九州。东京位于本岛的最北端，是一个非常大的城市，人口非常多，经济也很发达。我记得东京是日本的政治、经济和文化中心，所以它应该是首都。\n\n不过，有时候可能会有其他的说法，比如“首都”有时候可能指的是行政中心，而东京确实是日本的首都，但有时候可能会有其他的解释。不过，根据我的记忆，东京是正确的答案。\n\n另外，我还记得一些关于日本首都的其他信息，比如东京的地铁系统非常发达，覆盖整个城市，这可能也是它作为首都的原因之一。此外，东京的国际影响力也非常大，很多国际会议和活动都会在东京举行。\n\n再想想，日本的首都名称有时候可能会有不同的拼写，比如“東京”是正式的名称，而有时候可能用“东市”或者“东京市”来指代。但问题里只问",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 50.96158527031099,
+      "single_median_tok_s": 50.58994053395595,
+      "concurrent_best_tok_s": 196.3368462805977,
+      "concurrent_median_tok_s": 196.29464558495454,
+      "streaming_ttft_ms": [
+        120.42073905467987,
+        152.62516075745225,
+        55.43626518920064,
+        88.2049323990941
+      ],
+      "streaming_mean_token_interval_ms": [
+        19.83646644248056,
+        19.56237918705124,
+        20.380833992311935,
+        20.104784655439502
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/deepseek-r1-int8-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/DeepSeek-R1-Distill-Qwen-7B",
+      "served_name": "DeepSeek-R1-Distill-Qwen-7B",
+      "batch": 8,
+      "tp": 2,
+      "reasoning": true,
+      "name": "deepseek-r1-int8-tp2-b8",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-deepseek-r1-int8-tp2-b8",
+      "quant_path": "/mnt/nvme/models/DeepSeek-R1-Distill-Qwen-7B-int8-exp20261030",
+      "bias_shim": true
+    },
+    "status": "passed",
+    "startup_s": 295.21891838498414,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国是一个很大的国家，位于欧洲，但具体的首都位置我可能记不太清楚。让我想想，巴黎是不是法国的首都？对，没错，巴黎是法国的首都。我还记得巴黎是一个非常著名的历史城市，有很多历史遗迹，比如埃菲尔铁塔、巴黎歌剧院和凯旋门。所以，答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。首先，我需要确认一下日本的首都到底在哪里。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该仔细想一下或者查阅一下资料。\n\n首先，日本的首都通常指的是政治、经济和文化中心。东京确实是一个非常大的城市，人口非常多，而且在很多方面都是日本的象征。比如，东京奥运会就是在那里举办过的。此外，东京的地铁系统非常发达，覆盖全国，这也是它作为首都的一个重要标志。\n\n不过，有时候可能会有其他的说法，比如“首都圈”指的是东京、大阪等城市，但通常所说的首都还是指东京。所以，综合来看，日本的首都应该是东京。\n\n为了进一步确认，我可以回想一下历史上的事件。比如，二战期间，东京是日本的首都，尽管后来被美国占领。现在，东京仍然是日本的政治和经济中心，拥有众多的大学、研究机构和重要的商业区。\n\n另外，日本的官方文件和媒体报道中，也经常提到东京作为首都。所以，综合以上思考，我可以确定日本的首都是东京。\n</think>\n\n日本的首都是东京。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国是一个很大的国家，位于欧洲，但具体的首都位置我可能记不太清楚。让我想想，巴黎是不是法国的首都？对，没错，巴黎是法国的首都。我还记得巴黎是一个非常著名的历史城市，有很多历史遗迹，比如埃菲尔铁塔、巴黎歌剧院和凯旋门。所以，答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。首先，我需要确认一下日本的首都到底在哪里。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该仔细想一下或者查阅一下资料。\n\n首先，日本的首都通常指的是政治、经济和文化中心。东京确实是一个非常大的城市，人口非常多，而且在很多方面都是日本的象征。比如，东京奥运会就是在那里举办过的。此外，东京的地铁系统非常发达，覆盖全国，这也是它作为首都的一个重要标志。\n\n不过，有时候可能会有其他的说法，比如“首都圈”指的是东京、大阪等城市，但通常所说的首都还是指东京。所以，综合来看，日本的首都应该是东京。\n\n为了进一步确认，我可以回想一下历史上的事件。比如，二战期间，东京是日本的首都，尽管后来被美国占领。现在，东京仍然是日本的政治和经济中心，拥有众多的大学、研究机构和重要的商业区。\n\n另外，日本的官方文件和媒体报道中，也经常提到东京作为首都。所以，综合以上思考，我可以确定日本的首都是东京。\n</think>\n\n日本的首都是东京。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "嗯，法国的首都在哪里呢？我记得法国是一个很大的国家，位于欧洲，但具体的首都位置我可能记不太清楚。让我想想，巴黎是不是法国的首都？对，没错，巴黎是法国的首都。我还记得巴黎是一个非常著名的历史城市，有很多历史遗迹，比如埃菲尔铁塔、巴黎歌剧院和凯旋门。所以，答案应该是巴黎。\n</think>\n\n巴黎",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "嗯，我现在要回答的问题是：日本的首都是哪里？只回答城市名。首先，我需要确认一下日本的首都到底在哪里。我记得日本的首都应该是东京，对吧？不过，为了确保准确性，我应该仔细想一下或者查阅一下资料。\n\n首先，日本的首都通常指的是政治、经济和文化中心。东京确实是一个非常大的城市，人口非常多，而且在很多方面都是日本的象征。比如，东京奥运会就是在那里举办过的。此外，东京的地铁系统非常发达，覆盖全国，这也是它作为首都的一个重要标志。\n\n不过，有时候可能会有其他的说法，比如“首都圈”指的是东京、大阪等城市，但通常所说的首都还是指东京。所以，综合来看，日本的首都应该是东京。\n\n为了进一步确认，我可以回想一下历史上的事件。比如，二战期间，东京是日本的首都，尽管后来被美国占领。现在，东京仍然是日本的政治和经济中心，拥有众多的大学、研究机构和重要的商业区。\n\n另外，日本的官方文件和媒体报道中，也经常提到东京作为首都。所以，综合以上思考，我可以确定日本的首都是东京。\n</think>\n\n日本的首都是东京。",
+          "matches_exactly": false,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "首先，我需要计算10乘以10的结果。\n\n10乘以10等于100。\n</think>\n\n10乘以10等于 \\boxed{100}。",
+          "matches_exactly": false,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。",
+        "首先，我需要计算2加2的和。\n\n2加2等于4。\n</think>\n\n2加2等于4。"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 47.60044580652422,
+      "single_median_tok_s": 47.407441647261734,
+      "concurrent_best_tok_s": 348.55785074853736,
+      "concurrent_median_tok_s": 347.7852361815925,
+      "streaming_ttft_ms": [
+        75.90292626991868,
+        238.487527705729,
+        107.97016182914376,
+        172.869720030576,
+        205.68847889080644,
+        272.40111073479056,
+        144.4517499767244,
+        43.757340870797634
+      ],
+      "streaming_mean_token_interval_ms": [
+        22.63024545219891,
+        21.262316252378856,
+        22.36187517909067,
+        21.815224405878983,
+        21.5375597721764,
+        20.977958629862602,
+        22.05757619500035,
+        22.909214015768356
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3",
+      "served_name": "Mistral-7B-Instruct-v0.3",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": false,
+      "name": "mistral-bf16-tp2-b4",
+      "int8": false,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-mistral-bf16-tp2-b4"
+    },
+    "status": "passed",
+    "startup_s": 602.1028619837016,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        " 4",
+        " 4",
+        " 4",
+        " 4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 32.67041107199387,
+      "single_median_tok_s": 32.53310801637588,
+      "concurrent_best_tok_s": 126.71763996060317,
+      "concurrent_median_tok_s": 126.70010637920511,
+      "streaming_ttft_ms": [
+        166.64243629202247,
+        130.75943803414702,
+        95.4268891364336,
+        60.2567819878459
+      ],
+      "streaming_mean_token_interval_ms": [
+        30.42367663813614,
+        30.72352145461976,
+        31.02141342071049,
+        31.316438552868718
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/mistral-bf16-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3",
+      "served_name": "Mistral-7B-Instruct-v0.3",
+      "batch": 4,
+      "tp": 2,
+      "reasoning": false,
+      "name": "mistral-int8-tp2-b4",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-mistral-int8-tp2-b4",
+      "quant_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3-int8-exp20261030"
+    },
+    "status": "passed",
+    "startup_s": 666.4858532650396,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        " 4",
+        " 4",
+        " 4",
+        " 4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 53.29677084416505,
+      "single_median_tok_s": 53.25687054975862,
+      "concurrent_best_tok_s": 205.8077139412574,
+      "concurrent_median_tok_s": 205.6424621657332,
+      "streaming_ttft_ms": [
+        46.156997326761484,
+        126.21191935613751,
+        72.91017100214958,
+        100.1128270290792
+      ],
+      "streaming_mean_token_interval_ms": [
+        19.56774909910159,
+        18.894783663367775,
+        19.344339518956527,
+        19.117280073902187
+      ]
+    },
+    "direct_output": "/home/ubuntu/experiments/trn1-model-bench-20261030/mistral-int8-tp2-b4-direct.json"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3",
+      "served_name": "Mistral-7B-Instruct-v0.3",
+      "batch": 8,
+      "tp": 2,
+      "reasoning": false,
+      "name": "mistral-int8-tp2-b8",
+      "int8": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-mistral-int8-tp2-b8",
+      "quant_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3-int8-exp20261030"
+    },
+    "status": "passed",
+    "startup_s": 662.3062270237133,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        " 4",
+        " 4",
+        " 4",
+        " 4",
+        " 4",
+        " 4",
+        " 4",
+        " 4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 52.1628221181115,
+      "single_median_tok_s": 52.02202950396779,
+      "concurrent_best_tok_s": 383.47290011944443,
+      "concurrent_median_tok_s": 383.324011927213,
+      "streaming_ttft_ms": [
+        99.46129005402327,
+        234.15699694305658,
+        72.32880080118775,
+        152.91706519201398,
+        180.70777412503958,
+        45.09785119444132,
+        125.90171676129103,
+        208.1966418772936
+      ],
+      "streaming_mean_token_interval_ms": [
+        20.34685979871189,
+        19.211268764646615,
+        20.57576913605718,
+        19.89166481232568,
+        19.659356941946417,
+        20.797320645490363,
+        20.121026615917433,
+        19.430532934097183
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 1,
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8",
+      "name": "qwen3-int8-tp1-b4-skipembed",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-tp1-b4-skipembed",
+      "extra_overrides": {
+        "weights_to_skip_layout_optimization": [
+          ".*embed_tokens.*"
+        ]
+      },
+      "note": "Retry after compiler NCC_IXRO001 for input75 (embed_tokens.weight). Only embedding WLO skipped; SDK unchanged."
+    },
+    "status": "failed",
+    "error": "trn1-bench-qwen3-int8-tp1-b4-skipembed ended before readiness: deactivating",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 233, in run_case\n    unit,startup=server(case,cores='0' if case.get('tp')==1 else '0-1')\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 152, in server\n    return unit,wait_server(unit,port)\n  File \"/home/ubuntu/experiments/trn1-model-bench-20261030/orchestrate.py\", line 78, in wait_server\n    if active not in ['active','activating']: raise RuntimeError(f'{unit} ended before readiness: {active}')\nRuntimeError: trn1-bench-qwen3-int8-tp1-b4-skipembed ended before readiness: deactivating\n"
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3",
+      "served_name": "Mistral-7B-Instruct-v0.3",
+      "batch": 4,
+      "tp": 1,
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Mistral-7B-Instruct-v0.3-int8-exp20261030",
+      "name": "mistral-int8-tp1-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-mistral-int8-tp1-b4",
+      "note": "Alternate topology experiment with a smaller vocabulary embedding after Qwen3 TP1 compiler failure."
+    },
+    "status": "passed",
+    "startup_s": 1400.719272627961,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": " Paris",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": " 4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": " 東京",
+          "matches_exactly": false,
+          "contains_expected": false
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": " 100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        " 4",
+        " 4",
+        " 4",
+        " 4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 14.999536217444131,
+      "single_median_tok_s": 14.997866638492486,
+      "concurrent_best_tok_s": 58.6343386497902,
+      "concurrent_median_tok_s": 58.24353145367949,
+      "streaming_ttft_ms": [
+        94.65929726138711,
+        319.98136499896646,
+        245.26522122323513,
+        170.19860306754708
+      ],
+      "streaming_mean_token_interval_ms": [
+        68.28306549612213,
+        66.38812750358791,
+        67.01720204251278,
+        67.6485507420319
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "cpu": true,
+      "int8": false,
+      "name": "qwen3-bf16-cpu-random-tp2-b4",
+      "skip_sampling_probe": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-nodevsample",
+      "http_sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      }
+    },
+    "status": "passed",
+    "startup_s": 90.25952569535002,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 20.409811127273716,
+      "single_median_tok_s": 20.20901621270241,
+      "concurrent_best_tok_s": 42.71292707054318,
+      "concurrent_median_tok_s": 42.64583087175176,
+      "streaming_ttft_ms": [
+        124.06134000048041,
+        176.31934769451618,
+        229.11683609709144,
+        71.53859501704574
+      ],
+      "streaming_mean_token_interval_ms": [
+        94.04431249429824,
+        93.60137621347769,
+        93.16060320716821,
+        94.48562774948087
+      ]
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "cpu": true,
+      "int8": true,
+      "name": "qwen3-int8-cpu-random-tp2-b4",
+      "skip_sampling_probe": true,
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-cpu-tp2-b4",
+      "http_sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      },
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8",
+      "inspect_topk1": true
+    },
+    "status": "passed",
+    "startup_s": 50.13905284414068,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 26.6871677897715,
+      "single_median_tok_s": 26.623089686448285,
+      "concurrent_best_tok_s": 48.82199378454627,
+      "concurrent_median_tok_s": 48.69777318739137,
+      "streaming_ttft_ms": [
+        99.73843907937407,
+        187.27266788482666,
+        143.89390079304576,
+        55.2965197712183
+      ],
+      "streaming_mean_token_interval_ms": [
+        81.81105149487237,
+        81.07272734349014,
+        81.43580926018727,
+        82.18713053854323
+      ]
+    },
+    "topk1_diagnostic": {
+      "file": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen3-int8-cpu-random-tp2-b4-topk1-diagnostic.json",
+      "unique_outputs": 2,
+      "equal_max_logprob_events": 6
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "cpu": true,
+      "int8": false,
+      "name": "qwen3-bf16-cpu-fast-random-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/Qwen3-8B-nodevsample",
+      "cpu_fast_sampler": true,
+      "cpu_sampler_stats_dir": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen3-bf16-cpu-fast-random-tp2-b4-sampler-stats",
+      "http_sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      },
+      "note": "Opt-in small-top-k CPU sampler. Preserve all kth-score ties, fall back to full-vocabulary reference for ambiguous nucleus boundaries. Exact seeded text can differ because RNG consumption changes. Same compiled BF16 model as reference."
+    },
+    "status": "passed",
+    "startup_s": 100.27698615891859,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 28.916411092205255,
+      "single_median_tok_s": 28.73918725611984,
+      "concurrent_best_tok_s": 105.43929902597036,
+      "concurrent_median_tok_s": 105.40542955866495,
+      "streaming_ttft_ms": [
+        140.39599895477295,
+        177.58371215313673,
+        102.51580597832799,
+        65.23419311270118
+      ],
+      "streaming_mean_token_interval_ms": [
+        37.23189347822751,
+        36.917160433411844,
+        37.548028370913336,
+        37.86457835172279
+      ]
+    },
+    "sampling": {
+      "outputs": {
+        "greedy": [
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "topk1": [
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "random": [
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星际喵咖",
+          "星爪咖啡厅",
+          "星爪咖啡馆"
+        ]
+      },
+      "greedy_unique": 1,
+      "topk1_unique": 1,
+      "random_unique": 3,
+      "note": "Behavioral sampling probe; diversity alone does not prove distributional correctness."
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 2,
+      "cpu": true,
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8",
+      "name": "qwen3-int8-cpu-fast-random-tp2-b4",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-cpu-tp2-b4",
+      "cpu_fast_sampler": true,
+      "cpu_sampler_stats_dir": "/home/ubuntu/experiments/trn1-model-bench-20261030/qwen3-int8-cpu-fast-random-tp2-b4-sampler-stats",
+      "http_sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      },
+      "note": "Opt-in small-top-k CPU sampler. Preserve all kth-score ties, fall back to full-vocabulary reference for ambiguous nucleus boundaries. Exact seeded text can differ because RNG consumption changes. Same compiled INT8 model as reference."
+    },
+    "status": "passed",
+    "startup_s": 50.1334099220112,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 44.11273883778767,
+      "single_median_tok_s": 43.91309993693008,
+      "concurrent_best_tok_s": 155.9595198174076,
+      "concurrent_median_tok_s": 154.79923967602974,
+      "streaming_ttft_ms": [
+        67.41967611014843,
+        126.13631086423993,
+        96.6241778805852,
+        37.8919686190784
+      ],
+      "streaming_mean_token_interval_ms": [
+        25.466599529061245,
+        24.969418881414068,
+        25.220707821964968,
+        25.71571442228155
+      ]
+    },
+    "sampling": {
+      "outputs": {
+        "greedy": [
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆",
+          "星爪咖啡馆"
+        ],
+        "topk1": [
+          "星爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ],
+        "random": [
+          "星际喵咖",
+          "星爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡馆",
+          "星爪咖啡厅",
+          "星爪咖啡厅"
+        ]
+      },
+      "greedy_unique": 1,
+      "topk1_unique": 2,
+      "random_unique": 3,
+      "note": "Behavioral sampling probe; diversity alone does not prove distributional correctness."
+    }
+  },
+  {
+    "case": {
+      "model_path": "/mnt/nvme/models/Qwen3-8B",
+      "served_name": "Qwen3-8B",
+      "batch": 4,
+      "tp": 1,
+      "compile_workers": 2,
+      "int8": true,
+      "quant_path": "/mnt/nvme/models/Qwen3-8B-int8",
+      "name": "qwen3-int8-tp1-b4-skip-large-weights",
+      "artifact": "/mnt/nvme/neuron-artifacts/exp-20261030-qwen3-int8-tp1-b4-skip-large-weights",
+      "extra_overrides": {
+        "weights_to_skip_layout_optimization": [
+          ".*embed_tokens.*",
+          ".*lm_head.*"
+        ]
+      },
+      "note": "Follow-up HLO confirms that after embedding was skipped, input75 became the full-vocabulary BF16 lm_head and reproduced NCC_IXRO001 in prefill512+. Skip both large BF16 vocabulary matrices; keep all other optimizations. Requires independent compile and validation.",
+      "controller_handoff": "compile-monitor-handoff.json; same systemd compile process, original total startup time retained"
+    },
+    "status": "passed",
+    "startup_s": 2450.185961,
+    "quality": {
+      "serial": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "concurrent": [
+        {
+          "prompt": "法国的首都是哪里？只回答城市名。",
+          "expected": "巴黎",
+          "text": "巴黎",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "2加2等于几？只回答数字。",
+          "expected": "4",
+          "text": "4",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "日本的首都是哪里？只回答城市名。",
+          "expected": "东京",
+          "text": "东京",
+          "matches_exactly": true,
+          "contains_expected": true
+        },
+        {
+          "prompt": "10乘以10等于几？只回答数字。",
+          "expected": "100",
+          "text": "100",
+          "matches_exactly": true,
+          "contains_expected": true
+        }
+      ],
+      "identical_prompt_outputs": [
+        "4",
+        "4",
+        "4",
+        "4"
+      ],
+      "all_identical_rows_match": true,
+      "note": "Small smoke test only; does not establish overall model quality.",
+      "passed": true
+    },
+    "http": {
+      "single_best_tok_s": 9.0820875657175,
+      "single_median_tok_s": 9.081277004088248,
+      "concurrent_best_tok_s": 35.76748785855651,
+      "concurrent_median_tok_s": 35.744329844791416,
+      "streaming_ttft_ms": [
+        100.60377884656191,
+        251.3256799429655,
+        326.3930710963905,
+        176.1715509928763
+      ],
+      "streaming_mean_token_interval_ms": [
+        112.31303945215059,
+        111.04409122730003,
+        110.41529266508061,
+        111.67677264942341
+      ]
+    }
+  }
+]

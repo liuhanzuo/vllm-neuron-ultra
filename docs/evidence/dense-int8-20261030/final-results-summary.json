@@ -1,0 +1,47 @@
+{
+  "models": [
+    {
+      "model": "Qwen3-8B",
+      "BF16_C4_tok_s": 115.26691681558309,
+      "INT8_C4_tok_s": 176.4441440541611,
+      "same_concurrency_speedup": 1.5307440237727203,
+      "INT8_C8_tok_s": 329.61608153262824
+    },
+    {
+      "model": "Qwen2.5-7B-Instruct",
+      "BF16_C4_tok_s": 91.46019438724187,
+      "INT8_C4_tok_s": 184.9555531061737,
+      "same_concurrency_speedup": 2.022251913472577,
+      "INT8_C8_tok_s": 331.028133986398
+    },
+    {
+      "model": "DeepSeek-R1-Distill-Qwen-7B",
+      "BF16_C4_tok_s": 94.1530549360348,
+      "INT8_C4_tok_s": 196.29464558495454,
+      "same_concurrency_speedup": 2.0848462720440897,
+      "INT8_C8_tok_s": 347.7852361815925
+    },
+    {
+      "model": "Mistral-7B-Instruct-v0.3",
+      "BF16_C4_tok_s": 126.70010637920511,
+      "INT8_C4_tok_s": 205.6424621657332,
+      "same_concurrency_speedup": 1.6230646369803259,
+      "INT8_C8_tok_s": 383.324011927213
+    }
+  ],
+  "replicas": [
+    {
+      "model": "Mistral-7B-Instruct-v0.3",
+      "C8_two_TP1_replicas_tok_s": 116.60932753452407
+    },
+    {
+      "model": "Qwen3-8B",
+      "C8_two_TP1_replicas_tok_s": 71.06133987584069
+    }
+  ],
+  "Qwen3_INT8_CPU_random_reference": 48.69777318739137,
+  "Qwen3_INT8_CPU_random_optimized": 154.79923967602974,
+  "Qwen3_CPU_sampler_speedup": 3.1787745012560396,
+  "long_context_prompt_tokens": 1309,
+  "Qwen3_TP1_first_startup_minutes": 40.836432683333335
+}

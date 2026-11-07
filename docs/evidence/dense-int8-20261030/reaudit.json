@@ -1,0 +1,348 @@
+{
+  "schema": "historical_dense_int8_metadata_reaudit_v1",
+  "historical_measurement_date": "2026-10-30",
+  "audit_date": "2026-11-07",
+  "cases": 8,
+  "recomputed_nonstream_round_records": 48,
+  "verified_nonstream_request_usage_records": 120,
+  "rows": [
+    {
+      "model": "Qwen3-8B",
+      "official_repo": "Qwen/Qwen3-8B",
+      "official_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "pair": {
+        "bf16": {
+          "case": "qwen3-bf16-tp2-b4",
+          "model": "Qwen3-8B",
+          "rates": {
+            "single": 29.70143179750118,
+            "concurrent": 115.26691681558309
+          },
+          "round_rates": {
+            "single": [
+              29.682567551009953,
+              29.70143179750118,
+              29.728946628972007
+            ],
+            "concurrent": [
+              115.27152285356149,
+              115.26691681558309,
+              115.175630884202
+            ]
+          },
+          "prompt_tokens": 19,
+          "prompt_ids_saved": true,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        },
+        "int8": {
+          "case": "qwen3-int8-tp2-b4",
+          "model": "Qwen3-8B",
+          "rates": {
+            "single": 45.37090230777262,
+            "concurrent": 176.4441440541611
+          },
+          "round_rates": {
+            "single": [
+              45.37090230777262,
+              45.49784257995562,
+              45.24141525201198
+            ],
+            "concurrent": [
+              176.4441440541611,
+              175.12972154840816,
+              177.13398104751226
+            ]
+          },
+          "prompt_tokens": 19,
+          "prompt_ids_saved": false,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        }
+      },
+      "speedup": {
+        "single": 1.5275661664091806,
+        "concurrent": 1.5307440237727203
+      }
+    },
+    {
+      "model": "Qwen2.5-7B-Instruct",
+      "official_repo": "Qwen/Qwen2.5-7B-Instruct",
+      "official_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "pair": {
+        "bf16": {
+          "case": "qwen25-bf16-tp2-b4",
+          "model": "Qwen2.5-7B-Instruct",
+          "rates": {
+            "single": 23.36693642315733,
+            "concurrent": 91.46019438724187
+          },
+          "round_rates": {
+            "single": [
+              23.214224056237438,
+              23.499093541370616,
+              23.36693642315733
+            ],
+            "concurrent": [
+              91.48613380014484,
+              91.18997582980316,
+              91.46019438724187
+            ]
+          },
+          "prompt_tokens": 36,
+          "prompt_ids_saved": false,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        },
+        "int8": {
+          "case": "qwen25-int8-tp2-b4",
+          "model": "Qwen2.5-7B-Instruct",
+          "rates": {
+            "single": 48.04330623265174,
+            "concurrent": 184.9555531061737
+          },
+          "round_rates": {
+            "single": [
+              48.04330623265174,
+              47.74315878279464,
+              48.125740701547834
+            ],
+            "concurrent": [
+              184.9555531061737,
+              185.43346600103897,
+              184.64634974142768
+            ]
+          },
+          "prompt_tokens": 36,
+          "prompt_ids_saved": true,
+          "bias_adapter": true,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        }
+      },
+      "speedup": {
+        "single": 2.0560378717442562,
+        "concurrent": 2.022251913472577
+      }
+    },
+    {
+      "model": "DeepSeek-R1-Distill-Qwen-7B",
+      "official_repo": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "official_revision": "916b56a44061fd5cd7d6a8fb632557ed4f724f60",
+      "pair": {
+        "bf16": {
+          "case": "deepseek-r1-bf16-tp2-b4",
+          "model": "DeepSeek-R1-Distill-Qwen-7B",
+          "rates": {
+            "single": 24.14901289139085,
+            "concurrent": 94.1530549360348
+          },
+          "round_rates": {
+            "single": [
+              24.14901289139085,
+              24.14139467226247,
+              24.1948991014973
+            ],
+            "concurrent": [
+              94.37577431601288,
+              94.13987885011673,
+              94.1530549360348
+            ]
+          },
+          "prompt_tokens": 12,
+          "prompt_ids_saved": false,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        },
+        "int8": {
+          "case": "deepseek-r1-int8-tp2-b4",
+          "model": "DeepSeek-R1-Distill-Qwen-7B",
+          "rates": {
+            "single": 50.58994053395595,
+            "concurrent": 196.29464558495454
+          },
+          "round_rates": {
+            "single": [
+              50.19148532651534,
+              50.96158527031099,
+              50.58994053395595
+            ],
+            "concurrent": [
+              194.28669013167647,
+              196.29464558495454,
+              196.3368462805977
+            ]
+          },
+          "prompt_tokens": 12,
+          "prompt_ids_saved": true,
+          "bias_adapter": true,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        }
+      },
+      "speedup": {
+        "single": 2.094907181568126,
+        "concurrent": 2.0848462720440897
+      }
+    },
+    {
+      "model": "Mistral-7B-Instruct-v0.3",
+      "official_repo": "mistralai/Mistral-7B-Instruct-v0.3",
+      "official_revision": "c170c708c41dac9275d15a8fff4eca08d52bab71",
+      "pair": {
+        "bf16": {
+          "case": "mistral-bf16-tp2-b4",
+          "model": "Mistral-7B-Instruct-v0.3",
+          "rates": {
+            "single": 32.53310801637588,
+            "concurrent": 126.70010637920511
+          },
+          "round_rates": {
+            "single": [
+              32.53310801637588,
+              32.50413606392881,
+              32.67041107199387
+            ],
+            "concurrent": [
+              126.71763996060317,
+              126.70010637920511,
+              126.63950578396837
+            ]
+          },
+          "prompt_tokens": 17,
+          "prompt_ids_saved": true,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        },
+        "int8": {
+          "case": "mistral-int8-tp2-b4",
+          "model": "Mistral-7B-Instruct-v0.3",
+          "rates": {
+            "single": 53.25687054975862,
+            "concurrent": 205.6424621657332
+          },
+          "round_rates": {
+            "single": [
+              53.25687054975862,
+              52.90804180042573,
+              53.29677084416505
+            ],
+            "concurrent": [
+              205.05570758380838,
+              205.8077139412574,
+              205.6424621657332
+            ]
+          },
+          "prompt_tokens": 17,
+          "prompt_ids_saved": true,
+          "bias_adapter": false,
+          "sampler": {
+            "deterministic": false,
+            "do_sample": false,
+            "dynamic": false,
+            "global_topk": 256,
+            "on_device_sampling_config": true,
+            "sampling_dp_degree": 1,
+            "temperature": 1.0,
+            "top_k": 1,
+            "top_k_kernel_enabled": false,
+            "top_p": 1.0
+          }
+        }
+      },
+      "speedup": {
+        "single": 1.637005309266831,
+        "concurrent": 1.6230646369803259
+      }
+    }
+  ],
+  "sampler": "on-device greedy; dynamic=false,do_sample=false,top_k=1",
+  "doc_correction": "Earlier Feishu prose incorrectly called this table standard CPU greedy sampling.",
+  "rates_changed": false,
+  "new_inference_run": false,
+  "merged_branch_qualified": false,
+  "scope": "Historical warm HTTP three-round medians, original TP2/B4/context2048,120 forced output tokens.",
+  "limitations": [
+    "This re-audit authenticates saved JSON and arithmetic, not historical process ownership or current binary contents.",
+    "Some early HTTP files omit prompt IDs; equal lengths and recorded benchmark inputs do not supply missing per-request IDs.",
+    "Archived status=passed means the old finite suite passed, not the later full numeric/cold/long/quality protocol.",
+    "INT8 changes weights; small quality probes do not establish losslessness.",
+    "Launch records and saved configs select device sampling; no fresh device trace was collected.",
+    "No compiler/model/quantized payload is read, hashed, bundled or recreated."
+  ]
+}

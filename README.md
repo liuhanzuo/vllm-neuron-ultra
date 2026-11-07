@@ -17,6 +17,10 @@ unmodified upstream vLLM-Neuron.
 | [SmolLM3-3B](docs/smollm3.md) | Combined reader/writer implementation `e2d1e28`: [qualified scoped results](docs/smollm3-results-20261105.md), short single/C4 **8.16× / 8.05×**. The later [write-only ablation](docs/smollm3-ablation-20261107.md) failed deterministic output equality and is not qualified. |
 | [Nemotron Nano 9B v2](docs/nemotron9b.md) | Experimental source migration, awaiting fresh device and full-model checks. [Historical 13.18 / 51.06 tok/s](docs/nemotron9b-results-historical-20261103.md) are absolute rates, not speedups. |
 
+The [historical four-model INT8 report](docs/dense-int8-results-20261030.md)
+preserves Qwen3-8B, Qwen2.5-7B, DeepSeek-R1-Distill-Qwen-7B and Mistral-7B
+measurements with raw JSON and their limited validation scope.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 

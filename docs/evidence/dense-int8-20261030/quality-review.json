@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "case": "deepseek-r1-bf16-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "deepseek-r1-int8-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": false
+    },
+    {
+      "case": "mistral-bf16-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": false,
+      "code_review_note": "list(set(values)) does not preserve first-occurrence order.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "mistral-int8-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": false,
+      "code_review_note": "list(set(values)) does not preserve first-occurrence order.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "qwen25-bf16-tp2-b4",
+      "objective_passes": 2,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "qwen25-int8-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "Example comment incorrectly shows a string s absent from the input; function body is otherwise suitable for hashable values.",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "qwen3-bf16-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "qwen3-int8-tp2-b4",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Loop with seen-set and append preserves first occurrence for the integer/hashable inputs in this task; reviewed statically, not executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    },
+    {
+      "case": "qwen3-int8-tp1-b4-skip-large-weights",
+      "objective_passes": 3,
+      "objective_checks": 3,
+      "code_syntax": true,
+      "code_core_logic_review": true,
+      "code_review_note": "Statically reviewed the seen-set loop: preserves first occurrence for the integer/hashable inputs in this task. No generated code executed.",
+      "code_example_issue": "",
+      "explanation_budget_reached": true
+    }
+  ],
+  "note": "Manual static review of the eight visible function bodies. No generated code was executed. Small sample; no broad accuracy/quantization loss estimate. Explanations reaching the output budget are incomplete evidence."
+}
