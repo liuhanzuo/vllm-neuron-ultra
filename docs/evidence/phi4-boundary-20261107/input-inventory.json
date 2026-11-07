@@ -1,0 +1,1936 @@
+{
+  "schema": "phi4_saved_boundary_alignment_source_v1",
+  "source_author": "/root/minicpm_v3_terminal_audit",
+  "source_only": true,
+  "runtime_admission": false,
+  "counts": {
+    "logical_frames": 64,
+    "arms": 6,
+    "arm_frame_occurrences": 192,
+    "boundaries": 9,
+    "anchors": 3,
+    "comparisons": 5184,
+    "head_comparisons": 576,
+    "activation_payload_inventory": 160,
+    "selected_activation_payloads": 104,
+    "excluded_TP2_activation_payloads": 56,
+    "manifests_inventory": 10,
+    "selected_manifests": 6
+  },
+  "boundaries": {
+    "gateup_output": [
+      "layers.0.mlp.gate_up_proj.output",
+      16384
+    ],
+    "down_input": [
+      "layers.0.mlp.down_proj.input",
+      8192
+    ],
+    "down_output": [
+      "layers.0.mlp.down_proj.output",
+      3072
+    ],
+    "layer0_output": [
+      "layers.0.output",
+      3072
+    ],
+    "layer1_norm": [
+      "layers.1.input_layernorm.output",
+      3072
+    ],
+    "layer1_qkv": [
+      "layers.1.self_attn.qkv_proj.output",
+      5120
+    ],
+    "layer1_oproj_input": [
+      "layers.1.self_attn.o_proj.input",
+      3072
+    ],
+    "final_norm": [
+      "norm.output",
+      3072
+    ],
+    "logits": [
+      "lm_head.output",
+      200064
+    ]
+  },
+  "criteria": {
+    "cosine_min": 0.995,
+    "kl_max_nats": 0.02,
+    "max_abs_error_max": 2.0,
+    "argmax_match_fraction_min": 0.9,
+    "all_reference_margins_gt_0.5_must_match": true
+  },
+  "references": {
+    "instruct": {
+      "native_single": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/manifest.json",
+          "bytes": 5250684,
+          "sha256": "5a6d7b09dda6778e478650e292fa952bec783747ab38452a50d60a63498e4de1",
+          "identity": [
+            66306,
+            9056956,
+            5250684,
+            1793679842766521876,
+            1793679842768521832
+          ]
+        },
+        "producer_receipt_sha256": "51220079554b44c998f05458c6cd3f0b2c9924f327f8458aa7066846519f0bff"
+      },
+      "native_batch": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/manifest.json",
+          "bytes": 3172841,
+          "sha256": "fb82c5c6367185fecb480c96e86ea489e6c470955d60f5af43ebcccf0d4bda62",
+          "identity": [
+            66306,
+            9057005,
+            3172841,
+            1793680542969091900,
+            1793680542970091878
+          ]
+        },
+        "producer_receipt_sha256": "7e92379a3d349604479a97a91afefcebc2a75881c9aa3ab3900faa94b284b37e"
+      },
+      "port": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/manifest.json",
+          "bytes": 3172633,
+          "sha256": "1d9749ddacbe06ab2663e07f89499c47986f7550e9a5ab01d85b100d6abf921c",
+          "identity": [
+            66306,
+            9057009,
+            3172633,
+            1793680543051090100,
+            1793680543052090078
+          ]
+        },
+        "producer_receipt_sha256": "97deeb80d34af378071d15fc8c19c5109b52f884b397d3f2394d9b2bdc021164"
+      }
+    },
+    "reasoning": {
+      "native_single": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/manifest.json",
+          "bytes": 5251649,
+          "sha256": "088e4afa62fad8a749f5617637fca0e295c4d6c79ee1cc227d4c58866f1a8199",
+          "identity": [
+            66306,
+            9057073,
+            5251649,
+            1793681290284587204,
+            1793681290286587159
+          ]
+        },
+        "producer_receipt_sha256": "7bef42dac6a5d0870eb4afa532a31ecaf57ef5c173dd7d2511bc3d838b14cb33"
+      },
+      "native_batch": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/manifest.json",
+          "bytes": 3172856,
+          "sha256": "a14a41dcefc65ed5219918bfa8e1c9e07181dcf83ca99b85ca4a08e247c32b6e",
+          "identity": [
+            66306,
+            9057111,
+            3172856,
+            1793681990444159273,
+            1793681990444159273
+          ]
+        },
+        "producer_receipt_sha256": "d63de8c42408eb936dd86d761a7146b8b3c2fd5cc6d0d40294e8bf52181a7a0f"
+      },
+      "port": {
+        "manifest": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/manifest.json",
+          "bytes": 3172648,
+          "sha256": "3d6b8742365ba4fae3473e5232abfc4f4cd295381662612e0a6374fb187abc28",
+          "identity": [
+            66306,
+            9057115,
+            3172648,
+            1793681990525157487,
+            1793681990526157465
+          ]
+        },
+        "producer_receipt_sha256": "cc935c3ba8b5d4c0a719a7f8b70466555147be492a5045f631a08f0948220bb0"
+      }
+    }
+  },
+  "arms": {
+    "instruct": {
+      "unchanged": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/unchanged-instruct-result.json",
+          "bytes": 991632,
+          "sha256": "bb9b16f100ab2ac2ac5258a64c5b5109bfc4adfd5152c894f6621dedae946b00",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/unchanged-instruct.pt",
+          "bytes": 42329439,
+          "sha256": "bbec5c444955a6712964b8ce436bffbffc1968e8f11d4bacf07b6e2b751d1d6a",
+          "identity": null
+        }
+      },
+      "wrapper": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/wrapper-instruct-result.json",
+          "bytes": 991614,
+          "sha256": "1ea0a54cd7c259688e2888babd8cfb162fe107565bdd2832a51adb0282ed5387",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/wrapper-instruct.pt",
+          "bytes": 42329439,
+          "sha256": "bbec5c444955a6712964b8ce436bffbffc1968e8f11d4bacf07b6e2b751d1d6a",
+          "identity": null
+        }
+      },
+      "candidate": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/candidate-instruct-result.json",
+          "bytes": 998744,
+          "sha256": "0b57ed935d0eaa3e4feeeecb08431a9abb82d22ccf866299c45f7c50a7e7292c",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/candidate-instruct.pt",
+          "bytes": 42329439,
+          "sha256": "171126b9427d8ecc57b2ca711d7ef0d6857c131f5569516d16e5b15fcb7ff121",
+          "identity": null
+        }
+      }
+    },
+    "reasoning": {
+      "unchanged": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/unchanged-reasoning-result.json",
+          "bytes": 992004,
+          "sha256": "acb97a0655f29d4d25f9a250e4d666a03764509101e4f231186d0fb3aeb5c121",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/unchanged-reasoning.pt",
+          "bytes": 42329439,
+          "sha256": "f43783d6be3767573951e8e5be0d4f367a3ea1b38c188371feadaca32a5e2162",
+          "identity": null
+        }
+      },
+      "wrapper": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/wrapper-reasoning-result.json",
+          "bytes": 991986,
+          "sha256": "d46f4fb0faa3bdde1b25cefee4aec087035377096923e708949eb05bf9435e30",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/wrapper-reasoning.pt",
+          "bytes": 42329439,
+          "sha256": "f43783d6be3767573951e8e5be0d4f367a3ea1b38c188371feadaca32a5e2162",
+          "identity": null
+        }
+      },
+      "candidate": {
+        "report": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/candidate-reasoning-result.json",
+          "bytes": 999499,
+          "sha256": "39e3e29a5b3ed8f9d18b6ccabb5afa24b7ef1d5454d3da4531da843d7f6b8aa9",
+          "identity": null
+        },
+        "payload": {
+          "path": "/mnt/nvme/phi4-full-gateup-decode-row1-v4/candidate-reasoning.pt",
+          "bytes": 42329439,
+          "sha256": "df6ab190627ae93d2b8ee4de4d7099c13980fafe4c68d6266ff02e711b1abec7",
+          "identity": null
+        }
+      }
+    }
+  },
+  "logit_sources": {
+    "instruct": {
+      "hf": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/hf-reference.pt",
+        "bytes": 19216081,
+        "sha256": "16c27239bfa5ecea4a9666ad27fa9bb85ac25881f5d6d14cfb0a6d08c73ead53",
+        "identity": [
+          66306,
+          8836945,
+          19216081,
+          1793443843706145429,
+          1793443843706145429
+        ]
+      },
+      "paired": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-mixed-reference-study/instruct/logit-frames.pt",
+        "bytes": 76852289,
+        "sha256": "a62cfd8ede4ea553688a8ac6f1894fcb7fce405b66a6540e159c8bf6cb506f1e",
+        "identity": [
+          66306,
+          8841981,
+          76852289,
+          1793522003110108329,
+          1793522003110108329
+        ]
+      }
+    },
+    "reasoning": {
+      "hf": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/hf-reference.pt",
+        "bytes": 19216401,
+        "sha256": "8d2ed2c97cd44d8f776e8844d7361c43f8b136da7f701b395402319b90939530",
+        "identity": [
+          66306,
+          8836941,
+          19216401,
+          1793444556768426180,
+          1793444556768426180
+        ]
+      },
+      "paired": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-mixed-reference-study/reasoning/logit-frames.pt",
+        "bytes": 76852289,
+        "sha256": "f11353cb591321dc7e81a98c4a70300f2b7c5fe25b9ba6d7763ba52c3c7acb4a",
+        "identity": [
+          66306,
+          8842225,
+          76852289,
+          1793522708752554063,
+          1793522708752554063
+        ]
+      }
+    }
+  },
+  "old_reports": {
+    "instruct": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/real-weight-port-validation.json",
+      "bytes": 12425,
+      "sha256": "427b47a373487fad153d74c62cd328ab15491fee3ee3ebb9f793ce7e4867d4ab",
+      "identity": null
+    },
+    "reasoning": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/real-weight-port-validation.json",
+      "bytes": 12618,
+      "sha256": "dcb3c1781dd5f567e9012882622907fc5440b020d02e203b95a1f234b7bb37f2",
+      "identity": null
+    }
+  },
+  "source_closure": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_saved_boundary_alignment_v1.py",
+      "bytes": 21833,
+      "sha256": "2e703ff5859e7c9fa48f48cdeb9e06c2ee3976aeac2cffbf9377fefa9646237c",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/prepare_phi4_saved_boundary_alignment_v1.py",
+      "bytes": 14163,
+      "sha256": "20f71a7fa5cd0546802bbd86045b81feafae4a74d7f97337b83637cc45b0faba",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_phi4_saved_boundary_alignment_v1.py",
+      "bytes": 11533,
+      "sha256": "8f1eb1684e329e71f9b242bac2180d4a19989c11aadd44016714e33aea830e93",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/compare_phi4_intermediate_v1.py",
+      "bytes": 7442,
+      "sha256": "d0566e2c9a6c40225824ccb58e6b54cf963fa54ce7dd3d85f0d967488b1c32b0",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_intermediate_protocol_v1.py",
+      "bytes": 7189,
+      "sha256": "051ab54ef4b81828e486c73eb2a472c49e8f14b18abf66368b8eea1a22b91ee3",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_intermediate_taps_v1.py",
+      "bytes": 4257,
+      "sha256": "7e52485834a4e2fad1e32ffbe47456125fe1460e0280a3bd80f42ba97f064c2e",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/capture_phi4_intermediate_single_v1.py",
+      "bytes": 3226,
+      "sha256": "a750ca649c553e3387627fcb558085525c131ca90303235e45fac3f74036ddad",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/capture_phi4_intermediate_mixed_v1.py",
+      "bytes": 8143,
+      "sha256": "aa3b12fbe0ebd1251d3034ec8b0a0e7ff4e912a138462b2a7dfade5edd230f8f",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_contract_v4.py",
+      "bytes": 5577,
+      "sha256": "1462bf69c42eba014878dc60f0935089843d019090df960d8472821de2ed0c05",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_results_v4.py",
+      "bytes": 9716,
+      "sha256": "8e0b1fb6e0ddddcd55f6b659664c7cc3610616afb48882adf7dff33105df1344",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_runtime_v4.py",
+      "bytes": 9410,
+      "sha256": "d4555912d2b6c4c6dfdf3b2bf84fcadb8ee4235522a3dc4d2e8f27cf86b1b70c",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_phi4_full_gateup_worker_v4.py",
+      "bytes": 18008,
+      "sha256": "ef76026d3a8f01707a327102ccf355ab0d8bd0273a68266083b9d1aa285614ed",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_mixed_reference_protocol.py",
+      "bytes": 5326,
+      "sha256": "36ed8e6d1dbca0b6c7a6bf348f7a9b2a6094a5f688aee43a4699dfee7f650599",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_real_logits.py",
+      "bytes": 12095,
+      "sha256": "1f77e72f1cfcd8d6ee7253daea78e8d598cb7c07d9c98acc7ece9e1e4b41161f",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/terminal-metadata-audit-v1.json",
+      "bytes": 188367,
+      "sha256": "99ae5bb74cde6d774f93094d4368db08c6f37404a7b0cff78a1d35c618ce2ff4",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/plan.json",
+      "bytes": 68963,
+      "sha256": "edcf85d88b6438f4ff8eb2ccb66519c3ac479ac08fe99bc73ed27872ac9adff5",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/plan.json",
+      "bytes": 119396,
+      "sha256": "32b69fe7d580ccb90b43127c268f497b8f1957585e3d342eac3b674905d248d6",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/analyze-result.json",
+      "bytes": 408461,
+      "sha256": "391717865ed6b2edf06c121f43f9e42ec42fc6f7484ae91260313d5bde95b997",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/admit-result.json",
+      "bytes": 74397,
+      "sha256": "64c588afc3dad02603db3d15e44a3b2fd35004c24a83b746a3033df4e156cb24",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/unchanged-instruct-result.json",
+      "bytes": 991632,
+      "sha256": "bb9b16f100ab2ac2ac5258a64c5b5109bfc4adfd5152c894f6621dedae946b00",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/wrapper-instruct-result.json",
+      "bytes": 991614,
+      "sha256": "1ea0a54cd7c259688e2888babd8cfb162fe107565bdd2832a51adb0282ed5387",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/candidate-instruct-result.json",
+      "bytes": 998744,
+      "sha256": "0b57ed935d0eaa3e4feeeecb08431a9abb82d22ccf866299c45f7c50a7e7292c",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/hf-reference.json",
+      "bytes": 21444,
+      "sha256": "5f57c152711de3d488db56cf3f3d13fc9807c833531107b8cd98dfffc6dbcfe1",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/real-weight-port-validation.json",
+      "bytes": 12425,
+      "sha256": "427b47a373487fad153d74c62cd328ab15491fee3ee3ebb9f793ce7e4867d4ab",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/native_single/instruct/result.json",
+      "bytes": 7272,
+      "sha256": "46652ef8507fe01091a817d6b173b2a2e985c47204511cf948574f9952b7172c",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/mixed/instruct/reproduction.json",
+      "bytes": 4963,
+      "sha256": "f2a6abc9b62ff102b8c2628a1c9a959c52beab66b46e032daf53aef529ed7c67",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/unchanged-reasoning-result.json",
+      "bytes": 992004,
+      "sha256": "acb97a0655f29d4d25f9a250e4d666a03764509101e4f231186d0fb3aeb5c121",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/wrapper-reasoning-result.json",
+      "bytes": 991986,
+      "sha256": "d46f4fb0faa3bdde1b25cefee4aec087035377096923e708949eb05bf9435e30",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-full-gateup-decode-row1-v4/candidate-reasoning-result.json",
+      "bytes": 999499,
+      "sha256": "39e3e29a5b3ed8f9d18b6ccabb5afa24b7ef1d5454d3da4531da843d7f6b8aa9",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/hf-reference.json",
+      "bytes": 22699,
+      "sha256": "e297fbced54f8969dd38c81042103e86d8e1b8695cda633b71b9762b9ea63f5c",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/real-weight-port-validation.json",
+      "bytes": 12618,
+      "sha256": "dcb3c1781dd5f567e9012882622907fc5440b020d02e203b95a1f234b7bb37f2",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/native_single/reasoning/result.json",
+      "bytes": 7273,
+      "sha256": "d8a1715cdf5299cd6f784b571778adc3279e0c247ff5c3a4c3aa341c4b48a939",
+      "identity": null
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/mixed/reasoning/reproduction.json",
+      "bytes": 4963,
+      "sha256": "5902cc883d6eaa8085da1125e1fbc133d6068c99da55fae75a1039c042089819",
+      "identity": null
+    }
+  ],
+  "metric_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_real_logits.py",
+    "bytes": 12095,
+    "sha256": "1f77e72f1cfcd8d6ee7253daea78e8d598cb7c07d9c98acc7ece9e1e4b41161f",
+    "identity": null
+  },
+  "all160_payload_identities": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-00.pt": [
+      66306,
+      9056894,
+      4008757,
+      1793679710258447708,
+      1793679710258447708
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-01.pt": [
+      66306,
+      9056935,
+      4008757,
+      1793679711078429638,
+      1793679711078429638
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-02.pt": [
+      66306,
+      9056934,
+      4008757,
+      1793679711533419611,
+      1793679711533419611
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-03.pt": [
+      66306,
+      9056933,
+      4008757,
+      1793679711990409540,
+      1793679711990409540
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-04.pt": [
+      66306,
+      9056936,
+      4008757,
+      1793679714469354912,
+      1793679714469354912
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-05.pt": [
+      66306,
+      9056937,
+      4008757,
+      1793679714924344886,
+      1793679714924344886
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-06.pt": [
+      66306,
+      9056938,
+      4008757,
+      1793679715386334705,
+      1793679715386334705
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-07.pt": [
+      66306,
+      9056939,
+      4008757,
+      1793679715848324524,
+      1793679715848324524
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-08.pt": [
+      66306,
+      9056940,
+      4008757,
+      1793679718336269697,
+      1793679718336269697
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-09.pt": [
+      66306,
+      9056941,
+      4008757,
+      1793679718793259627,
+      1793679718793259627
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-10.pt": [
+      66306,
+      9056942,
+      4008757,
+      1793679719247249622,
+      1793679719247249622
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-11.pt": [
+      66306,
+      9056943,
+      4008757,
+      1793679719701239618,
+      1793679719701239618
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-12.pt": [
+      66306,
+      9056944,
+      4008757,
+      1793679722201184526,
+      1793679722201184526
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-13.pt": [
+      66306,
+      9056945,
+      4008757,
+      1793679722657174478,
+      1793679722657174478
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-14.pt": [
+      66306,
+      9056946,
+      4008757,
+      1793679723111164473,
+      1793679723111164473
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-15.pt": [
+      66306,
+      9056947,
+      4008757,
+      1793679723574154270,
+      1793679723574154270
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-16.pt": [
+      66306,
+      9056948,
+      4008757,
+      1793679726074099161,
+      1793679726074099161
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-17.pt": [
+      66306,
+      9056949,
+      4008757,
+      1793679726532089064,
+      1793679726532089064
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-18.pt": [
+      66306,
+      9056950,
+      4008757,
+      1793679726988079011,
+      1793679726988079011
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-19.pt": [
+      66306,
+      9056951,
+      4008757,
+      1793679727453068760,
+      1793679727453068760
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-20.pt": [
+      66306,
+      9056952,
+      4008757,
+      1793679840977561429,
+      1793679840977561429
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-21.pt": [
+      66306,
+      9056953,
+      4008757,
+      1793679841596547743,
+      1793679841596547743
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-22.pt": [
+      66306,
+      9056954,
+      4008757,
+      1793679842117536225,
+      1793679842117536225
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-23.pt": [
+      66306,
+      9056955,
+      4008757,
+      1793679842629524905,
+      1793679842629524905
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-00.pt": [
+      66306,
+      9056925,
+      4008757,
+      1793679874212826993,
+      1793679874212826993
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-01.pt": [
+      66306,
+      9056983,
+      4008757,
+      1793680337117609980,
+      1793680337117609980
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-02.pt": [
+      66306,
+      9056967,
+      4008757,
+      1793680363260036492,
+      1793680363260036492
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-03.pt": [
+      66306,
+      9056966,
+      4008757,
+      1793680389387462136,
+      1793680389387462136
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-04.pt": [
+      66306,
+      9056985,
+      15703157,
+      1793680397980272757,
+      1793680397980272757
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-05.pt": [
+      66306,
+      9056984,
+      15703157,
+      1793680406475085482,
+      1793680406475085482
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-06.pt": [
+      66306,
+      9056987,
+      15703157,
+      1793680415015897060,
+      1793680415015897060
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-07.pt": [
+      66306,
+      9056989,
+      4008757,
+      1793680440910325794,
+      1793680440910325794
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-08.pt": [
+      66306,
+      9056991,
+      4008757,
+      1793680467107748824,
+      1793680467107748824
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-09.pt": [
+      66306,
+      9056993,
+      4008757,
+      1793680492923183111,
+      1793680492923183111
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-10.pt": [
+      66306,
+      9056995,
+      4008757,
+      1793680519025618479,
+      1793680519025618479
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-11.pt": [
+      66306,
+      9056997,
+      15703157,
+      1793680525719471104,
+      1793680525719471104
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-12.pt": [
+      66306,
+      9056999,
+      15703157,
+      1793680533480300246,
+      1793680533480300246
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-13.pt": [
+      66306,
+      9057001,
+      15703157,
+      1793680540082155288,
+      1793680540082155288
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-00.pt": [
+      66306,
+      9056965,
+      4008757,
+      1793679874227826662,
+      1793679874227826662
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-01.pt": [
+      66306,
+      9056964,
+      4008757,
+      1793680337131609672,
+      1793680337131609672
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-02.pt": [
+      66306,
+      9056982,
+      4008757,
+      1793680363274036185,
+      1793680363274036185
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-03.pt": [
+      66306,
+      9056981,
+      4008757,
+      1793680389401461827,
+      1793680389401461827
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-04.pt": [
+      66306,
+      9056986,
+      15703157,
+      1793680398012272052,
+      1793680398012272052
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-05.pt": [
+      66306,
+      9056988,
+      15703157,
+      1793680406507084776,
+      1793680406507084776
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-06.pt": [
+      66306,
+      9056990,
+      15703157,
+      1793680415047896354,
+      1793680415047896354
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-07.pt": [
+      66306,
+      9056992,
+      4008757,
+      1793680441041322904,
+      1793680441041322904
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-08.pt": [
+      66306,
+      9056994,
+      4008757,
+      1793680467121748516,
+      1793680467121748516
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-09.pt": [
+      66306,
+      9056996,
+      4008757,
+      1793680492937182809,
+      1793680492937182809
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-10.pt": [
+      66306,
+      9056998,
+      4008757,
+      1793680519039618170,
+      1793680519039618170
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-11.pt": [
+      66306,
+      9057000,
+      15703157,
+      1793680525752470378,
+      1793680525752470378
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-12.pt": [
+      66306,
+      9057002,
+      15703157,
+      1793680533512299543,
+      1793680533512299543
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-13.pt": [
+      66306,
+      9057004,
+      15703157,
+      1793680540114154586,
+      1793680540114154586
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-00.pt": [
+      66306,
+      9056978,
+      2960181,
+      1793680590108043498,
+      1793680590108043498
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-01.pt": [
+      66306,
+      9057018,
+      2960181,
+      1793680846597377689,
+      1793680846597377689
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-02.pt": [
+      66306,
+      9057015,
+      2960181,
+      1793680873876776392,
+      1793680873876776392
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-03.pt": [
+      66306,
+      9057020,
+      2960181,
+      1793680901147176687,
+      1793680901147176687
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-04.pt": [
+      66306,
+      9057022,
+      11508789,
+      1793680918169801386,
+      1793680918169801386
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-05.pt": [
+      66306,
+      9057027,
+      11508789,
+      1793680935151425830,
+      1793680935151425830
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-06.pt": [
+      66306,
+      9057029,
+      11508789,
+      1793680952202049534,
+      1793680952202049534
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-07.pt": [
+      66306,
+      9057031,
+      2960181,
+      1793680979645445906,
+      1793680979645445906
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-08.pt": [
+      66306,
+      9057024,
+      2960181,
+      1793681006764847741,
+      1793681006764847741
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-09.pt": [
+      66306,
+      9057032,
+      2960181,
+      1793681033826255947,
+      1793681033826255947
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-10.pt": [
+      66306,
+      9057034,
+      2960181,
+      1793681060962657687,
+      1793681060962657687
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-11.pt": [
+      66306,
+      9057035,
+      11508789,
+      1793681076453316031,
+      1793681076453316031
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-12.pt": [
+      66306,
+      9057039,
+      11508789,
+      1793681091986972419,
+      1793681091986972419
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-13.pt": [
+      66306,
+      9057043,
+      11508789,
+      1793681107584626328,
+      1793681107584626328
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-00.pt": [
+      66306,
+      9057014,
+      2960181,
+      1793680590108043498,
+      1793680590108043498
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-01.pt": [
+      66306,
+      9057019,
+      2960181,
+      1793680846597377689,
+      1793680846597377689
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-02.pt": [
+      66306,
+      9057016,
+      2960181,
+      1793680873876776392,
+      1793680873876776392
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-03.pt": [
+      66306,
+      9057021,
+      2960181,
+      1793680901146176709,
+      1793680901146176709
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-04.pt": [
+      66306,
+      9057023,
+      11508789,
+      1793680918169801386,
+      1793680918169801386
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-05.pt": [
+      66306,
+      9057025,
+      11508789,
+      1793680935151425830,
+      1793680935151425830
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-06.pt": [
+      66306,
+      9057026,
+      11508789,
+      1793680952202049534,
+      1793680952202049534
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-07.pt": [
+      66306,
+      9057028,
+      2960181,
+      1793680979645445906,
+      1793680979645445906
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-08.pt": [
+      66306,
+      9057030,
+      2960181,
+      1793681006764847741,
+      1793681006764847741
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-09.pt": [
+      66306,
+      9057033,
+      2960181,
+      1793681033826255947,
+      1793681033826255947
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-10.pt": [
+      66306,
+      9057037,
+      2960181,
+      1793681060962657687,
+      1793681060962657687
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-11.pt": [
+      66306,
+      9057041,
+      11508789,
+      1793681076453316031,
+      1793681076453316031
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-12.pt": [
+      66306,
+      9057036,
+      11508789,
+      1793681091985972441,
+      1793681091985972441
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-13.pt": [
+      66306,
+      9057038,
+      11508789,
+      1793681107584626328,
+      1793681107584626328
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-00.pt": [
+      66306,
+      9057013,
+      4008757,
+      1793681150887666568,
+      1793681150887666568
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-01.pt": [
+      66306,
+      9057011,
+      4008757,
+      1793681151357656200,
+      1793681151357656200
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-02.pt": [
+      66306,
+      9056957,
+      4008757,
+      1793681151830645765,
+      1793681151830645765
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-03.pt": [
+      66306,
+      9057050,
+      4008757,
+      1793681152294635528,
+      1793681152294635528
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-04.pt": [
+      66306,
+      9057053,
+      4008757,
+      1793681156287547437,
+      1793681156287547437
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-05.pt": [
+      66306,
+      9057055,
+      4008757,
+      1793681156744537355,
+      1793681156744537355
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-06.pt": [
+      66306,
+      9057054,
+      4008757,
+      1793681157204527207,
+      1793681157204527207
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-07.pt": [
+      66306,
+      9057056,
+      4008757,
+      1793681157663517081,
+      1793681157663517081
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-08.pt": [
+      66306,
+      9057057,
+      4008757,
+      1793681161649429144,
+      1793681161649429144
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-09.pt": [
+      66306,
+      9057058,
+      4008757,
+      1793681162112418930,
+      1793681162112418930
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-10.pt": [
+      66306,
+      9057059,
+      4008757,
+      1793681162569408848,
+      1793681162569408848
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-11.pt": [
+      66306,
+      9057060,
+      4008757,
+      1793681163027398744,
+      1793681163027398744
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-12.pt": [
+      66306,
+      9057061,
+      4008757,
+      1793681166763316328,
+      1793681166763316328
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-13.pt": [
+      66306,
+      9057062,
+      4008757,
+      1793681167229306048,
+      1793681167229306048
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-14.pt": [
+      66306,
+      9057066,
+      4008757,
+      1793681167700295658,
+      1793681167700295658
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-15.pt": [
+      66306,
+      9057063,
+      4008757,
+      1793681168173285224,
+      1793681168173285224
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-16.pt": [
+      66306,
+      9057065,
+      4008757,
+      1793681172175196941,
+      1793681172175196941
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-17.pt": [
+      66306,
+      9057067,
+      4008757,
+      1793681172637186750,
+      1793681172637186750
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-18.pt": [
+      66306,
+      9057064,
+      4008757,
+      1793681173101176514,
+      1793681173101176514
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-19.pt": [
+      66306,
+      9057068,
+      4008757,
+      1793681173565166278,
+      1793681173565166278
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-20.pt": [
+      66306,
+      9057069,
+      4008757,
+      1793681288448627712,
+      1793681288448627712
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-21.pt": [
+      66306,
+      9057070,
+      4008757,
+      1793681289094613459,
+      1793681289094613459
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-22.pt": [
+      66306,
+      9057071,
+      4008757,
+      1793681289619601876,
+      1793681289619601876
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-23.pt": [
+      66306,
+      9057072,
+      4008757,
+      1793681290148590204,
+      1793681290148590204
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-00.pt": [
+      66306,
+      9056910,
+      4008757,
+      1793681320736917239,
+      1793681320736917239
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-01.pt": [
+      66306,
+      9057085,
+      4008757,
+      1793681782546744868,
+      1793681782546744868
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-02.pt": [
+      66306,
+      9057084,
+      4008757,
+      1793681808616170206,
+      1793681808616170206
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-03.pt": [
+      66306,
+      9057083,
+      4008757,
+      1793681834754594210,
+      1793681834754594210
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-04.pt": [
+      66306,
+      9057087,
+      15703157,
+      1793681843488401801,
+      1793681843488401801
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-05.pt": [
+      66306,
+      9057091,
+      15703157,
+      1793681851314229303,
+      1793681851314229303
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-06.pt": [
+      66306,
+      9057093,
+      15703157,
+      1793681860385029362,
+      1793681860385029362
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-07.pt": [
+      66306,
+      9057095,
+      4008757,
+      1793681886313458934,
+      1793681886313458934
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-08.pt": [
+      66306,
+      9057097,
+      4008757,
+      1793681912389885092,
+      1793681912389885092
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-09.pt": [
+      66306,
+      9057099,
+      4008757,
+      1793681938240315318,
+      1793681938240315318
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-10.pt": [
+      66306,
+      9057101,
+      4008757,
+      1793681964201740093,
+      1793681964201740093
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-11.pt": [
+      66306,
+      9057103,
+      15703157,
+      1793681972311559108,
+      1793681972311559108
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-12.pt": [
+      66306,
+      9057105,
+      15703157,
+      1793681980216384778,
+      1793681980216384778
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-13.pt": [
+      66306,
+      9057107,
+      15703157,
+      1793681987680220217,
+      1793681987680220217
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-00.pt": [
+      66306,
+      9057082,
+      4008757,
+      1793681320751916909,
+      1793681320751916909
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-01.pt": [
+      66306,
+      9057081,
+      4008757,
+      1793681782562744515,
+      1793681782562744515
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-02.pt": [
+      66306,
+      9057086,
+      4008757,
+      1793681808633169832,
+      1793681808633169832
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-03.pt": [
+      66306,
+      9057090,
+      4008757,
+      1793681834769593880,
+      1793681834769593880
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-04.pt": [
+      66306,
+      9057092,
+      15703157,
+      1793681843522401052,
+      1793681843522401052
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-05.pt": [
+      66306,
+      9057094,
+      15703157,
+      1793681851346228598,
+      1793681851346228598
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-06.pt": [
+      66306,
+      9057096,
+      15703157,
+      1793681860417028657,
+      1793681860417028657
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-07.pt": [
+      66306,
+      9057098,
+      4008757,
+      1793681886434456280,
+      1793681886434456280
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-08.pt": [
+      66306,
+      9057100,
+      4008757,
+      1793681912403884783,
+      1793681912403884783
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-09.pt": [
+      66306,
+      9057102,
+      4008757,
+      1793681938255314988,
+      1793681938255314988
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-10.pt": [
+      66306,
+      9057104,
+      4008757,
+      1793681964215739781,
+      1793681964215739781
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-11.pt": [
+      66306,
+      9057106,
+      15703157,
+      1793681972343558394,
+      1793681972343558394
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-12.pt": [
+      66306,
+      9057108,
+      15703157,
+      1793681980248384072,
+      1793681980248384072
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-13.pt": [
+      66306,
+      9057110,
+      15703157,
+      1793681987713219489,
+      1793681987713219489
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-00.pt": [
+      66306,
+      9057119,
+      2960181,
+      1793682041737027175,
+      1793682041737027175
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-01.pt": [
+      66306,
+      9057134,
+      2960181,
+      1793682298779365071,
+      1793682298779365071
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-02.pt": [
+      66306,
+      9057121,
+      2960181,
+      1793682326108761441,
+      1793682326108761441
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-03.pt": [
+      66306,
+      9057139,
+      2960181,
+      1793682353562155131,
+      1793682353562155131
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-04.pt": [
+      66306,
+      9057135,
+      11508789,
+      1793682370677775892,
+      1793682370677775892
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-05.pt": [
+      66306,
+      9057142,
+      11508789,
+      1793682387807396917,
+      1793682387807396917
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-06.pt": [
+      66306,
+      9057138,
+      11508789,
+      1793682404890019745,
+      1793682404890019745
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-07.pt": [
+      66306,
+      9057141,
+      2960181,
+      1793682432108418281,
+      1793682432108418281
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-08.pt": [
+      66306,
+      9057143,
+      2960181,
+      1793682459381813760,
+      1793682459381813760
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-09.pt": [
+      66306,
+      9057148,
+      2960181,
+      1793682486402217885,
+      1793682486402217885
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-10.pt": [
+      66306,
+      9057150,
+      2960181,
+      1793682513494620601,
+      1793682513494620601
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-11.pt": [
+      66306,
+      9057152,
+      11508789,
+      1793682529029278336,
+      1793682529029278336
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-12.pt": [
+      66306,
+      9057159,
+      11508789,
+      1793682544630934389,
+      1793682544630934389
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-13.pt": [
+      66306,
+      9057153,
+      11508789,
+      1793682560217590803,
+      1793682560217590803
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-00.pt": [
+      66306,
+      9057120,
+      2960181,
+      1793682041737027175,
+      1793682041737027175
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-01.pt": [
+      66306,
+      9057133,
+      2960181,
+      1793682298779365071,
+      1793682298779365071
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-02.pt": [
+      66306,
+      9057122,
+      2960181,
+      1793682326108761441,
+      1793682326108761441
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-03.pt": [
+      66306,
+      9057140,
+      2960181,
+      1793682353563155109,
+      1793682353563155109
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-04.pt": [
+      66306,
+      9057136,
+      11508789,
+      1793682370677775892,
+      1793682370677775892
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-05.pt": [
+      66306,
+      9057137,
+      11508789,
+      1793682387807396917,
+      1793682387807396917
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-06.pt": [
+      66306,
+      9057144,
+      11508789,
+      1793682404890019745,
+      1793682404890019745
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-07.pt": [
+      66306,
+      9057146,
+      2960181,
+      1793682432108418281,
+      1793682432108418281
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-08.pt": [
+      66306,
+      9057145,
+      2960181,
+      1793682459381813760,
+      1793682459381813760
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-09.pt": [
+      66306,
+      9057147,
+      2960181,
+      1793682486402217885,
+      1793682486402217885
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-10.pt": [
+      66306,
+      9057149,
+      2960181,
+      1793682513495620579,
+      1793682513495620579
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-11.pt": [
+      66306,
+      9057154,
+      11508789,
+      1793682529029278336,
+      1793682529029278336
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-12.pt": [
+      66306,
+      9057158,
+      11508789,
+      1793682544631934367,
+      1793682544631934367
+    ],
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-13.pt": [
+      66306,
+      9057155,
+      11508789,
+      1793682560233590450,
+      1793682560233590450
+    ]
+  },
+  "all10_manifest_producer_bindings": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/manifest.json": {
+      "identity": [
+        66306,
+        9056956,
+        5250684,
+        1793679842766521876,
+        1793679842768521832
+      ],
+      "producer_sha256": "5a6d7b09dda6778e478650e292fa952bec783747ab38452a50d60a63498e4de1"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/manifest.json": {
+      "identity": [
+        66306,
+        9057005,
+        3172841,
+        1793680542969091900,
+        1793680542970091878
+      ],
+      "producer_sha256": "fb82c5c6367185fecb480c96e86ea489e6c470955d60f5af43ebcccf0d4bda62"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/manifest.json": {
+      "identity": [
+        66306,
+        9057009,
+        3172633,
+        1793680543051090100,
+        1793680543052090078
+      ],
+      "producer_sha256": "1d9749ddacbe06ab2663e07f89499c47986f7550e9a5ab01d85b100d6abf921c"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/manifest.json": {
+      "identity": [
+        66306,
+        9057040,
+        3157112,
+        1793681129150147416,
+        1793681129151147393
+      ],
+      "producer_sha256": "9740b87918c87b1a9b56aa08436bd7e5662c6c415fa05014e6ceb3125e5bd494"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/manifest.json": {
+      "identity": [
+        66306,
+        9057045,
+        3157112,
+        1793681129367142597,
+        1793681129368142575
+      ],
+      "producer_sha256": "81fd8e2a73789a1fa13fe62ef89b495d75624a2165b3d71a01aecd6814f407b0"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/manifest.json": {
+      "identity": [
+        66306,
+        9057073,
+        5251649,
+        1793681290284587204,
+        1793681290286587159
+      ],
+      "producer_sha256": "088e4afa62fad8a749f5617637fca0e295c4d6c79ee1cc227d4c58866f1a8199"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/manifest.json": {
+      "identity": [
+        66306,
+        9057111,
+        3172856,
+        1793681990444159273,
+        1793681990444159273
+      ],
+      "producer_sha256": "a14a41dcefc65ed5219918bfa8e1c9e07181dcf83ca99b85ca4a08e247c32b6e"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/manifest.json": {
+      "identity": [
+        66306,
+        9057115,
+        3172648,
+        1793681990525157487,
+        1793681990526157465
+      ],
+      "producer_sha256": "3d6b8742365ba4fae3473e5232abfc4f4cd295381662612e0a6374fb187abc28"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/manifest.json": {
+      "identity": [
+        66306,
+        9057151,
+        3157127,
+        1793682581116130012,
+        1793682581118129968
+      ],
+      "producer_sha256": "4429bd074e7554cd475fed5baea901f053bb6328c3675fc656f5a77f0378ff2d"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/manifest.json": {
+      "identity": [
+        66306,
+        9057160,
+        3157127,
+        1793682581119129946,
+        1793682581120129924
+      ],
+      "producer_sha256": "f1fce19978ef3dd575eded91f8a089fb1f420241c837f001b5136c1fdb133d33"
+    }
+  },
+  "selected104_payload_paths": [
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-14.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-15.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-16.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-17.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-18.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-19.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-20.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-21.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-22.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_single/call-23.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/native_batch/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/port/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-14.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-15.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-16.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-17.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-18.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-19.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-20.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-21.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-22.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_single/call-23.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/native_batch/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/port/call-13.pt"
+  ],
+  "excluded56_TP2_payload_paths": [
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank0/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/instruct/tp2-rank1/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank0/call-13.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-00.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-01.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-02.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-03.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-04.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-05.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-06.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-07.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-08.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-09.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-10.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-11.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-12.pt",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/activations/reasoning/tp2-rank1/call-13.pt"
+  ],
+  "inherited_v4_producer_source_map_sha256": "ec22b398b9fa581593c7c15defcd292c7732a7a1f766527cba885a7cbb096d6e",
+  "inherited_intermediate_producer_source_map_sha256": "2219c342f18e81dac3b60a58b98bf5feab8fc453b85b449ba4a6bff1708d62a1",
+  "directly_rechecked_producer_sources": [
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/compare_phi4_intermediate_v1.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_intermediate_protocol_v1.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_intermediate_taps_v1.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/capture_phi4_intermediate_single_v1.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/capture_phi4_intermediate_mixed_v1.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_contract_v4.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_results_v4.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_full_gateup_runtime_v4.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/run_phi4_full_gateup_worker_v4.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4_mixed_reference_protocol.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_real_logits.py",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/terminal-metadata-audit-v1.json",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-intermediate-capture-v1/plan.json",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/hf-reference.json",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-instruct/real-weight-port-validation.json",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/hf-reference.json",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-reasoning/real-weight-port-validation.json"
+  ],
+  "payloads_read_or_hashed": false,
+  "large_manifests_read_or_hashed": false
+}

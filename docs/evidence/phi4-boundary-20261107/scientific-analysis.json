@@ -1,0 +1,1516 @@
+{
+  "schema": "phi4_v10_saved_boundary_scientific_metadata_analysis_v1",
+  "observed_at": "2026-11-07T02:23:01.225856+00:00",
+  "analyst": "/root/lfm_pair_mini2_successor",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-saved-boundary-alignment-cpu-v10/events.jsonl": "7ee0cf4c8c3aef919a9e0d4a103cf5e25922b716828ec6c83d2ca3ae4bcc9931",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/phi4-saved-boundary-alignment-cpu-v10/terminal.json": "cd9ed5a2342a27c9a33bc4e7d3ccbe96edc53001145fb6532e5bc6c29068bdc3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-saved-boundary-cpu-v10-root-v1/external-audit.json": "2fdf4b1836b1ed8fa2a232910a28f5e337dc340aad66d4656fe681e831c6d416",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/phi4-saved-boundary-cpu-v10-root-v1/release.json": "76d5fa9ff576f88f2012fae0924a03a1293ffec1fd57dd54a96d570cd84f704d"
+  },
+  "read_only_inputs": true,
+  "tensor_payload_read": false,
+  "model_or_service_started": false,
+  "canonical_or_frozen_mutations": false,
+  "integrity": {
+    "passed": true,
+    "comparisons": 5184,
+    "head_comparisons": 576,
+    "all_geometry_keys_unique": true,
+    "complete_summary_recomputed_from_comparison_rows": true,
+    "unchanged_wrapper_raw_sha_identical": true,
+    "gate_count": 18,
+    "activation_payloads_verified_by_worker": 104,
+    "full_payload_files_loaded_by_worker": 114,
+    "source_worker_elapsed_seconds": 39.83303815871477,
+    "source_worker_max_rss_kib": 557824,
+    "external_terminal_passed": true,
+    "predecessors_drained": 251,
+    "independent_live_terminal_audit": "Root owns current live-process audit; this report only checks recorded metadata and hashes."
+  },
+  "headline": "row1 gate/up substantially improves selected-row agreement with native_single, especially reasoning, but does not restore downstream/whole-model agreement or qualify the candidate.",
+  "raw_unequal_counts_out_of32_against_native_single": {
+    "instruct": {
+      "gateup_output": {
+        "unchanged": 23,
+        "candidate": 4
+      },
+      "down_input": {
+        "unchanged": 23,
+        "candidate": 4
+      },
+      "down_output": {
+        "unchanged": 19,
+        "candidate": 20
+      },
+      "layer0_output": {
+        "unchanged": 15,
+        "candidate": 8
+      },
+      "layer1_norm": {
+        "unchanged": 15,
+        "candidate": 8
+      },
+      "layer1_qkv": {
+        "unchanged": 20,
+        "candidate": 16
+      },
+      "layer1_oproj_input": {
+        "unchanged": 22,
+        "candidate": 19
+      },
+      "final_norm": {
+        "unchanged": 28,
+        "candidate": 28
+      },
+      "logits": {
+        "unchanged": 28,
+        "candidate": 28
+      }
+    },
+    "reasoning": {
+      "gateup_output": {
+        "unchanged": 24,
+        "candidate": 0
+      },
+      "down_input": {
+        "unchanged": 24,
+        "candidate": 0
+      },
+      "down_output": {
+        "unchanged": 22,
+        "candidate": 13
+      },
+      "layer0_output": {
+        "unchanged": 18,
+        "candidate": 4
+      },
+      "layer1_norm": {
+        "unchanged": 18,
+        "candidate": 4
+      },
+      "layer1_qkv": {
+        "unchanged": 22,
+        "candidate": 12
+      },
+      "layer1_oproj_input": {
+        "unchanged": 31,
+        "candidate": 28
+      },
+      "final_norm": {
+        "unchanged": 31,
+        "candidate": 31
+      },
+      "logits": {
+        "unchanged": 31,
+        "candidate": 31
+      }
+    }
+  },
+  "rms_descriptive_only": {
+    "instruct": {
+      "gateup_output": {
+        "unchanged_mean": 2.155704387166023e-05,
+        "candidate_mean": 1.975194586124297e-05,
+        "better": 19,
+        "equal": 10,
+        "worse": 3
+      },
+      "down_input": {
+        "unchanged_mean": 3.5494048070830355e-06,
+        "candidate_mean": 3.1927285739855467e-06,
+        "better": 21,
+        "equal": 10,
+        "worse": 1
+      },
+      "down_output": {
+        "unchanged_mean": 2.7943665536273834e-05,
+        "candidate_mean": 1.915516141497002e-05,
+        "better": 12,
+        "equal": 17,
+        "worse": 3
+      },
+      "layer0_output": {
+        "unchanged_mean": 3.592772672783679e-05,
+        "candidate_mean": 2.2732202294211796e-05,
+        "better": 10,
+        "equal": 22,
+        "worse": 0
+      },
+      "layer1_norm": {
+        "unchanged_mean": 3.9110733460137545e-05,
+        "candidate_mean": 2.5036160616348396e-05,
+        "better": 10,
+        "equal": 22,
+        "worse": 0
+      },
+      "layer1_qkv": {
+        "unchanged_mean": 0.00032667158425930896,
+        "candidate_mean": 0.00017923749675759549,
+        "better": 10,
+        "equal": 22,
+        "worse": 0
+      },
+      "layer1_oproj_input": {
+        "unchanged_mean": 8.509118301792539e-05,
+        "candidate_mean": 4.668474495157185e-05,
+        "better": 14,
+        "equal": 18,
+        "worse": 0
+      },
+      "final_norm": {
+        "unchanged_mean": 0.01586407188524837,
+        "candidate_mean": 0.015749214663174634,
+        "better": 7,
+        "equal": 18,
+        "worse": 7
+      },
+      "logits": {
+        "unchanged_mean": 0.13819912459574402,
+        "candidate_mean": 0.09642753803254073,
+        "better": 11,
+        "equal": 18,
+        "worse": 3
+      }
+    },
+    "reasoning": {
+      "gateup_output": {
+        "unchanged_mean": 2.2429090350386243e-06,
+        "candidate_mean": 0.0,
+        "better": 24,
+        "equal": 8,
+        "worse": 0
+      },
+      "down_input": {
+        "unchanged_mean": 2.2767429241818107e-07,
+        "candidate_mean": 0.0,
+        "better": 24,
+        "equal": 8,
+        "worse": 0
+      },
+      "down_output": {
+        "unchanged_mean": 9.097778896262654e-06,
+        "candidate_mean": 7.372629220594062e-07,
+        "better": 17,
+        "equal": 14,
+        "worse": 1
+      },
+      "layer0_output": {
+        "unchanged_mean": 1.3089234894465874e-05,
+        "candidate_mean": 8.259061849445711e-07,
+        "better": 15,
+        "equal": 15,
+        "worse": 2
+      },
+      "layer1_norm": {
+        "unchanged_mean": 1.939309271628195e-05,
+        "candidate_mean": 1.2388592774168568e-06,
+        "better": 15,
+        "equal": 15,
+        "worse": 2
+      },
+      "layer1_qkv": {
+        "unchanged_mean": 0.00023921875027069895,
+        "candidate_mean": 3.911377459067018e-05,
+        "better": 15,
+        "equal": 15,
+        "worse": 2
+      },
+      "layer1_oproj_input": {
+        "unchanged_mean": 5.730934131237694e-05,
+        "candidate_mean": 2.724502675278184e-05,
+        "better": 17,
+        "equal": 11,
+        "worse": 4
+      },
+      "final_norm": {
+        "unchanged_mean": 0.05285182129969196,
+        "candidate_mean": 0.05102392469310986,
+        "better": 14,
+        "equal": 11,
+        "worse": 7
+      },
+      "logits": {
+        "unchanged_mean": 0.23124655707975567,
+        "candidate_mean": 0.21129898411835174,
+        "better": 14,
+        "equal": 11,
+        "worse": 7
+      }
+    }
+  },
+  "head_metrics_by_original_anchor": {
+    "instruct": {
+      "unchanged/native_single": {
+        "argmax_matches": 32,
+        "raw_equal": 4,
+        "max_abs_error": 4.0,
+        "max_mean_abs_error": 0.47233471274375916,
+        "min_cosine": 0.999862790107727,
+        "max_kl_reference_to_neuron": 0.020647035911679268
+      },
+      "unchanged/native_batch": {
+        "argmax_matches": 32,
+        "raw_equal": 31,
+        "max_abs_error": 0.5,
+        "max_mean_abs_error": 0.009442606009542942,
+        "min_cosine": 0.9999642968177795,
+        "max_kl_reference_to_neuron": 9.176606852179248e-08
+      },
+      "unchanged/port": {
+        "argmax_matches": 32,
+        "raw_equal": 32,
+        "max_abs_error": 0.0,
+        "max_mean_abs_error": 0.0,
+        "min_cosine": 0.9999642968177795,
+        "max_kl_reference_to_neuron": 0.0
+      },
+      "candidate/native_single": {
+        "argmax_matches": 32,
+        "raw_equal": 4,
+        "max_abs_error": 1.5,
+        "max_mean_abs_error": 0.196797713637352,
+        "min_cosine": 0.999853253364563,
+        "max_kl_reference_to_neuron": 0.020647035911679268
+      },
+      "candidate/native_batch": {
+        "argmax_matches": 32,
+        "raw_equal": 17,
+        "max_abs_error": 3.5,
+        "max_mean_abs_error": 0.4243198335170746,
+        "min_cosine": 0.999902606010437,
+        "max_kl_reference_to_neuron": 0.012015375308692455
+      },
+      "candidate/port": {
+        "argmax_matches": 32,
+        "raw_equal": 18,
+        "max_abs_error": 3.5,
+        "max_mean_abs_error": 0.4243198335170746,
+        "min_cosine": 0.999902606010437,
+        "max_kl_reference_to_neuron": 0.012015375308692455
+      }
+    },
+    "reasoning": {
+      "unchanged/native_single": {
+        "argmax_matches": 32,
+        "raw_equal": 1,
+        "max_abs_error": 2.4375,
+        "max_mean_abs_error": 0.3444666564464569,
+        "min_cosine": 0.9959671497344971,
+        "max_kl_reference_to_neuron": 0.02795311249792576
+      },
+      "unchanged/native_batch": {
+        "argmax_matches": 32,
+        "raw_equal": 27,
+        "max_abs_error": 1.07421875,
+        "max_mean_abs_error": 0.10348983108997345,
+        "min_cosine": 0.9996330142021179,
+        "max_kl_reference_to_neuron": 0.001970360055565834
+      },
+      "unchanged/port": {
+        "argmax_matches": 32,
+        "raw_equal": 32,
+        "max_abs_error": 0.0,
+        "max_mean_abs_error": 0.0,
+        "min_cosine": 0.9999814033508301,
+        "max_kl_reference_to_neuron": 0.0
+      },
+      "candidate/native_single": {
+        "argmax_matches": 32,
+        "raw_equal": 1,
+        "max_abs_error": 2.0,
+        "max_mean_abs_error": 0.24694234132766724,
+        "min_cosine": 0.9973882436752319,
+        "max_kl_reference_to_neuron": 0.027953095734119415
+      },
+      "candidate/native_batch": {
+        "argmax_matches": 32,
+        "raw_equal": 11,
+        "max_abs_error": 1.3125,
+        "max_mean_abs_error": 0.1928376704454422,
+        "min_cosine": 0.9982267022132874,
+        "max_kl_reference_to_neuron": 0.017678653821349144
+      },
+      "candidate/port": {
+        "argmax_matches": 32,
+        "raw_equal": 11,
+        "max_abs_error": 1.3125,
+        "max_mean_abs_error": 0.1928376704454422,
+        "min_cosine": 0.9982267022132874,
+        "max_kl_reference_to_neuron": 0.017678653821349144
+      }
+    }
+  },
+  "phase_counts": {
+    "instruct": {
+      "unchanged": {
+        "prefill": {
+          "gateup_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_input": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer0_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_norm": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_qkv": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_oproj_input": {
+            "rows": 8,
+            "raw_unequal": 2
+          },
+          "final_norm": {
+            "rows": 8,
+            "raw_unequal": 4
+          },
+          "logits": {
+            "rows": 8,
+            "raw_unequal": 4
+          }
+        },
+        "decode": {
+          "gateup_output": {
+            "rows": 24,
+            "raw_unequal": 23
+          },
+          "down_input": {
+            "rows": 24,
+            "raw_unequal": 23
+          },
+          "down_output": {
+            "rows": 24,
+            "raw_unequal": 19
+          },
+          "layer0_output": {
+            "rows": 24,
+            "raw_unequal": 15
+          },
+          "layer1_norm": {
+            "rows": 24,
+            "raw_unequal": 15
+          },
+          "layer1_qkv": {
+            "rows": 24,
+            "raw_unequal": 20
+          },
+          "layer1_oproj_input": {
+            "rows": 24,
+            "raw_unequal": 20
+          },
+          "final_norm": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "logits": {
+            "rows": 24,
+            "raw_unequal": 24
+          }
+        }
+      },
+      "candidate": {
+        "prefill": {
+          "gateup_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_input": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer0_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_norm": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_qkv": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_oproj_input": {
+            "rows": 8,
+            "raw_unequal": 2
+          },
+          "final_norm": {
+            "rows": 8,
+            "raw_unequal": 4
+          },
+          "logits": {
+            "rows": 8,
+            "raw_unequal": 4
+          }
+        },
+        "decode": {
+          "gateup_output": {
+            "rows": 24,
+            "raw_unequal": 4
+          },
+          "down_input": {
+            "rows": 24,
+            "raw_unequal": 4
+          },
+          "down_output": {
+            "rows": 24,
+            "raw_unequal": 20
+          },
+          "layer0_output": {
+            "rows": 24,
+            "raw_unequal": 8
+          },
+          "layer1_norm": {
+            "rows": 24,
+            "raw_unequal": 8
+          },
+          "layer1_qkv": {
+            "rows": 24,
+            "raw_unequal": 16
+          },
+          "layer1_oproj_input": {
+            "rows": 24,
+            "raw_unequal": 17
+          },
+          "final_norm": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "logits": {
+            "rows": 24,
+            "raw_unequal": 24
+          }
+        }
+      }
+    },
+    "reasoning": {
+      "unchanged": {
+        "prefill": {
+          "gateup_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_input": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer0_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_norm": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_qkv": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_oproj_input": {
+            "rows": 8,
+            "raw_unequal": 7
+          },
+          "final_norm": {
+            "rows": 8,
+            "raw_unequal": 7
+          },
+          "logits": {
+            "rows": 8,
+            "raw_unequal": 7
+          }
+        },
+        "decode": {
+          "gateup_output": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "down_input": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "down_output": {
+            "rows": 24,
+            "raw_unequal": 22
+          },
+          "layer0_output": {
+            "rows": 24,
+            "raw_unequal": 18
+          },
+          "layer1_norm": {
+            "rows": 24,
+            "raw_unequal": 18
+          },
+          "layer1_qkv": {
+            "rows": 24,
+            "raw_unequal": 22
+          },
+          "layer1_oproj_input": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "final_norm": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "logits": {
+            "rows": 24,
+            "raw_unequal": 24
+          }
+        }
+      },
+      "candidate": {
+        "prefill": {
+          "gateup_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_input": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "down_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer0_output": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_norm": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_qkv": {
+            "rows": 8,
+            "raw_unequal": 0
+          },
+          "layer1_oproj_input": {
+            "rows": 8,
+            "raw_unequal": 7
+          },
+          "final_norm": {
+            "rows": 8,
+            "raw_unequal": 7
+          },
+          "logits": {
+            "rows": 8,
+            "raw_unequal": 7
+          }
+        },
+        "decode": {
+          "gateup_output": {
+            "rows": 24,
+            "raw_unequal": 0
+          },
+          "down_input": {
+            "rows": 24,
+            "raw_unequal": 0
+          },
+          "down_output": {
+            "rows": 24,
+            "raw_unequal": 13
+          },
+          "layer0_output": {
+            "rows": 24,
+            "raw_unequal": 4
+          },
+          "layer1_norm": {
+            "rows": 24,
+            "raw_unequal": 4
+          },
+          "layer1_qkv": {
+            "rows": 24,
+            "raw_unequal": 12
+          },
+          "layer1_oproj_input": {
+            "rows": 24,
+            "raw_unequal": 21
+          },
+          "final_norm": {
+            "rows": 24,
+            "raw_unequal": 24
+          },
+          "logits": {
+            "rows": 24,
+            "raw_unequal": 24
+          }
+        }
+      }
+    }
+  },
+  "preserved_original18_gates": {
+    "instruct/candidate": {
+      "native_batch": false,
+      "original_hf": false,
+      "original_port": false
+    },
+    "instruct/unchanged": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "instruct/wrapper": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/candidate": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/unchanged": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    },
+    "reasoning/wrapper": {
+      "native_batch": true,
+      "original_hf": false,
+      "original_port": true
+    }
+  },
+  "selected_row_equal_then_divergent_witnesses": {
+    "instruct": {
+      "down_input->down_output": [
+        {
+          "ordinal": 6,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 1
+          },
+          "output_rms": 4.404832986371046e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 7,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 1
+          },
+          "output_rms": 6.229374920613962e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 8,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 3,
+            "step": 2
+          },
+          "output_rms": 3.116213782360923e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 9,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 4.3015947132529745e-09,
+          "output_max_abs": 2.384185791015625e-07
+        },
+        {
+          "ordinal": 10,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 1.3765103082409519e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 11,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 4.404866597066622e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 13,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 6.721241739457773e-11,
+          "output_max_abs": 3.725290298461914e-09
+        },
+        {
+          "ordinal": 14,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 3
+          },
+          "output_rms": 2.758392369134192e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 15,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 2.219556179645688e-06,
+          "output_max_abs": 0.0001220703125
+        },
+        {
+          "ordinal": 23,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 1
+          },
+          "output_rms": 4.404832986371046e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 24,
+          "key": {
+            "fixture": 1,
+            "phase": "decode",
+            "slot": 3,
+            "step": 2
+          },
+          "output_rms": 8.603189426505949e-09,
+          "output_max_abs": 4.76837158203125e-07
+        },
+        {
+          "ordinal": 26,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 3.116213782360923e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 27,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 1.3765103082409519e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 28,
+          "key": {
+            "fixture": 1,
+            "phase": "decode",
+            "slot": 3,
+            "step": 3
+          },
+          "output_rms": 3.4412757706023796e-08,
+          "output_max_abs": 1.9073486328125e-06
+        },
+        {
+          "ordinal": 29,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 2.753356658059778e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 31,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 2.758392369134192e-07,
+          "output_max_abs": 1.52587890625e-05
+        }
+      ],
+      "layer1_norm->layer1_qkv": [
+        {
+          "ordinal": 9,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 6.823937983168932e-06,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 10,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 3.411975467616153e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 11,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 2.132480599880018e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 13,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 4.76837158203125e-07,
+          "output_max_abs": 3.0517578125e-05
+        },
+        {
+          "ordinal": 14,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 3
+          },
+          "output_rms": 1.3328003749250112e-08,
+          "output_max_abs": 9.5367431640625e-07
+        },
+        {
+          "ordinal": 25,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 2.729575167846423e-05,
+          "output_max_abs": 0.001953125
+        },
+        {
+          "ordinal": 27,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 3.411975467616153e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 31,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 1.3328003749250112e-08,
+          "output_max_abs": 9.5367431640625e-07
+        }
+      ],
+      "layer1_qkv->layer1_oproj_input": [
+        {
+          "ordinal": 1,
+          "key": {
+            "fixture": 5,
+            "phase": "prefill",
+            "slot": 1
+          },
+          "output_rms": 1.7145733518621548e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 17,
+          "key": {
+            "fixture": 3,
+            "phase": "prefill",
+            "slot": 1
+          },
+          "output_rms": 3.950668166038347e-06,
+          "output_max_abs": 0.0001220703125
+        },
+        {
+          "ordinal": 29,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 4.905158496092894e-05,
+          "output_max_abs": 0.00048828125
+        }
+      ]
+    },
+    "reasoning": {
+      "down_input->down_output": [
+        {
+          "ordinal": 5,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 1
+          },
+          "output_rms": 4.540397916503175e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 6,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 1
+          },
+          "output_rms": 2.1507973566264873e-09,
+          "output_max_abs": 1.1920928955078125e-07
+        },
+        {
+          "ordinal": 7,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 1
+          },
+          "output_rms": 5.506041232963807e-07,
+          "output_max_abs": 3.0517578125e-05
+        },
+        {
+          "ordinal": 9,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 2.688496695783109e-10,
+          "output_max_abs": 1.4901161193847656e-08
+        },
+        {
+          "ordinal": 10,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 1.3765103082409519e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 13,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 2.7530206164819037e-07,
+          "output_max_abs": 1.52587890625e-05
+        },
+        {
+          "ordinal": 14,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 3
+          },
+          "output_rms": 1.3765129337235025e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 23,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 1
+          },
+          "output_rms": 2.1507973566264873e-09,
+          "output_max_abs": 1.1920928955078125e-07
+        },
+        {
+          "ordinal": 24,
+          "key": {
+            "fixture": 1,
+            "phase": "decode",
+            "slot": 3,
+            "step": 2
+          },
+          "output_rms": 8.826855581229414e-06,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 25,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 3.4412757706023796e-08,
+          "output_max_abs": 1.9073486328125e-06
+        },
+        {
+          "ordinal": 27,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 1.3765103082409519e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 28,
+          "key": {
+            "fixture": 1,
+            "phase": "decode",
+            "slot": 3,
+            "step": 3
+          },
+          "output_rms": 8.809665972742092e-06,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 31,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 1.3765129337235025e-07,
+          "output_max_abs": 7.62939453125e-06
+        }
+      ],
+      "layer1_norm->layer1_qkv": [
+        {
+          "ordinal": 6,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 1
+          },
+          "output_rms": 1.3656203301010825e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 8,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 3,
+            "step": 2
+          },
+          "output_rms": 2.729575167846423e-05,
+          "output_max_abs": 0.001953125
+        },
+        {
+          "ordinal": 9,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 1.0995603093131343e-07,
+          "output_max_abs": 7.62939453125e-06
+        },
+        {
+          "ordinal": 21,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 1
+          },
+          "output_rms": 4.265481793133932e-07,
+          "output_max_abs": 3.0517578125e-05
+        },
+        {
+          "ordinal": 23,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 1
+          },
+          "output_rms": 1.3656203301010825e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 25,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 2
+          },
+          "output_rms": 1.3647875839232114e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 26,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 2.729575167846423e-05,
+          "output_max_abs": 0.001953125
+        },
+        {
+          "ordinal": 29,
+          "key": {
+            "fixture": 3,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 1.3647875839232114e-05,
+          "output_max_abs": 0.0009765625
+        }
+      ],
+      "layer1_qkv->layer1_oproj_input": [
+        {
+          "ordinal": 0,
+          "key": {
+            "fixture": 0,
+            "phase": "prefill",
+            "slot": 3
+          },
+          "output_rms": 1.9622297279861246e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 1,
+          "key": {
+            "fixture": 5,
+            "phase": "prefill",
+            "slot": 1
+          },
+          "output_rms": 1.8720054602318293e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 2,
+          "key": {
+            "fixture": 2,
+            "phase": "prefill",
+            "slot": 0
+          },
+          "output_rms": 1.5054724225603745e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 3,
+          "key": {
+            "fixture": 4,
+            "phase": "prefill",
+            "slot": 2
+          },
+          "output_rms": 8.76698773017191e-06,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 4,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 3,
+            "step": 1
+          },
+          "output_rms": 1.4128248628370817e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 10,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 2
+          },
+          "output_rms": 3.2484484133304704e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 11,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 1.0940351847132691e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 12,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 3,
+            "step": 3
+          },
+          "output_rms": 1.4074866914156361e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 13,
+          "key": {
+            "fixture": 5,
+            "phase": "decode",
+            "slot": 1,
+            "step": 3
+          },
+          "output_rms": 1.7447542307224596e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 14,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 0,
+            "step": 3
+          },
+          "output_rms": 4.326612716778096e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 15,
+          "key": {
+            "fixture": 4,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 1.4182117050468589e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 16,
+          "key": {
+            "fixture": 1,
+            "phase": "prefill",
+            "slot": 3
+          },
+          "output_rms": 2.8025741774641572e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 18,
+          "key": {
+            "fixture": 0,
+            "phase": "prefill",
+            "slot": 0
+          },
+          "output_rms": 1.9622297279861246e-05,
+          "output_max_abs": 0.00048828125
+        },
+        {
+          "ordinal": 19,
+          "key": {
+            "fixture": 2,
+            "phase": "prefill",
+            "slot": 2
+          },
+          "output_rms": 1.5054724225603745e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 20,
+          "key": {
+            "fixture": 1,
+            "phase": "decode",
+            "slot": 3,
+            "step": 1
+          },
+          "output_rms": 3.361319403642388e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 22,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 0,
+            "step": 1
+          },
+          "output_rms": 1.4128248628370817e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 27,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 2
+          },
+          "output_rms": 3.2484484133304704e-05,
+          "output_max_abs": 0.0009765625
+        },
+        {
+          "ordinal": 30,
+          "key": {
+            "fixture": 0,
+            "phase": "decode",
+            "slot": 0,
+            "step": 3
+          },
+          "output_rms": 1.4074866914156361e-05,
+          "output_max_abs": 0.000244140625
+        },
+        {
+          "ordinal": 31,
+          "key": {
+            "fixture": 2,
+            "phase": "decode",
+            "slot": 2,
+            "step": 3
+          },
+          "output_rms": 4.326612716778096e-05,
+          "output_max_abs": 0.0009765625
+        }
+      ]
+    }
+  },
+  "duplicate_slot_observations": {
+    "instruct": {
+      "pairs": 216,
+      "actual_raw_sha_equal": 216,
+      "scope": "Only duplicate logical fixture/step occurrences in the two saved slot arrangements; not arbitrary or long request reuse proof."
+    },
+    "reasoning": {
+      "pairs": 216,
+      "actual_raw_sha_equal": 216,
+      "scope": "Only duplicate logical fixture/step occurrences in the two saved slot arrangements; not arbitrary or long request reuse proof."
+    }
+  },
+  "conclusions": [
+    "Reasoning candidate gateup_output and down_input are raw-equal to native_single in32/32 occurrences (baseline8/32). Instruct improves9/32 to28/32; the4 remaining raw mismatches are ordinal5/12/21/30. A raw-count improvement is not a new acceptance threshold.",
+    "Downstream discrepancies remain: reasoning candidate down_output13/32, layer1_qkv12/32, layer1_oproj_input28/32, logits31/32 unequal; instruct logits28/32 unequal. All24 decode head rows remain unequal in both variants.",
+    "Selected down_input is raw-identical but down_output differs in13 reasoning/16 instruct rows; selected layer1_norm is equal but layer1_qkv differs in8 rows for each variant. These support testing execution geometry/rounding with identical full inputs; they do not prove the earliest global cause.",
+    "Selected-row layer1_qkv is equal throughout all8 prefill occurrences, yet layer1_oproj_input differs in7 reasoning/2 instruct rows. Full-prefix K/V rows, attention masks/positions and attention arithmetic were not matched by this saved selected-row comparison. Thus prior decode KV history alone cannot explain all observed prefill discrepancies.",
+    "All6 original_hf gates remain false. Instruct candidate additionally changes native_batch and original_port gates fromtrue tofalse (maximum output absolute discrepancy against port3.5). Reasoning candidate retains those two original gates true; head raw discrepancies alone do not overturn their original tolerance results.",
+    "Candidate native_single argmax is32/32 for both variants, but this does not satisfy the unchanged multi-metric original gates. Mean per-row head RMS decreases0.1381991\u21920.09642754 instruct and0.23124656\u21920.21129898 reasoning, with3/7 individual rows worse respectively. No speedup was measured here.",
+    "For each variant216 duplicated fixture/phase/step boundary pairs across all3 arms retain identical actual raw SHA across two saved slot layouts. This is limited reassuring evidence, not proof of arbitrary slot lifecycle correctness; cold-cache, long-decode and slot-reuse gates remain mandatory."
+  ],
+  "next_diagnostic": {
+    "name": "Layer1 attention cross-replay with complete identical inputs and explicit prefix/cache provenance",
+    "status": "Design only; requires new reviewed serial admission and fresh namespace; not started.",
+    "why_most_discriminative": "Reasoning prefill ordinal0 and decode ordinal4 have selected QKV equality but attention-output inequality, so fixing full logical Q/K/V distinguishes unseen prefix-state differences from attention execution geometry instead of repeatedly altering gate/up.",
+    "representative_witnesses": [
+      {
+        "variant": "reasoning",
+        "ordinal": 0,
+        "fixture": 0,
+        "phase": "prefill",
+        "slot": 3,
+        "qkv_equal": true,
+        "attention_max_abs": 0.00048828125
+      },
+      {
+        "variant": "reasoning",
+        "ordinal": 4,
+        "fixture": 0,
+        "phase": "decode",
+        "step": 1,
+        "slot": 3,
+        "qkv_equal": true,
+        "attention_max_abs": 0.000244140625
+      }
+    ],
+    "capture_requirements": [
+      "Capture complete layer1 Q/K/V for all valid prefix tokens, exact pre/post-RoPE query/key tensors, positions, masks, cache lengths and physical-slot mapping, not only the last prediction row. Preserve both original reference and candidate provenance with raw SHA.",
+      "Capture before and after cache update at each selected decode step, including padding/inactive slots and selected-row o_proj input. Check all source shape/dtype/weight/rope/mask identities before interpretation.",
+      "Use the original6 fixtures, two slot arrangements and fixed teacher-forced tokens; retain8 prefill +24 decode occurrences per variant. Begin with the two witness cases, then cover all cases under the same frozen protocol."
+    ],
+    "factorial_design": [
+      "Control arm: native_single attention on native_single complete Q/K/V/mask/positions reproduces its saved output. Candidate/port unchanged controls must reproduce their own outputs; otherwise stop at a capture/replay validity failure.",
+      "Execution-only intervention: feed the identical native_single full logical Q/K/V and identical mask/positions/scale to single-row and batch/port attention paths; preserve valid-token layout while checking padded rows. Only execution path/shape changes.",
+      "State-only intervention: hold attention implementation, selected query, scale, mask and positions fixed; replace the complete valid K/V prefix using native_single versus candidate histories after explicit logical-token alignment. Current-token K/V must be explicitly held fixed or crossed as a separate named factor.",
+      "Run the2\u00d72 path-by-prefix-state cross on each selected frame. Reconstruct both trajectories from fresh prefill with fixed tokens, and reset every request slot; preserve the original slot-reuse sequence as a separate controlled condition."
+    ],
+    "decision_rules": [
+      "Execution-only mismatch with byte-identical full inputs implicates that isolated attention implementation/layout/rounding path; it does not locate the global model first cause.",
+      "Prefix-state effect with fixed execution path demonstrates a causal contribution for that isolated replay. It must not be called a cache corruption until prefix construction, earlier-token numerical differences and slot mapping are separately excluded.",
+      "If fixing full prefix inputs removes prefill/attention mismatch but head still fails, quantify propagation and investigate later blocks; no candidate promotion from local agreement alone.",
+      "If new capture cannot supply full prefixes and replay controls, report insufficient evidence; do not infer historical K/V equality from the current selected-row SHA."
+    ],
+    "cheap_secondary_control": "Separate same-input layer0 down_proj row1-vs-batched replay on the13 reasoning equal-input/different-output witnesses can isolate linear geometry sensitivity, but does not resolve the independent prefill attention discrepancy.",
+    "retained_requirements": [
+      "All18 original gates and all3 original anchors; no new tolerance to declare a pass.",
+      "No assertion that first observed selected-row boundary equals global causal origin.",
+      "No model qualification or speedup until independent full-model numeric, cold-cache, long-decode, slot-reuse, quality and timing evidence.",
+      "New source/runtime admission, exact ownership/drain proof, serial heavy-work schedule and resource/storage budgets; no reuse of failed namespaces."
+    ]
+  },
+  "model_qualified": false,
+  "new_speedup_claim": false,
+  "KV_history_restored": false,
+  "global_first_cause_proven": false,
+  "all15_model_families_complete": false
+}
