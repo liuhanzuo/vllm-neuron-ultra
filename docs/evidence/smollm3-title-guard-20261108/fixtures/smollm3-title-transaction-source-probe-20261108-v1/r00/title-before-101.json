@@ -1,0 +1,114 @@
+{
+  "schema": "smollm3_enginecore_title_before_v1",
+  "sequence": 1,
+  "policy": "actual-before-length-exact-title-zero-padding-v1",
+  "binding": {
+    "permit_sha256": "f9d9775419aa8dc7d987ca9fe9c4c4788a5e136cf07019cd93393bc088f36758",
+    "spawn_identity": {
+      "pid": 101,
+      "start_ticks": "10001",
+      "ppid": 99,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-s",
+        "-c",
+        "from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=23, pipe_handle=25)",
+        "--multiprocessing-fork"
+      ],
+      "cgroup": "0::/fixture.service"
+    },
+    "run": {
+      "run_id": "r00",
+      "mode": "off"
+    },
+    "attempt_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "unit": "fixture",
+    "invocation_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "runtime_source_sha256": "f94d0cc0668c48c3c682ba9e3560d1117c1d287db29ac35f28a6514cb9395bc5",
+    "controller": {
+      "pid": 90,
+      "start_ticks": "9001",
+      "ppid": 80,
+      "argv": [
+        "controller"
+      ],
+      "cgroup": "0::/controller.service"
+    }
+  },
+  "before": {
+    "identity": {
+      "pid": 101,
+      "start_ticks": "10001",
+      "ppid": 99,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-s",
+        "-c",
+        "from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=23, pipe_handle=25)",
+        "--multiprocessing-fork"
+      ],
+      "cgroup": "0::/fixture.service"
+    },
+    "exe": {
+      "target": "/usr/bin/python3.10",
+      "file": {
+        "dev": 1,
+        "ino": 2,
+        "mode": 33261,
+        "size": 4,
+        "mtime_ns": 5,
+        "ctime_ns": 6
+      }
+    },
+    "cmdline": {
+      "base64": "L2hvbWUvdWJ1bnR1L3ZlbnZzL3ZsbG1fbmV1cm9uL2Jpbi9weXRob24ALUIALXMALWMAZnJvbSBtdWx0aXByb2Nlc3Npbmcuc3Bhd24gaW1wb3J0IHNwYXduX21haW47IHNwYXduX21haW4odHJhY2tlcl9mZD0yMywgcGlwZV9oYW5kbGU9MjUpAC0tbXVsdGlwcm9jZXNzaW5nLWZvcmsA",
+      "bytes": 162,
+      "sha256": "c3248664559947b23e080bb4995a568c413b8793947abee70b710bd650761a14"
+    }
+  },
+  "expected_after": {
+    "base64": "VkxMTTo6RW5naW5lQ29yZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "bytes": 162,
+    "sha256": "6d0ee5b582c717195a6e4257ed5e7c84123334dbd26781795c99301faf71b210"
+  },
+  "witness": {
+    "core_source_sha256": "4573563d926cafe0f1e11ebb25e862ce3bc722af9a24425dec791b9d43cfbedd",
+    "utils_source_sha256": "15644926d0877d9b11694fc03629717a7a47d6f995afdef141746ed385cd4ce4",
+    "envs_source_sha256": "a70016521a542d7bfa4884c0f9c3efc74df8cd030f5971a58774a87ab35d3803",
+    "native_binding": {
+      "package": "setproctitle",
+      "version": "1.3.7",
+      "extension": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/setproctitle/_setproctitle.cpython-310-x86_64-linux-gnu.so",
+      "file_identity": {
+        "dev": 66306,
+        "ino": 8268093,
+        "mode": 33277,
+        "size": 68784,
+        "mtime_ns": 1790148771481374161,
+        "ctime_ns": 1790148771481374161
+      },
+      "setter_is_original_builtin": true
+    },
+    "call": {
+      "function": "EngineCoreProc.run_engine_core",
+      "line": 697,
+      "data_parallel_size": 1,
+      "dp_rank": 0,
+      "local_dp_rank": 0,
+      "args": [
+        "EngineCore"
+      ],
+      "kwargs": {},
+      "defaults": [
+        "",
+        "VLLM"
+      ]
+    },
+    "original_callable_verified": true,
+    "single_original_call": true
+  },
+  "created_monotonic": 3894112.624868235,
+  "deadline_monotonic": 3894127.624868235
+}
