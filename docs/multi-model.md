@@ -101,6 +101,6 @@ rejection, original numeric gates, cold cache, long decode, request-slot reuse,
 quality and matched serving measurements for each model. No model family is
 declared fully optimized.
 
-最新实测进展： [MiniCPM5 第 1 帧完成 15 个张量重放和独立数据复核](minicpm5-frame1-diagnostic-20261108.md)，固定输入的 down 路径差异与实际 MLP 输入差异已分别量化；整模型仍未合格。Nemotron r5 的失败与回收见 [结束记录](nemotron-r5-compile-interruption-20261108.md)。模型提速倍数仍以已合格的配对性能结果为准。
+最新实测进展： [MiniCPM5 第 1 帧完成 15 个张量重放和独立数据复核](minicpm5-frame1-diagnostic-20261108.md)，固定输入的 down 路径差异与实际 MLP 输入差异已分别量化；整模型仍未合格。Nemotron r5 的失败与回收见 [结束记录](nemotron-r5-compile-interruption-20261108.md)；[v14 编译资源链接修复](nemotron-v14-compiler-links-20261108.md)已通过 94 项集成检查和 13 项配置检查，r6 已实际启动，完整验收仍在进行。模型提速倍数仍以已合格的配对性能结果为准。
 
 [2026-11-08 小模型候选复查](recent-small-models-20261108.md)记录官方仓库更新、草稿模型排除依据与原精度候选的准备状态，保留全部 15 个模型家族。

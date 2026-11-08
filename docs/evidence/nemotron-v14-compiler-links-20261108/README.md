@@ -1,0 +1,1 @@
+This is a source and evidence archive for the host-specific serial experiment runner. It is not a standalone installed plugin or a portable benchmark launcher. The complete host source closure and predecessor catalog remain local and are referenced by SHA-256 in manifest.json. No weights, compiler binaries, credentials or model speedup claims are included.
