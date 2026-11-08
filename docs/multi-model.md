@@ -49,7 +49,7 @@ concurrent requests. These are warm HTTP workload results, not compile times.
 |---|---:|---:|---:|---|
 | LFM3 `822e1bd826321dc078226c2da3f199e1d385146f` | 2.02× / 1.80× | 8.51× / 6.70× | 5.92× | [Paired full-model gates passed in the stated scope](lfm3-results-20261107.md) |
 | SmolLM3 combined `e2d1e28b83411863acef5f12ff3db1f887866a76` | 8.16× / 8.05× | 8.00× / 7.51× | 5.50× | [Qualified at decode floor2048 against cached native reference](smollm3-results-20261105.md); natural-bucket and full-causal-reference failures remain |
-| Nemotron `60ab7f54a2c54ef0bc9b498621a45719ee7f0e84` | — | — | — | No matched packaged speedup; historical 13.18 / 51.06 tok/s are absolute rates |
+| Nemotron `60ab7f54a2c54ef0bc9b498621a45719ee7f0e84` | — | — | — | [Input/environment capture passed](nemotron-input-capture-20261108.md); no matched packaged speedup; historical 13.18 / 51.06 tok/s are absolute rates |
 
 The model package trees are preserved from these source branches:
 
