@@ -1,0 +1,69 @@
+{
+  "complete": true,
+  "stage": "install",
+  "owner": {
+    "pid": 3333056,
+    "start_ticks": "394918552",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v1.py",
+      "install",
+      "--run",
+      "install-r1",
+      "--source-sha256",
+      "004859cf5063a99e6f33e198aa158f9afed88c6c867a55d4f1b6d1b885839153"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "commands": [
+    {
+      "command": [
+        "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+        "-m",
+        "pip",
+        "--isolated",
+        "install",
+        "--no-cache-dir",
+        "--no-deps",
+        "--require-hashes",
+        "--report",
+        "/mnt/nvme/dory-official-cpu-20261108-v1/install-r1/installation.json",
+        "-r",
+        "/mnt/nvme/dory-official-cpu-20261108-v1/runtime-requirements.lock"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/install-r1/00.log"
+    },
+    {
+      "command": [
+        "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+        "-m",
+        "pip",
+        "--isolated",
+        "check"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/install-r1/01.log"
+    },
+    {
+      "command": [
+        "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+        "-m",
+        "pip",
+        "--isolated",
+        "freeze",
+        "--all"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/install-r1/02.log"
+    }
+  ],
+  "elapsed_seconds": 38.43150604190305,
+  "root_free": 30280142848,
+  "nvme_free": 38438522880,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "actual_self_exit_claimed": false
+}

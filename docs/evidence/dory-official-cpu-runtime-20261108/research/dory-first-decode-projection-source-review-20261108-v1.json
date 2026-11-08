@@ -1,0 +1,17 @@
+{
+  "worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_first_decode_projection_v1.py",
+    "sha256": "b8eec9e74b5a812992073f61f1fdb32aa83b92cba07f4b202e794d394bbb22aa"
+  },
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v5.py",
+    "sha256": "5c3b5662b35922713a84c225334880aa54c81f94e0e20d96e74c152135dfae2d"
+  },
+  "reviewer": "/root",
+  "source_syntax_checked": true,
+  "scope": "Replay one tiny FP32 attention layer at first decode position6, token13 from saved prefill caches; compare Q/K/V, SDPA, normalized projection input, output and same-input controls",
+  "hypothesis": "First local difference is oneDNN versus F.linear output projection",
+  "acceptance": "All upstream operands/results through projection input EXACT; output differs; same-input projection controls and original layer0 cache reproduction EXACT",
+  "original_model_forward": false,
+  "full_model_claim": false
+}

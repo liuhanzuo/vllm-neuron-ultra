@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "stage": "fetch",
+  "owner": {
+    "pid": 3333427,
+    "start_ticks": "394923215",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v1.py",
+      "fetch",
+      "--run",
+      "fetch-r1",
+      "--source-sha256",
+      "004859cf5063a99e6f33e198aa158f9afed88c6c867a55d4f1b6d1b885839153"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "commands": [
+    {
+      "command": [
+        "git",
+        "init",
+        "/mnt/nvme/dory-official-cpu-20261108-v1/vllm"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/fetch-r1/00.log"
+    },
+    {
+      "command": [
+        "git",
+        "remote",
+        "add",
+        "origin",
+        "https://github.com/vllm-project/vllm.git"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/fetch-r1/01.log"
+    },
+    {
+      "command": [
+        "git",
+        "fetch",
+        "--depth=1",
+        "origin",
+        "75fc05a53a366068f534a61ab3ee6b50485419f2"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/fetch-r1/02.log"
+    },
+    {
+      "command": [
+        "git",
+        "checkout",
+        "--detach",
+        "75fc05a53a366068f534a61ab3ee6b50485419f2"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/fetch-r1/03.log"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "log": "/mnt/nvme/dory-official-cpu-20261108-v1/fetch-r1/04.log"
+    }
+  ],
+  "elapsed_seconds": 14.150655985809863,
+  "root_free": 30280126464,
+  "nvme_free": 38229794816,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "actual_self_exit_claimed": false
+}

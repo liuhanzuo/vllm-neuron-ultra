@@ -1,0 +1,43 @@
+{
+  "schema": "dory_official_cpu_maintenance_root_preparation_v1",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v1.py",
+    "sha256": "004859cf5063a99e6f33e198aa158f9afed88c6c867a55d4f1b6d1b885839153"
+  },
+  "source_syntax_checked": true,
+  "stages": [
+    "resolve",
+    "fetch",
+    "install",
+    "build"
+  ],
+  "reviewer": "/root",
+  "original_commit": "75fc05a53a366068f534a61ab3ee6b50485419f2",
+  "no_model_forward": true,
+  "no_performance_claim": true,
+  "serial_lock_for_following_stages": true,
+  "previous_preparation_deviation": "System packages and isolated venv/build dependencies were installed under observer gate but WITHOUT serial lock. No competing heavy job was observed before or after; not a performance run. Do not characterize those steps as serial-lock admitted.",
+  "already_completed": {
+    "system_packages": [
+      "g++-12=12.3.0-1ubuntu1~22.04.3",
+      "libstdc++-12-dev=12.3.0-1ubuntu1~22.04.3",
+      "libtcmalloc-minimal4=2.9.1-0ubuntu3"
+    ],
+    "apt_actual_exit": {
+      "session_id": 77195,
+      "exit_code": 0,
+      "tool_chunk": "1102ca"
+    },
+    "venv": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1",
+    "venv_actual_exit": {
+      "session_id": 57668,
+      "exit_code": 0,
+      "tool_chunk": "ade321"
+    },
+    "build_dependencies_actual_exit": {
+      "session_id": 35793,
+      "exit_code": 0,
+      "tool_chunk": "596021"
+    }
+  }
+}

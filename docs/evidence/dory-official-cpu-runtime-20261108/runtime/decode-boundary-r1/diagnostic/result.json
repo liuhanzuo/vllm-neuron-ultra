@@ -1,0 +1,105 @@
+{
+  "complete": true,
+  "passed": true,
+  "position": 6,
+  "token": 13,
+  "dtype": "float32",
+  "layer": 0,
+  "comparisons": {
+    "sdpa_q": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "fc23997362207df96ed89e822c60afdb844f0a8c0fd1ef5ed1bf13f9d0b1d970",
+      "right_sha256": "fc23997362207df96ed89e822c60afdb844f0a8c0fd1ef5ed1bf13f9d0b1d970"
+    },
+    "sdpa_k": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029",
+      "right_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029"
+    },
+    "sdpa_v": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e",
+      "right_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e"
+    },
+    "sdpa_out": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "751720c16316038b39952486b71c78b24ee9812876a433cd19b18986693ec1de",
+      "right_sha256": "751720c16316038b39952486b71c78b24ee9812876a433cd19b18986693ec1de"
+    },
+    "oproj_input": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "3b1923f9aa52aae1755732a094199aa9df23094722e4888edbe1c51706218ee6",
+      "right_sha256": "3b1923f9aa52aae1755732a094199aa9df23094722e4888edbe1c51706218ee6"
+    },
+    "oproj_output": {
+      "exact_bytes": false,
+      "unequal_values": 10,
+      "max_abs": 1.4901161193847656e-08,
+      "left_sha256": "296df39ad6ca72a60ad266bcc9ce1277b3f997b00a3fb56dcd565099bc9eb5b8",
+      "right_sha256": "2cef99361db7731943317d8e3a623eb519196a2e9529a2b0f60e9786cf40383f"
+    },
+    "official_repeat": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "296df39ad6ca72a60ad266bcc9ce1277b3f997b00a3fb56dcd565099bc9eb5b8",
+      "right_sha256": "296df39ad6ca72a60ad266bcc9ce1277b3f997b00a3fb56dcd565099bc9eb5b8"
+    },
+    "candidate_same_input_control": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "2cef99361db7731943317d8e3a623eb519196a2e9529a2b0f60e9786cf40383f",
+      "right_sha256": "2cef99361db7731943317d8e3a623eb519196a2e9529a2b0f60e9786cf40383f"
+    },
+    "original_official_key_cache": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029",
+      "right_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029"
+    },
+    "original_official_value_cache": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e",
+      "right_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e"
+    },
+    "original_candidate_key_cache": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029",
+      "right_sha256": "97aee80d17c3abf748ff3d3c6592be5f106bda80bf3e05c7cf21bb2734772029"
+    },
+    "original_candidate_value_cache": {
+      "exact_bytes": true,
+      "unequal_values": 0,
+      "max_abs": 0.0,
+      "left_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e",
+      "right_sha256": "f7da46b3d2c1e9e55ff3c5f567c4b60b20eccd413be87576b5a853d92832132e"
+    }
+  },
+  "backend": [
+    "ops",
+    "onednn_mm"
+  ],
+  "observed_local_first_difference": "oneDNN output projection versus F.linear on exactly identical input and weight",
+  "local_difference_caused_by_projection_path": true,
+  "full_model_logits_difference_fully_explained": false,
+  "source_state": "Saved original tiny fixture weights and six-token cache; isolated first attention layer replay",
+  "original_weight_model_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

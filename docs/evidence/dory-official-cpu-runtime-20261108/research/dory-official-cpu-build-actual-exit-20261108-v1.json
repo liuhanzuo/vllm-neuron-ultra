@@ -1,0 +1,78 @@
+{
+  "complete": true,
+  "actual_exit": {
+    "session_id": 97214,
+    "exit_code": 0,
+    "tool_chunk": "ff0157"
+  },
+  "owner_gone": true,
+  "result": {
+    "complete": true,
+    "stage": "build",
+    "owner": {
+      "pid": 3333656,
+      "start_ticks": "394926274",
+      "ppid": 433847,
+      "argv": [
+        "python3",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v1.py",
+        "build",
+        "--run",
+        "build-r1",
+        "--source-sha256",
+        "004859cf5063a99e6f33e198aa158f9afed88c6c867a55d4f1b6d1b885839153"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    "commands": [
+      {
+        "command": [
+          "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+          "-m",
+          "pip",
+          "--isolated",
+          "wheel",
+          "--no-deps",
+          "--no-build-isolation",
+          "--no-cache-dir",
+          "--wheel-dir",
+          "/mnt/nvme/dory-official-cpu-20261108-v1/wheels",
+          "."
+        ],
+        "returncode": 0,
+        "log": "/mnt/nvme/dory-official-cpu-20261108-v1/build-r1/00.log"
+      }
+    ],
+    "elapsed_seconds": 2082.1391917783767,
+    "root_free": 30270476288,
+    "nvme_free": 35930353664,
+    "full_model_qualified": false,
+    "new_speedup_claim": false,
+    "actual_self_exit_claimed": false
+  },
+  "wheel": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/wheels/vllm-0.1.dev1+g75fc05a53.cpu-cp312-cp312-linux_x86_64.whl",
+    "bytes": 132685835,
+    "sha256": "37eae6e5e8f345b22d2c6147befa1c9f6b725c9fe88f83c336ae83f3184821f7"
+  },
+  "metadata_headers": [
+    "Name: vllm",
+    "Version: 0.1.dev1+g75fc05a53.cpu",
+    "Requires-Python: <3.15,>=3.11"
+  ],
+  "native_extensions": [
+    "vllm/_C.abi3.so",
+    "vllm/_C_AVX2.abi3.so",
+    "vllm/_C_AVX512.abi3.so",
+    "vllm/fs_io_C.abi3.so",
+    "vllm/spinloop.abi3.so",
+    "vllm/libs/libtcmalloc_minimal.so.4"
+  ],
+  "oneDNN_commit": "0e2a5bfeef1bfbffc3137464606540233086ce9b",
+  "git_tracked_diff": "",
+  "space": {
+    "/": 30270144512,
+    "/mnt/nvme": 35930337280
+  }
+}

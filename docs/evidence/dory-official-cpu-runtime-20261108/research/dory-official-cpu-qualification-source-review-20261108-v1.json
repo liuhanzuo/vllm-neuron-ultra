@@ -1,0 +1,39 @@
+{
+  "schema": "dory_official_cpu_qualification_source_review_v1",
+  "reviewer": "/root",
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v2.py",
+      "sha256": "e25fd44d8f49701f0856cafd49ed02c66f3af4d120773cd75232525ba9552cbf"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_official_cpu_qualify_v1.py",
+      "sha256": "ec97f9acf9cee18a2bc22ba2e742b8b0f0ef91cddf9080fa6a3f4b5aa6ef1a5a"
+    },
+    {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/test-tools.lock",
+      "sha256": "f8c942d3bc7cdbd9e46b74ab8d00e1471401dc566e61618270f9b24c32c0b824"
+    },
+    {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/test-tools-source.json",
+      "sha256": "aa7790dc241d294d21f1ce7b2da28a46849e86028443efafdfb1c39a79b8de4d"
+    }
+  ],
+  "source_only": true,
+  "native_test_not_executed": true,
+  "stages": [
+    "install locally built CPU wheel and pinned pytest tools",
+    "import official CPU package with Intel OpenMP/TCMalloc",
+    "run unchanged official model/config tests outside repository-wide conftest"
+  ],
+  "inference_scope": "Upstream tiny tests including synthetic float32/BF16 operations; official ReferenceAttention replaces production paged attention as in upstream fixture",
+  "acceptance": "All unchanged official tests pass; imported model/config bytes equal original pinned source",
+  "original_weight_forward": false,
+  "original_two_loop_additional_fixture": false,
+  "performance_claim": false,
+  "preconditions": [
+    "Active CPU build must exit successfully before wheel installation",
+    "Serial lock and root28GiB/NVMe8GiB disk floors",
+    "All runtime dependencies remain inside new NVMe environment"
+  ]
+}

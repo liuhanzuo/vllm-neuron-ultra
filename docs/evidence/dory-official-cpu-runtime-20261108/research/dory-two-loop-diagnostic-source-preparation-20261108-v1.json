@@ -1,0 +1,39 @@
+{
+  "schema": "dory_two_loop_diagnostic_preparation_v1",
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_official_two_loop_diagnostic_v1.py",
+      "sha256": "23385984a97094074900c5ffa48b5c21929a6f3e875b3230c74107cd6b818aa3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_cpu_maintenance_v3.py",
+      "sha256": "c52d50176088ed1c56cb0cd37bf2ec8077be71473c434764beb9dc669e4f29c5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_contract.py",
+      "sha256": "4f0f9cdd3cb17ae23330944088dfc0334077b96463bb84e91b6194b8979fe95f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/official-config.json",
+      "sha256": "d2d086f5949598a043a00d70e2c28c45305bca7703682de3e4f990a7fd3279a4"
+    }
+  ],
+  "reviewer": "/root",
+  "source_syntax_checked": true,
+  "executed": false,
+  "precision": [
+    "float32 synthetic fixture",
+    "bfloat16 synthetic fixture"
+  ],
+  "shape": "8 physical layers; hidden16; Q2/KV1/head8; recurrent2loops; 6 independent caches; vocab32",
+  "primitive_shapes": "QKV32x16 and gateup48x16 at M1,6",
+  "sequence": "6 prefill +27 one-token decode =33 tokens; SWA3; fresh reuse same slot",
+  "preserve_original_checkpoint": true,
+  "preserve_official_sources": true,
+  "exact_gate": "Record finite values + exact bytes for projections/hidden/logits/KV; retain mismatch; never relax",
+  "saved_outputs": "Every step hidden/logits/KV for both implementations, all synthetic weights, primitive inputs/results",
+  "full_original_long_decode_gate": false,
+  "original_weight_forward": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

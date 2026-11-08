@@ -1,0 +1,24 @@
+W1108 20:48:15.303000 3352618 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1108 20:48:15.303000 3352618 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1108 20:48:15.304000 3352618 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_official_cpu_qualify_v1.py", line 96, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_official_cpu_qualify_v1.py", line 60, in main
+    save(out/'imports.json', dict(versions=versions,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_official_cpu_qualify_v1.py", line 28, in save
+    json.dump(row, f, indent=2)
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+                 ^^^^^^^^
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type mappingproxy is not JSON serializable
