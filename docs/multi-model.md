@@ -108,3 +108,5 @@ declared fully optimized.
 最新局部实测：[MiniCPM5 完整有效前缀的注意力输入一致，差异从注意力输出出现；固定 CPU 布局替换后恢复原生残差/归一化，独立字节复核通过](minicpm5-upstream-result-20261108.md)。没有新增整模型候选或提速倍数。
 
 最新运行器进展：[Nemotron v15 核验完整 PWP/DVE 资源，113 项检查通过，已发起 r7 复验](nemotron-v15-compiler-resources-20261108.md)。原模型实现、52 阶段和提速表保持原有结论，尚无新整模型合格结果。
+
+最新诊断准备：[MiniCPM5 注意力内部完整采集、自身输入控制和独立字节比较源码通过 54 项检查](minicpm5-attention-source-20261108.md)，尚未执行新的模型采集。Nemotron r7 继续串行运行，提速表没有新增结果。

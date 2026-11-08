@@ -1,0 +1,434 @@
+{
+  "schema": "minicpm5_frame1_attention_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T15:19:33.318045+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "native_executed": false,
+  "weights_loaded": false,
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_observer_v1.py",
+      "sha256": "87a262c1172d5cb545ec8f87c81d4950ed0f653777a800a73b6e1e0695284028"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_worker_v1.py",
+      "sha256": "73cfe0de0fc38a922515f3d7da1ae4db56855d529d6cf9692a8c5a13d11634c7"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_frame1_attention_source_v1.py",
+      "sha256": "70d55da9f515808ffc551700c8a22c28a3b3e3eb9267a703ef18beb9ea01a9c0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_bytes_v1.py",
+      "sha256": "75573f2767fabff4343c8225115c7ba1b20d7398006b587c604e1611b75dbc53"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_attention_bytes_v1.py",
+      "sha256": "063667e4ece27af9f941b55fc7b1bad414fa9ba15f149a93f7bc398880b9a9f9"
+    }
+  ],
+  "science": {
+    "frame": {
+      "index": 1,
+      "fixture": 7,
+      "slot": 1,
+      "step": 0
+    },
+    "native_length": 1231,
+    "cpu_bucket": 2048,
+    "fields": [
+      "normalized_input",
+      "position_ids",
+      "q_projection",
+      "k_projection",
+      "v_projection",
+      "q_rope_input",
+      "k_rope_input",
+      "q_post_rope",
+      "k_post_rope",
+      "v_heads",
+      "rope_cos",
+      "rope_sin",
+      "attention_mask",
+      "context_heads",
+      "context_before_o",
+      "projection_output"
+    ],
+    "geometry": {
+      "native": {
+        "normalized_input": {
+          "shape": [
+            1,
+            1231,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "position_ids": {
+          "shape": [
+            1,
+            1231
+          ],
+          "dtype": "torch.int64"
+        },
+        "q_projection": {
+          "shape": [
+            1,
+            1231,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_projection": {
+          "shape": [
+            1,
+            1231,
+            256
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "v_projection": {
+          "shape": [
+            1,
+            1231,
+            256
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "q_rope_input": {
+          "shape": [
+            1,
+            16,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_rope_input": {
+          "shape": [
+            1,
+            2,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "q_post_rope": {
+          "shape": [
+            1,
+            16,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_post_rope": {
+          "shape": [
+            1,
+            2,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "v_heads": {
+          "shape": [
+            1,
+            2,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "rope_cos": {
+          "shape": [
+            1,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "rope_sin": {
+          "shape": [
+            1,
+            1231,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            1,
+            1231,
+            1231
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "context_heads": {
+          "shape": [
+            1,
+            1231,
+            16,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "context_before_o": {
+          "shape": [
+            1,
+            1231,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "projection_output": {
+          "shape": [
+            1,
+            1231,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        }
+      },
+      "cpu": {
+        "normalized_input": {
+          "shape": [
+            1,
+            2048,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "position_ids": {
+          "shape": [
+            1,
+            2048
+          ],
+          "dtype": "torch.int64"
+        },
+        "q_projection": {
+          "shape": [
+            1,
+            2048,
+            1024
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_projection": {
+          "shape": [
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "v_projection": {
+          "shape": [
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "q_rope_input": {
+          "shape": [
+            1,
+            8,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_rope_input": {
+          "shape": [
+            1,
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "q_post_rope": {
+          "shape": [
+            1,
+            8,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "k_post_rope": {
+          "shape": [
+            1,
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "v_heads": {
+          "shape": [
+            1,
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "rope_cos": {
+          "shape": [
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "rope_sin": {
+          "shape": [
+            1,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "attention_mask": {
+          "shape": [
+            1,
+            1,
+            2048,
+            2048
+          ],
+          "dtype": "torch.bool"
+        },
+        "context_heads": {
+          "shape": [
+            1,
+            8,
+            2048,
+            128
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "context_before_o": {
+          "shape": [
+            1,
+            2048,
+            1024
+          ],
+          "dtype": "torch.bfloat16"
+        },
+        "projection_output": {
+          "shape": [
+            1,
+            2048,
+            2048
+          ],
+          "dtype": "torch.bfloat16"
+        }
+      }
+    },
+    "own_input_control_fields": [
+      "q_projection",
+      "k_projection",
+      "v_projection",
+      "q_post_rope",
+      "k_post_rope",
+      "context_heads",
+      "projection_output"
+    ],
+    "raw_capture_bytes": 133376314,
+    "raw_control_bytes": 67148288,
+    "original_upstream_capture_bytes": 152735744,
+    "total_raw_bytes": 353284922,
+    "original_upstream_anchors": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/native/capture.json",
+        "sha256": "40418292e270997d077028405c470e7f4fc8839019744e95e7c7c89aa3ae8fc2"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/cpu-rank0/capture.json",
+        "sha256": "9520927adc3544137b02d297bb1250c349fd3e1982177bf8aff2448744641d2c"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/cpu-rank1/capture.json",
+        "sha256": "d032f15fd76814fb72f8b365602409e0b7a4b78b787243bf33b8400c1c150483"
+      }
+    ],
+    "output_cap_bytes": 402653184,
+    "file_cap_bytes": 16777216,
+    "profiled_original_calls": [
+      "outer",
+      "rope",
+      "attention"
+    ],
+    "original_function_dispatch_retained": true,
+    "precision_interventions": [],
+    "full_model_qualified": false,
+    "new_speedup_claim": false
+  },
+  "tests": [
+    {
+      "suite": "capture_and_control_source",
+      "tests": 39,
+      "actual_exit_code": 0,
+      "tool_chunk": "971e09"
+    },
+    {
+      "suite": "independent_bytes_and_head_mapping",
+      "tests": 15,
+      "actual_exit_code": 0,
+      "tool_chunk": "d25235"
+    }
+  ],
+  "retained_failed_checks": [
+    {
+      "kind": "initial_ast_parse",
+      "tool_chunk": "bf0d72",
+      "exit_code": 1,
+      "reason": "unexecuted draft missing whitespace before conditional keyword"
+    },
+    {
+      "kind": "second_ast_parse",
+      "tool_chunk": "a336f2",
+      "exit_code": 1,
+      "reason": "unexecuted draft missing whitespace before conjunction"
+    },
+    {
+      "kind": "first_source_suite",
+      "tests": 36,
+      "errors": 5,
+      "tool_chunk": "4a1a3b",
+      "exit_code": 1,
+      "reason": "JSON comparison helper cannot serialize sets; replaced with explicit set equality"
+    }
+  ],
+  "original_loading_lifecycle_ast_equal": true,
+  "original_upstream_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_worker_v1.py",
+    "sha256": "038d998e3b04f80469a99e33d277f1c508ee33c9ca2a30b24535c1398f47a08f"
+  },
+  "original_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/llama/modeling_llama.py",
+      "sha256": "363df58c077a8fcfd3593b2817538e53f90eeab32294d3c6bbb7241f094669de"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py",
+      "sha256": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8"
+    }
+  ],
+  "additional_new_runtime_imports": [],
+  "claim_scope": "source, real Python profiler fixture, mock hook/control wiring, synthetic byte mapping and existing metadata only",
+  "pending": [
+    "Prepare exact-source runtime bundle and independent final-result/metadata review after r7 actual terminal release and completed history finalization",
+    "Execute native full1231 and CPU two-rank full2048 under original runtimes, original threads, original weight bytes and Gloo",
+    "Require all seven prior complete upstream boundaries and six prediction taps exact",
+    "Read all48 observed and21 own-input output payloads plus original seven upstream payloads per role under admitted post-exit serial review",
+    "Localize numeric divergence; no unique internal cause or final-logit claim without subsequent controlled comparisons",
+    "Retain all original full-model cold-cache, long-decode, request-slot-reuse, quality and paired-serving gates"
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
