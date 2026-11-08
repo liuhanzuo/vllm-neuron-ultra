@@ -1,0 +1,73 @@
+{
+  "schema": "minicpm5_frame1_raw_boundary_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T09:53:14.169598+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_raw_boundaries_v1.py",
+    "sha256": "22a5e192c31ad6fe838e5ab9bb6e274e982b2a3d1239c1776d934bb2ba5d0895"
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_raw_boundaries_v1.py",
+    "sha256": "e0dc493e05db9dc00ea6ee406e65bf3bd97828a6d819352859e0482e5b477b50"
+  },
+  "metadata_reviewer": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py",
+    "sha256": "8d5243d29480870b97b3821a2a54bceee3228d05eb72817c61ad872500e38ce3"
+  },
+  "tests_passed": 38,
+  "actual_test_exit": {
+    "exit_code": 0,
+    "tool_chunk": "289e24"
+  },
+  "log": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-raw-boundary-source-checks-20261108-v3.log",
+    "sha256": "0d23537e73fc93d5b84e207d81694de8a3b7058a7f8b0a76249e886fcaaae70b"
+  },
+  "earlier_checks": [
+    {
+      "exit_code": 1,
+      "tool_chunk": "578a09",
+      "tests": 30,
+      "failures": 2,
+      "log": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-raw-boundary-source-checks-20261108-v1.log",
+        "sha256": "d0f25dc597effd9469a9c9462fa7634338a4a1b93fdff89154e904b789db94bf"
+      }
+    },
+    {
+      "exit_code": 0,
+      "tool_chunk": "228baf",
+      "tests": 30,
+      "log": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-raw-boundary-source-checks-20261108-v2.log",
+        "sha256": "045a08b6f49ea5b3d6c5a91235d07ca6d69196449da5607fe8763d97bfe59ea3"
+      }
+    }
+  ],
+  "initial_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_raw_boundaries_v1.py.initial.txt",
+    "sha256": "dd1004ecab9abb8d9def1df2e32b789c74c39a0f25aabdb54e846a5fbae019d4"
+  },
+  "initial_checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_raw_boundaries_v1.py.initial.txt",
+    "sha256": "72fc621af57214dc11b2e5a883d5c9ba319fc869764101bcdd4b3cc1bc0cc663"
+  },
+  "corrections": [
+    "Immediate same-size rewrite escaped stat-only final check in synthetic test. Added a second complete bounded content hash at completion.",
+    "Extreme antiparallel cosine returned -0.9999999999999999. Test now uses 14 decimal places; production relative/absolute reduction tolerances unchanged."
+  ],
+  "scope": [
+    "All 65536 BF16 encodings checked against independent float32 decoding; exact integer accumulation, signed zero, subnormals, nonfinite rejection.",
+    "Synthetic byte captures cover logical packing with feature-major strides, rank concatenation per token, prediction scope, padding, replicated CPU boundaries.",
+    "CLI source/spec/result/replay/capture binding tested with explicit synthetic reader and metadata-audit/raw-audit mocks; no future real result created.",
+    "Actual command re-runs the frozen metadata audit; reads all 15 payloads, checks complete hashes and finite BF16 values, independently computes ten observed-boundary metrics.",
+    "Full capture execution remains pending actual MiniCPM5 data and serial lifecycle completion. Full model/counterfactual math is not independently recomputed by this tool."
+  ],
+  "source_only": true,
+  "native_modules_imported": false,
+  "real_payloads_read": false,
+  "actual_frame1_executed": false,
+  "fullscale_resource_budget_measured": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
