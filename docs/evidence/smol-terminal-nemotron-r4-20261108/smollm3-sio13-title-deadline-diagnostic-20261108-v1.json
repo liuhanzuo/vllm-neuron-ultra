@@ -1,0 +1,58 @@
+{
+  "schema": "smollm3_sio13_title_deadline_diagnostic_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T04:12:24.106595+00:00",
+  "terminal_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio13-root-terminal-audit-20261108-v1.json",
+    "sha256": "32db20dd57a4816666ee83a437fa42889e99ef9661486cbd3e91d0fa13576b6e"
+  },
+  "complete_catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/root-post-smol-sio13-complete-predecessors-20261108-v1.json",
+    "sha256": "b29dca3e250b1d3aafb9a9dbdabad210631966d3f76400e392fbdb97b33e96b6"
+  },
+  "actual_exit": {
+    "session_id": 76500,
+    "exit_code": 1,
+    "tool_chunk": "58f06c"
+  },
+  "actual_finalizer_exit": {
+    "session_id": 69730,
+    "exit_code": 0,
+    "tool_chunk": "d3603d"
+  },
+  "original_error": {
+    "type": "RuntimeError",
+    "message": "before ACK deadline"
+  },
+  "completed_requests": 0,
+  "completed_output_tokens": 0,
+  "before": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio13/r00/title-before-2626813.json",
+    "sha256": "50534fa5db805ce477d18eb50ca78627e8a47d08d4fc62d468428ad3a403b4d6"
+  },
+  "created_monotonic": 3891194.665048595,
+  "deadline_monotonic": 3891209.665048595,
+  "fixed_title_budget_seconds": 15,
+  "intent_mtime_ns": 1794110705733663736,
+  "wall_minus_monotonic_sample": 1790219491.6961074,
+  "estimated_creation_to_intent_write_seconds": 19.372507814783603,
+  "estimate_limitation": "Wall/monotonic conversion sampled after exit; not direct elapsed timing or proof of absent wall-clock adjustment.",
+  "before_ack_exists": false,
+  "after_exists": false,
+  "commit_exists": false,
+  "source_findings": {
+    "title_runtime": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_enginecore_title_runtime_v11.py",
+      "sha256": "0e3da2d0bcef2876e7d9d480cf9ab5ba3539c7002574e60117a4d1c69ca448d7"
+    },
+    "context_protocol": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_protocol_v18.py",
+      "sha256": "e53ad3861520d4d949c54d91e806fafd46398886787f69e00f179b7ab033e630"
+    },
+    "ordering": "begin() creates a15second deadline before context.record(); write() runs full poll before exclusive write and another full poll after. Controller before_ack() rejects the expired deadline."
+  },
+  "original_sources_unchanged": true,
+  "successor_not_started": true,
+  "model_numeric_failure_proven": false,
+  "new_speedup_claim": false
+}

@@ -118,7 +118,7 @@ complete-category forecast. These are experiment-harness sources that require th
 retained workspace and fixtures; they are not standalone installation tests of
 the unified model package. The unified model implementation remains `e0a01d3`.
 
-## Successor sio13 integrated and running
+## Successor sio13 integrated; now failed and finalized
 
 The exact installation-receipt reader is now connected through all nine runtime
 modules in a fresh sio13 namespace, with fresh service names and nonces. The
@@ -139,14 +139,29 @@ two actual fully audited reference fixtures; this is not twelve model executions
 The final budget rehashed 37,315 source entries and projected 1,697,529,856 bytes
 total, including 99,500,032 bytes of control data, within the unchanged caps.
 
-The real external process is running under session 76500. Initial source,
-input and compiled-payload admission passed. Its first server progressed past
-the prior receipt rejection and recorded the native-ready environment stage;
-server readiness and inference requests remain unverified at this snapshot.
-The complete three-configuration, twelve-round, 264-request, 33,696-token matrix
-and all original cold-cache, long-decoding, slot-reuse and quality requirements
-remain. There is no new completed matrix, model qualification or speedup claim.
+The real external process (session 76500) exited **1**. Initial source,
+input and compiled-payload admission passed, and both parent and engine child
+passed the previous installation-receipt rejection. The controller then failed
+at the process-title handshake with `before ACK deadline`, before readiness or
+any inference request. There were zero completed requests and output tokens.
 
-The [sio13 evidence manifest](evidence/smollm3-sio13-20261108/manifest.json) binds
-the exact sources, checks, budget and observed live owner. Native experiments
-remain serial; follow the existing session rather than starting another copy.
+The retained intent fixes a 15-second title deadline. Its file modification time
+is approximately 19.4 seconds after creation, using a wall/monotonic conversion
+sampled after exit. That estimate is supporting evidence, not a direct trace or
+proof that the wall clock never changed. Source inspection establishes that
+`begin()` starts the clock before `context.record()`, whose writer performs a
+complete guard poll before publishing and another afterward. There is no
+before-ACK, after-call or commit receipt. This is a validation-harness failure;
+it does not establish a model numerical defect or completed title change.
+
+The independent finalizer exited 0, retained all output, and confirmed physical
+drain. The finalized history contains **785 planned services and 147 standalone
+process identities**; 23 of the 25 added services were never launched. The
+original failed outcome remains failed. The old namespace and sources are frozen.
+
+The three configurations, twelve rounds, 264 requests and 33,696 tokens remain
+the required future matrix, including cold cache, long decode, slot reuse and
+quality. No new completed matrix, model qualification or speedup is claimed.
+Nemotron r4 subsequently received serial admission using this finalized history.
+The [terminal and successor evidence](evidence/smol-terminal-nemotron-r4-20261108/manifest.json)
+includes original failure receipts, the timing diagnostic and actual launch.

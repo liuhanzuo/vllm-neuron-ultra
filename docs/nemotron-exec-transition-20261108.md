@@ -74,7 +74,7 @@ validation requirement was lowered; no new model speedup is claimed.
 
 ## Completed Smol history compatibility prepared
 
-While SmolLM3 sio13 runs serially, a source-only successor extends the prepared
+While SmolLM3 sio13 was running, a source-only successor extended the prepared
 Nemotron runner to consume the complete later history. The v8 reader actually
 rejects the retained 9,070,236-byte Smol catalog at its ordinary 8 MiB bound and
 rejects the wheel's extensionless `REQUESTED` receipt. These source-level errors
@@ -99,8 +99,40 @@ symlinks and the original exec-transition handling. A synthetic future catalog
 checks transport only and is never presented as a completed experiment.
 
 The [source evidence](evidence/nemotron-history-20261108/manifest.json) preserves
-the v8 parents and the complete v9 patch. No new execution specification or
-runtime admission exists. Actual Smol termination, independent finalization,
+the v8 parents and the complete v9 patch. At that v9 preparation snapshot, no execution specification or
+runtime admission existed. Actual Smol termination, independent finalization,
 all latest predecessor release proofs, full source binding and a fresh 48 GiB
-NVMe admission check remain required before Nemotron can launch. There is no
+NVMe admission check were still required before launch. There was no
 new model qualification or speedup claim.
+
+## Latest serial run: r4 admitted after Smol finalization
+
+SmolLM3 sio13 has now failed at its title-handshake deadline and was independently
+finalized. The completed history contains 785 planned services and 147 standalone
+identities. A v10 runner explicitly follows both completed Smol producers (sio13
+and sio12), authenticating each original audit, execution, live owner, actual
+external exit, release, controller result and supervisor exit. It checks original
+row/process extensions and source hashes, preserves failure outcomes, and does
+not reinterpret inherited Nemotron release fields as the latest Smol exit.
+Fresh physical drain remains mandatory at launch.
+
+Twenty actual-history and rejection controls plus 34 lifecycle, inventory and
+source-preservation checks passed. The v9 parent sources, original model package,
+all 52 stages and all resource/storage limits remain unchanged. An initial test
+selected the wrong predecessor glob; its error is retained and the corrected
+whole suite passed. The source-preservation checks compare distinct old and new
+modules. An unlaunched specification also failed on underscores in service names;
+a successor normalizes only those service identifiers and retains the failure.
+
+The real v10 bundle check revalidated **37,606 source entries**. Fresh root and
+NVMe free space were 32,579,350,528 and 51,750,019,072 bytes respectively, meeting
+the unchanged reservations. The r4 external launcher is running under session
+50501; its controller has authenticated ownership and written actual runtime
+admission. This is an admitted experiment, not a completed model result.
+Compilation, numerical/state checks, cold cache, long decode, quality and paired
+workloads still have to finish. No new speedup is claimed.
+
+The [r4 evidence](evidence/smol-terminal-nemotron-r4-20261108/manifest.json) preserves
+the v10 source changes, regressions, failed Smol receipts and actual admission.
+Large complete source/specification records remain in the workspace with their
+exact hashes listed in that manifest. Native/model/compiler tasks remain serial.
