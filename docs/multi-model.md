@@ -100,3 +100,5 @@ merged branch, complete compile/load and corruption
 rejection, original numeric gates, cold cache, long decode, request-slot reuse,
 quality and matched serving measurements for each model. No model family is
 declared fully optimized.
+
+最新工具准备与实际进度见 [Nemotron r5 归档与 MiniCPM5 历史读取修复](r5-finalizer-mini-history-20261108.md)。模型性能结论仍以已完成的配对结果为准。

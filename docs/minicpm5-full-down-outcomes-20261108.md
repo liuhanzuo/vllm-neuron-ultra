@@ -23,3 +23,5 @@
 [全部 32 帧 CSV](evidence/nemotron-v12-builder-smol-r02-20261108/minicpm5-full-down-phase-outcomes-20261108-v1.csv) · [分阶段汇总及来源](evidence/nemotron-v12-builder-smol-r02-20261108/minicpm5-full-down-phase-outcomes-20261108-v1.json)
 
 长提示第 1 帧的采集与重放源码现已准备，19 项源码与元数据检查通过；实际模型运行仍在排队。[诊断范围和验证限制](minicpm5-frame1-diagnostic-20261108.md)。
+
+最新工具准备与实际进度见 [Nemotron r5 归档与 MiniCPM5 历史读取修复](r5-finalizer-mini-history-20261108.md)。模型性能结论仍以已完成的配对结果为准。
