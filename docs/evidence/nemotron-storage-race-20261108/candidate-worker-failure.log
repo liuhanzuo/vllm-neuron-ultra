@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v6.py", line 279, in <module>
+    if __name__=='__main__':main()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v6.py", line 276, in main
+    fn(x.phase,dict(path=x.spec,sha256=x.spec_sha256),dict(path=x.review,sha256=x.review_sha256))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v6.py", line 240, in run
+    force_guard();start=time.monotonic()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v6.py", line 239, in force_guard
+    def force_guard():last[0]=0.;guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v6.py", line 237, in guard
+    p.healthy(spec,admission,stage)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_protocol_v6.py", line 339, in healthy
+    storage(spec,reserve=True);require(canonical()==admission['canonical_sha256'],'Canonical changed')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_protocol_v6.py", line 310, in storage
+    root_used=usage(Path(spec['control_root']))+usage(Path(spec['evidence_root']),True)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_protocol_v6.py", line 296, in usage
+    p=Path(base)/name;s=p.lstat();count+=1
+  File "/usr/lib/python3.10/pathlib.py", line 1222, in lstat
+    return self.stat(follow_symlinks=False)
+  File "/usr/lib/python3.10/pathlib.py", line 1097, in stat
+    return self._accessor.stat(self, follow_symlinks=follow_symlinks)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r2-20261108-control/split-nemotron-projection-b1-t128-tensor-split-storage-highwater.json.tmp'

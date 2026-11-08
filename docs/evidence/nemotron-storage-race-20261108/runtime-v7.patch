@@ -1,0 +1,466 @@
+--- nemotron9b_package_controller_v6.py
++++ nemotron9b_package_controller_v7.py
+@@ -8,7 +8,7 @@
+ import sys
+ import time
+ import traceback
+-import nemotron9b_package_protocol_v6 as p
++import nemotron9b_package_protocol_v7 as p
+ 
+ 
+ def acquire():
+@@ -33,7 +33,7 @@
+     try:return _wait_phase(spec,stage,spec_ref,review_ref,admission,holder)
+     except BaseException:
+         if holder[0]is not None:
+-            from nemotron9b_package_window_v6 import failed_hold
++            from nemotron9b_package_window_v7 import failed_hold
+             failed_hold(spec,stage,holder[0]);holder[0]=None
+         raise
+ 
+@@ -61,19 +61,19 @@
+         if p.kind(stage)=='workloads'and(c/(stage+'-measurement-ready.json')).exists()and not(c/(stage+'-measurement-begin.json')).exists():
+             p.healthy(spec,admission,stage);p.sources(spec)
+             ready=p.read(c/(stage+'-measurement-ready.json'));p.require(ready['owner']==owner and ready['prepared']is True,'Actual premeasurement ready')
+-            from nemotron9b_package_window_v6 import begin
++            from nemotron9b_package_window_v7 import begin
+             holder[0]=begin(spec,stage,owner,admission)
+             status(spec,stage,True)
+             p.once(c/(stage+'-measurement-begin.json'),dict(owner=owner,allowed=True,observer_barrier=p.ref(c/(stage+'-observer-barrier.json'))))
+         timed=p.kind(stage)=='workloads'and(c/(stage+'-measurement-begin.json')).exists()and not(c/(stage+'-measurement-end.json')).exists()
+         if holder[0]is not None and(c/(stage+'-measurement-end.json')).exists():
+-            from nemotron9b_package_window_v6 import finish
++            from nemotron9b_package_window_v7 import finish
+             finish(spec,stage,holder[0],owner);holder[0]=None
+         status(spec,stage,timed)
+         p.healthy(spec,admission,stage,timed=timed)
+         if not timed:
+             if p.kind(stage)in ('compile','quality','workloads'):
+-                from nemotron9b_package_server_lifecycle_v6 import controller_observe
++                from nemotron9b_package_server_lifecycle_v7 import controller_observe
+                 controller_observe(spec,stage,owner)
+             space=p.storage(spec,reserve=True);highwater['samples']+=1
+             for key in ('root_used','nvme_used'):highwater[key]=max(highwater[key],space[key])
+@@ -180,10 +180,10 @@
+     if args.check:p.bundle(s,r)
+     elif args.execute:execute(s,r)
+     elif args.recover_observer_release:
+-        from nemotron9b_package_window_v6 import recover_released_registry
++        from nemotron9b_package_window_v7 import recover_released_registry
+         recover_released_registry(s,r)
+     else:
+-        from nemotron9b_package_external_v6 import launch,audit
++        from nemotron9b_package_external_v7 import launch,audit
+         (launch(s,r)if args.launch else audit(s,r,args.release_failed))
+ 
+ 
+--- nemotron9b_package_evidence_v6.py
++++ nemotron9b_package_evidence_v7.py
+@@ -5,7 +5,7 @@
+ import os
+ from pathlib import Path
+ import stat
+-import nemotron9b_package_protocol_v6 as p
++import nemotron9b_package_protocol_v7 as p
+ 
+ RAW={'numeric':'numeric.json.pt','cold':'cold-buckets.pt','long':'long-decode-validation.pt'}
+ REPORT={'numeric':'numeric.json','cold':'cold-buckets.json','long':'long-decode-validation.json'}
+--- nemotron9b_package_external_v6.py
++++ nemotron9b_package_external_v7.py
+@@ -4,8 +4,8 @@
+ import signal
+ import stat
+ import time
+-import nemotron9b_package_protocol_v6 as p
+-from nemotron9b_package_controller_v6 import acquire,release
++import nemotron9b_package_protocol_v7 as p
++from nemotron9b_package_controller_v7 import acquire,release
+ 
+ 
+ def control_dir(spec):
+@@ -26,7 +26,7 @@
+             p.low.empty_group(p.group(spec,stage))
+         control.mkdir(mode=0o700)
+         command=p.service_command(spec,'controller',spec_ref,review_ref)
+-        from nemotron9b_package_window_v6 import register
++        from nemotron9b_package_window_v7 import register
+         register(spec,spec_ref,review_ref,owner)
+         p.once(control/'external-launch-intent.json',dict(schema='nemotron9b_package_external_intent_v3',execution_spec=spec_ref,source_review=review_ref,
+             command=command,external_owner=owner,lock_identity=lock,canonical_sha256=p.canonical(),automatic_successor_launch=False))
+@@ -38,7 +38,7 @@
+             p.require(not p.low.terminal(value),'Controller exited before independent owner ACK')
+             p.require(time.monotonic()<deadline,'Independent live-owner timeout')
+             if captured is None:time.sleep(.05)
+-        from nemotron9b_package_window_v6 import bind_controller
++        from nemotron9b_package_window_v7 import bind_controller
+         bind_controller(spec,spec_ref,review_ref,captured)
+         p.once(control/'external-controller-owner.json',dict(launch_intent=p.ref(control/'external-launch-intent.json'),owner=captured))
+         deadline=time.monotonic()+48*3600+180
+@@ -146,7 +146,7 @@
+                     p.require(p.canonical()==intent['canonical_sha256'],'Canonical unchanged during external validation')
+                 guard=p.AuditGuard(full_audit)
+                 guard.force();result=p.completion(spec,admission,guard)
+-                from nemotron9b_package_evidence_v6 import final_audit
++                from nemotron9b_package_evidence_v7 import final_audit
+                 raw=final_audit(spec,admission,guard);guard.force(terminal=True)
+                 result.update(full_model_qualified=True,awaiting_external_raw_byte_audit=False,external_raw_byte_audit=raw)
+             except BaseException as error:candidate=False;failure.append(repr(error))
+@@ -177,7 +177,7 @@
+                 model_qualified=candidate,new_speedup_claim=False)
+             if release_path.exists():p.require(p.read(release_path)==record,'Release identity unchanged')
+             else:p.once(release_path,record)
+-            from nemotron9b_package_window_v6 import release_registry
++            from nemotron9b_package_window_v7 import release_registry
+             release_registry(spec,p.ref(release_path))
+             return record
+         raise RuntimeError('Failed diagnostic drained; root must explicitly release failed audit')
+--- nemotron9b_package_metadata_v6.py
++++ nemotron9b_package_metadata_v7.py
+@@ -43,13 +43,17 @@
+         'runtime_binary_stat': dict, 'runtime_binary_sha256': dict, 'physical_drain': dict, 'payloads': dict},
+     'nemotron9b_package_runtime_v4': {'source_sha256': dict, 'runtime_python_source_sha256': dict,
+         'runtime_binary_stat': dict, 'payloads': dict, 'runtime_readiness': dict},
+-    'nemotron9b_package_runtime_v6': {'source_sha256': dict, 'runtime_python_source_sha256': dict,
++    'nemotron9b_package_runtime_v7': {'source_sha256': dict, 'runtime_python_source_sha256': dict,
+         'runtime_binary_stat': dict, 'payloads': dict, 'runtime_readiness': dict, 'metadata_limits': dict},
+-    'nemotron9b_package_runtime_source_review_v6': {'source_sha256': dict, 'execution_spec_sha256': str,
++    'nemotron9b_package_runtime_source_review_v7': {'source_sha256': dict, 'execution_spec_sha256': str,
+         'reviewer': str, 'blockers': list, 'source_only': bool, 'independent_review': bool, 'passed': bool},
+     'nemotron9b_package_runtime_v5': {'source_sha256': dict, 'runtime_python_source_sha256': dict,
+         'runtime_binary_stat': dict, 'payloads': dict, 'runtime_readiness': dict, 'metadata_limits': dict},
+     'nemotron9b_package_runtime_source_review_v5': {'source_sha256': dict, 'execution_spec_sha256': str,
++        'reviewer': str, 'blockers': list, 'source_only': bool, 'independent_review': bool, 'passed': bool},
++    'nemotron9b_package_runtime_v6': {'source_sha256': dict, 'runtime_python_source_sha256': dict,
++        'runtime_binary_stat': dict, 'payloads': dict, 'runtime_readiness': dict, 'metadata_limits': dict},
++    'nemotron9b_package_runtime_source_review_v6': {'source_sha256': dict, 'execution_spec_sha256': str,
+         'reviewer': str, 'blockers': list, 'source_only': bool, 'independent_review': bool, 'passed': bool},
+     'root_post_nemotron_package_complete_predecessors_v1': {'source_sha256': dict, 'rows': list, 'processes': list},
+     'root_post_unified_native_complete_predecessors_v1': {'source_sha256': dict, 'rows': list, 'processes': list},
+--- nemotron9b_package_model_phases_v6.py
++++ nemotron9b_package_model_phases_v7.py
+@@ -6,8 +6,8 @@
+ from pathlib import Path
+ from types import SimpleNamespace
+ import time
+-import nemotron9b_package_protocol_v6 as p
+-from nemotron9b_package_science_v6 import metrics,passed,graph_routes,validate_states,expected_bucket,CRITERIA,STEPS,LENGTH,MARKS,PREFIXES
++import nemotron9b_package_protocol_v7 as p
++from nemotron9b_package_science_v7 import metrics,passed,graph_routes,validate_states,expected_bucket,CRITERIA,STEPS,LENGTH,MARKS,PREFIXES
+ SPEC=DEST=None
+ 
+ def configure(spec):
+--- nemotron9b_package_primitive_oracles_v6.py
++++ nemotron9b_package_primitive_oracles_v7.py
+@@ -4,7 +4,7 @@
+ import json
+ from pathlib import Path
+ MAPPINGS=[[0,1,2,3],[3,2,1,0],[3,-1,-1,-1],[-1,-1,-1,-1],[2,2,0,3],[-2147483648,3,-9,0],[0,0,0,0],[3,3,3,3]]
+-from nemotron9b_package_protocol_v6 import stream_sha
++from nemotron9b_package_protocol_v7 import stream_sha
+ 
+ def mappings(rows):
+     return MAPPINGS if rows == 4 else [[slot] for slot in [0, 1, 2, 3, -1, -9, -2147483648]]
+--- nemotron9b_package_primitives_v6.py
++++ nemotron9b_package_primitives_v7.py
+@@ -7,8 +7,8 @@
+ import re
+ import sys
+ import time
+-import nemotron9b_package_protocol_v6 as p
+-from nemotron9b_package_primitive_oracles_v6 import array_for,select,compare,mappings,classify,classifier_controls,output_shapes,inspect_hlo
++import nemotron9b_package_protocol_v7 as p
++from nemotron9b_package_primitive_oracles_v7 import array_for,select,compare,mappings,classify,classifier_controls,output_shapes,inspect_hlo
+ SPEC=DEST=None
+ sha=p.stream_sha
+ save=p.save
+--- nemotron9b_package_protocol_v6.py
++++ nemotron9b_package_protocol_v7.py
+@@ -11,7 +11,7 @@
+ import time
+ import minicpm5_layer0_execution_protocol_v4 as low
+ import nemotron9b_package_metadata_alias_v1 as alias_metadata
+-import nemotron9b_package_metadata_v6 as metadata
++import nemotron9b_package_metadata_v7 as metadata
+ 
+ ROOT = Path(__file__).resolve().parent
+ PACKAGE = Path('/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1')
+@@ -120,7 +120,8 @@
+ 
+ 
+ def required_sources():
+-    files=list(ROOT.glob('nemotron9b_package_*v6.py'))
++    files=list(ROOT.glob('nemotron9b_package_*v7.py'))
++    files += list(ROOT.glob('nemotron9b_package_*v6.py'))
+     files += list(ROOT.glob('nemotron9b_package_*v5.py'))
+     files += list(ROOT.glob('nemotron9b_package_*v4.py'))
+     files += list(ROOT.glob('nemotron9b_package_*v3.py'))
+@@ -139,11 +140,11 @@
+     quiet();s=read(spec_ref['path'],spec_ref['sha256']);review=read(review_ref['path'],review_ref['sha256'])
+     alias_metadata.validate_spec(s)
+     require(s['metadata_limits']==metadata.LIMITS,'Reviewed bounded metadata transport')
+-    require(s['schema']=='nemotron9b_package_runtime_v6' and s['root_finalized'] is True,'Future root-finalized spec required')
++    require(s['schema']=='nemotron9b_package_runtime_v7' and s['root_finalized'] is True,'Future root-finalized spec required')
+     require(s['package_commit']==COMMIT and s['package_root']==str(PACKAGE),'Exact reviewed package')
+     require(re.fullmatch('[a-z0-9-]{1,40}',s['run_id']),'Unique run identifier')
+     require(s['stages']==list(STAGES) and s['resources']=={x:resources(x)for x in (*STAGES,'controller')},'All phases/resources retained')
+-    require(review['schema']=='nemotron9b_package_runtime_source_review_v6','Exact v5 source review schema')
++    require(review['schema']=='nemotron9b_package_runtime_source_review_v7','Exact v5 source review schema')
+     require(review['passed'] is review['source_only'] is review['independent_review'] is True and review['reviewer']=='/root'
+         and review['blockers']==[] and review['execution_spec_sha256']==spec_ref['sha256']
+         and review['source_sha256']==s['source_sha256'],'Exact independent root source review')
+@@ -151,7 +152,7 @@
+     require(s['runtime_software_identity']['python']=='3.10'and s['runtime_software_identity']['versions']['vllm']=='0.11.0','Original runtime identity')
+     require(s['retirement_policy']=='none','v3 cannot reclaim space or reduce reservations automatically')
+     require(s['disk_budget']==dict(root_floor=ROOT_FLOOR,nvme_floor=NVME_FLOOR,root_cap=ROOT_CAP,nvme_cap=NVME_CAP,caps=CAPS),'Unreduced storage policy')
+-    require(s['controller']==str(ROOT/'nemotron9b_package_controller_v6.py')and s['worker']==str(ROOT/'nemotron9b_package_worker_v6.py'),'Executable closure')
++    require(s['controller']==str(ROOT/'nemotron9b_package_controller_v7.py')and s['worker']==str(ROOT/'nemotron9b_package_worker_v7.py'),'Executable closure')
+     require(set(required_sources())<=set(s['source_sha256']),'Complete package/lifecycle/source closure')
+     require(set(s['units'])==set((*STAGES,'controller'))and len(set(s['units'].values()))==len(STAGES)+1,'Unique retained units')
+     for stage,unit in s['units'].items():require(re.fullmatch('trn1-latest-verify-nemotron9b-package-[a-z0-9-]+',unit),'Unit namespace')
+@@ -183,8 +184,8 @@
+     long=read(s['reference_metadata']['long']['path'],s['reference_metadata']['long']['sha256'])
+     require(long['cached_trajectories_complete']is True and len(long['fixtures'])==5
+         and long['revision']=='6533e8de2c68e4536bf7c411d7a3ce5734111476','Original five cached trajectories')
+-    from nemotron9b_package_evidence_v6 import validate_payload_closure
+-    from nemotron9b_package_window_v6 import contract
++    from nemotron9b_package_evidence_v7 import validate_payload_closure
++    from nemotron9b_package_window_v7 import contract
+     validate_payload_closure(s);contract(s)
+     sources(s);return s,catalog
+ 
+@@ -287,19 +288,42 @@
+ def producer(owner):return dict(pid=owner['pid'],starttime=int(owner['start_ticks']),invocation_id=owner['invocation_id'])
+ 
+ 
+-def usage(root,allow_view=False):
++def _walk_error(error):raise error
++
++
++def _usage_once(root,allow_view):
+     total=0;count=0
+-    if not root.exists():return 0
+-    for base,dirs,files in os.walk(root,followlinks=False):
++    for base,dirs,files in os.walk(root,followlinks=False,onerror=_walk_error):
+         for name in dirs:require(not (Path(base)/name).is_symlink(),'No directory symlinks')
+         for name in files:
+-            p=Path(base)/name;s=p.lstat();count+=1
+-            require(count<100000 and s.st_uid==os.getuid(),'Owned bounded output tree')
+-            if p.is_symlink():require(allow_view and p.parent==root/'view','Only prepared model view symlinks');continue
+-            require(stat.S_ISREG(s.st_mode)and s.st_nlink==1,'Ordinary new output file')
+-            require(s.st_size<=16*GIB and (p.suffix!='.log'or s.st_size<=64*MIB),'Per-file evidence/log cap')
+-            total+=max(s.st_size,s.st_blocks*512)
++            path=Path(base)/name;info=path.lstat();count+=1
++            require(count<100000 and info.st_uid==os.getuid(),'Owned bounded output tree')
++            if path.is_symlink():require(allow_view and path.parent==root/'view','Only prepared model view symlinks');continue
++            require(stat.S_ISREG(info.st_mode)and info.st_nlink==1,'Ordinary new output file')
++            require(info.st_size<=16*GIB and (path.suffix!='.log'or info.st_size<=64*MIB),'Per-file evidence/log cap')
++            total+=max(info.st_size,info.st_blocks*512)
+     return total
++
++
++def usage(root,allow_view=False):
++    """Retry the entire inventory on rename races; never skip vanished entries."""
++    try:before=root.lstat()
++    except FileNotFoundError:return 0
++    require(stat.S_ISDIR(before.st_mode)and not root.is_symlink(),'Ordinary inventory root')
++    identity=(before.st_dev,before.st_ino)
++    for attempt in range(8):
++        try:
++            total=_usage_once(root,allow_view)
++            after=root.lstat()
++            require((after.st_dev,after.st_ino)==identity,'Inventory root replaced')
++            return total
++        except FileNotFoundError:
++            try:current=root.lstat()
++            except FileNotFoundError:raise RuntimeError('Inventory root disappeared')
++            require((current.st_dev,current.st_ino)==identity,'Inventory root replaced')
++            require(attempt<7,'Output inventory did not stabilize after complete rescans')
++            time.sleep(.01)
++    raise RuntimeError('Unreachable inventory retry limit')
+ 
+ 
+ def file_identity(path):
+@@ -413,7 +437,7 @@
+ 
+ def validate_result(spec,stage,result):
+     """Independent metadata acceptance; counts are derived, not trusted claims."""
+-    from nemotron9b_package_science_v6 import passed,expected_long_frames
++    from nemotron9b_package_science_v7 import passed,expected_long_frames
+     k=kind(stage);e=Path(spec['evidence_root']);w=Path(spec['work_root'])
+     require(result.get('complete')is True,'Complete phase result')
+     if k=='prepare':
+@@ -452,7 +476,7 @@
+                 require(all(x['passed']and x['nonzero_bytes']==0 for x in pattern['zero_checks']),'Raw zero equality')
+         elif k=='numeric':require(len(proof['rows'])==32 and passed(proof['rows']),'Original strict32')
+         elif k=='cold':
+-            from nemotron9b_package_model_phases_v6 import configure,validate_cold
++            from nemotron9b_package_model_phases_v7 import configure,validate_cold
+             configure(spec);validate_cold(proof)
+         else:
+             info=read(spec['reference_metadata']['long']['path'],spec['reference_metadata']['long']['sha256'])
+@@ -506,13 +530,13 @@
+             and record['lease']==ref(c/(stage+'-lease.json')),'Exact terminal worker result')
+         validate_result(spec,stage,record['result']);rows[stage]=ref(c/(stage+'-worker-result.json'))
+         if stage in SCIENTIFIC_STAGES:
+-            from nemotron9b_package_evidence_v6 import verify_phase
++            from nemotron9b_package_evidence_v7 import verify_phase
+             verify_phase(spec,stage,record['result'],owner,record['lease'],guard,hash_files=False)
+         if kind(stage)in ('compile','quality','workloads'):
+-            from nemotron9b_package_server_lifecycle_v6 import validate_chain
++            from nemotron9b_package_server_lifecycle_v7 import validate_chain
+             validate_chain(spec,stage,owner,record['result'],admission)
+         if kind(stage)=='workloads':
+-            from nemotron9b_package_window_v6 import validate_window
++            from nemotron9b_package_window_v7 import validate_window
+             validate_window(spec,stage,owner)
+     rounds=[workload_rates(read(e/('workloads-'+str(n)+'.json')))for n in range(3)]
+     rates={name:{mode:statistics.median(r[name][mode]for r in rounds)for mode in rounds[0][name]}for name in rounds[0]}
+--- nemotron9b_package_raw_verify_v6.py
++++ nemotron9b_package_raw_verify_v7.py
+@@ -4,9 +4,9 @@
+ import math
+ import os
+ from pathlib import Path
+-import nemotron9b_package_protocol_v6 as p
+-from nemotron9b_package_evidence_v6 import RAW,REPORT,COUNTS,digest,identity,verify_phase,tree,snapshot_inputs
+-from nemotron9b_package_science_v6 import metrics,passed,expected_long_frames,PREFIXES
++import nemotron9b_package_protocol_v7 as p
++from nemotron9b_package_evidence_v7 import RAW,REPORT,COUNTS,digest,identity,verify_phase,tree,snapshot_inputs
++from nemotron9b_package_science_v7 import metrics,passed,expected_long_frames,PREFIXES
+ 
+ 
+ def same_metrics(actual,claimed):
+--- nemotron9b_package_server_lifecycle_v6.py
++++ nemotron9b_package_server_lifecycle_v7.py
+@@ -9,7 +9,7 @@
+ import signal
+ import subprocess
+ import time
+-import nemotron9b_package_protocol_v6 as p
++import nemotron9b_package_protocol_v7 as p
+ 
+ 
+ def observe(pid):
+--- nemotron9b_package_window_v6.py
++++ nemotron9b_package_window_v7.py
+@@ -13,7 +13,7 @@
+ import stat
+ import subprocess
+ import time
+-import nemotron9b_package_protocol_v6 as p
++import nemotron9b_package_protocol_v7 as p
+ 
+ GATE=p.ROOT/'nemotron9b-package-observer-gate-v3.lock'
+ REGISTRY=p.ROOT/'nemotron9b-package-window-v3.json'
+@@ -163,7 +163,7 @@
+ 
+ def recover_released_registry(spec_ref,review_ref):
+     """Repair only an interrupted observer reopening, never rerun/promote audit."""
+-    from nemotron9b_package_controller_v6 import acquire,release
++    from nemotron9b_package_controller_v7 import acquire,release
+     spec,catalog=p.bundle(spec_ref,review_ref);p.low.user_bus();fd,auditor,lock=acquire()
+     try:
+         c=Path(spec['control_root']);release_ref=p.ref(c/'root-release.json');record=p.read(release_ref['path'],release_ref['sha256'])
+--- nemotron9b_package_worker_v6.py
++++ nemotron9b_package_worker_v7.py
+@@ -11,7 +11,7 @@
+ import time
+ import traceback
+ import urllib.request
+-import nemotron9b_package_protocol_v6 as p
++import nemotron9b_package_protocol_v7 as p
+ 
+ 
+ def prepare(spec,guard):
+@@ -41,7 +41,7 @@
+ 
+ def migration(spec,phase):
+     import torch
+-    from nemotron9b_package_science_v6 import metrics,passed
++    from nemotron9b_package_science_v7 import metrics,passed
+     paths={'numeric':'numeric.json.pt','cold':'cold-buckets.pt','long':'long-decode-validation.pt'}
+     fresh=torch.load(Path(spec['evidence_root'])/paths[phase],map_location='cpu',weights_only=True)
+     old=torch.load(spec['references']['historical_'+phase],map_location='cpu',weights_only=True)
+@@ -58,7 +58,7 @@
+ 
+ 
+ def quality(spec):
+-    import nemotron9b_package_quality_v6 as old
++    import nemotron9b_package_quality_v7 as old
+     suite=p.read(spec['quality_suite']['path'],spec['quality_suite']['sha256'])
+     fixture=p.read(p.PACKAGE/'vllm_neuron/models/nemotron9b/tokenizer_fixtures.json')
+     rows={x['id']:x for x in fixture['fixtures']};assert len(rows)==len(suite['cases'])==96
+@@ -76,7 +76,7 @@
+ 
+ 
+ def workloads(spec,stage,owner,guard):
+-    from nemotron9b_package_workloads_v6 import benchmark,verify,mixed
++    from nemotron9b_package_workloads_v7 import benchmark,verify,mixed
+     e=Path(spec['evidence_root']);c=Path(spec['control_root'])
+     prompts={int(k):v for k,v in p.read(e/'workload-inputs.json').items()}
+     # No source/payload hashing or directory scans inside the timed window.
+@@ -88,7 +88,7 @@
+     assert begin['owner']==owner and begin['allowed']is True
+     barrier=p.read(begin['observer_barrier']['path'],begin['observer_barrier']['sha256'])
+     assert barrier['worker']==owner and barrier['exclusive_observer_gate_held']is True
+-    from nemotron9b_package_window_v6 import registry
++    from nemotron9b_package_window_v7 import registry
+     assert registry()==barrier['registry']and barrier['registry']['performance_window']is True
+     result=dict(case=p.case(spec),round=int(stage.rsplit('-',1)[1]),workloads={},inputs={str(k):v for k,v in prompts.items()})
+     try:
+@@ -104,7 +104,7 @@
+ 
+ def http_stage(spec,stage,owner,guard,spec_ref,review_ref):
+     """Actual post-exec identity and deliberate terminal status gate success."""
+-    from nemotron9b_package_server_lifecycle_v6 import observe_expected,shutdown,validate_chain
++    from nemotron9b_package_server_lifecycle_v7 import observe_expected,shutdown,validate_chain
+     c=Path(spec['control_root']);e=Path(spec['evidence_root']);child=None;child_owner=None;pidfd=None
+     observation=None;workload_complete=False;original_error=None;result=None
+     with socket.socket()as sock:assert sock.connect_ex(('127.0.0.1',8010))!=0,'Port already occupied'
+@@ -160,7 +160,7 @@
+         p.once(c/(stage+'-server-ready.json'),dict(observation=observation,post_exec=p.ref(c/(stage+'-server-post-exec.json')),
+             controller_observation=p.ref(c/(stage+'-server-observed.json')),health_status=200))
+         if stage=='compile':
+-            from nemotron9b_package_http_transport_v6 import request
++            from nemotron9b_package_http_transport_v7 import request
+             prompts=p.read(e/'workload-inputs.json');rows=[]
+             for ids in (prompts['32'],prompts['128']):
+                 row=request(8010,p.case(spec)['served_name'],ids,16,stream=True)
+@@ -242,14 +242,14 @@
+         k=p.kind(stage)
+         if k=='prepare':result=prepare(spec,guard)
+         elif k=='verify-raw':
+-            from nemotron9b_package_raw_verify_v6 import run as verify_raw
++            from nemotron9b_package_raw_verify_v7 import run as verify_raw
+             result=verify_raw(spec,owner,lease_ref,guard)
+         elif k in ('alias','split'):
+-            from nemotron9b_package_primitives_v6 import configure,alias,split
++            from nemotron9b_package_primitives_v7 import configure,alias,split
+             configure(spec);result=(alias if k=='alias'else split)(stage)
+         elif k in ('compile','quality','workloads'):result=http_stage(spec,stage,owner,guard,spec_ref,review_ref)
+         else:
+-            import nemotron9b_package_model_phases_v6 as model
++            import nemotron9b_package_model_phases_v7 as model
+             model.configure(spec)
+             getattr(model,{'state-copy':'state_copy','numeric':'numeric','cold':'cold','long':'long_decode'}[stage])()
+             if stage!='state-copy':migration(spec,stage)
+@@ -257,7 +257,7 @@
+             result=dict(complete=True,passed=True,report=p.ref(Path(spec['evidence_root'])/output))
+         force_guard();p.validate_result(spec,stage,result)
+         if stage in p.SCIENTIFIC_STAGES:
+-            from nemotron9b_package_evidence_v6 import phase_manifest
++            from nemotron9b_package_evidence_v7 import phase_manifest
+             result['raw_manifest']=phase_manifest(spec,stage,owner,lease_ref,guard)
+         force_guard()
+         p.once(c/(stage+'-worker-result.json'),dict(complete=True,passed=True,phase=stage,producer=p.producer(owner),lease=lease_ref,result=result,
+--- nemotron9b_package_workloads_v6.py
++++ nemotron9b_package_workloads_v7.py
+@@ -9,7 +9,7 @@
+ import statistics
+ import time
+ from pathlib import Path
+-from nemotron9b_package_http_transport_v6 import benchmark,request
++from nemotron9b_package_http_transport_v7 import benchmark,request
+ 
+ def percentile(values,p):
+     return sorted(values)[max(0,math.ceil(p*len(values))-1)]

@@ -1,5 +1,10 @@
 # Nemotron qualification: exit-observation race — 2026-11-08
 
+**Later result:** v6/r2 completed all 70 alias checks with normal exits, then
+failed on a separate temporary-file inventory race before candidate execution.
+See the [follow-up result and v7 fix](nemotron-storage-race-20261108.md).
+
+
 The first 52-stage qualification attempt stopped in our experiment controller,
 after the last alias test had written a passing result. The external task exited
 with code **1**. This is an experiment-tool failure; it does not establish a

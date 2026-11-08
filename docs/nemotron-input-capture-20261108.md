@@ -59,6 +59,7 @@ reported 70 passing checks; 62 had normal retained-exit proof. The external
 exit was 1. A process-exit observation race was reproduced and a v6 successor
 passed 23 source regressions. A fresh full-protocol run was launched on
 2026-11-08; see the [failure, fix and timestamped launch evidence](nemotron-exit-race-20261108.md).
+The subsequent v6/r2 run completed all 70 alias checks, then stopped on a separate storage-monitor race before candidate execution; see the [v7 fix and successor observation](nemotron-storage-race-20261108.md).
 Full-model and paired performance qualification remain pending. No new Nemotron
 speedup is claimed.
 
