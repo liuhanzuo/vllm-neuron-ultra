@@ -1,0 +1,130 @@
+{
+  "schema": "minicpm5_upstream_saved_bytes_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T13:12:44.138857+00:00",
+  "previous_preparation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-upstream-source-preparation-20261108-v1.json",
+    "sha256": "ea6e37db3ab51f944c86e8c94f2c19482c1d1e1866ac2bd7b71c59587c5e86cd"
+  },
+  "new_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_replay_v2.py",
+      "sha256": "5a480b773ba4b329fc2d9bd2a0c3a8ee18b89cc40fa46f1a6aedb4d7917ebec9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_upstream_saved_bytes_v1.py",
+      "sha256": "399e26d41e733bc45f88becbdc0ef4427fd19167588312730bdaef9489ec1df7"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_upstream_saved_bytes_v1.py",
+      "sha256": "fb2dc52af7bd96b11381155561fc68cb7208a64aff229ce4831d261a0af0b648"
+    }
+  ],
+  "preserved_drafts": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_upstream_saved_bytes_v1-draft-before-metadata-review-20261108.py",
+      "sha256": "e77e2b3bdc0b5186989a6e3fb510c2cf391588d890a88d23d0031d2ba43dfc25"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_upstream_saved_bytes_v1-draft-before-metadata-review-20261108.py",
+      "sha256": "c9f48a48833dd707db00995c42a8724ac65499e0ee6735e7c192a83da3d23957"
+    }
+  ],
+  "independent_metric_helpers": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_raw_boundaries_v1.py",
+      "sha256": "22a5e192c31ad6fe838e5ab9bb6e274e982b2a3d1239c1776d934bb2ba5d0895"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py",
+      "sha256": "8d5243d29480870b97b3821a2a54bceee3228d05eb72817c61ad872500e38ce3"
+    }
+  ],
+  "capture_plan": {
+    "schema": "minicpm5_upstream_contrast_capture_plan_v1",
+    "contrasts": [
+      "native_entry_only",
+      "native_attention_only",
+      "native_entry_and_attention"
+    ],
+    "fields": [
+      "postnorm_output"
+    ],
+    "shape": [
+      1,
+      2048,
+      2048
+    ],
+    "dtype": "torch.bfloat16",
+    "tensor_bytes": 8388608,
+    "contrast_bytes": 25165824,
+    "all_raw_bytes": 177926144,
+    "whole_output_cap_bytes": 201326592,
+    "independent_norm_arithmetic_reexecuted": false,
+    "new_speedup_claim": false
+  },
+  "tests": [
+    {
+      "tests": 29,
+      "exit_code": 0,
+      "tool_chunk": "02a120",
+      "session_id": null,
+      "elapsed_seconds": 0.203,
+      "scope": "Initial source/synthetic checks before strengthening metadata checks; actual prior tool result retained in turn history"
+    },
+    {
+      "tests": 41,
+      "exit_code": 0,
+      "tool_chunk": "4b8e81",
+      "session_id": null,
+      "elapsed_seconds": 0.213,
+      "scope": "Source, metadata and miniature saved-byte tests. No actual model payloads/native calculation"
+    }
+  ],
+  "all_tests_passed": true,
+  "failed_test_rounds_this_change": [],
+  "review_findings_fixed": [
+    "Require replay v2 full postnorm output bytes rather than metrics only",
+    "Require original frame, complete capture budget, complete observed comparison fields and exact success/failure classifications",
+    "Bind original three r3 references; callback independently loads pinned r3 metadata and verifies complete MLP-input metadata",
+    "Preserve failed-control outcome and prohibit contrasts after failed controls"
+  ],
+  "test_fixture_scope": "LENGTH=2 BUCKET=3 WIDTH=4 only in isolated mocks; production original1231/2048/2048unchanged",
+  "independently_verified_at_future_runtime": [
+    "All21 original saved boundaries and six norm-weight files",
+    "ReplicatedCPUrank fullbyteequality includingpadding",
+    "Native/CPU boundary metrics fromcomplete realprefix andprediction",
+    "BF16 residual addition by integer arithmetic for threeoriginalroles andthreecontrasts",
+    "Threecomplete saved contrast outputs, metadata, hashes,metrics andoriginalCPU padding",
+    "Original r3 complete MLPinput metadata"
+  ],
+  "limitations": [
+    "No native model calculation or original raw model payload reads occurred during preparation",
+    "Reviewer does not independently reexecute RMSNorm/rsqrt, attention, final logits, original norm checkpoint reads, or serving",
+    "Full-size review callback has not been exercised against actual future outputs, which do not exist yet",
+    "Runtime source closure, actual post-Dory completed history, environment pins, whole-output resource accounting, exact process exit and physical drain still require reviewed serial runner integration",
+    "Own norm controls are assessed by retained metadata; independent norm arithmetic is not claimed"
+  ],
+  "original_remaining_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "original_v1_preserved": true,
+  "future_runtime_requires_replay_v2": true,
+  "runtime_prepared": false,
+  "runtime_admitted": false,
+  "native_executed": false,
+  "weights_read": false,
+  "actual_raw_payloads_read": false,
+  "all15_model_families_retained": true,
+  "model_qualified": false,
+  "new_speedup_claim": false,
+  "canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  }
+}
