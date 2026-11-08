@@ -71,3 +71,36 @@ Nemotron v8 remains source-prepared and unlaunched. SmolLM3 sio12 ran first but
 failed before readiness and completed no inference requests; its groups are now
 drained. Native experiments remain serial. No storage threshold or model
 validation requirement was lowered; no new model speedup is claimed.
+
+## Completed Smol history compatibility prepared
+
+While SmolLM3 sio13 runs serially, a source-only successor extends the prepared
+Nemotron runner to consume the complete later history. The v8 reader actually
+rejects the retained 9,070,236-byte Smol catalog at its ordinary 8 MiB bound and
+rejects the wheel's extensionless `REQUESTED` receipt. These source-level errors
+were reproduced without starting a model.
+
+The coherent v9 successor retains the exact `60ab7f5` model package, all 52
+stages, resource/storage limits and the bounded authenticated exec-transition
+fix. Its metadata reader adds only these routes:
+
+- Canonical completed Smol catalog filenames under the experiment's research
+  directory require a reviewed SHA256 digest before reading. They retain the
+  original 16 MiB Smol writer cap and must bind the filename to the catalog
+  schema, complete service count, unique units, finalized status, source map and
+  retained terminal-audit hash. Later physical drain and source checks still run.
+- The two original wheel receipts have exact path/hash pins and a 64-byte bound.
+  Other extensionless files and unlisted large JSON keep the original behavior.
+
+All 16 metadata controls and 34 HTTP/lifecycle/inventory/source-preservation
+checks passed. They include the actual retained 760-service/146-process catalog,
+wrong/missing hashes, changed bytes, schema/count errors, oversized files,
+symlinks and the original exec-transition handling. A synthetic future catalog
+checks transport only and is never presented as a completed experiment.
+
+The [source evidence](evidence/nemotron-history-20261108/manifest.json) preserves
+the v8 parents and the complete v9 patch. No new execution specification or
+runtime admission exists. Actual Smol termination, independent finalization,
+all latest predecessor release proofs, full source binding and a fresh 48 GiB
+NVMe admission check remain required before Nemotron can launch. There is no
+new model qualification or speedup claim.
