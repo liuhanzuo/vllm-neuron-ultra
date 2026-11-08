@@ -1,0 +1,52 @@
+{
+  "schema": "dory_rotary_arithmetic_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T10:25:33.177399+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_rotary_arithmetic_v1.py",
+    "sha256": "c50cd765bfe3f4882121be5b76a0efcb570277e2cb613efe22d085fad4bb999b",
+    "bytes": 13592
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_rotary_arithmetic_v1.py",
+    "sha256": "01a6820b8330a8639c8c2e42c03d0a993774b30ee985ad5ea9604163c459c25c",
+    "bytes": 6583
+  },
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-arithmetic-plan-20261108-v1.json",
+    "sha256": "ed7aef63a9f30f4628bf0aa6e4a3c36aa96112b62c81badb40cb57648bffd1f1",
+    "bytes": 5685
+  },
+  "tests": {
+    "passed": 24,
+    "actual_exit": {
+      "exit_code": 0,
+      "tool_chunk": "ae9d12"
+    },
+    "log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-arithmetic-source-checks-20261108-v1.log",
+      "sha256": "b0eb6c7cf59c457bd85c2042a5791d95512364e6837975b30375ce460fa296b0",
+      "bytes": 1335
+    }
+  },
+  "source_only": true,
+  "runtime_admitted": false,
+  "native_arithmetic_executed": false,
+  "actual_backend_dispatch_executed": false,
+  "original_weights_loaded": false,
+  "native_reference_qualified": false,
+  "neuron_baseline_qualified": false,
+  "new_speedup_claim": false,
+  "implementation": [
+    "Seven unchanged function bodies extracted from pinned official/default native RoPE and original local candidate; imports and dispatch are not executed.",
+    "Future runtime keeps complete262144-position cache for both theta and dtype variants; query16/key4 heads,256 dimensions;96 separate position comparisons.",
+    "Strict finite value and packed-byte equality frozen before any native run; two deterministic fixtures include signed zeros and binary cancellation values.",
+    "Sequential cache lifecycle breaks bound-method reference cycle before next cache; actual peak memory and numerical execution remain unmeasured.",
+    "Caller-supplied actual serial guard is required; no launcher, download, runtime admission or replacement of whole-model tests."
+  ],
+  "remaining": [
+    "Independently admitted serial CPU runtime and measured resource budget after Nemotron/Mini.",
+    "Real native arithmetic comparison with retained input/output hashes; preserve any failures.",
+    "Actual official backend dispatch, projection/SDPA parity, original-weight native reference, Neuron baseline and originalcold/long/slot/quality/serving gates."
+  ]
+}

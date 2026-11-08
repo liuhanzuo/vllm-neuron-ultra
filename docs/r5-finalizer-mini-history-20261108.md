@@ -35,3 +35,8 @@ Nemotron r5 正在完成原定的 52 阶段实验。本文记录运行中的进�
 [30 阶段真实运行快照与逐项数值标记](evidence/minicpm5-frame1-raw-boundary-20261108/nemotron9b-package-v13-r5-root-progress-20261108-v6.json)。
 
 2026-11-08 后续快照已核验全部 32 个拆分原语结果，即 16 组 original/tensor_split 配对。16 个 tensor_split 结果均通过局部数值检查，原路径 14 个失败、2 个单行对照通过。已进入原定整模型编译阶段，真实编译进程身份匹配，仍需后续状态复制、数值、冷缓存、长解码、质量和性能验收。参见 [42 阶段完整进度快照](evidence/dory-checkpoint-loader-20261108/nemotron9b-package-v13-r5-root-progress-20261108-v9.json)。此前 30 阶段快照保留为历史记录。
+
+
+## r5 已结束（后续状态）
+
+r5 已在编译阶段因实验目录检查不接受编译器生成的内部资源链接而失败，42 个阶段正常退出、1 个阶段中断、9 个阶段未启动。保留链接后按失败结果回收，完整结束记录包含 916 条服务、170 条进程。详见[本轮中断原因与证据](nemotron-r5-compile-interruption-20261108.md)。后续 MiniCPM5 使用实际结束记录，全部原定正确性与性能验收保留。

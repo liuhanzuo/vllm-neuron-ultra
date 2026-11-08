@@ -1,0 +1,78 @@
+{
+  "schema": "nemotron9b_r5_failure_and_recovery_summary_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T10:34:19.753848+00:00",
+  "counts": {
+    "planned": 52,
+    "normal_success": 42,
+    "interrupted_live": 1,
+    "never_launched": 9
+  },
+  "original_tool_exit": {
+    "session_id": 92674,
+    "exit_code": 1,
+    "tool_chunk": "f17013"
+  },
+  "original_controller_error": "RuntimeError('Only prepared model view symlinks')",
+  "actual_external_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-r5-actual-external-exit-20261108-v1.json",
+    "sha256": "c18551732ea54a36b788f383f7c9138081c51ad85652a75b60a91a937b643b24",
+    "bytes": 1525
+  },
+  "terminal_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-r5-20261108-root-terminal-v1.json",
+    "sha256": "0961635b71ce95ae9a2a701756924b839b3dc4dc655444ef1e645bd28c5fa33c",
+    "bytes": 3230608
+  },
+  "complete_catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-r5-20261108-complete-catalog-v1.json",
+    "sha256": "3bb59ec168b6d0b1c55d1421ab05837f34a6bf2375d93f9a3a7929a354bb01ce",
+    "bytes": 10464431
+  },
+  "complete_service_history": 916,
+  "complete_process_history": 170,
+  "finalizer_actual_exit": {
+    "session_id": 20583,
+    "exit_code": 0,
+    "tool_chunk": "8255e0"
+  },
+  "cleanup_retry": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r5-controller-cleanup-retry-signal-20261108-v1.json",
+    "sha256": "473224dd114a44baf7f2ecd88cbd280abedaf5602d6f1c3b5469bb3cc2d113d1",
+    "bytes": 1838
+  },
+  "preserving_recovery_intent": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r5-compiler-links-recovery-intent-20261108-v1.json",
+    "sha256": "78adbaa8b09327f43b5bb0cbceeaec67426d2f17aba460a5abd6f29740932f66",
+    "bytes": 79116
+  },
+  "preserving_recovery_action": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r5-compiler-links-recovery-action-20261108-v1.json",
+    "sha256": "511bacbd5d7f4cd238f162ca760fdda6c70bcdb1e86739af14a7e844be36bcba",
+    "bytes": 1349
+  },
+  "supported_recovery_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r5-supported-recovery-exit-20261108-v1.json",
+    "sha256": "77d76db477548e9973b301a68fd32cf07d2f23b8634eb7fcdb99b81c6c02c324",
+    "bytes": 1824
+  },
+  "source_failure_location": {
+    "file": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_storage_inventory_candidate_v1.py",
+    "line": 26
+  },
+  "cause": "Our output inventory allows symlinks only under prepared model view; Neuron compiler generated ten links under compile-work pointing to installed neuronxcc/pwp/pwp_bin_trainium assets.",
+  "attribution": "Harness storage policy incompatibility; no proof of a model numerical or upstream compiler defect.",
+  "primitive_result_boundary": "32 primitive results: tensor_split16pass; original14fail and2 single-rowpass.42 successful worker exits do not mean42 numerical passes.",
+  "all_original_groups_drained": true,
+  "all_original_sources_unchanged": true,
+  "symlink_targets_untouched": true,
+  "links_preserved": 10,
+  "restarted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "remaining": [
+    "Future fresh Nemotron spec must bind exact compiler asset link policy and original source hashes; no broad symlink allowance.",
+    "Compile/state-copy/numeric/cold/long/quality/3workloads/raw-review still required; original r4/r5 failures preserved.",
+    "Mini frame1 may follow only the actual finalized catalog."
+  ]
+}

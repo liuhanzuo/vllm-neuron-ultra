@@ -1,0 +1,142 @@
+{
+  "schema": "dory_rotary_arithmetic_plan_v1",
+  "positions": [
+    0,
+    1,
+    1023,
+    1024,
+    2048,
+    262143
+  ],
+  "theta": [
+    10000,
+    10000000
+  ],
+  "dtypes": [
+    "float32",
+    "bfloat16"
+  ],
+  "fixtures": [
+    "signed_ramp",
+    "binary_scale_cancellation"
+  ],
+  "query_heads": 16,
+  "key_heads": 4,
+  "head_dim": 256,
+  "original_cache_positions": 262144,
+  "expected_position_comparisons": 96,
+  "acceptance": "Every finite output value must match exactly AND packed output bytes must match; no tolerance relaxation",
+  "native_cache_policy": "Build full original FP32 cache via unchanged upstream methods, then cast to configured dtype",
+  "native_cache_fp32_bytes": 268435456,
+  "scope": "Extracted native arithmetic only; official module import/dispatch, CPU fused kernel and model remain unqualified",
+  "source_only": true,
+  "runtime_admitted": false,
+  "native_executed": false,
+  "numerical_parity_proven": false,
+  "native_reference_qualified": false,
+  "new_speedup_claim": false,
+  "provenance": {
+    "sources": {
+      "base": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+        "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+        "bytes": 10964
+      },
+      "common": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/common.py",
+        "sha256": "af4825138c1d8ee3823bfad04dadd91f6657818f867756c676faeb9d14d64f02",
+        "bytes": 9949
+      },
+      "candidate": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_reference_candidate.py",
+        "sha256": "366dc0ab95bbeebb3bd2311f205e23afc63ce3fbbcfca321345185dcbc191716",
+        "bytes": 9724
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/config.json",
+        "sha256": "d2d086f5949598a043a00d70e2c28c45305bca7703682de3e4f990a7fd3279a4",
+        "bytes": 2267
+      }
+    },
+    "extracted_functions": [
+      {
+        "identity": "common.ApplyRotaryEmb.forward_static",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/common.py",
+          "sha256": "af4825138c1d8ee3823bfad04dadd91f6657818f867756c676faeb9d14d64f02",
+          "bytes": 9949
+        },
+        "line": 134,
+        "end_line": 173,
+        "body_ast_sha256": "de46d6743915a2feb7eb4abe4fc6f77aefe0704795cd957fc668df0320adbb59"
+      },
+      {
+        "identity": "base.RotaryEmbeddingBase._compute_inv_freq",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+          "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+          "bytes": 10964
+        },
+        "line": 80,
+        "end_line": 92,
+        "body_ast_sha256": "e940f29d2bf56963d98b17b3719eb0aa792c3e28f010d0196766b2712fc37b67"
+      },
+      {
+        "identity": "base.RotaryEmbeddingBase._compute_cos_sin_cache",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+          "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+          "bytes": 10964
+        },
+        "line": 94,
+        "end_line": 103,
+        "body_ast_sha256": "3effe6371d70ac435992c574d592083c05e62711fbecd5fad806060739034610"
+      },
+      {
+        "identity": "base.RotaryEmbeddingBase._match_cos_sin_cache_dtype",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+          "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+          "bytes": 10964
+        },
+        "line": 105,
+        "end_line": 131,
+        "body_ast_sha256": "1d1f45fc19e686963b6006b9948f409dbc91751eba4028a7bd4b0cf5cc402d06"
+      },
+      {
+        "identity": "base.RotaryEmbedding.forward_static",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+          "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+          "bytes": 10964
+        },
+        "line": 161,
+        "end_line": 201,
+        "body_ast_sha256": "5876ccc3787f087d9f065e2250522d22398285997b1c0279c408f5c80a26efb5"
+      },
+      {
+        "identity": "base.RotaryEmbedding.forward_native",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/base.py",
+          "sha256": "c81804498f08f072356a26b41967f211475df2694dabf5da9f488c074d1fdef5",
+          "bytes": 10964
+        },
+        "line": 203,
+        "end_line": 219,
+        "body_ast_sha256": "e6a884ec202c8d98b14c2c559310373e72a1178ab04058b9b194109ec482b640"
+      },
+      {
+        "identity": "candidate.neox_rope_candidate",
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_reference_candidate.py",
+          "sha256": "366dc0ab95bbeebb3bd2311f205e23afc63ce3fbbcfca321345185dcbc191716",
+          "bytes": 9724
+        },
+        "line": 33,
+        "end_line": 48,
+        "body_ast_sha256": "cb265f555f28e2a8553b784b9256efbd10ce820ab8b0182c0910d3f885899c80"
+      }
+    ],
+    "extraction_scope": "Unchanged function bodies; no module import or backend dispatch"
+  }
+}
