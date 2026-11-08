@@ -1,0 +1,107 @@
+{
+  "schema": "smollm3_sio14_stop_failure_source_diagnostic_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T08:14:58.784525+00:00",
+  "original_controller_terminal": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/control/supervisor-terminal.json",
+    "sha256": "da47aab7976e96f6e0ba750056667f8b141eea12ff88bd925999b676ae4301a4"
+  },
+  "actual_external_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-external-exit-root-sio14-20261108-v1.json",
+    "sha256": "73374b6b6f757bd58ed701e4b6195470c6c2e1d0022608a97ea5c3cb6d361683"
+  },
+  "original_stop_intent": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r07/server-stop-intent.json",
+    "sha256": "168b90f3a32fb81420d8da294d85bef8800d00750fc108dfba3cde6ab5950f05"
+  },
+  "original_error": {
+    "type": "RuntimeError",
+    "message": "Exact retained exit PID"
+  },
+  "frozen_sources": {
+    "smollm3_observer_invariance_lifecycle_v24.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_lifecycle_v24.py",
+      "sha256": "bd6a0af742060fb709710d16155891a66648b75daa27e766ca95352dcd3d2b6b"
+    },
+    "smollm3_observer_invariance_controller_v26.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_controller_v26.py",
+      "sha256": "2a20c36e60670cbafacae016489eca1aaa01cbd27601b9bda18852b667803072"
+    },
+    "smollm3_authorized_stop_transition_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_authorized_stop_transition_v1.py",
+      "sha256": "cabafca3afc1a0557f55147c7163ef8b320e153fbc20ae3527b0d9b81344e69a"
+    }
+  },
+  "journal": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-sio14-r07-stop-journal-20261108-v1.json",
+    "sha256": "11e06738feb9d07d2eae7f3c1e32d2abd62e1d65cf00b976d7a6023f25e0f567"
+  },
+  "journal_events": [
+    {
+      "kind": "server_stopping",
+      "timestamp_us": "1794124951921435",
+      "unit": "init.scope",
+      "message": "server_stopping"
+    },
+    {
+      "kind": "server_stopped",
+      "timestamp_us": "1794124952583228",
+      "unit": "init.scope",
+      "message": "server_stopped"
+    },
+    {
+      "kind": "other",
+      "timestamp_us": "1794124952583437",
+      "unit": "init.scope",
+      "message": "trn1-latest-verify-smollm3-observer-invariance-v15-r07-server.service: Consumed 10min 10.683s CPU time."
+    },
+    {
+      "kind": "supervisor_exit1",
+      "timestamp_us": "1794124953962493",
+      "unit": "init.scope",
+      "message": "trn1-latest-verify-smollm3-observer-invariance-v15-supervisor.service: Main process exited, code=exited, status=1/FAILURE"
+    },
+    {
+      "kind": "supervisor_failed",
+      "timestamp_us": "1794124953962747",
+      "unit": "init.scope",
+      "message": "trn1-latest-verify-smollm3-observer-invariance-v15-supervisor.service: Failed with result 'exit-code'."
+    },
+    {
+      "kind": "other",
+      "timestamp_us": "1794124953962803",
+      "unit": "init.scope",
+      "message": "trn1-latest-verify-smollm3-observer-invariance-v15-supervisor.service: Consumed 1h 7min 52.758s CPU time."
+    }
+  ],
+  "failure_site": "owned_live_or_retained_exit: MainPID=0 branch requires terminal(value) and retained ExecMainPID in a single immediate check.",
+  "preceding_source_constraints": [
+    "authenticate_parent verifies original invocation, installed argv, resource limits and durable service binding on the exact initial sample.",
+    "Each refresh repeats classification and durable service binding on that same refreshed sample.",
+    "That binding includes ExecMainPID matching the retained original owner."
+  ],
+  "supported_interpretation": "The source call path binds the original PID before this check. A MainPID=0 sample that is not yet terminal can therefore fail during authorized stop bookkeeping; the synthetic deactivating/job/control-process cases reproduce this edge.",
+  "actual_failing_property_snapshot_retained": false,
+  "exact_pending_systemd_field_proven": false,
+  "foreign_process_or_model_error_proven": false,
+  "candidate": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3_owned_exit_bookkeeping_candidate_v1.py",
+    "sha256": "c01e030569e4706b4e7ffee1c43cfb8076c32377caddb77318d824a734815f6a"
+  },
+  "source_controls": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-owned-exit-bookkeeping-source-controls-20261108-v1.json",
+    "sha256": "5f128b1ca4eafed05a74e117b49d8dd7a6ad6cd86b3e9356d0954036e9b1b08f"
+  },
+  "source_test_actual_exit": {
+    "exit_code": 0,
+    "tool_chunk": "3abb1d"
+  },
+  "candidate_tests_passed": 18,
+  "candidate_integrated": false,
+  "original_sources_unchanged": true,
+  "candidate_behavior": "Keep exact invocation/ExecMainPID binding. A nonterminal MainPID=0 sample waits within the unchanged2second bound and reauthenticates the next sample. Only two identical terminal samples plus owner absence return. No automatic success or drain claim. Typed authorized disappearance and authentication errors still propagate.",
+  "runtime_successor_required": true,
+  "original12round_matrix_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
