@@ -53,11 +53,14 @@ paired workload requirements. NVMe entry/floor/output limits remain **48 / 30 /
 18 GiB**. This capture did not create any model outputs; available NVMe storage
 was 52,097,224,704 bytes at completion.
 
-The saved v4 execution specification is explicitly **not admitted**. Its old
-runtime readers still need a coherent successor for the exact historical raw
-partition, three non-UTF-8 sources and larger JSON envelope. That successor
-requires a separate review before launching the unchanged 52-stage protocol.
-No new Nemotron speedup is claimed.
+The old v4 draft was superseded by the reviewed v5 runtime. Its first actual
+qualification run stopped in the experiment controller after alias workers
+reported 70 passing checks; 62 had normal retained-exit proof. The external
+exit was 1. A process-exit observation race was reproduced and a v6 successor
+passed 23 source regressions. A fresh full-protocol run was launched on
+2026-11-08; see the [failure, fix and timestamped launch evidence](nemotron-exit-race-20261108.md).
+Full-model and paired performance qualification remain pending. No new Nemotron
+speedup is claimed.
 
 SmolLM3 preparation also advanced: the accepted controller and supervisor-stop
 fixes are wired through nine coherent sio11 modules, with all 12 focused source
