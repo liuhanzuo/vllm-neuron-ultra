@@ -1,0 +1,1 @@
+Host-specific source preparation and synthetic-file checks only. No Torch execution or model qualification has occurred. Actual execution requires a separate bounded serial admission after the active Nemotron run ends. Original upstream function bodies and provenance remain in the preceding Dory evidence directories.

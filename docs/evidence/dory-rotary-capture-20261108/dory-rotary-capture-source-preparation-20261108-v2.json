@@ -1,0 +1,98 @@
+{
+  "schema": "dory_rotary_capture_source_preparation_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T12:09:11.657378+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_rotary_arithmetic_v2.py": "47eca12f7568af71c4019ab5d5307ca68a91ecaf19940194168a13aa1ec8fba9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_rotary_arithmetic_capture_v2.py": "84f2b561b2bdd5fc39cdff6d151c43231d739382d9eafbd54dabeb9ccf3242d3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_rotary_capture_runtime_v1.py": "d4a4f4d6e952f987bf47b15250c564f3d855bf801f0da7595efbec1d2f72597e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_dory_rotary_saved_boundaries_v1.py": "0ee914955cc92d92ab58346d80d7e3da67867e5cb0b4e2ba0af05a633e373e73",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_rotary_capture_v2.py": "e24f665c628e2a4e148479bdd881f0e739892a711507c5c9e165f22bebc48a14"
+  },
+  "original_preparation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-arithmetic-source-preparation-20261108-v1.json",
+    "sha256": "3739a1891a5c16634ea3e224e73a418e107282ac59a4abc70708f340f6f2fd89"
+  },
+  "original_v1_preserved": true,
+  "tests": {
+    "count": 18,
+    "actual_exit": {
+      "session_id": 61481,
+      "exit_code": 0,
+      "tool_chunk": "cc4a81"
+    },
+    "seconds": 4.504,
+    "scope": "Standard-library source checks, exact scalar edge cases and complete synthetic saved-file fixtures; no torch/model/native arithmetic executed"
+  },
+  "discovered_source_blocker": {
+    "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_rotary_arithmetic_v1.py",
+    "function": "run_comparison",
+    "reason": "dict(theta=...,dtype=dtype_name,...,**compare_position(...)) duplicates dtype returned by compare_position; raises TypeError on first comparison result",
+    "actual_reproducer": "test_unexecuted_v1_duplicate_dtype_reproduced_and_fixed",
+    "v1_native_executed": false,
+    "fix": "Versioned v2 removes redundant dtype keyword; preserves torch.dtype string from compare_position; result schema v2; mathematical statements unchanged"
+  },
+  "failed_source_checks": [
+    {
+      "exit_code": 1,
+      "tool_chunk": "73cd93",
+      "reason": "Draft reviewer fixture used duplicate explicit dtype keyword; syntax error before tests"
+    },
+    {
+      "session_id": 9664,
+      "exit_code": 1,
+      "tool_chunk": "47f1f5",
+      "tests": 18,
+      "failures": 1,
+      "reason": "Test expected incorrect raw byte total2224176; corrected using original53tensor shape formula to2230320"
+    }
+  ],
+  "future_execution": {
+    "unobserved_control_comparisons": 96,
+    "captured_comparisons": 96,
+    "unique_comparisons": 96,
+    "total_executed_comparisons": 192,
+    "expected_saved_tensors": 53,
+    "expected_raw_bytes": 2230320,
+    "full_cache_positions": 262144,
+    "dtypes": [
+      "float32",
+      "bfloat16"
+    ],
+    "theta": [
+      10000,
+      10000000
+    ],
+    "positions": [
+      0,
+      1,
+      1023,
+      1024,
+      2048,
+      262143
+    ],
+    "strict_observer_equality": true,
+    "strict_finite_value_and_byte_equality": true
+  },
+  "independent_review_scope": [
+    "Derive complete original matrix and53raw shapes; exactfilehash/identity/size",
+    "Recreate deterministic inputs including signedzeros withoutTorch",
+    "Recompute all96saved output comparison metrics from complete arrays",
+    "Reexecute both multiply/add halves with FP32orBF16rounding from saved cache coefficients; compare complete output bytes",
+    "No sin/cos cache recomputation, official module dispatch, fused CPU kernel, weights or whole-model qualification"
+  ],
+  "source_only": true,
+  "runtime_admitted": false,
+  "native_arithmetic_executed": false,
+  "actual_backend_dispatch_executed": false,
+  "original_weights_loaded": false,
+  "native_reference_qualified": false,
+  "neuron_baseline_qualified": false,
+  "new_speedup_claim": false,
+  "remaining": [
+    "After Nemotronr6 actual terminalrelease, finalize complete978servicehistory and observedowners",
+    "Prepare exact independentlyreviewed one-threadCPU runtime admission with interpreter/libraryidentities,processownership,seriallock,memory/time/disklimits and externalexitreceipt",
+    "Execute both original96comparisonrounds then independent stdlibrawreview; retain any failed parity/control",
+    "Official backend dispatch, projection/SDPAparity, fulloriginalweightnative/Neuronbaseline,cold/long/slots/quality/pairedserving remain required"
+  ]
+}

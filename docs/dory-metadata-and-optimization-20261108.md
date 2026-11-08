@@ -54,7 +54,7 @@
 
 上述容量不代表实际峰值内存，也不证明声明的最大上下文能在本机或 TP1 Neuron 核上容纳。长 prefill 的工作区和循环中的中间状态仍需实测。
 
-实际执行继续排在正在运行的 Nemotron 和已排队的 MiniCPM5 之后。Dory 仍需完成权重加载、分词器与模板运行、RoPE/投影/SDPA 数值对照、原权重全模型参考、Neuron 移植，以及原定冷缓存、长解码、槽位复用、质量与配对服务性能检查。
+实际执行排在正在运行的 Nemotron r6 之后；MiniCPM5 首帧 r3 的采集与复核已完成。Dory 仍需完成权重加载、分词器与模板运行、RoPE/投影/SDPA 数值对照、原权重全模型参考、Neuron 移植，以及原定冷缓存、长解码、槽位复用、质量与配对服务性能检查。
 
 [元数据结果](evidence/dory-metadata-rotary-20261108/metadata/metadata-review.json) · [23 项检查与源码结论](evidence/dory-metadata-rotary-20261108/dory-metadata-rotary-root-source-review-20261108-v1.json) · [证据清单](evidence/dory-metadata-rotary-20261108/manifest.json)
 
@@ -72,6 +72,8 @@
 
 
 ## RoPE 独立数值对照程序已准备
+
+后续检查发现本节旧版结果组装会重复传入 dtype，已在未改动算术的新版本修正；原 24 项源码检查不代表实际运行通过。新增的完整采集与独立复核代码通过 18 项检查，仍等待原生执行，见[修复、53 个完整张量和验证范围](dory-rotary-capture-20261108.md)。
 
 新增程序通过 **24 项标准库源码检查**，从固定版本提取七个未经改写的函数体，包括官方缓存生成、原生旋转运算和本地候选。它不执行官方模块导入或后端调度，因此未来即使这项对照通过，也只能证明所测原生算术的一致性，不能直接宣布整个参考模型或 CPU 融合内核合格。
 
