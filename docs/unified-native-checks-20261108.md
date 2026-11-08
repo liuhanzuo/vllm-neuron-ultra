@@ -30,7 +30,7 @@ prove that its attention/kernel path actually executed.
 
 The outer process and all nine original services exited successfully. Eight
 spawn children exited successfully; all observed processes and service groups
-were drained. The preceding failed run remains recorded.
+were drained. The preceding failed run remains recorded. An [independent review](evidence/unified-native-20261108/completion-independent-review.json) reproduced the phase, child, configuration and history counts from the completed raw metadata.
 
 ## Probe bug found and corrected
 
