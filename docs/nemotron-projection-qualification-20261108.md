@@ -24,16 +24,27 @@ that the expected mismatch was reproduced; it does not make that output correct.
 | 4 | 1 | 27/36 | 0/36 | Different / Exact |
 | 1 | 1 | 0/9 | 0/9 | Exact / Exact |
 
-At 2026-11-08T02:31:44.014314+00:00, the run had advanced to
-`split-nemotron-conv-b1-t128-tensor-split`. All nine earlier alias stages also passed
-70 device checks with normal retained original exits. The serial run keeps
-package `60ab7f5` and all 52 planned stages; it does not substitute the unified
-implementation.
+The run is now terminal and failed. It completed preparation, all nine alias
+stages (70 device checks), and all 32 split workers (16 original/candidate pairs)
+with retained original exit 0. Both projection and convolution candidates passed
+all eight shapes: 96 complete output byte comparisons in total. The convolution
+input is `[batch, 6144, length]`, split sizes are `[5120, 512, 512]`, and its sampled
+wrong-address counts match the projection table above. The original multi-row
+paths fail in 14 of the 16 cases; both single-row controls pass.
 
-Convolution split tests, whole-model compilation, state copying, numeric checks,
-cold cache, long decoding, quality, slot reuse, paired workloads and raw result
-verification remain mandatory. **There is no new model speedup ratio.** An
-incorrect original output is not an eligible performance baseline.
+Stage 43, `compile`, failed in our server exec-transition identity check, before
+successful full-model compilation or HTTP smoke results. The original outer
+exit was 1. Recovery drained the services and explicitly released the failed run;
+its exit 0 does not qualify the experiment. All 53 planned service entries,
+including the controller and never-started phases, remain in the completed
+history. Package `60ab7f5` and the full 52-stage protocol were retained.
+
+Whole-model compilation, state copying, numeric checks, cold cache, long
+decoding, quality, slot reuse, paired workloads and final raw verification
+remain mandatory. **There is no new model speedup ratio.** An incorrect original
+output is not an eligible performance baseline. See the
+[terminal diagnosis and prepared fix](nemotron-exec-transition-20261108.md) and
+[all 16 pairs](evidence/nemotron-terminal-20261108/all-split-results.json).
 
 The [retained evidence](evidence/nemotron-projection-20261108/progress.json)
 contains complete comparison hashes, sampled-address diagnostics and references
