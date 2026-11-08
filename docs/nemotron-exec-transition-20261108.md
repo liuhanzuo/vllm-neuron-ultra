@@ -58,14 +58,15 @@ the 8.9 MB catalog. Its actual exit 1 and uncaptured process-identity limitation
 remain recorded. A separate recovery reverified every archive member and the
 source's absence; the second helper completed with exit 0.
 
-Root free space returned to about 30.5 GiB. NVMe currently has about 46.2 GiB,
-below the new Nemotron run's unchanged 48 GiB floor-plus-reservation requirement.
-A new run must satisfy that reservation before launch. SmolLM3's lower NVMe
-floor is satisfied, but its final memory review and runtime admission remain
-pending. No storage threshold or model validation requirement was lowered.
+Root free space returned to about 30.5 GiB. A later verified archive of sixteen
+completed global Neuron compilation-cache entries reclaimed another
+2,148,040,704 allocated bytes (about 2.00 GiB) on NVMe. All 64 original files were
+rehash-verified in the retained archive before retirement. Model weights,
+artifacts and experiment outputs were untouched. NVMe free space was then about
+48.196 GiB, above the unchanged 48 GiB floor-plus-reservation requirement, with
+little margin; each new run still requires a fresh space check.
 
-The [evidence manifest](evidence/nemotron-terminal-20261108/manifest.json) binds
-all split comparisons, terminal summary, actual exec diagnostic, prepared patch,
-tests and archive receipts. These harness sources require the retained workspace;
-they are not standalone model installation tests. Unified model implementation
-remains `e0a01d3`; [historical speedup tables](multi-model.md) are unchanged.
+The archive receipt is in the [admission evidence](evidence/smollm3-admission-20261108/manifest.json).
+Nemotron v8 remains source-prepared and unlaunched. SmolLM3 sio12 has been started
+first, and native experiments remain serial. No storage threshold or model
+validation requirement was lowered; no new model speedup is claimed.

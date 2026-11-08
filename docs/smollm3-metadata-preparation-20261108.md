@@ -55,12 +55,39 @@ These empirical allowances fit the original caps. The off rounds have only
 inclusive monitors; this is not a guarantee that every hypothetical maximum
 response can fit.
 
-Root free space is now about 30.5 GiB after verified, recoverable archival of
-inactive software. **Runtime admission remains pending:** the forecast does
-not prove the complete external-audit path fits its 512 MiB address-space limit,
-and final source/spec/review bindings and live disk checks remain required.
-No `sio12` directory or execution specification has been created. The full
-scientific request matrix is unchanged and there is no new speedup claim.
+The retained-data external-audit memory probe has now passed under the original
+512 MiB address-space and 16 MiB file-size limits, peaking at 282,914,816 bytes
+(269.8 MiB) RSS. It reparsed original raw HTTP/SSE and observer records, regenerated
+exact export bytes, and retained twelve capture/proof slots plus six exports.
+Those slots repeat the two genuinely fully audited historical reference fixtures
+(r00/off and r01/on). They are **not twelve new model runs**, nor coverage of all
+three configurations. The failed first probe, which attempted to use r02 without
+its missing completed lifecycle audit, is retained. No r02 audit was fabricated.
+
+Final admission exposed a source-reader mismatch: four already reviewed model
+metadata symlinks were accepted by the complete source-closure check but rejected
+by the handoff loader. The successor routes that loader through the same exact
+alias-aware validation. Ordinary reads remain strict; changed targets, redirected
+links, wrong hashes and unreviewed aliases are rejected. Nine successor runtime
+modules and the finalizer now bind consistently. Thirteen alias/preservation,
+24 finalizer/transport and nine budget checks passed; frozen predecessors remain
+unchanged. An intermediate missing successor test-file preparation failure is
+also retained.
+
+The final forecast binds **735 completed services and 145 recorded standalone
+process identities**, and reverified **37,106 source entries**.
+Its total is **1,697,599,488 bytes** and control allocation is
+**99,569,664 bytes**. Original caps, the complete scientific matrix and
+fail-and-retain behavior are unchanged. Exact source acceptance, specification
+and review were created and the real `load_spec` check passed.
+
+The fresh sio12 external process has started (tool session 78142); its actual
+identity is retained in the new [admission evidence](evidence/smollm3-admission-20261108/manifest.json).
+Input/source and compiled-payload admission passed; the authenticated controller
+has entered the first round, r00. The full twelve rounds and terminal review have
+not completed. This is no new
+model qualification or speedup claim. Follow the retained execution handle; do
+not start a duplicate experiment.
 
 The [evidence manifest](evidence/smollm3-metadata-20261108/manifest.json) binds the
 source checks, runtime patch, finalizer source, regression checkers, the older partial estimate and the new

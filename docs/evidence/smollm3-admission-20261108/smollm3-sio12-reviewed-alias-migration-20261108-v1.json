@@ -1,0 +1,23 @@
+{
+  "mapping": {
+    "smollm3_enginecore_title_runtime_v9": "smollm3_enginecore_title_runtime_v10",
+    "smollm3_spawn_environment_witness_v12": "smollm3_spawn_environment_witness_v13",
+    "smollm3_observer_invariance_protocol_v16": "smollm3_observer_invariance_protocol_v17",
+    "smollm3_observer_invariance_lifecycle_v20": "smollm3_observer_invariance_lifecycle_v21",
+    "smollm3_observer_invariance_controller_v22": "smollm3_observer_invariance_controller_v23",
+    "smollm3_observer_invariance_audit_v21": "smollm3_observer_invariance_audit_v22",
+    "smollm3_observer_invariance_wrapper_v20": "smollm3_observer_invariance_wrapper_v21",
+    "smollm3_observer_invariance_worker_v16": "smollm3_observer_invariance_worker_v17",
+    "smollm3_observer_invariance_analysis_v16": "smollm3_observer_invariance_analysis_v17",
+    "finalize_smollm3_sio12_root_20261108_v1": "finalize_smollm3_sio12_root_20261108_v2",
+    "check_smollm3_sio12_finalizer_source_20261108_v1": "check_smollm3_sio12_finalizer_source_20261108_v2",
+    "check_smollm3_sio12_catalog_transport_review_v2": "check_smollm3_sio12_catalog_transport_review_v3",
+    "smollm3_sio12_prospective_budget_v2": "smollm3_sio12_prospective_budget_v3",
+    "smollm3-observer-invariance-source-template-20261108-v17.json": "smollm3-observer-invariance-source-template-20261108-v18.json",
+    "smollm3-sio12-metadata-source-handoff-20261108-v1.json": "smollm3-sio12-metadata-source-handoff-20261108-v2.json",
+    "smollm3-sio12-metadata-root-source-review-20261108-v1.json": "smollm3-sio12-metadata-root-source-review-20261108-v2.json",
+    "smollm3-sio12-finalizer-source-checks-20261108-v1.json": "smollm3-sio12-finalizer-source-checks-20261108-v2.json"
+  },
+  "old_load_block": "    require(all(value['runtime_source_sha256'].get(k)==v and digest_bytes(p.bounded_source(Path(k)))==v\n                for k,v in handoff['source_sha256'].items()),'Every frozen sio12 source pin')",
+  "new_load_block": "    require(all(value['runtime_source_sha256'].get(k)==v\n                for k,v in handoff['source_sha256'].items()),'Every frozen sio12 source pin')\n    # Use the same exact reviewed metadata aliases as runtime admission. The\n    # ordinary reader stays strict; alias targets and bytes are authenticated.\n    source_closure({'source_sha256': handoff['source_sha256']}, {},\n                   handoff['original_metadata_symlink_resolutions'], hash_bytes=True)"
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "smollm3_retained_data_audit_memory_probe_v1",
+  "observed_at": "2026-11-08T03:15:28.404597+00:00",
+  "source_only": true,
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/probe_smollm3_sio12_retained_audit_memory_20261108_v1.py",
+    "sha256": "6bd61d5e209ff344ff13e5d55dfcbe09c768f5ac716bc3b7637d95194026717c"
+  },
+  "catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-r3-maintenance-20261108-complete-catalog.json",
+    "sha256": "d0572d983c400dc87713858ac1522d83da33366f8ed7fd7b1afb63c44f98da8f"
+  },
+  "actual_owner": {
+    "pid": 2602344,
+    "start_ticks": "388823236",
+    "ppid": 2602343,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/probe_smollm3_sio12_retained_audit_memory_20261108_v1.py"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "passed": false,
+  "error": {
+    "type": "FileNotFoundError",
+    "message": "[Errno 2] No such file or directory: '/home/ubuntu/experiments/trn1-latest-models-20261031/sio10/r02/root-mode-lifecycle.json'",
+    "phase": "fixture_slot_2"
+  },
+  "samples": [
+    {
+      "phase": "current_history_and_distinct_source_bindings",
+      "peak_rss_bytes": 163209216,
+      "vmsize_bytes": 174551040,
+      "rss_bytes": 163246080
+    },
+    {
+      "phase": "fixture_slot_0",
+      "fixture": "r00",
+      "peak_rss_bytes": 163602432,
+      "vmsize_bytes": 174551040,
+      "rss_bytes": 163676160
+    },
+    {
+      "phase": "fixture_slot_1",
+      "fixture": "r01",
+      "peak_rss_bytes": 203317248,
+      "vmsize_bytes": 214396928,
+      "rss_bytes": 203415552
+    }
+  ],
+  "fixture_slots": [
+    {
+      "slot": 0,
+      "fixture": "r00",
+      "original_capture": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio10/r00/capture-result.json",
+        "sha256": "0251a3cd0ce4969a4e244f6c902b32f244d551d203f3d0b0dca32acf4dc0dc56"
+      },
+      "original_proof": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio10/r00/root-mode-lifecycle.json",
+        "sha256": "88a1ba63d70be2aca4e118b866dc54b95ee94c90e2b2e4d4972ee8a4a3e3010c"
+      },
+      "raw_wire_reparse": true,
+      "export_bytes_recomputed": false
+    },
+    {
+      "slot": 1,
+      "fixture": "r01",
+      "original_capture": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio10/r01/capture-result.json",
+        "sha256": "b047e990f0881dd406d5b338337e81823889e2d97fabd62ab5715a723c3108e6"
+      },
+      "original_proof": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio10/r01/root-mode-lifecycle.json",
+        "sha256": "3e560fd9deed7f2992c9f3c7e63b0832f1da6200f55cb1e3172a9eba74db6b8f"
+      },
+      "raw_wire_reparse": true,
+      "export_bytes_recomputed": true
+    }
+  ],
+  "source_entries": 37079,
+  "address_space_limit_bytes": 536870912,
+  "extra_future_binding_allowance_bytes": 16777216,
+  "elapsed_seconds": 4.254935530014336,
+  "final_memory": {
+    "peak_rss_bytes": 203448320,
+    "vmsize_bytes": 214396928,
+    "rss_bytes": 203497472
+  },
+  "new_model_runs": 0,
+  "only_three_original_completed_fixture_runs": true,
+  "twelve_fixture_slots_not_twelve_actual_runs": true,
+  "actual_raw_capture_reader": true,
+  "actual_observer_reader": true,
+  "actual_exporter_and_chunk_comparison": true,
+  "complete_physical_lifecycle_audit_executed": false,
+  "final_payload_hashing_not_executed": true,
+  "source_bytes_rehashed": false,
+  "remaining_runtime_checks": "Actual final spec/review and distinct future run outputs must still satisfy unchanged readers, monitors and terminal audit. This empirical memory test is not a maximum-size proof or scientific qualification.",
+  "runtime_namespace_created": false,
+  "runtime_admitted": false,
+  "new_speedup_claim": false
+}
