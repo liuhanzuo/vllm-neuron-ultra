@@ -20,3 +20,5 @@ Spark 的 4B 配置继续使用 36 层，滑动窗口注意力与全注意力按
 本次仅访问公开元数据和小型文本文件，没有下载模型权重、执行远程代码或启动新的设备实验。完整原始响应与校验清单保存在研究目录；公开证据保留本轮筛选结论、目标元数据、源码比较及 Nano4B 的当前准备检查。
 
 [筛选结论](evidence/recent-small-models-20261108/selection.json) · [元数据与原始来源](evidence/recent-small-models-20261108/targeted.json) · [源码比较](evidence/recent-small-models-20261108/spark-source-comparison.json) · [证据清单](evidence/recent-small-models-20261108/manifest.json)
+
+Dory 的实际官方权重头与完整分词器结构已补齐核验：507 个 BF16 张量、3,975,229,440 参数，23 项元数据检查通过。固定源码显示原生参考与 CPU 融合 RoPE 有不同舍入路径；尚未运行模型或得到提速。见 [Dory 元数据、后端区别和优化方向](dory-metadata-and-optimization-20261108.md)。
