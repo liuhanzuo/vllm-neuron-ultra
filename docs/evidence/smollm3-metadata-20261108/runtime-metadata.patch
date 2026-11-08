@@ -1,0 +1,895 @@
+--- smollm3_enginecore_title_runtime_v8.py
++++ smollm3_enginecore_title_runtime_v9.py
+@@ -21,7 +21,7 @@
+ 
+ 
+ def lifecycle():
+-    import smollm3_observer_invariance_lifecycle_v19 as life
++    import smollm3_observer_invariance_lifecycle_v20 as life
+     return life
+ 
+ 
+--- smollm3_spawn_environment_witness_v11.py
++++ smollm3_spawn_environment_witness_v12.py
+@@ -13,7 +13,7 @@
+ import time
+ import types
+ import smollm3_observer_invariance_environment_v8 as env
+-import smollm3_enginecore_title_runtime_v8 as title_runtime
++import smollm3_enginecore_title_runtime_v9 as title_runtime
+ import smollm3_enginecore_title_transition_v1 as title
+ 
+ require=env.require
+--- smollm3_observer_invariance_protocol_v15.py
++++ smollm3_observer_invariance_protocol_v16.py
+@@ -13,18 +13,19 @@
+ import threading
+ import time
+ import smollm3_token_capture_protocol_v7 as old
++import smollm3_observer_metadata_source_v1 as source_metadata
+ import smollm3_observer_invariance_environment_v8 as environment_policy
+-import smollm3_enginecore_title_runtime_v8 as title_runtime
++import smollm3_enginecore_title_runtime_v9 as title_runtime
+ 
+ ROOT=Path(__file__).resolve().parent
+-DEST=ROOT/'sio11'
++DEST=ROOT/'sio12'
+ BASE=ROOT/'research/smollm3-engine-token-capture-inputs-20261107-v7.json'
+ BASE_SHA='c4d2b9977379d698646e8485e470e15c766b90d72f1b43001f1e6559e8f22507'
+ BASE_CANONICAL_SHA='8076a269dbb035fd214f1a9a2415ff8c8609e187422ee29d5d71cdabc79cb1f0'
+ PYTHON=old.PYTHON
+ TARGET=old.TARGET
+ ROLES=old.ROLES
+-SPAWN='TRN1_SMOL_OBSERVER_INVARIANCE_V11'
++SPAWN='TRN1_SMOL_OBSERVER_INVARIANCE_V12'
+ MIB=2**20;GIB=2**30
+ OUTPUT_CAP=2*GIB
+ CONTROL_CAP=128*MIB
+@@ -65,7 +66,7 @@
+ 
+ def unit(run_id,kind):
+     run_row(run_id);require(kind in ('server','client'),'Exact service kind')
+-    return 'trn1-latest-verify-smollm3-observer-invariance-v12-'+run_id+'-'+kind
++    return 'trn1-latest-verify-smollm3-observer-invariance-v13-'+run_id+'-'+kind
+ 
+ 
+ def resource(kind):
+@@ -76,13 +77,8 @@
+ 
+ 
+ def bounded_source(path,wanted=None):
+-    performance_guard();path=Path(path)
+-    require(path.is_absolute() and path.resolve()==path and not any(p.is_symlink() for p in (path,*path.parents)),'Source absolute immutable path')
+-    require(path.suffix not in ('.raw','.pt','.bin','.safetensors','.neff','.so','.whl','.zlib','.pb') and path.stat().st_size<=8*MIB,'Source metadata only')
+-    before=path.stat();raw=path.read_bytes();after=path.stat()
+-    require(len(raw)<=8*MIB and (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)==
+-        (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns),'Source changed during read')
+-    raw.decode('utf8');require(wanted is None or hashlib.sha256(raw).hexdigest()==wanted,'Source digest');return raw
++    performance_guard()
++    return source_metadata.source_bytes(path,wanted)
+ 
+ 
+ def load_base():return json.loads(bounded_source(BASE,BASE_SHA))
+@@ -123,10 +119,14 @@
+     expected=template(base);require({k:v for k,v in value.items() if k!='source_sha256'}=={k:v for k,v in expected.items() if k!='source_sha256'},'Exact source-only matrix/science/resource template')
+     pins=value['source_sha256'];require(isinstance(pins,dict) and all(type(k)is str and re.fullmatch('[0-9a-f]{64}',v) for k,v in pins.items()),'Immutable source closure')
+     require(all(pins.get(k)==v for k,v in base['source_sha256'].items()) and pins.get(str(BASE))==BASE_SHA,'Complete original source closure')
+-    for name in ('smollm3_observer_invariance_protocol_v15.py','smollm3_observer_invariance_worker_v15.py','smollm3_observer_invariance_analysis_v15.py',
+-                 'smollm3_observer_invariance_environment_v8.py','smollm3_spawn_environment_witness_v11.py','smollm3_ray_import_witness_v5.py',
+-                 'smollm3_enginecore_title_transition_v1.py','smollm3_enginecore_title_hook_v3.py','smollm3_enginecore_title_runtime_v8.py'):
++    for name in ('smollm3_observer_invariance_protocol_v16.py','smollm3_observer_invariance_worker_v16.py','smollm3_observer_invariance_analysis_v16.py',
++                 'smollm3_observer_invariance_environment_v8.py','smollm3_spawn_environment_witness_v12.py','smollm3_ray_import_witness_v5.py',
++                 'smollm3_enginecore_title_transition_v1.py','smollm3_enginecore_title_hook_v3.py','smollm3_enginecore_title_runtime_v9.py'):
+         require(str(ROOT/name) in pins,'Callable implementation closure')
++    for name in ('smollm3_observer_metadata_source_v1.py','smollm3_observer_metadata_codec_v2.py',
++                 'smollm3_observer_metadata_store_v1.py','nemotron9b_package_metadata_v7.py',
++                 'minicpm5_layer0_execution_protocol_v4.py','minicpm5_layer0_runtime_auth_v1.py','historical_b3_payload_partition_v1.py'):
++        require(str(ROOT/name)in pins,'Complete metadata transport source closure')
+     require(value['storage']['run_caps_included_bytes']+CONTROL_CAP==OUTPUT_CAP,'Control included in total2GiB')
+     return value
+ 
+--- smollm3_observer_invariance_lifecycle_v19.py
++++ smollm3_observer_invariance_lifecycle_v20.py
+@@ -4,6 +4,7 @@
+ controller. No native modules. Frozen scientific callables are never modified.
+ """
+ import copy
++import smollm3_observer_metadata_store_v1 as metadata_store
+ from contextlib import contextmanager
+ import hashlib
+ import json
+@@ -17,24 +18,24 @@
+ import sys
+ import time
+ 
+-import smollm3_observer_invariance_protocol_v15 as p
+-import smollm3_spawn_environment_witness_v11 as witness
++import smollm3_observer_invariance_protocol_v16 as p
++import smollm3_spawn_environment_witness_v12 as witness
+ import historical_b3_payload_partition_v1 as historical
+ import smollm3_enginecore_title_transition_v1 as title
+-import smollm3_enginecore_title_runtime_v8 as title_runtime
++import smollm3_enginecore_title_runtime_v9 as title_runtime
+ 
+ ROOT = p.ROOT
+ DEST = p.DEST
+ CONTROL = DEST / 'control'
+ SELF = Path(__file__).resolve()
+-WRAPPER = ROOT / 'smollm3_observer_invariance_wrapper_v19.py'
+-CONTROLLER = ROOT / 'smollm3_observer_invariance_controller_v21.py'
+-AUDIT = ROOT / 'smollm3_observer_invariance_audit_v20.py'
+-UNIT = 'trn1-latest-verify-smollm3-observer-invariance-v12-supervisor'
++WRAPPER = ROOT / 'smollm3_observer_invariance_wrapper_v20.py'
++CONTROLLER = ROOT / 'smollm3_observer_invariance_controller_v22.py'
++AUDIT = ROOT / 'smollm3_observer_invariance_audit_v21.py'
++UNIT = 'trn1-latest-verify-smollm3-observer-invariance-v13-supervisor'
+ LOCK = ROOT / 'serial-enrollment.lock'
+-HANDOFF = ROOT / 'research/smollm3-sio11-stop-source-handoff-20261108-v1.json'
+-TEMPLATE = ROOT / 'research/smollm3-observer-invariance-source-template-20261108-v15.json'
+-CALLABLE_ACCEPTANCE = ROOT / 'research/smollm3-sio11-stop-root-source-review-20261108-v1.json'
++HANDOFF = ROOT / 'research/smollm3-sio12-metadata-source-handoff-20261108-v1.json'
++TEMPLATE = ROOT / 'research/smollm3-observer-invariance-source-template-20261108-v17.json'
++CALLABLE_ACCEPTANCE = ROOT / 'research/smollm3-sio12-metadata-root-source-review-20261108-v1.json'
+ PREDECESSOR_FLOOR = dict(path=str(ROOT/'research/root-post-smol-sio5-failed-complete-predecessors-20261107-v1.json'),
+                         sha256='b4beec61b5f7b0ec34ca65e8a69172ca9023b2ca55c8e62e83b0a936f7395a3e')
+ GROUP_PREFIX = p.old.GROUP_PREFIX
+@@ -92,8 +93,12 @@
+     return raw
+ 
+ 
++def decode_bytes(path, raw):
++    return metadata_store.decode(DEST,path,raw)
++
++
+ def read(path, cap=8*MIB):
+-    return json.loads(read_bytes(path, cap))
++    return decode_bytes(path,read_bytes(path,cap))
+ 
+ 
+ def reference(ref):
+@@ -166,7 +171,7 @@
+ 
+ 
+ def record(path, value):
+-    return write_once(path, json_bytes(value))
++    return metadata_store.record(DEST,path,value,write_once,json_bytes)
+ 
+ 
+ def command(argv, timeout=10, cap=128*1024):
+@@ -441,7 +446,7 @@
+     require(value['source_template']['path'] == str(TEMPLATE), 'Fresh scientific template path')
+     require(value['callable_handoff']['path'] == str(HANDOFF), 'Fresh callable handoff path')
+     require(value['callable_root_acceptance']['path'] == str(CALLABLE_ACCEPTANCE), 'Fresh root source acceptance path')
+-    require(value['work'] == str(DEST) and value['matrix'] == p.matrix(), 'Fresh sio11 fixed matrix')
++    require(value['work'] == str(DEST) and value['matrix'] == p.matrix(), 'Fresh sio12 fixed matrix')
+     require(value['runtime_admitted'] is True and value['root_review_required'] is True, 'Root-bound admission only')
+     require(value['supervisor_unit'] == UNIT and value['planned_units'] == [p.unit(r['run_id'], k) for r in p.matrix() for k in ('server', 'client')]+[UNIT], 'All24 plus supervisor')
+     require(value['wall_time'] == plan['wall_time'] and value['storage'] == plan['storage'], 'Unchanged budgets')
+@@ -469,12 +474,12 @@
+     require(all(value['runtime_source_sha256'].get(k) == v for key in ('source_sha256','provenance_sha256')
+                 for k,v in partition[key].items()), 'Every authenticated current metadata/source pin retained')
+     handoff = reference(value['callable_handoff'])
+-    require(template_reference(handoff['source_template'])==value['source_template'] and handoff['source_frozen'] is True,'Frozen sio11 handoff/template binding')
++    require(template_reference(handoff['source_template'])==value['source_template'] and handoff['source_frozen'] is True,'Frozen sio12 handoff/template binding')
+     require(all(value['runtime_source_sha256'].get(k)==v and digest_bytes(p.bounded_source(Path(k)))==v
+-                for k,v in handoff['source_sha256'].items()),'Every frozen sio11 source pin')
++                for k,v in handoff['source_sha256'].items()),'Every frozen sio12 source pin')
+     accepted=reference(value['callable_root_acceptance'])
+     require(accepted['reviewer']=='/root' and accepted['passed'] is True and accepted['independent_review'] is True
+-            and accepted['source_handoff']==value['callable_handoff'] and accepted['blockers']==[],'Exact independent sio11 source acceptance')
++            and accepted['source_handoff']==value['callable_handoff'] and accepted['blockers']==[],'Exact independent sio12 source acceptance')
+     return value, plan, base, handoff
+ 
+ 
+--- smollm3_observer_invariance_controller_v21.py
++++ smollm3_observer_invariance_controller_v22.py
+@@ -15,8 +15,8 @@
+ import time
+ import urllib.request
+ 
+-import smollm3_observer_invariance_lifecycle_v19 as l
+-import smollm3_observer_invariance_protocol_v15 as p
++import smollm3_observer_invariance_lifecycle_v20 as l
++import smollm3_observer_invariance_protocol_v16 as p
+ import smollm3_authorized_stop_transition_v1 as stop_transition
+ 
+ 
+@@ -271,7 +271,7 @@
+             time.sleep(.2)
+ 
+     def execute(self):
+-        import smollm3_observer_invariance_audit_v20 as audit
++        import smollm3_observer_invariance_audit_v21 as audit
+         captures={};evidence={};exports={}
+         for row in p.matrix():
+             run_id=row['run_id'];root=p.directory(run_id)
+@@ -280,7 +280,7 @@
+             for name in ('compile-forbidden','cache-forbidden'):(root/name).mkdir(mode=0o700)
+             self.current=dict(self.envelope,run_started_monotonic=time.monotonic(),run=row,
+                               proofs=dict(self.envelope['proofs'],previous_run_fully_drained=True,fresh_run_namespace=True))
+-            self.current['directory_identities']={str(path):l.directory_identity(path)for path in(p.DEST,l.CONTROL,root,p.temporary(run_id))}
++            self.current['directory_identities']={str(path):l.directory_identity(path)for path in(p.DEST,l.CONTROL,l.CONTROL/'source-maps',l.CONTROL/'catalog-maps',root,p.temporary(run_id))}
+             l.record(root/'run-admission.json',self.current)
+             with socket.socket()as s:p.require(s.connect_ex(('127.0.0.1',8010))!=0,'Port8010 occupied')
+             server=self.launch(run_id,'server');self.ready(server)
+@@ -292,7 +292,7 @@
+             captures[run_id]=capture;evidence[run_id]=proof
+             if export is not None:exports[run_id]=export
+             self.poll(run_id)
+-        from smollm3_observer_invariance_analysis_v15 import compare_matrix
++        from smollm3_observer_invariance_analysis_v16 import compare_matrix
+         comparison=compare_matrix(self.base,captures,evidence,exports)
+         l.record(l.CONTROL/'matrix-result.json',comparison)
+         return comparison
+--- smollm3_observer_invariance_audit_v20.py
++++ smollm3_observer_invariance_audit_v21.py
+@@ -21,10 +21,10 @@
+ import sys
+ import time
+ 
+-import smollm3_observer_invariance_lifecycle_v19 as l
+-import smollm3_observer_invariance_protocol_v15 as p
+-import smollm3_observer_invariance_analysis_v15 as analysis
+-import smollm3_observer_invariance_worker_v15 as worker
++import smollm3_observer_invariance_lifecycle_v20 as l
++import smollm3_observer_invariance_protocol_v16 as p
++import smollm3_observer_invariance_analysis_v16 as analysis
++import smollm3_observer_invariance_worker_v16 as worker
+ import smollm3_token_capture_export_v3 as exporter
+ import smollm3_authorized_stop_transition_v1 as stop_transition
+ 
+@@ -261,7 +261,7 @@
+ 
+ def audit_run(base,run_id,write_export=False):
+     """Postdrain raw bytes and authenticated actual observers, never fake flags."""
+-    from smollm3_observer_invariance_controller_v21 import state_from_disk,physical
++    from smollm3_observer_invariance_controller_v22 import state_from_disk,physical
+     run=p.run_row(run_id);root=p.directory(run_id)
+     for kind in ('server','client'):
+         state=state_from_disk(run_id,kind);p.require(state is not None and state['owner']is not None,'Both actual service owners')
+@@ -334,7 +334,7 @@
+         for pattern in ('spawn-*.json','runner-*.json','ray-*.json'):
+             for path in sorted(root.glob(pattern)):
+                 try:
+-                    raw=l.read_bytes(path);value=json.loads(raw)
++                    raw=l.read_bytes(path);value=l.decode_bytes(path,raw)
+                     witnesses.append(dict(path=str(path),sha256=l.digest_bytes(raw),bytes=len(raw),schema=value.get('schema'),
+                         failed=value.get('passed')is False,partial_evidence=True,qualification_proven=False))
+                 except BaseException as error:
+@@ -603,6 +603,10 @@
+     # Only small durable metadata is newly pinned; raw/model payloads retain
+     # their separate complete byte proof and are never folded into source pins.
+     for path in sorted(p.DEST.rglob('*.json')):
++        # The catalog cannot include its own transport dependencies. They live
++        # in a separate namespace and are authenticated by every catalog read;
++        # root finalization must retain them with authenticated_chunks().
++        if path.is_relative_to(l.CONTROL/'catalog-maps'):continue
+         if path.name.startswith('.pending-')or path.name in('successor-catalog.json','external-terminal.json','external-release.json','external-recovery-required.json')or path.name.startswith('recovery-release-'):continue
+         raw=l.read_bytes(path);additions[str(path)]=l.digest_bytes(raw)
+     for name,digest in additions.items():
+@@ -634,11 +638,12 @@
+         lock_stat=os.fstat(lock_fd);lock=dict(path=str(l.LOCK),device=lock_stat.st_dev,inode=lock_stat.st_ino)
+         l.lock_proof(external,lock)
+         for sig in(signal.SIGINT,signal.SIGTERM,signal.SIGHUP):signal.signal(sig,interrupted)
+-        p.require(not p.DEST.exists()and not p.DEST.is_symlink(),'Never reuse sio11 namespace')
++        p.require(not p.DEST.exists()and not p.DEST.is_symlink(),'Never reuse sio12 namespace')
+         prior=drain_predecessors(spec)
+         for path,floor in ((p.ROOT,30*l.GIB),(Path('/mnt/nvme'),5*l.GIB)):
+             st=os.statvfs(path);p.require(st.f_bavail*st.f_frsize>=floor,'Admission storage')
+         p.DEST.mkdir(mode=0o700);l.CONTROL.mkdir(mode=0o700);created=True
++        l.metadata_store.provision(p.DEST)
+         resource.setrlimit(resource.RLIMIT_AS,(512*l.MIB,512*l.MIB))
+         resource.setrlimit(resource.RLIMIT_FSIZE,(16*l.MIB,16*l.MIB))
+         os.sched_setaffinity(0,{7});os.setpriority(os.PRIO_PROCESS,0,19)
+@@ -695,7 +700,7 @@
+             audit_deadline=time.monotonic()+1800
+             for sig in(signal.SIGINT,signal.SIGTERM,signal.SIGHUP):signal.signal(sig,signal.SIG_IGN)
+             cleanup_errors=[];drains=[]
+-            from smollm3_observer_invariance_controller_v21 import cleanup_all
++            from smollm3_observer_invariance_controller_v22 import cleanup_all
+             try:
+                 with l.bounded_phase(audit_deadline):
+                     # Preserve the original error first, then attempt every owned stop.
+--- smollm3_observer_invariance_wrapper_v19.py
++++ smollm3_observer_invariance_wrapper_v20.py
+@@ -5,8 +5,8 @@
+ import sys
+ import time
+ 
+-import smollm3_observer_invariance_lifecycle_v19 as life
+-import smollm3_observer_invariance_protocol_v15 as p
++import smollm3_observer_invariance_lifecycle_v20 as life
++import smollm3_observer_invariance_protocol_v16 as p
+ 
+ 
+ def entry(args, spawned=False):
+@@ -52,11 +52,11 @@
+                    actual_process=current, spawned=spawned, mode=row['mode']))
+     context.record_environment();context.advance_environment('startup')
+     if args.kind=='server':
+-        import smollm3_spawn_environment_witness_v11 as witness
++        import smollm3_spawn_environment_witness_v12 as witness
+         if spawned: context.install_title_witness()
+         context.install_ray_witness()
+         witness.install(context,life.process)
+-    import smollm3_observer_invariance_worker_v15 as worker
++    import smollm3_observer_invariance_worker_v16 as worker
+     try:
+         return worker.server(context, spawned=spawned) if args.kind == 'server' else worker.client(context)
+     except BaseException as error:
+--- smollm3_observer_invariance_worker_v15.py
++++ smollm3_observer_invariance_worker_v16.py
+@@ -15,8 +15,8 @@
+ import threading
+ import urllib.error
+ import urllib.request
+-import smollm3_observer_invariance_protocol_v15 as p
+-import smollm3_observer_invariance_analysis_v15 as analysis
++import smollm3_observer_invariance_protocol_v16 as p
++import smollm3_observer_invariance_analysis_v16 as analysis
+ import run_smollm3_token_capture_v7 as old_worker
+ 
+ _SERVER_STARTED=False
+--- smollm3_observer_invariance_analysis_v15.py
++++ smollm3_observer_invariance_analysis_v16.py
+@@ -4,7 +4,7 @@
+ """
+ import hashlib
+ import re
+-import smollm3_observer_invariance_protocol_v15 as p
++import smollm3_observer_invariance_protocol_v16 as p
+ 
+ 
+ def validate_capture(base,run_id,value):
+--- /dev/null
++++ smollm3_observer_metadata_codec_v2.py
+@@ -0,0 +1,154 @@
++"""Pure lossless metadata codec. No filesystem, service, model or runtime admission.
++
++The caller must publish each returned chunk durably in its owned control tree
++before the enclosing record, and authenticate that directory on every read.
++Only complete source-hash/stat maps move to chunks. Process identities, permits,
++scientific results and failure/exit fields stay in the record unchanged.
++"""
++import hashlib
++import json
++import math
++from pathlib import PurePosixPath
++import re
++
++RECORD_SCHEMA='smollm3_compact_source_record_v2'
++CHUNK_SCHEMA='smollm3_shared_source_chunk_v2'
++MARKER='$smollm3_source_map'
++FIELDS={'source_stats':'stat','root_runtime_source_sha256':'sha256','runtime_source_sha256':'sha256',
++        'source_sha256':'fingerprint','new_source_and_evidence_pins':'fingerprint'}
++CHUNK_ENTRIES=1024
++CHUNK_CAP=1024*1024
++RECORD_CAP=8*1024*1024
++EXPANSION_CAP=32*1024*1024
++ENTRY_CAP=100000
++DEPTH_CAP=48
++SHA=re.compile('[0-9a-f]{64}')
++STAT_KEYS={'device','inode','size','mtime_ns','ctime_ns','realpath'}
++FORBIDDEN_SUFFIXES={'.raw','.pt','.bin','.safetensors','.neff','.so','.whl','.zlib','.pb'}
++
++def require(value,message):
++    if not value:raise ValueError(message)
++
++def encode_json(value):
++    return json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False).encode('utf8')
++
++def sha(raw):return hashlib.sha256(raw).hexdigest()
++
++def pairs(items):
++    result={}
++    for key,value in items:
++        require(key not in result,'Duplicate JSON key')
++        result[key]=value
++    return result
++
++def decode_json(raw):
++    def bad_constant(value):raise ValueError('Nonfinite JSON constant')
++    return json.loads(raw.decode('utf8'),object_pairs_hook=pairs,parse_constant=bad_constant)
++
++def absolute(name):
++    require(type(name)is str and 0<len(name)<=4096 and '\x00'not in name,'Bounded source path')
++    p=PurePosixPath(name)
++    require(p.is_absolute()and str(p)==name and '..'not in p.parts,'Canonical absolute source path')
++    return p
++
++def validate_map(kind,entries):
++    require(kind in ('sha256','stat','fingerprint')and type(entries)is dict and len(entries)<=ENTRY_CAP,'Known bounded source map')
++    for name,value in entries.items():
++        # Generic catalog fingerprints are opaque names/hashes, including
++        # retained historical raw hashes. They grant no access to those files.
++        if kind=='fingerprint':require(type(name)is str and 0<len(name)<=4096 and '\x00'not in name,'Bounded fingerprint name')
++        else:require(absolute(name).suffix not in FORBIDDEN_SUFFIXES,'No model/native/raw payload in source map')
++        if kind in ('sha256','fingerprint'):require(type(value)is str and SHA.fullmatch(value),'Exact source SHA256')
++        else:
++            require(type(value)is dict and set(value)==STAT_KEYS,'Exact source stat fields')
++            absolute(value['realpath'])
++            for field in STAT_KEYS-{'realpath'}:
++                require(type(value[field])is int and value[field]>=(0 if field=='size' else 1),'Exact source stat integer')
++    return entries
++
++def pack_map(kind,entries,blobs):
++    validate_map(kind,entries);names=sorted(entries);chunks=[]
++    for offset in range(0,len(names),CHUNK_ENTRIES):
++        selected=names[offset:offset+CHUNK_ENTRIES]
++        raw=encode_json(dict(schema=CHUNK_SCHEMA,kind=kind,entries={n:entries[n]for n in selected}))
++        require(len(raw)<=CHUNK_CAP,'Bounded source chunk')
++        digest=sha(raw)
++        require(digest not in blobs or blobs[digest]==raw,'Content hash collision')
++        blobs[digest]=raw
++        chunks.append(dict(sha256=digest,bytes=len(raw),count=len(selected)))
++    manifest=dict(kind=kind,count=len(names),chunks=chunks)
++    return {MARKER:dict(manifest,manifest_sha256=sha(encode_json(manifest)))}
++
++def pack(value):
++    """Return compact wire bytes and SHA-addressed chunks, without writing."""
++    require(type(value)is dict and value.get('schema')!=RECORD_SCHEMA,'Original ordinary record required')
++    blobs={}
++    def visit(item,field=None,depth=0):
++        require(depth<=DEPTH_CAP,'Metadata nesting cap')
++        if type(item)is dict:
++            require(MARKER not in item and all(type(k)is str for k in item),'Reserved marker or non-string key')
++            if field in FIELDS:return pack_map(FIELDS[field],item,blobs)
++            return {k:visit(v,k,depth+1)for k,v in item.items()}
++        if type(item)is list:return [visit(v,None,depth+1)for v in item]
++        require(item is None or type(item)in (str,bool,int,float),'Ordinary JSON values only')
++        if type(item)is float:require(math.isfinite(item),'Finite metadata number')
++        return item
++    record=visit(value)
++    require(sum(len(x)for x in blobs.values())<=EXPANSION_CAP,'Bounded distinct source maps')
++    raw=encode_json(dict(schema=RECORD_SCHEMA,record=record))
++    require(len(raw)<=RECORD_CAP,'Compact record cap')
++    return raw,blobs
++
++def unpack(raw,resolve):
++    """Authenticate chunks supplied by caller; return the original JSON object.
++
++    resolve(digest) must read only the matching owned control-tree chunk. No
++    path supplied by a record is passed to the resolver. No global cache is kept.
++    """
++    require(type(raw)is bytes and len(raw)<=RECORD_CAP,'Bounded compact record bytes')
++    envelope=decode_json(raw)
++    require(type(envelope)is dict and set(envelope)=={'schema','record'}and envelope['schema']==RECORD_SCHEMA and type(envelope['record'])is dict,'Exact compact record envelope')
++    cache={};loaded_bytes=0;expanded_bytes=0
++    def expand(value,field):
++        nonlocal loaded_bytes,expanded_bytes
++        require(field in FIELDS and set(value)=={MARKER},'Source reference only in its explicit map field')
++        ref=value[MARKER]
++        require(type(ref)is dict and set(ref)=={'kind','count','chunks','manifest_sha256'},'Exact map reference')
++        require(ref['kind']==FIELDS[field]and type(ref['count'])is int and 0<=ref['count']<=ENTRY_CAP,'Exact map kind/count')
++        require(type(ref['chunks'])is list and len(ref['chunks'])==(ref['count']+CHUNK_ENTRIES-1)//CHUNK_ENTRIES,'Exact bounded chunk count')
++        manifest={k:ref[k]for k in ('kind','count','chunks')}
++        require(type(ref['manifest_sha256'])is str and sha(encode_json(manifest))==ref['manifest_sha256'],'Map manifest digest')
++        result={};last=None
++        for index,chunk in enumerate(ref['chunks']):
++            require(type(chunk)is dict and set(chunk)=={'sha256','bytes','count'},'Exact chunk reference')
++            digest=chunk['sha256'];require(type(digest)is str and SHA.fullmatch(digest),'Chunk digest')
++            require(type(chunk['bytes'])is int and 0<chunk['bytes']<=CHUNK_CAP,'Chunk byte bound')
++            require(type(chunk['count'])is int and chunk['count']==min(CHUNK_ENTRIES,ref['count']-index*CHUNK_ENTRIES),'Exact chunk entries')
++            if digest not in cache:
++                payload=resolve(digest)
++                require(type(payload)is bytes and len(payload)==chunk['bytes']and sha(payload)==digest,'Exact source chunk bytes/hash')
++                loaded_bytes+=len(payload);require(loaded_bytes<=EXPANSION_CAP,'Bounded loaded source maps')
++                cache[digest]=payload
++            payload=cache[digest]
++            require(len(payload)==chunk['bytes'],'Cached chunk exact byte count')
++            expanded_bytes+=len(payload);require(expanded_bytes<=EXPANSION_CAP,'Bounded repeated map expansion')
++            item=decode_json(payload)
++            require(type(item)is dict and set(item)=={'schema','kind','entries'}and item['schema']==CHUNK_SCHEMA and item['kind']==ref['kind'],'Exact source chunk schema/kind')
++            entries=validate_map(ref['kind'],item['entries'])
++            require(len(entries)==chunk['count'],'Exact source chunk count')
++            for name in entries:
++                require(last is None or name>last,'Strict global source order; no duplicate/overlapping chunks')
++                last=name;result[name]=entries[name]
++        require(len(result)==ref['count'],'Complete original source map')
++        return result
++    def visit(item,field=None,depth=0):
++        require(depth<=DEPTH_CAP,'Metadata nesting cap')
++        if type(item)is dict:
++            if MARKER in item:return expand(item,field)
++            require(field not in FIELDS,'Explicit source map must use authenticated chunks')
++            return {k:visit(v,k,depth+1)for k,v in item.items()}
++        if type(item)is list:return [visit(v,None,depth+1)for v in item]
++        require(item is None or type(item)in (str,bool,int,float),'Ordinary JSON values only')
++        if type(item)is float:require(math.isfinite(item),'Finite metadata number')
++        return item
++    return visit(envelope['record'])
+--- /dev/null
++++ smollm3_observer_metadata_store_v1.py
+@@ -0,0 +1,115 @@
++"""Explicit filesystem transport for source-map chunks; inert on import.
++
++The admitted lifecycle supplies its existing durable exclusive byte writer.
++Every data reference resolves only to a digest-named JSON file in this run's
++private control directory. Raw byte hashing remains separate from expansion.
++"""
++import os
++from pathlib import Path
++import stat
++import smollm3_observer_metadata_codec_v2 as codec
++
++require=codec.require
++
++def ordinary(path,directory=False):
++    path=Path(path)
++    require(path.is_absolute()and path==path.resolve()and not any(x.is_symlink()for x in (path,*path.parents)),'Owned canonical metadata path')
++    value=path.lstat()
++    require(value.st_uid==os.getuid(),'Owned metadata identity')
++    require(stat.S_ISDIR(value.st_mode)if directory else stat.S_ISREG(value.st_mode),'Ordinary metadata type')
++    require(stat.S_IMODE(value.st_mode)==(0o700 if directory else 0o600),'Private metadata permissions')
++    if not directory:require(value.st_nlink==1,'No metadata hardlinks')
++    return value
++
++def identity(value):return value.st_dev,value.st_ino,value.st_size,value.st_mtime_ns,value.st_ctime_ns
++
++def directory_identity(value):return value.st_dev,value.st_ino
++
++def chunk_directory(root,catalog=False):
++    require(type(catalog)is bool,'Explicit map namespace')
++    root=Path(root);ordinary(root,True);ordinary(root/'control',True)
++    return root/('control/catalog-maps'if catalog else'control/source-maps')
++
++
++def catalog_record(root,path):return Path(path)==Path(root)/'control/successor-catalog.json'
++
++def provision(root):
++    """Call once, after fresh private run/control roots and before admission."""
++    path=chunk_directory(root);path.mkdir(mode=0o700,exist_ok=False)
++    chunk_directory(root,True).mkdir(mode=0o700,exist_ok=False)
++    fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
++    try:os.fsync(fd)
++    finally:os.close(fd)
++    return dict(path=str(path),device=ordinary(path,True).st_dev,inode=ordinary(path,True).st_ino)
++
++def read_chunk(root,digest,expected_directory=None,catalog=False):
++    require(type(digest)is str and codec.SHA.fullmatch(digest),'Literal source chunk digest only')
++    directory=chunk_directory(root,catalog);before_dir=ordinary(directory,True)
++    require(expected_directory is None or directory_identity(before_dir)==expected_directory,'Source chunk directory replaced')
++    path=directory/(digest+'.json');before=ordinary(path)
++    require(before.st_size<=codec.CHUNK_CAP,'Source chunk byte cap')
++    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
++    try:
++        require(identity(os.fstat(fd))==identity(before),'Source chunk changed on open')
++        with os.fdopen(fd,'rb',closefd=False)as stream:raw=stream.read(codec.CHUNK_CAP+1)
++        after=os.fstat(fd)
++        require(len(raw)==before.st_size and identity(before)==identity(after)==identity(ordinary(path)),'Source chunk identity/length changed')
++    finally:os.close(fd)
++    require(directory_identity(ordinary(directory,True))==directory_identity(before_dir),'Source chunk directory changed while reading')
++    require(codec.sha(raw)==digest,'Source chunk content hash')
++    return raw
++
++def record(root,path,value,write_once,legacy_json_bytes):
++    """Chunks are durable before the parent record becomes visible."""
++    root=Path(root);path=Path(path);ordinary(root,True)
++    require(path.is_relative_to(root)and path!=root and path.suffix=='.json','Owned JSON record only')
++    ordinary(path.parent,True)
++    original=legacy_json_bytes(value)
++    # Preserve the existing JSON writer's accepted Python input domain, e.g.
++    # tuple shapes become arrays before the strict JSON-only codec sees them.
++    normalized=codec.decode_json(original)
++    def has_maps(item):
++        if type(item)is dict:
++            return any((key in codec.FIELDS and type(child)is dict and bool(child))or has_maps(child)for key,child in item.items())
++        return type(item)is list and any(has_maps(child)for child in item)
++    if not has_maps(normalized):return write_once(path,original)
++    wire,chunks=codec.pack(normalized)
++    if not chunks:return write_once(path,original)
++    catalog=catalog_record(root,path);directory=chunk_directory(root,catalog);expected=directory_identity(ordinary(directory,True))
++    for digest,raw in sorted(chunks.items()):
++        target=directory/(digest+'.json')
++        require(directory_identity(ordinary(directory,True))==expected,'Source chunk directory changed before write')
++        if target.exists():require(read_chunk(root,digest,expected,catalog)==raw,'Existing immutable chunk differs')
++        else:
++            try:write_once(target,raw)
++            except FileExistsError:
++                # Only identical completed content can settle a concurrent publish.
++                # Any pending loser file remains charged by the full inventory.
++                require(read_chunk(root,digest,expected,catalog)==raw,'Concurrent immutable chunk differs')
++            require(read_chunk(root,digest,expected,catalog)==raw,'Published chunk must be complete before record')
++    require(directory_identity(ordinary(directory,True))==expected,'Source chunk directory changed before parent record')
++    return write_once(path,wire)
++
++def decode(root,path,raw):
++    """Expand semantics without substituting bytes used by provenance hashes."""
++    require(type(raw)is bytes and len(raw)<=codec.RECORD_CAP,'Original evidence byte cap')
++    value=codec.decode_json(raw)
++    if type(value)is not dict or value.get('schema')!=codec.RECORD_SCHEMA:
++        require(not(type(value)is dict and str(value.get('schema','')).startswith('smollm3_compact_source_record_')),'Unsupported compact evidence version')
++        return value
++    root=Path(root);path=Path(path);ordinary(root,True)
++    require(path.is_relative_to(root)and path!=root and path.suffix=='.json','Compact record belongs to this run only')
++    ordinary(path.parent,True)
++    catalog=catalog_record(root,path);directory=chunk_directory(root,catalog);expected=directory_identity(ordinary(directory,True))
++    return codec.unpack(raw,lambda digest:read_chunk(root,digest,expected,catalog))
++
++
++def authenticated_chunks(root,path,raw):
++    """Root finalizer uses this to retain the complete physical dependency closure."""
++    value=codec.decode_json(raw)
++    if type(value)is not dict or value.get('schema')!=codec.RECORD_SCHEMA:return []
++    catalog=catalog_record(root,path);directory=chunk_directory(root,catalog);expected=directory_identity(ordinary(directory,True));refs={}
++    def resolve(digest):
++        data=read_chunk(root,digest,expected,catalog);refs[digest]=dict(path=str(directory/(digest+'.json')),sha256=digest,bytes=len(data));return data
++    codec.unpack(raw,resolve)
++    return [refs[digest]for digest in sorted(refs)]
+--- /dev/null
++++ smollm3_observer_metadata_source_v1.py
+@@ -0,0 +1,14 @@
++"""Exact inherited metadata/encoding exceptions; never reads model payloads."""
++from pathlib import Path
++import nemotron9b_package_metadata_v7 as inherited
++
++# The inherited reader enumerates named/schema-checked 32MiB Nemotron envelopes.
++# Everything else keeps its ordinary8MiB cap and text type restrictions.
++def source_bytes(path,wanted=None):
++    path=Path(path);name=str(path)
++    if name in inherited.NON_UTF8:
++        expected=inherited.NON_UTF8[name]
++        inherited.require(wanted is None or wanted==expected,'Exact original Python encoding exception')
++        return inherited.python_source_bytes(path,expected)
++    if name in inherited.SPECIAL_TEXT_PINS and wanted is None:wanted=inherited.SPECIAL_TEXT_PINS[name]
++    return inherited.text(path,wanted)
+--- /dev/null
++++ research/check_smollm3_metadata_codec_v2.py
+@@ -0,0 +1,30 @@
++"""Inherited adversarial checks plus complete current-history roundtrips."""
++import hashlib,json,sys,types,unittest
++from pathlib import Path
++R=Path('/home/ubuntu/experiments/trn1-latest-models-20261031');sys.path.insert(0,str(R))
++import smollm3_observer_metadata_codec_v2 as c
++previous=types.ModuleType('codec_v2_inherited')
++source=(R/'research/check_smollm3_metadata_codec_v1.py').read_text().replace('import smollm3_observer_metadata_codec_v1 as c','import smollm3_observer_metadata_codec_v2 as c')
++exec(compile(source,str(R/'research/check_smollm3_metadata_codec_v1.py'),'exec'),previous.__dict__)
++class Catalog(unittest.TestCase):
++ def test_full_history_fingerprints_without_payload_reads(self):
++  value={'source_sha256':{'/original/file.raw':'a'*64,'relative/package.py':'b'*64},'new_source_and_evidence_pins':{'/native/old.so':'c'*64}}
++  wire,blobs=c.pack(value);self.assertEqual(c.unpack(wire,blobs.__getitem__),value)
++ def test_equal_catalog_maps_share_chunks(self):
++  pins=previous.hashes();value={'source_sha256':pins,'new_source_and_evidence_pins':pins,'rows':[{'unit':'original','failed':True}]}
++  wire,blobs=c.pack(value);self.assertEqual(len(blobs),3);self.assertLess(len(wire),2048);self.assertEqual(c.unpack(wire,blobs.__getitem__),value)
++ def test_current682_service_catalog_preserved(self):
++  path=R/'research/nemotron9b-package-r2-20261108-complete-catalog.json';raw=path.read_bytes()
++  self.assertEqual(hashlib.sha256(raw).hexdigest(),'aee2339abc294402d7039898128308182cbcbd726359c9670bf7614d0d25d6f5')
++  original=json.loads(raw);wire,blobs=c.pack(original);restored=c.unpack(wire,blobs.__getitem__)
++  self.assertEqual(c.encode_json(original),c.encode_json(restored));self.assertEqual(len(restored['rows']),682);self.assertEqual(len(restored['processes']),106)
++  self.assertEqual(len(restored['historical_payload_sha256']),14);self.assertLess(len(wire),8*2**20)
++ def test_runtime_source_map_still_rejects_raw_paths(self):
++  with self.assertRaises(ValueError):c.pack({'runtime_source_sha256':{'/history/file.raw':'a'*64}})
++ def test_fingerprint_map_cannot_replace_process_identity(self):
++  wire,blobs=c.pack({'source_sha256':previous.hashes(1),'producer':{'pid':10}});value=c.decode_json(wire)
++  value['record']['producer']=value['record']['source_sha256']
++  with self.assertRaises(ValueError):c.unpack(c.encode_json(value),blobs.__getitem__)
++if __name__=='__main__':
++ suite=unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromTestCase(previous.Codec),unittest.defaultTestLoader.loadTestsFromTestCase(Catalog)])
++ result=unittest.TextTestRunner(verbosity=2).run(suite);raise SystemExit(0 if result.wasSuccessful()else 1)
+--- /dev/null
++++ research/check_smollm3_metadata_store_v1.py
+@@ -0,0 +1,107 @@
++"""Real durable filesystem tests using the original exclusive byte writer."""
++import errno,json,os,sys,tempfile,unittest
++from pathlib import Path
++from unittest.mock import patch
++R=Path('/home/ubuntu/experiments/trn1-latest-models-20261031');sys.path.insert(0,str(R))
++import smollm3_observer_metadata_store_v1 as store
++import smollm3_observer_invariance_lifecycle_v19 as life
++c=store.codec
++
++def value():return {'producer':{'pid':7,'original_exit':1},'permit':{'root_runtime_source_sha256':{'/retained/%04d.py'%i:'a'*64 for i in range(2049)}},'passed':False}
++class Store(unittest.TestCase):
++ def setUp(self):
++  self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);(self.root/'control').mkdir(mode=0o700)
++  self.binding=patch.object(life,'DEST',self.root);self.binding.start();store.provision(self.root)
++ def tearDown(self):self.binding.stop();self.tmp.cleanup()
++ def record(self,name='record.json',data=None,writer=None):
++  return store.record(self.root,self.root/name,value()if data is None else data,life.write_once if writer is None else writer,life.json_bytes)
++ def test_chunks_complete_before_parent_publication(self):
++  seen=[]
++  def writer(path,raw):
++   if path.name=='record.json':
++    decoded=store.decode(self.root,path,raw);self.assertEqual(decoded,value());self.assertEqual(len(list((self.root/'control/source-maps').glob('*.json'))),3)
++   seen.append(path);return life.write_once(path,raw)
++  result=self.record(writer=writer);self.assertTrue(result['durable']);self.assertEqual(seen[-1],self.root/'record.json')
++ def test_full_roundtrip_and_raw_hash_separation(self):
++  result=self.record();raw=life.read_bytes(self.root/'record.json');self.assertEqual(result['sha256'],life.digest_bytes(raw));self.assertNotEqual(raw,life.json_bytes(value()))
++  self.assertEqual(store.decode(self.root,self.root/'record.json',raw),value())
++ def test_simple_records_keep_original_wire_bytes(self):
++  data={'pid':7,'passed':False};self.record(data=data);self.assertEqual((self.root/'record.json').read_bytes(),life.json_bytes(data));self.assertEqual(list((self.root/'control/source-maps').iterdir()),[])
++ def test_identical_maps_publish_once(self):
++  self.record();directory=self.root/'control/source-maps';before={x.name:x.stat().st_ino for x in directory.iterdir()};self.record('second.json');self.assertEqual(before,{x.name:x.stat().st_ino for x in directory.iterdir()})
++ def test_parent_record_cannot_be_overwritten(self):
++  self.record()
++  with self.assertRaises(FileExistsError):self.record()
++ def test_failed_parent_write_retains_completed_chunks(self):
++  def writer(path,raw):
++   if path.name=='record.json':raise RuntimeError('simulated parent failure')
++   return life.write_once(path,raw)
++  with self.assertRaises(RuntimeError):self.record(writer=writer)
++  self.assertFalse((self.root/'record.json').exists());self.assertEqual(len(list((self.root/'control/source-maps').glob('*.json'))),3)
++  for path in (self.root/'control/source-maps').glob('*.json'):self.assertEqual(c.sha(path.read_bytes()),path.stem)
++ def test_identical_concurrent_publish_is_accepted(self):
++  def writer(path,raw):
++   result=life.write_once(path,raw)
++   if path.parent.name=='source-maps':raise FileExistsError(errno.EEXIST,'concurrent publication',str(path))
++   return result
++  self.record(writer=writer);self.assertEqual(store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json')),value())
++ def test_different_concurrent_publish_rejected(self):
++  def writer(path,raw):
++   if path.parent.name=='source-maps':life.write_once(path,b'{}');raise FileExistsError(errno.EEXIST,'different data',str(path))
++   return life.write_once(path,raw)
++  with self.assertRaises(ValueError):self.record(writer=writer)
++  self.assertFalse((self.root/'record.json').exists())
++ def test_corrupted_chunk_rejected(self):
++  self.record();path=next((self.root/'control/source-maps').glob('*.json'));path.write_bytes(path.read_bytes()+b' ')
++  with self.assertRaises(ValueError):store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))
++ def test_deleted_chunk_rejected(self):
++  self.record();next((self.root/'control/source-maps').glob('*.json')).unlink()
++  with self.assertRaises(FileNotFoundError):store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))
++ def test_chunk_symlink_rejected(self):
++  self.record();path=next((self.root/'control/source-maps').glob('*.json'));copy=self.root/'copy.json';copy.write_bytes(path.read_bytes());copy.chmod(0o600);path.unlink();path.symlink_to(copy)
++  with self.assertRaises(ValueError):store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))
++ def test_chunk_hardlink_rejected(self):
++  self.record();path=next((self.root/'control/source-maps').glob('*.json'));os.link(path,self.root/'hardlink.json')
++  with self.assertRaises(ValueError):store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))
++ def test_public_chunk_permissions_rejected(self):
++  self.record();next((self.root/'control/source-maps').glob('*.json')).chmod(0o644)
++  with self.assertRaises(ValueError):store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))
++ def test_directory_replacement_rejected(self):
++  self.record();d=self.root/'control/source-maps';identity=store.directory_identity(d.stat());d.rename(self.root/'old-maps');d.mkdir(mode=0o700)
++  with self.assertRaisesRegex(ValueError,'directory replaced'):store.read_chunk(self.root,'a'*64,identity)
++ def test_digest_cannot_resolve_an_arbitrary_path(self):
++  with self.assertRaises(ValueError):store.read_chunk(self.root,'../../outside')
++ def test_record_outside_run_rejected(self):
++  with self.assertRaises(ValueError):store.record(self.root,self.root.parent/'outside.json',value(),life.write_once,life.json_bytes)
++ def test_compact_record_from_another_run_rejected(self):
++  self.record();raw=life.read_bytes(self.root/'record.json')
++  with self.assertRaises(ValueError):store.decode(self.root,self.root.parent/'outside.json',raw)
++ def test_provision_cannot_reuse_namespace(self):
++  with self.assertRaises(FileExistsError):store.provision(self.root)
++ def test_failed_original_exit_is_preserved(self):
++  self.record();self.assertEqual(store.decode(self.root,self.root/'record.json',life.read_bytes(self.root/'record.json'))['producer']['original_exit'],1)
++ def test_original_json_tuple_shape_and_integer_key_contract(self):
++  data=value();data['shape']=(1,128,5120);data['mapping']={0:('same',1)}
++  self.record(data=data);raw=life.read_bytes(self.root/'record.json')
++  self.assertEqual(store.decode(self.root,self.root/'record.json',raw),json.loads(life.json_bytes(data)))
++ def test_simple_record_at_original_size_cap_needs_no_envelope(self):
++  data={'text':''};overhead=len(life.json_bytes(data));data['text']='x'*(8*2**20-overhead)
++  self.record(data=data);self.assertEqual((self.root/'record.json').stat().st_size,8*2**20)
++ def test_catalog_transport_is_separate_from_ordinary_source_dependencies(self):
++  self.record();source_before={x.name:x.read_bytes()for x in (self.root/'control/source-maps').iterdir()}
++  data={'source_sha256':{'/history/actual.raw':'a'*64},'rows':[{'failed':True}]};path=self.root/'control/successor-catalog.json'
++  store.record(self.root,path,data,life.write_once,life.json_bytes);raw=life.read_bytes(path)
++  self.assertEqual(source_before,{x.name:x.read_bytes()for x in (self.root/'control/source-maps').iterdir()})
++  self.assertEqual(store.decode(self.root,path,raw),data)
++  refs=store.authenticated_chunks(self.root,path,raw);self.assertTrue(refs)
++  for ref in refs:self.assertEqual(Path(ref['path']).parent,self.root/'control/catalog-maps');self.assertEqual(c.sha(Path(ref['path']).read_bytes()),ref['sha256'])
++ def test_catalog_cannot_resolve_ordinary_source_chunk_names(self):
++  self.record();raw=life.read_bytes(self.root/'record.json')
++  with self.assertRaises(FileNotFoundError):store.decode(self.root,self.root/'control/successor-catalog.json',raw)
++ def test_all_physical_dependencies_authenticate_before_export(self):
++  self.record();raw=life.read_bytes(self.root/'record.json');refs=store.authenticated_chunks(self.root,self.root/'record.json',raw)
++  self.assertEqual(len(refs),3);next((self.root/'control/source-maps').glob('*.json')).unlink()
++  with self.assertRaises(FileNotFoundError):store.authenticated_chunks(self.root,self.root/'record.json',raw)
++ def test_unknown_compact_schema_rejected(self):
++  with self.assertRaises(ValueError):store.decode(self.root,self.root/'record.json',b'{"schema":"smollm3_compact_source_record_v999"}')
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ research/check_smollm3_sio12_metadata_integration_v1.py
+@@ -0,0 +1,114 @@
++"""Coherent metadata successor tests; no native, model or service launch."""
++import ast,copy,hashlib,importlib,json,os,resource,sys,tempfile,types,unittest
++from pathlib import Path
++from unittest.mock import patch
++R=Path('/home/ubuntu/experiments/trn1-latest-models-20261031');sys.path.insert(0,str(R))
++import smollm3_observer_invariance_protocol_v16 as p
++import smollm3_observer_invariance_lifecycle_v20 as l
++import smollm3_observer_invariance_protocol_v15 as oldp
++import smollm3_observer_invariance_lifecycle_v19 as oldl
++import smollm3_observer_metadata_source_v1 as source
++import smollm3_observer_metadata_codec_v2 as codec
++import nemotron9b_package_metadata_v7 as inherited
++MAPPING={
++'smollm3_enginecore_title_runtime_v8':'smollm3_enginecore_title_runtime_v9',
++'smollm3_spawn_environment_witness_v11':'smollm3_spawn_environment_witness_v12',
++'smollm3_observer_invariance_protocol_v15':'smollm3_observer_invariance_protocol_v16',
++'smollm3_observer_invariance_lifecycle_v19':'smollm3_observer_invariance_lifecycle_v20',
++'smollm3_observer_invariance_controller_v21':'smollm3_observer_invariance_controller_v22',
++'smollm3_observer_invariance_audit_v20':'smollm3_observer_invariance_audit_v21',
++'smollm3_observer_invariance_wrapper_v19':'smollm3_observer_invariance_wrapper_v20',
++'smollm3_observer_invariance_worker_v15':'smollm3_observer_invariance_worker_v16',
++'smollm3_observer_invariance_analysis_v15':'smollm3_observer_invariance_analysis_v16'}
++def migrated(text):
++ for before,after in MAPPING.items():text=text.replace(before,after)
++ return text.replace("'sio11'","'sio12'").replace('sio11 ','sio12 ').replace('sio11-','sio12-').replace('invariance-v12-','invariance-v13-').replace('TRN1_SMOL_OBSERVER_INVARIANCE_V11','TRN1_SMOL_OBSERVER_INVARIANCE_V12').replace('smollm3-sio12-stop-source-handoff-20261108-v1.json','smollm3-sio12-metadata-source-handoff-20261108-v1.json').replace('smollm3-sio12-stop-root-source-review-20261108-v1.json','smollm3-sio12-metadata-root-source-review-20261108-v1.json').replace('smollm3-observer-invariance-source-template-20261108-v15.json','smollm3-observer-invariance-source-template-20261108-v17.json')
++class Integration(unittest.TestCase):
++ def test_all_nine_modules_import_without_native(self):
++  for name in MAPPING.values():importlib.import_module(name)
++  self.assertFalse(p.native_loaded())
++ def test_all_old_sio11_module_hashes_preserved(self):
++  h=json.loads((R/'research/smollm3-sio11-stop-source-handoff-20261108-v1.json').read_text())
++  for row in h['complete_migrated_modules']:self.assertEqual(hashlib.sha256(Path(row['path']).read_bytes()).hexdigest(),row['sha256'])
++ def test_new_namespace_is_uncreated(self):self.assertFalse(p.DEST.exists());self.assertEqual(p.DEST,R/'sio12')
++ def test_full_scientific_template_and_budgets_preserved(self):
++  base=p.load_base();before=oldp.template(base);after=p.template(base)
++  for key in before:
++   if key not in ('work','ipc_layout'):self.assertEqual(after[key],before[key],key)
++  self.assertEqual(len(p.matrix()),12);self.assertEqual(after['total_requests'],264);self.assertEqual(after['total_output_tokens'],33696)
++ def test_all_unmodified_functions_and_methods_preserved(self):
++  allowed={'smollm3_observer_invariance_protocol_v15':{'bounded_source','validate_template'},'smollm3_observer_invariance_lifecycle_v19':{'read','record'},'smollm3_observer_invariance_audit_v20':{'execute','failed_evidence','append_catalog'},'smollm3_observer_invariance_controller_v21':{'execute'}}
++  def definitions(text):
++   result={}
++   for x in ast.parse(text).body:
++    if isinstance(x,(ast.FunctionDef,ast.AsyncFunctionDef)):result[x.name]=ast.dump(x)
++    elif isinstance(x,ast.ClassDef):
++     for m in x.body:
++      if isinstance(m,(ast.FunctionDef,ast.AsyncFunctionDef)):result[x.name+'.'+m.name]=ast.dump(m)
++   return result
++  for old,new in MAPPING.items():
++   before=definitions(migrated((R/(old+'.py')).read_text()));after=definitions((R/(new+'.py')).read_text())
++   for name,tree in before.items():
++    if name.split('.')[-1] not in allowed.get(old,set()):self.assertEqual(tree,after[name],old+':'+name)
++ def test_controller_execute_adds_only_shared_directory_identity(self):
++  before=migrated((R/'smollm3_observer_invariance_controller_v21.py').read_text())
++  expected=before.replace('for path in(p.DEST,l.CONTROL,root,p.temporary(run_id))',"for path in(p.DEST,l.CONTROL,l.CONTROL/'source-maps',l.CONTROL/'catalog-maps',root,p.temporary(run_id))")
++  self.assertEqual(ast.dump(ast.parse(expected)),ast.dump(ast.parse((R/'smollm3_observer_invariance_controller_v22.py').read_text())))
++ def test_auditor_changes_only_provision_and_semantic_decode(self):
++  before=migrated((R/'smollm3_observer_invariance_audit_v20.py').read_text())
++  expected=before.replace('p.DEST.mkdir(mode=0o700);l.CONTROL.mkdir(mode=0o700);created=True','p.DEST.mkdir(mode=0o700);l.CONTROL.mkdir(mode=0o700);created=True\n        l.metadata_store.provision(p.DEST)').replace('raw=l.read_bytes(path);value=json.loads(raw)','raw=l.read_bytes(path);value=l.decode_bytes(path,raw)')
++  expected=expected.replace("    for path in sorted(p.DEST.rglob('*.json')):\n","    for path in sorted(p.DEST.rglob('*.json')):\n        if path.is_relative_to(l.CONTROL/'catalog-maps'):continue\n")
++  self.assertEqual(ast.dump(ast.parse(expected)),ast.dump(ast.parse((R/'smollm3_observer_invariance_audit_v21.py').read_text())))
++ def test_each_transport_consumer_points_at_successor(self):
++  controller=importlib.import_module(MAPPING['smollm3_observer_invariance_controller_v21']);audit=importlib.import_module(MAPPING['smollm3_observer_invariance_audit_v20']);wrapper=importlib.import_module(MAPPING['smollm3_observer_invariance_wrapper_v19']);title=importlib.import_module(MAPPING['smollm3_enginecore_title_runtime_v8'])
++  self.assertIs(controller.l,l);self.assertIs(audit.l,l);self.assertIs(wrapper.life,l);self.assertIs(l.p,p)
++  self.assertIs(p.title_runtime,title);self.assertIs(l.witness.title_runtime,title)
++ def test_actual_non_utf8_sources_have_exact_original_bytes(self):
++  for name,digest in inherited.NON_UTF8.items():
++   raw=p.bounded_source(name,digest);self.assertEqual(hashlib.sha256(raw).hexdigest(),digest)
++   with self.assertRaises(UnicodeDecodeError):raw.decode('utf8')
++ def test_encoding_exception_rejects_changed_expected_hash(self):
++  with self.assertRaises(RuntimeError):p.bounded_source(next(iter(inherited.NON_UTF8)),'0'*64)
++ def test_current_large_preparation_and_catalog_metadata(self):
++  for name in ['nemotron9b-package-preparation-r1-20261108-capture.json','nemotron9b-package-r2-20261108-complete-catalog.json']:
++   path=R/'research'/name;raw=p.bounded_source(path);self.assertGreater(len(raw),8*2**20);self.assertIsInstance(json.loads(raw),dict)
++ def test_raw_payload_path_rejected_before_open(self):
++  with patch.object(inherited,'stable_bytes',side_effect=AssertionError('payload opened')):
++   with self.assertRaises(RuntimeError):p.bounded_source('/never-open.raw','a'*64)
++ def test_unlisted_large_json_rejected(self):
++  with tempfile.TemporaryDirectory()as tmp:
++   path=Path(tmp)/'unlisted.json';path.write_bytes(b' '*(8*2**20+1))
++   with self.assertRaises(RuntimeError):p.bounded_source(path)
++ def test_fake_named_large_schema_rejected(self):
++  fake=R/'research/nemotron9b-package-invalid-source-test.json';raw=b'{"schema":"unreviewed","padding":"'+b'a'*(8*2**20)+b'"}'
++  with patch.object(inherited,'stable_bytes',return_value=raw):
++   with self.assertRaises(RuntimeError):p.bounded_source(fake)
++ def test_lifecycle_record_semantics_and_original_byte_digest(self):
++  with tempfile.TemporaryDirectory()as tmp:
++   root=Path(tmp);(root/'control').mkdir(mode=0o700)
++   with patch.object(l,'DEST',root):
++    l.metadata_store.provision(root);value={'permit':{'root_runtime_source_sha256':{'/source.py':'a'*64}},'source_stats':{},'tuple':(1,2),'failed':True};path=root/'test.json'
++    record=l.record(path,value);self.assertEqual(l.read(path),json.loads(l.json_bytes(value)));self.assertEqual(l.digest_bytes(l.read_bytes(path)),record['sha256'])
++ def test_shared_chunks_and_pending_bytes_charged_to_control_budget(self):
++  entry=dict(path=str(p.DEST/('control/source-maps/.pending-chunk.json-1-'+'a'*32)),size=121*2**20,blocks=0,symlink=False,kind='dir',nlink=1)
++  with self.assertRaisesRegex(RuntimeError,'Control128MiB'):l.budget_inventory([entry],'r00',32*2**30,8*2**30)
++ def test_final_catalog_recovery_does_not_include_its_own_transport(self):
++  audit=importlib.import_module('smollm3_observer_invariance_audit_v21')
++  with tempfile.TemporaryDirectory()as tmp:
++   root=Path(tmp);(root/'control').mkdir(mode=0o700)
++   with patch.object(l,'DEST',root),patch.object(l,'CONTROL',root/'control'),patch.object(p,'DEST',root),patch.object(audit,'predecessor_catalog',return_value=({'source_sha256':{}},[],[])):
++    l.metadata_store.provision(root)
++    l.record(root/'control/source-admission.json',{'source_stats':{'/source.py':{'device':1,'inode':1,'size':0,'mtime_ns':1,'ctime_ns':1,'realpath':'/source.py'}}})
++    spec={'runtime_source_sha256':{'/source.py':'a'*64},'historical_payload_sha256':{},'final_predecessor_catalog':{'path':'/previous.json','sha256':'b'*64}}
++    before=audit.append_catalog(spec,{'pid':7},None,None);path=root/'control/successor-catalog.json';l.record(path,before)
++    after=audit.append_catalog(spec,{'pid':7},None,None);self.assertEqual(before,after);self.assertEqual(l.read(path),after)
++    self.assertEqual(len(after['rows']),25);self.assertTrue(all(x['never_launched']for x in after['rows']))
++    refs=l.metadata_store.authenticated_chunks(root,path,l.read_bytes(path));self.assertTrue(refs)
++    self.assertTrue(all(ref['path']not in after['source_sha256']for ref in refs))
++    for child in (root/'control/source-maps').glob('*.json'):self.assertIn(str(child),after['source_sha256'])
++ def test_original_stop_authorization_logic_preserved(self):
++  for name in ('authenticate_parent','request_stop','drain_after_stop'):
++   old=ast.parse((R/'smollm3_observer_invariance_controller_v21.py').read_text());new=ast.parse((R/'smollm3_observer_invariance_controller_v22.py').read_text())
++   a=[x for x in old.body if isinstance(x,ast.FunctionDef)and x.name==name];b=[x for x in new.body if isinstance(x,ast.FunctionDef)and x.name==name]
++   self.assertEqual([ast.dump(x)for x in a],[ast.dump(x)for x in b])
++if __name__=='__main__':unittest.main(verbosity=2)

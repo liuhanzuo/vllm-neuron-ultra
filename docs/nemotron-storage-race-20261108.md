@@ -69,3 +69,5 @@ The [manifest](evidence/nemotron-storage-race-20261108/manifest.json) binds the
 and [actual successor observation](evidence/nemotron-storage-race-20261108/r3-observation.json).
 The checker/patch require the original retained experiment workspace and fixtures;
 they are not standalone tests of the unified installation package.
+
+The later [projection milestone](nemotron-projection-qualification-20261108.md) records eight completed candidate shapes and their paired original controls.
