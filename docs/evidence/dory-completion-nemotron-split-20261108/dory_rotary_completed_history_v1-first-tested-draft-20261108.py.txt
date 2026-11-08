@@ -1,0 +1,203 @@
+"""Actual post-Dory completion and append-only history; no native import/launch.
+
+Finalization requires external tool exit, the exact reviewed request, released
+Nemotron history, and fresh physical drain. A complete result is independently
+replayed from saved bytes after native exit. Full-model qualification is false.
+"""
+import argparse, ast, copy, datetime, hashlib, json, os, re, resource, signal, sys, time
+from pathlib import Path
+import nemotron9b_package_r6_completed_history_v1 as prior
+R,Q=prior.R,prior.Q
+if str(Q)not in sys.path:sys.path.insert(0,str(Q))
+import nemotron9b_package_protocol_v14 as p
+import nemotron9b_r4_terminal_metadata_v2 as metadata
+import run_dory_rotary_root_v1 as runner
+from nemotron9b_package_controller_v14 import acquire,release
+require=p.require
+SCHEMA='root_post_dory_rotary_complete_history_v1'
+SELF=Path(__file__).resolve()
+CHANGED={'schema','processes','process_predecessors','source_sha256','appended_from','appended_terminal_audit','latest_producer','latest_producer_qualified','latest_producer_exit','latest_producer_terminal_audit'}
+BUDGET=dict(wall_seconds=600,cpu_seconds=300,address_space_bytes=2*2**30,file_bytes=32*2**20,root_floor_bytes=28*2**30,cpus=[6])
+
+
+def same(a,b,message):require(a==b,message)
+def ref(path):return metadata.ref(path)
+def load_small(reference):return metadata.load(reference)
+def catalog_path(run_id):
+ require(type(run_id)is str and re.fullmatch('[a-z0-9-]{1,32}',run_id),'Exact finite Dory run identifier')
+ return Q/('dory-rotary-'+run_id+'-complete-catalog-v1.json')
+def output_root(run_id):catalog_path(run_id);return R/('dory-rotary-'+run_id)
+def audit_path(run_id):catalog_path(run_id);return Q/('dory-rotary-'+run_id+'-root-terminal-v1.json')
+
+
+def validate_exit(exited,request_ref,review_ref,root):
+ require(exited['schema']=='dory_rotary_actual_external_exit_v1'and exited['reviewer']=='/root','Actual external Dory exit schema/reviewer')
+ require(exited['actual_tool_exit_observed']is True and exited['exact_owner_gone']is True,'Actual terminal tool observation')
+ same(exited['request'],request_ref,'Exact executed request');same(exited['source_review'],review_ref,'Exact executed source review');same(exited['output_root'],str(root),'Exact executed output root')
+ actual=exited['actual_exit'];require(type(actual['session_id'])is int and actual['session_id']>0 and type(actual['exit_code'])is int and 0<=actual['exit_code']<=255 and re.fullmatch('[0-9a-f]{6}',actual['tool_chunk']),'Actual session, integer status and terminal tool chunk')
+ owner=exited['owner'];require(type(owner['pid'])is int and owner['pid']>0 and str(owner['start_ticks']).isdigit(),'Actual process identity')
+ expected=[str(runner.PYTHON),'-I','-S','-B',str(Path(runner.__file__).resolve()),'--run','--request',request_ref['path'],'--request-sha256',request_ref['sha256'],'--review',review_ref['path'],'--review-sha256',review_ref['sha256']]
+ same(owner['argv'],expected,'Exact original native invocation')
+ return actual['exit_code']
+
+
+def classify(exited,terminal,failure,post_review):
+ code=exited['actual_exit']['exit_code'];owner=exited['owner'];request=exited['request']
+ if terminal is not None:
+  require(terminal['schema']=='dory_rotary_actual_terminal_v1'and terminal['complete']is True,'Complete retained arithmetic terminal')
+  same(terminal['owner'],owner,'Native terminal owner');same(terminal['request'],request,'Native terminal request')
+  require(terminal['actual_self_exit_claimed']is False and terminal['native_reference_qualified']is False and terminal['neuron_baseline_qualified']is False and terminal['new_speedup_claim']is False,'Local arithmetic never model qualification')
+  require(post_review is not None and post_review['complete']is True,'Complete independent post-exit review')
+  same(post_review['result'],terminal['result'],'Same original saved result')
+  same(terminal['arithmetic_passed'],post_review['observer_invariant']and post_review['arithmetic_parity'],'Original observer and arithmetic outcome')
+  same(terminal['reference_replay_passed'],post_review['all_reference_outputs_reproduced'],'Original reference replay outcome')
+  same(terminal['candidate_replay_passed'],post_review['all_candidate_outputs_reproduced'],'Original candidate replay outcome')
+  require(all(type(terminal[k])is bool for k in ('arithmetic_passed','reference_replay_passed','candidate_replay_passed','passed')),'Actual terminal booleans')
+  same(terminal['passed'],all(terminal[k]for k in ('arithmetic_passed','reference_replay_passed','candidate_replay_passed')),'Derived local pass classification')
+ if failure is not None:
+  same(failure['owner'],owner,'Failure original owner');same(failure['request'],request,'Failure original request')
+  require(failure['actual_self_exit_claimed']is False and failure['native_reference_qualified']is False and failure['new_speedup_claim']is False,'Failure not promoted')
+  require(type(failure['error_type'])is str and type(failure['error'])is str,'Original failure retained')
+ if code==0:require(terminal is not None and terminal['passed']is True and failure is None,'Zero exit needs complete successful local result and no failure')
+ else:require(failure is not None,'Nonzero execution must retain original failure')
+ return dict(actual_exit_code=code,arithmetic_qualified=bool(code==0 and terminal is not None and terminal['passed']),complete_saved_data_reviewed=post_review is not None,native_reference_qualified=False,neuron_baseline_qualified=False,producer_qualified=False,new_speedup_claim=False)
+
+
+def compose(original,catalog_ref,audit_ref,exit_ref,request_ref,review_ref,finalizer_review_ref,outcome,run_owner,finalizer_owner,pins):
+ require(len(original['rows'])==original['complete_count']==978 and original['root_finalized']is True and original['all_planned_launches_accounted_for']is True,'Actual complete r6 history')
+ value=copy.deepcopy(original);processes=[dict(run_owner,role='dory_rotary_native'),dict(finalizer_owner,role='dory_rotary_finalizer',next_admission_must_prove_gone=True)]
+ value['processes']+=processes
+ if 'process_predecessors'in original:value['process_predecessors']=copy.deepcopy(value['processes'])
+ for path,sha in pins.items():require(path not in value['source_sha256']or value['source_sha256'][path]==sha,'No original source rebound');value['source_sha256'][path]=sha
+ value.update(schema=SCHEMA,appended_from=catalog_ref,appended_terminal_audit=audit_ref,latest_producer='dory_rotary_arithmetic',latest_producer_qualified=False,latest_producer_exit=exit_ref,latest_producer_terminal_audit=audit_ref)
+ value['dory_rotary_append']=dict(previous_catalog=catalog_ref,terminal_review=audit_ref,actual_exit=exit_ref,request=request_ref,source_review=review_ref,finalizer_source_review=finalizer_review_ref,processes=processes,finalizer_owner=finalizer_owner,outcome=outcome)
+ validate_extension(original,value);return value
+
+
+def validate_extension(original,value):
+ require(set(value)==set(original)|{'dory_rotary_append'},'Only exact Dory extension field')
+ same(value['schema'],SCHEMA,'Exact post-Dory schema')
+ for key,want in original.items():
+  if key not in CHANGED:same(value[key],want,'Preserve prior model outcome: '+key)
+ require(len(value['rows'])==value['complete_count']==978,'All original service rows unchanged')
+ ext=value['dory_rotary_append'];same(value['processes'][:len(original['processes'])],original['processes'],'All prior standalone owners')
+ same(value['processes'][len(original['processes']):],ext['processes'],'Exactly actual Dory/native and finalizer owners')
+ require(len(ext['processes'])==2 and ext['processes'][0]['role']=='dory_rotary_native'and ext['processes'][1]==dict(ext['finalizer_owner'],role='dory_rotary_finalizer',next_admission_must_prove_gone=True),'Finalizer does not claim its own exit')
+ require(len({(x['pid'],x['start_ticks'])for x in value['processes']})==len(value['processes']),'No duplicate or reused actual owner')
+ if 'process_predecessors'in original:same(value['process_predecessors'],value['processes'],'Complete process alias')
+ require(all(value['source_sha256'].get(k)==v for k,v in original['source_sha256'].items()),'All original source pins preserved')
+ for key in ('previous_catalog','terminal_review','actual_exit','request','source_review','finalizer_source_review'):
+  reference=ext[key];same(value['source_sha256'].get(reference['path']),reference['sha256'],'Exact appended evidence pin')
+ same(value['appended_from'],ext['previous_catalog'],'Actual previous history');same(value['appended_terminal_audit'],ext['terminal_review'],'Actual audit');same(value['latest_producer_terminal_audit'],ext['terminal_review'],'Latest audit');same(value['latest_producer_exit'],ext['actual_exit'],'Actual external exit')
+ require(value['latest_producer']=='dory_rotary_arithmetic'and value['latest_producer_qualified']is False and ext['outcome']['producer_qualified']is False,'Local arithmetic never whole model qualification')
+ return value
+
+
+def validate(value):
+ ext=value['dory_rotary_append'];same(ext['previous_catalog']['path'],str(prior.CURRENT),'Only actual complete r6 predecessor')
+ original=prior.load(ext['previous_catalog']);validate_extension(original,value)
+ request=load_small(ext['request']);root=output_root(request['run_id']);same(request['output_root'],str(root),'Actual request namespace')
+ same(request['catalog'],ext['previous_catalog'],'Dory follows same r6');review=load_small(ext['source_review'])
+ require(review['schema']=='dory_rotary_runtime_source_review_v1'and review['reviewer']=='/root'and review['passed']is review['independent_review']is review['source_only']is True and review['blockers']==[],'Retained actual runtime source review');same(review['request'],ext['request'],'Reviewed exact request');same(review['source_sha256'],request['source_sha256'],'Reviewed exact runtime sources')
+ exited=load_small(ext['actual_exit']);validate_exit(exited,ext['request'],ext['source_review'],root);audit=load_small(ext['terminal_review'])
+ require(audit['schema']=='dory_rotary_root_terminal_v1'and audit['reviewer']=='/root'and audit['actual_exit']==ext['actual_exit']and audit['request']==ext['request']and audit['source_review']==ext['source_review']and audit['previous_catalog']==ext['previous_catalog'],'Exact completed audit references')
+ approval=load_small(ext['finalizer_source_review']);require(approval['schema']=='dory_rotary_finalizer_source_review_v1'and approval['reviewer']=='/root'and approval['passed']is approval['independent_review']is approval['source_only']is True and approval['blockers']==[],'Retained finalizer source review');same(approval['actual_exit'],ext['actual_exit'],'Finalizer reviewed actual exit');same(approval['request'],ext['request'],'Finalizer reviewed actual request');same(approval['budgets'],BUDGET,'Exact finalizer budget')
+ for path,sha in approval['source_sha256'].items():same(value['source_sha256'].get(path),sha,'All finalizer source pins')
+ same(audit['finalizer_owner'],ext['finalizer_owner'],'Actual finalizer owner');same(audit['finalizer_source_review'],ext['finalizer_source_review'],'Reviewed finalizer')
+ require(audit['finalizer_self_exit_claimed']is False and audit['physical_drain_passed']is True and audit['next_admission_must_verify_finalizer_exit']is True,'Fresh drain and external finalizer exit requirement')
+ for name,reference in audit['metadata'].items():same(reference['path'],str(root/name),'Only actual output metadata');same(ref(root/name),reference,'Exact retained metadata');same(value['source_sha256'].get(reference['path']),reference['sha256'],'All retained metadata pinned')
+ terminal=load_small(audit['metadata']['terminal.json'])if 'terminal.json'in audit['metadata']else None
+ failure=load_small(audit['metadata']['failure.json'])if 'failure.json'in audit['metadata']else None
+ post=load_small(audit['post_exit_raw_review'])if audit['post_exit_raw_review']else None
+ if post is not None:
+  reference=audit['post_exit_raw_review'];same(reference['path'],str(Q/('dory-rotary-'+request['run_id']+'-post-exit-raw-review-v1.json')),'Exact post-exit review namespace');same(value['source_sha256'].get(reference['path']),reference['sha256'],'Pinned actual post-exit review')
+ if 'admission.json'in audit['metadata']:
+  admitted=load_small(audit['metadata']['admission.json']);same(admitted['owner'],exited['owner'],'Actual native admission owner');same(admitted['request'],ext['request'],'Actual native admission request');same(admitted['review'],ext['source_review'],'Actual native admission source review');same(admitted['catalog'],ext['previous_catalog'],'Actual native predecessor');require(admitted['all_predecessors_physically_drained']is True and admitted['actual_self_exit_claimed']is False,'Original native admission states actual drain, not self exit')
+ same(classify(exited,terminal,failure,post),ext['outcome'],'Independently derive terminal classification');same(ext['outcome'],audit['outcome'],'Actual local outcome retained')
+ if terminal is not None:
+  same(terminal['admission'],audit['metadata']['admission.json'],'Actual original admission');same(terminal['result']['path'],str(root/'comparison/result.json'),'Exact original result path')
+  same(terminal['independent_review'],audit['metadata']['independent-review.json'],'Original in-process independent review');same(post,load_small(terminal['independent_review']),'Post-exit and in-process full saved-byte reviews identical')
+ same(ext['processes'][0],dict(exited['owner'],role='dory_rotary_native'),'Native owner from actual tool exit')
+ for path,sha in request['source_sha256'].items():same(value['source_sha256'].get(path),sha,'All runtime source pins')
+ return value
+
+
+def text(path,expected=None):
+ path=Path(path)
+ if path.parent!=Q or not re.fullmatch('dory-rotary-[a-z0-9-]{1,32}-complete-catalog-v1.json',path.name):return prior.text(path,expected)
+ require(type(expected)is str and re.fullmatch('[0-9a-f]{64}',expected),'Exact Dory catalog hash required')
+ raw=p.metadata.stable_bytes(path,32*2**20);same(hashlib.sha256(raw).hexdigest(),expected,'Exact complete catalog bytes');value=json.loads(raw);validate(value)
+ request=load_small(value['dory_rotary_append']['request']);same(path,catalog_path(request['run_id']),'Exact complete catalog namespace');return raw
+
+def load(reference):return json.loads(text(reference['path'],reference['sha256']))
+def physical_drain(value):
+ validate(value);ext=value['dory_rotary_append'];older=prior.physical_drain(prior.load(ext['previous_catalog']))
+ for owner in ext['processes']:p.low.gone({k:v for k,v in owner.items()if k not in ('role','next_admission_must_prove_gone')})
+ return dict(previous=older,dory_and_finalizer_gone=True)
+
+
+def source_paths():
+ paths=set(map(Path,runner.source_paths()))|{SELF,Q/'check_dory_rotary_completed_history_v1.py'};todo=list(paths);seen=set()
+ while todo:
+  path=todo.pop()
+  if path in seen:continue
+  seen.add(path)
+  if path.suffix!='.py':continue
+  for node in ast.walk(ast.parse(path.read_text())):
+   names=[x.name for x in node.names]if isinstance(node,ast.Import)else[node.module]if isinstance(node,ast.ImportFrom)and node.module and not node.level else[]
+   for name in names:
+    for base in (R,Q):
+     child=base/(name.replace('.','/')+'.py')
+     if child.is_file()and child not in paths:paths.add(child);todo.append(child)
+ return sorted(map(str,paths))
+
+
+def write_once(path,value):
+ raw=(json.dumps(value,indent=2,allow_nan=False)+'\n').encode();require(len(raw)<32*2**20,'Bounded Dory finalizer file')
+ fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+ with os.fdopen(fd,'wb')as f:f.write(raw);f.flush();os.fsync(f.fileno())
+ p.metadata.sync_parent(path);return dict(path=str(path),sha256=hashlib.sha256(raw).hexdigest())
+
+
+def finalize(exit_ref,finalizer_review_ref):
+ runner.ensure_observer();exited=load_small(exit_ref);request_ref=exited['request'];request=runner.validate_request(load_small(request_ref));root=output_root(request['run_id']);review_ref=exited['source_review']
+ validate_exit(exited,request_ref,review_ref,root);p.low.gone(exited['owner']);approval=load_small(finalizer_review_ref)
+ require(approval['schema']=='dory_rotary_finalizer_source_review_v1'and approval['reviewer']=='/root'and approval['passed']is approval['independent_review']is approval['source_only']is True and approval['blockers']==[],'Separate exact finalizer source review')
+ same(approval['actual_exit'],exit_ref,'Review binds genuine external exit');same(approval['request'],request_ref,'Finalizer exact request');same(approval['budgets'],BUDGET,'Original finalizer resource limits')
+ same(set(approval['source_sha256']),set(source_paths()),'Complete reviewed finalizer source closure')
+ for path,sha in approval['source_sha256'].items():same(ref(path)['sha256'],sha,'Exact reviewed finalizer source')
+ audit_file=audit_path(request['run_id']);catalog_file=catalog_path(request['run_id']);post_file=Q/('dory-rotary-'+request['run_id']+'-post-exit-raw-review-v1.json')
+ require(not any(x.exists()for x in (audit_file,catalog_file,post_file)),'Never overwrite finalizer evidence')
+ fd,owner,lock=acquire();started=time.monotonic();old_alarm=None
+ try:
+  original=runner.validate_terminal(request['catalog'],request['finalizer_exit']);prior.physical_drain(original);p.low.gone(exited['owner']);p.low.active_heavy()
+  os.sched_setaffinity(0,set(BUDGET['cpus']));os.nice(19);resource.setrlimit(resource.RLIMIT_AS,(BUDGET['address_space_bytes'],)*2);resource.setrlimit(resource.RLIMIT_CPU,(BUDGET['cpu_seconds'],BUDGET['cpu_seconds']+5));resource.setrlimit(resource.RLIMIT_FSIZE,(BUDGET['file_bytes'],)*2)
+  def alarm(signum,frame):raise TimeoutError('Dory post-exit finalizer wall budget')
+  old_alarm=signal.signal(signal.SIGALRM,alarm);signal.alarm(BUDGET['wall_seconds'])
+  def guard():
+   require(time.monotonic()-started<BUDGET['wall_seconds'],'Bounded post-exit work');p.low.lock_proof(owner,lock);runner.ensure_observer();runner.usage(root)
+   fs=os.statvfs(R);require(fs.f_bavail*fs.f_frsize>=BUDGET['root_floor_bytes'],'Original root free-space floor')
+  guard();metadata_refs={str(path.relative_to(root)):ref(path)for path in sorted(root.rglob('*.json'))}
+  terminal=load_small(metadata_refs['terminal.json'])if 'terminal.json'in metadata_refs else None;failure=load_small(metadata_refs['failure.json'])if 'failure.json'in metadata_refs else None;post=None;post_ref=None
+  if terminal is not None:
+   same(terminal['result']['path'],str(root/'comparison/result.json'),'Actual original full result')
+   from review_dory_rotary_saved_boundaries_v1 import review as independent
+   post=independent(terminal['result'],guard);same(post,load_small(terminal['independent_review']),'Exact independent review after native exit')
+   post_ref=write_once(post_file,post)
+  outcome=classify(exited,terminal,failure,post);guard();p.low.gone(exited['owner']);same(p.canonical(),request['canonical_sha256'],'Canonical state unchanged')
+  audit=dict(schema='dory_rotary_root_terminal_v1',reviewer='/root',observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),actual_exit=exit_ref,request=request_ref,source_review=review_ref,previous_catalog=request['catalog'],finalizer_source_review=finalizer_review_ref,finalizer_owner=owner,finalizer_self_exit_claimed=False,next_admission_must_verify_finalizer_exit=True,physical_drain_passed=True,metadata=metadata_refs,post_exit_raw_review=post_ref,outcome=outcome,original_science=request['science'],all_15_model_families_remain_in_scope=True,new_speedup_claim=False)
+  audit_ref=write_once(audit_file,audit);pins=dict(request['source_sha256'])
+  for path,sha in approval['source_sha256'].items():require(path not in pins or pins[path]==sha,'No conflicting finalizer source');pins[path]=sha
+  for item in [request['catalog'],exit_ref,request_ref,review_ref,finalizer_review_ref,audit_ref,*metadata_refs.values(),*([post_ref]if post_ref else[])]:require(item['path']not in pins or pins[item['path']]==item['sha256'],'No conflicting evidence pin');pins[item['path']]=item['sha256']
+  value=compose(original,request['catalog'],audit_ref,exit_ref,request_ref,review_ref,finalizer_review_ref,outcome,exited['owner'],owner,pins);validate(value);catalog_ref=write_once(catalog_file,value);guard()
+  print(json.dumps(dict(catalog=catalog_ref,audit=audit_ref,finalizer_owner=owner,outcome=outcome,actual_self_exit_claimed=False)),flush=True)
+ finally:
+  signal.alarm(0)
+  if old_alarm is not None:signal.signal(signal.SIGALRM,old_alarm)
+  release(fd)
+
+if __name__=='__main__':
+ parser=argparse.ArgumentParser()
+ for name in ('actual-exit','actual-exit-sha256','review','review-sha256'):parser.add_argument('--'+name,required=True)
+ args=parser.parse_args();require(sys.dont_write_bytecode and __debug__,'Bytecode disabled and assertions enabled')
+ finalize(dict(path=args.actual_exit,sha256=args.actual_exit_sha256),dict(path=args.review,sha256=args.review_sha256))
