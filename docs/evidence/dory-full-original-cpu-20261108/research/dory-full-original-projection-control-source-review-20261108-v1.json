@@ -1,0 +1,17 @@
+{
+  "reviewer": "/root",
+  "source_only": true,
+  "spec_sha256": "273b51fa62f79a39f2f16164895dccc1e18794fa0115b47af8b86846617de1e9",
+  "hypothesis": "The complete original-model trajectory divergence disappears when projection implementation is shared, retaining all non-projection math/state.",
+  "checked": [
+    "Original standalone candidate file unchanged",
+    "All289 original matrix routes use storage pointer/shape/stride and official loaded projection target",
+    "Correct QKV and MLP row selection, with contiguous split outputs",
+    "Interception is active only during candidate.forward",
+    "449 candidate and281 official projections per call,27 calls including restart",
+    "Same original weights/config/tokens/schedule/budgets/exact criterion",
+    "Prior full F.linear failure and independent verification remain intact",
+    "No full-model qualification or speedup promotion"
+  ],
+  "runtime_admitted_by_root": true
+}

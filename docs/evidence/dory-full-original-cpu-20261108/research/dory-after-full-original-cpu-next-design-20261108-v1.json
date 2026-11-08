@@ -1,0 +1,25 @@
+{
+  "schema": "dory_after_full_original_cpu_next_design_v1",
+  "source_only": true,
+  "runtime_admitted": false,
+  "findings": [
+    "All original72physical layers/2loops/56histories executed atBF16",
+    "Original standaloneF.linear is not an exact reference:1/26logit calls exact,31/32top1",
+    "Only routing candidate projections to official modules yields2964/2964exact saved states",
+    "Official saved outputs are identical across both fresh processes; shared projection control did not perturb them",
+    "This32token teacher-forced trajectory does not meet long/context-window/generation/production gates"
+  ],
+  "next_action": "Extend pinned officialCPU reference to complete-prompt prefill, original-policy generation and the original cold/long/reference-slot matrix before Neuron adapter admission.",
+  "retained_reference_requirements": [
+    "Original config,507weights,BF16,72physical layers,2loops,56independent histories",
+    "Full-prefill and incremental outputs stay distinct; always match shape/schedule in path comparisons",
+    "Cross1023/1024/1025 and multiple SWA windows under original full long-decode protocol",
+    "A-release-B,reset-without-release,new epoch same textualID,stale handle,interleaved slots,different prompt lengths,injected mid-loop failure; compare B against fresh process",
+    "Generation keeps default thinking,EOS2/11,do_sampletrue,temperature1,top_p.95,top_k0; preserve original quality corpus/gates",
+    "Save complete logits and planned boundary states with honest independent-review coverage; budget long-run raw bytes before launch",
+    "Treat common projection control as causal evidence, not a replacement vllm-neuron baseline or promoted F.linear candidate"
+  ],
+  "neuron_adapter_pending": true,
+  "all15_families_remain_in_scope": true,
+  "new_speedup_claim": false
+}
