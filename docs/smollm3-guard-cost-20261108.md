@@ -1,5 +1,7 @@
 # SmolLM3 startup guard repair: source preparation, 2026-11-08
 
+最新进展：Nemotron r4 已以失败状态完成回收；Smol 下一代读取器和九模块衔接已通过源码检查。详见 [2026-11-08 后续记录](nemotron-r4-terminal-smol-reader-20261108.md)。
+
 **Latest status:** the third codec candidate and delayed intent publication are
 connected through all nine successor source modules. There are 71 codec/stat,
 nine writer and nine integration checks. Complete source-level title transactions

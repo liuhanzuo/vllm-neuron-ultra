@@ -1,5 +1,7 @@
 # Nemotron package startup: retained failure and bounded fix — 2026-11-08
 
+最新进展：Nemotron r4 已以失败状态完成回收；Smol 下一代读取器和九模块衔接已通过源码检查。详见 [2026-11-08 后续记录](nemotron-r4-terminal-smol-reader-20261108.md)。
+
 The third package run failed in our startup monitor after 42 successful stages.
 The 16 `tensor_split` cases passed all 96 complete output byte comparisons;
 all nine alias stages passed 70 device checks. These are partial correctness
