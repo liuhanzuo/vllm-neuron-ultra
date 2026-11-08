@@ -1,0 +1,164 @@
+{
+  "schema": "dory_original_bf16_projection_terminal_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T21:20:30.695290+00:00",
+  "complete": true,
+  "projection_diagnostic_exact_gate_passed": false,
+  "groups": 181,
+  "physical_layers": 72,
+  "physical_matrices": 289,
+  "batches": [
+    1,
+    7,
+    32
+  ],
+  "cases": 543,
+  "comparisons": 975,
+  "exact_comparisons": 781,
+  "mismatching_comparisons": 194,
+  "maximum_absolute_difference": 0.000244140625,
+  "comparisons_by_batch": {
+    "1": {
+      "official_vs_packed_exact": "51/181",
+      "official_vs_split_exact": "8/72",
+      "packed_vs_split_exact": "72/72"
+    },
+    "7": {
+      "official_vs_packed_exact": "181/181",
+      "official_vs_split_exact": "72/72",
+      "packed_vs_split_exact": "72/72"
+    },
+    "32": {
+      "official_vs_packed_exact": "181/181",
+      "official_vs_split_exact": "72/72",
+      "packed_vs_split_exact": "72/72"
+    }
+  },
+  "actual_onednn_calls": 543,
+  "all507_original_tensors_rehashed": true,
+  "all181_official_loaded_projection_hashes_match_original": true,
+  "independent_saved_comparisons_reproduced": 975,
+  "raw_files": 1311,
+  "raw_bytes": 252108800,
+  "batch_prefix_posthoc_comparisons": 1302,
+  "batch_prefix_summary": {
+    "official/1-vs-7": {
+      "cases": 181,
+      "exact": 42,
+      "unequal_values": 356,
+      "max_abs": 0.000244140625
+    },
+    "official/1-vs-32": {
+      "cases": 181,
+      "exact": 42,
+      "unequal_values": 356,
+      "max_abs": 0.000244140625
+    },
+    "official/7-vs-32": {
+      "cases": 181,
+      "exact": 181,
+      "unequal_values": 0,
+      "max_abs": 0.0
+    },
+    "packed/1-vs-7": {
+      "cases": 181,
+      "exact": 64,
+      "unequal_values": 295,
+      "max_abs": 0.000244140625
+    },
+    "packed/1-vs-32": {
+      "cases": 181,
+      "exact": 64,
+      "unequal_values": 295,
+      "max_abs": 0.000244140625
+    },
+    "packed/7-vs-32": {
+      "cases": 181,
+      "exact": 181,
+      "unequal_values": 0,
+      "max_abs": 0.0
+    },
+    "split/1-vs-7": {
+      "cases": 72,
+      "exact": 10,
+      "unequal_values": 190,
+      "max_abs": 0.000244140625
+    },
+    "split/1-vs-32": {
+      "cases": 72,
+      "exact": 10,
+      "unequal_values": 190,
+      "max_abs": 0.000244140625
+    },
+    "split/7-vs-32": {
+      "cases": 72,
+      "exact": 72,
+      "unequal_values": 0,
+      "max_abs": 0.0
+    }
+  },
+  "input_limitation": "K=2560 uses original embedding rows reused across projections; K=4096/7168 use normalized synthetic vectors. These are not original full-model downstream activations.",
+  "resources": {
+    "elapsed_seconds": 126.41958190314472,
+    "peak_rss_bytes": 10156515328,
+    "not_inference_performance": true
+  },
+  "failure_preserved": "r1 runner KeyError on previous loader proof JSON depth after weights loaded, before projections; v2 changes one lookup",
+  "prior_fp32_exact_failure_preserved": true,
+  "official_cpu_backend_authoritative": true,
+  "same_batch_and_call_schedule_required": true,
+  "full_model_forward_executed": false,
+  "neuron_baseline_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "active_jobs": [],
+  "actual_exits": {
+    "r1": {
+      "session_id": 16523,
+      "exit_code": 1,
+      "tool_chunk": "1ac021"
+    },
+    "r2": {
+      "session_id": 93925,
+      "exit_code": 0,
+      "tool_chunk": "da3185"
+    },
+    "review": {
+      "session_id": 74933,
+      "exit_code": 0,
+      "tool_chunk": "a8c8cf"
+    },
+    "batch_prefix": {
+      "session_id": 14923,
+      "exit_code": 0,
+      "tool_chunk": "de8990"
+    }
+  },
+  "refs": {
+    "spec": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-projection-sweep-spec-20261108-v2.json",
+      "sha256": "8f911f02c6b1c7bd0d686e26ff2e621cd7ecb55b4b48b3cd91bc42bb11170959"
+    },
+    "source_review": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-projection-sweep-source-review-20261108-v2.json",
+      "sha256": "3a2970d6b2eae40f33e7451ec6a85097c19cd232f07de5cac34c4f2bc2559656"
+    },
+    "result": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/projection-sweep-r2/diagnostic/result.json",
+      "sha256": "5d91068584973b5afdca46875b984e3e672cee283a0d260ed3c416b41e45af26"
+    },
+    "saved_review": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/projection-sweep-review-r2/saved-review.json",
+      "sha256": "3896ad32bb3a7b73e7c31b3c9e7fb95c88fd016162565b9631f03fd8f50789c1"
+    },
+    "batch_prefix": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/projection-sweep-batch-prefix-v1.json",
+      "sha256": "d95aec1f7d86a5e474545f04851ffd3a94f185b49c8e4db577ee0787446252d1"
+    }
+  }
+}

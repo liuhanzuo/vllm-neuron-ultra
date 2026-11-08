@@ -1,0 +1,139 @@
+{
+  "schema": "dory_checkpoint_tokenizer_metadata_review_v1",
+  "reviewer": "/root",
+  "revision": "f6c832e6963ddb74f62c75813a3e8c74b1af67b1",
+  "repository": "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16",
+  "input_files": {
+    "repository.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/repository.json",
+      "sha256": "995bb6547ba9bf4cf376fb72534671761b9ea0858aa240731a235d5f7d4ec05d",
+      "bytes": 14444
+    },
+    "config.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/config.json",
+      "sha256": "d2d086f5949598a043a00d70e2c28c45305bca7703682de3e4f990a7fd3279a4",
+      "bytes": 2267
+    },
+    "tokenizer_config.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/tokenizer_config.json",
+      "sha256": "10f93eabcb9b1602fbb991d6308e787ce1df28ee9cd7a1c6d1e8c3f338b957bc",
+      "bytes": 177209
+    },
+    "special_tokens_map.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/special_tokens_map.json",
+      "sha256": "e9435fefd6d838fd9fcbbc44b97a8e3ff322be7f6dfb7e4fd2468586574bb52b",
+      "bytes": 563
+    },
+    "generation_config.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/generation_config.json",
+      "sha256": "55535fcf0e43be7b7968d51a4223182316000b2799c46d75037c23dcca2e467d",
+      "bytes": 225
+    },
+    "chat_template.jinja": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/chat_template.jinja",
+      "sha256": "82753bef5cedc4932c1ed509b5c9a12be680fd86d1adb65bc3f7398d11c8eebc",
+      "bytes": 10152
+    },
+    "safetensors-prefix.bin": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/safetensors-prefix.bin",
+      "sha256": "cfa61ba0407150d6e4cec8ea3675a84b5ee9cd2964e2be217b3a887bf8775a24",
+      "bytes": 8
+    },
+    "safetensors-header.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/safetensors-header.json",
+      "sha256": "17283cf0d92ee9381dbb083a64c06f3d8f527d395bc0010785363fbb5fb60428",
+      "bytes": 56584
+    },
+    "tokenizer.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/tokenizer.json",
+      "sha256": "623c34567aebb18582765289fbe23d901c62704d6518d71866e0e58db892b5b7",
+      "bytes": 17077484
+    }
+  },
+  "contract_source_sha256": "4f0f9cdd3cb17ae23330944088dfc0334077b96463bb84e91b6194b8979fe95f",
+  "checkpoint": {
+    "tensors": 507,
+    "parameters": 3975229440,
+    "data_bytes": 7950458880,
+    "file_bytes": 7950515472,
+    "header_bytes": 56584,
+    "all_names_shapes_match": true,
+    "dtypes": [
+      "BF16"
+    ],
+    "contiguous_complete_data_intervals": true,
+    "weight_values_read": false
+  },
+  "tokenizer": {
+    "vocabulary": 131072,
+    "added_tokens": 1000,
+    "merges": 269443,
+    "stop_tokens": [
+      {
+        "id": 2,
+        "token": "</s>"
+      },
+      {
+        "id": 11,
+        "token": "<|im_end|>"
+      }
+    ],
+    "tokenizer_eos": {
+      "id": 11,
+      "token": "<|im_end|>"
+    },
+    "bos_id": 1,
+    "pad_id": 11,
+    "add_bos_token": false,
+    "add_eos_token": false,
+    "ignore_merges": true,
+    "tokenizer_executed": false,
+    "chat_template_rendered": false
+  },
+  "template": {
+    "file": "chat_template.jinja",
+    "bytes": 10152,
+    "external_file_required": true,
+    "default_enable_thinking": true,
+    "default_medium_effort": false,
+    "default_truncate_history_thinking": true,
+    "rendered": false
+  },
+  "checkpoint_lfs": {
+    "sha256": "207483664dfef54c4c4438863260d3ba423bf3d6009b43fe84264b281e9fda23",
+    "size": 7950515472,
+    "pointerSize": 135
+  },
+  "checkpoint_full_lfs_hash_verified": false,
+  "architecture": {
+    "hidden_size": 2560,
+    "attention_projection_width": 4096,
+    "kv_projection_width": 1024,
+    "head_dim": 256,
+    "physical_layers": 72,
+    "layer_visits": 112,
+    "recurrent_loops": 2,
+    "attention_histories": 56,
+    "sliding_histories": 42
+  },
+  "reference_cache_storage": {
+    "bytes_per_token": 229376,
+    "bytes_at_tokens": {
+      "1024": 234881024,
+      "2048": 469762048,
+      "4096": 939524096,
+      "262144": 60129542144
+    },
+    "formula": "56 histories * 2(K,V) * 4 KV heads * 256 head dim * 2 BF16 bytes * tokens",
+    "scope": "Retained K/V logical storage only, full-history CPU reference. Excludes weights, activations, temporary copies and framework memory.",
+    "peak_memory_fit_proven": false
+  },
+  "source_sha256": "f95445d90ecbc418ca57dd1d49a073b39c696a616f3435b9ee423077b124e748",
+  "model_framework_imported": false,
+  "weights_loaded": false,
+  "model_executed": false,
+  "numerical_parity_proven": false,
+  "native_reference_qualified": false,
+  "neuron_baseline_qualified": false,
+  "new_speedup_claim": false
+}

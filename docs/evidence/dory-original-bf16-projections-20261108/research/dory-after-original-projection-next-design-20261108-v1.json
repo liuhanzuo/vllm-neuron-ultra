@@ -1,0 +1,24 @@
+{
+  "schema": "dory_after_original_projection_next_design_v1",
+  "source_only": true,
+  "runtime_admitted": false,
+  "scientific_findings": [
+    "Original BF16 oneDNN/F.linear exact alignment fails at M=1 despite exact packed source weights",
+    "Both backends independently vary with M; F.linear packed and split match for all observed M",
+    "M=7 and M=32 equality is limited to saved primitive inputs, not full-model or arbitrary-shape guarantee"
+  ],
+  "next_action": "Run complete original72/2loop/56history official CPU reference with original BF16 weights and matched per-call shape; revalidate tokenizer in Transformers5.20.2 before generation",
+  "reference_backend": "Pinned unchanged official CPU module loading and oneDNN postload; preserve original standalone F.linear candidate and failed exact comparison",
+  "implementation_notes": [
+    "Construct at BF16 without accidental full FP32 parameter copy",
+    "Keep physical projection sharing and 56 independent histories for both loops",
+    "Upstream ReferenceAttention remains a CPU arithmetic fixture, not paged serving attention",
+    "Record full input IDs, positions, per-call shapes, logits/hidden/all caches; quantify diagnostics without changing gates",
+    "Preserve full maxposition262144 and original SWA1024, learned scales, default thinking and EOS2/11",
+    "Budget full model, original loaded weights, CPU packing and both rotary tables before admission",
+    "No generation sampling settings changed; request-slot reuse/cold/long/quality/paired serving remain required"
+  ],
+  "no_automatic_successor_launch": true,
+  "neuron_baseline_pending": true,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,1664 @@
+{
+  "schema": "dory_original_bf16_projection_sweep_v1",
+  "reviewer": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_dory_original_projection_saved_v1.py",
+  "base": "/mnt/nvme/dory-official-cpu-20261108-v1",
+  "environment": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1",
+  "worker": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_original_projection_sweep_v2.py",
+  "output": "/mnt/nvme/dory-official-cpu-20261108-v1/projection-sweep-r2",
+  "review_output": "/mnt/nvme/dory-official-cpu-20261108-v1/projection-sweep-review-r2",
+  "checkpoint": {
+    "path": "/mnt/nvme/models/dory1.0-4b-bf16-f6c832e6963ddb74f62c75813a3e8c74b1af67b1/model.safetensors",
+    "device": 66304,
+    "inode": 4849719,
+    "size": 7950515472,
+    "mtime_ns": 1794162279985851621,
+    "ctime_ns": 1794162302947344326
+  },
+  "checkpoint_sha256": "207483664dfef54c4c4438863260d3ba423bf3d6009b43fe84264b281e9fda23",
+  "previous_loader_proof": "/home/ubuntu/experiments/trn1-latest-models-20261031/dory-original-weight-load-r2-20261108-v1/loader-proof.json",
+  "token_captures": "/home/ubuntu/experiments/trn1-latest-models-20261031/dory-tokenizer-template-r1-20261108-v1/captures.json",
+  "token_case": "history_default_truncation",
+  "tokens": [
+    10,
+    25708,
+    1010,
+    11,
+    1010,
+    10,
+    3263,
+    1010,
+    10107,
+    11,
+    1010,
+    10,
+    1503,
+    19464,
+    1010,
+    12,
+    13,
+    31106,
+    11,
+    1010,
+    10,
+    3263,
+    1010,
+    12961,
+    11,
+    1010,
+    10,
+    1503,
+    19464,
+    1010,
+    12,
+    1010
+  ],
+  "groups": [
+    {
+      "id": "layer-00-qkv",
+      "layer": 0,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.0.mixer.q_proj.weight",
+        "backbone.layers.0.mixer.k_proj.weight",
+        "backbone.layers.0.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-00-gate",
+      "layer": 0,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.0.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-00-output",
+      "layer": 0,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.0.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-01-gate_up",
+      "layer": 1,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.1.mixer.gate_proj.weight",
+        "backbone.layers.1.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-01-down",
+      "layer": 1,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.1.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-02-qkv",
+      "layer": 2,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.2.mixer.q_proj.weight",
+        "backbone.layers.2.mixer.k_proj.weight",
+        "backbone.layers.2.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-02-gate",
+      "layer": 2,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.2.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-02-output",
+      "layer": 2,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.2.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-03-gate_up",
+      "layer": 3,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.3.mixer.gate_proj.weight",
+        "backbone.layers.3.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-03-down",
+      "layer": 3,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.3.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-04-qkv",
+      "layer": 4,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.4.mixer.q_proj.weight",
+        "backbone.layers.4.mixer.k_proj.weight",
+        "backbone.layers.4.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-04-gate",
+      "layer": 4,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.4.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-04-output",
+      "layer": 4,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.4.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-05-gate_up",
+      "layer": 5,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.5.mixer.gate_proj.weight",
+        "backbone.layers.5.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-05-down",
+      "layer": 5,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.5.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-06-qkv",
+      "layer": 6,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.6.mixer.q_proj.weight",
+        "backbone.layers.6.mixer.k_proj.weight",
+        "backbone.layers.6.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-06-gate",
+      "layer": 6,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.6.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-06-output",
+      "layer": 6,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.6.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-07-gate_up",
+      "layer": 7,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.7.mixer.gate_proj.weight",
+        "backbone.layers.7.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-07-down",
+      "layer": 7,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.7.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-08-qkv",
+      "layer": 8,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.8.mixer.q_proj.weight",
+        "backbone.layers.8.mixer.k_proj.weight",
+        "backbone.layers.8.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-08-gate",
+      "layer": 8,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.8.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-08-output",
+      "layer": 8,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.8.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-09-gate_up",
+      "layer": 9,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.9.mixer.gate_proj.weight",
+        "backbone.layers.9.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-09-down",
+      "layer": 9,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.9.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-10-qkv",
+      "layer": 10,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.10.mixer.q_proj.weight",
+        "backbone.layers.10.mixer.k_proj.weight",
+        "backbone.layers.10.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-10-gate",
+      "layer": 10,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.10.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-10-output",
+      "layer": 10,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.10.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-11-gate_up",
+      "layer": 11,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.11.mixer.gate_proj.weight",
+        "backbone.layers.11.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-11-down",
+      "layer": 11,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.11.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-12-qkv",
+      "layer": 12,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.12.mixer.q_proj.weight",
+        "backbone.layers.12.mixer.k_proj.weight",
+        "backbone.layers.12.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-12-gate",
+      "layer": 12,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.12.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-12-output",
+      "layer": 12,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.12.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-13-gate_up",
+      "layer": 13,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.13.mixer.gate_proj.weight",
+        "backbone.layers.13.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-13-down",
+      "layer": 13,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.13.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-14-qkv",
+      "layer": 14,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.14.mixer.q_proj.weight",
+        "backbone.layers.14.mixer.k_proj.weight",
+        "backbone.layers.14.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-14-gate",
+      "layer": 14,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.14.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-14-output",
+      "layer": 14,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.14.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-15-gate_up",
+      "layer": 15,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.15.mixer.gate_proj.weight",
+        "backbone.layers.15.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-15-down",
+      "layer": 15,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.15.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-16-qkv",
+      "layer": 16,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.16.mixer.q_proj.weight",
+        "backbone.layers.16.mixer.k_proj.weight",
+        "backbone.layers.16.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-16-gate",
+      "layer": 16,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.16.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-16-output",
+      "layer": 16,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.16.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-17-gate_up",
+      "layer": 17,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.17.mixer.gate_proj.weight",
+        "backbone.layers.17.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-17-down",
+      "layer": 17,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.17.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-18-qkv",
+      "layer": 18,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.18.mixer.q_proj.weight",
+        "backbone.layers.18.mixer.k_proj.weight",
+        "backbone.layers.18.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-18-gate",
+      "layer": 18,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.18.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-18-output",
+      "layer": 18,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.18.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-19-gate_up",
+      "layer": 19,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.19.mixer.gate_proj.weight",
+        "backbone.layers.19.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-19-down",
+      "layer": 19,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.19.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-20-qkv",
+      "layer": 20,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.20.mixer.q_proj.weight",
+        "backbone.layers.20.mixer.k_proj.weight",
+        "backbone.layers.20.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-20-gate",
+      "layer": 20,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.20.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-20-output",
+      "layer": 20,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.20.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-21-gate_up",
+      "layer": 21,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.21.mixer.gate_proj.weight",
+        "backbone.layers.21.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-21-down",
+      "layer": 21,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.21.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-22-qkv",
+      "layer": 22,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.22.mixer.q_proj.weight",
+        "backbone.layers.22.mixer.k_proj.weight",
+        "backbone.layers.22.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-22-gate",
+      "layer": 22,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.22.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-22-output",
+      "layer": 22,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.22.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-23-gate_up",
+      "layer": 23,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.23.mixer.gate_proj.weight",
+        "backbone.layers.23.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-23-down",
+      "layer": 23,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.23.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-24-qkv",
+      "layer": 24,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.24.mixer.q_proj.weight",
+        "backbone.layers.24.mixer.k_proj.weight",
+        "backbone.layers.24.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-24-gate",
+      "layer": 24,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.24.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-24-output",
+      "layer": 24,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.24.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-25-gate_up",
+      "layer": 25,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.25.mixer.gate_proj.weight",
+        "backbone.layers.25.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-25-down",
+      "layer": 25,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.25.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-26-qkv",
+      "layer": 26,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.26.mixer.q_proj.weight",
+        "backbone.layers.26.mixer.k_proj.weight",
+        "backbone.layers.26.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-26-gate",
+      "layer": 26,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.26.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-26-output",
+      "layer": 26,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.26.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-27-gate_up",
+      "layer": 27,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.27.mixer.gate_proj.weight",
+        "backbone.layers.27.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-27-down",
+      "layer": 27,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.27.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-28-qkv",
+      "layer": 28,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.28.mixer.q_proj.weight",
+        "backbone.layers.28.mixer.k_proj.weight",
+        "backbone.layers.28.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-28-gate",
+      "layer": 28,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.28.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-28-output",
+      "layer": 28,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.28.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-29-gate_up",
+      "layer": 29,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.29.mixer.gate_proj.weight",
+        "backbone.layers.29.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-29-down",
+      "layer": 29,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.29.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-30-qkv",
+      "layer": 30,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.30.mixer.q_proj.weight",
+        "backbone.layers.30.mixer.k_proj.weight",
+        "backbone.layers.30.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-30-gate",
+      "layer": 30,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.30.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-30-output",
+      "layer": 30,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.30.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-31-gate_up",
+      "layer": 31,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.31.mixer.gate_proj.weight",
+        "backbone.layers.31.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-31-down",
+      "layer": 31,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.31.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-32-qkv",
+      "layer": 32,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.32.mixer.q_proj.weight",
+        "backbone.layers.32.mixer.k_proj.weight",
+        "backbone.layers.32.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-32-gate",
+      "layer": 32,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.32.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-32-output",
+      "layer": 32,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.32.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-33-gate_up",
+      "layer": 33,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.33.mixer.gate_proj.weight",
+        "backbone.layers.33.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-33-down",
+      "layer": 33,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.33.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-34-qkv",
+      "layer": 34,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.34.mixer.q_proj.weight",
+        "backbone.layers.34.mixer.k_proj.weight",
+        "backbone.layers.34.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-34-gate",
+      "layer": 34,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.34.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-34-output",
+      "layer": 34,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.34.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-35-gate_up",
+      "layer": 35,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.35.mixer.gate_proj.weight",
+        "backbone.layers.35.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-35-down",
+      "layer": 35,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.35.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-36-qkv",
+      "layer": 36,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.36.mixer.q_proj.weight",
+        "backbone.layers.36.mixer.k_proj.weight",
+        "backbone.layers.36.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-36-gate",
+      "layer": 36,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.36.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-36-output",
+      "layer": 36,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.36.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-37-gate_up",
+      "layer": 37,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.37.mixer.gate_proj.weight",
+        "backbone.layers.37.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-37-down",
+      "layer": 37,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.37.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-38-qkv",
+      "layer": 38,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.38.mixer.q_proj.weight",
+        "backbone.layers.38.mixer.k_proj.weight",
+        "backbone.layers.38.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-38-gate",
+      "layer": 38,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.38.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-38-output",
+      "layer": 38,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.38.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-39-gate_up",
+      "layer": 39,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.39.mixer.gate_proj.weight",
+        "backbone.layers.39.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-39-down",
+      "layer": 39,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.39.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-40-qkv",
+      "layer": 40,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.40.mixer.q_proj.weight",
+        "backbone.layers.40.mixer.k_proj.weight",
+        "backbone.layers.40.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-40-gate",
+      "layer": 40,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.40.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-40-output",
+      "layer": 40,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.40.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-41-gate_up",
+      "layer": 41,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.41.mixer.gate_proj.weight",
+        "backbone.layers.41.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-41-down",
+      "layer": 41,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.41.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-42-qkv",
+      "layer": 42,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.42.mixer.q_proj.weight",
+        "backbone.layers.42.mixer.k_proj.weight",
+        "backbone.layers.42.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-42-gate",
+      "layer": 42,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.42.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-42-output",
+      "layer": 42,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.42.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-43-gate_up",
+      "layer": 43,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.43.mixer.gate_proj.weight",
+        "backbone.layers.43.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-43-down",
+      "layer": 43,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.43.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-44-qkv",
+      "layer": 44,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.44.mixer.q_proj.weight",
+        "backbone.layers.44.mixer.k_proj.weight",
+        "backbone.layers.44.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-44-gate",
+      "layer": 44,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.44.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-44-output",
+      "layer": 44,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.44.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-45-gate_up",
+      "layer": 45,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.45.mixer.gate_proj.weight",
+        "backbone.layers.45.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-45-down",
+      "layer": 45,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.45.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-46-qkv",
+      "layer": 46,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.46.mixer.q_proj.weight",
+        "backbone.layers.46.mixer.k_proj.weight",
+        "backbone.layers.46.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-46-gate",
+      "layer": 46,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.46.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-46-output",
+      "layer": 46,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.46.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-47-gate_up",
+      "layer": 47,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.47.mixer.gate_proj.weight",
+        "backbone.layers.47.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-47-down",
+      "layer": 47,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.47.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-48-qkv",
+      "layer": 48,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.48.mixer.q_proj.weight",
+        "backbone.layers.48.mixer.k_proj.weight",
+        "backbone.layers.48.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-48-gate",
+      "layer": 48,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.48.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-48-output",
+      "layer": 48,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.48.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-49-gate_up",
+      "layer": 49,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.49.mixer.gate_proj.weight",
+        "backbone.layers.49.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-49-down",
+      "layer": 49,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.49.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-50-qkv",
+      "layer": 50,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.50.mixer.q_proj.weight",
+        "backbone.layers.50.mixer.k_proj.weight",
+        "backbone.layers.50.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-50-gate",
+      "layer": 50,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.50.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-50-output",
+      "layer": 50,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.50.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-51-gate_up",
+      "layer": 51,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.51.mixer.gate_proj.weight",
+        "backbone.layers.51.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-51-down",
+      "layer": 51,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.51.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-52-qkv",
+      "layer": 52,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.52.mixer.q_proj.weight",
+        "backbone.layers.52.mixer.k_proj.weight",
+        "backbone.layers.52.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-52-gate",
+      "layer": 52,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.52.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-52-output",
+      "layer": 52,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.52.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-53-gate_up",
+      "layer": 53,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.53.mixer.gate_proj.weight",
+        "backbone.layers.53.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-53-down",
+      "layer": 53,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.53.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-54-qkv",
+      "layer": 54,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.54.mixer.q_proj.weight",
+        "backbone.layers.54.mixer.k_proj.weight",
+        "backbone.layers.54.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-54-gate",
+      "layer": 54,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.54.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-54-output",
+      "layer": 54,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.54.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-55-gate_up",
+      "layer": 55,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.55.mixer.gate_proj.weight",
+        "backbone.layers.55.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-55-down",
+      "layer": 55,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.55.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-56-qkv",
+      "layer": 56,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.56.mixer.q_proj.weight",
+        "backbone.layers.56.mixer.k_proj.weight",
+        "backbone.layers.56.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-56-gate",
+      "layer": 56,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.56.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-56-output",
+      "layer": 56,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.56.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-57-gate_up",
+      "layer": 57,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.57.mixer.gate_proj.weight",
+        "backbone.layers.57.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-57-down",
+      "layer": 57,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.57.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-58-qkv",
+      "layer": 58,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.58.mixer.q_proj.weight",
+        "backbone.layers.58.mixer.k_proj.weight",
+        "backbone.layers.58.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-58-gate",
+      "layer": 58,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.58.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-58-output",
+      "layer": 58,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.58.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-59-gate_up",
+      "layer": 59,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.59.mixer.gate_proj.weight",
+        "backbone.layers.59.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-59-down",
+      "layer": 59,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.59.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-60-qkv",
+      "layer": 60,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.60.mixer.q_proj.weight",
+        "backbone.layers.60.mixer.k_proj.weight",
+        "backbone.layers.60.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-60-gate",
+      "layer": 60,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.60.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-60-output",
+      "layer": 60,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.60.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-61-gate_up",
+      "layer": 61,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.61.mixer.gate_proj.weight",
+        "backbone.layers.61.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-61-down",
+      "layer": 61,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.61.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-62-qkv",
+      "layer": 62,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.62.mixer.q_proj.weight",
+        "backbone.layers.62.mixer.k_proj.weight",
+        "backbone.layers.62.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-62-gate",
+      "layer": 62,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.62.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-62-output",
+      "layer": 62,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.62.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-63-gate_up",
+      "layer": 63,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.63.mixer.gate_proj.weight",
+        "backbone.layers.63.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-63-down",
+      "layer": 63,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.63.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-64-qkv",
+      "layer": 64,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.64.mixer.q_proj.weight",
+        "backbone.layers.64.mixer.k_proj.weight",
+        "backbone.layers.64.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-64-gate",
+      "layer": 64,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.64.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-64-output",
+      "layer": 64,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.64.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-65-gate_up",
+      "layer": 65,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.65.mixer.gate_proj.weight",
+        "backbone.layers.65.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-65-down",
+      "layer": 65,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.65.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-66-qkv",
+      "layer": 66,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.66.mixer.q_proj.weight",
+        "backbone.layers.66.mixer.k_proj.weight",
+        "backbone.layers.66.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-66-gate",
+      "layer": 66,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.66.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-66-output",
+      "layer": 66,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.66.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-67-gate_up",
+      "layer": 67,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.67.mixer.gate_proj.weight",
+        "backbone.layers.67.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-67-down",
+      "layer": 67,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.67.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-68-qkv",
+      "layer": 68,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.68.mixer.q_proj.weight",
+        "backbone.layers.68.mixer.k_proj.weight",
+        "backbone.layers.68.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-68-gate",
+      "layer": 68,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.68.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-68-output",
+      "layer": 68,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.68.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-69-gate_up",
+      "layer": 69,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.69.mixer.gate_proj.weight",
+        "backbone.layers.69.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-69-down",
+      "layer": 69,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.69.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-70-qkv",
+      "layer": 70,
+      "kind": "qkv",
+      "weights": [
+        "backbone.layers.70.mixer.q_proj.weight",
+        "backbone.layers.70.mixer.k_proj.weight",
+        "backbone.layers.70.mixer.v_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-70-gate",
+      "layer": 70,
+      "kind": "gate",
+      "weights": [
+        "backbone.layers.70.mixer.g_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-70-output",
+      "layer": 70,
+      "kind": "output",
+      "weights": [
+        "backbone.layers.70.mixer.o_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-71-gate_up",
+      "layer": 71,
+      "kind": "gate_up",
+      "weights": [
+        "backbone.layers.71.mixer.gate_proj.weight",
+        "backbone.layers.71.mixer.up_proj.weight"
+      ]
+    },
+    {
+      "id": "layer-71-down",
+      "layer": 71,
+      "kind": "down",
+      "weights": [
+        "backbone.layers.71.mixer.down_proj.weight"
+      ]
+    },
+    {
+      "id": "lm-head",
+      "layer": null,
+      "kind": "lm_head",
+      "weights": [
+        "lm_head.weight"
+      ]
+    }
+  ],
+  "batches": [
+    1,
+    7,
+    32
+  ],
+  "expected_cases": 543,
+  "expected_comparisons": 975,
+  "expected_raw_bytes": 252108800,
+  "reference": "Unchanged pinned official CPU modules after official weight loading/postload; actual oneDNN per call",
+  "diagnostic": "Standalone F.linear on original concatenated matrices and individual original matrices",
+  "acceptance": "Exact finite BF16 bytes. Preserve every mismatch. This is projection characterization, never a full-model gate.",
+  "input_origins": {
+    "2560": "Original embedding rows, no further normalization; reused across groups. Not actual downstream activations.",
+    "4096/7168": "FP32 normalized deterministic arange/remainder vectors cast once to BF16, not downstream activations."
+  },
+  "budget": {
+    "root_floor": 30064771072,
+    "nvme_floor": 8589934592,
+    "nvme_new_bytes": 2147483648,
+    "wall_seconds": 3600,
+    "cpu_seconds": 3300,
+    "address_space_bytes": 25769803776,
+    "single_file_bytes": 67108864,
+    "log_bytes": 16777216,
+    "cpus": [
+      4
+    ]
+  },
+  "full_model_forward": false,
+  "full_long_decode": false,
+  "production_slot_reuse": false,
+  "new_speedup_claim": false,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_dory_original_projection_saved_v1.py": "cc5bf70f3fcf273ff8d0f04ab4caaaef541a8c43f79dca1ce4e75dcb3607812f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_projection_serial_v1.py": "52aeae775cc8c17f0691bfe326fad601f3d4f0ef68695b66906d5ce2e6b10561",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_checkpoint_loader_v1.py": "61e20085087318d79b94e98fac6f82ada245818a2f61723de4b4afa888659cf8",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/model_executor/layers/linear.py": "d4b97d850eb8bdee5fd2459e7ac688d00623b54f5ec0ea590c08da0173f8b4d4",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/model_executor/layers/linear.py": "d4b97d850eb8bdee5fd2459e7ac688d00623b54f5ec0ea590c08da0173f8b4d4",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/model_executor/layers/vocab_parallel_embedding.py": "0a25685b16b295d0c9f7127ae48fc7cc86d2a961e4e7e7bd8879354540225f44",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/model_executor/layers/vocab_parallel_embedding.py": "0a25685b16b295d0c9f7127ae48fc7cc86d2a961e4e7e7bd8879354540225f44",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/model_executor/layers/utils.py": "7c102381e4a48cd3d5893548de7280362938b39104a1c0375ecee5969d881262",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/model_executor/layers/utils.py": "7c102381e4a48cd3d5893548de7280362938b39104a1c0375ecee5969d881262",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/model_executor/models/dory.py": "483a3adbbef4d2b66e275579e1e505a3d812f3c1c09b10c349e6cbf286df517b",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/model_executor/models/dory.py": "483a3adbbef4d2b66e275579e1e505a3d812f3c1c09b10c349e6cbf286df517b",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/transformers_utils/configs/dory.py": "cf0d79e7cbdbf44d34e385f7aa66ff4cfc531dad280d001b8b850e15143817be",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/transformers_utils/configs/dory.py": "cf0d79e7cbdbf44d34e385f7aa66ff4cfc531dad280d001b8b850e15143817be",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/dory-tokenizer-template-r1-20261108-v1/captures.json": "015f2baa1875c6ef750f9b167002ae99ab53acf22de0a850ad2b0a1ca7ae3b69",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/dory-original-weight-load-r2-20261108-v1/loader-proof.json": "ef09c2c436e10f507b157be7f8255bb1a1520842cc01e4a805f9379bacdd5b0c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_original_projection_sweep_v2.py": "5f49367c3132141e60bab169b4fd39e1330993040aac79ba9b7819831c8c9856"
+  },
+  "predecessor_failure_preserved": "projection-sweep-r1: KeyError reading previous proof tensors at wrong JSON depth, before any projection"
+}

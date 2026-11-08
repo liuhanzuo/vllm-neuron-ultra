@@ -1,0 +1,161 @@
+"""Whole saved-prefix residual/RMSNorm replay. No runtime or launch on import.
+
+An admitted future serial worker supplies torch and guard. This does not replay
+attention, full-model logits, Gloo or serving and cannot qualify a candidate.
+"""
+import ast,copy,hashlib,json,os
+from pathlib import Path
+from types import SimpleNamespace
+import minicpm5_frame1_upstream_worker_v1 as w
+from minicpm5_saved_oproj_fullshape_intervention_worker_v1 import measure
+
+def restore(torch,row,directory,guard):
+    guard();path=Path(row['path'])
+    w.require(path.parent==directory and path.name==row['name']+'.bf16','Finite captured tensor path')
+    w.same(w.identity(path),row['identity'],'Fresh observed payload identity')
+    w.require(row['observed_not_recomputed'] is True and row['encoding']=='packed_bf16_le','Actual observed BF16 capture')
+    native=directory.name=='native'
+    w.require(directory.name in ('native','cpu-rank0','cpu-rank1') and row['name'] in w.FIELDS,'Exact observation role/field')
+    w.same(row['metadata']['shape'],w.expected_shapes(native)[row['name']],'Original full observed geometry')
+    w.require(0<row['bytes']<=w.CAPTURE_FILE_CAP,'Bounded capture payload')
+    data=path.read_bytes()
+    w.require(len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']==row['metadata']['sha256'],
+              'Actual captured tensor bytes')
+    meta=row['metadata'];span=w.checked_layout(meta['shape'],meta['stride'],meta['offset'])
+    w.same(meta['dtype'],'torch.bfloat16','BF16 original observation')
+    w.require(2*span==len(data),'Exact dense storage extent')
+    packed=torch.frombuffer(bytearray(data),dtype=torch.bfloat16).reshape(meta['shape'])
+    restored=torch.empty_strided(meta['shape'],meta['stride'],dtype=torch.bfloat16)
+    restored.copy_(packed)
+    w.same(w.metadata(torch,restored),meta,'Full original shape/stride/dtype/raw roundtrip')
+    w.require(bool(torch.isfinite(restored).all()),'Finite restored capture')
+    w.same(w.identity(path),row['identity'],'Capture unchanged during read')
+    return restored
+
+
+
+def bind_norm(torch,path,wanted):
+    raw=Path(path).read_bytes();w.require(hashlib.sha256(raw).hexdigest()==wanted,'Pinned actual RMSNorm source')
+    text=raw.decode();w.norm_source(text);tree=ast.parse(text)
+    cls,=[node for node in tree.body if isinstance(node,ast.ClassDef)and node.name=='LlamaRMSNorm']
+    forward,=[node for node in cls.body if isinstance(node,ast.FunctionDef)and node.name=='forward']
+    node=copy.deepcopy(forward);w.require(not node.decorator_list,'No removed norm function wrapper')
+    tree=ast.Module(body=[ast.ImportFrom(module='__future__',names=[ast.alias(name='annotations')],level=0),node],type_ignores=[]);ast.fix_missing_locations(tree)
+    namespace=dict(torch=torch);exec(compile(tree,str(path),'exec',dont_inherit=True),namespace)
+    return namespace['forward']
+
+
+def read_report(role,reference,root):
+    w.require(role in ('native','cpu-rank0','cpu-rank1'),'Exact role');path=Path(reference['path'])
+    w.require(path==root/role/'capture.json','Exact actual upstream capture path')
+    raw=path.read_bytes();w.require(len(raw)<2*w.MIB and hashlib.sha256(raw).hexdigest()==reference['sha256'],'Original capture metadata digest')
+    value=json.loads(raw);native=role=='native';rank=-1 if native else int(role[-1])
+    w.require(value['schema']=='minicpm5_frame1_upstream_capture_v1'and value['complete']is True and value['native']is native and value['rank']==rank,'Complete actual upstream capture')
+    w.same(value['frame'],w.FRAME,'Original frame1');w.same([x['name']for x in value['captures']],list(w.FIELDS),'All seven complete boundaries')
+    w.require(value['anchor']['all_six_exact']is True and value['actual_prefix_calls']==1 and value['precision_interventions']==[]and value['oproj_witnesses']==[],'Original unmodified observed prefix')
+    w.require(value['history_consumed']is False and value['downstream_layers_executed']==0 and value['full_model_qualified']is False and value['new_speedup_claim']is False,'No other model outcome promoted')
+    anchor=value['cpu_full_anchor'];w.require(anchor['full_mlp_input_exact']is anchor['adjacent_boundaries_exact']is True,'Observed full input and adjacent anchors')
+    w.same(anchor['reference'],w.R3_CAPTURES[0 if native else rank+1],'Actual r3 fullinputanchor')
+    w.same(sorted(value['norm_weights']),sorted(w.NORM_NAMES),'Both original norm weights')
+    return value
+
+
+def load_norm(torch,row,role,name,root):
+    path=Path(row['path']);w.require(path==root/role/(name+'.weight.bf16'),'Exact norm weight path')
+    w.require(row['bytes']==4096 and row['shape']==[2048]and row['dtype']=='torch.bfloat16','Original complete norm weight')
+    raw=path.read_bytes();w.require(len(raw)==4096 and hashlib.sha256(raw).hexdigest()==row['sha256'],'Original saved norm bytes')
+    value=torch.frombuffer(bytearray(raw),dtype=torch.bfloat16);w.require(bool(torch.isfinite(value).all()),'Finite norm weights');return value
+
+
+def compare(torch,a,b):
+    w.same(list(a.shape),list(b.shape),'Full original comparison geometry')
+    return dict(full=measure(torch,a,b),real_tokens=measure(torch,a[:,:w.LENGTH],b[:,:w.LENGTH]),prediction=measure(torch,a[:,w.LENGTH-1:w.LENGTH],b[:,w.LENGTH-1:w.LENGTH]))
+
+
+def fixed_cpu_geometry(torch,cpu,native,guard):
+    # All2048rows/layout retained. Only original real1231rows are substituted;
+    # original CPU padding remains unchanged, and native has no invented padding.
+    guard();meta=w.metadata(torch,cpu)
+    w.same(list(cpu.shape),[1,w.BUCKET,2048],'Original CPU full bucket')
+    w.same(list(native.shape),[1,w.LENGTH,2048],'Original native full prompt')
+    result=torch.empty_strided(meta['shape'],meta['stride'],dtype=torch.bfloat16)
+    result.copy_(cpu);result[:,:w.LENGTH].copy_(native)
+    w.same_bytes(w.raw(torch,result[:,w.LENGTH:]),w.raw(torch,cpu[:,w.LENGTH:]),'Original CPU padding bytes untouched')
+    w.same(list(result.stride()),meta['stride'],'Original CPU physical layout')
+    return result
+
+
+def control_passed(controls):
+    w.require(set(controls)=={'native','cpu-rank0','cpu-rank1'},'All three original controls')
+    required={'inputnorm_output','attention_input','postnorm_input','postnorm_output','mlp_input'}
+    for role,rows in controls.items():
+        w.require(set(rows)==required,'Every own-input control required')
+        for value in rows.values():w.require(type(value['raw_exact'])is bool and type(value['layout_exact'])is bool,'Actual control booleans')
+    return all(value['raw_exact']and value['layout_exact']for rows in controls.values()for value in rows.values())
+
+
+CONTRASTS=('native_entry_only','native_attention_only','native_entry_and_attention')
+CONTRAST_BYTES=3*2*2048*2048
+
+def capture_plan():
+    return dict(schema='minicpm5_upstream_contrast_capture_plan_v1',contrasts=list(CONTRASTS),fields=['postnorm_output'],shape=[1,2048,2048],dtype='torch.bfloat16',tensor_bytes=2*2048*2048,contrast_bytes=CONTRAST_BYTES,all_raw_bytes=w.science()['actual_capture_bytes']+w.science()['norm_weight_bytes']+CONTRAST_BYTES,whole_output_cap_bytes=w.OUTPUT_CAP,independent_norm_arithmetic_reexecuted=False,new_speedup_claim=False)
+
+
+def save_contrast(torch,value,root,label):
+    w.require(label in CONTRASTS,'Exact original counterfactual')
+    w.same(list(value.shape),[1,w.BUCKET,2048],'Complete CPU counterfactual geometry')
+    w.require(value.dtype==torch.bfloat16 and value.device.type=='cpu'and bool(torch.isfinite(value).all()),'Finite original BF16 contrast')
+    metadata=w.metadata(torch,value);w.checked_layout(metadata['shape'],metadata['stride'],metadata['offset'])
+    raw=w.raw(torch,value);w.require(len(raw)==2*w.BUCKET*2048,'All original contrast bytes')
+    directory=Path(root)/'contrasts';w.require(directory.is_absolute()and directory.resolve()==directory,'Canonical contrast directory')
+    directory.mkdir(mode=0o700,exist_ok=True);path=directory/(label+'.postnorm.bf16')
+    with path.open('xb')as stream:w.require(stream.write(raw)==len(raw),'Complete counterfactual write');stream.flush();os.fsync(stream.fileno())
+    w.same(w.metadata(torch,value),metadata,'Capture did not change computed output')
+    return dict(name=label,path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),metadata=metadata,identity=w.identity(path),encoding='packed_bf16_le',counterfactual_computed=True,observed_model_output=False)
+
+
+def run(*,torch,plan,root,capture_refs,guard):
+    w.require(callable(guard),'Actual admitted serial guard');guard();w.validate_science(plan);root=Path(root)
+    w.require(set(capture_refs)=={'native','cpu-rank0','cpu-rank1'},'Complete actual captures required')
+    reports={role:read_report(role,ref,root)for role,ref in capture_refs.items()}
+    observed={};weights={};functions={};controls={};old_threads=torch.get_num_threads()
+    result=dict(schema='minicpm5_frame1_upstream_replay_v2',complete=False,captures=capture_refs,frame=w.FRAME,controls={},contrasts={},contrast_capture_plan=capture_plan(),source_only=False,attention_reexecuted=False,actual_gloo_reexecuted=False,native_interpreter_reused_in_replay=False,unique_final_KL_cause_proven=False,full_model_qualified=False,new_speedup_claim=False)
+    try:
+        with torch.inference_mode():
+            for role,report in reports.items():
+                guard();observed[role]={row['name']:restore(torch,row,root/role,guard)for row in report['captures']}
+                weights[role]={name:load_norm(torch,report['norm_weights'][name],role,name,root)for name in w.NORM_NAMES}
+                source=w.NORM_SOURCES['native'if role=='native'else'cpu']
+                functions[role]=bind_norm(torch,source,plan['source_sha256'][str(source)])
+                torch.set_num_threads(2 if role=='native'else 1);obs=observed[role];fun=functions[role]
+                norm=lambda x,name:fun(SimpleNamespace(weight=weights[role][name],variance_epsilon=1e-6),x)
+                pre=norm(obs['layer_input'],'input_layernorm');summed=obs['layer_input']+obs['attention_output'];post=norm(obs['postnorm_input'],'post_attention_layernorm')
+                computed=dict(inputnorm_output=pre,attention_input=pre,postnorm_input=summed,postnorm_output=post,mlp_input=post)
+                controls[role]={}
+                for name,value in computed.items():
+                    actual,expected=w.metadata(torch,value),w.metadata(torch,obs[name]);same_layout=all(actual[k]==expected[k]for k in ('shape','stride','offset','dtype'))
+                    controls[role][name]=dict(raw_exact=actual['sha256']==expected['sha256'],layout_exact=same_layout,actual=actual,expected=expected,comparison=compare(torch,value,obs[name]))
+                del computed,pre,summed,post
+            result['controls']=controls;result['all_own_input_controls_exact']=control_passed(controls)
+            if not result['all_own_input_controls_exact']:
+                result.update(complete=True,passed=False,classification='own_input_replay_failed_no_counterfactual_executed')
+                w.once(root/'upstream-replay.json',result);return result
+            for name in w.NORM_NAMES:
+                for role in ('cpu-rank0','cpu-rank1'):w.same_bytes(w.raw(torch,weights['native'][name]),w.raw(torch,weights[role][name]),'All original norm weights equal')
+            for field in w.FIELDS:w.same(w.metadata(torch,observed['cpu-rank0'][field]),w.metadata(torch,observed['cpu-rank1'][field]),'Replicated full CPU boundary '+field)
+            cpu,native=observed['cpu-rank0'],observed['native'];torch.set_num_threads(1)
+            before={name:w.metadata(torch,value)for name,value in cpu.items()}
+            changed_entry=fixed_cpu_geometry(torch,cpu['layer_input'],native['layer_input'],guard)
+            changed_attention=fixed_cpu_geometry(torch,cpu['attention_output'],native['attention_output'],guard)
+            fun=functions['cpu-rank0'];norm=lambda x:fun(SimpleNamespace(weight=weights['cpu-rank0']['post_attention_layernorm'],variance_epsilon=1e-6),x)
+            variants=[('native_entry_only',changed_entry,cpu['attention_output']),('native_attention_only',cpu['layer_input'],changed_attention),('native_entry_and_attention',changed_entry,changed_attention)]
+            for label,entry,attention in variants:
+                guard();summed=entry+attention;post=norm(summed)
+                saved=save_contrast(torch,post,root,label)
+                result['contrasts'][label]=dict(saved_postnorm_output=saved,complete_shape=[1,w.BUCKET,2048],only_real_prefix_substituted=w.LENGTH,cpu_padding_preserved=True,entry=w.metadata(torch,entry),attention=w.metadata(torch,attention),residual_vs_cpu=compare(torch,summed,cpu['postnorm_input']),postnorm_vs_cpu=compare(torch,post,cpu['postnorm_output']),residual_real_vs_native=measure(torch,summed[:,:w.LENGTH],native['postnorm_input']),postnorm_real_vs_native=measure(torch,post[:,:w.LENGTH],native['postnorm_output']))
+                del summed,post
+            w.same({name:w.metadata(torch,value)for name,value in cpu.items()},before,'Original observed inputs unchanged')
+            result['observed_boundaries']={field:dict(real_tokens=measure(torch,native[field],cpu[field][:,:w.LENGTH]),prediction=measure(torch,native[field][:,w.LENGTH-1:w.LENGTH],cpu[field][:,w.LENGTH-1:w.LENGTH]))for field in w.FIELDS}
+            result.update(complete=True,passed=True,classification='local_residual_and_postnorm_contrasts_only_not_attention_or_final_logit_cause',runtime_torch_version=str(torch.__version__),native_control_threads=2,cpu_controls_and_contrasts_threads=1,all_21_capture_payloads_restored=True,original_remaining_gates=plan['remaining_gates'])
+            guard();w.once(root/'upstream-replay.json',result);return result
+    finally:torch.set_num_threads(old_threads)
