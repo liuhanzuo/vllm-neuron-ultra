@@ -1,6 +1,6 @@
 # Nemotron Nano 9B v2: experimental Trn1 package
 
-2026-11-08 更新：[编译资源链接修复与 r6 实际启动](nemotron-v14-compiler-links-20261108.md)。修复属于实验运行器；模型实现和完整验收条件保留，尚无新增封装提速结论。
+2026-11-08 最新：[r6 编译中断、资源恢复与局部结果](dory-r1-nemotron-r6-terminal-20261108.md)。此前更新：[编译资源链接修复与 r6 实际启动](nemotron-v14-compiler-links-20261108.md)。修复属于实验运行器；模型实现和完整验收条件保留，尚无新增封装提速结论。
 
 **Source migration only: this package has no fresh device, full-model,
 end-to-end or performance qualification.** The explicit opt-in is intended for

@@ -1,0 +1,104 @@
+{
+  "schema": "nemotron9b_package_r6_actual_external_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T13:49:36.932977+00:00",
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-spec.json",
+    "sha256": "cd779a014effdca2e4fd9a8595b9764ba5e0b51d37df05279292ed266de2c4ff"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-root-review.json",
+    "sha256": "8fa6c810f5c69d8831960a8c92e364dd6eea2cf0c2d17b3777a084c4cf6cfc79"
+  },
+  "owner": {
+    "pid": 2982583,
+    "start_ticks": "391916337",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v14.py",
+      "--launch",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-spec.json",
+      "--spec-sha256",
+      "cd779a014effdca2e4fd9a8595b9764ba5e0b51d37df05279292ed266de2c4ff",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-root-review.json",
+      "--review-sha256",
+      "8fa6c810f5c69d8831960a8c92e364dd6eea2cf0c2d17b3777a084c4cf6cfc79"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "actual_tool_exit_observed": true,
+  "exact_owner_gone": true,
+  "actual_exit": {
+    "session_id": 46838,
+    "exit_code": 1,
+    "tool_chunk": "e53aee"
+  },
+  "controller_failed": true,
+  "original_error": "RuntimeError('Only reviewed model/bucket/subgraph compiler assets')",
+  "supported_release_retry_failed": {
+    "session_id": 55572,
+    "exit_code": 1,
+    "tool_chunk": "8d4e01"
+  },
+  "supported_release_completed": {
+    "session_id": 34336,
+    "exit_code": 0,
+    "tool_chunk": "71cb43"
+  },
+  "release": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/root-release.json",
+    "sha256": "87a29e6e3e8e0bb7861927de33f310ab07a5cd0480062def63b586cd2f778909"
+  },
+  "known_recovery_owner_receipts": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r6-recovery-cleanup-retry-signal-external-exit-20261108-v1.json",
+      "sha256": "136f3f184dbee4cd515abd1cccaa1a04f876f8c76e3d01f592f20051987964da"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r6-recovery-read-only-inspection-external-exit-20261108-v1.json",
+      "sha256": "1ffd4c78d2b57d42f989331a4b47de2aab3080ea93243735b4079678d74c516e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r6-recovery-compiler-asset-inspection-external-exit-20261108-v1.json",
+      "sha256": "33cc59e514943c665bab92d27122ee1780afb59b9eb476c79294490822c4f076"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r6-recovery-compiler-links-archive-external-exit-20261108-v1.json",
+      "sha256": "f0a89b03eb77441c443fb8190a67fb586f6dcbc8679dc6732a8700fe298a983c"
+    }
+  ],
+  "release_helper_pid_not_recorded": true,
+  "release_helper_note": "Actual CLI tool exits are observed; later repeated audit does not persist its own PID in the original protocol. No PID is invented. Original launch owner and recorded recovery owners are independently verified gone.",
+  "failed_inspections": [
+    {
+      "session_id": null,
+      "exit_code": 1,
+      "tool_chunk": "65e573",
+      "reason": "Compile owner was already gone; no handoff or snapshot written"
+    },
+    {
+      "session_id": null,
+      "exit_code": 1,
+      "tool_chunk": "12a183",
+      "reason": "Wrong launch metadata key; no retry signal sent"
+    },
+    {
+      "session_id": 86474,
+      "exit_code": 1,
+      "tool_chunk": "d9837e",
+      "reason": "Wrong metadata helper API; no evidence or artifact mutation"
+    },
+    {
+      "session_id": null,
+      "exit_code": 1,
+      "tool_chunk": "fa32d5",
+      "reason": "Wrong protocol reader API; no archive or deletion"
+    }
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
