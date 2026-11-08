@@ -1,0 +1,140 @@
+"""Actual 507-entry source contract and synthetic checkpoint I/O controls only."""
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import struct
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+import dory_checkpoint_loader_v1 as d
+
+
+class Source(unittest.TestCase):
+    def test_actual_complete_official_contract(self):
+        c=d.source_contract()
+        self.assertEqual((c['tensor_count'],c['parameters'],c['file_bytes']),(507,3975229440,7950515472))
+        self.assertEqual(sum(x['end']-x['start']for x in c['rows']),7950458880)
+        self.assertEqual(max(x['end']-x['start']for x in c['rows']),671088640)
+        self.assertEqual(c['full_sha256'],'207483664dfef54c4c4438863260d3ba423bf3d6009b43fe84264b281e9fda23')
+        self.assertEqual(c['config']['n_recurrent_loops'],2)
+        self.assertEqual(c['config']['recurrent_kv_cache_mode'],'per_loop')
+    def test_native_frameworks_not_imported(self):
+        self.assertFalse({'torch','numpy','tokenizers','transformers'}&set(sys.modules))
+    def test_changed_contract_source_rejected(self):
+        with patch.object(d,'CONTRACT_SHA','0'*64),self.assertRaises(ValueError):d.source_contract()
+    def test_changed_header_source_rejected(self):
+        with patch.object(d,'HEADER_SHA','0'*64),self.assertRaises(ValueError):d.source_contract()
+    def test_missing_guard_rejected_before_file_access(self):
+        with self.assertRaises(ValueError):d.load_checkpoint('/missing',{},torch=None,guard=None)
+    def test_expired_guard_rejects_before_source_loading(self):
+        def fail():raise RuntimeError('expired')
+        with patch.object(d,'source_contract')as load:
+            with self.assertRaisesRegex(RuntimeError,'expired'):
+                d.load_checkpoint('/missing',{},torch=None,guard=fail)
+            load.assert_not_called()
+
+
+class Stream(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory()
+        self.path=Path(self.tmp.name)/'model.safetensors'
+        header={'a':dict(dtype='BF16',shape=[2,3],data_offsets=[0,12]),
+                'b':dict(dtype='BF16',shape=[2],data_offsets=[12,16])}
+        self.raw=json.dumps(header,separators=(',',':')).encode()
+        self.payload=struct.pack('<8H',0,0x3f80,0x4000,0xc000,1,0x8000,0x3f00,0x3f81)
+        self.content=struct.pack('<Q',len(self.raw))+self.raw+self.payload
+        self.path.write_bytes(self.content)
+        self.contract=dict(header=self.raw,rows=[dict(name=k,shape=v['shape'],start=v['data_offsets'][0],end=v['data_offsets'][1])for k,v in header.items()],
+                           max_tensor_bytes=12,file_bytes=len(self.content),data_bytes=16,tensor_count=2,full_sha256=hashlib.sha256(self.content).hexdigest())
+        self.fd=os.open(self.path,os.O_RDONLY)
+        self.calls=0
+    def tearDown(self):
+        os.close(self.fd);self.tmp.cleanup()
+    def guard(self):self.calls+=1
+    def convert(self,buffer,shape):return memoryview(buffer)
+    def validate(self,value,shape,guard):
+        guard()
+        self.assertEqual(len(value),2*__import__('math').prod(shape))
+    def load(self,**kw):
+        return d._stream(self.fd,kw.pop('contract',self.contract),kw.pop('guard',self.guard),
+                         kw.pop('convert',self.convert),kw.pop('validate',self.validate),**kw)
+    def test_single_read_loads_complete_physical_payload(self):
+        weights,proof=self.load()
+        self.assertEqual(bytes(weights['a'])+bytes(weights['b']),self.payload)
+        self.assertTrue(proof['full_file_hash_verified'])
+        self.assertEqual(proof['file_bytes_read'],len(self.content))
+        self.assertFalse(proof['separately_qualified_model'])
+        self.assertEqual(len(proof['tensors']),2)
+        self.assertGreaterEqual(self.calls,6)
+    def test_buffers_retain_ownership_after_return(self):
+        weights,_=self.load()
+        self.assertIsInstance(weights['a'].obj,bytearray)
+        self.assertIsNot(weights['a'].obj,weights['b'].obj)
+        self.assertEqual(bytes(weights['a']),self.payload[:12])
+    def test_one_allocation_for_each_physical_tensor(self):
+        sizes=[]
+        def allocate(size):sizes.append(size);return bytearray(size)
+        self.load(allocate=allocate)
+        self.assertEqual(sizes,[12,4])
+    def test_chunk_reads_cover_all_bytes(self):
+        with patch.object(d,'CHUNK_BYTES',4):
+            weights,proof=self.load()
+        self.assertEqual(bytes(weights['a'])+bytes(weights['b']),self.payload)
+        self.assertEqual(proof['chunk_bytes'],4)
+        self.assertGreaterEqual(self.calls,9)
+    def test_changed_payload_rejected_by_full_lfs_hash(self):
+        raw=bytearray(self.content);raw[-1]^=1;self.path.write_bytes(raw)
+        with self.assertRaisesRegex(ValueError,'LFS SHA256'):self.load()
+    def test_header_raw_change_rejected(self):
+        raw=bytearray(self.content);raw[8]^=1;self.path.write_bytes(raw)
+        with self.assertRaisesRegex(ValueError,'raw safetensors header'):self.load()
+    def test_header_length_change_rejected(self):
+        self.path.write_bytes(struct.pack('<Q',len(self.raw)+1)+self.content[8:])
+        with self.assertRaisesRegex(ValueError,'header prefix'):self.load()
+    def test_short_header_rejected(self):
+        self.path.write_bytes(self.content[:9])
+        with self.assertRaises(ValueError):self.load()
+    def test_short_tensor_rejected(self):
+        self.path.write_bytes(self.content[:-1])
+        with self.assertRaisesRegex(ValueError,'truncation'):self.load()
+    def test_trailing_bytes_rejected(self):
+        self.path.write_bytes(self.content+b'x')
+        with self.assertRaisesRegex(ValueError,'trailing'):self.load()
+    def test_reordered_intervals_rejected(self):
+        c=copy.deepcopy(self.contract);c['rows'].reverse()
+        with self.assertRaisesRegex(ValueError,'Sequential'):self.load(contract=c)
+    def test_missing_physical_tensor_rejected(self):
+        c=copy.deepcopy(self.contract);c['rows'].pop()
+        with self.assertRaises(ValueError):self.load(contract=c)
+    def test_wrong_tensor_count_rejected(self):
+        c=copy.deepcopy(self.contract);c['tensor_count']=3
+        with self.assertRaisesRegex(ValueError,'Every original tensor'):self.load(contract=c)
+    def test_tensor_cap_checked_before_allocate(self):
+        c=copy.deepcopy(self.contract);c['max_tensor_bytes']=8
+        with self.assertRaises(ValueError),patch.object(d,'bytearray',create=True,side_effect=AssertionError('no allocation')):
+            self.load(contract=c,allocate=lambda n:(_ for _ in ()).throw(AssertionError('no allocation')))
+    def test_guard_failure_aborts_without_result(self):
+        def guard():
+            self.calls+=1
+            if self.calls==5:raise RuntimeError('lease lost')
+        with self.assertRaisesRegex(RuntimeError,'lease lost'):self.load(guard=guard)
+    def test_value_validation_failure_aborts_without_result(self):
+        def reject(*unused):raise ValueError('nonfinite fixture')
+        with self.assertRaisesRegex(ValueError,'nonfinite'):self.load(validate=reject)
+    def test_identity_replacement_rejected(self):
+        expected=d.identity(self.path)
+        replacement=self.path.with_name('new.safetensors');replacement.write_bytes(self.content)
+        replacement.replace(self.path)
+        with self.assertRaisesRegex(ValueError,'identity'):d.check_identity(self.path,self.fd,expected)
+    def test_file_descriptor_and_path_identity(self):
+        expected=d.identity(self.path)
+        d.check_identity(self.path,self.fd,expected)
+        expected['inode']+=1
+        with self.assertRaises(ValueError):d.check_identity(self.path,self.fd,expected)
+
+
+if __name__=='__main__':unittest.main(verbosity=2)

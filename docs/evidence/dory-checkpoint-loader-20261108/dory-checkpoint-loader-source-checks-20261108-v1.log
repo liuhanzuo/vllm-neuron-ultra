@@ -1,0 +1,41 @@
+test_actual_complete_official_contract (__main__.Source) ... ok
+test_changed_contract_source_rejected (__main__.Source) ... ok
+test_changed_header_source_rejected (__main__.Source) ... ok
+test_expired_guard_rejects_before_source_loading (__main__.Source) ... ok
+test_missing_guard_rejected_before_file_access (__main__.Source) ... ok
+test_native_frameworks_not_imported (__main__.Source) ... ok
+test_buffers_retain_ownership_after_return (__main__.Stream) ... ok
+test_changed_payload_rejected_by_full_lfs_hash (__main__.Stream) ... ok
+test_chunk_reads_cover_all_bytes (__main__.Stream) ... ok
+test_file_descriptor_and_path_identity (__main__.Stream) ... ok
+test_guard_failure_aborts_without_result (__main__.Stream) ... ok
+test_header_length_change_rejected (__main__.Stream) ... ok
+test_header_raw_change_rejected (__main__.Stream) ... ok
+test_identity_replacement_rejected (__main__.Stream) ... FAIL
+test_missing_physical_tensor_rejected (__main__.Stream) ... ok
+test_one_allocation_for_each_physical_tensor (__main__.Stream) ... ok
+test_reordered_intervals_rejected (__main__.Stream) ... ok
+test_short_header_rejected (__main__.Stream) ... ok
+test_short_tensor_rejected (__main__.Stream) ... ok
+test_single_read_loads_complete_physical_payload (__main__.Stream) ... ok
+test_tensor_cap_checked_before_allocate (__main__.Stream) ... ok
+test_trailing_bytes_rejected (__main__.Stream) ... ok
+test_value_validation_failure_aborts_without_result (__main__.Stream) ... ok
+test_wrong_tensor_count_rejected (__main__.Stream) ... ok
+
+======================================================================
+FAIL: test_identity_replacement_rejected (__main__.Stream)
+----------------------------------------------------------------------
+ValueError: Ordinary owned checkpoint
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_checkpoint_loader_v1.py", line 132, in test_identity_replacement_rejected
+    with self.assertRaisesRegex(ValueError,'identity'):d.check_identity(self.path,self.fd,expected)
+AssertionError: "identity" does not match "Ordinary owned checkpoint"
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.018s
+
+FAILED (failures=1)

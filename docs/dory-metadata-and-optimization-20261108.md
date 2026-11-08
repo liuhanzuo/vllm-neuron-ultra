@@ -57,3 +57,15 @@
 实际执行继续排在正在运行的 Nemotron 和已排队的 MiniCPM5 之后。Dory 仍需完成权重加载、分词器与模板运行、RoPE/投影/SDPA 数值对照、原权重全模型参考、Neuron 移植，以及原定冷缓存、长解码、槽位复用、质量与配对服务性能检查。
 
 [元数据结果](evidence/dory-metadata-rotary-20261108/metadata/metadata-review.json) · [23 项检查与源码结论](evidence/dory-metadata-rotary-20261108/dory-metadata-rotary-root-source-review-20261108-v1.json) · [证据清单](evidence/dory-metadata-rotary-20261108/manifest.json)
+
+## 原始 BF16 权重加载代码已准备
+
+加载程序现已实现并通过 **24 项源码与合成文件检查**。它按已核验的官方文件头依次读取 507 个物理张量，每个张量只分配一份底层字节缓冲，读取块大小限制为 1 MiB；按文件顺序同时累计整个 checkpoint 的 SHA256，只有完全匹配官方 LFS 校验值才返回权重。张量名称、完整形状、偏移和文件身份必须匹配，两个循环继续共用原来的物理参数。
+
+实现计划通过 `torch.frombuffer` 让 CPU BF16 张量持有底层缓冲，避免先缓存整个文件再复制一份全部权重。有限值检查也按小块执行。当前只用小型合成文件与标准库 `memoryview` 验证了读取、哈希、缓冲寿命和中断处理；真实 PyTorch 缓冲所有权、官方权重值、实际内存峰值和原生模型构造尚未运行。这里的 7,950,458,880 字节只是权重数据量，不是实际峰值内存。
+
+首轮反例测试中，替换文件已被“原文件失去链接”的检查正确拒绝，但测试错误地要求看到稍后的身份不匹配消息；已调整测试断言，生产代码未因此放宽。原失败记录保留。
+
+该模块没有下载器、模型启动入口或自动执行路径。未来必须由串行运行器提供实际运行资格和资源检查，再调用加载函数。后续仍依次需要官方完整文件、实际加载验证、原生数值对照、Neuron 基线以及全部完整模型验收，不能把加载器测试算作模型完成或提速。
+
+[加载代码与 24 项检查](evidence/dory-checkpoint-loader-20261108/dory-checkpoint-loader-source-preparation-20261108-v1.json) · [源码和日志清单](evidence/dory-checkpoint-loader-20261108/manifest.json)。

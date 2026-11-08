@@ -1,0 +1,87 @@
+{
+  "schema": "dory_checkpoint_loader_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T10:13:18.604230+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_checkpoint_loader_v1.py",
+    "sha256": "61e20085087318d79b94e98fac6f82ada245818a2f61723de4b4afa888659cf8",
+    "bytes": 10109
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_checkpoint_loader_v1.py",
+    "sha256": "693c7dfca936cd86fde7da717d274267aba07eaeff6bf352b8b08b64231f88a3",
+    "bytes": 7700
+  },
+  "metadata_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/metadata-review.json",
+    "sha256": "04125c5a8446c9d3c6dcb9cfe61b9dd36e4f6fed7630ae25897a6f66dabcf7eb",
+    "bytes": 5168
+  },
+  "original_contract": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_contract.py",
+    "sha256": "4f0f9cdd3cb17ae23330944088dfc0334077b96463bb84e91b6194b8979fe95f",
+    "bytes": 10609
+  },
+  "tests": {
+    "passed": 24,
+    "actual_exit": {
+      "exit_code": 0,
+      "tool_chunk": "2c3223"
+    },
+    "log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-loader-source-checks-20261108-v2.log",
+      "sha256": "e853d2cb6ae70a19d0346b395ecb9297aca6808b2a86dca483cbfa692aded6fa",
+      "bytes": 1623
+    }
+  },
+  "preserved_initial_test": {
+    "actual_exit": {
+      "exit_code": 1,
+      "tool_chunk": "ad11a4"
+    },
+    "tests": 24,
+    "failures": 1,
+    "log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-loader-source-checks-20261108-v1.log",
+      "sha256": "ffe6e50e83e6490eacbf80300fbcf5c747803eb426934d1af09d66cf97920034",
+      "bytes": 2312
+    },
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_checkpoint_loader_v1.py.initial.txt",
+      "sha256": "f0c153b2369526890c24b291c81c69878aaac6ca309a5cbb15c878d2fc76b209",
+      "bytes": 7716
+    },
+    "cause": "Replacement file was correctly rejected by unlinked-original-file check before identity comparison; test incorrectly required a later error message. Only test assertion changed."
+  },
+  "implementation": [
+    "No native imports, downloading, checkpoint reads, allocations or service launch at module import.",
+    "Public load_checkpoint validates pinned actual507tensorcontract and caller-supplied original file identity; caller must provide independently admitted serial lease/resource guard and actual torch module.",
+    "One bytearray allocated per physical BF16 tensor; 1MiB bounded pread chunks update whole-file official LFS SHA256 before any returned weights. Original rows/offsets/header must match; all507weights loaded once.",
+    "torch.frombuffer is intended to retain backing bytearray without extra full checkpoint copy; finite checks run in bounded slices. Actual torch storage ownership/finite checks have not yet run.",
+    "No model wrapper integration, no automatic reference or Neuron launch, no change to original2loops/56histories or frozen candidate."
+  ],
+  "tests_scope": [
+    "Actual saved507header+configuration inspected withoutweightdata.",
+    "Small synthetic files and memoryview conversion callback validate sequential I/O, whole-file digest, chunking, buffer lifetime, originalfileidentity, guard interruption and error propagation.",
+    "No torch import or actual weight bytes read; actual loader runtime/nativebuffersemantics and measuredpeakmemory remain required."
+  ],
+  "projected_weight_storage_bytes": 7950458880,
+  "max_single_tensor_bytes": 671088640,
+  "io_chunk_bytes": 1048576,
+  "projected_memory_scope": "Tensor payload storage only; Python, model/reference, validation and framework overhead excluded. No measured fit or peak-memory claim.",
+  "source_only": true,
+  "runtime_admitted": false,
+  "checkpoint_downloaded": false,
+  "actual_weights_loaded": false,
+  "native_buffer_semantics_tested": false,
+  "model_executed": false,
+  "native_reference_qualified": false,
+  "neuron_baseline_qualified": false,
+  "new_speedup_claim": false,
+  "remaining": [
+    "Review and admit future serial loader environment/resource plan after current Nemotron and queuedMini.",
+    "Download exact official7,950,515,472bytecheckpoint onlywithstoragebudget; verifycompleteLFShash whileloading; preserve source/config/tokenizer/dispatch pins.",
+    "Validate actual frombuffer ownership and originalcandidateweights/learnedscales withfulldata; nativeRoPE/projection/SDPAparity; tokenizer/templateexecution.",
+    "Fullmodelnative/Neuron correctness,cold,long,slotreuse,quality,pairedservingperformancegates unchanged."
+  ]
+}
