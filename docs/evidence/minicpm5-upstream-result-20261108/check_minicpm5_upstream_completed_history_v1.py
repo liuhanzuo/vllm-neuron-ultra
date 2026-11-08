@@ -1,0 +1,68 @@
+import copy,hashlib,sys,unittest
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R))
+import minicpm5_upstream_completed_history_v1 as h
+
+def ref(name):return dict(path='/fixture/'+name,sha256=hashlib.sha256(name.encode()).hexdigest())
+def fixture():
+ old=dict(schema='prior',rows=[dict(unit='old-'+str(i))for i in range(978)],complete_count=978,processes=[dict(pid=i+1,start_ticks=str(i+500))for i in range(190)],source_sha256={'/old.py':'a'*64},root_release_refs=[ref('failed-release')],root_finalized=True,all_planned_launches_accounted_for=True,runtime_physical_drain_required=True,other_model_outcomes={'Mini':'rejected','Dory':'arithmetic_only','Phi':'pending'})
+ old.update(appended_from=ref('older'),appended_terminal_audit=ref('older-audit'),latest_producer='dory',latest_producer_qualified=False,latest_producer_exit=ref('older-exit'),latest_producer_terminal_audit=ref('older-audit'))
+ old['process_predecessors']=copy.deepcopy(old['processes'])
+ ext=dict(prior=h.PRIOR,terminal=ref('terminal'),review_run=ref('run'),review_exit=ref('exit'),audit=ref('audit'))
+ pins={v['path']:v['sha256']for v in ext.values()}
+ rows=[dict(unit='new-'+str(i))for i in range(3)];processes=[dict(pid=i+10001,start_ticks=str(i+20001))for i in range(6)];processes[-1]['next_admission_must_prove_gone']=True
+ return old,h.compose(old,rows,processes,pins,ext)
+class History(unittest.TestCase):
+ def setUp(self):self.old,self.value=fixture()
+ def check(self):return h.extension(self.old,self.value)
+ def test_exact_extension(self):self.assertTrue(self.check())
+ def test_omitted_old_service(self):
+  self.value['rows'].pop(0)
+  with self.assertRaises(RuntimeError):self.check()
+ def test_rewritten_prior_failure(self):
+  self.value['other_model_outcomes']['Mini']='passed'
+  with self.assertRaises(RuntimeError):self.check()
+ def test_missing_old_process(self):
+  self.value['processes'].pop(0)
+  with self.assertRaises(RuntimeError):self.check()
+ def test_reused_process_identity(self):
+  self.value['processes'][-2]=copy.deepcopy(self.value['processes'][0])
+  with self.assertRaises(RuntimeError):self.check()
+ def test_old_source_changed(self):
+  self.value['source_sha256']['/old.py']='b'*64
+  with self.assertRaises(RuntimeError):self.check()
+ def test_wrong_completed_count(self):
+  self.value['complete_count']=978
+  with self.assertRaises(RuntimeError):self.check()
+ def test_no_model_promotion(self):
+  self.value['latest_producer_qualified']=True
+  with self.assertRaises(RuntimeError):self.check()
+ def test_finalizer_needs_external_exit(self):
+  self.value['processes'][-1]['next_admission_must_prove_gone']=False
+  with self.assertRaises(RuntimeError):self.check()
+ def test_missing_actual_exit_pin(self):
+  del self.value['source_sha256'][self.value['minicpm5_upstream_append']['review_exit']['path']]
+  with self.assertRaises(RuntimeError):self.check()
+ def test_fabricated_release(self):
+  self.value['root_release_refs'].append(ref('invented'))
+  with self.assertRaises(RuntimeError):self.check()
+class Exit(unittest.TestCase):
+ def setUp(self):
+  self.reference=ref('review-run');self.run=dict(schema='minicpm5_upstream_independent_review_run_v1',complete=True,owner=dict(pid=500001,start_ticks='71'),actual_self_exit_claimed=False,model_exit_verified=True,physical_drain_verified=True,full_model_qualified=False,new_speedup_claim=False,terminal=h.TERMINAL,actual_model_exit=dict(session_id=10266,exit_code=0,tool_chunk='d0cecb'))
+  self.exited=dict(schema='minicpm5_upstream_review_actual_external_exit_v1',reviewer='/root',actual_tool_exit_observed=True,exact_owner_gone=True,run=self.reference,owner=self.run['owner'],actual_exit=dict(session_id=19,exit_code=0,tool_chunk='abcdef'))
+ def check(self):return h.exit_check(self.exited,self.reference,self.run)
+ def test_exact_receipt(self):self.assertTrue(self.check())
+ def test_nonzero_review(self):
+  self.exited['actual_exit']['exit_code']=1
+  with self.assertRaises(RuntimeError):self.check()
+ def test_missing_external_exit(self):
+  self.exited['actual_tool_exit_observed']=False
+  with self.assertRaises(RuntimeError):self.check()
+ def test_wrong_review_owner(self):
+  self.exited['owner']=dict(pid=500002,start_ticks='71')
+  with self.assertRaises(RuntimeError):self.check()
+ def test_wrong_actual_model_exit(self):
+  self.run['actual_model_exit']['exit_code']=1
+  with self.assertRaises(RuntimeError):self.check()
+ def test_no_native_import(self):self.assertFalse({'torch','numpy','torch_neuronx','transformers'}&set(sys.modules))
+if __name__=='__main__':unittest.main(verbosity=2)
