@@ -1,0 +1,72 @@
+{
+  "schema": "dory_reference_loader_bridge_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T16:05:44.442720+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_reference_loader_bridge_v1.py",
+    "sha256": "02574979fd2b2abaed6999f64f03297d94c1e4cf4c35ec02ccb280b0c1022a6d"
+  },
+  "checker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_reference_loader_bridge_v1.py",
+    "sha256": "6af46c389ba4c2553c4b94c6c1844807419d18ad4a33847538d558eced9b88ed"
+  },
+  "original_loader": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_checkpoint_loader_v1.py",
+    "sha256": "61e20085087318d79b94e98fac6f82ada245818a2f61723de4b4afa888659cf8"
+  },
+  "original_candidate": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_reference_candidate.py",
+    "sha256": "366dc0ab95bbeebb3bd2311f205e23afc63ce3fbbcfca321345185dcbc191716"
+  },
+  "original_contract": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/dory_contract.py",
+    "sha256": "4f0f9cdd3cb17ae23330944088dfc0334077b96463bb84e91b6194b8979fe95f"
+  },
+  "metadata": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-metadata-20261108-v1/metadata-review.json",
+    "sha256": "04125c5a8446c9d3c6dcb9cfe61b9dd36e4f6fed7630ae25897a6f66dabcf7eb"
+  },
+  "prior_loader_preparation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-checkpoint-loader-source-preparation-20261108-v1.json",
+    "sha256": "3dcebe98fd79bf25aad58cd982186097ee10c09c36532deba42fea685f154014"
+  },
+  "tests": {
+    "passed": 15,
+    "actual_exit": {
+      "session_id": null,
+      "exit_code": 0,
+      "tool_chunk": "d67319"
+    },
+    "scope": "Actual507tensorheader/sourcepins plus tiny synthetic storage-descriptor fixtures and import/lease failure paths; no torch import, tensor bytes or model execution"
+  },
+  "implementation": [
+    "Guarded future load_checkpoint then unchanged DoryReferenceCandidate construction with exact official BF16 config,TP1,two loops and56per-loop histories.",
+    "Byte-for-byte original candidate/contract executed only in future caller torch process; existing module names rejected rather than replaced; failed import removes only new own registrations.",
+    "All507weights including learned scales must remain distinct full BF16 CPU physical buffers; detached reference tensors must preserve exact original pointer,storage size,shape,stride and offset.",
+    "Whole official checkpoint LFS digest and per-tensor payload hashes remain bound; no original loader,candidate,model math or frozen runtime sources changed.",
+    "No downloader,model forward,tokenizer,scheduler,Neuron adapter or automatic runtime admission."
+  ],
+  "tensor_count": 507,
+  "parameters": 3975229440,
+  "weight_payload_bytes": 7950458880,
+  "checkpoint_file_bytes": 7950515472,
+  "n_recurrent_loops": 2,
+  "per_loop_cache_histories": 56,
+  "checkpoint_downloaded": false,
+  "actual_weights_loaded": false,
+  "actual_torch_storage_semantics_tested": false,
+  "model_constructed": false,
+  "model_forward_executed": false,
+  "native_reference_qualified": false,
+  "neuron_baseline_qualified": false,
+  "peak_memory_fit_proven": false,
+  "new_speedup_claim": false,
+  "remaining": [
+    "Admit serial native environment/resource plan after Nemotron and queuedMini; reserve exact official checkpoint bytes plus original free-space floor before download.",
+    "Actual frombuffer/bytearray ownership and detach storage tests and measured peak memory; official whole checkpoint download/hash; no fixture may qualify original weights.",
+    "Official dispatch,packed versus separate projections,SDPA,tokenizer/template,complete original-weight native reference.",
+    "Original Neuron baseline,numeric,cold,long decode,slot reuse,quality and paired-serving gates."
+  ]
+}
