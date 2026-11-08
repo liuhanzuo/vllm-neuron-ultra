@@ -1,0 +1,163 @@
+{
+  "schema": "minicpm5_frame1_mlp_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T07:14:46.818088+00:00",
+  "decision": "source_prepared; serial_runner_and_runtime_admission_pending",
+  "source_only": true,
+  "runtime_admitted": false,
+  "runner_prepared": false,
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_mlp_worker_v1.py",
+      "sha256": "58c3f6d09f77e3287cd951e947b4217efc60bfa11131389b3bdb51f641637f94",
+      "bytes": 25796
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_mlp_replay_v1.py",
+      "sha256": "efaac365d5b036603b8f95d682da3676b0a018aaf43299402c6e1b4967ed59b0",
+      "bytes": 9983
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_frame1_mlp_source_v1.py",
+      "sha256": "1e157bde6e0cbb45902e524a4d40aa810388079178570133e1b30c2084e7a18a",
+      "bytes": 9232
+    }
+  ],
+  "unchanged_predecessor_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_worker_v2.py",
+      "sha256": "c32c3f83d61616179bed2b4121d4c36810428aa88039b9d3999dc5746fc380a3",
+      "bytes": 21045
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_replay_v2.py",
+      "sha256": "d5faf86069c1d65289e6c1309c211fd696c6ad67e5cc47f6eb2f572b092a56b5",
+      "bytes": 8381
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame17_mlp_runner_v2.py",
+      "sha256": "57af2bf85c9291b0c2442242180d73e308b4543346d3c9983495b0f99ddd3b2f",
+      "bytes": 21412
+    }
+  ],
+  "original_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-input-plan-20261107-v1.json",
+    "sha256": "ce599a2beae22df0a05c13591854cfab8ba57519df11ee93a0d25ad4392306c8",
+    "bytes": 4087706
+  },
+  "actual_anchor_references": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "04a6334a2950b16f9fb4c8dc3870603584b5c6e0da010bc8fab7583c98c7ffc0",
+      "bytes": 213511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-01/result.json",
+      "sha256": "d1cac9b1a0f1c6095a4dd6a885a782251da9cab7bed3d0f254e14201aa357d02",
+      "bytes": 213511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "9141f970060fb3ba0857b482c4f79505e72da48734cfae763ceb473e8684c74a",
+      "bytes": 213300
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-01/result.json",
+      "sha256": "6e315aa0a88a7d52fb87f362a882e50b06d8089d92e5d6d6113b621f54b18523",
+      "bytes": 213300
+    }
+  ],
+  "frame": {
+    "index": 1,
+    "fixture": 7,
+    "slot": 1,
+    "step": 0,
+    "prediction_position": 1230,
+    "native_length": 1231,
+    "cpu_bucket": 2048
+  },
+  "capture_fields": [
+    "input",
+    "gate",
+    "up",
+    "down_input",
+    "output"
+  ],
+  "arm": "strict_anchor_s0",
+  "precision_interventions": [],
+  "source_controls": {
+    "tests": 19,
+    "passed": true,
+    "actual_exit_code": 0,
+    "actual_tool_chunk": "c537fc",
+    "test_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_frame1_mlp_source_v1.py",
+      "sha256": "1e157bde6e0cbb45902e524a4d40aa810388079178570133e1b30c2084e7a18a",
+      "bytes": 9232
+    },
+    "no_model_framework_imported": true,
+    "checks": [
+      "pinned actual frame/call/shape and both rank baseline metadata",
+      "four whole CPU boundary metadata equal to original full-down strict baseline",
+      "reject changed hash, stride, rank, prompt, precision policy and mask",
+      "original dispatch identity, no precision patch constructor",
+      "dense original feature-major and row-major layouts, full capture budgets",
+      "original SiLU activation source and no history route",
+      "mechanism classification cannot claim final KL causality"
+    ]
+  },
+  "retained_failed_source_check": {
+    "exit_code": 1,
+    "tool_chunk": "662fed",
+    "cause": "new boundary-set comparison passed Python sets to inherited JSON equality helper; corrected to sorted lists before final successful checks"
+  },
+  "output_budget": {
+    "native_raw_bytes": 55463936,
+    "cpu_raw_bytes_each": 54525952,
+    "all15_raw_bytes": 164515840,
+    "per_file_cap_bytes": 16777216,
+    "total_cap_bytes": 201326592,
+    "full_fixed_input_product_bytes": 25165824
+  },
+  "numerical_controls_required": {
+    "fullshape_controls": 15,
+    "shape_stride_dtype_and_raw_bytes_exact": true,
+    "native_interpreter_threads": 2,
+    "cpu_and_fixed_input_threads": 1,
+    "actual_execution_completed": false
+  },
+  "intended_analysis": [
+    "actual native versus actual CPU for all five MLP boundaries over all real tokens and final prediction",
+    "same complete CPU input: full MLP versus TP2 MLP versus full down using the observed TP2 front-half product",
+    "full padded shape retained in operations; slice only for reporting metrics"
+  ],
+  "no_history_prefix": {
+    "stop_after_layer0": true,
+    "forbid_layer1_and_final_norm": true,
+    "forbid_cpu_cache_read_write": true,
+    "native_fresh_cache": true,
+    "whole_model_history_not_replayed": true
+  },
+  "remaining_gates": [
+    "original32",
+    "cold84",
+    "long2049_and93markers",
+    "slot_reuse_and_inactive_resume",
+    "quality96",
+    "paired_vllm_neuron_serving"
+  ],
+  "next_actions": [
+    "Create separately reviewed successor runner/spec retaining complete current predecessor catalog and fresh serial lock/drain",
+    "Bind all inherited source and input pins plus these new sources and four added CPU metadata references",
+    "Enforce expanded finite output and resource caps; preserve exact original model weights and numerical criteria",
+    "After active Smol and queued Nemotron work, admit native, CPU TP2 and local replay stages serially; retain original actual exits",
+    "Only interpret mechanism contrasts if all15 complete tensor controls pass"
+  ],
+  "native_model_executed": false,
+  "numerical_replay_executed": false,
+  "new_speedup_claim": false,
+  "full_model_qualified": false,
+  "all_15_model_families_remain_in_scope": true,
+  "active_smol_session": 57994,
+  "nemotron_queue_unchanged": true
+}
