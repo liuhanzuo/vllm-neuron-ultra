@@ -106,3 +106,5 @@ declared fully optimized.
 [2026-11-08 小模型候选复查](recent-small-models-20261108.md)记录官方仓库更新、草稿模型排除依据与原精度候选的准备状态，保留全部 15 个模型家族。
 
 最新局部实测：[MiniCPM5 完整有效前缀的注意力输入一致，差异从注意力输出出现；固定 CPU 布局替换后恢复原生残差/归一化，独立字节复核通过](minicpm5-upstream-result-20261108.md)。没有新增整模型候选或提速倍数。
+
+最新运行器进展：[Nemotron v15 核验完整 PWP/DVE 资源，113 项检查通过，已发起 r7 复验](nemotron-v15-compiler-resources-20261108.md)。原模型实现、52 阶段和提速表保持原有结论，尚无新整模型合格结果。
