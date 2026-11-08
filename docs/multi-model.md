@@ -102,3 +102,5 @@ quality and matched serving measurements for each model. No model family is
 declared fully optimized.
 
 最新工具准备与实际进度见 [Nemotron r5 归档与 MiniCPM5 历史读取修复](r5-finalizer-mini-history-20261108.md)。模型性能结论仍以已完成的配对结果为准。
+
+[2026-11-08 小模型候选复查](recent-small-models-20261108.md)记录官方仓库更新、草稿模型排除依据与原精度候选的准备状态，保留全部 15 个模型家族。

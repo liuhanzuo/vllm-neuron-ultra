@@ -1,0 +1,69 @@
+{
+  "schema": "official_small_delta_selection_20261108_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T09:29:46.895587+00:00",
+  "authors_scanned": 19,
+  "latest_repositories_scanned": 293,
+  "changed_revisions_or_new_repositories": 22,
+  "newly_created_repositories": [
+    {
+      "id": "tencent/Qwen3.8-27B-DSpine-b16",
+      "sha": "ea909c0f5fab8865f9e14600334f55f7ce47308f",
+      "createdAt": "2026-11-07T14:20:29.000Z",
+      "lastModified": "2026-11-07T15:40:48.000Z",
+      "downloads": 0,
+      "likes": 33,
+      "pipeline_tag": "text-generation",
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true
+    }
+  ],
+  "successful_requests_including_targeted_and_source": 42,
+  "prior_families_preserved": 15,
+  "existing_model_selection_replaced": false,
+  "new_model_qualification": false,
+  "new_baseline": false,
+  "new_speedup_claim": false,
+  "decisions": [
+    {
+      "model": "tencent/Qwen3.8-27B-DSpine-b16",
+      "revision": "ea909c0f5fab8865f9e14600334f55f7ce47308f",
+      "decision": "Exclude as independent<10B target: draft depends on>10B target model",
+      "draft_checkpoint_metadata_elements": 2025912064,
+      "required_target": "Qwen/Qwen3.8-27B",
+      "target_metadata_elements": 27781427952,
+      "evidence": [
+        "targeted.json",
+        "tencent__Qwen3.8-27B-DSpine-b16.README.md",
+        "Qwen__Qwen3.8-27B.metadata.json"
+      ]
+    },
+    {
+      "model": "XHToken/Spark-X2.6-4B",
+      "revision": "64ca8f2a295b8ceb2757b9d4749a6558c4759e5b",
+      "decision": "Retain existing family and original fixed experiment revision; newer model/config source bytes equal. No new native claim.",
+      "metadata_parameters": 4112079360,
+      "newer_weights_and_tokenizer_equal_not_proven": true
+    },
+    {
+      "model": "XHToken/Spark-X2.6-1.7B",
+      "revision": "0e60633b345b19ba9f56ed1fda197acd271e8546",
+      "decision": "Optional smaller variant within existing Spark family; originalBF16 metadata<10B, separate baseline required",
+      "metadata_parameters": 1707657216
+    }
+  ],
+  "remaining_unexamined_changed_repositories": [
+    "XHToken/Spark-X2.6-1.7B-GGUF",
+    "XHToken/Spark-X2.6-4B-GGUF",
+    "ibm-granite/granite-speech-5.0-2b",
+    "nvidia/Metatron-v1"
+  ],
+  "quantized_storage_element_counts_not_original_model_parameter_counts": true,
+  "scan_exhaustive": false,
+  "serial_priority": [
+    "Complete actual Nemotron9B r5 and original independent terminal audit",
+    "MiniCPM5 frame1 diagnostic with original remaining full gates",
+    "Continue other retained15families including official original-weight baselines for Nano4B and Spark"
+  ],
+  "no_weight_payload_or_native_execution": true
+}
