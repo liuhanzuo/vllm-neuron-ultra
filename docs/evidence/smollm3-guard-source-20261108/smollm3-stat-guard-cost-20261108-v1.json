@@ -1,0 +1,55 @@
+{
+  "schema": "smollm3_stat_guard_cost_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T04:22:33.415318+00:00",
+  "owner": {
+    "pid": 2648855,
+    "start_ticks": "389225534",
+    "ppid": 2648854,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/probe_smollm3_stat_guard_cost_20261108_v1.py"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "source_admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio13/control/source-admission.json",
+    "sha256": "0a3d3fac1a1a5dacdaa91fb09696fe72bc58bcc4d81560667278627477f5eb53"
+  },
+  "source_paths": 37315,
+  "samples": [
+    {
+      "implementation": "original",
+      "source_paths": 37315,
+      "wall_seconds": 1.763379159849137,
+      "cpu_seconds": 1.7630011520000002
+    },
+    {
+      "implementation": "stdlib_realpath",
+      "source_paths": 37315,
+      "wall_seconds": 1.0722594447433949,
+      "cpu_seconds": 1.072938497
+    },
+    {
+      "implementation": "stdlib_realpath",
+      "source_paths": 37315,
+      "wall_seconds": 1.0629667746834457,
+      "cpu_seconds": 1.0629688270000002
+    },
+    {
+      "implementation": "original",
+      "source_paths": 37315,
+      "wall_seconds": 1.7651005438528955,
+      "cpu_seconds": 1.7649538900000001
+    }
+  ],
+  "memory_peak_rss_bytes": 72429568,
+  "no_cross_call_cache": true,
+  "model_payloads_read": false,
+  "native_imports": false,
+  "performance_claim": false,
+  "concurrent_native_run": "nemotron9b_r4_nonmeasurement",
+  "original_sources_unchanged": true,
+  "limitation": "Stat-only harness diagnostic while Nemotron nonmeasurement phase may run; not a full live RuntimeContext poll or independent model benchmark."
+}

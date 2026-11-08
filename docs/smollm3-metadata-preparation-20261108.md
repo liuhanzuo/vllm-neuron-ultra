@@ -165,3 +165,11 @@ quality. No new completed matrix, model qualification or speedup is claimed.
 Nemotron r4 subsequently received serial admission using this finalized history.
 The [terminal and successor evidence](evidence/smol-terminal-nemotron-r4-20261108/manifest.json)
 includes original failure receipts, the timing diagnostic and actual launch.
+
+## Guard cost repair prepared; complete transaction still pending
+
+The [new source report](smollm3-guard-cost-20261108.md) records 71 passing
+checks and a retained-metadata component reduction from about 18.6–18.8 seconds
+to 5.1–5.2 seconds. These are validation-harness timings, not model speedups.
+The original 15-second title deadline and complete scientific matrix remain.
+No fresh Smol runtime is admitted by these component results.
