@@ -1,0 +1,87 @@
+test_actual_four_strict_baselines (__main__.MetadataReview) ... ok
+test_actual_prior_frame17_metric_arithmetic (__main__.MetadataReview) ... ok
+test_classification_front_half_different (__main__.MetadataReview) ... ERROR
+test_classification_no_output_difference (__main__.MetadataReview) ... ERROR
+test_frame17_is_not_accepted_as_frame1 (__main__.MetadataReview) ... ok
+test_no_native_imported (__main__.MetadataReview) ... ok
+test_payload_rejected_before_open (__main__.MetadataReview) ... ok
+test_real_metadata_wrong_hash_rejected (__main__.MetadataReview) ... ok
+test_reject_bitwise_flag_inconsistency (__main__.MetadataReview) ... ok
+test_reject_capture_path_escape (__main__.MetadataReview) ... ok
+test_reject_claim_of_history_consumption (__main__.MetadataReview) ... ok
+test_reject_claim_of_later_layers (__main__.MetadataReview) ... ok
+test_reject_cpu_full_anchor_hash_change (__main__.MetadataReview) ... ok
+test_reject_final_kl_causality_claim (__main__.MetadataReview) ... ok
+test_reject_inconsistent_symmetric_distance (__main__.MetadataReview) ... ok
+test_reject_layout_change (__main__.MetadataReview) ... ok
+test_reject_missing_capture_field (__main__.MetadataReview) ... ok
+test_reject_missing_control (__main__.MetadataReview) ... ok
+test_reject_missing_observed_boundary (__main__.MetadataReview) ... ok
+test_reject_missing_role (__main__.MetadataReview) ... ok
+test_reject_missing_scope (__main__.MetadataReview) ... ok
+test_reject_nonfinite_metric (__main__.MetadataReview) ... ok
+test_reject_other_prompt_length (__main__.MetadataReview) ... ok
+test_reject_precision_intervention (__main__.MetadataReview) ... ok
+test_reject_prediction_anchor_change (__main__.MetadataReview) ... ok
+test_reject_recomputed_capture (__main__.MetadataReview) ... ok
+test_reject_remaining_gate_omission (__main__.MetadataReview) ... ok
+test_reject_replica_output_change (__main__.MetadataReview) ... ok
+test_reject_same_product_contradictory_down (__main__.MetadataReview) ... ok
+test_reject_scope_shrink (__main__.MetadataReview) ... ok
+test_reject_smaller_capture (__main__.MetadataReview) ... ok
+test_reject_unearned_full_model_claim (__main__.MetadataReview) ... ok
+test_signed_zero_is_not_raw_equal (__main__.MetadataReview) ... ok
+test_synthetic_complete_future_is_only_metadata_consistency (__main__.MetadataReview) ... ERROR
+
+======================================================================
+ERROR: test_classification_front_half_different (__main__.MetadataReview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 112, in test_classification_front_half_different
+    self.assertEqual(self.run_case(change)['classification'],'front_half_differs_down_is_not_established_as_unique_cause')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 70, in run_case
+    return a.audit(*values)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 126, in audit
+    same(set(anchor['source_metadata']),set(TAPS),'Six original layout records')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 30, in same
+    def same(left,right,message):require(left==right,message)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 28, in require
+    if not value:raise ValueError(message)
+ValueError: Six original layout records
+
+======================================================================
+ERROR: test_classification_no_output_difference (__main__.MetadataReview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 115, in test_classification_no_output_difference
+    self.assertEqual(self.run_case(change)['classification'],'no_output_difference_for_this_fixed_input')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 70, in run_case
+    return a.audit(*values)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 126, in audit
+    same(set(anchor['source_metadata']),set(TAPS),'Six original layout records')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 30, in same
+    def same(left,right,message):require(left==right,message)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 28, in require
+    if not value:raise ValueError(message)
+ValueError: Six original layout records
+
+======================================================================
+ERROR: test_synthetic_complete_future_is_only_metadata_consistency (__main__.MetadataReview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 74, in test_synthetic_complete_future_is_only_metadata_consistency
+    result=self.run_case();self.assertEqual(result['capture_bytes'],164515840);self.assertEqual(result['capture_count'],15)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_review_minicpm5_frame1_metadata_v1.py", line 70, in run_case
+    return a.audit(*values)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 126, in audit
+    same(set(anchor['source_metadata']),set(TAPS),'Six original layout records')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 30, in same
+    def same(left,right,message):require(left==right,message)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py", line 28, in require
+    if not value:raise ValueError(message)
+ValueError: Six original layout records
+
+----------------------------------------------------------------------
+Ran 34 tests in 1.840s
+
+FAILED (errors=3)
