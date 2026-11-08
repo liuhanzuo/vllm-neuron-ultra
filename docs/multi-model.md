@@ -109,4 +109,6 @@ declared fully optimized.
 
 最新运行器进展：[Nemotron v15 核验完整 PWP/DVE 资源，113 项检查通过，已发起 r7 复验](nemotron-v15-compiler-resources-20261108.md)。原模型实现、52 阶段和提速表保持原有结论，尚无新整模型合格结果。
 
-最新诊断准备：[MiniCPM5 注意力内部完整采集、自身输入控制和独立字节比较源码通过 54 项检查](minicpm5-attention-source-20261108.md)，尚未执行新的模型采集。Nemotron r7 继续串行运行，提速表没有新增结果。
+最新诊断准备：[MiniCPM5 注意力内部采集、完整结果复核、串行运行和配置生成源码通过 98 项检查](minicpm5-attention-source-20261108.md)，尚未执行新的模型采集。Nemotron r7 继续串行运行，提速表没有新增结果。
+
+[Nemotron r7 局部投影拆分对照](nemotron-r7-split-progress-20261108.md)：128/256/512/1024 token 的 CPU 两种写法均正确，原写法设备输出不一致，tensor_split 逐字节一致。此为已保留阶段的运行中元数据快照，尚无整轮独立原始数据复核或新提速结论。
