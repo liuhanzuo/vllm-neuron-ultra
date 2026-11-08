@@ -1,6 +1,8 @@
-# Nemotron r5 归档准备与 MiniCPM5 历史兼容修复（2026-11-08）
+# Nemotron r5 与 MiniCPM5 历史工具记录（2026-11-08）
 
-Nemotron r5 正在完成原定的 52 阶段实验。本文记录运行中的进度快照，以及接下来接续 MiniCPM5 所需的工具修复。全部 15 个模型家族继续保留；此次没有新增模型提速倍数。
+最新状态：Nemotron r5 已因编译资源链接检查失败退出并完成回收；MiniCPM5 第 1 帧 r3 的采集、重放和独立数据复核已完成。详见 [Nemotron 结束记录](nemotron-r5-compile-interruption-20261108.md)与 [MiniCPM5 实测结果](minicpm5-frame1-diagnostic-20261108.md)。全部 15 个模型家族继续保留，未新增完整模型提速结果。
+
+## 以下为运行期间的准备与进度快照
 
 | 工作 | 已核实结果 | 仍需完成 |
 | --- | --- | --- |
