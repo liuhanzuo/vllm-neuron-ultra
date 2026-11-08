@@ -109,7 +109,7 @@ run, with no new inference result, model qualification or speedup.
 
 The [admission and terminal evidence](evidence/smollm3-admission-20261108/manifest.json)
 retains the startup snapshot, actual exits, failure log, post-finalizer verification
-and successor reader controls. The native queue is idle after this failed run;
+and successor reader controls. The sio12 native process is terminal. Its successor status is recorded below;
 Nemotron v8 remains unlaunched. Original science and resource limits remain in force.
 
 The [evidence manifest](evidence/smollm3-metadata-20261108/manifest.json) binds the
@@ -117,3 +117,36 @@ source checks, runtime patch, finalizer source, regression checkers, the older p
 complete-category forecast. These are experiment-harness sources that require the
 retained workspace and fixtures; they are not standalone installation tests of
 the unified model package. The unified model implementation remains `e0a01d3`.
+
+## Successor sio13 integrated and running
+
+The exact installation-receipt reader is now connected through all nine runtime
+modules in a fresh sio13 namespace, with fresh service names and nonces. The
+original source files and failed sio12 outputs are unchanged. The two receipt
+files are pinned in the initial source closure as well as the wheel check.
+The actual worker's complete pre-native source phase verifies all 44 installed
+files before importing inference libraries.
+
+Four integration checks, 26 finalizer/transport checks and nine budget checks
+passed. The finalizer now returns a reference computed from the exact bytes it
+just durably wrote, avoiding the previous 8 MiB console reread. A real >8 MiB
+write is tested, along with unchanged no-overwrite and 16 MiB output limits.
+
+The retained-data memory probe was rerun against the complete 760-service /
+146-process predecessor history under the original 512 MiB address-space limit.
+It peaked at 283,824,128 bytes (270.7 MiB) RSS. As before, its twelve slots repeat
+two actual fully audited reference fixtures; this is not twelve model executions.
+The final budget rehashed 37,315 source entries and projected 1,697,529,856 bytes
+total, including 99,500,032 bytes of control data, within the unchanged caps.
+
+The real external process is running under session 76500. Initial source,
+input and compiled-payload admission passed. Its first server progressed past
+the prior receipt rejection and recorded the native-ready environment stage;
+server readiness and inference requests remain unverified at this snapshot.
+The complete three-configuration, twelve-round, 264-request, 33,696-token matrix
+and all original cold-cache, long-decoding, slot-reuse and quality requirements
+remain. There is no new completed matrix, model qualification or speedup claim.
+
+The [sio13 evidence manifest](evidence/smollm3-sio13-20261108/manifest.json) binds
+the exact sources, checks, budget and observed live owner. Native experiments
+remain serial; follow the existing session rather than starting another copy.
