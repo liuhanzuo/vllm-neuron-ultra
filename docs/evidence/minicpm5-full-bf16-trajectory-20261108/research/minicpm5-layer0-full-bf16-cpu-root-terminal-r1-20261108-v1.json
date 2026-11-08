@@ -1,0 +1,494 @@
+{
+  "schema": "minicpm5_full_bf16_trajectory_integrated_terminal_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T19:58:00.553779+00:00",
+  "owner": {
+    "pid": 3326387,
+    "start_ticks": "394838811",
+    "ppid": 3326386,
+    "argv": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "complete": true,
+  "measurement_reproduction_passed": true,
+  "candidates_accepted": false,
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json",
+    "sha256": "727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff"
+  },
+  "summary": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-summary-r1-20261108-v1.json",
+    "sha256": "e311921b44d772f606ec15c387666ad37fda01ae4db141e56d3d78a6ac6fe7a0"
+  },
+  "float64_analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-float64-analysis-r1-20261108-v1.json",
+    "sha256": "2d166dff79daa0ea7900ea8ef015fb659b8ece0f4247c62b1d87566018ce6621"
+  },
+  "float64_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-bf16-float64-analysis-actual-exit-20261108-v1.json",
+    "sha256": "854eafc8eb19425cd02632a841f0f3772716a9809e4e04d743538976a52bcd03"
+  },
+  "metric_replay": {
+    "path": "/mnt/nvme/minicpm5-full-bf16-metric-replay-r1-20261108-v1/result.json",
+    "sha256": "7fbe13fe009a6366c1891a398660d6e7fd6fc524a86229cd23ee6548b051f8c4"
+  },
+  "metric_replay_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-bf16-metric-replay-actual-exit-20261108-v1.json",
+    "sha256": "a5413b44b9d7251c39d75e62fa234a35a638d5505251daae19bfbb7ac3857ffe"
+  },
+  "controls": {
+    "complete": true,
+    "rank_count": 2,
+    "arm_count": 3,
+    "calls_per_rank": 42,
+    "HF_frames_per_arm": 32,
+    "selected_tap_raw_bytes_total": 3145728,
+    "cross_rank_full_logits_tensor_hashes_equal": true,
+    "cross_rank_HF_metrics_equal": true,
+    "cross_rank_selected_tap_bundles_equal": true,
+    "raw_payloads_read": false
+  },
+  "arms": {
+    "strict_anchor_s0": {
+      "summary": {
+        "frames": 32,
+        "passed_frames": 29,
+        "passed_prefill": 7,
+        "passed_decode": 22,
+        "top1_matches": 32,
+        "overall_top1_gate": true,
+        "failed": [
+          {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 0.75,
+              "mean_abs_error": 0.10412118583917618,
+              "cosine": 0.9987252354621887,
+              "kl_reference_to_neuron": 0.10126954317092896,
+              "argmax_match": true,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 1062
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 9,
+              "fixture": 7,
+              "slot": 1,
+              "step": 2
+            },
+            "physical_row": 1,
+            "current_position": 1232,
+            "metrics": {
+              "max_abs_error": 1.125,
+              "mean_abs_error": 0.17521408200263977,
+              "cosine": 0.9977738261222839,
+              "kl_reference_to_neuron": 0.028122015297412872,
+              "argmax_match": true,
+              "reference_margin": 0.625,
+              "reference_top1": 130073,
+              "neuron_top1": 130073
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 13,
+              "fixture": 7,
+              "slot": 1,
+              "step": 3
+            },
+            "physical_row": 1,
+            "current_position": 1233,
+            "metrics": {
+              "max_abs_error": 1.126953125,
+              "mean_abs_error": 0.19864898920059204,
+              "cosine": 0.9962618350982666,
+              "kl_reference_to_neuron": 0.04872628301382065,
+              "argmax_match": true,
+              "reference_margin": 0.125,
+              "reference_top1": 130073,
+              "neuron_top1": 130073
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          }
+        ]
+      },
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 0.75,
+          "mean_abs_error": 0.10412118583917618,
+          "cosine": 0.9987252354621887,
+          "kl_reference_to_neuron": 0.10126954317092896,
+          "argmax_match": true,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 1062
+        },
+        "failed_criteria": [
+          "KL"
+        ]
+      },
+      "full_logical_calls": 14,
+      "frames": 32
+    },
+    "strict_layer0_full_bf16_prefill_only": {
+      "summary": {
+        "frames": 32,
+        "passed_frames": 28,
+        "passed_prefill": 5,
+        "passed_decode": 23,
+        "top1_matches": 31,
+        "overall_top1_gate": true,
+        "failed": [
+          {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 1.375,
+              "mean_abs_error": 0.15589292347431183,
+              "cosine": 0.9971520304679871,
+              "kl_reference_to_neuron": 0.32932785153388977,
+              "argmax_match": false,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 15182
+            },
+            "failed_criteria": [
+              "KL",
+              "high_margin_argmax"
+            ]
+          },
+          {
+            "frame": {
+              "index": 13,
+              "fixture": 7,
+              "slot": 1,
+              "step": 3
+            },
+            "physical_row": 1,
+            "current_position": 1233,
+            "metrics": {
+              "max_abs_error": 1.28125,
+              "mean_abs_error": 0.17746810615062714,
+              "cosine": 0.9969621300697327,
+              "kl_reference_to_neuron": 0.05059920623898506,
+              "argmax_match": true,
+              "reference_margin": 0.125,
+              "reference_top1": 130073,
+              "neuron_top1": 130073
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 16,
+              "fixture": 4,
+              "slot": 3,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 26,
+            "metrics": {
+              "max_abs_error": 1.359375,
+              "mean_abs_error": 0.2043772041797638,
+              "cosine": 0.9954079389572144,
+              "kl_reference_to_neuron": 0.026069695129990578,
+              "argmax_match": true,
+              "reference_margin": 0.125,
+              "reference_top1": 608,
+              "neuron_top1": 608
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 17,
+              "fixture": 1,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 27,
+            "metrics": {
+              "max_abs_error": 1.0,
+              "mean_abs_error": 0.1353095918893814,
+              "cosine": 0.9982230067253113,
+              "kl_reference_to_neuron": 0.039746783673763275,
+              "argmax_match": true,
+              "reference_margin": 1.625,
+              "reference_top1": 1216,
+              "neuron_top1": 1216
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          }
+        ]
+      },
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292347431183,
+          "cosine": 0.9971520304679871,
+          "kl_reference_to_neuron": 0.32932785153388977,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      },
+      "full_logical_calls": 14,
+      "frames": 32
+    },
+    "strict_layer0_full_bf16_both_phases": {
+      "summary": {
+        "frames": 32,
+        "passed_frames": 28,
+        "passed_prefill": 5,
+        "passed_decode": 23,
+        "top1_matches": 31,
+        "overall_top1_gate": true,
+        "failed": [
+          {
+            "frame": {
+              "index": 1,
+              "fixture": 7,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 1230,
+            "metrics": {
+              "max_abs_error": 1.375,
+              "mean_abs_error": 0.15589292347431183,
+              "cosine": 0.9971520304679871,
+              "kl_reference_to_neuron": 0.32932785153388977,
+              "argmax_match": false,
+              "reference_margin": 1.125,
+              "reference_top1": 1062,
+              "neuron_top1": 15182
+            },
+            "failed_criteria": [
+              "KL",
+              "high_margin_argmax"
+            ]
+          },
+          {
+            "frame": {
+              "index": 13,
+              "fixture": 7,
+              "slot": 1,
+              "step": 3
+            },
+            "physical_row": 1,
+            "current_position": 1233,
+            "metrics": {
+              "max_abs_error": 1.279296875,
+              "mean_abs_error": 0.18307510018348694,
+              "cosine": 0.9967406988143921,
+              "kl_reference_to_neuron": 0.028047632426023483,
+              "argmax_match": true,
+              "reference_margin": 0.125,
+              "reference_top1": 130073,
+              "neuron_top1": 130073
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 16,
+              "fixture": 4,
+              "slot": 3,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 26,
+            "metrics": {
+              "max_abs_error": 1.359375,
+              "mean_abs_error": 0.2043772041797638,
+              "cosine": 0.9954079389572144,
+              "kl_reference_to_neuron": 0.026069695129990578,
+              "argmax_match": true,
+              "reference_margin": 0.125,
+              "reference_top1": 608,
+              "neuron_top1": 608
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          },
+          {
+            "frame": {
+              "index": 17,
+              "fixture": 1,
+              "slot": 1,
+              "step": 0
+            },
+            "physical_row": 0,
+            "current_position": 27,
+            "metrics": {
+              "max_abs_error": 1.0,
+              "mean_abs_error": 0.1353095918893814,
+              "cosine": 0.9982230067253113,
+              "kl_reference_to_neuron": 0.039746783673763275,
+              "argmax_match": true,
+              "reference_margin": 1.625,
+              "reference_top1": 1216,
+              "neuron_top1": 1216
+            },
+            "failed_criteria": [
+              "KL"
+            ]
+          }
+        ]
+      },
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292347431183,
+          "cosine": 0.9971520304679871,
+          "kl_reference_to_neuron": 0.32932785153388977,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      },
+      "full_logical_calls": 14,
+      "frames": 32
+    }
+  },
+  "strict_baseline_all14_exact": true,
+  "strict_baseline_passed_frames": 29,
+  "strict_baseline_top1_matches": 32,
+  "candidate_passed_frames": [
+    28,
+    28
+  ],
+  "candidate_top1_matches": [
+    31,
+    31
+  ],
+  "original_FP32_metrics_all96_exact": true,
+  "independent_float64_classification_and_argmax_all96_match": true,
+  "independent_float64_scalar_agreement_passed": false,
+  "prespecified_tolerances_not_relaxed": true,
+  "float64_scalar_disagreement_count": 75,
+  "float64_maximum_metric_deviations": {
+    "cosine": 9.458068279333265e-05,
+    "kl_reference_to_neuron": 9.440072668842614e-06,
+    "max_abs_error": 0.0,
+    "mean_abs_error": 1.887297806923982e-08,
+    "reference_margin": 0.0
+  },
+  "FP32_layout_different_frames": 72,
+  "max_FP32_layout_cosine_difference": 9.107589721679688e-05,
+  "new_passing_frames": [
+    9
+  ],
+  "new_failing_frames": [
+    16,
+    17
+  ],
+  "frame1_high_margin_argmax_regression": true,
+  "decoding_in_both_phases_does_not_rescue_prefill_regression": true,
+  "complete_payload_logits_files": 84,
+  "complete_selected_tap_files": 84,
+  "replicated_ranks_counted_once": true,
+  "full_logits_bytes": 100404852,
+  "selected_tap_bytes": 3145728,
+  "physical_output_usage": {
+    "allocated_bytes": 126832640,
+    "files": 273,
+    "per_rank_allocated_bytes": {
+      "cpu-rank0": 63324160,
+      "cpu-rank1": 63324160
+    }
+  },
+  "all_native_and_review_owners_gone": true,
+  "service_group_empty": {
+    "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service",
+    "absent": true
+  },
+  "canonical_unchanged": true,
+  "numerical_only_CPU_experiment": true,
+  "neuron_candidate_compiled": false,
+  "quality96_executed": false,
+  "performance_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "conclusions": [
+    "Reject both layer0 full BF16 phase candidates: preserved one old failing frame9 but newly fail16,17, and high-margin frame1 token regresses. Do not compile or benchmark this candidate.",
+    "Same input local o_proj error reduction did not predict final logits quality. This does not establish unique downstream amplification mechanism or a Trn1 chip defect.",
+    "Original frozen FP32 metrics reproduce exactly using original producer layout. Independent float64 scalar tolerance failed for75 cosine values; keep this failed gate. Float64 pass/fail and tokens agree96/96.",
+    "FP32 cosine depends on stride in72 decoded frames; contiguous serialization must not be used to claim exact reexecution of original scalar metrics."
+  ]
+}

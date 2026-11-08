@@ -1,0 +1,3286 @@
+{
+  "schema": "minicpm5_original32_layer0_full_bf16_cpu_root_summary_v1",
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json",
+    "sha256": "727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff"
+  },
+  "sources": [
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/result.json",
+      "sha256": "aeebf6ecc01564aa6248b0cd9d800a30dbfac77a8d6ee249adde39738178b97b"
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/result.json",
+      "sha256": "c3b8934bd4cc3f233ff88e5a13e43253fb85bdf62e076282b434c88692fe6437"
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/result.json",
+      "sha256": "40058c6edd33d6e5c0594ae322aaaf01dcaf2f2ec0221645d5fc41955b671832"
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/result.json",
+      "sha256": "8607a0d43cb22ecb85be5568c6a407430c21e618b642c6036fe15be3a66bcd69"
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/result.json",
+      "sha256": "86d9b20304a5cb8f58c6adfc4edec31f864d828233805d7857b6ce66e240de9e"
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/result.json",
+      "sha256": "7dd41262b2c2f6ecd2ce684e94fbd4d127d19c0faa9a8ad98e33e05bf24a03fb"
+    }
+  ],
+  "replicated_ranks_counted_once": true,
+  "summaries": {
+    "strict_anchor_s0": {
+      "frames": 32,
+      "passed_frames": 29,
+      "passed_prefill": 7,
+      "passed_decode": 22,
+      "top1_matches": 32,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.10412118583917618,
+            "cosine": 0.9987252354621887,
+            "kl_reference_to_neuron": 0.10126954317092896,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "physical_row": 1,
+          "current_position": 1232,
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.17521408200263977,
+            "cosine": 0.9977738261222839,
+            "kl_reference_to_neuron": 0.028122015297412872,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.126953125,
+            "mean_abs_error": 0.19864898920059204,
+            "cosine": 0.9962618350982666,
+            "kl_reference_to_neuron": 0.04872628301382065,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    },
+    "strict_layer0_full_bf16_prefill_only": {
+      "frames": 32,
+      "passed_frames": 28,
+      "passed_prefill": 5,
+      "passed_decode": 23,
+      "top1_matches": 31,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.28125,
+            "mean_abs_error": 0.17746810615062714,
+            "cosine": 0.9969621300697327,
+            "kl_reference_to_neuron": 0.05059920623898506,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 26,
+          "metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 27,
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    },
+    "strict_layer0_full_bf16_both_phases": {
+      "frames": 32,
+      "passed_frames": 28,
+      "passed_prefill": 5,
+      "passed_decode": 23,
+      "top1_matches": 31,
+      "overall_top1_gate": true,
+      "failed": [
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 1230,
+          "metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "physical_row": 1,
+          "current_position": 1233,
+          "metrics": {
+            "max_abs_error": 1.279296875,
+            "mean_abs_error": 0.18307510018348694,
+            "cosine": 0.9967406988143921,
+            "kl_reference_to_neuron": 0.028047632426023483,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 26,
+          "metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "physical_row": 0,
+          "current_position": 27,
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        }
+      ]
+    }
+  },
+  "contrasts": {
+    "strict_anchor_s0__vs__strict_layer0_full_bf16_prefill_only": {
+      "newly_passed_frames": [
+        9
+      ],
+      "newly_failed_frames": [
+        16,
+        17
+      ],
+      "frames": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3203125,
+            "mean_abs_error": 0.050001759082078934,
+            "cosine": 0.9997166395187378,
+            "kl_reference_to_neuron": 2.6362300559412688e-05,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.054383762180805206,
+            "cosine": 0.9996620416641235,
+            "kl_reference_to_neuron": 8.992223229142837e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          }
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL",
+            "high_margin_argmax"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.10412118583917618,
+            "cosine": 0.9987252354621887,
+            "kl_reference_to_neuron": 0.10126954317092896,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          }
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.06864462792873383,
+            "cosine": 0.9994516968727112,
+            "kl_reference_to_neuron": 0.00044237819383852184,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787371635437012,
+            "cosine": 0.9994702935218811,
+            "kl_reference_to_neuron": 0.0008690517279319465,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.328125,
+            "mean_abs_error": 0.057222213596105576,
+            "cosine": 0.9997134804725647,
+            "kl_reference_to_neuron": 0.0003297587390989065,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194553375244,
+            "cosine": 0.9994537234306335,
+            "kl_reference_to_neuron": 0.0003248179564252496,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          }
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.047463152557611465,
+            "cosine": 0.9996688961982727,
+            "kl_reference_to_neuron": 1.7047378264578583e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.053346000611782074,
+            "cosine": 0.9996140599250793,
+            "kl_reference_to_neuron": 1.6628175103505782e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.65625,
+            "mean_abs_error": 0.09401891380548477,
+            "cosine": 0.9987539649009705,
+            "kl_reference_to_neuron": 8.190513511863173e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.046875,
+            "mean_abs_error": 0.18777181208133698,
+            "cosine": 0.9955578446388245,
+            "kl_reference_to_neuron": 2.945623691630317e-07,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15150466561317444,
+            "cosine": 0.997905433177948,
+            "kl_reference_to_neuron": 6.752553599653766e-05,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.12662318348884583,
+            "cosine": 0.9984727501869202,
+            "kl_reference_to_neuron": 0.00014264303899835795,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          }
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.045908354222774506,
+            "cosine": 0.9997231364250183,
+            "kl_reference_to_neuron": 1.970796802197583e-06,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06148647889494896,
+            "cosine": 0.9995313882827759,
+            "kl_reference_to_neuron": 0.0017499655950814486,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          }
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09983290731906891,
+            "cosine": 0.9989601969718933,
+            "kl_reference_to_neuron": 7.229220500448719e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.775390625,
+            "mean_abs_error": 0.10972189903259277,
+            "cosine": 0.9987664222717285,
+            "kl_reference_to_neuron": 5.592687375610694e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.17521408200263977,
+            "cosine": 0.9977738261222839,
+            "kl_reference_to_neuron": 0.028122015297412872,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.15719074010849,
+            "cosine": 0.9981546998023987,
+            "kl_reference_to_neuron": 0.006437154486775398,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.1207551509141922,
+            "cosine": 0.998471736907959,
+            "kl_reference_to_neuron": 4.420840468810638e-06,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.703125,
+            "mean_abs_error": 0.11566535383462906,
+            "cosine": 0.9985764026641846,
+            "kl_reference_to_neuron": 1.871423762622726e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.296875,
+            "mean_abs_error": 0.0537494458258152,
+            "cosine": 0.9997012615203857,
+            "kl_reference_to_neuron": 0.0007506656111218035,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.09545343369245529,
+            "cosine": 0.9993741512298584,
+            "kl_reference_to_neuron": 3.9631937397643924e-05,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          }
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.65625,
+            "mean_abs_error": 0.2154097557067871,
+            "cosine": 0.9956506490707397,
+            "kl_reference_to_neuron": 0.0003190240531694144,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.453125,
+            "mean_abs_error": 0.2102859765291214,
+            "cosine": 0.995891809463501,
+            "kl_reference_to_neuron": 0.0002984962775371969,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.126953125,
+            "mean_abs_error": 0.19864898920059204,
+            "cosine": 0.9962618350982666,
+            "kl_reference_to_neuron": 0.04872628301382065,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.28125,
+            "mean_abs_error": 0.17746810615062714,
+            "cosine": 0.9969621300697327,
+            "kl_reference_to_neuron": 0.05059920623898506,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.6015625,
+            "mean_abs_error": 0.09261349588632584,
+            "cosine": 0.9991133809089661,
+            "kl_reference_to_neuron": 3.052088140975684e-05,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.6328125,
+            "mean_abs_error": 0.10205799341201782,
+            "cosine": 0.9989315867424011,
+            "kl_reference_to_neuron": 0.00025265771546401083,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          }
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.05302481725811958,
+            "cosine": 0.9996246099472046,
+            "kl_reference_to_neuron": 0.00012261958909220994,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.0559818260371685,
+            "cosine": 0.9995840191841125,
+            "kl_reference_to_neuron": 0.0009921948658302426,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          }
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.16635869443416595,
+            "cosine": 0.9969666600227356,
+            "kl_reference_to_neuron": 0.018798664212226868,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          }
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.12014298141002655,
+            "cosine": 0.998630166053772,
+            "kl_reference_to_neuron": 0.010951168835163116,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          }
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.4306640625,
+            "mean_abs_error": 0.06468525528907776,
+            "cosine": 0.9997507333755493,
+            "kl_reference_to_neuron": 0.0010462721111252904,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769327163696,
+            "cosine": 0.999738335609436,
+            "kl_reference_to_neuron": 0.0001964871189557016,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          }
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.7138671875,
+            "mean_abs_error": 0.11596866697072983,
+            "cosine": 0.9988172054290771,
+            "kl_reference_to_neuron": 0.00020364686497487128,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499148845673,
+            "cosine": 0.9987688660621643,
+            "kl_reference_to_neuron": 0.0002690649125725031,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06325522810220718,
+            "cosine": 0.9995101690292358,
+            "kl_reference_to_neuron": 0.00684988871216774,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08226325362920761,
+            "cosine": 0.9992069602012634,
+            "kl_reference_to_neuron": 0.011644743382930756,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          }
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.43359375,
+            "mean_abs_error": 0.09307179600000381,
+            "cosine": 0.9996498227119446,
+            "kl_reference_to_neuron": 5.943121504969895e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.35546875,
+            "mean_abs_error": 0.05363774672150612,
+            "cosine": 0.9997689723968506,
+            "kl_reference_to_neuron": 2.8679258321062662e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          }
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.0530804842710495,
+            "cosine": 0.9996920824050903,
+            "kl_reference_to_neuron": 3.1634817787562497e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05410948023200035,
+            "cosine": 0.999678909778595,
+            "kl_reference_to_neuron": 1.4617167209962645e-07,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          }
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.78125,
+            "mean_abs_error": 0.12283682078123093,
+            "cosine": 0.9984102249145508,
+            "kl_reference_to_neuron": 5.730180419050157e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.13114655017852783,
+            "cosine": 0.9982428550720215,
+            "kl_reference_to_neuron": 5.452420737128705e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          }
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.640625,
+            "mean_abs_error": 0.09086846560239792,
+            "cosine": 0.9992521405220032,
+            "kl_reference_to_neuron": 0.00012214966409374028,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09836997836828232,
+            "cosine": 0.9991137385368347,
+            "kl_reference_to_neuron": 5.0632319471333176e-05,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          }
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.052818987518548965,
+            "cosine": 0.9998735189437866,
+            "kl_reference_to_neuron": -6.464787105642245e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06604688614606857,
+            "cosine": 0.9998531937599182,
+            "kl_reference_to_neuron": -2.2289540879683045e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          }
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.057868897914886475,
+            "cosine": 0.9995952844619751,
+            "kl_reference_to_neuron": -2.51715648325046e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.07307004928588867,
+            "cosine": 0.9994405508041382,
+            "kl_reference_to_neuron": -5.251518775395425e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          }
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.07944668084383011,
+            "cosine": 0.9997445940971375,
+            "kl_reference_to_neuron": 3.0083390356594464e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.10030050575733185,
+            "cosine": 0.9996720552444458,
+            "kl_reference_to_neuron": 1.918931502586929e-08,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.12309383600950241,
+            "cosine": 0.9991025328636169,
+            "kl_reference_to_neuron": 0.0008244505152106285,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.13048416376113892,
+            "cosine": 0.9990029335021973,
+            "kl_reference_to_neuron": 0.0008422541432082653,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          }
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.04696177691221237,
+            "cosine": 0.9998264312744141,
+            "kl_reference_to_neuron": 7.217369812906327e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.265625,
+            "mean_abs_error": 0.042009979486465454,
+            "cosine": 0.9998639225959778,
+            "kl_reference_to_neuron": -2.2393734866454906e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          }
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3271484375,
+            "mean_abs_error": 0.0559585839509964,
+            "cosine": 0.9996531009674072,
+            "kl_reference_to_neuron": 9.685815882676252e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05859250947833061,
+            "cosine": 0.9996359944343567,
+            "kl_reference_to_neuron": 4.247901941312193e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          }
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.45703125,
+            "mean_abs_error": 0.12513357400894165,
+            "cosine": 0.9997095465660095,
+            "kl_reference_to_neuron": 2.665972715476528e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08176404982805252,
+            "cosine": 0.9997550845146179,
+            "kl_reference_to_neuron": 1.1315656593069434e-05,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          }
+        }
+      ]
+    },
+    "strict_anchor_s0__vs__strict_layer0_full_bf16_both_phases": {
+      "newly_passed_frames": [
+        9
+      ],
+      "newly_failed_frames": [
+        16,
+        17
+      ],
+      "frames": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3203125,
+            "mean_abs_error": 0.050001759082078934,
+            "cosine": 0.9997166395187378,
+            "kl_reference_to_neuron": 2.6362300559412688e-05,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.054383762180805206,
+            "cosine": 0.9996620416641235,
+            "kl_reference_to_neuron": 8.992223229142837e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          }
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL",
+            "high_margin_argmax"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.10412118583917618,
+            "cosine": 0.9987252354621887,
+            "kl_reference_to_neuron": 0.10126954317092896,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          }
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.06864462792873383,
+            "cosine": 0.9994516968727112,
+            "kl_reference_to_neuron": 0.00044237819383852184,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787371635437012,
+            "cosine": 0.9994702935218811,
+            "kl_reference_to_neuron": 0.0008690517279319465,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.328125,
+            "mean_abs_error": 0.057222213596105576,
+            "cosine": 0.9997134804725647,
+            "kl_reference_to_neuron": 0.0003297587390989065,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194553375244,
+            "cosine": 0.9994537234306335,
+            "kl_reference_to_neuron": 0.0003248179564252496,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          }
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.047463152557611465,
+            "cosine": 0.9996688961982727,
+            "kl_reference_to_neuron": 1.7047378264578583e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.06010681018233299,
+            "cosine": 0.9995101094245911,
+            "kl_reference_to_neuron": 5.3104287189853494e-08,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.65625,
+            "mean_abs_error": 0.09401891380548477,
+            "cosine": 0.9987539649009705,
+            "kl_reference_to_neuron": 8.190513511863173e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.20009534060955048,
+            "cosine": 0.9954563975334167,
+            "kl_reference_to_neuron": 4.6226439565089095e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15150466561317444,
+            "cosine": 0.997905433177948,
+            "kl_reference_to_neuron": 6.752553599653766e-05,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.90625,
+            "mean_abs_error": 0.15308113396167755,
+            "cosine": 0.9978233575820923,
+            "kl_reference_to_neuron": 0.0003712746547535062,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          }
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.045908354222774506,
+            "cosine": 0.9997231364250183,
+            "kl_reference_to_neuron": 1.970796802197583e-06,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.06697779893875122,
+            "cosine": 0.9994593262672424,
+            "kl_reference_to_neuron": 0.001723786350339651,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          }
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09983290731906891,
+            "cosine": 0.9989601969718933,
+            "kl_reference_to_neuron": 7.229220500448719e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.11164765805006027,
+            "cosine": 0.9987162351608276,
+            "kl_reference_to_neuron": 2.726063394220546e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.17521408200263977,
+            "cosine": 0.9977738261222839,
+            "kl_reference_to_neuron": 0.028122015297412872,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15811707079410553,
+            "cosine": 0.9980624914169312,
+            "kl_reference_to_neuron": 0.005752911325544119,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.1207551509141922,
+            "cosine": 0.998471736907959,
+            "kl_reference_to_neuron": 4.420840468810638e-06,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11658552289009094,
+            "cosine": 0.9985731840133667,
+            "kl_reference_to_neuron": 8.56477072375128e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.296875,
+            "mean_abs_error": 0.0537494458258152,
+            "cosine": 0.9997012615203857,
+            "kl_reference_to_neuron": 0.0007506656111218035,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.056487828493118286,
+            "cosine": 0.9996675252914429,
+            "kl_reference_to_neuron": 0.0007524765678681433,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          }
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.65625,
+            "mean_abs_error": 0.2154097557067871,
+            "cosine": 0.9956506490707397,
+            "kl_reference_to_neuron": 0.0003190240531694144,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0859375,
+            "mean_abs_error": 0.16401636600494385,
+            "cosine": 0.997473955154419,
+            "kl_reference_to_neuron": 0.00652389507740736,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.126953125,
+            "mean_abs_error": 0.19864898920059204,
+            "cosine": 0.9962618350982666,
+            "kl_reference_to_neuron": 0.04872628301382065,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.279296875,
+            "mean_abs_error": 0.18307510018348694,
+            "cosine": 0.9967406988143921,
+            "kl_reference_to_neuron": 0.028047632426023483,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.6015625,
+            "mean_abs_error": 0.09261349588632584,
+            "cosine": 0.9991133809089661,
+            "kl_reference_to_neuron": 3.052088140975684e-05,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.1188802570104599,
+            "cosine": 0.998667299747467,
+            "kl_reference_to_neuron": 0.000476624583825469,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          }
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.05302481725811958,
+            "cosine": 0.9996246099472046,
+            "kl_reference_to_neuron": 0.00012261958909220994,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.05381640046834946,
+            "cosine": 0.9996309280395508,
+            "kl_reference_to_neuron": 0.0001220396370626986,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          }
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.16635869443416595,
+            "cosine": 0.9969666600227356,
+            "kl_reference_to_neuron": 0.018798664212226868,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          }
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.12014298141002655,
+            "cosine": 0.998630166053772,
+            "kl_reference_to_neuron": 0.010951168835163116,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          }
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.4306640625,
+            "mean_abs_error": 0.06468525528907776,
+            "cosine": 0.9997507333755493,
+            "kl_reference_to_neuron": 0.0010462721111252904,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769327163696,
+            "cosine": 0.999738335609436,
+            "kl_reference_to_neuron": 0.0001964871189557016,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          }
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.7138671875,
+            "mean_abs_error": 0.11596866697072983,
+            "cosine": 0.9988172054290771,
+            "kl_reference_to_neuron": 0.00020364686497487128,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499148845673,
+            "cosine": 0.9987688660621643,
+            "kl_reference_to_neuron": 0.0002690649125725031,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06325522810220718,
+            "cosine": 0.9995101690292358,
+            "kl_reference_to_neuron": 0.00684988871216774,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.46875,
+            "mean_abs_error": 0.07445599138736725,
+            "cosine": 0.9993078112602234,
+            "kl_reference_to_neuron": 0.012824710458517075,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          }
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.43359375,
+            "mean_abs_error": 0.09307179600000381,
+            "cosine": 0.9996498227119446,
+            "kl_reference_to_neuron": 5.943121504969895e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.0590742789208889,
+            "cosine": 0.9997691512107849,
+            "kl_reference_to_neuron": 3.663927782326937e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          }
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.0530804842710495,
+            "cosine": 0.9996920824050903,
+            "kl_reference_to_neuron": 3.1634817787562497e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05939381942152977,
+            "cosine": 0.9996038675308228,
+            "kl_reference_to_neuron": 1.3914282135374378e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          }
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.78125,
+            "mean_abs_error": 0.12283682078123093,
+            "cosine": 0.9984102249145508,
+            "kl_reference_to_neuron": 5.730180419050157e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.921875,
+            "mean_abs_error": 0.1408699005842209,
+            "cosine": 0.9979150295257568,
+            "kl_reference_to_neuron": 8.268649253295735e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          }
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.640625,
+            "mean_abs_error": 0.09086846560239792,
+            "cosine": 0.9992521405220032,
+            "kl_reference_to_neuron": 0.00012214966409374028,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11578359454870224,
+            "cosine": 0.9988409280776978,
+            "kl_reference_to_neuron": 0.00020780904742423445,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          }
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.052818987518548965,
+            "cosine": 0.9998735189437866,
+            "kl_reference_to_neuron": -6.464787105642245e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06958352029323578,
+            "cosine": 0.9998894333839417,
+            "kl_reference_to_neuron": 3.790960079186334e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          }
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.057868897914886475,
+            "cosine": 0.9995952844619751,
+            "kl_reference_to_neuron": -2.51715648325046e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.322265625,
+            "mean_abs_error": 0.05661351978778839,
+            "cosine": 0.999595582485199,
+            "kl_reference_to_neuron": 3.4907359225400114e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          }
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.07944668084383011,
+            "cosine": 0.9997445940971375,
+            "kl_reference_to_neuron": 3.0083390356594464e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.08144300431013107,
+            "cosine": 0.9997084140777588,
+            "kl_reference_to_neuron": 3.5495014572006767e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.12309383600950241,
+            "cosine": 0.9991025328636169,
+            "kl_reference_to_neuron": 0.0008244505152106285,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.16141298413276672,
+            "cosine": 0.9985630512237549,
+            "kl_reference_to_neuron": 0.003459327854216099,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          }
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.04696177691221237,
+            "cosine": 0.9998264312744141,
+            "kl_reference_to_neuron": 7.217369812906327e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.25,
+            "mean_abs_error": 0.045071352273225784,
+            "cosine": 0.9998412132263184,
+            "kl_reference_to_neuron": -5.39294404688917e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          }
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3271484375,
+            "mean_abs_error": 0.0559585839509964,
+            "cosine": 0.9996531009674072,
+            "kl_reference_to_neuron": 9.685815882676252e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.07552700489759445,
+            "cosine": 0.999439001083374,
+            "kl_reference_to_neuron": 8.043660670864483e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          }
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.45703125,
+            "mean_abs_error": 0.12513357400894165,
+            "cosine": 0.9997095465660095,
+            "kl_reference_to_neuron": 2.665972715476528e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.4765625,
+            "mean_abs_error": 0.07294556498527527,
+            "cosine": 0.9997628927230835,
+            "kl_reference_to_neuron": 2.8080903575755656e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          }
+        }
+      ]
+    },
+    "strict_layer0_full_bf16_prefill_only__vs__strict_layer0_full_bf16_both_phases": {
+      "newly_passed_frames": [],
+      "newly_failed_frames": [],
+      "frames": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.054383762180805206,
+            "cosine": 0.9996620416641235,
+            "kl_reference_to_neuron": 8.992223229142837e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.054383762180805206,
+            "cosine": 0.9996620416641235,
+            "kl_reference_to_neuron": 8.992223229142837e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          }
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [
+            "KL",
+            "high_margin_argmax"
+          ],
+          "candidate_failed": [
+            "KL",
+            "high_margin_argmax"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292347431183,
+            "cosine": 0.9971520304679871,
+            "kl_reference_to_neuron": 0.32932785153388977,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          }
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787371635437012,
+            "cosine": 0.9994702935218811,
+            "kl_reference_to_neuron": 0.0008690517279319465,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787371635437012,
+            "cosine": 0.9994702935218811,
+            "kl_reference_to_neuron": 0.0008690517279319465,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194553375244,
+            "cosine": 0.9994537234306335,
+            "kl_reference_to_neuron": 0.0003248179564252496,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194553375244,
+            "cosine": 0.9994537234306335,
+            "kl_reference_to_neuron": 0.0003248179564252496,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          }
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.053346000611782074,
+            "cosine": 0.9996140599250793,
+            "kl_reference_to_neuron": 1.6628175103505782e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.06010681018233299,
+            "cosine": 0.9995101094245911,
+            "kl_reference_to_neuron": 5.3104287189853494e-08,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.046875,
+            "mean_abs_error": 0.18777181208133698,
+            "cosine": 0.9955578446388245,
+            "kl_reference_to_neuron": 2.945623691630317e-07,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.20009534060955048,
+            "cosine": 0.9954563975334167,
+            "kl_reference_to_neuron": 4.6226439565089095e-08,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.12662318348884583,
+            "cosine": 0.9984727501869202,
+            "kl_reference_to_neuron": 0.00014264303899835795,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.90625,
+            "mean_abs_error": 0.15308113396167755,
+            "cosine": 0.9978233575820923,
+            "kl_reference_to_neuron": 0.0003712746547535062,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          }
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06148647889494896,
+            "cosine": 0.9995313882827759,
+            "kl_reference_to_neuron": 0.0017499655950814486,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.06697779893875122,
+            "cosine": 0.9994593262672424,
+            "kl_reference_to_neuron": 0.001723786350339651,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          }
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.775390625,
+            "mean_abs_error": 0.10972189903259277,
+            "cosine": 0.9987664222717285,
+            "kl_reference_to_neuron": 5.592687375610694e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.11164765805006027,
+            "cosine": 0.9987162351608276,
+            "kl_reference_to_neuron": 2.726063394220546e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.15719074010849,
+            "cosine": 0.9981546998023987,
+            "kl_reference_to_neuron": 0.006437154486775398,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15811707079410553,
+            "cosine": 0.9980624914169312,
+            "kl_reference_to_neuron": 0.005752911325544119,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.703125,
+            "mean_abs_error": 0.11566535383462906,
+            "cosine": 0.9985764026641846,
+            "kl_reference_to_neuron": 1.871423762622726e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11658552289009094,
+            "cosine": 0.9985731840133667,
+            "kl_reference_to_neuron": 8.56477072375128e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.09545343369245529,
+            "cosine": 0.9993741512298584,
+            "kl_reference_to_neuron": 3.9631937397643924e-05,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.056487828493118286,
+            "cosine": 0.9996675252914429,
+            "kl_reference_to_neuron": 0.0007524765678681433,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          }
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 1.453125,
+            "mean_abs_error": 0.2102859765291214,
+            "cosine": 0.995891809463501,
+            "kl_reference_to_neuron": 0.0002984962775371969,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0859375,
+            "mean_abs_error": 0.16401636600494385,
+            "cosine": 0.997473955154419,
+            "kl_reference_to_neuron": 0.00652389507740736,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.28125,
+            "mean_abs_error": 0.17746810615062714,
+            "cosine": 0.9969621300697327,
+            "kl_reference_to_neuron": 0.05059920623898506,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.279296875,
+            "mean_abs_error": 0.18307510018348694,
+            "cosine": 0.9967406988143921,
+            "kl_reference_to_neuron": 0.028047632426023483,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          }
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.6328125,
+            "mean_abs_error": 0.10205799341201782,
+            "cosine": 0.9989315867424011,
+            "kl_reference_to_neuron": 0.00025265771546401083,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.1188802570104599,
+            "cosine": 0.998667299747467,
+            "kl_reference_to_neuron": 0.000476624583825469,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          }
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.0559818260371685,
+            "cosine": 0.9995840191841125,
+            "kl_reference_to_neuron": 0.0009921948658302426,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.05381640046834946,
+            "cosine": 0.9996309280395508,
+            "kl_reference_to_neuron": 0.0001220396370626986,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          }
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.2043772041797638,
+            "cosine": 0.9954079389572144,
+            "kl_reference_to_neuron": 0.026069695129990578,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          }
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "baseline_failed": [
+            "KL"
+          ],
+          "candidate_failed": [
+            "KL"
+          ],
+          "baseline_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "candidate_metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095918893814,
+            "cosine": 0.9982230067253113,
+            "kl_reference_to_neuron": 0.039746783673763275,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          }
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769327163696,
+            "cosine": 0.999738335609436,
+            "kl_reference_to_neuron": 0.0001964871189557016,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769327163696,
+            "cosine": 0.999738335609436,
+            "kl_reference_to_neuron": 0.0001964871189557016,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          }
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499148845673,
+            "cosine": 0.9987688660621643,
+            "kl_reference_to_neuron": 0.0002690649125725031,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499148845673,
+            "cosine": 0.9987688660621643,
+            "kl_reference_to_neuron": 0.0002690649125725031,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          }
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08226325362920761,
+            "cosine": 0.9992069602012634,
+            "kl_reference_to_neuron": 0.011644743382930756,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.46875,
+            "mean_abs_error": 0.07445599138736725,
+            "cosine": 0.9993078112602234,
+            "kl_reference_to_neuron": 0.012824710458517075,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          }
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.35546875,
+            "mean_abs_error": 0.05363774672150612,
+            "cosine": 0.9997689723968506,
+            "kl_reference_to_neuron": 2.8679258321062662e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.0590742789208889,
+            "cosine": 0.9997691512107849,
+            "kl_reference_to_neuron": 3.663927782326937e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          }
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05410948023200035,
+            "cosine": 0.999678909778595,
+            "kl_reference_to_neuron": 1.4617167209962645e-07,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05939381942152977,
+            "cosine": 0.9996038675308228,
+            "kl_reference_to_neuron": 1.3914282135374378e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          }
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.13114655017852783,
+            "cosine": 0.9982428550720215,
+            "kl_reference_to_neuron": 5.452420737128705e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.921875,
+            "mean_abs_error": 0.1408699005842209,
+            "cosine": 0.9979150295257568,
+            "kl_reference_to_neuron": 8.268649253295735e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          }
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09836997836828232,
+            "cosine": 0.9991137385368347,
+            "kl_reference_to_neuron": 5.0632319471333176e-05,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11578359454870224,
+            "cosine": 0.9988409280776978,
+            "kl_reference_to_neuron": 0.00020780904742423445,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          }
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06604688614606857,
+            "cosine": 0.9998531937599182,
+            "kl_reference_to_neuron": -2.2289540879683045e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06958352029323578,
+            "cosine": 0.9998894333839417,
+            "kl_reference_to_neuron": 3.790960079186334e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          }
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.07307004928588867,
+            "cosine": 0.9994405508041382,
+            "kl_reference_to_neuron": -5.251518775395425e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.322265625,
+            "mean_abs_error": 0.05661351978778839,
+            "cosine": 0.999595582485199,
+            "kl_reference_to_neuron": 3.4907359225400114e-09,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          }
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.10030050575733185,
+            "cosine": 0.9996720552444458,
+            "kl_reference_to_neuron": 1.918931502586929e-08,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.08144300431013107,
+            "cosine": 0.9997084140777588,
+            "kl_reference_to_neuron": 3.5495014572006767e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          }
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.13048416376113892,
+            "cosine": 0.9990029335021973,
+            "kl_reference_to_neuron": 0.0008422541432082653,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.16141298413276672,
+            "cosine": 0.9985630512237549,
+            "kl_reference_to_neuron": 0.003459327854216099,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          }
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.265625,
+            "mean_abs_error": 0.042009979486465454,
+            "cosine": 0.9998639225959778,
+            "kl_reference_to_neuron": -2.2393734866454906e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.25,
+            "mean_abs_error": 0.045071352273225784,
+            "cosine": 0.9998412132263184,
+            "kl_reference_to_neuron": -5.39294404688917e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          }
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05859250947833061,
+            "cosine": 0.9996359944343567,
+            "kl_reference_to_neuron": 4.247901941312193e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.07552700489759445,
+            "cosine": 0.999439001083374,
+            "kl_reference_to_neuron": 8.043660670864483e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          }
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "baseline_failed": [],
+          "candidate_failed": [],
+          "baseline_metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08176404982805252,
+            "cosine": 0.9997550845146179,
+            "kl_reference_to_neuron": 1.1315656593069434e-05,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "candidate_metrics": {
+            "max_abs_error": 0.4765625,
+            "mean_abs_error": 0.07294556498527527,
+            "cosine": 0.9997628927230835,
+            "kl_reference_to_neuron": 2.8080903575755656e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          }
+        }
+      ]
+    }
+  },
+  "limits": [
+    "JSON endpoint summary only; not an independent raw tensor recomputation.",
+    "Selected prediction taps require separate numerical analysis; hashes do not measure error.",
+    "CPU diagnostic only. Device, cold-cache, long decode, slot reuse/inactive-slot, quality96 and paired serving remain required."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

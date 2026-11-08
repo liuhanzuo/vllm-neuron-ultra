@@ -1,0 +1,134 @@
+{
+  "reviewer": "/root",
+  "actual_identity_verified": true,
+  "actual_execution_handle": {
+    "kind": "tool_session",
+    "session_id": 17987
+  },
+  "owner": {
+    "pid": 3310989,
+    "start_ticks": "394669213",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-execution-spec-20261108-v1.json",
+      "--spec-sha256",
+      "a5961e72d254d3a49ad57197fa801a7d3fd861db5dd4b6a9c775f13cb4e4f58a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-execution-review-20261108-v1.json",
+      "--review-sha256",
+      "c692450e682da1b06a0d970629deb9d72d7e8a606de7a3d321af411a1c0e8932"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "coordinator": {
+    "pid": 3312004,
+    "start_ticks": "394670928",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/admission.json",
+      "--admission-sha256",
+      "98480f3811d2ed314ac807d846234183f75bc7e4163300edecc009f045eaee28"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service",
+    "unit": "trn1-mini-original32-layer0-full-bf16-r1-20261108-v1",
+    "invocation_id": "3159c718eda649d2a794056a285d0c8a"
+  },
+  "ranks": [
+    {
+      "pid": 3312028,
+      "start_ticks": "394670997",
+      "ppid": 3312004,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/admission.json",
+        "--admission-sha256",
+        "98480f3811d2ed314ac807d846234183f75bc7e4163300edecc009f045eaee28"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service"
+    },
+    {
+      "pid": 3312029,
+      "start_ticks": "394670998",
+      "ppid": 3312004,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/admission.json",
+        "--admission-sha256",
+        "98480f3811d2ed314ac807d846234183f75bc7e4163300edecc009f045eaee28"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service"
+    }
+  ],
+  "admission": {
+    "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/admission.json",
+    "sha256": "98480f3811d2ed314ac807d846234183f75bc7e4163300edecc009f045eaee28"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-execution-spec-20261108-v1.json",
+    "sha256": "a5961e72d254d3a49ad57197fa801a7d3fd861db5dd4b6a9c775f13cb4e4f58a"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-execution-review-20261108-v1.json",
+    "sha256": "c692450e682da1b06a0d970629deb9d72d7e8a606de7a3d321af411a1c0e8932"
+  },
+  "properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "3312004",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "3312004",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=5817ba300e3f9f9ceb2c7d3c764a9a4a HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py --mode coordinator --admission /mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/admission.json --admission-sha256 98480f3811d2ed314ac807d846234183f75bc7e4163300edecc009f045eaee28 ; ignore_errors=no ; start_time=[Sun 2026-11-08 19:30:00 UTC] ; stop_time=[n/a] ; pid=3312004 ; code=(null) ; status=0/0 }",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-original32-layer0-full-bf16-r1-20261108-v1.service",
+    "BindsTo": "",
+    "After": "-.mount app.slice basic.target",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running",
+    "Job": "",
+    "InvocationID": "3159c718eda649d2a794056a285d0c8a",
+    "ExecStopPost": ""
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  }
+}

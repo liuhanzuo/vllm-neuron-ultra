@@ -1,0 +1,96 @@
+{
+  "actual_exit": {
+    "session_id": 45634,
+    "exit_code": 1,
+    "tool_chunk": "66c0ad"
+  },
+  "actual_tool_exit_observed": true,
+  "owner_live_identity_captured": false,
+  "owner_capture_attempt": {
+    "exit_code": 1,
+    "tool_chunk": "424ed2",
+    "reason": "Verifier already exited before PID scan"
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_full_bf16_trajectory_raw_v3.py",
+    "sha256": "351cf2432a3382256999410fa43a159bdbb40ee955d37ca47b16fe36ccb966de"
+  },
+  "error": "Contiguous-layout validator incorrectly required canonical stride in size-1 dimensions.",
+  "layouts": [
+    {
+      "call": 0,
+      "saved": {
+        "tensor": true,
+        "storage": {
+          "key": "0",
+          "count": 130560
+        },
+        "offset": 0,
+        "shape": [
+          1,
+          1,
+          130560
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ]
+      },
+      "producer_metadata": {
+        "shape": [
+          1,
+          1,
+          130560
+        ],
+        "stride": [
+          1,
+          1,
+          1
+        ],
+        "offset": 0,
+        "dtype": "torch.float32",
+        "sha256": "f01a0be1df2fb0b74612f19aefa8a36b80ce0737ef6375839a5a35dea8299e73"
+      }
+    },
+    {
+      "call": 4,
+      "saved": {
+        "tensor": true,
+        "storage": {
+          "key": "0",
+          "count": 522240
+        },
+        "offset": 0,
+        "shape": [
+          4,
+          1,
+          130560
+        ],
+        "stride": [
+          130560,
+          130560,
+          1
+        ]
+      },
+      "producer_metadata": {
+        "shape": [
+          4,
+          1,
+          130560
+        ],
+        "stride": [
+          1,
+          4,
+          4
+        ],
+        "offset": 0,
+        "dtype": "torch.float32",
+        "sha256": "a6b6aeda807b24f14d6c500744cb2acc637f5ac92320a900084c5df2d34e01ea"
+      }
+    }
+  ],
+  "raw_review_complete": false,
+  "model_rerun": false,
+  "correction": "Only require canonical stride for dimensions with size>1; require offset0, exact storage extent and nonnegative strides, preserving logical order."
+}

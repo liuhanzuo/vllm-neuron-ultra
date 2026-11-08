@@ -1,0 +1,46 @@
+{
+  "schema": "post_minicpm5_full_bf16_rejection_next_work_v1",
+  "reviewer": "/root",
+  "source_only": true,
+  "all15_families_remain_in_scope": true,
+  "rejected_evidence": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-terminal-r1-20261108-v1.json",
+    "sha256": "09fd540440ad56fa1f4cbec337d1f8f00207bbc733316b1afd477e940825501d"
+  },
+  "candidates_rejected": [
+    "strict_layer0_full_bf16_prefill_only",
+    "strict_layer0_full_bf16_both_phases"
+  ],
+  "no_rerun_or_compile_of_rejected_candidates": true,
+  "mini_retained_baseline": {
+    "CPU_original32": 29,
+    "device_original32": 30,
+    "frames": 32,
+    "not_interchangeable": true
+  },
+  "mini_next_science": "Do not rank candidates by isolated layer0 projection distance. Before another whole-model candidate, use existing selected taps and full logits to locate where final differences arise; no new capture or threshold change required for first analysis. A consistent multi-layer BF16 path would be a separate hypothesis requiring new review, not automatic promotion.",
+  "priority_next_model": "Dory1.0-4B: close official reference backend gap, then original-weight native inference and Neuron baseline.",
+  "dory_fixed": {
+    "model": "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16",
+    "revision": "f6c832e6963ddb74f62c75813a3e8c74b1af67b1",
+    "official_vllm_commit": "75fc05a53a366068f534a61ab3ee6b50485419f2",
+    "original_weights_and_BF16": true,
+    "loops": 2
+  },
+  "dory_next_actions": [
+    "Inspect pinned official CPU runtime build/requirements and installed environments; no official vLLM package currently in native reference environment.",
+    "Provide isolated pinned official CPU runtime or supported samecommit build with exact source and dependency provenance. Do not install over existing Neuron or native reference venvs. Budget wheel/build/cache on NVMe and retain8GiB floor.",
+    "Qualify actual unquantized GEMM backend selection and packed QKV/gate_up projections. custom_ops none alone does not establish F.linear backend. Official post-load may choose SGL/oneDNN/ZenTorch.",
+    "Run primitive and tiny full-two-loop official reference fixtures before original507tensor inference. Do not call standalone candidate outputs official parity.",
+    "Keep original default thinking, tokenizer/template,EOS[2,11],temperature1,top_p.95,top_k0 and native/device/cold/long/slot/quality/paired-serving gates."
+  ],
+  "remaining_mini_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "new_speedup_claim": false,
+  "full_model_qualified": false
+}

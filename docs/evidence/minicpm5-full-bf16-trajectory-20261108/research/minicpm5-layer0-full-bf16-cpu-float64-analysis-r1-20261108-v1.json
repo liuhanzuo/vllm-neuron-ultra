@@ -1,0 +1,3141 @@
+{
+  "schema": "minicpm5_full_bf16_trajectory_float64_analysis_v1",
+  "passed": false,
+  "complete": true,
+  "reviewer": "/root",
+  "verifier": {
+    "pid": 3324336,
+    "start_ticks": "394809261",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_minicpm5_full_bf16_trajectory_float64_v1.py",
+      "--exit",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json",
+      "--exit-sha256",
+      "727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff",
+      "--source-sha256",
+      "49bbb9503e9f9e68b46161567abf1d46fb40167ebde9f977c0858e53c2d8c088"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json",
+    "sha256": "727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff"
+  },
+  "verifier_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_minicpm5_full_bf16_trajectory_float64_v1.py",
+    "sha256": "49bbb9503e9f9e68b46161567abf1d46fb40167ebde9f977c0858e53c2d8c088"
+  },
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-input-plan-20261108-v1.json",
+    "sha256": "e7c7f8b159c620ce3fdef227251b505dad4047cb73e4e9eaab4dd8140ef3f888"
+  },
+  "metadata_controls": {
+    "complete": true,
+    "rank_count": 2,
+    "arm_count": 3,
+    "calls_per_rank": 42,
+    "HF_frames_per_arm": 32,
+    "selected_tap_raw_bytes_total": 3145728,
+    "cross_rank_full_logits_tensor_hashes_equal": true,
+    "cross_rank_HF_metrics_equal": true,
+    "cross_rank_selected_tap_bundles_equal": true,
+    "raw_payloads_read": false
+  },
+  "summaries": {
+    "strict_anchor_s0": {
+      "passed_frames": 29,
+      "top1_matches": 32,
+      "failed_frames": [
+        1,
+        9,
+        13
+      ],
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "metrics": {
+          "max_abs_error": 0.75,
+          "mean_abs_error": 0.10412119146819938,
+          "cosine": 0.998727909360843,
+          "kl_reference_to_neuron": 0.10126607184622247,
+          "argmax_match": true,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 1062
+        },
+        "failed_criteria": [
+          "KL"
+        ]
+      }
+    },
+    "strict_layer0_full_bf16_prefill_only": {
+      "passed_frames": 28,
+      "top1_matches": 31,
+      "failed_frames": [
+        1,
+        13,
+        16,
+        17
+      ],
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292396736495,
+          "cosine": 0.9971528034569923,
+          "kl_reference_to_neuron": 0.32931841146122093,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      }
+    },
+    "strict_layer0_full_bf16_both_phases": {
+      "passed_frames": 28,
+      "top1_matches": 31,
+      "failed_frames": [
+        1,
+        13,
+        16,
+        17
+      ],
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292396736495,
+          "cosine": 0.9971528034569923,
+          "kl_reference_to_neuron": 0.32931841146122093,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      }
+    }
+  },
+  "rows": [
+    {
+      "arm": "strict_anchor_s0",
+      "rows": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.3203125,
+            "mean_abs_error": 0.05000176187787278,
+            "cosine": 0.9997184343475962,
+            "kl_reference_to_neuron": 2.6297169547794243e-05,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.10412119146819938,
+            "cosine": 0.998727909360843,
+            "kl_reference_to_neuron": 0.10126607184622247,
+            "argmax_match": true,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 1062
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.06864463607232799,
+            "cosine": 0.999453387165182,
+            "kl_reference_to_neuron": 0.00044142385723037173,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.328125,
+            "mean_abs_error": 0.057222211423019566,
+            "cosine": 0.9997136779814102,
+            "kl_reference_to_neuron": 0.000329865579840157,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.04746315033704627,
+            "cosine": 0.9997195269585538,
+            "kl_reference_to_neuron": 1.6466162287794253e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.65625,
+            "mean_abs_error": 0.09401891283033526,
+            "cosine": 0.9988019442448707,
+            "kl_reference_to_neuron": 5.053056559833053e-09,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15150466140396163,
+            "cosine": 0.9979451937393417,
+            "kl_reference_to_neuron": 6.75097065288226e-05,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.04590835639951276,
+            "cosine": 0.9997550665977052,
+            "kl_reference_to_neuron": 1.9430458630114454e-06,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09983290587551892,
+            "cosine": 0.99899243182559,
+            "kl_reference_to_neuron": 7.235301157843658e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.17521409395369975,
+            "cosine": 0.9978038366977688,
+            "kl_reference_to_neuron": 0.02811550991186675,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.12075515165559801,
+            "cosine": 0.998506458997563,
+            "kl_reference_to_neuron": 4.389525273888719e-06,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.296875,
+            "mean_abs_error": 0.053749450051463116,
+            "cosine": 0.9997532296020352,
+            "kl_reference_to_neuron": 0.0007504911325720643,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.65625,
+            "mean_abs_error": 0.21540976101486925,
+            "cosine": 0.9956913187664833,
+            "kl_reference_to_neuron": 0.00031901787739331517,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.126953125,
+            "mean_abs_error": 0.19864897032761397,
+            "cosine": 0.9963075824590761,
+            "kl_reference_to_neuron": 0.048724421458488175,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.6015625,
+            "mean_abs_error": 0.09261349523622615,
+            "cosine": 0.999140286693802,
+            "kl_reference_to_neuron": 3.080861614918255e-05,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.053024813144321684,
+            "cosine": 0.9996755020356487,
+            "kl_reference_to_neuron": 0.00012251124047829188,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.125,
+            "mean_abs_error": 0.1663586894817212,
+            "cosine": 0.9969667680846939,
+            "kl_reference_to_neuron": 0.018797966165839446,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.12014297717433496,
+            "cosine": 0.9986296610265869,
+            "kl_reference_to_neuron": 0.010952248365526862,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.4306640625,
+            "mean_abs_error": 0.06468525205044916,
+            "cosine": 0.9997595477004173,
+            "kl_reference_to_neuron": 0.0010462202137500117,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.7138671875,
+            "mean_abs_error": 0.11596866776052789,
+            "cosine": 0.9988174751779763,
+            "kl_reference_to_neuron": 0.00020357185430611838,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06325522545524234,
+            "cosine": 0.9995391516074768,
+            "kl_reference_to_neuron": 0.006850838891740935,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.43359375,
+            "mean_abs_error": 0.09307178818054643,
+            "cosine": 0.9997019057292978,
+            "kl_reference_to_neuron": 5.957779675536697e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.0530804829197187,
+            "cosine": 0.9997264421789839,
+            "kl_reference_to_neuron": 3.2084570428230713e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.78125,
+            "mean_abs_error": 0.12283682787023922,
+            "cosine": 0.9984511105047249,
+            "kl_reference_to_neuron": 5.9296921999502925e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.640625,
+            "mean_abs_error": 0.09086847072832432,
+            "cosine": 0.9992857248091689,
+            "kl_reference_to_neuron": 0.000122169383799891,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.052818985243200084,
+            "cosine": 0.9999460012494873,
+            "kl_reference_to_neuron": 5.58443695355955e-09,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.05786889703469533,
+            "cosine": 0.999633894848951,
+            "kl_reference_to_neuron": 2.3116299009517094e-10,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.07944668585471079,
+            "cosine": 0.9998145271192842,
+            "kl_reference_to_neuron": 3.7838552298633466e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.12309382618496231,
+            "cosine": 0.9991506054085699,
+            "kl_reference_to_neuron": 0.0008243819652887398,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.046961775547185655,
+            "cosine": 0.9998828269228941,
+            "kl_reference_to_neuron": 1.4690458430363154e-07,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.3271484375,
+            "mean_abs_error": 0.05595858274210318,
+            "cosine": 0.9997057309668058,
+            "kl_reference_to_neuron": 4.208726711765716e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.45703125,
+            "mean_abs_error": 0.12513357476815215,
+            "cosine": 0.9997532722765705,
+            "kl_reference_to_neuron": 2.7666865277767153e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "failed_criteria": []
+        }
+      ]
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "rows": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05438375935488034,
+            "cosine": 0.9996628397920573,
+            "kl_reference_to_neuron": 8.916443802447688e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292396736495,
+            "cosine": 0.9971528034569923,
+            "kl_reference_to_neuron": 0.32931841146122093,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787372079869623,
+            "cosine": 0.9994724467994932,
+            "kl_reference_to_neuron": 0.0008704737922378085,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194751121505,
+            "cosine": 0.9994558786971207,
+            "kl_reference_to_neuron": 0.00032468937741163213,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.4375,
+            "mean_abs_error": 0.053346000540563286,
+            "cosine": 0.9996668960520325,
+            "kl_reference_to_neuron": 1.4659950112431992e-07,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 1.046875,
+            "mean_abs_error": 0.1877717935977796,
+            "cosine": 0.9956091169914238,
+            "kl_reference_to_neuron": 3.066573555422712e-07,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.12662317118808336,
+            "cosine": 0.9985166905777546,
+            "kl_reference_to_neuron": 0.0001425224454018623,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.06148648062428715,
+            "cosine": 0.9995719952301111,
+            "kl_reference_to_neuron": 0.001749907651623281,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.775390625,
+            "mean_abs_error": 0.1097219002296162,
+            "cosine": 0.9987961407578843,
+            "kl_reference_to_neuron": 5.593357929237046e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.1571907526776925,
+            "cosine": 0.9981837433550126,
+            "kl_reference_to_neuron": 0.0064304146255988424,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.703125,
+            "mean_abs_error": 0.11566535681303518,
+            "cosine": 0.9986173143912361,
+            "kl_reference_to_neuron": 2.5352719130620616e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.09545343323683768,
+            "cosine": 0.9994128581232445,
+            "kl_reference_to_neuron": 3.943620938067787e-05,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.453125,
+            "mean_abs_error": 0.21028598014667046,
+            "cosine": 0.9959225970657485,
+            "kl_reference_to_neuron": 0.0002982573934899503,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.28125,
+            "mean_abs_error": 0.1774681021258527,
+            "cosine": 0.9969981107422495,
+            "kl_reference_to_neuron": 0.05059731609169444,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.6328125,
+            "mean_abs_error": 0.10205798687084633,
+            "cosine": 0.998974457228487,
+            "kl_reference_to_neuron": 0.0002525097991434108,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05598182856178313,
+            "cosine": 0.9996353835976763,
+            "kl_reference_to_neuron": 0.000992108347898109,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.20437719529385076,
+            "cosine": 0.9954080685061792,
+            "kl_reference_to_neuron": 0.026070585766283436,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095878830965,
+            "cosine": 0.9982256411781978,
+            "kl_reference_to_neuron": 0.039746977768631335,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769114968239,
+            "cosine": 0.9997471909220723,
+            "kl_reference_to_neuron": 0.000196219422191618,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499557166708,
+            "cosine": 0.9987703819419325,
+            "kl_reference_to_neuron": 0.0002702773989875315,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08226325716640727,
+            "cosine": 0.9992464523514581,
+            "kl_reference_to_neuron": 0.01164307550209244,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.35546875,
+            "mean_abs_error": 0.05363774129061722,
+            "cosine": 0.9998225887659598,
+            "kl_reference_to_neuron": 2.869997487525637e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.054109475359905,
+            "cosine": 0.9997093642010967,
+            "kl_reference_to_neuron": 3.318243695081941e-07,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.13114655881426207,
+            "cosine": 0.9982773899364626,
+            "kl_reference_to_neuron": 5.986895657386314e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.09836997805601534,
+            "cosine": 0.9991589709357811,
+            "kl_reference_to_neuron": 5.073511328415803e-05,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06604687970715994,
+            "cosine": 0.9999477744427115,
+            "kl_reference_to_neuron": 1.398686562416259e-07,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.07307005632102635,
+            "cosine": 0.9994718656666551,
+            "kl_reference_to_neuron": 3.507825545921789e-10,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.59375,
+            "mean_abs_error": 0.10030050940957724,
+            "cosine": 0.9997391877640676,
+            "kl_reference_to_neuron": 2.242391894567387e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.13048414580030915,
+            "cosine": 0.9990464972973129,
+            "kl_reference_to_neuron": 0.0008423391858497425,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.265625,
+            "mean_abs_error": 0.04200997535121061,
+            "cosine": 0.9999025283125913,
+            "kl_reference_to_neuron": 4.877342397791265e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05859250591556523,
+            "cosine": 0.9996775871254453,
+            "kl_reference_to_neuron": 2.7064701220434655e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08176405452438357,
+            "cosine": 0.9998138030627179,
+            "kl_reference_to_neuron": 1.1421192732005983e-05,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "failed_criteria": []
+        }
+      ]
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "rows": [
+        {
+          "frame": {
+            "index": 0,
+            "fixture": 0,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05438375935488034,
+            "cosine": 0.9996628397920573,
+            "kl_reference_to_neuron": 8.916443802447688e-06,
+            "argmax_match": true,
+            "reference_margin": 5.875,
+            "reference_top1": 50480,
+            "neuron_top1": 50480
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 1,
+            "fixture": 7,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.375,
+            "mean_abs_error": 0.15589292396736495,
+            "cosine": 0.9971528034569923,
+            "kl_reference_to_neuron": 0.32931841146122093,
+            "argmax_match": false,
+            "reference_margin": 1.125,
+            "reference_top1": 1062,
+            "neuron_top1": 15182
+          },
+          "failed_criteria": [
+            "KL",
+            "high_margin_argmax"
+          ]
+        },
+        {
+          "frame": {
+            "index": 2,
+            "fixture": 2,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.47265625,
+            "mean_abs_error": 0.06787372079869623,
+            "cosine": 0.9994724467994932,
+            "kl_reference_to_neuron": 0.0008704737922378085,
+            "argmax_match": true,
+            "reference_margin": 3.25,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 3,
+            "fixture": 5,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.08421194751121505,
+            "cosine": 0.9994558786971207,
+            "kl_reference_to_neuron": 0.00032468937741163213,
+            "argmax_match": true,
+            "reference_margin": 4.75,
+            "reference_top1": 115320,
+            "neuron_top1": 115320
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 4,
+            "fixture": 0,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.060106805839813225,
+            "cosine": 0.9995592894400341,
+            "kl_reference_to_neuron": 9.487887119769298e-09,
+            "argmax_match": true,
+            "reference_margin": 10.875,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 5,
+            "fixture": 7,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.9375,
+            "mean_abs_error": 0.2000953308375114,
+            "cosine": 0.9955017380857364,
+            "kl_reference_to_neuron": 6.1554295359429224e-09,
+            "argmax_match": true,
+            "reference_margin": 11.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 6,
+            "fixture": 2,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.90625,
+            "mean_abs_error": 0.15308113896068842,
+            "cosine": 0.9978647757343163,
+            "kl_reference_to_neuron": 0.0003713994731836429,
+            "argmax_match": true,
+            "reference_margin": 5.625,
+            "reference_top1": 39310,
+            "neuron_top1": 39310
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 7,
+            "fixture": 5,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.5,
+            "mean_abs_error": 0.06697779547642259,
+            "cosine": 0.9994995742986894,
+            "kl_reference_to_neuron": 0.0017238184228250658,
+            "argmax_match": true,
+            "reference_margin": 0.75,
+            "reference_top1": 354,
+            "neuron_top1": 354
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 8,
+            "fixture": 0,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.75,
+            "mean_abs_error": 0.1116476594689576,
+            "cosine": 0.998746369161973,
+            "kl_reference_to_neuron": 2.7214922957109652e-05,
+            "argmax_match": true,
+            "reference_margin": 7.3125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 9,
+            "fixture": 7,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.15811705882387125,
+            "cosine": 0.9980946146453392,
+            "kl_reference_to_neuron": 0.005746888477612113,
+            "argmax_match": true,
+            "reference_margin": 0.625,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 10,
+            "fixture": 2,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11658553405135286,
+            "cosine": 0.9986188588066478,
+            "kl_reference_to_neuron": 9.07017136730101e-07,
+            "argmax_match": true,
+            "reference_margin": 10.625,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 11,
+            "fixture": 5,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.375,
+            "mean_abs_error": 0.05648783209149306,
+            "cosine": 0.9997156575628104,
+            "kl_reference_to_neuron": 0.0007524472886389577,
+            "argmax_match": true,
+            "reference_margin": 2.125,
+            "reference_top1": 3034,
+            "neuron_top1": 3034
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 12,
+            "fixture": 0,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.0859375,
+            "mean_abs_error": 0.16401636567441563,
+            "cosine": 0.9975131941513768,
+            "kl_reference_to_neuron": 0.006523588128289329,
+            "argmax_match": true,
+            "reference_margin": 1.0,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 13,
+            "fixture": 7,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 1.279296875,
+            "mean_abs_error": 0.1830750881589255,
+            "cosine": 0.9967787529906358,
+            "kl_reference_to_neuron": 0.028046205106431497,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 130073,
+            "neuron_top1": 130073
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 14,
+            "fixture": 2,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.6875,
+            "mean_abs_error": 0.11888026410677269,
+            "cosine": 0.9987060794569856,
+            "kl_reference_to_neuron": 0.0004765849743266128,
+            "argmax_match": true,
+            "reference_margin": 5.0,
+            "reference_top1": 8869,
+            "neuron_top1": 8869
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 15,
+            "fixture": 5,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.3125,
+            "mean_abs_error": 0.05381639797660504,
+            "cosine": 0.9996604464457006,
+            "kl_reference_to_neuron": 0.00012194367012086903,
+            "argmax_match": true,
+            "reference_margin": 4.125,
+            "reference_top1": 317,
+            "neuron_top1": 317
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 16,
+            "fixture": 4,
+            "slot": 3,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.359375,
+            "mean_abs_error": 0.20437719529385076,
+            "cosine": 0.9954080685061792,
+            "kl_reference_to_neuron": 0.026070585766283436,
+            "argmax_match": true,
+            "reference_margin": 0.125,
+            "reference_top1": 608,
+            "neuron_top1": 608
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 17,
+            "fixture": 1,
+            "slot": 1,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 1.0,
+            "mean_abs_error": 0.1353095878830965,
+            "cosine": 0.9982256411781978,
+            "kl_reference_to_neuron": 0.039746977768631335,
+            "argmax_match": true,
+            "reference_margin": 1.625,
+            "reference_top1": 1216,
+            "neuron_top1": 1216
+          },
+          "failed_criteria": [
+            "KL"
+          ]
+        },
+        {
+          "frame": {
+            "index": 18,
+            "fixture": 6,
+            "slot": 0,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.06777769114968239,
+            "cosine": 0.9997471909220723,
+            "kl_reference_to_neuron": 0.000196219422191618,
+            "argmax_match": true,
+            "reference_margin": 1.875,
+            "reference_top1": 2842,
+            "neuron_top1": 2842
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 19,
+            "fixture": 3,
+            "slot": 2,
+            "step": 0
+          },
+          "metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.11767499557166708,
+            "cosine": 0.9987703819419325,
+            "kl_reference_to_neuron": 0.0002702773989875315,
+            "argmax_match": true,
+            "reference_margin": 6.5,
+            "reference_top1": 1746,
+            "neuron_top1": 1746
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 20,
+            "fixture": 4,
+            "slot": 3,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.46875,
+            "mean_abs_error": 0.07445599508366785,
+            "cosine": 0.9993496667331694,
+            "kl_reference_to_neuron": 0.012822242906268176,
+            "argmax_match": true,
+            "reference_margin": 0.375,
+            "reference_top1": 2871,
+            "neuron_top1": 2871
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 21,
+            "fixture": 1,
+            "slot": 1,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.34375,
+            "mean_abs_error": 0.05907427488880999,
+            "cosine": 0.9998097617912423,
+            "kl_reference_to_neuron": 3.669999954341347e-05,
+            "argmax_match": true,
+            "reference_margin": 6.875,
+            "reference_top1": 1101,
+            "neuron_top1": 1101
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 22,
+            "fixture": 6,
+            "slot": 0,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.359375,
+            "mean_abs_error": 0.05939381684852289,
+            "cosine": 0.9996430350278951,
+            "kl_reference_to_neuron": 1.4103128447389897e-06,
+            "argmax_match": true,
+            "reference_margin": 9.25,
+            "reference_top1": 1562,
+            "neuron_top1": 1562
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 23,
+            "fixture": 3,
+            "slot": 2,
+            "step": 1
+          },
+          "metrics": {
+            "max_abs_error": 0.921875,
+            "mean_abs_error": 0.1408698905811773,
+            "cosine": 0.9979645064599287,
+            "kl_reference_to_neuron": 8.784142319537614e-06,
+            "argmax_match": true,
+            "reference_margin": 9.75,
+            "reference_top1": 3103,
+            "neuron_top1": 3103
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 24,
+            "fixture": 4,
+            "slot": 3,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.71875,
+            "mean_abs_error": 0.11578359079875929,
+            "cosine": 0.9988751235016834,
+            "kl_reference_to_neuron": 0.0002078539318608444,
+            "argmax_match": true,
+            "reference_margin": 6.625,
+            "reference_top1": 4219,
+            "neuron_top1": 4219
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 25,
+            "fixture": 1,
+            "slot": 1,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.28125,
+            "mean_abs_error": 0.06958352527855073,
+            "cosine": 0.9999561166725426,
+            "kl_reference_to_neuron": 3.039712127558726e-08,
+            "argmax_match": true,
+            "reference_margin": 12.875,
+            "reference_top1": 242,
+            "neuron_top1": 242
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 26,
+            "fixture": 6,
+            "slot": 0,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.322265625,
+            "mean_abs_error": 0.05661351442172685,
+            "cosine": 0.9996310028003312,
+            "kl_reference_to_neuron": 4.98117915776842e-10,
+            "argmax_match": true,
+            "reference_margin": 14.625,
+            "reference_top1": 285,
+            "neuron_top1": 285
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 27,
+            "fixture": 3,
+            "slot": 2,
+            "step": 2
+          },
+          "metrics": {
+            "max_abs_error": 0.5625,
+            "mean_abs_error": 0.0814430002561387,
+            "cosine": 0.999763961213486,
+            "kl_reference_to_neuron": 3.627386089754436e-07,
+            "argmax_match": true,
+            "reference_margin": 12.375,
+            "reference_top1": 220,
+            "neuron_top1": 220
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 28,
+            "fixture": 4,
+            "slot": 3,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.875,
+            "mean_abs_error": 0.16141299589664912,
+            "cosine": 0.998597305703992,
+            "kl_reference_to_neuron": 0.0034594590139484117,
+            "argmax_match": true,
+            "reference_margin": 3.75,
+            "reference_top1": 357,
+            "neuron_top1": 357
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 29,
+            "fixture": 1,
+            "slot": 1,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.25,
+            "mean_abs_error": 0.04507134834249668,
+            "cosine": 0.9998978663721731,
+            "kl_reference_to_neuron": 9.530432120407311e-08,
+            "argmax_match": true,
+            "reference_margin": 13.5,
+            "reference_top1": 45,
+            "neuron_top1": 45
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 30,
+            "fixture": 6,
+            "slot": 0,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.40625,
+            "mean_abs_error": 0.07552700316095178,
+            "cosine": 0.999488435621231,
+            "kl_reference_to_neuron": 2.8794432278192058e-08,
+            "argmax_match": true,
+            "reference_margin": 11.75,
+            "reference_top1": 8259,
+            "neuron_top1": 8259
+          },
+          "failed_criteria": []
+        },
+        {
+          "frame": {
+            "index": 31,
+            "fixture": 3,
+            "slot": 2,
+            "step": 3
+          },
+          "metrics": {
+            "max_abs_error": 0.4765625,
+            "mean_abs_error": 0.07294556742999703,
+            "cosine": 0.9998327370367939,
+            "kl_reference_to_neuron": 2.7674511857822426e-06,
+            "argmax_match": true,
+            "reference_margin": 8.0,
+            "reference_top1": 3375,
+            "neuron_top1": 3375
+          },
+          "failed_criteria": []
+        }
+      ]
+    }
+  ],
+  "logits_payloads": [
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-00/output.pt",
+      "sha256": "aec87a2e97dbee04e198d913a8bebbc45641dd884f407af10fc0acef3ce8ff55",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-00/output.pt",
+      "sha256": "aec87a2e97dbee04e198d913a8bebbc45641dd884f407af10fc0acef3ce8ff55",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-01/output.pt",
+      "sha256": "b2049751eac8ad9a101dfac3c3e58807e3ca256b1c12bba73b526e1bcdd5b2bb",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-01/output.pt",
+      "sha256": "b2049751eac8ad9a101dfac3c3e58807e3ca256b1c12bba73b526e1bcdd5b2bb",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-02/output.pt",
+      "sha256": "be1936fb001242c28708e758ca787adedf2206933c73f12319efb062c83e8814",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-02/output.pt",
+      "sha256": "be1936fb001242c28708e758ca787adedf2206933c73f12319efb062c83e8814",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-03/output.pt",
+      "sha256": "cba52de22aa85e5f9954fa764d86d4082af523e1817d47291cec6eba62ad4d82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-03/output.pt",
+      "sha256": "cba52de22aa85e5f9954fa764d86d4082af523e1817d47291cec6eba62ad4d82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-04/output.pt",
+      "sha256": "f9dadf9db0501c41a65682b1ab5369d167ab9856e6fadf09fa2db89e1d7089a2",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-04/output.pt",
+      "sha256": "f9dadf9db0501c41a65682b1ab5369d167ab9856e6fadf09fa2db89e1d7089a2",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-05/output.pt",
+      "sha256": "201404396c671e905e669e5300f6b9c3e6f7289020771b639cfad9d62e339c3b",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-05/output.pt",
+      "sha256": "201404396c671e905e669e5300f6b9c3e6f7289020771b639cfad9d62e339c3b",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-06/output.pt",
+      "sha256": "3f30363446459e34cef294477180678d73ff55907e5f4f8e62a0155fe76cd493",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-06/output.pt",
+      "sha256": "3f30363446459e34cef294477180678d73ff55907e5f4f8e62a0155fe76cd493",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-07/output.pt",
+      "sha256": "c47d85a98fdab26c1f471a444f92c096c23bca53872ec53a443d9a3b7293bb99",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-07/output.pt",
+      "sha256": "c47d85a98fdab26c1f471a444f92c096c23bca53872ec53a443d9a3b7293bb99",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-08/output.pt",
+      "sha256": "31835798ef12038dab9878cbe8acef7bccffab953f3f1d7a385e2b42e4823778",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-08/output.pt",
+      "sha256": "31835798ef12038dab9878cbe8acef7bccffab953f3f1d7a385e2b42e4823778",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-09/output.pt",
+      "sha256": "044c7bbbfd78bca9b517527b60b5d31e49c7c36c1d286da938a7e14e0553869b",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-09/output.pt",
+      "sha256": "044c7bbbfd78bca9b517527b60b5d31e49c7c36c1d286da938a7e14e0553869b",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-10/output.pt",
+      "sha256": "eac99eea34bd3a1882257f39fb1ce731a25aa300c8f98b561d19fed8014ce720",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-10/output.pt",
+      "sha256": "eac99eea34bd3a1882257f39fb1ce731a25aa300c8f98b561d19fed8014ce720",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-11/output.pt",
+      "sha256": "3daebe012ab5b52d256f9ea0662fab7c873b39974e54803c6bff99bb9b0a41b0",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-11/output.pt",
+      "sha256": "3daebe012ab5b52d256f9ea0662fab7c873b39974e54803c6bff99bb9b0a41b0",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-12/output.pt",
+      "sha256": "911e17182269de3f2b9636d203f7b3f0c30d89addd9b10989e6485646fe5deec",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-12/output.pt",
+      "sha256": "911e17182269de3f2b9636d203f7b3f0c30d89addd9b10989e6485646fe5deec",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_anchor_s0/call-13/output.pt",
+      "sha256": "8add846412ebe0d021027ecf90cd1bfb521ea1ada76a94f72fb638559a5ea485",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_anchor_s0/call-13/output.pt",
+      "sha256": "8add846412ebe0d021027ecf90cd1bfb521ea1ada76a94f72fb638559a5ea485",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-00/output.pt",
+      "sha256": "a02c14e1a31da38927bd555f457f35e53b19ab1d8029162406fbd2db545b3500",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-00/output.pt",
+      "sha256": "a02c14e1a31da38927bd555f457f35e53b19ab1d8029162406fbd2db545b3500",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-01/output.pt",
+      "sha256": "e47e5315cea6553fe1bc05aaea0295d10b4666df5db1b54d1b23b18fe18cb539",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-01/output.pt",
+      "sha256": "e47e5315cea6553fe1bc05aaea0295d10b4666df5db1b54d1b23b18fe18cb539",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-02/output.pt",
+      "sha256": "62c92de8759ebb952574fab4e7a0e9d2d771b29b46fceab591ffbfbbefcbacf5",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-02/output.pt",
+      "sha256": "62c92de8759ebb952574fab4e7a0e9d2d771b29b46fceab591ffbfbbefcbacf5",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-03/output.pt",
+      "sha256": "e6a565100a2d50095c9a732f76be2f679a5e6988eeace621cdd5b2eb775154b3",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-03/output.pt",
+      "sha256": "e6a565100a2d50095c9a732f76be2f679a5e6988eeace621cdd5b2eb775154b3",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-04/output.pt",
+      "sha256": "0026be1a0b4542d19d98fa429ffb9df9ab85b1ad75b5250a7894110100ddfe71",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-04/output.pt",
+      "sha256": "0026be1a0b4542d19d98fa429ffb9df9ab85b1ad75b5250a7894110100ddfe71",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-05/output.pt",
+      "sha256": "09f4e5a8174b22e0727f021dc121bb27db8b981f49e5b9945f2d1f1529cba393",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-05/output.pt",
+      "sha256": "09f4e5a8174b22e0727f021dc121bb27db8b981f49e5b9945f2d1f1529cba393",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-06/output.pt",
+      "sha256": "79a3cdb43f1588b6a2267f225ecb9be89f69a4f6efd773ca40a572b4a4b7533b",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-06/output.pt",
+      "sha256": "79a3cdb43f1588b6a2267f225ecb9be89f69a4f6efd773ca40a572b4a4b7533b",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-07/output.pt",
+      "sha256": "209ddfb1b88f1c9b81e2ab7db65f81108a15b9ca8562f8e22dbef71a5c9aab82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-07/output.pt",
+      "sha256": "209ddfb1b88f1c9b81e2ab7db65f81108a15b9ca8562f8e22dbef71a5c9aab82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-08/output.pt",
+      "sha256": "ebc7a95c03e7666a546cb7b3977a1f83c9814407a07785427515ba36c4f51726",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-08/output.pt",
+      "sha256": "ebc7a95c03e7666a546cb7b3977a1f83c9814407a07785427515ba36c4f51726",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-09/output.pt",
+      "sha256": "7dbaa0f83e56041ac11974496cc48fbb199d8a21ea3071a59f1aa49df8f90948",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-09/output.pt",
+      "sha256": "7dbaa0f83e56041ac11974496cc48fbb199d8a21ea3071a59f1aa49df8f90948",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-10/output.pt",
+      "sha256": "44b915d5eec980a3cbb2fb863ba1bd331ab3a9f21b0aca529193dd08d20fb393",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-10/output.pt",
+      "sha256": "44b915d5eec980a3cbb2fb863ba1bd331ab3a9f21b0aca529193dd08d20fb393",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-11/output.pt",
+      "sha256": "6899c5bc71c2139f892b527a8eaa4f560b4b5e051d17bdafb19ceb91f6d380d5",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-11/output.pt",
+      "sha256": "6899c5bc71c2139f892b527a8eaa4f560b4b5e051d17bdafb19ceb91f6d380d5",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-12/output.pt",
+      "sha256": "0fd40f4414c1c6a4dace1d9e98e0de2bd2af73063adaa626b653827074064f65",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-12/output.pt",
+      "sha256": "0fd40f4414c1c6a4dace1d9e98e0de2bd2af73063adaa626b653827074064f65",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_prefill_only/call-13/output.pt",
+      "sha256": "9dfe19836c68c7d50ac03f9ced6235f8fa6a0a74c82baca786343c3fcdb9a088",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_prefill_only/call-13/output.pt",
+      "sha256": "9dfe19836c68c7d50ac03f9ced6235f8fa6a0a74c82baca786343c3fcdb9a088",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-00/output.pt",
+      "sha256": "a02c14e1a31da38927bd555f457f35e53b19ab1d8029162406fbd2db545b3500",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-00/output.pt",
+      "sha256": "a02c14e1a31da38927bd555f457f35e53b19ab1d8029162406fbd2db545b3500",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-01/output.pt",
+      "sha256": "e47e5315cea6553fe1bc05aaea0295d10b4666df5db1b54d1b23b18fe18cb539",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-01/output.pt",
+      "sha256": "e47e5315cea6553fe1bc05aaea0295d10b4666df5db1b54d1b23b18fe18cb539",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-02/output.pt",
+      "sha256": "62c92de8759ebb952574fab4e7a0e9d2d771b29b46fceab591ffbfbbefcbacf5",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-02/output.pt",
+      "sha256": "62c92de8759ebb952574fab4e7a0e9d2d771b29b46fceab591ffbfbbefcbacf5",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-03/output.pt",
+      "sha256": "e6a565100a2d50095c9a732f76be2f679a5e6988eeace621cdd5b2eb775154b3",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-03/output.pt",
+      "sha256": "e6a565100a2d50095c9a732f76be2f679a5e6988eeace621cdd5b2eb775154b3",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-04/output.pt",
+      "sha256": "a9cbe10a29eeaa03103b6d975d3db0bf0f5a38488e45c14ddc5470c85dea4300",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-04/output.pt",
+      "sha256": "a9cbe10a29eeaa03103b6d975d3db0bf0f5a38488e45c14ddc5470c85dea4300",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-05/output.pt",
+      "sha256": "81c78e439051ece2b379f1ba9275e401b07f4deed65f0efc63e829b1c230e5c0",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-05/output.pt",
+      "sha256": "81c78e439051ece2b379f1ba9275e401b07f4deed65f0efc63e829b1c230e5c0",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-06/output.pt",
+      "sha256": "b01ded82f8e349b247adb8d48404e3e401d95dbd83b293cf24c41cdeb14915a4",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-06/output.pt",
+      "sha256": "b01ded82f8e349b247adb8d48404e3e401d95dbd83b293cf24c41cdeb14915a4",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-07/output.pt",
+      "sha256": "209ddfb1b88f1c9b81e2ab7db65f81108a15b9ca8562f8e22dbef71a5c9aab82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-07/output.pt",
+      "sha256": "209ddfb1b88f1c9b81e2ab7db65f81108a15b9ca8562f8e22dbef71a5c9aab82",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-08/output.pt",
+      "sha256": "ebc7a95c03e7666a546cb7b3977a1f83c9814407a07785427515ba36c4f51726",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-08/output.pt",
+      "sha256": "ebc7a95c03e7666a546cb7b3977a1f83c9814407a07785427515ba36c4f51726",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-09/output.pt",
+      "sha256": "7dbaa0f83e56041ac11974496cc48fbb199d8a21ea3071a59f1aa49df8f90948",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-09/output.pt",
+      "sha256": "7dbaa0f83e56041ac11974496cc48fbb199d8a21ea3071a59f1aa49df8f90948",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-10/output.pt",
+      "sha256": "44b915d5eec980a3cbb2fb863ba1bd331ab3a9f21b0aca529193dd08d20fb393",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-10/output.pt",
+      "sha256": "44b915d5eec980a3cbb2fb863ba1bd331ab3a9f21b0aca529193dd08d20fb393",
+      "bytes": 523817
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-11/output.pt",
+      "sha256": "5b283917497e264aea472938f522cd168eb2ad7b1ea1d09971bd35283a9ef1c4",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-11/output.pt",
+      "sha256": "5b283917497e264aea472938f522cd168eb2ad7b1ea1d09971bd35283a9ef1c4",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-12/output.pt",
+      "sha256": "02707bdcc2e973b49f9d499b8ff8594f336e31da8b1d7b9f9f150a8b667e1884",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-12/output.pt",
+      "sha256": "02707bdcc2e973b49f9d499b8ff8594f336e31da8b1d7b9f9f150a8b667e1884",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank0/strict_layer0_full_bf16_both_phases/call-13/output.pt",
+      "sha256": "720c2a6f5b1a08779f9a455ca54ac858f63818368f1314ca7d40ac05b75b654a",
+      "bytes": 2090601
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-original32-layer0-full-bf16-cpu-r1-20261108-v1/cpu-rank1/strict_layer0_full_bf16_both_phases/call-13/output.pt",
+      "sha256": "720c2a6f5b1a08779f9a455ca54ac858f63818368f1314ca7d40ac05b75b654a",
+      "bytes": 2090601
+    }
+  ],
+  "logits_payload_count": 84,
+  "selected_tap_bytes_checked": 3145728,
+  "HF_frames": 32,
+  "candidate_metric_frames": 96,
+  "metrics_independently_recomputed": true,
+  "original_metric_tolerance_gate_passed": false,
+  "scalar_disagreements": [
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 4,
+      "metric": "cosine",
+      "delta": 5.06307602811118e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996688961982727,
+      "independent_float64": 0.9997195269585538
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 5,
+      "metric": "cosine",
+      "delta": 4.797934390021741e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9987539649009705,
+      "independent_float64": 0.9988019442448707
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 6,
+      "metric": "cosine",
+      "delta": 3.976056139365358e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.997905433177948,
+      "independent_float64": 0.9979451937393417
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 7,
+      "metric": "cosine",
+      "delta": 3.1930172686878144e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997231364250183,
+      "independent_float64": 0.9997550665977052
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 8,
+      "metric": "cosine",
+      "delta": 3.223485369674428e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9989601969718933,
+      "independent_float64": 0.99899243182559
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 9,
+      "metric": "cosine",
+      "delta": 3.001057548490671e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9977738261222839,
+      "independent_float64": 0.9978038366977688
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 10,
+      "metric": "cosine",
+      "delta": 3.4722089603977935e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.998471736907959,
+      "independent_float64": 0.998506458997563
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 11,
+      "metric": "cosine",
+      "delta": 5.196808164942279e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997012615203857,
+      "independent_float64": 0.9997532296020352
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 12,
+      "metric": "cosine",
+      "delta": 4.066969574356705e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9956506490707397,
+      "independent_float64": 0.9956913187664833
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 13,
+      "metric": "cosine",
+      "delta": 4.574736080953379e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9962618350982666,
+      "independent_float64": 0.9963075824590761
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 14,
+      "metric": "cosine",
+      "delta": 2.690578483588446e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9991133809089661,
+      "independent_float64": 0.999140286693802
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 15,
+      "metric": "cosine",
+      "delta": 5.089208844410997e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996246099472046,
+      "independent_float64": 0.9996755020356487
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 18,
+      "metric": "cosine",
+      "delta": 8.814324867989498e-06,
+      "tolerance": 3e-06,
+      "recorded": 0.9997507333755493,
+      "independent_float64": 0.9997595477004173
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 20,
+      "metric": "cosine",
+      "delta": 2.8982578240910328e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9995101690292358,
+      "independent_float64": 0.9995391516074768
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 21,
+      "metric": "cosine",
+      "delta": 5.208301735326604e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996498227119446,
+      "independent_float64": 0.9997019057292978
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 22,
+      "metric": "cosine",
+      "delta": 3.4359773893544165e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996920824050903,
+      "independent_float64": 0.9997264421789839
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 23,
+      "metric": "cosine",
+      "delta": 4.08855901741223e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9984102249145508,
+      "independent_float64": 0.9984511105047249
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 24,
+      "metric": "cosine",
+      "delta": 3.3584287165711046e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9992521405220032,
+      "independent_float64": 0.9992857248091689
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 25,
+      "metric": "cosine",
+      "delta": 7.248230570067182e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998735189437866,
+      "independent_float64": 0.9999460012494873
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 26,
+      "metric": "cosine",
+      "delta": 3.8610386975945765e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9995952844619751,
+      "independent_float64": 0.999633894848951
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 27,
+      "metric": "cosine",
+      "delta": 6.99330221467509e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997445940971375,
+      "independent_float64": 0.9998145271192842
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 28,
+      "metric": "cosine",
+      "delta": 4.8072544952981744e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9991025328636169,
+      "independent_float64": 0.9991506054085699
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 29,
+      "metric": "cosine",
+      "delta": 5.639564848003431e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998264312744141,
+      "independent_float64": 0.9998828269228941
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 30,
+      "metric": "cosine",
+      "delta": 5.2629999398590144e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996531009674072,
+      "independent_float64": 0.9997057309668058
+    },
+    {
+      "arm": "strict_anchor_s0",
+      "frame": 31,
+      "metric": "cosine",
+      "delta": 4.372571056099339e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997095465660095,
+      "independent_float64": 0.9997532722765705
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 4,
+      "metric": "cosine",
+      "delta": 5.283612695317075e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996140599250793,
+      "independent_float64": 0.9996668960520325
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 5,
+      "metric": "cosine",
+      "delta": 5.127235259938523e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9955578446388245,
+      "independent_float64": 0.9956091169914238
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 6,
+      "metric": "cosine",
+      "delta": 4.394039083444046e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9984727501869202,
+      "independent_float64": 0.9985166905777546
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 7,
+      "metric": "cosine",
+      "delta": 4.0606947335208865e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9995313882827759,
+      "independent_float64": 0.9995719952301111
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 8,
+      "metric": "cosine",
+      "delta": 2.9718486155738688e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9987664222717285,
+      "independent_float64": 0.9987961407578843
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 9,
+      "metric": "cosine",
+      "delta": 2.9043552613905455e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9981546998023987,
+      "independent_float64": 0.9981837433550126
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 10,
+      "metric": "cosine",
+      "delta": 4.091172705156243e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9985764026641846,
+      "independent_float64": 0.9986173143912361
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 11,
+      "metric": "cosine",
+      "delta": 3.8706893386142305e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9993741512298584,
+      "independent_float64": 0.9994128581232445
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 12,
+      "metric": "cosine",
+      "delta": 3.078760224750621e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.995891809463501,
+      "independent_float64": 0.9959225970657485
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 13,
+      "metric": "cosine",
+      "delta": 3.598067251686654e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9969621300697327,
+      "independent_float64": 0.9969981107422495
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 14,
+      "metric": "cosine",
+      "delta": 4.287048608586641e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9989315867424011,
+      "independent_float64": 0.998974457228487
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 15,
+      "metric": "cosine",
+      "delta": 5.136441356379251e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9995840191841125,
+      "independent_float64": 0.9996353835976763
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 18,
+      "metric": "cosine",
+      "delta": 8.855312636280033e-06,
+      "tolerance": 3e-06,
+      "recorded": 0.999738335609436,
+      "independent_float64": 0.9997471909220723
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 20,
+      "metric": "cosine",
+      "delta": 3.9492150194719855e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9992069602012634,
+      "independent_float64": 0.9992464523514581
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 21,
+      "metric": "cosine",
+      "delta": 5.361636910916623e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997689723968506,
+      "independent_float64": 0.9998225887659598
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 22,
+      "metric": "cosine",
+      "delta": 3.0454422501713374e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.999678909778595,
+      "independent_float64": 0.9997093642010967
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 23,
+      "metric": "cosine",
+      "delta": 3.4534864441160273e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9982428550720215,
+      "independent_float64": 0.9982773899364626
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 24,
+      "metric": "cosine",
+      "delta": 4.523239894638209e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9991137385368347,
+      "independent_float64": 0.9991589709357811
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 25,
+      "metric": "cosine",
+      "delta": 9.458068279333265e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998531937599182,
+      "independent_float64": 0.9999477744427115
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 26,
+      "metric": "cosine",
+      "delta": 3.131486251695126e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9994405508041382,
+      "independent_float64": 0.9994718656666551
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 27,
+      "metric": "cosine",
+      "delta": 6.713251962175981e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996720552444458,
+      "independent_float64": 0.9997391877640676
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 28,
+      "metric": "cosine",
+      "delta": 4.3563795115608706e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9990029335021973,
+      "independent_float64": 0.9990464972973129
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 29,
+      "metric": "cosine",
+      "delta": 3.860571661351564e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998639225959778,
+      "independent_float64": 0.9999025283125913
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 30,
+      "metric": "cosine",
+      "delta": 4.159269108860997e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996359944343567,
+      "independent_float64": 0.9996775871254453
+    },
+    {
+      "arm": "strict_layer0_full_bf16_prefill_only",
+      "frame": 31,
+      "metric": "cosine",
+      "delta": 5.871854810002297e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997550845146179,
+      "independent_float64": 0.9998138030627179
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 4,
+      "metric": "cosine",
+      "delta": 4.9180015443073266e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9995101094245911,
+      "independent_float64": 0.9995592894400341
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 5,
+      "metric": "cosine",
+      "delta": 4.5340552319639293e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9954563975334167,
+      "independent_float64": 0.9955017380857364
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 6,
+      "metric": "cosine",
+      "delta": 4.141815222402645e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9978233575820923,
+      "independent_float64": 0.9978647757343163
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 7,
+      "metric": "cosine",
+      "delta": 4.024803144697664e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9994593262672424,
+      "independent_float64": 0.9994995742986894
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 8,
+      "metric": "cosine",
+      "delta": 3.0134001145376565e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9987162351608276,
+      "independent_float64": 0.998746369161973
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 9,
+      "metric": "cosine",
+      "delta": 3.212322840806525e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9980624914169312,
+      "independent_float64": 0.9980946146453392
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 10,
+      "metric": "cosine",
+      "delta": 4.567479328110302e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9985731840133667,
+      "independent_float64": 0.9986188588066478
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 11,
+      "metric": "cosine",
+      "delta": 4.813227136757359e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996675252914429,
+      "independent_float64": 0.9997156575628104
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 12,
+      "metric": "cosine",
+      "delta": 3.923899695790212e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.997473955154419,
+      "independent_float64": 0.9975131941513768
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 13,
+      "metric": "cosine",
+      "delta": 3.805417624369589e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9967406988143921,
+      "independent_float64": 0.9967787529906358
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 14,
+      "metric": "cosine",
+      "delta": 3.8779709518599326e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.998667299747467,
+      "independent_float64": 0.9987060794569856
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 15,
+      "metric": "cosine",
+      "delta": 2.9518406149842136e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996309280395508,
+      "independent_float64": 0.9996604464457006
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 18,
+      "metric": "cosine",
+      "delta": 8.855312636280033e-06,
+      "tolerance": 3e-06,
+      "recorded": 0.999738335609436,
+      "independent_float64": 0.9997471909220723
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 20,
+      "metric": "cosine",
+      "delta": 4.185547294599523e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9993078112602234,
+      "independent_float64": 0.9993496667331694
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 21,
+      "metric": "cosine",
+      "delta": 4.0610580457345336e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997691512107849,
+      "independent_float64": 0.9998097617912423
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 22,
+      "metric": "cosine",
+      "delta": 3.9167497072334356e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9996038675308228,
+      "independent_float64": 0.9996430350278951
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 23,
+      "metric": "cosine",
+      "delta": 4.9476934171899245e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9979150295257568,
+      "independent_float64": 0.9979645064599287
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 24,
+      "metric": "cosine",
+      "delta": 3.419542398563902e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9988409280776978,
+      "independent_float64": 0.9988751235016834
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 25,
+      "metric": "cosine",
+      "delta": 6.668328860093276e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998894333839417,
+      "independent_float64": 0.9999561166725426
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 26,
+      "metric": "cosine",
+      "delta": 3.542031513226185e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.999595582485199,
+      "independent_float64": 0.9996310028003312
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 27,
+      "metric": "cosine",
+      "delta": 5.5547135727196384e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997084140777588,
+      "independent_float64": 0.999763961213486
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 28,
+      "metric": "cosine",
+      "delta": 3.425448023708366e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9985630512237549,
+      "independent_float64": 0.998597305703992
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 29,
+      "metric": "cosine",
+      "delta": 5.665314585479031e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9998412132263184,
+      "independent_float64": 0.9998978663721731
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 30,
+      "metric": "cosine",
+      "delta": 4.943453785699603e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.999439001083374,
+      "independent_float64": 0.999488435621231
+    },
+    {
+      "arm": "strict_layer0_full_bf16_both_phases",
+      "frame": 31,
+      "metric": "cosine",
+      "delta": 6.984431371037658e-05,
+      "tolerance": 3e-06,
+      "recorded": 0.9997628927230835,
+      "independent_float64": 0.9998327370367939
+    }
+  ],
+  "raw_payloads_passed": true,
+  "independent_float64_tolerances": {
+    "cosine": 3e-06,
+    "kl_reference_to_neuron": 2e-05,
+    "max_abs_error": 2e-06,
+    "mean_abs_error": 2e-06,
+    "reference_margin": 2e-06
+  },
+  "maximum_metric_deviations": {
+    "cosine": 9.458068279333265e-05,
+    "kl_reference_to_neuron": 9.440072668842614e-06,
+    "max_abs_error": 0.0,
+    "mean_abs_error": 1.887297806923982e-08,
+    "reference_margin": 0.0
+  },
+  "exact_classification_and_argmax": true,
+  "model_reexecuted": false,
+  "matrix_multiplication_reexecuted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "measured_resources": {
+    "elapsed_seconds": 13.125743315089494,
+    "peak_rss_bytes": 280260608
+  }
+}
