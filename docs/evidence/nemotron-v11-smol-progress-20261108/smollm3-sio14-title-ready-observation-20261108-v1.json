@@ -1,0 +1,320 @@
+{
+  "schema": "smollm3_sio14_title_ready_live_observation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T06:08:54.867810+00:00",
+  "actual_session": 57994,
+  "actual_exit_observed": false,
+  "permit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/permit-server-2724926.json",
+    "sha256": "da7023d38eef151854209928766cbb137b6d66602ee74052be73c66be8e45b0a"
+  },
+  "title_receipts": {
+    "before": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/title-before-2724926.json",
+      "sha256": "5eba66e45dd47efdcca1f9c6bdcb4571f02a04b2088c64f2f63c04fc1b588291"
+    },
+    "before_ack": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/title-before-ack-2724926.json",
+      "sha256": "556f438b1193f6d563b0a19fb38a6f33a60368f81d0fc891b51f50e1a683416d"
+    },
+    "after": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/title-after-2724926.json",
+      "sha256": "f603d5205dd7d037ca9a6bbab6ad9cd47aba74fc2c655d1d1eef79353e96126a"
+    },
+    "commit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/title-commit-2724926.json",
+      "sha256": "667d1f66438068f602a7c03d50214351a3c663b2d62bf1bc29c2f0dda9e9c45e"
+    }
+  },
+  "title_complete_metadata_validation": {
+    "before_sha256": "5c7a45ea5d7d53532ee5e0cdf5ff49a617e7b76ea7776fa05b80bbc1502745e3",
+    "before_ack_sha256": "b058647c127a75739b444ded776f2604deed64817f9cc2a0a5fe46118706ce59",
+    "after_sha256": "bc98c8f961053348bf51b1ed4a9970eefe9058407aa0a8457c2b8f97832c08de",
+    "commit_sha256": "2613156b016cf60a13d244cf91cd5313f441af9422204b8020bd45988c1a5d69"
+  },
+  "live_title_check": {
+    "state": "committed",
+    "authenticated": true,
+    "spawn_identity": {
+      "pid": 2724926,
+      "start_ticks": "389793418",
+      "ppid": 2723691,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-s",
+        "-c",
+        "from multiprocessing.spawn import spawn_main; spawn_main(tracker_fd=23, pipe_handle=25)",
+        "--multiprocessing-fork"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-server.service"
+    },
+    "live_observation": {
+      "identity": {
+        "pid": 2724926,
+        "start_ticks": "389793418",
+        "ppid": 2723691,
+        "argv": [
+          "VLLM::EngineCore"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-server.service"
+      },
+      "exe": {
+        "target": "/usr/bin/python3.10",
+        "file": {
+          "dev": 66306,
+          "ino": 6333,
+          "mode": 33261,
+          "size": 5941864,
+          "mtime_ns": 1788171497000000000,
+          "ctime_ns": 1790232137499498335
+        }
+      },
+      "cmdline": {
+        "base64": "VkxMTTo6RW5naW5lQ29yZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "bytes": 162,
+        "sha256": "6d0ee5b582c717195a6e4257ed5e7c84123334dbd26781795c99301faf71b210"
+      }
+    },
+    "transition": {
+      "before_sha256": "5c7a45ea5d7d53532ee5e0cdf5ff49a617e7b76ea7776fa05b80bbc1502745e3",
+      "before_ack_sha256": "b058647c127a75739b444ded776f2604deed64817f9cc2a0a5fe46118706ce59",
+      "after_sha256": "bc98c8f961053348bf51b1ed4a9970eefe9058407aa0a8457c2b8f97832c08de",
+      "commit_sha256": "2613156b016cf60a13d244cf91cd5313f441af9422204b8020bd45988c1a5d69"
+    }
+  },
+  "owners": {
+    "external": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/control/external-owner.json",
+        "sha256": "69ad55da917584eb5b7ad18cbfbc18dccdf9e44bd3f298a4ffb4827d6e1307e7"
+      },
+      "expected": {
+        "pid": 2721488,
+        "start_ticks": "389776497",
+        "ppid": 2721487,
+        "argv": [
+          "python3",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_audit_v25.py",
+          "--execute",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+      },
+      "observed": {
+        "pid": 2721488,
+        "start_ticks": "389776497",
+        "ppid": 2721487,
+        "argv": [
+          "python3",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_audit_v25.py",
+          "--execute",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+      },
+      "exact_identity_live": true
+    },
+    "supervisor": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/control/supervisor-owner.json",
+        "sha256": "16b61ecf0d7d03eee2f6551308a617b3f14446f8fd4a7c29742c63afea56bddc"
+      },
+      "expected": {
+        "pid": 2723625,
+        "start_ticks": "389782922",
+        "ppid": 1583,
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_controller_v26.py",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-supervisor.service",
+        "unit": "trn1-latest-verify-smollm3-observer-invariance-v15-supervisor",
+        "invocation_id": "5319430120914c528c92238532e37f26"
+      },
+      "observed": {
+        "pid": 2723625,
+        "start_ticks": "389782922",
+        "ppid": 1583,
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_controller_v26.py",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-supervisor.service"
+      },
+      "exact_identity_live": true
+    },
+    "server": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/server-owner.json",
+        "sha256": "6218868268faeb6be8414da8bd17f6292a74d08bf5a9aa9819819e442bf3174b"
+      },
+      "expected": {
+        "pid": 2723691,
+        "start_ticks": "389783400",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v24.py",
+          "--kind",
+          "server",
+          "--run-id",
+          "r00",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-server.service",
+        "unit": "trn1-latest-verify-smollm3-observer-invariance-v15-r00-server",
+        "invocation_id": "4556c43e93fd4d719a4eecfdf2731445",
+        "attempt_id": "fc2d8ff3e2e25fd50aea87425274854c"
+      },
+      "observed": {
+        "pid": 2723691,
+        "start_ticks": "389783400",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v24.py",
+          "--kind",
+          "server",
+          "--run-id",
+          "r00",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-server.service"
+      },
+      "exact_identity_live": true
+    },
+    "client": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/client-owner.json",
+        "sha256": "697a2c00102c4446a04511bd04cb18576b649736d5b69d830371854337ff3e9f"
+      },
+      "expected": {
+        "pid": 2728217,
+        "start_ticks": "389820003",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v24.py",
+          "--kind",
+          "client",
+          "--run-id",
+          "r00",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-client.service",
+        "unit": "trn1-latest-verify-smollm3-observer-invariance-v15-r00-client",
+        "invocation_id": "af40272417184f369c4d62ac867f0cb9",
+        "attempt_id": "fc2d8ff3e2e25fd50aea87425274854c"
+      },
+      "observed": {
+        "pid": 2728217,
+        "start_ticks": "389820003",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v24.py",
+          "--kind",
+          "client",
+          "--run-id",
+          "r00",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+          "--spec-sha",
+          "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-review-20261108-v1.json",
+          "--review-sha",
+          "048733dc5320fc1803d0fcb343fb084e04aeb100799810c6617fa4a6dade3f93"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v15-r00-client.service"
+      },
+      "exact_identity_live": true
+    }
+  },
+  "server_ready": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/server-ready.json",
+    "sha256": "1bdf491b999fca4ff938c4c1b4b4e79d34d982e4c609fdcba2f16a883a38c1b4"
+  },
+  "model_id": "smollm3-3b",
+  "client_admitted": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio14/r00/admitted-client-2728217.json",
+    "sha256": "d9ae37145bbcb1498c633306c94c4ee25e0f668b96e4a52098c1a73e602b2d49"
+  },
+  "title_recorded_commit_elapsed_seconds": 11.55771263083443,
+  "timing_scope": "Receipt timestamp difference only; not final file-publication latency or model performance.",
+  "captures_observed": [],
+  "failures_observed": [],
+  "terminals_observed": [],
+  "external_recovery_required": false,
+  "postdrain_audit_performed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "root_free_bytes": 32128876544,
+  "nvme_free_bytes": 49651453952
+}
