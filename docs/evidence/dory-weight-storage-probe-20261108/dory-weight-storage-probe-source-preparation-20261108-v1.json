@@ -1,0 +1,78 @@
+{
+  "schema": "dory_weight_storage_probe_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T16:41:22.571573+00:00",
+  "source_only": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_weight_storage_probe_v1.py": "c75a1bcbb532fb5e0c473df0dfcdcb0ad9b8b09e98a9925df5d36ed427e68699",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_weight_storage_probe_v1.py": "a3ef648cd413bae48521b8e01a27fcb1eb648328f2057624de4e502d0706c820"
+  },
+  "unchanged_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_reference_loader_bridge_v1.py": "02574979fd2b2abaed6999f64f03297d94c1e4cf4c35ec02ccb280b0c1022a6d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_checkpoint_loader_v1.py": "61e20085087318d79b94e98fac6f82ada245818a2f61723de4b4afa888659cf8"
+  },
+  "source_checks": {
+    "tests": 22,
+    "passed": true,
+    "actual_exit": {
+      "session_id": null,
+      "exit_code": 0,
+      "tool_chunk": "1e8d4f"
+    },
+    "scope": "Source and stdlib synthetic bytes only; no Torch or runtime fixture execution"
+  },
+  "plan": {
+    "schema": "dory_weight_storage_probe_plan_v1",
+    "shapes": [
+      [
+        4
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        256,
+        256
+      ]
+    ],
+    "buffer_types": [
+      "plain",
+      "tracked"
+    ],
+    "stages": [
+      "initial",
+      "mutation",
+      "detached"
+    ],
+    "cases": 6,
+    "saved_tensors": 18,
+    "saved_raw_bytes": 786864,
+    "maximum_buffer_bytes": 131072,
+    "live_synthetic_byte_budget": 2097152,
+    "live_synthetic_budget_scope": "Logical tensor/byte buffers only; excludes Python lists, allocator and framework. Actual runner resident-memory budget remains required.",
+    "original_checkpoint_bytes": 7950515472,
+    "official_weight_values_read": false,
+    "model_constructed": false,
+    "model_forward_executed": false,
+    "native_reference_qualified": false,
+    "new_speedup_claim": false
+  },
+  "native_runtime_prepared": false,
+  "native_runtime_admitted": false,
+  "actual_torch_storage_semantics_tested": false,
+  "checkpoint_downloaded": false,
+  "official_weights_loaded": false,
+  "full_reference_constructed": false,
+  "model_forward_executed": false,
+  "peak_full_model_memory_fit_proven": false,
+  "neuron_baseline_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "queue": "After genuine Nemotron r7 terminal/finalization and queued MiniCPM5 attention diagnosis",
+  "limitations": [
+    "Saved-byte verifier does not reexecute Torch storage lifetime semantics",
+    "Logical 2MiB buffer budget excludes framework/Python/allocator memory; actual runtime resource budget remains required",
+    "Actual full checkpoint hash, original model construction, numeric/quality/serving gates remain pending"
+  ]
+}
