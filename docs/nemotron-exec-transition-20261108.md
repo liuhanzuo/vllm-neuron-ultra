@@ -67,6 +67,7 @@ artifacts and experiment outputs were untouched. NVMe free space was then about
 little margin; each new run still requires a fresh space check.
 
 The archive receipt is in the [admission evidence](evidence/smollm3-admission-20261108/manifest.json).
-Nemotron v8 remains source-prepared and unlaunched. SmolLM3 sio12 has been started
-first, and native experiments remain serial. No storage threshold or model
+Nemotron v8 remains source-prepared and unlaunched. SmolLM3 sio12 ran first but
+failed before readiness and completed no inference requests; its groups are now
+drained. Native experiments remain serial. No storage threshold or model
 validation requirement was lowered; no new model speedup is claimed.

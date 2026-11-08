@@ -81,13 +81,36 @@ Its total is **1,697,599,488 bytes** and control allocation is
 fail-and-retain behavior are unchanged. Exact source acceptance, specification
 and review were created and the real `load_spec` check passed.
 
-The fresh sio12 external process has started (tool session 78142); its actual
-identity is retained in the new [admission evidence](evidence/smollm3-admission-20261108/manifest.json).
-Input/source and compiled-payload admission passed; the authenticated controller
-has entered the first round, r00. The full twelve rounds and terminal review have
-not completed. This is no new
-model qualification or speedup claim. Follow the retained execution handle; do
-not start a duplicate experiment.
+The fresh sio12 experiment **failed before the first server became ready**;
+zero inference requests completed. Source, input and compiled-payload admission
+had passed. The actual server traceback rejects the installed wheel's extensionless
+`REQUESTED` receipt; the original reader independently reproduces that error.
+`INSTALLER` is the second unsupported receipt in the same 44-file installed list.
+The external process exited 1 (session 78142), and all planned groups are drained.
+
+A source-only successor now permits these two exact original receipt paths and
+hashes, bounded to 64 bytes. All 44 real installed files verify; eleven focused
+receipt controls passed. The new reader has **not** been integrated into a new
+runtime closure or launched. The failed sio12 namespace will not be reused.
+
+The terminal finalizer wrote its audit and complete catalog, then itself exited 1
+while printing a reference: the new 9,070,236-byte catalog exceeds the ordinary
+8 MiB reader cap. An independent follow-up authenticated both retained outputs,
+verified all prior history and repeated physical drain checks. The completed
+catalog contains 760 planned service entries and 146 recorded standalone process
+identities; 23 of the 25 new planned units were never launched. Original finalizer
+failure and successful follow-up verification remain separate records.
+
+Reader v3 additionally accepts only this exact completed catalog path/hash and
+schema under the existing 16 MiB writer cap. Sixteen tests passed, including the
+44 installed files, real completed catalog, changed hash/schema rejection and
+continued rejection of unlisted oversized JSON. This is preparation for a future
+run, with no new inference result, model qualification or speedup.
+
+The [admission and terminal evidence](evidence/smollm3-admission-20261108/manifest.json)
+retains the startup snapshot, actual exits, failure log, post-finalizer verification
+and successor reader controls. The native queue is idle after this failed run;
+Nemotron v8 remains unlaunched. Original science and resource limits remain in force.
 
 The [evidence manifest](evidence/smollm3-metadata-20261108/manifest.json) binds the
 source checks, runtime patch, finalizer source, regression checkers, the older partial estimate and the new

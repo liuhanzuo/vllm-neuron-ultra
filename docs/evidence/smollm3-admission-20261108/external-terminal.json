@@ -1,0 +1,1999 @@
+{
+  "schema": "smollm3_observer_invariance_external_terminal_v3",
+  "original_error": null,
+  "original_controller_error": {
+    "type": "RuntimeError",
+    "message": "Server exited before readiness"
+  },
+  "original_controller_cleanup_errors": [],
+  "scientific_error": {
+    "type": "RuntimeError",
+    "message": "Original controller failure retained"
+  },
+  "cleanup_errors": [],
+  "request_failure_audit": {
+    "request_failures": [],
+    "spawn_and_runner_witnesses": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/spawn-hook-2610798.json",
+        "sha256": "8d2d7d218edad16a034af3db359df57c555fbe52a8eceb0827499037b673a1f2",
+        "bytes": 534,
+        "schema": "smollm3_spawn_hook_v3",
+        "failed": false,
+        "partial_evidence": true,
+        "qualification_proven": false
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/ray-hook-2610798.json",
+        "sha256": "b36bdde45d859a939f3ba196e72e62f41af133b223c8bd76795eb7645567bb67",
+        "bytes": 2272,
+        "schema": "smollm3_ray_hook_v1",
+        "failed": false,
+        "partial_evidence": true,
+        "qualification_proven": false
+      }
+    ],
+    "evidence_audit_errors": []
+  },
+  "protocol_completed": false,
+  "lifecycle_qualified": false,
+  "qualified": false,
+  "original_supervisor_exit_zero": false,
+  "observer_api_invariance_passed": null,
+  "all_planned_groups_drained": true,
+  "planned_physical_drains": [
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "2h",
+            "RemainAfterExit": "yes",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "exit-code",
+            "ExecMainPID": "2610798",
+            "ExecMainCode": "1",
+            "ExecMainStatus": "1",
+            "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i HOME=/home/ubuntu USER=ubuntu LANG=C.UTF-8 PIP_NO_INDEX=1 PIP_DISABLE_PIP_VERSION_CHECK=1 PYTHONOPTIMIZE=0 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/pycache-server HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 TOKENIZERS_PARALLELISM=false NEURON_SMOLLM3=1 NEURON_SMOLLM3_CACHE_VARIANT=reference NEURON_SMOLLM3_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 VLLM_PLUGINS=neuron,neuron_smollm3 VLLM_WORKER_MULTIPROC_METHOD=spawn PYTHONPATH=/mnt/nvme/smollm3-cache-ablation-native-v3/target TMPDIR=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/t00 VLLM_RPC_BASE_PATH=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/t00 HF_HOME=/mnt/nvme/hf PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin NEURON_COMPILED_ARTIFACTS=/mnt/nvme/smollm3-cache-ablation-full-v7/artifact-reference BASE_COMPILE_WORK_DIR=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/compile-forbidden NEURON_COMPILE_CACHE_URL=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/cache-forbidden XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus TRN1_SMOL_OBSERVER_INVARIANCE_V12=r00:b565cda648467a5182e8702b0899f1a1 /home/ubuntu/venvs/vllm_neuron/bin/python -B -u /home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v21.py --kind server --run-id r00 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-spec-20261108-v1.json --spec-sha 861e55693648286989d23fb31a1840848473573c4812a29ac875c3fca5a91668 --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-review-20261108-v1.json --review-sha d714251bc203f391e6571ab7133c7fe1cb798346c619f1c0d53644174a5e66d4 ; ignore_errors=no ; start_time=[Sun 2026-11-08 03:27:46 UTC] ; stop_time=[Sun 2026-11-08 03:29:27 UTC] ; pid=2610798 ; code=exited ; status=1 }",
+            "ControlGroup": "",
+            "AllowedCPUs": "0-7",
+            "MemoryHigh": "26843545600",
+            "MemoryMax": "27917287424",
+            "MemorySwapMax": "8589934592",
+            "TasksMax": "2048",
+            "LimitFSIZE": "67108864",
+            "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+            "Nice": "19",
+            "CPUAffinity": "0-7",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-server.service",
+            "LoadState": "loaded",
+            "ActiveState": "failed",
+            "SubState": "failed",
+            "Job": "",
+            "InvocationID": "9104396920db45938df6e3d1143fd797"
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r00-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "2h",
+            "RemainAfterExit": "yes",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "exit-code",
+            "ExecMainPID": "2610798",
+            "ExecMainCode": "1",
+            "ExecMainStatus": "1",
+            "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i HOME=/home/ubuntu USER=ubuntu LANG=C.UTF-8 PIP_NO_INDEX=1 PIP_DISABLE_PIP_VERSION_CHECK=1 PYTHONOPTIMIZE=0 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/pycache-server HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 TOKENIZERS_PARALLELISM=false NEURON_SMOLLM3=1 NEURON_SMOLLM3_CACHE_VARIANT=reference NEURON_SMOLLM3_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 VLLM_PLUGINS=neuron,neuron_smollm3 VLLM_WORKER_MULTIPROC_METHOD=spawn PYTHONPATH=/mnt/nvme/smollm3-cache-ablation-native-v3/target TMPDIR=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/t00 VLLM_RPC_BASE_PATH=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/t00 HF_HOME=/mnt/nvme/hf PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin NEURON_COMPILED_ARTIFACTS=/mnt/nvme/smollm3-cache-ablation-full-v7/artifact-reference BASE_COMPILE_WORK_DIR=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/compile-forbidden NEURON_COMPILE_CACHE_URL=/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/r00/cache-forbidden XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus TRN1_SMOL_OBSERVER_INVARIANCE_V12=r00:b565cda648467a5182e8702b0899f1a1 /home/ubuntu/venvs/vllm_neuron/bin/python -B -u /home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v21.py --kind server --run-id r00 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-spec-20261108-v1.json --spec-sha 861e55693648286989d23fb31a1840848473573c4812a29ac875c3fca5a91668 --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-review-20261108-v1.json --review-sha d714251bc203f391e6571ab7133c7fe1cb798346c619f1c0d53644174a5e66d4 ; ignore_errors=no ; start_time=[Sun 2026-11-08 03:27:46 UTC] ; stop_time=[Sun 2026-11-08 03:29:27 UTC] ; pid=2610798 ; code=exited ; status=1 }",
+            "ControlGroup": "",
+            "AllowedCPUs": "0-7",
+            "MemoryHigh": "26843545600",
+            "MemoryMax": "27917287424",
+            "MemorySwapMax": "8589934592",
+            "TasksMax": "2048",
+            "LimitFSIZE": "67108864",
+            "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+            "Nice": "19",
+            "CPUAffinity": "0-7",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-server.service",
+            "LoadState": "loaded",
+            "ActiveState": "failed",
+            "SubState": "failed",
+            "Job": "",
+            "InvocationID": "9104396920db45938df6e3d1143fd797"
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r00-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r00-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r00-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r00-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r01-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r01-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r01-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r01-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r01-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r02-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r02-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r02-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r02-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r02-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r03-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r03-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r03-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r03-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r03-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r04-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r04-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r04-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r04-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r04-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r05-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r05-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r05-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r05-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r05-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r06-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r06-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r06-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r06-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r06-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r07-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r07-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r07-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r07-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r07-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r08-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r08-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r08-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r08-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r08-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r09-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r09-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r09-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r09-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r09-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r10-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r10-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r10-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r10-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r10-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-server",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r11-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-server.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r11-server.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-client",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r11-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "infinity",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "success",
+            "ExecMainPID": "0",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "AllowedCPUs": "",
+            "MemoryHigh": "infinity",
+            "MemoryMax": "infinity",
+            "MemorySwapMax": "infinity",
+            "TasksMax": "37867",
+            "LimitFSIZE": "infinity",
+            "WorkingDirectory": "",
+            "Nice": "0",
+            "CPUAffinity": "",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-r11-client.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "Job": "",
+            "InvocationID": ""
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-r11-client.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    },
+    {
+      "unit": "trn1-latest-verify-smollm3-observer-invariance-v13-supervisor",
+      "samples": [
+        {
+          "properties": {
+            "RuntimeMaxUSec": "1d",
+            "RemainAfterExit": "yes",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "exit-code",
+            "ExecMainPID": "2610775",
+            "ExecMainCode": "1",
+            "ExecMainStatus": "1",
+            "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONNOUSERSITE=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /usr/bin/python3 -B -u /home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_controller_v23.py --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-spec-20261108-v1.json --spec-sha 861e55693648286989d23fb31a1840848473573c4812a29ac875c3fca5a91668 --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-review-20261108-v1.json --review-sha d714251bc203f391e6571ab7133c7fe1cb798346c619f1c0d53644174a5e66d4 ; ignore_errors=no ; start_time=[Sun 2026-11-08 03:27:40 UTC] ; stop_time=[Sun 2026-11-08 03:29:29 UTC] ; pid=2610775 ; code=exited ; status=1 }",
+            "ControlGroup": "",
+            "AllowedCPUs": "7",
+            "MemoryHigh": "469762048",
+            "MemoryMax": "536870912",
+            "MemorySwapMax": "0",
+            "TasksMax": "128",
+            "LimitFSIZE": "16777216",
+            "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+            "Nice": "19",
+            "CPUAffinity": "7",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-supervisor.service",
+            "LoadState": "loaded",
+            "ActiveState": "failed",
+            "SubState": "failed",
+            "Job": "",
+            "InvocationID": "91ace67563214ae18301b5071626fba5"
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-supervisor.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        },
+        {
+          "properties": {
+            "RuntimeMaxUSec": "1d",
+            "RemainAfterExit": "yes",
+            "MainPID": "0",
+            "ControlPID": "0",
+            "Result": "exit-code",
+            "ExecMainPID": "2610775",
+            "ExecMainCode": "1",
+            "ExecMainStatus": "1",
+            "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONNOUSERSITE=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /usr/bin/python3 -B -u /home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_controller_v23.py --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-spec-20261108-v1.json --spec-sha 861e55693648286989d23fb31a1840848473573c4812a29ac875c3fca5a91668 --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-review-20261108-v1.json --review-sha d714251bc203f391e6571ab7133c7fe1cb798346c619f1c0d53644174a5e66d4 ; ignore_errors=no ; start_time=[Sun 2026-11-08 03:27:40 UTC] ; stop_time=[Sun 2026-11-08 03:29:29 UTC] ; pid=2610775 ; code=exited ; status=1 }",
+            "ControlGroup": "",
+            "AllowedCPUs": "7",
+            "MemoryHigh": "469762048",
+            "MemoryMax": "536870912",
+            "MemorySwapMax": "0",
+            "TasksMax": "128",
+            "LimitFSIZE": "16777216",
+            "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+            "Nice": "19",
+            "CPUAffinity": "7",
+            "KillMode": "control-group",
+            "Id": "trn1-latest-verify-smollm3-observer-invariance-v13-supervisor.service",
+            "LoadState": "loaded",
+            "ActiveState": "failed",
+            "SubState": "failed",
+            "Job": "",
+            "InvocationID": "91ace67563214ae18301b5071626fba5"
+          },
+          "group": {
+            "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-smollm3-observer-invariance-v13-supervisor.service",
+            "absent": true,
+            "pids": [],
+            "directories": []
+          }
+        }
+      ],
+      "physical_only": true,
+      "successful_execution_proven": false
+    }
+  ],
+  "external_owner": {
+    "pid": 2608846,
+    "start_ticks": "388890997",
+    "ppid": 2608845,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_audit_v22.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-spec-20261108-v1.json",
+      "--spec-sha",
+      "861e55693648286989d23fb31a1840848473573c4812a29ac875c3fca5a91668",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio12-execution-review-20261108-v1.json",
+      "--review-sha",
+      "d714251bc203f391e6571ab7133c7fe1cb798346c619f1c0d53644174a5e66d4"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "external_self_exit_not_claimed": true,
+  "successor_catalog": "/home/ubuntu/experiments/trn1-latest-models-20261031/sio12/control/successor-catalog.json",
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

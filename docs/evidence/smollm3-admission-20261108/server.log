@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v21.py", line 81, in <module>
+    entry(parser().parse_args())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_wrapper_v21.py", line 61, in entry
+    return worker.server(context, spawned=spawned) if args.kind == 'server' else worker.client(context)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_worker_v17.py", line 72, in server
+    context.poll();cls=native_setup(context)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_worker_v17.py", line 52, in native_setup
+    p.require(hashlib.sha256(p.bounded_source(p.TARGET/name)).hexdigest()==wanted,'Original installed package source')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_protocol_v17.py", line 81, in bounded_source
+    return source_metadata.source_bytes(path,wanted)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_metadata_source_v1.py", line 14, in source_bytes
+    return inherited.text(path,wanted)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v7.py", line 166, in text
+    require(path.suffix in TEXT_SUFFIXES or (not path.suffix and path.name in TEXT_BASENAMES) or
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py", line 17, in require
+    if not value:raise RuntimeError(message)
+RuntimeError: Reviewed UTF8 text only
