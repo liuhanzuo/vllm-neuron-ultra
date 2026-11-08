@@ -1,0 +1,154 @@
+{
+  "schema": "minicpm5_full_down_phase_outcomes_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T06:59:34.463517+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-root-summary-r1-20261107-v1.json",
+    "sha256": "56d2def2d9d6861083d0c6b84c0a3f4533451b3ad1b686b24d39a6a2d48bfd3e"
+  },
+  "independent_raw_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-independent-raw-r2-20261107-v2.json",
+    "sha256": "9af11e905ac9f80960f514fc3969a0688f7868f943514424e3eea33cfdecd815"
+  },
+  "rows": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-full-down-phase-outcomes-20261108-v1.csv",
+    "sha256": "53ca219186ba0a06f987f4f7a06b5ee5deb6364172d77898dc291f07284f5a16"
+  },
+  "phases": {
+    "prefill": {
+      "frames": 8,
+      "baseline_passed": 7,
+      "candidate_passed": 7,
+      "baseline_top1": 8,
+      "candidate_top1": 7,
+      "lower_KL_frames": [
+        0,
+        16,
+        18
+      ],
+      "higher_KL_frames": [
+        1,
+        2,
+        3,
+        17,
+        19
+      ]
+    },
+    "decode": {
+      "frames": 24,
+      "baseline_passed": 22,
+      "candidate_passed": 23,
+      "baseline_top1": 24,
+      "candidate_top1": 24,
+      "lower_KL_frames": [
+        4,
+        6,
+        8,
+        9,
+        10,
+        11,
+        20,
+        21,
+        23,
+        24,
+        27,
+        28,
+        29,
+        30
+      ],
+      "higher_KL_frames": [
+        5,
+        7,
+        12,
+        13,
+        14,
+        15,
+        22,
+        25,
+        26,
+        31
+      ]
+    }
+  },
+  "selected_frames": [
+    {
+      "frame": 1,
+      "fixture": 7,
+      "slot": 1,
+      "step": 0,
+      "phase": "prefill",
+      "position": 1230,
+      "baseline_KL": 0.10126954317092896,
+      "candidate_KL": 0.196322962641716,
+      "delta_KL": 0.09505341947078705,
+      "baseline_top1_match": true,
+      "candidate_top1_match": false,
+      "reference_margin": 1.125,
+      "baseline_failures": "KL",
+      "candidate_failures": "KL|high_margin_argmax"
+    },
+    {
+      "frame": 9,
+      "fixture": 7,
+      "slot": 1,
+      "step": 2,
+      "phase": "decode",
+      "position": 1232,
+      "baseline_KL": 0.028122015297412872,
+      "candidate_KL": 0.00846694316715002,
+      "delta_KL": -0.01965507213026285,
+      "baseline_top1_match": true,
+      "candidate_top1_match": true,
+      "reference_margin": 0.625,
+      "baseline_failures": "KL",
+      "candidate_failures": ""
+    },
+    {
+      "frame": 13,
+      "fixture": 7,
+      "slot": 1,
+      "step": 3,
+      "phase": "decode",
+      "position": 1233,
+      "baseline_KL": 0.04872628301382065,
+      "candidate_KL": 0.049903418868780136,
+      "delta_KL": 0.001177135854959488,
+      "baseline_top1_match": true,
+      "candidate_top1_match": true,
+      "reference_margin": 0.125,
+      "baseline_failures": "KL",
+      "candidate_failures": "KL"
+    },
+    {
+      "frame": 17,
+      "fixture": 1,
+      "slot": 1,
+      "step": 0,
+      "phase": "prefill",
+      "position": 27,
+      "baseline_KL": 0.010951168835163116,
+      "candidate_KL": 0.016635235399007797,
+      "delta_KL": 0.005684066563844681,
+      "baseline_top1_match": true,
+      "candidate_top1_match": true,
+      "reference_margin": 1.625,
+      "baseline_failures": "",
+      "candidate_failures": ""
+    }
+  ],
+  "metadata_only": true,
+  "raw_payload_bytes_read": 0,
+  "new_model_execution": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "inference": "Both-phase layer0 full-BF16 down changes produced one extra passing decode frame9 while worsening already-failing long-prefill frame1 and creating its high-margin top1 error. Phase grouping describes outcomes only; both phases and subsequent own-cache histories changed, so no phase-local causal attribution follows.",
+  "next_scientific_question": "Prioritize the original long-prefill frame1 (fixture7, position1230, physical bucket2048) and compare its actual native/strict-CPU complete layer0 attention/postnorm/MLP boundaries. A local frame17 fixed-input result does not establish this long-prefill path. A decode-only down diagnostic would still leave the existing frame1 failure and must not be promoted as a complete correctness fix.",
+  "preserved_followup_gates": [
+    "32 original frames with all teacher tokens and own-cache histories",
+    "cold84",
+    "long2049 and93markers",
+    "slot reuse and inactive-slot resume",
+    "quality96",
+    "paired vLLM-Neuron serving baseline and optimized candidate"
+  ]
+}
