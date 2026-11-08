@@ -6,7 +6,7 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
-This is a source integration release. Fresh device and end-to-end qualification
+The exact `e0a01d3` wheel passed [nine native installation/plugin/spawn/configuration checks](unified-native-checks-20261108.md) on 2026-11-08, after fixing a JSON-input bug in the probe. Fresh device and end-to-end qualification
 of the merged branch is pending. Use the recorded source commits for reproducing
 the existing measured comparisons; new merged source identities need new
 artifacts and a new full comparison.
@@ -95,8 +95,8 @@ python3 -B -m unittest discover -s test/multi_model -p 'test_*.py'
 
 These checks do not load native model libraries or execute device inference.
 The CPU sampler's native tests are a separate serial task, with historical
-results in [Trn1 optimizations](trn1-optimizations.md). Before promoting the
-merged branch, repeat native plugin/spawn checks, compile/load and corruption
+results in [Trn1 optimizations](trn1-optimizations.md). Native plugin/spawn/configuration checks for the exact wheel are recorded above. Before promoting the
+merged branch, complete compile/load and corruption
 rejection, original numeric gates, cold cache, long decode, request-slot reuse,
 quality and matched serving measurements for each model. No model family is
 declared fully optimized.

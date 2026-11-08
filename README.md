@@ -6,6 +6,8 @@ This is the `trn1-multi-model-experimental-20261107` branch for **Neuron SDK
 optimized paths require explicit opt-in. See the [installation and qualification
 guide](docs/multi-model.md) before using this branch.
 
+The exact `e0a01d3` wheel passed [nine native installation/plugin/spawn/configuration checks](docs/unified-native-checks-20261108.md) on 2026-11-08.
+
 **The merged branch has not passed fresh device or end-to-end qualification.**
 The results below belong to the named implementation commits and matched
 reference adapters; they do not qualify the merged source or compare against

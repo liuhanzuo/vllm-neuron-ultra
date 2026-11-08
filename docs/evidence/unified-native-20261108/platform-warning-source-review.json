@@ -1,0 +1,184 @@
+{
+  "schema": "unified_platform_warnings_independent_source_review_v1",
+  "source_only": true,
+  "framework_imported": false,
+  "native_executed": false,
+  "model_payload_read": false,
+  "wheel_payload_read": false,
+  "repository_modified": false,
+  "commit": "e0a01d3bd9e1fec9faf2b6b0f37ecbe2d8bf92dc",
+  "imported_release_base": "ad82965376f1eab5dcfecb6b1bae99ae8e262a8d",
+  "base_ancestry_blobs": {
+    "vllm_neuron/platform.py": {
+      "head_blob": "774fde4ce06522b2e0c4a8ec105b18946f06ad26",
+      "base_blob": "774fde4ce06522b2e0c4a8ec105b18946f06ad26",
+      "identical": true
+    },
+    "vllm_neuron/platform_overrides.py": {
+      "head_blob": "2684fd807b7bb376dfa8479adf81d9a1192c229d",
+      "base_blob": "2684fd807b7bb376dfa8479adf81d9a1192c229d",
+      "identical": true
+    }
+  },
+  "patch_package_absent_in_base_head_and_pinned_inventory": true,
+  "controls": [
+    {
+      "model": "lfm3",
+      "case": "unaltered_serialized_historical_body",
+      "accepted": true
+    },
+    {
+      "model": "lfm3",
+      "case": "tp_degree",
+      "rejected": true,
+      "reason": "Unsupported LFM3 Neuron field: tp_degree"
+    },
+    {
+      "model": "lfm3",
+      "case": "world_size",
+      "rejected": true,
+      "reason": "Unsupported LFM3 Neuron field: world_size"
+    },
+    {
+      "model": "lfm3",
+      "case": "local_ranks_size",
+      "rejected": true,
+      "reason": "Unsupported LFM3 Neuron field: local_ranks_size"
+    },
+    {
+      "model": "lfm3",
+      "case": "ep_degree",
+      "rejected": true,
+      "reason": "Unsupported LFM3 Neuron field: ep_degree"
+    },
+    {
+      "model": "lfm3",
+      "case": "seq_len",
+      "rejected": true,
+      "reason": "Unsupported LFM3 Neuron field: seq_len"
+    },
+    {
+      "model": "smollm3",
+      "case": "unaltered_serialized_historical_body",
+      "accepted": true
+    },
+    {
+      "model": "smollm3",
+      "case": "tp_degree",
+      "rejected": true,
+      "reason": "Unsupported SmolLM3 Neuron field: tp_degree"
+    },
+    {
+      "model": "smollm3",
+      "case": "world_size",
+      "rejected": true,
+      "reason": "Unsupported SmolLM3 Neuron field: world_size"
+    },
+    {
+      "model": "smollm3",
+      "case": "local_ranks_size",
+      "rejected": true,
+      "reason": "Unsupported SmolLM3 Neuron field: local_ranks_size"
+    },
+    {
+      "model": "smollm3",
+      "case": "ep_degree",
+      "rejected": true,
+      "reason": "Unsupported SmolLM3 Neuron field: ep_degree"
+    },
+    {
+      "model": "smollm3",
+      "case": "seq_len",
+      "rejected": true,
+      "reason": "Unsupported SmolLM3 Neuron field: seq_len"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "unaltered_serialized_historical_body",
+      "accepted": true
+    },
+    {
+      "model": "nemotron9b",
+      "case": "tp_degree",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B Neuron field: tp_degree"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "world_size",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B Neuron field: world_size"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "local_ranks_size",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B Neuron field: local_ranks_size"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "ep_degree",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B Neuron field: ep_degree"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "seq_len",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B Neuron field: seq_len"
+    },
+    {
+      "model": "nemotron9b",
+      "case": "non_json_dtype_sentinel",
+      "rejected": true,
+      "reason": "Unsupported Nemotron9B configuration type at ('neuron_config', 'torch_dtype')",
+      "actual_torch_dtype_used": false
+    }
+  ],
+  "controls_passed": 19,
+  "control_scope": "AST-extracted pure source functions over historical JSON and one synthetic dtype sentinel; not SDK execution.",
+  "default_observation": {
+    "passed": true,
+    "spawn_exitcode": 0,
+    "parent_pid": 2445224,
+    "spawn_pid": 2445281,
+    "warning_lines": [
+      9,
+      10,
+      19,
+      20
+    ],
+    "warnings_not_bound_to_pids_by_log": true
+  },
+  "findings": {
+    "config_warning": "Inherited constructor-time import cycle. Failed early attempt leaves flag false and skips assignments; later retry exists. Chat warning proves a later invocation reached stream patch, but final method/flag state was not asserted.",
+    "chat_warning": "Inherited dangling patch import. Only 0.11.0 patch branch is attempted; it swallows missing package and leaves original streaming generator. Config/world-size flow can continue. Suspected impact is multi-token Harmony/GPT-OSS stream delta accumulation, not an observed served-model failure.",
+    "nemotron_failure": "Preflight calls validate_scope on vars(config) despite production path passing parsed to_json_string body. Full canonical JSON admission correctly rejects typed torch_dtype. Correct both positive and negative probe calls; do not relax package contract.",
+    "preflight_gap": "Actual plugin and spawn plus NxDI config checks do not assert platform override identities, OpenAI request validation or HTTP streaming. These results do not qualify complete serving or speedup."
+  },
+  "sources_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_unified_platform_warnings_20261108_v1.py": "1c1053665fb6bae0fd7965f74099403ebde5d04c55925de68298370d702a502c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-native-lfm3-historical-config-20261107-v1.json": "243df3eba317cf196efcde6c5eee47da39c1edaf13adb4ccab9d022a3751a0ba",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-native-nemotron9b-historical-config-20261107-v1.json": "bf16866fd969d7be16096a88085ddfe748af46b618cd65c10c41c1e80bd692de",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-native-smollm3-historical-config-20261107-v1.json": "82152a9fa0e80dc4f5e6aa2eb779f1fb9199c05e22fac26e71990c3843b26b2a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-package-native-r1-20261108/default.log": "2d5e438dc76c7e66abcf9874d2c77ae07b24d2c66c54bbd9fdcec0fe6f2ba244",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-package-native-r1-20261108/default.result.json": "48f7162bec3de2d3f0f8216741b7884d2f0977d190c8247532a09db3c29042f9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-package-native-r1-20261108/nemotron9b-split-nki-v5.log": "ccba0e85dcb56974f6b53e91582488aa547a330b4eafba76f2ceeb1cc8721b84",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-package-native-source-bundle-20261107-v3.json": "0ec3058efffdc98b1e0383cc82dc009546b8888df2ea74d2354775d1a7894272",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/unified_package_native_preflight_v2.py": "bf19b0ffbe9415bcd1508c8abf0e251c8cfb83995b856bfb8b8ac7af074055c0",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/lfm3/artifacts.py": "ad799b2a14f26d9e53aa86d73d12437eebb0f89323b6260ca5e3160547bd6286",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/lfm3/identity.py": "a712e40e4e83b1fb3bf7bf2b66896760cd1f8ba8776019105054785f6c442b27",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/nemotron9b/artifacts.py": "23e9512442c235b971dd04c19c9ad2103d699630f3895ae81136050f2c491187",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/nemotron9b/identity.py": "b95e4e7535cad63e6df707aaa5422ac4ad26879386f9b2c9d0777667636699e4",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/nemotron9b/neuron_config_contract.json": "173b0ed80f552e976327e331804348be57c6b4d75792cfc074c114537ad268fd",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/smollm3/artifacts.py": "4bc4892f971fa9fabed049e13aff0e34a95056e6dcbb8cc4bb3107189670d2f5",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/smollm3/identity.py": "31cc6a3993ec0bf1be61cb07f431ed682ecb4d4c678a03d1d3e9af30067645e2",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/platform.py": "4387dfe509f055d72b93d955c1fb103142e000c452898680bb71e3e0886f8f26",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/platform_overrides.py": "01e81c6ec753ced45dd57bded421d0909ec930b0cd61ec25382b7dfb711aba6d",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/openai_harmony/__init__.py": "e7daf40879af2ebed3cfc77ab2ef1d686a3c8e04a4f84f246643a4e3aeae3d06",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/__init__.py": "4c654a12b57c517939954bbae0a1f66063fbdeb47d1a86d5f965d3f8d56e59a5",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/model.py": "cdc56efde88003b399204128c97086ba8ed06b7117e2e12ccdbd070b8892d362",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/entrypoints/openai/serving_chat.py": "a123f6702837c1061dbda89ade98a7c04b34f8ed787dd8c724d7eeeee2c78f06",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/platforms/__init__.py": "48bf2526618f5f435394dfd4ba52cf21ee71acfd1d0eb4bf45ba3c784727dcc7"
+  }
+}

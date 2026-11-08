@@ -1,0 +1,140 @@
+{
+  "schema": "unified_native_preflight_public_summary_v1",
+  "tested_implementation": "e0a01d3bd9e1fec9faf2b6b0f37ecbe2d8bf92dc",
+  "wheel": {
+    "bytes": 187504,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/multi-model-package-20261107-v1/vllm_neuron-0.2.2+lts-py3-none-any.whl",
+    "sha256": "600a6745dce5b80316a7d9d24cd1bc9407953ca0748d5232aa28caa3b64835b5"
+  },
+  "actual_external_exit_code": 0,
+  "actual_external_session": {
+    "kind": "tool_session",
+    "session_id": 59042
+  },
+  "actual_external_tool_chunk": "567939",
+  "root_terminal": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/unified-package-native-r2-root-terminal-20261108-v1.json",
+    "bytes": 1918626,
+    "sha256": "430c6fbe34215096683583ed397be55cf91a1ffc4f8d8362c52d4d0be205f515"
+  },
+  "phases": [
+    {
+      "phase": "install",
+      "service_exit_code": 0,
+      "passed": true
+    },
+    {
+      "phase": "default",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2454107,
+      "spawn_pid": 2454171,
+      "spawn_exit_code": 0,
+      "variant": "disabled"
+    },
+    {
+      "phase": "lfm3-reference",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2454237,
+      "spawn_pid": 2454319,
+      "spawn_exit_code": 0,
+      "variant": "reference",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "lfm3-nki",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2454412,
+      "spawn_pid": 2454487,
+      "spawn_exit_code": 0,
+      "variant": "nki_predicated_decode_v4",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "smollm3-reference",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2454679,
+      "spawn_pid": 2454754,
+      "spawn_exit_code": 0,
+      "variant": "reference",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "smollm3-read",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2454850,
+      "spawn_pid": 2454976,
+      "spawn_exit_code": 0,
+      "variant": "nki_read",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "smollm3-write",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2455069,
+      "spawn_pid": 2455143,
+      "spawn_exit_code": 0,
+      "variant": "nki_write",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "smollm3-read-write",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2455356,
+      "spawn_pid": 2455432,
+      "spawn_exit_code": 0,
+      "variant": "nki_read_write",
+      "context": 2048,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    },
+    {
+      "phase": "nemotron9b-split-nki-v5",
+      "service_exit_code": 0,
+      "passed": true,
+      "parent_pid": 2455524,
+      "spawn_pid": 2455607,
+      "spawn_exit_code": 0,
+      "variant": "split_nki_v5",
+      "context": 4096,
+      "scope_rejections": 10,
+      "saved_body_rejections": 14
+    }
+  ],
+  "native_preflight_passed": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "model_weights_loaded": false,
+  "device_graph_executed": false,
+  "compile_executed": false,
+  "root_all_processes_gone": true,
+  "root_all_cgroups_empty": true,
+  "previous_attempt": {
+    "actual_session": 19541,
+    "actual_exit_code": 1,
+    "actual_tool_chunk": "f5a098",
+    "completed_phases": 8,
+    "failed_phase": "nemotron9b-split-nki-v5",
+    "cause": "Our preflight passed vars(config) to JSON-only scope validation; both positive/negative calls now use complete parsed SDK serialization; package unchanged."
+  },
+  "limits": [
+    "No HTTP serving, numerical, cold-cache, long decode, slot-reuse, quality, artifact or performance qualification from this preflight.",
+    "Inherited platform config/stream override warnings remain; final override identity and HTTP stream behavior not tested."
+  ]
+}
