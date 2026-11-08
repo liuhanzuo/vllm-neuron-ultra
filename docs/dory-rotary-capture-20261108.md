@@ -29,3 +29,5 @@ Nemotron r6 结束并完成实际释放后，先绑定完整历史、原生解�
 之后仍需原权重加载、分词器和模板运行、原生参考、Neuron 基线及冷缓存、长解码、请求槽位复用、质量和成对服务测试。Dory 的两次循环、共享物理权重和 56 份独立历史保持不变。
 
 [源码与 18 项检查记录](evidence/dory-rotary-capture-20261108/dory-rotary-capture-source-preparation-20261108-v2.json) · [完整文件清单](evidence/dory-rotary-capture-20261108/manifest.json) · [官方元数据、参考边界和优化方向](dory-metadata-and-optimization-20261108.md)。
+
+后续进展：[执行器 39 项检查与 Nemotron 局部复验](dory-executor-nemotron-progress-20261108.md)。Dory 实际数值执行仍待串行准入。

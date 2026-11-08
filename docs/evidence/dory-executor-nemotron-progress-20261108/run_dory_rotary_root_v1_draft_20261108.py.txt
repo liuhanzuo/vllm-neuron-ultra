@@ -1,0 +1,162 @@
+"""Dory native arithmetic runner, exclusively admitted after actual Nemotron r6.
+
+No runtime on import. --prepare authenticates completed history but never grants
+source approval. --run requires a separately reviewed exact request and takes
+the serial lock before native library reads/import or arithmetic.
+"""
+import argparse,base64,csv,datetime,fcntl,hashlib,io,json,os,re,resource,signal,stat,sys,time
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];Q=R/'research';sys.path.insert(0,str(R));sys.path.insert(0,str(Q))
+import nemotron9b_package_protocol_v14 as p
+import nemotron9b_package_r6_completed_history_v1 as history
+import nemotron9b_r4_terminal_metadata_v2 as metadata
+from nemotron9b_package_controller_v14 import acquire,release
+PYTHON=Path('/home/ubuntu/venvs/model_reference_2026/bin/python')
+BASE=PYTHON.parent.parent/'lib/python3.12/site-packages'
+RECORD=BASE/'torch-2.9.1+cpu.dist-info/RECORD'
+RECORD_SHA='b7b1a26641988654ae3f994cdfbf523200c5f08a9eb1a5fdac56c1f8493bd8e5'
+BUDGET=dict(address_space_bytes=8*2**30,cpu_seconds=600,wall_seconds=900,file_bytes=16*2**20,output_bytes=16*2**20,root_floor_bytes=28*2**30,cpus=[6])
+FILES=['dory_rotary_arithmetic_v1.py','dory_rotary_arithmetic_v2.py','dory_rotary_arithmetic_capture_v2.py','dory_rotary_capture_runtime_v1.py','review_dory_rotary_saved_boundaries_v1.py','check_dory_rotary_capture_v2.py','run_dory_rotary_root_v1.py','check_run_dory_rotary_root_v1.py','nemotron9b_r4_terminal_metadata_v2.py']
+
+def ref(path):return metadata.ref(path)
+def load(ref):return metadata.load(ref)
+def once(path,value):return p.once(Path(path),value)
+
+def ensure_observer():
+ from nemotron9b_package_window_v14 import external_observer,registry,gate_identity
+ raw=os.environ.get('NEMOTRON_OBSERVER_GATE_FD','');p.require(raw.isdigit(),'Whole-command observer wrapper required')
+ fd=int(raw);info=os.fstat(fd);gate=gate_identity()
+ p.require((info.st_dev,info.st_ino)==(gate['device'],gate['inode']),'Inherited exact observer gate descriptor')
+ value=registry();p.require(value['state']=='released'and value['performance_window']is False,'Previous Nemotron run released before Dory')
+ return value
+
+def source_paths():
+ import dory_rotary_arithmetic_v2 as arithmetic
+ paths=[Q/name for name in FILES]+[Path(path)for path,_ in arithmetic.PINS.values()]
+ paths += [R/'nemotron9b_package_r6_completed_history_v1.py',R/'nemotron9b_post_mini_history_v1.py',R/'nemotron9b_completed_history_drain_v1.py']
+ return sorted(set(map(str,paths)))
+
+def validate_terminal(catalog_ref,exit_ref):
+ p.require(catalog_ref['path']==str(history.CURRENT),'Only completed actual r6 history')
+ catalog=history.load(catalog_ref);finish=load(exit_ref);ext=catalog['nemotron9b_package_r6_append']
+ p.require(finish['schema']=='nemotron9b_r6_finalizer_external_exit_v1'and finish['catalog']==catalog_ref and finish['owner']==ext['finalizer_owner'],'Exact r6 finalizer completion')
+ p.require(finish['actual_tool_exit_observed']is True and finish['exact_owner_gone']is True and finish['catalog_validated']is True,'Actual external finalizer exit and catalog validation')
+ actual=finish['actual_exit'];p.require(type(actual['session_id'])is int and type(actual['exit_code'])is int and actual['exit_code']==0 and re.fullmatch('[0-9a-f]{6}',actual['tool_chunk']),'Real successful finalizer tool completion')
+ p.low.gone(ext['finalizer_owner']);return catalog
+
+def validate_request(request):
+ p.require(request['schema']=='dory_rotary_runtime_request_v1'and re.fullmatch('[a-z0-9-]{1,32}',request['run_id']),'Exact runtime request')
+ p.require(request['python']==str(PYTHON)and request['torch_record']==dict(path=str(RECORD),sha256=RECORD_SHA),'Fixed nativeTorchCPUinstallation')
+ p.require(request['budgets']==BUDGET and request['science']==dict(unique_conditions=96,rounds=2,executed_comparisons=192,raw_tensors=53,raw_bytes=2230320,full_cache_positions=262144),'Unreduced original scientific and resource limits')
+ p.require(request['output_root']==str(R/('dory-rotary-'+request['run_id'])),'Fresh exact output namespace')
+ p.require(request['canonical_sha256']==p.canonical(),'Canonical main state unchanged')
+ p.require(set(request['source_sha256'])==set(source_paths()),'Complete explicit new executable source closure')
+ for path,wanted in request['source_sha256'].items():p.require(ref(path)['sha256']==wanted,'Frozen source changed: '+path)
+ p.require(request['native_reference_qualified']is request['new_speedup_claim']is request['automatic_successor_launch']is False,'No premature model qualification or automatic launch')
+ return request
+
+def prepare(catalog_ref,exit_ref,run_id):
+ ensure_observer();p.require(re.fullmatch('[a-z0-9-]{1,32}',run_id),'Bounded run identifier')
+ catalog=validate_terminal(catalog_ref,exit_ref)
+ out=R/('dory-rotary-'+run_id);p.require(not out.exists(),'Never reuse output roots')
+ request=dict(schema='dory_rotary_runtime_request_v1',run_id=run_id,python=str(PYTHON),torch_record=dict(path=str(RECORD),sha256=RECORD_SHA),source_sha256={path:ref(path)['sha256']for path in source_paths()},budgets=BUDGET,science=dict(unique_conditions=96,rounds=2,executed_comparisons=192,raw_tensors=53,raw_bytes=2230320,full_cache_positions=262144),output_root=str(out),catalog=catalog_ref,finalizer_exit=exit_ref,canonical_sha256=p.canonical(),runtime_admitted=False,native_reference_qualified=False,new_speedup_claim=False,automatic_successor_launch=False)
+ validate_request(request);path=Q/('dory-rotary-'+run_id+'-request.json');once(path,request)
+ return dict(request=ref(path),review_created=False,native_started=False)
+
+def file_identity(path):
+ path=Path(path);s=path.lstat();p.require(path.resolve()==path and stat.S_ISREG(s.st_mode),'Canonical regular runtime file')
+ return {key:getattr(s,key)for key in ['st_dev','st_ino','st_size','st_mtime_ns','st_ctime_ns']}
+
+def verify_binary(path,expected,size,guard):
+ path=Path(path);before=file_identity(path);p.require(before['st_size']==size,'Declared runtime file size')
+ digest=hashlib.sha256();count=0;fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  p.require(os.fstat(fd).st_ino==before['st_ino'],'Runtime file changed at open')
+  while True:
+   chunk=os.read(fd,2**20)
+   if not chunk:break
+   count+=len(chunk);p.require(count<=size,'Runtime file grew');digest.update(chunk);guard()
+ finally:os.close(fd)
+ p.require(file_identity(path)==before and count==size and digest.hexdigest()==expected,'Exact installed runtime bytes')
+ return dict(path=str(path),sha256=expected,identity=before)
+
+def verify_torch_install(guard):
+ p.require(ref(RECORD)['sha256']==RECORD_SHA,'Pinned installedTorchRECORD')
+ rows=list(csv.reader(io.StringIO(RECORD.read_text())));p.require(len(rows)==11721,'Exact installedTorchfilecount')
+ verified=[]
+ for name,digest,size in rows:
+  if not digest:
+   p.require(name=='torch-2.9.1+cpu.dist-info/RECORD','OnlyRECORDselfhashomitted');continue
+  path=(BASE/name).resolve();p.require(path.is_relative_to(PYTHON.parent.parent),'Runtime entry stays in installed environment')
+  p.require(digest.startswith('sha256=')and size.isdigit(),'InstalledSHA256andbytes')
+  expected=base64.urlsafe_b64decode(digest[7:]+'='*((-len(digest[7:]))%4)).hex()
+  verified.append(verify_binary(path,expected,int(size),guard))
+ p.require(ref(RECORD)['sha256']==RECORD_SHA,'RuntimeRECORDunchangedafterverification')
+ return verified
+
+def usage(root):
+ total=0
+ for path in root.rglob('*'):
+  s=path.lstat();p.require(not path.is_symlink(),'No output symlinks')
+  if path.is_file():p.require(stat.S_ISREG(s.st_mode)and s.st_nlink==1,'Ordinary output');total+=max(s.st_size,s.st_blocks*512)
+ p.require(total<=BUDGET['output_bytes'],'Bounded whole output tree')
+ fs=os.statvfs(R);p.require(fs.f_bavail*fs.f_frsize>=BUDGET['root_floor_bytes'],'Root free-space floor');return total
+
+def run(request_ref,review_ref):
+ ensure_observer();request=validate_request(load(request_ref));review=load(review_ref)
+ p.require(review['schema']=='dory_rotary_runtime_source_review_v1'and review['reviewer']=='/root'and review['passed']is review['independent_review']is review['source_only']is True and review['blockers']==[],'Separate exact root source review')
+ p.require(review['request']==request_ref and review['source_sha256']==request['source_sha256'],'Reviewed exact request/source')
+ p.require(sys.executable==str(PYTHON)and sys.dont_write_bytecode and __debug__,'Fixed native interpreter; bytecode disabled')
+ p.require('torch'not in sys.modules and 'numpy'not in sys.modules,'Authenticate before native import')
+ out=Path(request['output_root']);p.require(not out.exists(),'Fresh runtime outputs')
+ fd,owner,lock=acquire();started=time.monotonic();created=False;old_alarm=None
+ try:
+  catalog=validate_terminal(request['catalog'],request['finalizer_exit']);history.physical_drain(catalog);p.low.active_heavy();p.low.lock_proof(owner,lock)
+  os.sched_setaffinity(0,set(BUDGET['cpus']));os.nice(19)
+  resource.setrlimit(resource.RLIMIT_AS,(BUDGET['address_space_bytes'],BUDGET['address_space_bytes']))
+  resource.setrlimit(resource.RLIMIT_CPU,(BUDGET['cpu_seconds'],BUDGET['cpu_seconds']+5))
+  resource.setrlimit(resource.RLIMIT_FSIZE,(BUDGET['file_bytes'],BUDGET['file_bytes']))
+  def timeout(signum,frame):raise TimeoutError('Dory native arithmetic wall budget exceeded')
+  old_alarm=signal.signal(signal.SIGALRM,timeout);signal.alarm(BUDGET['wall_seconds'])
+  out.mkdir(mode=0o700);created=True
+  def fast_guard():
+   p.require(time.monotonic()-started<=BUDGET['wall_seconds'],'Bounded runtime duration')
+   p.low.lock_proof(owner,lock);ensure_observer();p.require(os.sched_getaffinity(0)==set(BUDGET['cpus']),'Original CPU affinity')
+  fast_guard();native_files=verify_torch_install(fast_guard)
+  executable=PYTHON.resolve();binary_before=file_identity(executable)
+  with executable.open('rb')as f:digest=hashlib.sha256(f.read()).hexdigest()
+  p.require(file_identity(executable)==binary_before,'Interpreterstablebytes')
+  environment={key:os.environ.get(key)for key in ['OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','PYTHONNOUSERSITE']}
+  p.require(environment==dict(OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',PYTHONNOUSERSITE='1'),'Explicitone-threadnativeenvironment')
+  once(out/'admission.json',dict(schema='dory_rotary_actual_admission_v1',request=request_ref,review=review_ref,owner=owner,lock_identity=lock,catalog=request['catalog'],all_predecessors_physically_drained=True,resources=BUDGET,environment=environment,torch_files_verified=len(native_files),interpreter=dict(path=str(executable),sha256=digest,identity=binary_before),actual_self_exit_claimed=False,native_reference_qualified=False,new_speedup_claim=False))
+  once(out/'runtime-files.json',dict(files=native_files,record=request['torch_record']))
+  import torch
+  p.require(str(torch.__version__)=='2.9.1+cpu'and Path(torch.__file__).resolve()==BASE/'torch/__init__.py','ActualnativeTorchCPUmodule')
+  torch.set_num_threads(1);torch.set_num_interop_threads(1)
+  from dory_rotary_capture_runtime_v1 import run as compare
+  result=compare(torch=torch,guard=fast_guard,output=out/'comparison')
+  from review_dory_rotary_saved_boundaries_v1 import review as independent
+  saved=independent(result['result'],fast_guard);once(out/'independent-review.json',saved)
+  for row in native_files:p.require(file_identity(row['path'])==row['identity'],'Nativefilesunchangedafterarithmetic')
+  validate_request(request);fast_guard();p.low.active_heavy();total=usage(out);actual=resource.getrusage(resource.RUSAGE_SELF)
+  done=dict(schema='dory_rotary_actual_terminal_v1',complete=True,owner=owner,request=request_ref,admission=ref(out/'admission.json'),result=result['result'],independent_review=ref(out/'independent-review.json'),
+   arithmetic_passed=result['passed'],reference_replay_passed=saved['all_reference_outputs_reproduced'],candidate_replay_passed=saved['all_candidate_outputs_reproduced'],
+   passed=result['passed']and saved['all_reference_outputs_reproduced']and saved['all_candidate_outputs_reproduced'],
+   measured_resources=dict(elapsed_seconds=time.monotonic()-started,peak_rss_bytes=actual.ru_maxrss*1024,user_seconds=actual.ru_utime,system_seconds=actual.ru_stime,output_bytes=total),
+   actual_self_exit_claimed=False,native_reference_qualified=False,neuron_baseline_qualified=False,new_speedup_claim=False)
+  once(out/'terminal.json',done);print(json.dumps(dict(terminal=ref(out/'terminal.json'),passed=done['passed'],actual_self_exit_claimed=False)),flush=True)
+  p.require(done['passed'],'Dory arithmetic or observer/replay check failed; all outputs retained')
+ except BaseException as error:
+  if created and not(out/'failure.json').exists():once(out/'failure.json',dict(error_type=type(error).__name__,error=str(error),owner=owner,request=request_ref,actual_self_exit_claimed=False,native_reference_qualified=False,new_speedup_claim=False))
+  raise
+ finally:
+  signal.alarm(0)
+  if old_alarm is not None:signal.signal(signal.SIGALRM,old_alarm)
+  release(fd)
+
+if __name__=='__main__':
+ parser=argparse.ArgumentParser();mode=parser.add_mutually_exclusive_group(required=True);mode.add_argument('--prepare',action='store_true');mode.add_argument('--run',action='store_true')
+ for name in ['catalog','catalog-sha256','finalizer-exit','finalizer-exit-sha256','run-id','request','request-sha256','review','review-sha256']:parser.add_argument('--'+name)
+ args=parser.parse_args()
+ if args.prepare:print(json.dumps(prepare(dict(path=args.catalog,sha256=args.catalog_sha256),dict(path=args.finalizer_exit,sha256=args.finalizer_exit_sha256),args.run_id)))
+ else:run(dict(path=args.request,sha256=args.request_sha256),dict(path=args.review,sha256=args.review_sha256))
