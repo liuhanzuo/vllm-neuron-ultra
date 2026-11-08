@@ -1,0 +1,108 @@
+{
+  "schema": "smollm3_sio14_attention_source_comparison_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T07:58:55.221463+00:00",
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/smollm3-observer-sio14-execution-spec-20261108-v1.json",
+    "sha256": "6ae6357c45f3d6bbd0c2fc38d5a77fe24d2c537073b67ca5589554da05c14337"
+  },
+  "source_comparison_script": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_smollm3_sio14_attention_source_v1.py",
+    "sha256": "d27d59f12d5991758c32ac130a49a519e592d7217dfbf19275604e481589d8a8"
+  },
+  "sources": {
+    "text_core.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/text_core.py",
+        "sha256": "97fd88e4ca0ffbd470328d5359216ad4ba364f3b2e949a5c0e6775bd7e583527"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/text_core.py",
+        "sha256": "97fd88e4ca0ffbd470328d5359216ad4ba364f3b2e949a5c0e6775bd7e583527"
+      }
+    },
+    "cache_attention.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/cache_attention.py",
+        "sha256": "9a92dce147ad8f740864b31a48323d0cc0a37860a24b5e263616eb76a28c33d7"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/cache_attention.py",
+        "sha256": "9a92dce147ad8f740864b31a48323d0cc0a37860a24b5e263616eb76a28c33d7"
+      }
+    },
+    "helpers.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/helpers.py",
+        "sha256": "b904d2b8ec9e49a57237114c756166806c534bb614d136bbee48ea6c05a008f3"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/helpers.py",
+        "sha256": "b904d2b8ec9e49a57237114c756166806c534bb614d136bbee48ea6c05a008f3"
+      }
+    },
+    "nki_write.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/nki_write.py",
+        "sha256": "b8ef846eb495c559c1b2094d8bc2deb265e34bbce2ad909828aad0dc57f7a9a5"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/nki_write.py",
+        "sha256": "b8ef846eb495c559c1b2094d8bc2deb265e34bbce2ad909828aad0dc57f7a9a5"
+      }
+    },
+    "nki_write_torch.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/nki_write_torch.py",
+        "sha256": "b359b5b315827f923899b96cd88ad9d1a868bf6d956ee6541362486ac9ac03b3"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/nki_write_torch.py",
+        "sha256": "b359b5b315827f923899b96cd88ad9d1a868bf6d956ee6541362486ac9ac03b3"
+      }
+    },
+    "modeling.py": {
+      "installed": {
+        "path": "/mnt/nvme/smollm3-cache-ablation-native-v3/target/vllm_neuron/models/smollm3/modeling.py",
+        "sha256": "8501ad8016a3a7f6396825e9410ed7878083791ef4e0b4542081e9d08243a6a5"
+      },
+      "pinned_source": {
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-smollm3-cache-ablation-v1/vllm_neuron/models/smollm3/modeling.py",
+        "sha256": "8501ad8016a3a7f6396825e9410ed7878083791ef4e0b4542081e9d08243a6a5"
+      }
+    }
+  },
+  "reference_and_candidate_arithmetic_ast_equal_after_exact_cache_helper_substitution": true,
+  "candidate_prefill_delegates_original": true,
+  "input_assertions_excluded": 6,
+  "read_sites_normalized": 2,
+  "write_sites_normalized": 2,
+  "write_variant_read_helper_matches_reference": true,
+  "negative_controls": [
+    "changed_attention_scale_rejected",
+    "changed_inclusive_mask_rejected",
+    "changed_softmax_precision_rejected"
+  ],
+  "state_access_source": {
+    "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/spmd.py",
+    "sha256": "c5585517ac099e3a34e8637283bbdb9170548cf236bf6c9304518ce89ba41e5c"
+  },
+  "historical_snapshot_helper_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_matched_state_device_v2.py",
+    "sha256": "65f43aec690e9fc991717f1373dc19e29fc11783b14ebc8ca9a91f49db95c357"
+  },
+  "interpretation": "Python attention arithmetic is identical after substituting the two intended cache reads and two intended writes. This does not establish compiled arithmetic, NKI copy semantics, alias safety, actual cache contents, or cause of output divergence.",
+  "next_steps": [
+    "Finish the original12round matrix before selecting a successor.",
+    "Read actual live state via traced_model.nxd_model.state only in a separately admitted observer experiment, retaining original loader/warmup and all22requests.",
+    "Reuse no clear/restore/load behavior from the historical matched-state worker: it deliberately resets state and differs from the online lifecycle.",
+    "Any new cache/logit observer needs its own off/on output controls, bounded complete reads, original process/source evidence, and same slot/request indexing.",
+    "If histories remain different, complete native self-replay and controlled full-history comparisons before a causal kernel claim."
+  ],
+  "model_or_compiler_imported": false,
+  "model_execution_performed": false,
+  "device_cache_read": false,
+  "state_snapshot_bytes_if_full144": 603979776,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
