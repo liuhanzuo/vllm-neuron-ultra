@@ -1,0 +1,238 @@
+{
+  "schema": "minicpm5_frame1_upstream_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T12:51:37.889932+00:00",
+  "base_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-input-plan-20261107-v1.json",
+    "sha256": "ce599a2beae22df0a05c13591854cfab8ba57519df11ee93a0d25ad4392306c8"
+  },
+  "new_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_worker_v1.py",
+      "sha256": "038d998e3b04f80469a99e33d277f1c508ee33c9ca2a30b24535c1398f47a08f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_replay_v1.py",
+      "sha256": "d383ffac430f07e8a99a9685e7712b7bb48a44158ee3ce2e9e0e4d5c63344deb"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_frame1_upstream_source_v1.py",
+      "sha256": "635b028c4eaaa4c7a9979ed7f885297b4a1884404e572cdba90558d6137e65f4"
+    }
+  ],
+  "unchanged_original_worker": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_mlp_worker_v2.py",
+    "sha256": "8fdd1a477e8e5159a77f3a4c176eea2120f4c0f970d9deef57e0a50a269ceb85"
+  },
+  "original_remaining_gates": {
+    "original32": "14 calls / 32 frames / all8 fixtures; cosine>=0.995, KL<=0.02, max_abs<=2, aggregate argmax>=0.9, every HF margin>0.5 must match.",
+    "cold": "Seven prefixes 32,128,256,512,1024,2048,2052; 84 full-vocabulary frames,42 calls,42 duplicate-slot checks, fresh zero all168 caches per prefix, all six buckets.",
+    "long_slot_reuse": "All2049 device operations,2044 decode calls,2041 teacher-forced steps,93 reference marks against8172 native cached updates; slot reuse,partial batch,inactive resume retained.",
+    "quality": "Original smoke and all96 quality cases with unchanged pinned inputs/graders.",
+    "performance": "Original workload suite, streaming/concurrent and mixed workloads, three rounds, unchanged gates; serialize native/compiler/device/performance work. No speedup claim until qualification."
+  },
+  "science": {
+    "frame": {
+      "index": 1,
+      "fixture": 7,
+      "slot": 1,
+      "step": 0
+    },
+    "capture_fields": [
+      "layer_input",
+      "inputnorm_output",
+      "attention_input",
+      "attention_output",
+      "postnorm_input",
+      "postnorm_output",
+      "mlp_input"
+    ],
+    "cpu_anchors": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-01/result.json",
+        "sha256": "04a6334a2950b16f9fb4c8dc3870603584b5c6e0da010bc8fab7583c98c7ffc0"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank1/strict_anchor_s0/call-01/result.json",
+        "sha256": "d1cac9b1a0f1c6095a4dd6a885a782251da9cab7bed3d0f254e14201aa357d02"
+      }
+    ],
+    "cpu_full_anchors": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank0/strict_anchor_s0/call-01/result.json",
+        "sha256": "9141f970060fb3ba0857b482c4f79505e72da48734cfae763ceb473e8684c74a"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-full-down-cpu-r1-20261107/cpu-rank1/strict_anchor_s0/call-01/result.json",
+        "sha256": "6e315aa0a88a7d52fb87f362a882e50b06d8089d92e5d6d6113b621f54b18523"
+      }
+    ],
+    "r3_captures": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-mlp-r3-20261108-v1/native/capture.json",
+        "sha256": "296c9a721f17c3118d18cb3cc9f929e648eb9d673c29e69aedf227b192d16348"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-mlp-r3-20261108-v1/cpu-rank0/capture.json",
+        "sha256": "38c8ba9a5e11ec366ab570e908f0b56e9a6e8fb389cd142cb7637ba94c7a0ca3"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-mlp-r3-20261108-v1/cpu-rank1/capture.json",
+        "sha256": "9f18c3163775cdbab4cb5789758d61f63472b0b3aea2dfd370e3d123d7908c45"
+      }
+    ],
+    "arm": "strict_anchor_s0",
+    "precision_interventions": [],
+    "norm_names": [
+      "input_layernorm",
+      "post_attention_layernorm"
+    ],
+    "norm_eps": 1e-06,
+    "norm_weight_bytes": 24576,
+    "native_length": 1231,
+    "cpu_bucket": 2048,
+    "actual_capture_bytes": 152735744,
+    "capture_file_cap_bytes": 16777216,
+    "output_cap_bytes": 201326592,
+    "upstream_only": true
+  },
+  "norm_source_proofs": {
+    "native": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/llama/modeling_llama.py",
+        "sha256": "363df58c077a8fcfd3593b2817538e53f90eeab32294d3c6bbb7241f094669de"
+      },
+      "arithmetic_ast_sha256": "7e6cf4c3f12d7637f45de8d36bf5dc96576d2abed7b5f78afd9e7f23d58b4cee",
+      "line": 61
+    },
+    "cpu": {
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/models/llama/modeling_llama.py",
+        "sha256": "31bf660a663259134324bc65da4e155951dc89c5ca46471d2325a9938e859e26"
+      },
+      "arithmetic_ast_sha256": "7e6cf4c3f12d7637f45de8d36bf5dc96576d2abed7b5f78afd9e7f23d58b4cee",
+      "line": 62
+    }
+  },
+  "preexisting_prediction_observation": {
+    "native": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-hf32-boundary-observer-v2/hf-frame-01.json",
+      "sha256": "8d086df2cb1b54c9a6db94efc6590a3ae819fbce080f12a2bc70ac02dd47cd9e"
+    },
+    "cpu": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-original32-layer0-phase-cpu-r1-20261107-v1/cpu-rank0/strict_anchor_s0/call-01/result.json",
+      "sha256": "04a6334a2950b16f9fb4c8dc3870603584b5c6e0da010bc8fab7583c98c7ffc0"
+    },
+    "taps": [
+      {
+        "tap": "embed_tokens",
+        "native_sha256": "5d20c2fda1577f9e75b6b7bc48a84b00a7df1a864b65738a8c828f84aa7ea77c",
+        "cpu_sha256": "5d20c2fda1577f9e75b6b7bc48a84b00a7df1a864b65738a8c828f84aa7ea77c",
+        "prediction_bytes_equal": true
+      },
+      {
+        "tap": "layers.0.input_layernorm",
+        "native_sha256": "49ed38241a37e2105c28be26289e72833cfdcbc068878d1a88cbdccb5d2286f9",
+        "cpu_sha256": "49ed38241a37e2105c28be26289e72833cfdcbc068878d1a88cbdccb5d2286f9",
+        "prediction_bytes_equal": true
+      },
+      {
+        "tap": "layers.0.self_attn",
+        "native_sha256": "d5fb1393ce6df63cff4ffd7d278771d9b3d3fe77719074f1b2472844b718a24a",
+        "cpu_sha256": "b51b4aaed5c0ad265068ea187843909ae01bce49d05986359df6c15eedc2f4b2",
+        "prediction_bytes_equal": false
+      },
+      {
+        "tap": "layers.0.post_attention_layernorm",
+        "native_sha256": "8a273c5816cbf9a5d41a5ca0b7738cb20b0bc41279490867bdf31b9440449668",
+        "cpu_sha256": "5cb9dce7590f51ddc7b18fb7de5fde4af2d91f472c812d3edc5c482cbfd2a931",
+        "prediction_bytes_equal": false
+      },
+      {
+        "tap": "layers.0.mlp",
+        "native_sha256": "ac5c2208cf06f5f307a038444c388708d784c7f069c1260c3e0f68cf1f096e93",
+        "cpu_sha256": "dab744da60b146bb37899495af6ebf9b428479909a6c3d1062b28490db6c0485",
+        "prediction_bytes_equal": false
+      },
+      {
+        "tap": "layers.0",
+        "native_sha256": "83db1ef99ab6f270b6f60d8a033e23d15c2c8450d0a13ffacfecf88207e63484",
+        "cpu_sha256": "09e07aa2b9f48c914db2f3544262df200ffa9c4378c6a99f018560278f62dd71",
+        "prediction_bytes_equal": false
+      }
+    ],
+    "scope": "Existing last-position prediction metadata only; not whole-prefix equality"
+  },
+  "preexisting_full_mlp_input": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-r3-independent-raw-review-20261108-v1.json",
+    "sha256": "7e7174967202aea4850a7de7d785b647039eb69bc666980a667888ccf55b554b"
+  },
+  "tests": [
+    {
+      "tests": 26,
+      "exit_code": 0,
+      "tool_chunk": "c64142",
+      "elapsed_seconds": 0.613,
+      "session_id": null
+    },
+    {
+      "tests": 35,
+      "exit_code": 0,
+      "tool_chunk": "538140",
+      "elapsed_seconds": 0.638,
+      "session_id": null
+    }
+  ],
+  "failures_preserved": [
+    {
+      "exit_code": 1,
+      "tool_chunk": "7446bd",
+      "session_id": null,
+      "cause": "Initial checker draft missed whitespace in an else expression; no tests ran",
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_frame1_upstream_source_v1.first-draft.py.txt",
+        "sha256": "a992d81e5e9a0b7ead65357ff2712f876465733d52f0027d33286d1f77f9b845"
+      }
+    },
+    {
+      "tests": 35,
+      "errors": 6,
+      "exit_code": 1,
+      "tool_chunk": "827c34",
+      "session_id": null,
+      "cause": "New replay mistakenly passed sets to inherited JSON-only equality helper; corrected to exact set equality. Related raw-byte comparison also switched to explicit same_bytes helper before native execution.",
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_replay_v1.first-draft.py.txt",
+        "sha256": "4840375aa19d086f18ed8fff2c046b527a700beae9b06c05f939a37b8e138520"
+      }
+    }
+  ],
+  "runtime_admitted": false,
+  "native_executed": false,
+  "weights_read_this_preparation": false,
+  "raw_payloads_read_this_preparation": false,
+  "model_qualified": false,
+  "new_speedup_claim": false,
+  "remaining_before_runtime": [
+    "Separate frozen runner/spec/review consuming actual full post-Dory completed history and external actual exit",
+    "Explicit source closure and pinned interpreters/libraries for both native and CPU paths",
+    "Retain original full1231native/2048CPU shapes, exact seven inputs, six prediction anchors and full MLP input from r3",
+    "All21 saved boundaries plus six norm-weight files; compare inputnorm/attention adjacency and postnorm/MLP adjacency",
+    "Bounded serial actual native/TP2CPU capture and admitted replay; no launch while Nemotron/Dory active",
+    "Independent saved-byte reviewer for all boundaries and counterfactual metadata, real exits and physical release",
+    "Only after diagnostics: controlled candidate interventions then all original32/cold84/long2049and93markers/slot/quality96/pairedserving gates"
+  ],
+  "replay_scope": {
+    "original_controls": "Full original layouts, two native threads and one CPU thread in the admitted replay interpreter; native interpreter not reused",
+    "counterfactuals": [
+      "native_entry_only",
+      "native_attention_only",
+      "native_entry_and_attention"
+    ],
+    "geometry": "Always2048CPUrows/layout; only real1231rows replaced; original CPU padding retained",
+    "attention_reexecuted": false,
+    "final_logits_reexecuted": false,
+    "actual_gloo_reexecuted": false,
+    "unique_final_KL_cause_proven": false
+  }
+}

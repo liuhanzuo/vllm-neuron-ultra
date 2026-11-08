@@ -1,0 +1,689 @@
+{
+  "schema": "nemotron9b_r6_partial_split_observation_v2",
+  "observed_at": "2026-11-08T12:52:16.572647+00:00",
+  "reviewer": "/root",
+  "controller_owner": {
+    "pid": 2984949,
+    "start_ticks": "391922389",
+    "ppid": 1583,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v14.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-spec.json",
+      "--spec-sha256",
+      "cd779a014effdca2e4fd9a8595b9764ba5e0b51d37df05279292ed266de2c4ff",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-root-review.json",
+      "--review-sha256",
+      "8fa6c810f5c69d8831960a8c92e364dd6eea2cf0c2d17b3777a084c4cf6cfc79"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r6-20261108-controller.service",
+    "invocation_id": "8e18185280f346bcb3dc3ae4e6ebe6b2"
+  },
+  "actual_proc": {
+    "pid": 2984949,
+    "start_ticks": "391922389",
+    "ppid": 1583,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v14.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-spec.json",
+      "--spec-sha256",
+      "cd779a014effdca2e4fd9a8595b9764ba5e0b51d37df05279292ed266de2c4ff",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v14-r6-20261108-root-review.json",
+      "--review-sha256",
+      "8fa6c810f5c69d8831960a8c92e364dd6eea2cf0c2d17b3777a084c4cf6cfc79"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r6-20261108-controller.service"
+  },
+  "invocation_id_verified": true,
+  "actual_tool_session": 46838,
+  "status": {
+    "stage": "split-nemotron-conv-b1-t128-tensor-split",
+    "performance_window": false
+  },
+  "retained_worker_exits": 28,
+  "split_rows": [
+    {
+      "stage": "split-nemotron-conv-b1-t128-original",
+      "case": {
+        "name": "nemotron_conv-b1-t128",
+        "kind": "nemotron_conv",
+        "batch": 1,
+        "length": 128,
+        "sizes": [
+          5120,
+          512,
+          512
+        ],
+        "input_shape": [
+          1,
+          6144,
+          128
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 1143,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-conv-b1-t128-original-worker-result.json",
+        "sha256": "de217274aed017ce1ad98075e1012782a26019893246a048e9deae9f86ff32ac"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-conv-b1-t128-original-retained-exit.json",
+        "sha256": "8efd1ab7b1e39388b5833af6cb16d61155939ec5c02b92fafaccd19d7cfb0087"
+      }
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t128-tensor-split",
+      "case": {
+        "name": "nemotron_conv-b1-t128",
+        "kind": "nemotron_conv",
+        "batch": 1,
+        "length": 128,
+        "sizes": [
+          5120,
+          512,
+          512
+        ],
+        "input_shape": [
+          1,
+          6144,
+          128
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-conv-b1-t128-tensor-split-worker-result.json",
+        "sha256": "d37ddfcdeb1767c5cb709c3525be7cc0fc76a845b7858efed810ac2b6b0bf603"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-conv-b1-t128-tensor-split-retained-exit.json",
+        "sha256": "d2156b67ed4ec60bf2226278462fbac28baa5ce122df916cdf28586346fa3602"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1-original",
+      "case": {
+        "name": "nemotron_projection-b1-t1",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 1,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          1,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": true
+      },
+      "variant": "original",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1-original-worker-result.json",
+        "sha256": "6bef99fc70594e9e34a0d3e8d736ae2ac8c5ece613f8ae819dd7e2bf5daa9ca6"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1-original-retained-exit.json",
+        "sha256": "15dfbbcba66f1df3835cc963f855743173b25d2976dc948bf1e91b0fb0284c17"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t1",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 1,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          1,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": true
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1-tensor-split-worker-result.json",
+        "sha256": "56423e06c7bada453b9addb985163c6ff939e4c12c8e254e0a4f1ec7097ce6a9"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1-tensor-split-retained-exit.json",
+        "sha256": "1af7e700e7a7293ce97e6145754ccb630505569fc7915c32f7e3f26e9c122d12"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1024-original",
+      "case": {
+        "name": "nemotron_projection-b1-t1024",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 1024,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          1024,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 9207,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1024-original-worker-result.json",
+        "sha256": "b059ec05380e858f319d636dbdbf484179fd6246221565c1e6bd16184613a6ec"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1024-original-retained-exit.json",
+        "sha256": "82329976c156ee917ecc37535d0ae86c6c9dbe1838c83b34449cb2d2a8dd4838"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1024-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t1024",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 1024,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          1024,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1024-tensor-split-worker-result.json",
+        "sha256": "f456eee1f410b1cf9e92ca974a34e35941acb6a7b798f3856913ae45e4af868c"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t1024-tensor-split-retained-exit.json",
+        "sha256": "debf2a43c9bbe6b79a317692301eff6bb3a6aecbe3b715f87f9871f387f6b298"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t128-original",
+      "case": {
+        "name": "nemotron_projection-b1-t128",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 128,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          128,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 1143,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t128-original-worker-result.json",
+        "sha256": "4955baa2a7a2f4f7c51175751525165726f636e0ba6b429df4b23b81b25a7d3f"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t128-original-retained-exit.json",
+        "sha256": "077b064fb4cfbb3cea2d42fd06ec53035f1e10d9e682e91913af9b53b80098c0"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t128-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t128",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 128,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          128,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t128-tensor-split-worker-result.json",
+        "sha256": "a6a835ac7525d5b94133b6b1b3e6dfefb94fd2f3c1f13c195335a6a18422eb39"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t128-tensor-split-retained-exit.json",
+        "sha256": "0b4cfe71cee62b0278ec2c794bd0989e592fe213624bac5560087aced6288e0b"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t2048-original",
+      "case": {
+        "name": "nemotron_projection-b1-t2048",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 2048,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          2048,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 18423,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t2048-original-worker-result.json",
+        "sha256": "ddcc7b7466f3ea0e27cb8f67edc62e8785d2d5adecba4e442a0206c77d1594e2"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t2048-original-retained-exit.json",
+        "sha256": "474f2f8a7061547fee06cf73a6d1c7623a4472c2eaa860959d604870e1a42f9b"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t2048-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t2048",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 2048,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          2048,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t2048-tensor-split-worker-result.json",
+        "sha256": "9808d4d88e6d11b00c60f2b01b3d1bd5b5cd6026c82fc0baaf5cba83c0fa4c49"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t2048-tensor-split-retained-exit.json",
+        "sha256": "705da2356b145dc83b73348845c05796539581f3f7b186c68e62baaf1dee1752"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t256-original",
+      "case": {
+        "name": "nemotron_projection-b1-t256",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 256,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          256,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 2295,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t256-original-worker-result.json",
+        "sha256": "8deea3ec09aeff8fbaafb5902562c9176cfba16a10faedd86b1b55b755a1d8f3"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t256-original-retained-exit.json",
+        "sha256": "a07e5bac5191b8e27178c03b5cafb1d23a6788d0d1efb759c04f1642a61a82c4"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t256-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t256",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 256,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          256,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t256-tensor-split-worker-result.json",
+        "sha256": "22edd42afb8e3b40a8bf6babf4e948d9079137c5ccb44a5d2ad1a8aa0a9847e5"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t256-tensor-split-retained-exit.json",
+        "sha256": "3cd1b02899d576a140b5e2d63c6414755d8a82031ae1346def96b45369530359"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t4096-original",
+      "case": {
+        "name": "nemotron_projection-b1-t4096",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 4096,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          4096,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 36855,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t4096-original-worker-result.json",
+        "sha256": "d6f4c32e478a182028bfab7b82dfe733597972e872b75cc02c2d88549d47edb6"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t4096-original-retained-exit.json",
+        "sha256": "f1a14b82612dcf0cadef6c23bb81e091da515e584cae49532ff8a7ca74f6d6a6"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t4096-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t4096",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 4096,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          4096,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t4096-tensor-split-worker-result.json",
+        "sha256": "48022c7ed16111d46e7b874f17f0a683b264e7e702cda13a0dc2fec0c6ce93ab"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t4096-tensor-split-retained-exit.json",
+        "sha256": "105dee168b439ca3777b2dfc4ff124fd771a8b8df2f570bd0c3299bf04e6f37b"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t512-original",
+      "case": {
+        "name": "nemotron_projection-b1-t512",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 512,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          512,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 4599,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t512-original-worker-result.json",
+        "sha256": "58d48249e01d59a166e40b853869d648c743a9c177822882d7a35dc41a1df2be"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t512-original-retained-exit.json",
+        "sha256": "94783f780d996311d7e4d9fb0a2dcdcf15b48edc50aa093760cd0d243733ff38"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t512-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b1-t512",
+        "kind": "nemotron_projection",
+        "batch": 1,
+        "length": 512,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          1,
+          512,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t512-tensor-split-worker-result.json",
+        "sha256": "fe310cbd9223e6e7bc92a285d10e58fce1dc058446119ba118fc120475909b2d"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b1-t512-tensor-split-retained-exit.json",
+        "sha256": "948a056d4b368d27ebec9e7a76c1720b8544de8060f7e04c761920bd15c2af65"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b4-t1-original",
+      "case": {
+        "name": "nemotron_projection-b4-t1",
+        "kind": "nemotron_projection",
+        "batch": 4,
+        "length": 1,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          4,
+          1,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "original",
+      "primitive_passed": false,
+      "cpu_passed": true,
+      "device_exact": false,
+      "original_control_confirmed": true,
+      "sampled_mismatches": 27,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b4-t1-original-worker-result.json",
+        "sha256": "f919658e801045c11d9499e7afb35e193d46d4d5c3e30f1c7d92600dd45b1097"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b4-t1-original-retained-exit.json",
+        "sha256": "751bb284793e4171d38e61706eed200a2573b9d517c48fc96cca2f71b5e09e34"
+      }
+    },
+    {
+      "stage": "split-nemotron-projection-b4-t1-tensor-split",
+      "case": {
+        "name": "nemotron_projection-b4-t1",
+        "kind": "nemotron_projection",
+        "batch": 4,
+        "length": 1,
+        "sizes": [
+          5120,
+          6144,
+          64
+        ],
+        "input_shape": [
+          4,
+          1,
+          11328
+        ],
+        "dtype": "bfloat16",
+        "single_row_control": false
+      },
+      "variant": "tensor_split",
+      "primitive_passed": true,
+      "cpu_passed": true,
+      "device_exact": true,
+      "original_control_confirmed": null,
+      "sampled_mismatches": 0,
+      "record": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b4-t1-tensor-split-worker-result.json",
+        "sha256": "30ae79745f1b713c6874e0f7be1259c57871bb34e3f988d4f9ca904534041991"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r6-20261108-control/split-nemotron-projection-b4-t1-tensor-split-retained-exit.json",
+        "sha256": "ab559bef100ce40e208a69b78ad5351370d03ad6cc70f64ede227bc295e4fc7b"
+      }
+    }
+  ],
+  "terminal_exit_observed": false,
+  "independent_end_raw_verification_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
