@@ -1,0 +1,709 @@
+{
+  "schema": "minicpm5_attention_failed_terminal_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-08T17:54:05.673856+00:00",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-spec.json",
+    "sha256": "124d0f5d7bb061738910301a7eda2d3b869362853cf6bec9f60ec03361cd690c"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-root-review.json",
+    "sha256": "368bf8d33846346d4ca788424cca9f1ce327545189013afe92545ca9b6d3b297"
+  },
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-actual-live.json",
+    "sha256": "ddabfd837fa2803a8995cbf52481f299dee128dec28b95e3fe03802335651ef1"
+  },
+  "actual_external_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-actual-external-exit.json",
+    "sha256": "4202446e422a6caef89a78a540124f1ab27fc73ca7cd97d6d151aee6128ebfe7"
+  },
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+    "sha256": "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce"
+  },
+  "failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/failure.json",
+    "sha256": "977a648ebf265b1ce451e4464c7712b7659f5ab7802de3643cf4b970e67fb94d"
+  },
+  "phase_exits": {
+    "native": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-exit.json",
+      "sha256": "35ddb1428c302f19b17628f9c5f2d769ab40c7d002680839f169d9c1d8dafe75"
+    },
+    "cpu": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-exit.json",
+      "sha256": "2dcc1c48c4add748c3a2e9f839ed99b2399f1b413ad13bfc5108ef282d4d9fe9"
+    }
+  },
+  "outer_owner": {
+    "pid": 3254619,
+    "start_ticks": "394067560",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-spec.json",
+      "--spec-sha256",
+      "124d0f5d7bb061738910301a7eda2d3b869362853cf6bec9f60ec03361cd690c",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-attention-r2-20261108-v1-root-review.json",
+      "--review-sha256",
+      "368bf8d33846346d4ca788424cca9f1ce327545189013afe92545ca9b6d3b297"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "phase_owners": {
+    "native": {
+      "pid": 3258523,
+      "start_ticks": "394079354",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py",
+        "--mode",
+        "phase",
+        "--phase",
+        "native",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+        "--admission-sha256",
+        "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-native.service",
+      "unit": "trn1-mini-f1-attention-r2-20261108-v1-native",
+      "invocation_id": "0033a86798db4df881336e61a090c7e3"
+    },
+    "cpu": {
+      "pid": 3258851,
+      "start_ticks": "394081474",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py",
+        "--mode",
+        "phase",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+        "--admission-sha256",
+        "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-cpu.service",
+      "unit": "trn1-mini-f1-attention-r2-20261108-v1-cpu",
+      "invocation_id": "c4b5cd5a20fe4bd2b59fa8b2c06b9794"
+    }
+  },
+  "rank_owners": [
+    {
+      "pid": 3258997,
+      "start_ticks": "394082314",
+      "ppid": 3258851,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py",
+        "--mode",
+        "rank",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+        "--admission-sha256",
+        "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-cpu.service"
+    },
+    {
+      "pid": 3258998,
+      "start_ticks": "394082314",
+      "ppid": 3258851,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py",
+        "--mode",
+        "rank",
+        "--phase",
+        "cpu",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+        "--admission-sha256",
+        "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-cpu.service"
+    }
+  ],
+  "children_exits": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/children-exits.json",
+    "sha256": "8041688409337bf01f39fd50489f2ab0269a2d0fb11707c96037d0a1b0d5ccb2"
+  },
+  "verifier": {
+    "pid": 3260145,
+    "start_ticks": "394095335",
+    "ppid": 3260144,
+    "argv": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "physical_drain_samples": [
+    [
+      {
+        "phase": "native",
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "15min",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "3258523",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "0",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=92530d63aeb47bc85f956423e8d26b5e HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py --mode phase --phase native --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json --admission-sha256 024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce ; ignore_errors=no ; start_time=[Sun 2026-11-08 17:51:25 UTC] ; stop_time=[Sun 2026-11-08 17:51:46 UTC] ; pid=3258523 ; code=exited ; status=0 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-native.service",
+          "BindsTo": "",
+          "After": "basic.target app.slice -.mount",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "exited",
+          "Job": "",
+          "InvocationID": "0033a86798db4df881336e61a090c7e3",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-native.service",
+          "absent": true
+        },
+        "never_launched": false
+      },
+      {
+        "phase": "cpu",
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "15min",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "3258851",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=92530d63aeb47bc85f956423e8d26b5e HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py --mode phase --phase cpu --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json --admission-sha256 024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce ; ignore_errors=no ; start_time=[Sun 2026-11-08 17:51:46 UTC] ; stop_time=[Sun 2026-11-08 17:52:33 UTC] ; pid=3258851 ; code=exited ; status=1 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-cpu.service",
+          "BindsTo": "",
+          "After": "app.slice -.mount basic.target",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "c4b5cd5a20fe4bd2b59fa8b2c06b9794",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-cpu.service",
+          "absent": true
+        },
+        "never_launched": false
+      },
+      {
+        "phase": "replay",
+        "properties": {
+          "TimeoutStopUSec": "1min 30s",
+          "RuntimeMaxUSec": "infinity",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "AllowedCPUs": "",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "TasksMax": "37867",
+          "Environment": "",
+          "LimitFSIZE": "infinity",
+          "WorkingDirectory": "",
+          "Nice": "0",
+          "CPUAffinity": "",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-replay.service",
+          "BindsTo": "",
+          "After": "",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": "",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-replay.service",
+          "absent": true
+        },
+        "never_launched": true
+      }
+    ],
+    [
+      {
+        "phase": "native",
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "15min",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "3258523",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "0",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=92530d63aeb47bc85f956423e8d26b5e HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py --mode phase --phase native --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json --admission-sha256 024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce ; ignore_errors=no ; start_time=[Sun 2026-11-08 17:51:25 UTC] ; stop_time=[Sun 2026-11-08 17:51:46 UTC] ; pid=3258523 ; code=exited ; status=0 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-native.service",
+          "BindsTo": "",
+          "After": "basic.target app.slice -.mount",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "exited",
+          "Job": "",
+          "InvocationID": "0033a86798db4df881336e61a090c7e3",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-native.service",
+          "absent": true
+        },
+        "never_launched": false
+      },
+      {
+        "phase": "cpu",
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "15min",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "3258851",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=92530d63aeb47bc85f956423e8d26b5e HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v3.py --mode phase --phase cpu --admission /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json --admission-sha256 024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce ; ignore_errors=no ; start_time=[Sun 2026-11-08 17:51:46 UTC] ; stop_time=[Sun 2026-11-08 17:52:33 UTC] ; pid=3258851 ; code=exited ; status=1 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-cpu.service",
+          "BindsTo": "",
+          "After": "app.slice -.mount basic.target",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "c4b5cd5a20fe4bd2b59fa8b2c06b9794",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-cpu.service",
+          "absent": true
+        },
+        "never_launched": false
+      },
+      {
+        "phase": "replay",
+        "properties": {
+          "TimeoutStopUSec": "1min 30s",
+          "RuntimeMaxUSec": "infinity",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "AllowedCPUs": "",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "TasksMax": "37867",
+          "Environment": "",
+          "LimitFSIZE": "infinity",
+          "WorkingDirectory": "",
+          "Nice": "0",
+          "CPUAffinity": "",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-f1-attention-r2-20261108-v1-replay.service",
+          "BindsTo": "",
+          "After": "",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": "",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-f1-attention-r2-20261108-v1-replay.service",
+          "absent": true
+        },
+        "never_launched": true
+      }
+    ]
+  ],
+  "all_three_planned_groups_drained": true,
+  "replay_never_launched": true,
+  "partial_files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/admission.json",
+      "sha256": "024621c5458cd3df0178d96cdfc3863819747d031d06746264fb510cecd834ce",
+      "bytes": 3694
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/children-exits.json",
+      "sha256": "8041688409337bf01f39fd50489f2ab0269a2d0fb11707c96037d0a1b0d5ccb2",
+      "bytes": 1560
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-exit.json",
+      "sha256": "2dcc1c48c4add748c3a2e9f839ed99b2399f1b413ad13bfc5108ef282d4d9fe9",
+      "bytes": 3895
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-launch-intent.json",
+      "sha256": "5ba7d6d03e855765ba617c11e14c76f459cc750bfcafcb73c95997c383814562",
+      "bytes": 3147
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-owner.json",
+      "sha256": "522e93a94488a782fad39776a2c920288ae13849da1e89f747f557d9f526764d",
+      "bytes": 761
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-rank0/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-rank0/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-rank1/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-rank1/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu-startup-observations.jsonl",
+      "sha256": "ea1052afbe952f08f02c568a125003bb2f673dfb870f36adb094549ef6ac3def",
+      "bytes": 2717
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/cpu.log",
+      "sha256": "ef7c2cdf0c85a03726f465742af8a3fe5cad0a54e782249aa75d05a6e41dd671",
+      "bytes": 18779
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/failure.json",
+      "sha256": "977a648ebf265b1ce451e4464c7712b7659f5ab7802de3643cf4b970e67fb94d",
+      "bytes": 909
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/attention_mask.raw",
+      "sha256": "e48ffaf06953c78f1ce1c366c2a4815845c805c85f84f900671d940f82f8dd4e",
+      "bytes": 3030722
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/context_before_o.raw",
+      "sha256": "142480634e6a6399abe55e5e0adae581cae2d13d533516b8631fa3ba93f1e92b",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/context_heads.raw",
+      "sha256": "142480634e6a6399abe55e5e0adae581cae2d13d533516b8631fa3ba93f1e92b",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/context_heads.raw",
+      "sha256": "142480634e6a6399abe55e5e0adae581cae2d13d533516b8631fa3ba93f1e92b",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/k_post_rope.raw",
+      "sha256": "b4a83e268c3d1bc0ca1884610e9e1b998365d2cee7691eb31197ebc6b6cba7cf",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/k_projection.raw",
+      "sha256": "a32563ffec4b026bfc685b08b7a2b3e4985fa268378d3b32ebd731ce1d258aed",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/projection_output.raw",
+      "sha256": "a384c05db93a4459a300b4f1042b918cb8e290369b058cb8fe45f5db9af18b75",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/q_post_rope.raw",
+      "sha256": "d8382dfd4619753e6fefff7b2f604e27b40eefefa29c782444ed9df9f44e44d0",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/q_projection.raw",
+      "sha256": "a9285251c1e12e3ee2facd70384436d4097c9c492da89e4eb9db6b410a52db81",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/controls/v_projection.raw",
+      "sha256": "a3f2bcf03e4ae6358bf80415d3f15c152a7cad3067eb5a0ebabcb3a357e0564c",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/k-consumer-boundary.json",
+      "sha256": "d7aaad51e80e01b564f69ec5626e9bcd5f5d055412faf962f5cbaabd48da175a",
+      "bytes": 874
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/k_post_rope.raw",
+      "sha256": "b4a83e268c3d1bc0ca1884610e9e1b998365d2cee7691eb31197ebc6b6cba7cf",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/k_projection.raw",
+      "sha256": "a32563ffec4b026bfc685b08b7a2b3e4985fa268378d3b32ebd731ce1d258aed",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/k_rope_input.raw",
+      "sha256": "865fb18da78e1f961b63d3b6ba20d4d930d8bfde9a3d6bc118b890a2805fcad9",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/normalized_input.raw",
+      "sha256": "4d4f6e864ecf3555c691b891db91d5b6264cfb188bc4662659c245734f913774",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/position_ids.raw",
+      "sha256": "e768a844ec7c4a0ddaded89e9ddd99b46d7740480c6d73366680f0ab98fdf3af",
+      "bytes": 9848
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/projection_output.raw",
+      "sha256": "a384c05db93a4459a300b4f1042b918cb8e290369b058cb8fe45f5db9af18b75",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/q_post_rope.raw",
+      "sha256": "d8382dfd4619753e6fefff7b2f604e27b40eefefa29c782444ed9df9f44e44d0",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/q_projection.raw",
+      "sha256": "a9285251c1e12e3ee2facd70384436d4097c9c492da89e4eb9db6b410a52db81",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/q_rope_input.raw",
+      "sha256": "864c7ff33a2b80ded98a1c84c0d05eeb93c23604755077bd64e12ea925c1e369",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/rope_cos.raw",
+      "sha256": "f089f137d13b4c7fdb9702c86647a09d8bd5c8f5ec8f3286a207c3d5c14ea41d",
+      "bytes": 315136
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/rope_sin.raw",
+      "sha256": "fdf9721e21752a196f60c19b71aa3c5dd603f85753cceb2d586ab4e7b2640d5b",
+      "bytes": 315136
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/v_heads.raw",
+      "sha256": "4f63912dc81ed78f0430bc1d70d722aa5e6238504c95ed0997b3edcf1761192a",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/v_projection.raw",
+      "sha256": "a3f2bcf03e4ae6358bf80415d3f15c152a7cad3067eb5a0ebabcb3a357e0564c",
+      "bytes": 630272
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention_input.bf16",
+      "sha256": "4d4f6e864ecf3555c691b891db91d5b6264cfb188bc4662659c245734f913774",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention_output.bf16",
+      "sha256": "a384c05db93a4459a300b4f1042b918cb8e290369b058cb8fe45f5db9af18b75",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/capture.json",
+      "sha256": "6ec7f2b974229a188372c18efd3e2d784e7221fc71e40bd0fdd0d4f0ab7b266b",
+      "bytes": 52738
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/inputnorm_output.bf16",
+      "sha256": "4d4f6e864ecf3555c691b891db91d5b6264cfb188bc4662659c245734f913774",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/layer_input.bf16",
+      "sha256": "58eeaf65a388f3c1d3a1f62c3f800134135ff76a7b8ef5fb844b6576076cc73f",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/mlp_input.bf16",
+      "sha256": "8f817f5bb7b849534562fe6763b1ad08590973864ee78755f1f2a3643a4e6739",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/postnorm_input.bf16",
+      "sha256": "792dd3e8e901c184faaf360712c1d0eae1c4412a12b962dcf144a1cca8cf9fc9",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/postnorm_output.bf16",
+      "sha256": "8f817f5bb7b849534562fe6763b1ad08590973864ee78755f1f2a3643a4e6739",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-exit.json",
+      "sha256": "35ddb1428c302f19b17628f9c5f2d769ab40c7d002680839f169d9c1d8dafe75",
+      "bytes": 3761
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-launch-intent.json",
+      "sha256": "bba632e9449574dcda643bc9baf06fc15540e8b15206c8841ffc7cbaa2173c3e",
+      "bytes": 2973
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-owner.json",
+      "sha256": "18a3370583675a57dd84991d371e2c3f6216c7b354bd082c4dc85462336ef411",
+      "bytes": 779
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-result.json",
+      "sha256": "15459dd748df8fc4af2f3df1f159e356c90cf8a5500d513fcece9150e1aba7e0",
+      "bytes": 969
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native-startup-observations.jsonl",
+      "sha256": "69366de7a7e5452363e5958e2549ad700053dcdc8ea730a9f596fc37646581c5",
+      "bytes": 2648
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native.log",
+      "sha256": "1f7932bfb409f51cbd4f090b47534a662e4113dfda0837428cfe2e756e07949d",
+      "bytes": 1009
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/rank0-owner.json",
+      "sha256": "6368ce54971cad114238dc1571effa7f1792494a83b5f5ff3529dd75857b04f4",
+      "bytes": 653
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/rank1-owner.json",
+      "sha256": "81c3dfa72ae34c8d19cb1581d698360619ccd4058e1a653f05a6442f4b9a4627",
+      "bytes": 653
+    }
+  ],
+  "partial_bytes": 99599281,
+  "original_error": "'RowParallelLinear' object has no attribute 'pad_size'",
+  "native_complete": true,
+  "native_capture": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/capture.json",
+    "sha256": "6ec7f2b974229a188372c18efd3e2d784e7221fc71e40bd0fdd0d4f0ab7b266b"
+  },
+  "native_k_boundary": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r2-20261108-v1/native/attention/k-consumer-boundary.json",
+    "sha256": "d7aaad51e80e01b564f69ec5626e9bcd5f5d055412faf962f5cbaabd48da175a"
+  },
+  "native_all7_boundaries_and_7controls_exact": true,
+  "actual_final_self_exit_claimed": false,
+  "complete_capture": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

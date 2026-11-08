@@ -1,0 +1,30 @@
+{
+  "schema": "minicpm5_attention_output_projection_source_preparation_v1",
+  "reviewer": "/root",
+  "source_only": true,
+  "runtime_admitted": false,
+  "observed_at": "2026-11-08T17:55:54.399377+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_observer_v3.py": "8c6ee754f61eb43bff54d2c8252598b3ee0a719cd343334f3a96e78bacd98e9a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_worker_v3.py": "27a02370ef177a4beef05c93ece66f371e6dc5556e63f4110d00812828c4d49b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_attention_failed_r2_history_v1.py": "d0b0248e61f108ac7b1edf02543062869ba2fca17cedcf0836ea5e8d06b9743d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v4.py": "402eab82b2e273b9210406ba9532f9a6580e0a576377d731ae28f7d73a9e4f4e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_frame1_attention_runtime_v4.py": "165b346a46a51c53743fd70e0840d8978f65fb0aa9500909fa51e380677a8d3a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_attention_output_padding_v1.py": "be5b1430979886f13c4dec332fa0eb6de0e0a1123337ad257ae848e40233d92a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_minicpm5_attention_terminal_v4.py": "7d680fd2263fc60516364adcf47d2eef83f61d5aff2d45534bac25b21879810c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_attention_review_v4.py": "3a16fbf283542052f9775ff3043a575a68cd6977867ca94079988397753424f5"
+  },
+  "actual_tests": {
+    "tests": 49,
+    "session_id": null,
+    "exit_code": 0,
+    "tool_chunk": "ab75bb"
+  },
+  "new_tests": 8,
+  "inherited_tests": 41,
+  "installed_source_contract": "RowParallelLinear creates pad_size only under self.pad; native runtime raised missing attribute when disabled",
+  "revised_checks": "pad False, ordinary TP2 BF16 reduction, input/output2048 and local1024, original2048x1024weight and no bias",
+  "original_model_arithmetic_unchanged": true,
+  "original_full_gates_retained": true,
+  "new_speedup_claim": false
+}

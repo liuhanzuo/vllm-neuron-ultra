@@ -1,0 +1,1096 @@
+{
+  "schema": "minicpm5_frame1_attention_complete_review_v1",
+  "complete": true,
+  "captures": {
+    "native": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/capture.json",
+      "sha256": "fbfcb3faab1db9c3fd24a269db82753d65e4b3cbd473dbca2001c0dc984044a5"
+    },
+    "cpu-rank0": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/capture.json",
+      "sha256": "db99780b5810d397c6bcebef21c9541675a0a41a9476a7a95947f6e7cff20486"
+    },
+    "cpu-rank1": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/capture.json",
+      "sha256": "035d3c32096575ee6887610377a03ffa6beed638e2078cfc29cd9a06d1548b6d"
+    }
+  },
+  "source_pins": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_metadata_v1.py": "3f2cdc52c8134b346060f0319582f488d12bd4ff043a4e8a79d3066693bb0088",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_bytes_v1.py": "75573f2767fabff4343c8225115c7ba1b20d7398006b587c604e1611b75dbc53",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_upstream_saved_bytes_v1.py": "399e26d41e733bc45f88becbdc0ef4427fd19167588312730bdaef9489ec1df7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_raw_boundaries_v1.py": "22a5e192c31ad6fe838e5ab9bb6e274e982b2a3d1239c1776d934bb2ba5d0895",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_metadata_v1.py": "8d5243d29480870b97b3821a2a54bceee3228d05eb72817c61ad872500e38ce3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_observer_v1.py": "87a262c1172d5cb545ec8f87c81d4950ed0f653777a800a73b6e1e0695284028",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_upstream_worker_v1.py": "038d998e3b04f80469a99e33d277f1c508ee33c9ca2a30b24535c1398f47a08f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_metadata_v2.py": "4b91ab5c4198ad2d18c570de2e4e224a847459516c8953cc060bf68c4c976c71",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_observer_v2.py": "497c34a9c57ac8e402fdbe29b56b5df285e41849f410055c1f5e8f9f8827f6f1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_attention_k_consumer_layout_v1.py": "b11685ee1b18d23681608196a751aa37bb6b83b5f87e016498d07d503ebd07d2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_metadata_v3.py": "a80ab2be5e710270f8312f2d8a8cdca620e5eb3e58ed0c300227effdf2bd3b8d"
+  },
+  "base_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-phase-cpu-input-plan-20261107-v1.json",
+    "sha256": "ce599a2beae22df0a05c13591854cfab8ba57519df11ee93a0d25ad4392306c8"
+  },
+  "metadata": {
+    "complete": true,
+    "prior_upstream_references": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/native/capture.json",
+        "sha256": "40418292e270997d077028405c470e7f4fc8839019744e95e7c7c89aa3ae8fc2"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/cpu-rank0/capture.json",
+        "sha256": "9520927adc3544137b02d297bb1250c349fd3e1982177bf8aff2448744641d2c"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-upstream-r1-20261108-v1/cpu-rank1/capture.json",
+        "sha256": "d032f15fd76814fb72f8b365602409e0b7a4b78b787243bf33b8400c1c150483"
+      }
+    ],
+    "all21_prior_upstream_metadata_exact": true,
+    "all_six_prediction_anchors_per_role_exact": true,
+    "original_constructor_norm_mlp_environment_retained": true,
+    "files": 96,
+    "raw_bytes": 353284922,
+    "controls": {
+      "native": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      },
+      "cpu-rank0": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      },
+      "cpu-rank1": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      }
+    },
+    "k_consumer_boundaries": {
+      "native": {
+        "record": {
+          "schema": "minicpm5_attention_k_consumer_boundary_v1",
+          "native": true,
+          "producer": {
+            "shape": [
+              1,
+              2,
+              1231,
+              128
+            ],
+            "stride": [
+              315136,
+              128,
+              256,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "b4a83e268c3d1bc0ca1884610e9e1b998365d2cee7691eb31197ebc6b6cba7cf"
+          },
+          "consumer": {
+            "shape": [
+              1,
+              2,
+              1231,
+              128
+            ],
+            "stride": [
+              315136,
+              157568,
+              128,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "b4a83e268c3d1bc0ca1884610e9e1b998365d2cee7691eb31197ebc6b6cba7cf"
+          },
+          "logical_bytes_exact": true,
+          "layout_exact": false,
+          "allowed_layout_transition": true,
+          "passed": true,
+          "consumer_layout_required_for_attention_replay": true,
+          "model_arithmetic_changed": false,
+          "new_speedup_claim": false
+        },
+        "reference": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/attention/k-consumer-boundary.json",
+          "sha256": "d7aaad51e80e01b564f69ec5626e9bcd5f5d055412faf962f5cbaabd48da175a"
+        }
+      },
+      "cpu-rank0": {
+        "record": {
+          "schema": "minicpm5_attention_k_consumer_boundary_v1",
+          "native": false,
+          "producer": {
+            "shape": [
+              1,
+              1,
+              2048,
+              128
+            ],
+            "stride": [
+              262144,
+              262144,
+              128,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "6966cef26ff7ff94a1c23352d71442faf224aac813a29259bdeae9caf94cc796"
+          },
+          "consumer": {
+            "shape": [
+              1,
+              1,
+              2048,
+              128
+            ],
+            "stride": [
+              262144,
+              262144,
+              128,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "6966cef26ff7ff94a1c23352d71442faf224aac813a29259bdeae9caf94cc796"
+          },
+          "logical_bytes_exact": true,
+          "layout_exact": true,
+          "allowed_layout_transition": false,
+          "passed": true,
+          "consumer_layout_required_for_attention_replay": true,
+          "model_arithmetic_changed": false,
+          "new_speedup_claim": false
+        },
+        "reference": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/attention/k-consumer-boundary.json",
+          "sha256": "6c471ffe0d35ad53e8dff2ef78750e7124e0df2c418d52cd4886f59f3f4ec749"
+        }
+      },
+      "cpu-rank1": {
+        "record": {
+          "schema": "minicpm5_attention_k_consumer_boundary_v1",
+          "native": false,
+          "producer": {
+            "shape": [
+              1,
+              1,
+              2048,
+              128
+            ],
+            "stride": [
+              262144,
+              262144,
+              128,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "9e51dc012efd224148bf6d8baf3a944776f0c8695af8aad7da60923ec48d93ee"
+          },
+          "consumer": {
+            "shape": [
+              1,
+              1,
+              2048,
+              128
+            ],
+            "stride": [
+              262144,
+              262144,
+              128,
+              1
+            ],
+            "offset": 0,
+            "dtype": "torch.bfloat16",
+            "sha256": "9e51dc012efd224148bf6d8baf3a944776f0c8695af8aad7da60923ec48d93ee"
+          },
+          "logical_bytes_exact": true,
+          "layout_exact": true,
+          "allowed_layout_transition": false,
+          "passed": true,
+          "consumer_layout_required_for_attention_replay": true,
+          "model_arithmetic_changed": false,
+          "new_speedup_claim": false
+        },
+        "reference": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/attention/k-consumer-boundary.json",
+          "sha256": "4b7a39ebf71e53789eb0e5ce8c1761299cf9ee5c2267c562a415c9715f5607eb"
+        }
+      }
+    },
+    "all21_own_input_controls_claim_exact": true,
+    "raw_payloads_verified": false,
+    "official_projection_bytes_independently_read": false,
+    "model_math_reexecuted": false,
+    "process_lifecycle_verified": false,
+    "full_model_qualified": false,
+    "new_speedup_claim": false
+  },
+  "upstream_boundary_files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/layer_input.bf16",
+      "sha256": "58eeaf65a388f3c1d3a1f62c3f800134135ff76a7b8ef5fb844b6576076cc73f",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/layer_input.bf16",
+      "sha256": "f968e6c9ba389a1f2b91f6a3946b83cb25729ba6115978cf62cdac0fb440316a",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/layer_input.bf16",
+      "sha256": "f968e6c9ba389a1f2b91f6a3946b83cb25729ba6115978cf62cdac0fb440316a",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/inputnorm_output.bf16",
+      "sha256": "4d4f6e864ecf3555c691b891db91d5b6264cfb188bc4662659c245734f913774",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/inputnorm_output.bf16",
+      "sha256": "c5d2fbcb75d5f3442dce163b6daaf29d42e1fe670d1f2d1a558e8bd09b792b37",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/inputnorm_output.bf16",
+      "sha256": "c5d2fbcb75d5f3442dce163b6daaf29d42e1fe670d1f2d1a558e8bd09b792b37",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/attention_input.bf16",
+      "sha256": "4d4f6e864ecf3555c691b891db91d5b6264cfb188bc4662659c245734f913774",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/attention_input.bf16",
+      "sha256": "c5d2fbcb75d5f3442dce163b6daaf29d42e1fe670d1f2d1a558e8bd09b792b37",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/attention_input.bf16",
+      "sha256": "c5d2fbcb75d5f3442dce163b6daaf29d42e1fe670d1f2d1a558e8bd09b792b37",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/attention_output.bf16",
+      "sha256": "a384c05db93a4459a300b4f1042b918cb8e290369b058cb8fe45f5db9af18b75",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/attention_output.bf16",
+      "sha256": "f9dba0c4511d79abf1ef786388ae09fec0b6f2f667e5b3b3a28b2d46229fe2b7",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/attention_output.bf16",
+      "sha256": "f9dba0c4511d79abf1ef786388ae09fec0b6f2f667e5b3b3a28b2d46229fe2b7",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/postnorm_input.bf16",
+      "sha256": "792dd3e8e901c184faaf360712c1d0eae1c4412a12b962dcf144a1cca8cf9fc9",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/postnorm_input.bf16",
+      "sha256": "fecf310925b336dbe50f532ff501e5b9cc77559d9a01d5bdb487f7399423d541",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/postnorm_input.bf16",
+      "sha256": "fecf310925b336dbe50f532ff501e5b9cc77559d9a01d5bdb487f7399423d541",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/postnorm_output.bf16",
+      "sha256": "8f817f5bb7b849534562fe6763b1ad08590973864ee78755f1f2a3643a4e6739",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/postnorm_output.bf16",
+      "sha256": "6f298ecee276d95c4d325ba75546353558fe7dc50b5b915afaf2a388810fd3cb",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/postnorm_output.bf16",
+      "sha256": "6f298ecee276d95c4d325ba75546353558fe7dc50b5b915afaf2a388810fd3cb",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/mlp_input.bf16",
+      "sha256": "8f817f5bb7b849534562fe6763b1ad08590973864ee78755f1f2a3643a4e6739",
+      "bytes": 5042176
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/mlp_input.bf16",
+      "sha256": "6f298ecee276d95c4d325ba75546353558fe7dc50b5b915afaf2a388810fd3cb",
+      "bytes": 8388608
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/mlp_input.bf16",
+      "sha256": "6f298ecee276d95c4d325ba75546353558fe7dc50b5b915afaf2a388810fd3cb",
+      "bytes": 8388608
+    }
+  ],
+  "upstream_boundary_metrics": {
+    "layer_input": {
+      "real_tokens": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 0.9999999999999999
+      },
+      "prediction": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      }
+    },
+    "inputnorm_output": {
+      "real_tokens": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      },
+      "prediction": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      }
+    },
+    "attention_input": {
+      "real_tokens": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      },
+      "prediction": {
+        "raw_exact": true,
+        "different_elements": 0,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "cosine": 1.0
+      }
+    },
+    "attention_output": {
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 802431,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0078125,
+        "mean_abs": 1.3950239214726107e-05,
+        "cosine": 0.9999964241699432
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 695,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.00048828125,
+        "mean_abs": 2.0504914573393762e-05,
+        "cosine": 0.9999989045164327
+      }
+    },
+    "postnorm_input": {
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 423479,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0078125,
+        "mean_abs": 1.4022611642209473e-05,
+        "cosine": 0.9999968730815194
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 440,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.00048828125,
+        "mean_abs": 2.018362283706665e-05,
+        "cosine": 0.9999986318461015
+      }
+    },
+    "postnorm_output": {
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 584829,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.03125,
+        "mean_abs": 0.00016048107311406848,
+        "cosine": 0.9999946608148437
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 393,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0078125,
+        "mean_abs": 0.00012699991930276155,
+        "cosine": 0.9999950919479287
+      }
+    },
+    "mlp_input": {
+      "real_tokens": {
+        "raw_exact": false,
+        "different_elements": 584829,
+        "compared_elements": 2521088,
+        "nonfinite_elements": 0,
+        "max_abs": 0.03125,
+        "mean_abs": 0.00016048107311406848,
+        "cosine": 0.9999946608148437
+      },
+      "prediction": {
+        "raw_exact": false,
+        "different_elements": 393,
+        "compared_elements": 2048,
+        "nonfinite_elements": 0,
+        "max_abs": 0.0078125,
+        "mean_abs": 0.00012699991930276155,
+        "cosine": 0.9999950919479287
+      }
+    }
+  },
+  "norm_weight_files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/native/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank0/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/input_layernorm.weight.bf16",
+      "sha256": "6105be864db4b6fc00baaa3b400283b034559a726e2e693b949a23f649abd25e",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-frame1-attention-r3-20261108-v1/cpu-rank1/post_attention_layernorm.weight.bf16",
+      "sha256": "83c31aba6bdaa16deec5626e670d3515a517f8a9e7025443c69a78484a3559ea",
+      "bytes": 4096
+    }
+  ],
+  "independent_residual_checks": {
+    "native": {
+      "different_elements": 0,
+      "compared_elements": 2521088,
+      "exact": true
+    },
+    "cpu-rank0": {
+      "different_elements": 0,
+      "compared_elements": 4194304,
+      "exact": true
+    },
+    "cpu-rank1": {
+      "different_elements": 0,
+      "compared_elements": 4194304,
+      "exact": true
+    }
+  },
+  "attention": {
+    "complete": true,
+    "files": 69,
+    "raw_bytes": 200524602,
+    "controls": {
+      "native": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      },
+      "cpu-rank0": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      },
+      "cpu-rank1": {
+        "q_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "v_projection": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "q_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "k_post_rope": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "context_heads": {
+          "raw_exact": true,
+          "layout_exact": true
+        },
+        "projection_output": {
+          "raw_exact": true,
+          "layout_exact": true
+        }
+      }
+    },
+    "all21_own_input_controls_exact": true,
+    "observed_boundary_metrics": {
+      "normalized_input": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "position_ids": {
+        "raw_exact": true,
+        "compared_elements": 1231,
+        "different_elements": 0
+      },
+      "q_projection": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 1,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0009765625,
+          "mean_abs": 3.873575614972583e-10,
+          "cosine": 0.9999999999987439
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "k_projection": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 315136,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0000000000000002
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 256,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "v_projection": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 315136,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0000000000000002
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 256,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "q_rope_input": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 1,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0009765625,
+          "mean_abs": 3.873575614972583e-10,
+          "cosine": 0.9999999999987439
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "k_rope_input": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 315136,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0000000000000002
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 256,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "q_post_rope": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 1,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0009765625,
+          "mean_abs": 3.873575614972583e-10,
+          "cosine": 0.9999999999987439
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "k_post_rope": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 315136,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 256,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999998
+        },
+        "cpu_padding_read": true
+      },
+      "v_heads": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 315136,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0000000000000002
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 256,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "rope_cos": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 157568,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 128,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999999
+        },
+        "cpu_padding_read": true
+      },
+      "rope_sin": {
+        "real_tokens": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 157568,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 0.9999999999999998
+        },
+        "prediction": {
+          "raw_exact": true,
+          "different_elements": 0,
+          "compared_elements": 128,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0,
+          "mean_abs": 0.0,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "attention_mask": {
+        "real_prefix_semantics_equal": true,
+        "real_prefix_different_cells": 0,
+        "padded_keys_allowed_for_real_queries": 0,
+        "native_cells": 1515361,
+        "cpu_cells_per_rank": 4194304,
+        "padded_query_cells_preserved_and_read": true
+      },
+      "context_heads": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 28,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.00048828125,
+          "mean_abs": 1.2978895748553119e-09,
+          "cosine": 0.9999999998349851
+        },
+        "prediction": {
+          "raw_exact": false,
+          "different_elements": 1,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 1.862645149230957e-09,
+          "mean_abs": 9.094947017729282e-13,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "context_before_o": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 28,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.00048828125,
+          "mean_abs": 1.2978895748553119e-09,
+          "cosine": 0.9999999998349851
+        },
+        "prediction": {
+          "raw_exact": false,
+          "different_elements": 1,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 1.862645149230957e-09,
+          "mean_abs": 9.094947017729282e-13,
+          "cosine": 1.0
+        },
+        "cpu_padding_read": true
+      },
+      "projection_output": {
+        "real_tokens": {
+          "raw_exact": false,
+          "different_elements": 802431,
+          "compared_elements": 2521088,
+          "nonfinite_elements": 0,
+          "max_abs": 0.0078125,
+          "mean_abs": 1.3950239214726107e-05,
+          "cosine": 0.9999964241699432
+        },
+        "prediction": {
+          "raw_exact": false,
+          "different_elements": 695,
+          "compared_elements": 2048,
+          "nonfinite_elements": 0,
+          "max_abs": 0.00048828125,
+          "mean_abs": 2.0504914573393762e-05,
+          "cosine": 0.9999989045164327
+        },
+        "cpu_padding_read": true
+      }
+    },
+    "full_original_padding_read": true,
+    "all_payloads_authenticated": true,
+    "model_math_reexecuted": false,
+    "independently_recomputed_trigonometry": false,
+    "original_seven_upstream_raw_payloads_independently_checked": false,
+    "process_lifecycle_verified": false,
+    "unique_internal_or_final_KL_cause_proven": false,
+    "full_model_qualified": false,
+    "new_speedup_claim": false
+  },
+  "reorder_checks": {
+    "native": {
+      "q_projection_to_q_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 1231
+      },
+      "k_projection_to_k_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 1231
+      },
+      "v_projection_to_v_heads": {
+        "all_rows_bitwise_equal": true,
+        "rows": 1231
+      },
+      "context_heads_to_context_before_o": {
+        "all_rows_bitwise_equal": true,
+        "rows": 1231
+      }
+    },
+    "cpu-rank0": {
+      "q_projection_to_q_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "k_projection_to_k_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "v_projection_to_v_heads": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "context_heads_to_context_before_o": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      }
+    },
+    "cpu-rank1": {
+      "q_projection_to_q_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "k_projection_to_k_rope_input": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "v_projection_to_v_heads": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      },
+      "context_heads_to_context_before_o": {
+        "all_rows_bitwise_equal": true,
+        "rows": 2048
+      }
+    }
+  },
+  "files": 96,
+  "raw_bytes": 353284922,
+  "all96_full_payloads_authenticated": true,
+  "all21_original_upstream_payloads_exact": true,
+  "all21_own_input_controls_exact": true,
+  "passed": true,
+  "classification": "original_full_prefix_observation_and_own_input_controls_only",
+  "trigonometry_or_attention_independently_reexecuted": false,
+  "projection_math_independently_reexecuted": false,
+  "norm_math_independently_reexecuted": false,
+  "residual_math_independently_reexecuted": true,
+  "process_lifecycle_verified": false,
+  "unique_internal_or_final_KL_cause_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

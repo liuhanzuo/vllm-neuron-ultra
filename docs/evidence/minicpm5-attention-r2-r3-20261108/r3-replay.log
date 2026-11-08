@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v4.py", line 488, in <module>
+    else:phase_main(reference,args.phase)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_frame1_attention_runner_v4.py", line 385, in phase_main
+    result=reviewer.review(root=root,capture_refs=refs,guard=guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_complete_v2.py", line 70, in review
+    plan=meta.load(BASE_PLAN)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_minicpm5_frame1_attention_metadata_v2.py", line 31, in load
+    require(len(data)<=2*2**20 and hashlib.sha256(data).hexdigest()==reference['sha256'],'Exact bounded metadata bytes')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py", line 17, in require
+    if not value:raise RuntimeError(message)
+RuntimeError: Exact bounded metadata bytes
