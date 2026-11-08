@@ -17,10 +17,12 @@
 
 真实材料装载校验复核了 2,050 个源码文件和四份严格基线记录；历史校验复核了 38,128 个源码与元数据指纹，并保留 14 个原始历史数据指纹。这些检查未导入模型框架，也未运行数值重放。装载校验中的未来执行规格仅在测试内存中构造，当前实验历史一环被明确模拟；不能视为实际启动授权或模型结果。
 
-串行运行器源码已经完成，仍需等 SmolLM3 当前实验真实结束并汇总完整记录，再绑定当时最新的已完成实验历史、生成独立源码审查和执行启动检查。当前队列中的缓存维护和 Nemotron 验证顺序保留。这份诊断不是可直接启用的 vLLM 优化开关。
+串行运行器与执行配置生成器源码均已完成；生成器的 16 项检查通过，覆盖原始输入和验收条件不变、完整历史缺失时不写出配置、旧源码指纹不能覆盖、服务名称不能复用等条件。仍需等 SmolLM3 当前实验真实结束并汇总完整记录，再绑定当时最新的已完成实验历史、生成独立源码审查和执行启动检查。当前队列中的缓存维护和 Nemotron 验证顺序保留。这份诊断不是可直接启用的 vLLM 优化开关。
 
 完整验收继续保留原始 32 帧、冷缓存 84 项、长解码 2049 次调用及 93 个检查点、请求槽位复用与空闲槽位恢复、质量 96 项，以及匹配 vLLM-Neuron 基线的配对性能测试。CPU 30/32 与此前设备 30/32 属于不同实验。
 
 [源码准备与证据](evidence/minicpm5-frame1-source-20261108/minicpm5-frame1-mlp-source-preparation-20261108-v1.json) · [源码清单](evidence/minicpm5-frame1-source-20261108/manifest.json) · [此前完整 32 帧结果](minicpm5-full-down-outcomes-20261108.md)
 
 [串行运行器、21 + 16 项检查与真实材料复核](evidence/minicpm5-frame1-runner-smol-r03-20261108/minicpm5-frame1-serial-runner-source-preparation-20261108-v1.json)。
+
+[执行配置生成器与 16 项检查](evidence/minicpm5-builder-smol-write-pair-20261108/minicpm5-frame1-runtime-builder-source-preparation-20261108-v1.json)。尚未生成实际执行配置，也未运行模型。
