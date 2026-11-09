@@ -1,0 +1,55 @@
+{
+  "schema": "minicpm5_saved_tap_report_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T20:52:22.888313+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_saved_tap_report_v1.py": "3e8e00bc4032cd1a15602cae479e9974ead4a92c8ed47436509a2989f2f4ed04",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_report_v1.py": "891316c3bd9bc8b13e1aa971c7617f31a4a343575b651bace80894e093b53364",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_report_v1_r2.py": "1379597cac3ed114c011af054929b7a9451a2e43f5d5083267f5c127a8aef09e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_report_metadata_v1.py": "c83316473d17ec372f838539d9f1adc4c9587930059748f91960e05158431db0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_saved_tap_analysis_v1.py": "ecb18047d3736f514f79b24b52965be24ef795f7a094934f541d8c3a8968f1ef",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_minicpm5_saved_tap_metadata_v1.py": "90e29ff3671fca736929d8db4a919fe3e1b4bd36ece566bdff954c06b4805c42",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_analysis_v1.py": "1c23fc865874b4f9bb85b49abd705f767a0a5d9c94b160d8fadd7245eb24c620"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-report-tests-actual-exit-20261109-v1.json",
+    "sha256": "cdd595db44ca9d420ba1cbc4d91c33370d321d19b2aa9144a5d66e04b4ed9295"
+  },
+  "actual_metadata_compatibility": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-report-metadata-actual-exit-20261109-v1.json",
+    "sha256": "c9dd86f02cbf0145463cf939ab13a8a4e74f95b890e4541ff1f347b5c5e89f83"
+  },
+  "prior_metadata_diagnosis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-metadata-diagnosis-20261109-v1.json",
+    "sha256": "d14e24cbc371039b709ea9acfe5bda7e6b71e1208c050f8e87d9bc26b384e4be"
+  },
+  "prior_numeric_design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-numeric-analysis-design-20261109-v1.json",
+    "sha256": "d86ca4f54d7d4d02189227f63aa7992345bc56b7f2f41d3d3861a36ab6c845c9"
+  },
+  "source_preparation_passed": true,
+  "numeric_report_core_prepared": true,
+  "executor_prepared": false,
+  "runtime_admitted": false,
+  "actual_tensor_analysis_executed": false,
+  "real_tensor_bytes_read": 0,
+  "current_dory_modified": false,
+  "serial_owner_added": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "implemented": [
+    "All95 original JSON records validated before any raw callback; original32frames and8prefill/6decode calls required on both ranks/all3arms.",
+    "All84bundles independently checked for full hash/entry hash/size/finiteBF16 and replicated rank byte equality; retain exact physical row permutation.",
+    "Three pairwise comparisons,32frames and4taps each=384descriptive vector comparisons. Replicated ranks counted once; every frame retained.",
+    "Each frame includes untouched original endpoint metrics. Candidate-to-candidate comparison correctly labeled; CPU anchor-relative deltas are not HF absolute error.",
+    "Late/early perturbation RMS ratios retain null for zero early values, including nonzero late differences; no causal gain claim.",
+    "External metadata/raw/guard callbacks separate numerical report logic from future serial executor. No CLI or direct raw filesystem reader in report core.",
+    "Generated trajectory tests validate exact guard placement, missing/corrupt/truncated replica rejection, mapping/endpoint/phase mismatch, reader/guard aborts and analytical numeric expectations.",
+    "Actual metadata-only check authenticated95originalJSON/27711882bytes and stopped before first raw callback could read bytes."
+  ],
+  "next": [
+    "Wait for Dory -> finite storage maintenance -> Nemotron chain, preserving actual complete predecessor history.",
+    "Prepare separately reviewed bounded stable-file raw reader, source/runtime specification, budget/ownership guard, admission and actual-exit collection. This module alone is not executable admission.",
+    "Then quantify all saved taps without rerunning models or rejected projection/gather candidates. Keep original96 FP32 gate replay and candidate rejection unchanged."
+  ]
+}
