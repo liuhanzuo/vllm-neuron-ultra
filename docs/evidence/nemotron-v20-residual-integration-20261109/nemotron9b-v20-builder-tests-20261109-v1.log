@@ -1,0 +1,49 @@
+test_actual_failed_native_receipt_is_not_a_successful_review_exit (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ERROR
+test_dory_source_or_binary_omission_is_rejected (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_incomplete_future_history_or_failed_r9_promotion_is_rejected (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_missing_completion_is_rejected_before_authentication_or_writes (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_missing_future_exit_rejected_without_output (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_modified_science_or_input_parent_is_rejected (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_no_runtime_spec_native_import_or_automatic_launch (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_observer_policy_retains_root_only_contract (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_old_failed_service_namespace_cannot_be_reused (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_scientific_fields_and_all20_historical_binary_pins_preserved (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+test_source_rebinding_or_missing_new_worker_is_rejected (check_prepare_nemotron9b_package_runtime_v20.Builder) ... ok
+dory-rotary-source-20261108-v1 (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: test_actual_failed_native_receipt_is_not_a_successful_review_exit (check_prepare_nemotron9b_package_runtime_v20.Builder)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_prepare_nemotron9b_package_runtime_v20.py", line 106, in test_actual_failed_native_receipt_is_not_a_successful_review_exit
+    b.build('r10-fixture', ref)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v20.py", line 134, in build
+    completion.residual.completed(review_exit_ref)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_after_dory_residual_review_v1.py", line 230, in completed
+    h,pins=extend(start,review_exit_ref,reader)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_after_dory_residual_review_v1.py", line 144, in extend
+    receipt=read(review_exit_ref);external(receipt,'saved-review')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_after_dory_residual_review_v1.py", line 98, in external
+    require(receipt['reviewer']=='/root' and receipt['actual_external_exit_observed'] is True
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_layer0_serial_contract_v2.py", line 14, in require
+    if not value:raise RuntimeError(message)
+RuntimeError: Actual successful saved-review exit
+
+======================================================================
+ERROR: dory-rotary-source-20261108-v1 (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: dory-rotary-source-20261108-v1
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/unittest/loader.py", line 470, in _find_test_path
+    package = self._get_module_from_name(name)
+  File "/usr/lib/python3.10/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/__init__.py", line 7, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+
+----------------------------------------------------------------------
+Ran 12 tests in 40.062s
+
+FAILED (errors=2)
