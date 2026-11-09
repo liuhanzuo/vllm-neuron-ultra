@@ -1,0 +1,462 @@
+{
+  "schema": "nemotron_r8_projection4096_hlo_structure_v1",
+  "complete": true,
+  "source_only_inspection": true,
+  "descriptor_sources": {
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/service/hlo_pb2.py": "8d332b4180bc80e2b376a3018de0013920e6878b3eb260c52540ef07bc5b0922",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/xla_data_pb2.py": "642ae1b5dc64a3188401d5f40dac475e0e4e20878b6473dda8e0e3306d8ba1f3"
+  },
+  "descriptor_loaded_by_AST_literal_without_executing_sdk": true,
+  "protobuf_implementation": "python",
+  "rows": [
+    {
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-projection-b1-t4096-original/compiler-work/model/graph.hlo",
+        "sha256": "e5bc21ec6d340276ce38b226e46af4b718fad3c73ad1c24b229cc33ee6204c3a",
+        "bytes": 1255
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-projection-b1-t4096-original-worker-result.json",
+        "sha256": "8dfe325625efc9c7ecb3e36e7e4e6936a46f90042245494fcb0362ddac06c2a9"
+      },
+      "entry_root": 15,
+      "nodes": [
+        {
+          "id": 1,
+          "name": "p0",
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            4096,
+            11328
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "name": "reshape.2",
+          "opcode": "reshape",
+          "dimensions": [
+            46399488
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "name": "slice.3",
+          "opcode": "slice",
+          "dimensions": [
+            20971520
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 20971520,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "name": "reshape.4",
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "name": "convert.5",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "name": "reshape.6",
+          "opcode": "reshape",
+          "dimensions": [
+            46399488
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "name": "slice.7",
+          "opcode": "slice",
+          "dimensions": [
+            25165824
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 25170944,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "name": "reshape.8",
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "name": "transpose.9",
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 10,
+          "name": "convert.10",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "name": "reshape.11",
+          "opcode": "reshape",
+          "dimensions": [
+            46399488
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "name": "slice.12",
+          "opcode": "slice",
+          "dimensions": [
+            262144
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [
+            {
+              "start": 11264,
+              "limit": 273408,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "name": "reshape.13",
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            64
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "name": "convert.14",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            64
+          ],
+          "operands": [
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 15,
+          "name": "tuple.15",
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            10,
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-projection-b1-t4096-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "a143e931d80dd9d8091eb821920cf90b323d5306079ef156dbdc74fbde38e4d0",
+        "bytes": 960
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-projection-b1-t4096-tensor-split-worker-result.json",
+        "sha256": "f21d5cf75537576a836a52b82471c64609412d445b53ad5dc288a230c625d237"
+      },
+      "entry_root": 9,
+      "nodes": [
+        {
+          "id": 1,
+          "name": "p0",
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            4096,
+            11328
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "name": "slice.2",
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "name": "convert.3",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "name": "slice.4",
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 11264,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "name": "transpose.5",
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 6,
+          "name": "convert.6",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "name": "slice.7",
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            64
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 11264,
+              "limit": 11328,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "name": "convert.8",
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            64
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "name": "tuple.9",
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            3,
+            6,
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    }
+  ],
+  "device_artifacts_or_raw_tensors_reread": false,
+  "native_framework_imported": false,
+  "new_compile_or_inference": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
