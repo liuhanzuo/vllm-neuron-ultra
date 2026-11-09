@@ -1,0 +1,74 @@
+{
+  "schema": "dory_residual_saved_review_r2_failed_actual_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T22:50:45.427124+00:00",
+  "actual_external_exit_observed": true,
+  "session_id": 86437,
+  "exit_code": 1,
+  "tool_chunk": "c0db47",
+  "owner": {
+    "pid": 36934,
+    "start_ticks": "403068361",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py",
+      "--mode",
+      "review",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r2-runtime-spec-20261109-v1.json",
+      "--spec-sha256",
+      "957360f389de29cd3ff29ce7e2711b79691c02da370f6f973945270d9faa44bc",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r2-source-review-20261109-v1.json",
+      "--review-sha256",
+      "94b68d5721a9dab5a0da9a0b454cae804246f7d295aa9545b50c3d590b3e6bcf"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r2-runtime-spec-20261109-v1.json",
+    "sha256": "957360f389de29cd3ff29ce7e2711b79691c02da370f6f973945270d9faa44bc"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r2-source-review-20261109-v1.json",
+    "sha256": "94b68d5721a9dab5a0da9a0b454cae804246f7d295aa9545b50c3d590b3e6bcf"
+  },
+  "output_files": {
+    "predecessor-drain.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/predecessor-drain.json",
+      "sha256": "8bca57fa83446964c58e614b8a22e9a8f0eba8aac593d49f04b335a1538c657d"
+    },
+    "post-exit-contract.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/post-exit-contract.json",
+      "sha256": "cf2359e65cce6ae077a3967a75c46c0c1822704a3299e564c09e7e51f80ccdd3"
+    },
+    "failure.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/failure.json",
+      "sha256": "cf61107a57b8971e0ce1cf64b9d7bbc10f2f7b6e19d304a928a9c650489b83e7"
+    },
+    "predecessor-history.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/predecessor-history.json",
+      "sha256": "94df382063d8c8b8723094870c03addcc4d048651a56ddea28cc06267a3a628b"
+    },
+    "admission.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/admission.json",
+      "sha256": "448ca54c27f9c5a7fc3ebfabeeb0c779982052da425782c4c44df1ce13b3f1d2"
+    },
+    "source-files.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r2/source-files.json",
+      "sha256": "17da2947b7f76e45182edd4440d963582ed34e6c71e02e098bcd35eaa627ba04"
+    }
+  },
+  "exact_owner_gone": true,
+  "exact_owner_gone_observation_tool_chunk": "4fcb0a",
+  "actual_tool_output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py\", line 209, in <module>\n    main()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py\", line 139, in main\n    checked = review_complete(contract, guard)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_complete_v2.py\", line 253, in review_complete\n    result = review_payloads(stream, diag, output_pins, spec[\"payload_review_budget\"], guard)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_payloads_v2.py\", line 199, in review_payloads\n    joined.accept(action, record, failure)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_payloads_v2.py\", line 45, in accept\n    self._accept(action, record, failure)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_payloads_v2.py\", line 115, in _accept\n    self.original.accept(action, action[\"original_archive\"])\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_archives_v2.py\", line 54, in accept\n    return self._accept(action, archive)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_archives_v2.py\", line 93, in _accept\n    self._forward(action, archive)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_archives_v2.py\", line 183, in _forward\n    for block in consume((end-start)*512):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_archives_v2.py\", line 156, in consume\n    self.guard()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py\", line 84, in guard\n    require(time.monotonic()-started < budget['wall_seconds']\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_layer0_serial_contract_v2.py\", line 14, in require\n    if not value:raise RuntimeError(message)\nRuntimeError: Full original resource bounds\n",
+  "failure_reason": {
+    "error": "RuntimeError('Full original resource bounds')",
+    "mode": "review"
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "saved_review_completed": false
+}
