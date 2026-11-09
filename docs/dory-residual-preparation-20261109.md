@@ -75,3 +75,17 @@
 这一步只检查了合成文件，**没有读取原始模型张量，也没有重放 6,200 个真实事件**。完整复核器还需接入选定残差和故障现场数据、原始与新归档分别复核、实际执行/检查点/退出证据及总资源限制。本组件不重算 top1 或 FP32 数值门槛；其中生命周期标记只用于整理缓存历史，不能代替原生故障恢复验证。原 7 个失败及已有提速倍数保持不变。
 
 [完整输出字节读取组件](evidence/dory-residual-source-20261109/dory_residual_saved_archives_v1.py)、[21 项合成数据检查](evidence/dory-residual-source-20261109/check_dory_residual_saved_archives_v1.py)、[实际检查记录](evidence/dory-residual-source-20261109/saved-archives-source-tests.json)、[审阅及尚未覆盖范围](evidence/dory-residual-source-20261109/saved-archives-source-review.json)、[保留的测试错误](evidence/dory-residual-source-20261109/dory-residual-saved-archives-test-failure-20261109-v1.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-saved-archives.json)。
+
+## 残差、故障现场与整体字节复核：新增 37 项合成检查
+
+新组件已接入每次完整前向的 224 个残差边界，分别保留物理层和循环轮次。读取时核对原完整参考的 33 行、标记调用的原选定行、BF16 原始字节及哈希，并逐边界重算解释性差异。原 FP32 指标和 7 个失败继续原样保留；“第一个字节不同的边界”只能描述保存结果，不能直接证明根因或准确性改善。
+
+故障现场复核覆盖原事件 6194：第 22 层第二轮输出后已完成 63 次层调用，保存 126 个边界和 112 个 K/V 张量。32 组缓存长度为 34、24 组为 33；每个注意力头的前 33 个位置都与独立重建的成功历史比较。原实验没有保存该次失败的完整张量，因此不能宣称故障新增位置与原失败张量逐字节相同。清理标记、投影数和其他槽位状态也会检查，但保存数据本身不能独立证明实际运行时清理。
+
+整体复核草稿将原始归档和新归档分别读取，逐项绑定请求身份、事件、输出头形状、112 次层调用及每次 281 次官方投影。原文件或新文件任意一侧发生损坏都会拒绝结果。完整入口还要求全部 6,200 个事件、6,185 次成功调用、89 次选定调用、153 行残差和原故障现场，并检查目录中的全部输出文件。两份缓存分别逐头重建；完整库存哈希只在生命周期边界重算，成功调用已逐张量验证完整历史哈希。
+
+**22 项残差/故障归档检查和 15 项整体接入检查，共 37 项合成检查通过。**检查包含一个实际读取全部 33 行、224 个边界的合成参考归档；故障接入用例则人工准备了事件 6194 之前的合成缓存，并不等于重放了此前真实事件。没有读取新的原始模型张量、执行原生模型或完成真实的全量复核。
+
+下一步仍需外层复核器认证实际检查点、源码、执行及退出证据，冻结新输出元数据，完成总资源预算和串行运行配置。Nemotron r9 实际结束并完成释放/历史登记后，才可安排完整准备与原生重放。现阶段尚未重新计算原 top1 或 FP32 验收指标，没有新增提速倍数或整模型通过结论。
+
+[残差及故障字节复核](evidence/dory-residual-source-20261109/dory_residual_saved_observations_v1.py)、[整体原始/新输出接入](evidence/dory-residual-source-20261109/dory_residual_saved_payloads_v1.py)、[37 项检查退出记录](evidence/dory-residual-source-20261109/joined-payload-source-tests.json)、[源码审阅和未完成范围](evidence/dory-residual-source-20261109/joined-payload-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-joined-payload.json)。
