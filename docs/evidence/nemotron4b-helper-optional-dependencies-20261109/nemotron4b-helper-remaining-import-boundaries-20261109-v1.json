@@ -1,0 +1,1015 @@
+{
+  "schema": "nemotron4b_helper_remaining_import_boundaries_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T22:36:35.947923+00:00",
+  "inventory": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-optional-dependency-inventory-20261109-v1.json",
+    "sha256": "f3399ac3b8898e960bdcef3811809a4c2f0be94c3346ae10d97edf9a30fcfc1b"
+  },
+  "root_count": 13,
+  "import_edges": 23,
+  "roots": {
+    "StringIO": {
+      "category": "python_version_branch",
+      "source_interpretation": "Both six implementations import StringIO in the else branch of if PY3. PY3 is assigned from sys.version_info[0] == 3.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "annotationlib": {
+      "category": "python_version_branch",
+      "source_interpretation": "Both imports are guarded by sys.version_info >= (3,14).",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "awscrt": {
+      "category": "optional_dependency",
+      "source_interpretation": "botocore.compat catches ImportError for awscrt.auth; crypto/checksum imports are conditional on HAS_CRT.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "backports": {
+      "category": "optional_version_branch",
+      "source_interpretation": "Older-Python zstd path appears inside try/except ImportError.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "bcrypt": {
+      "category": "optional_dependency",
+      "source_interpretation": "SSH serialization catches ImportError and sets _bcrypt_supported=False.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "botocore": {
+      "category": "optional_customization",
+      "source_interpretation": "Missing botocore.customizations.useragent has an explicit ImportError fallback returning unmodified components.",
+      "presence": {
+        "installed_candidates": [
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore"
+        ],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "brotli": {
+      "category": "optional_dependency",
+      "source_interpretation": "urllib3 catches ImportError around brotlicffi/brotli alternatives.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "brotlicffi": {
+      "category": "optional_dependency",
+      "source_interpretation": "urllib3 catches ImportError around brotlicffi/brotli alternatives.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "compression": {
+      "category": "optional_version_branch",
+      "source_interpretation": "Python>=3.14 zstd path appears inside try/except ImportError.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "dateutil": {
+      "category": "star_exports",
+      "source_interpretation": "dateutil.tz imports from the already catalogued dateutil.tz.tz; star export semantics were intentionally not evaluated by the graph.",
+      "presence": {
+        "installed_candidates": [
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/dateutil"
+        ],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "js": {
+      "category": "platform_path",
+      "source_interpretation": "The importing emscripten.fetch module is reached conservatively via urllib3 platform branches; urllib3.__init__ imports the emscripten integration only when sys.platform == emscripten.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "pyodide": {
+      "category": "platform_path",
+      "source_interpretation": "Same emscripten integration boundary; filesystem absence does not itself prove which import path executes.",
+      "presence": {
+        "installed_candidates": [],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    },
+    "six": {
+      "category": "dynamic_importer",
+      "source_interpretation": "six.moves is provided by the existing _SixMetaPathImporter and MovedModule declarations, not an ordinary six/moves.py file.",
+      "presence": {
+        "installed_candidates": [
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/six.py"
+        ],
+        "system_interpreter_stdlib_name": false,
+        "resolved_runtime_origin": false
+      },
+      "runtime_origin_resolved": false
+    }
+  },
+  "source_edges": [
+    {
+      "importer": "botocore.compat",
+      "target": "awscrt.auth",
+      "line": 285,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/compat.py",
+        "sha256": "e4f1a4f8787b3958baffb53c0661227ec6939feb1c3fe6a15a9ea175400a279b"
+      },
+      "context_start_line": 281,
+      "context": [
+        "",
+        "",
+        "# Detect if CRT is available for use",
+        "try:",
+        "    import awscrt.auth",
+        "",
+        "    # Allow user opt-out if needed",
+        "    disabled = os.environ.get('BOTO_DISABLE_CRT', \"false\")",
+        "    HAS_CRT = not disabled.lower() == 'true'",
+        "except ImportError:"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 284,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "botocore.compat",
+      "target": "awscrt.crypto",
+      "line": 369,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/compat.py",
+        "sha256": "e4f1a4f8787b3958baffb53c0661227ec6939feb1c3fe6a15a9ea175400a279b"
+      },
+      "context_start_line": 365,
+      "context": [
+        "    HAS_GZIP = False",
+        "",
+        "# Conditional import for awscrt EC crypto functionality",
+        "if HAS_CRT and has_minimum_crt_version((0, 28, 4)):",
+        "    from awscrt.crypto import EC",
+        "else:",
+        "    EC = None"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 368,
+          "test": "HAS_CRT and has_minimum_crt_version((0, 28, 4))",
+          "branch": "body"
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "botocore.useragent",
+      "target": "botocore.customizations.useragent",
+      "line": 265,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/useragent.py",
+        "sha256": "896dc51c2bf87208b72b32b772b878098729a07f71e6eaadd72028b500bf9830"
+      },
+      "context_start_line": 261,
+      "context": [
+        "",
+        "# This is not a public interface and is subject to abrupt breaking changes.",
+        "# Any usage is not advised or supported in external code bases.",
+        "try:",
+        "    from botocore.customizations.useragent import modify_components",
+        "except ImportError:",
+        "    # Default implementation that returns unmodified User-Agent components.",
+        "    def modify_components(components):",
+        "        return components",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 264,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_customization"
+    },
+    {
+      "importer": "botocore.httpchecksum",
+      "target": "awscrt",
+      "line": 45,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/httpchecksum.py",
+        "sha256": "a29e59f846c644891eede47d9c809816315f45b0033778640cbf03d725495380"
+      },
+      "context_start_line": 41,
+      "context": [
+        "    has_checksum_header,",
+        ")",
+        "",
+        "if HAS_CRT:",
+        "    from awscrt import checksums as crt_checksums",
+        "else:",
+        "    crt_checksums = None",
+        "",
+        "logger = logging.getLogger(__name__)",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 44,
+          "test": "HAS_CRT",
+          "branch": "body"
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "botocore.vendored.six",
+      "target": "StringIO",
+      "line": 684,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/vendored/six.py",
+        "sha256": "4ce39f422ee71467ccac8bed76beb05f8c321c7f0ceda9279ae2dfa3670106b3"
+      },
+      "context_start_line": 680,
+      "context": [
+        "",
+        "    def indexbytes(buf, i):",
+        "        return ord(buf[i])",
+        "    iterbytes = functools.partial(itertools.imap, ord)",
+        "    import StringIO",
+        "    StringIO = BytesIO = StringIO.StringIO",
+        "    _assertCountEqual = \"assertItemsEqual\"",
+        "    _assertRaisesRegex = \"assertRaisesRegexp\"",
+        "    _assertRegex = \"assertRegexpMatches\"",
+        "    _assertNotRegex = \"assertNotRegexpMatches\""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 642,
+          "test": "PY3",
+          "branch": "orelse"
+        }
+      ],
+      "category": "python_version_branch"
+    },
+    {
+      "importer": "dateutil.tz",
+      "target": "dateutil.tz.tz.*",
+      "line": 2,
+      "reason": "star_exports_unresolved",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/dateutil/tz/__init__.py",
+        "sha256": "17e333d77bfa8d8b1e92541ff537bd27a9f370b0e6ab8ee03916bad4adf9fc50"
+      },
+      "context_start_line": 1,
+      "context": [
+        "# -*- coding: utf-8 -*-",
+        "from .tz import *",
+        "from .tz import __doc__",
+        "",
+        "__all__ = [\"tzutc\", \"tzoffset\", \"tzlocal\", \"tzfile\", \"tzrange\",",
+        "           \"tzstr\", \"tzical\", \"tzwin\", \"tzwinlocal\", \"gettz\",",
+        "           \"enfold\", \"datetime_ambiguous\", \"datetime_exists\","
+      ],
+      "source_control_ancestry": [],
+      "category": "star_exports"
+    },
+    {
+      "importer": "dateutil.tz.tz",
+      "target": "six.moves",
+      "line": 21,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/dateutil/tz/tz.py",
+        "sha256": "1149c474c7de4e15e263a978b21f7205a6d9eb7fcf3b3cb4d734ac87db619f5a"
+      },
+      "context_start_line": 17,
+      "context": [
+        "from collections import OrderedDict",
+        "",
+        "import six",
+        "from six import string_types",
+        "from six.moves import _thread",
+        "from ._common import tzname_in_python2, _tzinfo",
+        "from ._common import tzrangebase, enfold",
+        "from ._common import _validate_fromutc_inputs",
+        "",
+        "from ._factories import _TzSingleton, _TzOffsetFactory"
+      ],
+      "source_control_ancestry": [],
+      "category": "dynamic_importer"
+    },
+    {
+      "importer": "urllib3.response",
+      "target": "brotlicffi",
+      "line": 22,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/response.py",
+        "sha256": "d950ed1fd2ab60d40b51b0d81d9dc6830cc7dc96698649ff268aad07ba3392dd"
+      },
+      "context_start_line": 18,
+      "context": [
+        "    from ._base_connection import BaseHTTPConnection",
+        "",
+        "try:",
+        "    try:",
+        "        import brotlicffi as brotli  # type: ignore[import-not-found]",
+        "    except ImportError:",
+        "        import brotli  # type: ignore[import-not-found]",
+        "except ImportError:",
+        "    brotli = None",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 21,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        },
+        {
+          "kind": "Try",
+          "line": 20,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "urllib3.response",
+      "target": "brotli",
+      "line": 24,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/response.py",
+        "sha256": "d950ed1fd2ab60d40b51b0d81d9dc6830cc7dc96698649ff268aad07ba3392dd"
+      },
+      "context_start_line": 20,
+      "context": [
+        "try:",
+        "    try:",
+        "        import brotlicffi as brotli  # type: ignore[import-not-found]",
+        "    except ImportError:",
+        "        import brotli  # type: ignore[import-not-found]",
+        "except ImportError:",
+        "    brotli = None",
+        "",
+        "from . import util",
+        "from ._base_connection import _TYPE_BODY"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 21,
+          "branch": "handlers",
+          "handlers": [
+            "ImportError"
+          ]
+        },
+        {
+          "kind": "Try",
+          "line": 20,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "urllib3.response",
+      "target": "compression",
+      "line": 242,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/response.py",
+        "sha256": "d950ed1fd2ab60d40b51b0d81d9dc6830cc7dc96698649ff268aad07ba3392dd"
+      },
+      "context_start_line": 238,
+      "context": [
+        "",
+        "",
+        "try:",
+        "    if sys.version_info >= (3, 14):",
+        "        from compression import zstd",
+        "    else:",
+        "        from backports import zstd",
+        "except ImportError:",
+        "    HAS_ZSTD = False",
+        "else:"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 241,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "body"
+        },
+        {
+          "kind": "Try",
+          "line": 240,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_version_branch"
+    },
+    {
+      "importer": "urllib3.response",
+      "target": "backports",
+      "line": 244,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/response.py",
+        "sha256": "d950ed1fd2ab60d40b51b0d81d9dc6830cc7dc96698649ff268aad07ba3392dd"
+      },
+      "context_start_line": 240,
+      "context": [
+        "try:",
+        "    if sys.version_info >= (3, 14):",
+        "        from compression import zstd",
+        "    else:",
+        "        from backports import zstd",
+        "except ImportError:",
+        "    HAS_ZSTD = False",
+        "else:",
+        "    HAS_ZSTD = True",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 241,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "orelse"
+        },
+        {
+          "kind": "Try",
+          "line": 240,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_version_branch"
+    },
+    {
+      "importer": "urllib3.util.request",
+      "target": "brotlicffi",
+      "line": 25,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/util/request.py",
+        "sha256": "8ada670bcba0ec3e2755f0e6194091325824011510d77aff5ccc529f34f09a91"
+      },
+      "context_start_line": 21,
+      "context": [
+        "",
+        "ACCEPT_ENCODING = \"gzip,deflate\"",
+        "try:",
+        "    try:",
+        "        import brotlicffi as _unused_module_brotli  # type: ignore[import-not-found] # noqa: F401",
+        "    except ImportError:",
+        "        import brotli as _unused_module_brotli  # type: ignore[import-not-found] # noqa: F401",
+        "except ImportError:",
+        "    pass",
+        "else:"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 24,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        },
+        {
+          "kind": "Try",
+          "line": 23,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "urllib3.util.request",
+      "target": "brotli",
+      "line": 27,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/util/request.py",
+        "sha256": "8ada670bcba0ec3e2755f0e6194091325824011510d77aff5ccc529f34f09a91"
+      },
+      "context_start_line": 23,
+      "context": [
+        "try:",
+        "    try:",
+        "        import brotlicffi as _unused_module_brotli  # type: ignore[import-not-found] # noqa: F401",
+        "    except ImportError:",
+        "        import brotli as _unused_module_brotli  # type: ignore[import-not-found] # noqa: F401",
+        "except ImportError:",
+        "    pass",
+        "else:",
+        "    ACCEPT_ENCODING += \",br\"",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 24,
+          "branch": "handlers",
+          "handlers": [
+            "ImportError"
+          ]
+        },
+        {
+          "kind": "Try",
+          "line": 23,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    },
+    {
+      "importer": "urllib3.util.request",
+      "target": "compression",
+      "line": 35,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/util/request.py",
+        "sha256": "8ada670bcba0ec3e2755f0e6194091325824011510d77aff5ccc529f34f09a91"
+      },
+      "context_start_line": 31,
+      "context": [
+        "    ACCEPT_ENCODING += \",br\"",
+        "",
+        "try:",
+        "    if sys.version_info >= (3, 14):",
+        "        from compression import zstd as _unused_module_zstd  # noqa: F401",
+        "    else:",
+        "        from backports import zstd as _unused_module_zstd  # noqa: F401",
+        "except ImportError:",
+        "    pass",
+        "else:"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 34,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "body"
+        },
+        {
+          "kind": "Try",
+          "line": 33,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_version_branch"
+    },
+    {
+      "importer": "urllib3.util.request",
+      "target": "backports",
+      "line": 37,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/util/request.py",
+        "sha256": "8ada670bcba0ec3e2755f0e6194091325824011510d77aff5ccc529f34f09a91"
+      },
+      "context_start_line": 33,
+      "context": [
+        "try:",
+        "    if sys.version_info >= (3, 14):",
+        "        from compression import zstd as _unused_module_zstd  # noqa: F401",
+        "    else:",
+        "        from backports import zstd as _unused_module_zstd  # noqa: F401",
+        "except ImportError:",
+        "    pass",
+        "else:",
+        "    ACCEPT_ENCODING += \",zstd\"",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 34,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "orelse"
+        },
+        {
+          "kind": "Try",
+          "line": 33,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_version_branch"
+    },
+    {
+      "importer": "typing_extensions",
+      "target": "annotationlib",
+      "line": 19,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/typing_extensions.py",
+        "sha256": "433d11d170d3a24d2eb065ebc1bfe848cea7e3d7ce68567ab52bea2d4c2f7ed8"
+      },
+      "context_start_line": 15,
+      "context": [
+        "import warnings",
+        "",
+        "# Breakpoint: https://github.com/python/cpython/pull/119891",
+        "if sys.version_info >= (3, 14):",
+        "    import annotationlib",
+        "",
+        "__all__ = [",
+        "    # Super-special typing primitives.",
+        "    'Any',",
+        "    'ClassVar',"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 18,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "body"
+        }
+      ],
+      "category": "python_version_branch"
+    },
+    {
+      "importer": "typing_extensions",
+      "target": "annotationlib",
+      "line": 3897,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/typing_extensions.py",
+        "sha256": "433d11d170d3a24d2eb065ebc1bfe848cea7e3d7ce68567ab52bea2d4c2f7ed8"
+      },
+      "context_start_line": 3893,
+      "context": [
+        "    __all__.append(\"CapsuleType\")",
+        "",
+        "",
+        "if sys.version_info >= (3, 14):",
+        "    from annotationlib import Format, get_annotations",
+        "else:",
+        "    # Available since Python 3.14.0a3",
+        "    # PR: https://github.com/python/cpython/pull/124415",
+        "    class Format(enum.IntEnum):",
+        "        VALUE = 1"
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 3896,
+          "test": "sys.version_info >= (3, 14)",
+          "branch": "body"
+        }
+      ],
+      "category": "python_version_branch"
+    },
+    {
+      "importer": "six",
+      "target": "StringIO",
+      "line": 689,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/six.py",
+        "sha256": "c51c91f703d3d4b3696c923cb5fec213e05e75d9215393befac7f2fa6a3904df"
+      },
+      "context_start_line": 685,
+      "context": [
+        "",
+        "    def indexbytes(buf, i):",
+        "        return ord(buf[i])",
+        "    iterbytes = functools.partial(itertools.imap, ord)",
+        "    import StringIO",
+        "    StringIO = BytesIO = StringIO.StringIO",
+        "    _assertCountEqual = \"assertItemsEqual\"",
+        "    _assertRaisesRegex = \"assertRaisesRegexp\"",
+        "    _assertRegex = \"assertRegexpMatches\"",
+        "    _assertNotRegex = \"assertNotRegexpMatches\""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "If",
+          "line": 647,
+          "test": "PY3",
+          "branch": "orelse"
+        }
+      ],
+      "category": "python_version_branch"
+    },
+    {
+      "importer": "dateutil.tz._factories",
+      "target": "six.moves",
+      "line": 5,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/dateutil/tz/_factories.py",
+        "sha256": "ba76fa5d0357acf32f7a4b13094f8083c8e6559b384a88e83d47001e95a7aef5"
+      },
+      "context_start_line": 1,
+      "context": [
+        "from datetime import timedelta",
+        "import weakref",
+        "from collections import OrderedDict",
+        "",
+        "from six.moves import _thread",
+        "",
+        "",
+        "class _TzSingleton(type):",
+        "    def __init__(cls, *args, **kwargs):",
+        "        cls.__instance = None"
+      ],
+      "source_control_ancestry": [],
+      "category": "dynamic_importer"
+    },
+    {
+      "importer": "dateutil.tz.win",
+      "target": "six.moves",
+      "line": 13,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/dateutil/tz/win.py",
+        "sha256": "c49b335a04b0135c4fc7f1c98f86647a9cae902fe1372d35e9631c5e16d1681f"
+      },
+      "context_start_line": 9,
+      "context": [
+        "# This code was originally contributed by Jeffrey Harris.",
+        "import datetime",
+        "import struct",
+        "",
+        "from six.moves import winreg",
+        "from six import text_type",
+        "",
+        "try:",
+        "    import ctypes",
+        "    from ctypes import wintypes"
+      ],
+      "source_control_ancestry": [],
+      "category": "dynamic_importer"
+    },
+    {
+      "importer": "urllib3.contrib.emscripten.fetch",
+      "target": "js",
+      "line": 45,
+      "reason": "explicit_import",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/contrib/emscripten/fetch.py",
+        "sha256": "e7171dfbebe217165dda7072d1a2bbdddb49f53b21d7261953f4945f09f089b9"
+      },
+      "context_start_line": 41,
+      "context": [
+        "from email.parser import Parser",
+        "from importlib.resources import files",
+        "from typing import TYPE_CHECKING, Any",
+        "",
+        "import js  # type: ignore[import-not-found]",
+        "from pyodide.ffi import (  # type: ignore[import-not-found]",
+        "    JsArray,",
+        "    JsException,",
+        "    JsProxy,",
+        "    to_js,"
+      ],
+      "source_control_ancestry": [],
+      "category": "platform_path"
+    },
+    {
+      "importer": "urllib3.contrib.emscripten.fetch",
+      "target": "pyodide.ffi",
+      "line": 46,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/contrib/emscripten/fetch.py",
+        "sha256": "e7171dfbebe217165dda7072d1a2bbdddb49f53b21d7261953f4945f09f089b9"
+      },
+      "context_start_line": 42,
+      "context": [
+        "from importlib.resources import files",
+        "from typing import TYPE_CHECKING, Any",
+        "",
+        "import js  # type: ignore[import-not-found]",
+        "from pyodide.ffi import (  # type: ignore[import-not-found]",
+        "    JsArray,",
+        "    JsException,",
+        "    JsProxy,",
+        "    to_js,",
+        ")"
+      ],
+      "source_control_ancestry": [],
+      "category": "platform_path"
+    },
+    {
+      "importer": "cryptography.hazmat.primitives.serialization.ssh",
+      "target": "bcrypt",
+      "line": 43,
+      "reason": "from_module",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/cryptography/hazmat/primitives/serialization/ssh.py",
+        "sha256": "84f579a1b1739f3d108457d714f39e43ccba32cbab034c5531088b9cb11212cf"
+      },
+      "context_start_line": 39,
+      "context": [
+        "    _KeySerializationEncryption,",
+        ")",
+        "",
+        "try:",
+        "    from bcrypt import kdf as _bcrypt_kdf",
+        "",
+        "    _bcrypt_supported = True",
+        "except ImportError:",
+        "    _bcrypt_supported = False",
+        ""
+      ],
+      "source_control_ancestry": [
+        {
+          "kind": "Try",
+          "line": 42,
+          "branch": "body",
+          "handlers": [
+            "ImportError"
+          ]
+        }
+      ],
+      "category": "optional_dependency"
+    }
+  ],
+  "additional_source_evidence": [
+    {
+      "module": "urllib3",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/urllib3/__init__.py",
+        "sha256": "24ca35b60d67215d40789daf10d0bf4f17e5d1ee61e86ce5f43195935ad645ba"
+      },
+      "lines": [
+        {
+          "line": 208,
+          "text": "if sys.platform == \"emscripten\":"
+        },
+        {
+          "line": 209,
+          "text": "    from .contrib.emscripten import inject_into_urllib3  # noqa: 401"
+        }
+      ]
+    },
+    {
+      "module": "six",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/six.py",
+        "sha256": "c51c91f703d3d4b3696c923cb5fec213e05e75d9215393befac7f2fa6a3904df"
+      },
+      "lines": [
+        {
+          "line": 37,
+          "text": "PY3 = sys.version_info[0] == 3"
+        },
+        {
+          "line": 169,
+          "text": "class _SixMetaPathImporter(object):"
+        },
+        {
+          "line": 242,
+          "text": "_importer = _SixMetaPathImporter(__name__)"
+        },
+        {
+          "line": 296,
+          "text": "    MovedModule(\"_thread\", \"thread\", \"_thread\"),"
+        },
+        {
+          "line": 323,
+          "text": "if sys.platform == \"win32\":"
+        },
+        {
+          "line": 325,
+          "text": "        MovedModule(\"winreg\", \"_winreg\"),"
+        }
+      ]
+    },
+    {
+      "module": "botocore.vendored.six",
+      "source": {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/botocore/vendored/six.py",
+        "sha256": "4ce39f422ee71467ccac8bed76beb05f8c321c7f0ceda9279ae2dfa3670106b3"
+      },
+      "lines": [
+        {
+          "line": 37,
+          "text": "PY3 = sys.version_info[0] == 3"
+        },
+        {
+          "line": 169,
+          "text": "class _SixMetaPathImporter(object):"
+        },
+        {
+          "line": 242,
+          "text": "_importer = _SixMetaPathImporter(__name__)"
+        },
+        {
+          "line": 296,
+          "text": "    MovedModule(\"_thread\", \"thread\", \"_thread\"),"
+        },
+        {
+          "line": 323,
+          "text": "if sys.platform == \"win32\":"
+        },
+        {
+          "line": 325,
+          "text": "        MovedModule(\"winreg\", \"_winreg\"),"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "These remaining graph entries are not an instruction to install missing packages or change original dependency behavior.",
+    "The observed source contains version/platform branches, optional ImportError fallbacks, star exports and a dynamic importer.",
+    "No SDK execution occurred; these observations do not prove the full real import trace or permit dropping guards."
+  ],
+  "installed_code_executed": false,
+  "native_payload_bytes_read": 0,
+  "complete_runtime_dependency_closure_proven": false,
+  "upstream_defect_established": false,
+  "package_installation_required_by_this_diagnosis": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "nemotron4b_helper_optional_dependencies_actual_exits_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T22:37:33.583738+00:00",
+  "tests": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_helper_optional_dependencies_v1.py",
+      "sha256": "a830ed731c01757c2ee8d0fa6d73d13c111c4ed9e0fa6d7412744eeacb75d253"
+    },
+    "analyzer": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_optional_dependencies_v1.py",
+      "sha256": "804f96606d1f80ebffcf1147fdcd84ef642249134eada52834de43b30dcebe8d"
+    },
+    "actual_external_exit_observed": true,
+    "exit_code": 0,
+    "tool_chunk": "6e4fdc",
+    "tests_passed": 7,
+    "output": "test_actual_namespace_parent_supported (__main__.OptionalCatalog) ... ok\ntest_missing_native_record_not_silently_dropped (__main__.OptionalCatalog) ... ok\ntest_missing_package_source_not_reclassified_as_namespace (__main__.OptionalCatalog) ... ok\ntest_native_record_size_mismatch_rejected_without_read (__main__.OptionalCatalog) ... ok\ntest_native_root_symlink_rejected (__main__.OptionalCatalog) ... ok\ntest_python_must_match_original_record (__main__.OptionalCatalog) ... ok\ntest_top_level_native_is_stat_only_and_python_not_executed (__main__.OptionalCatalog) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.009s\n\nOK\n"
+  },
+  "source_only_inventory": {
+    "actual_external_exit_observed": true,
+    "exit_code": 0,
+    "tool_chunk": "4353a0",
+    "result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-optional-dependency-inventory-20261109-v1.json",
+      "sha256": "f3399ac3b8898e960bdcef3811809a4c2f0be94c3346ae10d97edf9a30fcfc1b"
+    },
+    "output": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-optional-dependency-inventory-20261109-v1.json",
+      "sha256": "f3399ac3b8898e960bdcef3811809a4c2f0be94c3346ae10d97edf9a30fcfc1b",
+      "distributions": 15,
+      "added_python_sources": 108,
+      "added_python_bytes": 1288610,
+      "all_python_sources": 371,
+      "all_python_bytes": 5155150,
+      "reachable_python_modules": 267,
+      "native_stat_only_modules": [
+        "_cffi_backend",
+        "cryptography.hazmat.bindings._rust",
+        "google._upb._message",
+        "libneuronxla.libneuronpjrt"
+      ],
+      "reachable_native_boundaries": [
+        "cryptography.hazmat.bindings._rust",
+        "google._upb._message"
+      ],
+      "remaining_boundaries": [
+        "StringIO",
+        "annotationlib",
+        "awscrt",
+        "backports",
+        "bcrypt",
+        "botocore",
+        "brotli",
+        "brotlicffi",
+        "compression",
+        "dateutil",
+        "js",
+        "pyodide",
+        "six"
+      ],
+      "original119pins_unchanged": true,
+      "original263sources_unchanged": true,
+      "native_payload_bytes_read": 0,
+      "actual_SDK_helper_executed": false
+    }
+  },
+  "source_boundary_diagnosis": {
+    "actual_external_exit_observed": true,
+    "exit_code": 0,
+    "tool_chunk": "f89c72",
+    "result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-remaining-import-boundaries-20261109-v1.json",
+      "sha256": "6779a7574192d8d177777b0ae55eee023ff11188474fad0f0dbbbfce287c8415"
+    }
+  },
+  "installed_package_code_executed": false,
+  "native_payload_bytes_read": 0,
+  "runtime_admitted": false,
+  "new_speedup_claim": false
+}
