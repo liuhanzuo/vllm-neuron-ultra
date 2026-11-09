@@ -1,0 +1,102 @@
+{
+  "schema": "nemotron4b_hardlinked_source_reader_tests_actual_exits_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:47:20.157403+00:00",
+  "selected_tests": {
+    "reader": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_pinned_source_reader_v1.py",
+        "sha256": "9f3e0247e82a3fdf23162dc7083b25d65d34b533bc6d35918b0b4c611992c088"
+      },
+      "tests_passed": 10,
+      "actual": {
+        "chunk_id": "dd9981",
+        "wall_time_seconds": 1.5082e-05,
+        "exit_code": 0,
+        "original_token_count": 200,
+        "output": "test_additional_link_during_read_is_detected (__main__.Reader) ... ok\ntest_change_via_other_hardlink_during_read_is_detected (__main__.Reader) ... ok\ntest_forged_link_count_policy_is_rejected (__main__.Reader) ... ok\ntest_io_exception_closes_exact_opened_descriptor (__main__.Reader) ... ok\ntest_native_suffix_never_opened (__main__.Reader) ... ok\ntest_reads_exact_bytes_without_changing_original_identity (__main__.Reader) ... ok\ntest_same_bytes_new_inode_rejected (__main__.Reader) ... ok\ntest_singlelink_legacy_record_remains_compatible (__main__.Reader) ... ok\ntest_unapproved_symlink_rejected (__main__.Reader) ... ok\ntest_wrong_digest_rejected_with_original_identity (__main__.Reader) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.006s\n\nOK\n"
+      }
+    },
+    "router": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v4_r2.py",
+        "sha256": "39b911a4cc2d560f0cc281d2831c0f548f44cdbde243b1566da97b9e9d588791"
+      },
+      "tests_passed": 38,
+      "actual": {
+        "chunk_id": "0ec794",
+        "wall_time_seconds": 0.007035783,
+        "exit_code": 0,
+        "original_token_count": 790,
+        "output": "test_absent_optional_dependency_preserves_importerror_fallback (__main__.Imports) ... ok\ntest_actual_hardlinked_source_import_preserves_inode_and_peer (__main__.Imports) ... ok\ntest_catalog_mutation_after_construction_does_not_rebind_source (__main__.Imports) ... ok\ntest_caught_provenance_failure_still_poisoned_at_finish (__main__.Imports) ... ok\ntest_custom_create_importerror_preserves_parent_fallback_and_failure_audit (__main__.Imports) ... ok\ntest_custom_dynamic_alias_loader_semantics_preserved (__main__.Imports) ... ok\ntest_custom_exec_importerror_preserves_parent_fallback_and_failure_audit (__main__.Imports) ... ok\ntest_custom_loader_without_explicit_provider_rejected (__main__.Imports) ... ok\ntest_exact_finder_is_authorized_before_call (__main__.Imports) ... ok\ntest_existing_valid_timestamp_bytecode_cannot_replace_source (__main__.Imports) ... ok\ntest_finder_exception_retains_identity_and_is_not_absence (__main__.Imports) ... ok\ntest_found_unpinned_dependency_cannot_become_optional_absence (__main__.Imports) ... ok\ntest_hardlink_modified_through_peer_is_rejected (__main__.Imports) ... ok\ntest_hardlink_peer_removal_is_rejected (__main__.Imports) ... ok\ntest_hardlink_requires_explicit_original_link_count (__main__.Imports) ... ok\ntest_hardlinked_package_relative_imports_keep_original_paths (__main__.Imports) ... ok\ntest_importerror_from_authorization_is_sticky (__main__.Imports) ... ok\ntest_importerror_from_guard_cannot_become_optional_fallback (__main__.Imports) ... ok\ntest_importerror_from_source_reader_cannot_select_fallback (__main__.Imports) ... ok\ntest_namespace_extra_search_root_rejected (__main__.Imports) ... ok\ntest_namespace_locations_preserved (__main__.Imports) ... ok\ntest_native_rejection_precedes_extension_initialization (__main__.Imports) ... ok\ntest_nonzero_module_exit_remains_original (__main__.Imports) ... ok\ntest_ordinary_body_valueerror_is_not_provenance_failure (__main__.Imports) ... ok\ntest_original_declared_source_encoding_is_preserved (__main__.Imports) ... ok\ntest_parent_can_catch_child_body_importerror_and_continue (__main__.Imports) ... ok\ntest_parent_can_catch_child_missing_dependency (__main__.Imports) ... ok\ntest_postfailure_audit_rejection_blocks_optional_fallback (__main__.Imports) ... ok\ntest_provider_exception_identity_retained (__main__.Imports) ... ok\ntest_provider_failure_cannot_hide_failed_post_guard (__main__.Imports) ... ok\ntest_real_package_relative_import_and_original_origin (__main__.Imports) ... ok\ntest_reviewed_source_alias_preserves_original_module_file (__main__.Imports) ... ok\ntest_source_alias_chain_requires_separate_explicit_policy (__main__.Imports) ... ok\ntest_source_alias_retarget_is_rejected_before_body (__main__.Imports) ... ok\ntest_source_alias_target_change_is_rejected (__main__.Imports) ... ok\ntest_source_alias_without_explicit_record_is_rejected (__main__.Imports) ... ok\ntest_source_change_prevents_any_module_body_execution (__main__.Imports) ... ok\ntest_terminal_provider_exit_preserved_when_failure_audit_also_fails (__main__.Imports) ... ok\n\n----------------------------------------------------------------------\nRan 38 tests in 0.050s\n\nOK\n"
+      }
+    },
+    "context": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_context_v3.py",
+        "sha256": "a25e8e9daa2b448623ba0fd2cd0d609856f3b0f50df3e98aa457641e165f88db"
+      },
+      "tests_passed": 22,
+      "actual": {
+        "chunk_id": "cf2c36",
+        "wall_time_seconds": 1.4238e-05,
+        "exit_code": 0,
+        "original_token_count": 486,
+        "output": "test_module_authentication_cannot_be_replaced_by_name_match (__main__.Bindings) ... ok\ntest_same_type_unregistered_object_is_rejected (__main__.Bindings) ... ok\ntest_six_alias_namespace_must_match (__main__.Bindings) ... ok\ntest_standard_interpreter_objects_are_exact (__main__.Bindings) ... ok\ntest_three_real_startup_binding_shapes (__main__.Bindings) ... ok\ntest_audit_recursive_import_is_rejected_without_unbounded_recursion (__main__.ContextImports) ... ok\ntest_existing_side_effect_spec_preserves_cpython_selection (__main__.ContextImports) ... ok\ntest_existing_side_effect_spec_rejection_is_sticky (__main__.ContextImports) ... ok\ntest_finder_side_effect_module_audited_before_return (__main__.ContextImports) ... ok\ntest_legacy_finder_is_denied_before_load_module (__main__.ContextImports) ... ok\ntest_live_finder_list_append_affects_same_lookup (__main__.ContextImports) ... ok\ntest_nested_context_refusal_keeps_outer_hooks (__main__.ContextImports) ... ok\ntest_parent_optional_child_body_failure_still_works (__main__.ContextImports) ... ok\ntest_preloaded_module_audit_refuses_entry (__main__.ContextImports) ... ok\ntest_registrar_adds_finder_then_immediately_imports_with_it (__main__.ContextImports) ... ok\ntest_reload_uses_selected_source_and_original_module (__main__.ContextImports) ... ok\ntest_replaced_bootstrap_hook_rejected_at_exit_and_restored (__main__.ContextImports) ... ok\ntest_replaced_util_alias_rejected_at_exit_and_restored (__main__.ContextImports) ... ok\ntest_source_import_keeps_real_finder_objects_and_restores_hooks (__main__.ContextImports) ... ok\ntest_systemexit_keeps_original_code_and_restores_hooks (__main__.ContextImports) ... ok\ntest_unknown_finder_rejected_before_property_lookup (__main__.ContextImports) ... ok\ntest_util_find_spec_uses_authenticated_source_dispatch (__main__.ContextImports) ... ok\n\n----------------------------------------------------------------------\nRan 22 tests in 0.011s\n\nOK\n"
+      }
+    },
+    "ledger": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_module_origin_audit_v2.py",
+        "sha256": "c037b9b73aa8c36a695a71a7dfac658328c23fa6757aaddd8946f3ee3dbf3e28"
+      },
+      "tests_passed": 16,
+      "actual": {
+        "chunk_id": "b77104",
+        "wall_time_seconds": 0.04246123,
+        "exit_code": 0,
+        "original_token_count": 371,
+        "output": "test_actual_source_import_records_original_loader_origin (__main__.OriginImports) ... ok\ntest_alias_permission_does_not_approve_same_named_replacement (__main__.OriginImports) ... ok\ntest_approved_alias_requires_exact_module_object (__main__.OriginImports) ... ok\ntest_interpreter_policy_is_explicit_even_for_plausible_builtin_metadata (__main__.OriginImports) ... ok\ntest_native_looking_metadata_cannot_bypass_lifecycle_authorization (__main__.OriginImports) ... ok\ntest_optional_failed_module_can_disappear_and_later_reimport (__main__.OriginImports) ... ok\ntest_preloaded_name_set_must_be_complete (__main__.OriginImports) ... ok\ntest_preloaded_none_preserved_but_new_none_denied (__main__.OriginImports) ... ok\ntest_preloaded_object_cannot_be_replaced (__main__.OriginImports) ... ok\ntest_preloaded_origin_callback_denial_prevents_binding (__main__.OriginImports) ... ok\ntest_preloaded_spec_inplace_mutation_is_detected (__main__.OriginImports) ... ok\ntest_real_package_and_namespace_modules_are_audited (__main__.OriginImports) ... ok\ntest_regular_reload_preserves_object_and_revalidates_metadata (__main__.OriginImports) ... ok\ntest_source_loader_replacement_is_rejected (__main__.OriginImports) ... ok\ntest_source_metadata_change_is_rejected_even_with_same_object (__main__.OriginImports) ... ok\ntest_unreviewed_sys_modules_injection_is_detected (__main__.OriginImports) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.083s\n\nOK\n"
+      }
+    },
+    "startup": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_module_origins_v2.py",
+        "sha256": "df6072ecc5768573001b6e189bbaac7aef9975040a0dd03f53a3b7086061c517"
+      },
+      "tests_passed": 18,
+      "actual": {
+        "chunk_id": "eea31f",
+        "wall_time_seconds": 1.537770456,
+        "exit_code": 0,
+        "original_token_count": 415,
+        "output": "test_actual_parent_gate_then_site_then_original_helper (__main__.SiteRestoration) ... ok\ntest_bytecode_is_not_written (__main__.SiteRestoration) ... ok\ntest_gated_helper_imports_pinned_hardlink_without_changing_original (__main__.SiteRestoration) ... ok\ntest_helper_cannot_change_restored_execution_prefix (__main__.SiteRestoration) ... ok\ntest_helper_cannot_replace_preloaded_module_and_still_finish (__main__.SiteRestoration) ... ok\ntest_helper_catch_all_cannot_hide_unpinned_module_origin (__main__.SiteRestoration) ... ok\ntest_helper_fastpath_injected_module_is_checked_after_execution (__main__.SiteRestoration) ... ok\ntest_new_pth_file_prevents_initialization (__main__.SiteRestoration) ... ok\ntest_origin_context_denial_prevents_startup (__main__.SiteRestoration) ... ok\ntest_original_nonzero_helper_exit_is_preserved (__main__.SiteRestoration) ... ok\ntest_parent_denial_prevents_all_startup (__main__.SiteRestoration) ... ok\ntest_pth_change_after_parent_gate_prevents_initialization (__main__.SiteRestoration) ... ok\ntest_pth_error_swallowed_by_site_is_still_failure (__main__.SiteRestoration) ... ok\ntest_pth_registers_finder_then_helper_preserves_child_optional_fallback (__main__.SiteRestoration) ... ok\ntest_second_site_restore_cannot_retry_in_same_process (__main__.SiteRestoration) ... ok\ntest_startup_output_overflow_stays_a_failure (__main__.SiteRestoration) ... ok\ntest_startup_stdout_does_not_escape_as_successful_helper_output (__main__.SiteRestoration) ... ok\ntest_wrong_restored_import_path_is_rejected (__main__.SiteRestoration) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 1.579s\n\nOK\n"
+      }
+    }
+  },
+  "selected_test_total": 104,
+  "actual_source_catalog_read": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/validate_nemotron4b_actual_source_catalog_v1.py",
+      "sha256": "0a3add7d3c219d5eb74f728b107103c6348e8cba7643cf885c4953c74a8cacb4"
+    },
+    "actual": {
+      "chunk_id": "1e8970",
+      "wall_time_seconds": 0.15931706,
+      "exit_code": 0,
+      "original_token_count": 46,
+      "output": "{\"source_modules_read\": 1023, \"actual_source_bytes_read\": 16248589, \"original_hardlinked_modules_read\": 112, \"original_source_aliases_read\": 2, \"actual_inspected_source_imports\": 0}\n"
+    },
+    "result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-actual-source-catalog-read-validation-20261109-v1.json",
+      "sha256": "a92b7de7c31eb99e793c2ee68d9db7bbae77c52f4378cd938dc9ea6fa1fc43c1"
+    }
+  },
+  "all_fixture_children_reaped": true,
+  "actual_inspected_source_imports": 0,
+  "actual_SDK_helper_executed": false,
+  "actual_native_payload_bytes_read": 0,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
