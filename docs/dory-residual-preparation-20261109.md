@@ -37,3 +37,15 @@
 完整事件校验、真实重放、全部缓存/隐藏状态/logits 原始字节核对、独立复核及总资源预算仍待接入。上述工作完成、Nemotron r9 实际结束并完成资源释放后，才可准备新的独占运行；原 7 个整模型失败不变。
 
 [缓存管理代码](evidence/dory-residual-source-20261109/dory_residual_request_banks_v1.py)、[21 项缓存检查](evidence/dory-residual-source-20261109/check_dory_residual_request_banks_v1.py)、[4 项联合检查](evidence/dory-residual-source-20261109/check_dory_residual_capture_bank_integration_v1.py)、[25 项检查退出记录](evidence/dory-residual-source-20261109/banks-source-tests.json)、[原始故障元数据](evidence/dory-residual-source-20261109/dory-residual-original-injection-fixture-20261109-v1.json)、[源代码审阅与待接入事项](evidence/dory-residual-source-20261109/banks-source-review.json)、[本次文件清单](evidence/dory-residual-source-20261109/manifest-banks.json)。
+
+## 完整事件校验：新增 27 项源代码检查
+
+后续重放已增加完整事件校验器和带文件哈希校验的事件读取组件。每个成功调用必须包含固定顺序的 **114 个张量描述**：隐藏状态、输出分数、112 个 K/V 张量。检查覆盖每个张量的类型、形状、连续字节位置、总归档大小、有限值标记、历史前缀哈希链，以及原输出头形状、112 次层调用和请求身份。第二轮缓存也逐项核对；既有前五层计划只用于绑定原检查点的位置和指标，不限制新检查的缓存范围。
+
+本轮 **23 项元数据检查和 4 项事件读取检查，共 27 项通过**。除了合成的错误输入，还读取并认证原始前 6 个事件，包含两次完整因果参考调用的全部 114 个张量描述。读取组件绑定了原 6,200 项事件索引、6,185 项成功调用索引和 89 个选定调用，但目前只检查了前 6 个事件的正文，**没有验证全部 6,200 个正文，也没有读取原始张量数据或执行新模型**。
+
+部分迭代不能产生“完整完成”记录，也不能在同一读取器上悄悄重启。原故障注入和无效请求拒绝都被标为后续必须实际执行的步骤，不能仅以元数据标记获得恢复流程验收。原先 7 个失败的 FP32 指标字典保持原值，不因记录能够解析而改判通过。
+
+真实执行器仍须接入原模型、token/位置/输出头选择、投影调用计数、全部输出字节比较、残差和异常归档，随后完成独立复核及新的串行资源配置。事件读取检查依赖本机保留的原计划、索引和事件文件，不能当作可独立下载运行的完整模型基准。
+
+[完整事件校验](evidence/dory-residual-source-20261109/dory_residual_replay_history_v1.py)、[带哈希校验的读取组件](evidence/dory-residual-source-20261109/dory_residual_event_stream_v1.py)、[27 项检查退出记录](evidence/dory-residual-source-20261109/event-source-tests.json)、[前 6 个原事件元数据](evidence/dory-residual-source-20261109/dory-residual-original-startup-fixture-20261109-v1.json)、[审阅及待接入范围](evidence/dory-residual-source-20261109/event-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-events.json)。
