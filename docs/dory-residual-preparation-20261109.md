@@ -142,3 +142,11 @@
 r2 使用新目录和固定规格，加入成功元数据准备及 r1 的实际失败父子进程后，共认证 1,149 个服务和 345 个历史进程身份。父子进程已实际启动并记录，原分词器检查和 507 项权重加载已经通过；发布时回放尚未完成。完整任务仍须覆盖 6,185 次成功前向、56 组独立缓存、224 个层边界、153 行选定残差和原事件 6194 的故障现场。完成且实际退出后，再单独核验保存字节；原 7 个 FP32 失败、未确定根因和所有性能验收要求保持原记录。
 
 [完整元数据结果](evidence/dory-residual-source-20261109/metadata-r1-result.json)、[实际成功退出](evidence/dory-residual-source-20261109/dory-residual-metadata-r1-actual-exit-20261109-v1.json)、[首次原生失败](evidence/dory-residual-source-20261109/dory-residual-native-r1-failed-actual-exit-20261109-v1.json)、[接口修正](evidence/dory-residual-source-20261109/dory_residual_replay_runtime_v2.py)、[64 项检查记录](evidence/dory-residual-source-20261109/dory-residual-native-r2-source-tests-20261109-v1.json)、[r2 固定运行规格](evidence/dory-residual-source-20261109/dory-residual-native-r2-runtime-spec-20261109-v1.json)、[r2 实际启动](evidence/dory-residual-source-20261109/dory-residual-native-r2-live-launch-20261109-v1.json)、[本轮发布清单](evidence/dory-residual-source-20261109/manifest-metadata-native-r2.json)。
+
+## r2 首段完整前向已保存，后续回放继续
+
+实时核对 r2 的实际父子进程均在运行。原事件 1 的 2,060-token 完整因果前向已结束：生产者记录的 114 个张量描述与哈希均匹配原归档，top1 与原结果一致，官方投影调用数为 281；33 行、224 个层边界的残差已保存。此时事件日志完成了启动、前向、释放、下一次启动共 4 条记录，后续回放仍在执行。
+
+这说明修正后的缓存回调已通过首次真实完整前向，并且采集没有改变这一段保存的原输出。它不能证明全部 6,185 次调用完成，也不能把生产者的哈希比较当作退出后的独立字节复核。原 7 个 FP32 失败和未确定的数值根因继续保留，没有新增速度结果。
+
+[实际存活及首段结果观察](evidence/dory-residual-source-20261109/dory-residual-native-r2-live-observation-20261109-v2.json)、[首段完整事件记录](evidence/dory-residual-source-20261109/native-r2-first-full-causal-event.json)、[证据清单](evidence/dory-residual-source-20261109/manifest-native-r2-first-forward.json)。
