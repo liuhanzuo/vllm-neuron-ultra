@@ -1,0 +1,85 @@
+{
+  "schema": "dory_saved_review_retry_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T19:56:31.915530+00:00",
+  "source_preparation_passed": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_retry_contract_v1.py": "1fa22381cdf67c503e598724120ceeccdfad701b242076f31ae073824f2af6b8",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_saved_review_retry_v1.py": "418b47d9946d58717b9b1e41fb1cbdc8f7b4df3f40da51a90be046655ebee1df",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_dory_saved_review_retry_v1.py": "bbbafa5e41bb86d9727f1e37ff24172e49eefd10e0676aa3fc5f2153066b75a6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_contract_v1.py": "8f00c11d273a15284653dbee31263de4b5f52ed85122db619da771833e2646c9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_executor_v1.py": "0fc43fee8ee7813dad4d1e14dd890d4dde9894a7011b2532651f54f9c4d0115e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_imports_v1.py": "dad962a2dd41dcb21d17be7e78848fd8d8386d768f46b5cb254371adcc73a438",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_builder_v1.py": "93685ce4723f38719787136d321134ecfab1aeeadfed8f33e496a4a65d91bc3c"
+  },
+  "original_query_auth_preparation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-service-query-source-preparation-review-20261109-v2.json",
+    "sha256": "c4ee8608f4a56ca8717c99ed8b23d215e92819fd85e624abb0fc9cdab9f691bb"
+  },
+  "source_closure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-source-closure-20261109-v1.json",
+    "sha256": "51462ec5994c42b2c52d2fb6a64e393039f7ee9108c96f5209666b53e09aef93"
+  },
+  "contract_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-contract-tests-actual-exit-20261109-v1.json",
+    "sha256": "b946bf07a21cdc982f42ed223d2f9544511e89923b498b3f240c87e233521f5e"
+  },
+  "executor_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-executor-tests-actual-exit-20261109-v1.json",
+    "sha256": "658a86b0c2fce49cdbdcbe4772c6ecfc9e1f31739043fa95e05aeb2b2f57c5a5"
+  },
+  "builder_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-builder-tests-actual-exit-20261109-v1.json",
+    "sha256": "acd8b52b427b89f25786f383808cb7123427d515b741afaf2cd1336211108b64"
+  },
+  "imports": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-import-compatibility-actual-exit-20261109-v1.json",
+    "sha256": "66532be9c052a29c741c61cce77c0af4f4ade5230e648008f9f22b82de4088ed"
+  },
+  "tests_passed": 32,
+  "readonly_query_parity_cases": 20,
+  "retained_source_failures": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-source-import-failure-20261109-v1.json",
+      "sha256": "36a2562cd25bb1b7d3acbbb76c9d3111c6c6e0c0b3638e46b21f2b283b022e86"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-retry-builder-closure-failure-20261109-v1.json",
+      "sha256": "e4c27a8441f7bd43b0fe8b331b8f04840ad41f602bb3ef0e00ab56976412ee0b"
+    }
+  ],
+  "invariants": [
+    "Original admitted r2 spec, source review, owner and five preexisting metadata outputs are pinned; source pin rebinding is rejected.",
+    "Only actual nonzero exit of session86437 with exact owner36934/start403068361 can trigger this retry path.",
+    "Live owner, observation timeout, successful original exit, missing output, omitted native owner or unknown admitted directory prevents retry preparation.",
+    "Failed review output inventory is fully retained, including any saved review/result written before a later external failure.",
+    "Original 1149 services,347 prior owners and36 prior directories become1149/348/37 before retry. Future successful retry will require1149/349/38 downstream.",
+    "Native producer actual success and all original failure outcomes are reauthenticated using existing native anchors and receipt validation.",
+    "Original frozen metadata/payload/checkpoint algorithms are called unchanged; original seven FP32 failures are never promoted.",
+    "Full original time/memory/storage/CPU/affinity budget and all guard calls are retained.",
+    "All history reconstruction and physical-drain imports run before the query restricted finder is installed.",
+    "External spec and source-review pins are supplied by command line and excluded from the impossible self-hash source closure requirement; every historical metadata read must still be source-pinned.",
+    "Query connection closes before releasing the serial lock on success or failure, including constructed-but-unattached query and final audit failure.",
+    "Local source graph explicitly includes dynamically imported service-query source; full source/binary hashing remains an exclusive runtime step."
+  ],
+  "limitations": [
+    "Only source preparation. The real r2 reviewer is still live and has no actual failure receipt; no concrete retry runtime spec or admission exists.",
+    "The 18 contract tests simulate terminal receipts/process absence in memory; they do not prove any actual process exited.",
+    "The10 executor tests mock lock/resource/drain/raw-review functions; they do not prove complete archive validation or a real successful retry.",
+    "The4 builder tests and static source graph do not prove all dynamic imports. Real import test observed151 local modules/145 matching original source pins and20 empty-state service parity cases.",
+    "The real import test authenticates query dependencies before import but observes initial executor imports after execution; it is not full runtime provenance proof.",
+    "Downstream retry completion, storage and Nemotron validators still need reviewed successors before this retry may launch.",
+    "No benchmark, model intervention, storage reclamation or change to currently running r2."
+  ],
+  "final_runtime_source_review_complete": false,
+  "successor_executor_created": true,
+  "successor_builder_created": true,
+  "actual_prior_failed_exit_observed": false,
+  "successor_runtime_spec_created": false,
+  "runtime_admitted": false,
+  "downstream_completion_validators_updated": false,
+  "current_reviewer_unchanged": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "published": false
+}
