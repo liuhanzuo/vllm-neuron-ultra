@@ -150,3 +150,9 @@ r2 使用新目录和固定规格，加入成功元数据准备及 r1 的实际�
 这说明修正后的缓存回调已通过首次真实完整前向，并且采集没有改变这一段保存的原输出。它不能证明全部 6,185 次调用完成，也不能把生产者的哈希比较当作退出后的独立字节复核。原 7 个 FP32 失败和未确定的数值根因继续保留，没有新增速度结果。
 
 [实际存活及首段结果观察](evidence/dory-residual-source-20261109/dory-residual-native-r2-live-observation-20261109-v2.json)、[首段完整事件记录](evidence/dory-residual-source-20261109/native-r2-first-full-causal-event.json)、[证据清单](evidence/dory-residual-source-20261109/manifest-native-r2-first-forward.json)。
+
+## r2 两段完整参考已保存，长解码持续推进
+
+最新观察时，原生父子进程仍在运行，事件日志已保存 381 条完整记录。两段 2,060-token 完整因果参考均已保存；分别核对事件 1、4 和当时最新的三个长解码事件 378–380，生产者记录的归档描述/哈希及 top1 均与原结果匹配，每次官方投影为 281 次。本次只重新读取上述选定事件的元数据，没有逐项重新验证全部中间事件或读取原始张量。
+
+完整 6,200 事件回放仍未结束，退出后的独立字节复核尚未开始。原 7 个 FP32 失败和数值根因判断不变，没有新增提速倍数。[本次实际进程和选定事件观察](evidence/dory-residual-source-20261109/dory-residual-native-r2-live-observation-20261109-v4.json)。

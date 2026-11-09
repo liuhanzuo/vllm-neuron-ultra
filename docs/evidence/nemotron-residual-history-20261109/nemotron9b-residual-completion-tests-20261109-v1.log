@@ -1,0 +1,65 @@
+test_actual_live_native_owner_cannot_be_success (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ERROR
+test_both_full_archives_mandatory (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_child_exit_owner_replacement_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_duplicate_owner_cannot_be_appended (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_failed_or_unobserved_native_exit_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_failed_or_unobserved_review_exit_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_live_reviewer_cannot_be_success (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_missing_failed_native_directory_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_native_live_child_cannot_be_success (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ERROR
+test_native_owner_replacement_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_no_model_or_speedup_or_root_cause_promotion (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_original_checkpoint_mapping_required (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_original_failed_history_cannot_be_omitted (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_prior_service_cannot_be_omitted (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_real_anchor_is_admission_only_and_keeps_r9_failed (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_residual_or_injected_scope_cannot_be_reduced (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_review_source_approval_must_match_actual_command (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_reviewer_command_cannot_name_other_approval (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_saved_review_must_authenticate_all_original_sources (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_saved_scope_cannot_be_partial (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_source_pin_rebinding_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_synthetic_complete_chain_preserves_every_prior_row_and_owner (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_unaccounted_directory_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_wrong_saved_result_namespace_rejected (check_nemotron9b_after_dory_residual_review_v1.Completion) ... ok
+test_binary_input_refused_before_open (check_nemotron9b_after_dory_residual_review_v1.Reader) ... ok
+test_no_future_receipts_or_model_execution_created (check_nemotron9b_after_dory_residual_review_v1.Reader) ... ok
+test_real_anchor_digest_corruption_rejected (check_nemotron9b_after_dory_residual_review_v1.Reader) ... ok
+test_rebinding_refused_before_second_read (check_nemotron9b_after_dory_residual_review_v1.Reader) ... ok
+
+======================================================================
+ERROR: test_actual_live_native_owner_cannot_be_success (check_nemotron9b_after_dory_residual_review_v1.Completion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_residual_review_v1.py", line 117, in test_actual_live_native_owner_cannot_be_success
+    self.run_chain(lookup=c.current_process)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_residual_review_v1.py", line 97, in run_chain
+    return c.extend(self.f['start'],self.f['ref'],lambda ref:copy.deepcopy(self.f['store'][ref['path']]),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_after_dory_residual_review_v1.py", line 171, in extend
+    inspect_receipts(PRODUCER['sha256'],*records,native,process_lookup=lookup)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_generation_execution_provenance_v1.py", line 82, in inspect_receipts
+    require(current['state'] in ('Z', 'X'), 'Exact original process is still live')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_generation_saved_contract_v1.py", line 14, in require
+    raise ValueError(message)
+ValueError: Exact original process is still live
+
+======================================================================
+ERROR: test_native_live_child_cannot_be_success (check_nemotron9b_after_dory_residual_review_v1.Completion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_residual_review_v1.py", line 122, in test_native_live_child_cannot_be_success
+    self.run_chain(lookup=lambda pid:dict(pid=pid,start_ticks=child['start_ticks'],state='R')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_residual_review_v1.py", line 97, in run_chain
+    return c.extend(self.f['start'],self.f['ref'],lambda ref:copy.deepcopy(self.f['store'][ref['path']]),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_after_dory_residual_review_v1.py", line 171, in extend
+    inspect_receipts(PRODUCER['sha256'],*records,native,process_lookup=lookup)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_generation_execution_provenance_v1.py", line 82, in inspect_receipts
+    require(current['state'] in ('Z', 'X'), 'Exact original process is still live')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_generation_saved_contract_v1.py", line 14, in require
+    raise ValueError(message)
+ValueError: Exact original process is still live
+
+----------------------------------------------------------------------
+Ran 28 tests in 17.246s
+
+FAILED (errors=2)
