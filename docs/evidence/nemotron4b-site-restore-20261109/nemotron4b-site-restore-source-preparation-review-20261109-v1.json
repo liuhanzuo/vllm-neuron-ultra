@@ -1,0 +1,71 @@
+{
+  "schema": "nemotron4b_site_restore_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T22:47:07.832782+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_site_restore_v1.py": "ebb54bf31edc8b3547e8b8cef5736a092838b36c31988aee052b5c67058bb7c4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_site_restore_v1.py": "1a4b00b0684a6d3673c4bb38c77fa71258ec4f4304aebbc500e2a023ac72436a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_guarded_helper_entry_v2.py": "de46ad2cec90f5746e621b8f5f529b666730732bf71831b0fdf273405691b3cf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v1.py": "c6aae19d0e5bc145be7785963e88408d81635550b02f042e52456e1c6ba6322e"
+  },
+  "tests_and_inventory_actual_exits": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-site-restore-actual-exits-20261109-v1.json",
+    "sha256": "89612c3cb4205aee3724adade63d69992503f2b02e8008ef515aa1237fd13f94"
+  },
+  "actual_SDK_startup_input_inventory": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-site-startup-inputs-20261109-v1.json",
+    "sha256": "83bcc654aea933ac7fabef502f51084501b2a45c4c860ef2b7613ef59d8afa81"
+  },
+  "prior_optional_dependency_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-optional-dependencies-source-preparation-review-20261109-v1.json",
+    "sha256": "b11d1cd2c739259b7d03c415118d56f053bdd6a256e5498017e3faec3080f050"
+  },
+  "source_preparation_passed": true,
+  "gated_site_restore_core_prepared": true,
+  "tests_passed": 13,
+  "actual_synthetic_venv_startup_executed": true,
+  "all_fixture_direct_children_reaped": true,
+  "original119pins_revalidated_unchanged": true,
+  "prior4dependency_analyzer_pins_unchanged": true,
+  "prior3handshake_entry_supervisor_pins_unchanged": true,
+  "actual_SDK_startup_source_files": 8,
+  "actual_SDK_startup_source_bytes": 37365,
+  "findings": [
+    "New context connects the existing actual parent gate and original helper execution core to site.main restoration. Both pre/post paths, venv/base prefixes, helperargv, user-site exclusion and all configuredstartupinputs are checked.",
+    "Originalhelper script directory replaces wrappersearchdirectory beforestartup. Startup .pth membership and fullfilesare checked beforeandafterstartup andafterhelper; repeatedrestoration inoneprocess is rejected.",
+    "Actualstandardlibrarysite.main silently catches .pth exceptions. Newcontext captures boundedPythonstdout/stderr and refusesstartupwitherror/output ratherthan acceptingpartialinitialization. OriginalnonzerohelperSystemExit remains unchanged.",
+    "13actualstdlibfixtureprocesses covercorrectordering,silentpthfailure,unexpectedoutput/overflow,changed/extra .pth,deniedparent/context,wrongpath,posthelperprefixchange,nonzeroexit,one-useandnobytecode. Fixtureimportcontext is explicitlynotrealSDKoriginqualification.",
+    "ActualSDK inputinventoryauthenticated8textsources/37365bytes:original2pth+3startupPython+pyvenv.cfg+systemsite/_sitebuiltins. Actualinterpreterpath/symlinks/statrecorded;binarypayloadnotread."
+  ],
+  "limits": [
+    "Exact realSDKpre/postsys.path andcomplete runtime policy are not yet observed or created. Source snapshot is not runtime admission.",
+    "Caller-suppliedorigincontext must authenticate interpreter/stdlib,all importedPython,dynamicfinders,nativeextensions andlinkedlibraries. This module alone does notprovide thatfullcontext.",
+    "The-Sflagremainsobservable as sys.flags.no_site==1 aftersite.main; fullsemantic equivalence tooriginalhelper hasnotbeenproven.",
+    "Startupsideeffectspersist inside dedicatedhelperprocess. Failure means exitandretain evidence; no rollback/retryinplace is claimed.",
+    "Pythonstreamcaps supplement existingparentOSpipe caps; nativewrites remaina parent-supervisionresponsibility.",
+    "Root/worker/helper concreteintegration,fullownedgroupdrain andfreshcompletepredecessorhistory remainunfinished; noactualSDK/model/rawtensor executionornewbaseline/performance."
+  ],
+  "complete_runtime_dependency_closure_proven": false,
+  "full_external_import_context_prepared": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "actual_root_supervisor_prepared": false,
+  "actual_worker_successor_prepared": false,
+  "actual_SDK_helper_executed": false,
+  "installed_SDK_startup_executed": false,
+  "native_payload_bytes_read": 0,
+  "model_or_native_runtime_executed": false,
+  "serial_owner_added": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "current_dory_modified": false,
+  "all_new_sources_now_frozen": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next": [
+    "Useimmutablegated_site_restore_v1 as thefutureimport_context adapter aroundactualauthenticatedorigincontext; do notexecuteSDKbeforeparentgate.",
+    "Finishinterpreter/stdlib/dynamic/nativeorigincontext,exactpolicyandbootstrap; thenintegrateactualroot/worker/helperlifecycle with18testpairedrankcore.",
+    "KeepDory -> finite maintenance -> Nemotron -> Mini savedtapqueue,full15familiesandalloriginalscientificconstraints; noextra nativeorrawjobs beforecurrentserialownerends."
+  ]
+}
