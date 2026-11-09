@@ -23,6 +23,11 @@ The [historical four-model INT8 report](docs/dense-int8-results-20261030.md)
 preserves Qwen3-8B, Qwen2.5-7B, DeepSeek-R1-Distill-Qwen-7B and Mistral-7B
 measurements with raw JSON and their limited validation scope.
 
+The [Dory long-reference diagnostic report](docs/dory-long-reference-status-20261109.md)
+records seven independently reproduced CPU numerical failures and the passing
+13-call reference/release crosscheck. It includes archived review evidence and
+does not claim a Dory Neuron result or speedup.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 

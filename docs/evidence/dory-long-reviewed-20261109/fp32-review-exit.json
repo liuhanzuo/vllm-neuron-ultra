@@ -1,0 +1,59 @@
+{
+  "schema": "dory_long_matrix_metric_actual_external_exit_v1",
+  "observed_at": "2026-11-09T07:07:13.770965+00:00",
+  "session_id": 72277,
+  "exit_code": 0,
+  "tool_chunk": "3d47cc",
+  "actual_external_exit_observed": true,
+  "owner": {
+    "pid": 3632111,
+    "start_ticks": "398850064",
+    "ppid": 433847,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_full_cpu_serial_v1.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-long-matrix-metric-review-spec-20261108-v3.json",
+      "--spec-sha256",
+      "42d2a2aa229eba1c90702d9ed773a9452c531326f9455361d724c50116cda663",
+      "--review"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_record": {
+    "pid": 3632113,
+    "command": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/review_dory_long_metrics_v4.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-long-matrix-metric-review-spec-20261108-v3.json",
+      "--admission",
+      "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/admission.json"
+    ]
+  },
+  "child_start_ticks_recorded": false,
+  "live_identity_capture": {
+    "tool_chunk": "a33289",
+    "exit_code": 1,
+    "error": "Parent had already exited before /proc capture; no child start ticks were observed or inferred."
+  },
+  "recorded_parent_and_child_pids_absent": true,
+  "records": {
+    "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/admission.json": "a104d312547184b9d992c551dfec36462a7e2138a48822f297284a31f6eaab13",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/child.json": "2d1ca262f0416af0ec0b2bde508706c8f3219f6bc9fd54c0e1088e9d548e1dd9",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/child-exit.json": "f872a21faa607b2d77c02e8a28008477a0923e1e289438ffcbcbdfb0c66f2dd3",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/result.json": "23cbe41f10bb3cc5869e3671f0cf958cec6693419e03192ea15252a07d66bf7e",
+    "/mnt/nvme/dory-official-cpu-20261108-v1/long-matrix-metric-review-r1/metrics-review.json": "22bebcf8cba1cde4731c6c9ab705b2725b8642dd2b96a1f71eebf26916a75c71"
+  },
+  "metrics_summary": {
+    "original_FP32_metric_dicts_all_exact": true,
+    "marked_metrics_replayed": 87,
+    "pointwise_threshold_failures": 7,
+    "top1_matches": 87,
+    "original_numerical_acceptance_passed": false
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
