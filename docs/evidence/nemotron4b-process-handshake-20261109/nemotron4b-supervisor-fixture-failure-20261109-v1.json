@@ -1,0 +1,22 @@
+{
+  "schema": "nemotron4b_supervisor_fixture_failure_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T21:15:29.218750+00:00",
+  "session_id": 68339,
+  "actual_exit": {
+    "chunk_id": "3a9b99",
+    "wall_time_seconds": 1.3157e-05,
+    "exit_code": 1,
+    "original_token_count": 159,
+    "output": "ok\n\n======================================================================\nFAIL: test_early_zero_exit_before_capture_never_qualifies (__main__.Supervision)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_child_supervisor_v1.py\", line 83, in test_early_zero_exit_before_capture_never_qualifies\n    self.assertEqual(result['actual_exit_code'],0)\nAssertionError: -15 != 0\n\n----------------------------------------------------------------------\nRan 8 tests in 1.405s\n\nFAILED (failures=1)\n"
+  },
+  "tests_run": 8,
+  "tests_passed": 7,
+  "failures": 1,
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_child_supervisor_v1.py",
+    "sha256": "6a158437e7fd04b94bb16b2fa5b5dd7b6b1f222a1b176f8bd0c686162e10bcbd"
+  },
+  "cause": "Child closed ready pipe before returning0; parent observed failed capture and its own PID-handle SIGTERM could reach the still-exiting interpreter. Actual exit was-15, correctly retained as failed. Fixture incorrectly required0 regardless of observed cleanup signal. Correct it to accept0 only without cleanup or-15 with actual SIGTERM, always unsuccessful.",
+  "native_or_SDK_helper_executed": false
+}

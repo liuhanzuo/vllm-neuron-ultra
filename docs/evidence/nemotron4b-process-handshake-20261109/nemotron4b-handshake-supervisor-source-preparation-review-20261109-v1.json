@@ -1,0 +1,63 @@
+{
+  "schema": "nemotron4b_handshake_supervisor_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T21:16:49.186377+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v1.py": "c6aae19d0e5bc145be7785963e88408d81635550b02f042e52456e1c6ba6322e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_process_handshake_v1.py": "643bf343428029013f4e1a6b79021985156855237c1ba6a92b147c08552ce7b0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_child_supervisor_v1.py": "6a158437e7fd04b94bb16b2fa5b5dd7b6b1f222a1b176f8bd0c686162e10bcbd",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_child_supervisor_v1_r2.py": "2103061df8999ec05d7d3a5afb94526ecf57f14b14bbdc6c6cbbb4f4d5835c9f"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-handshake-supervisor-tests-actual-exit-20261109-v1.json",
+    "sha256": "0f4d795983077f12d49b45caef7e643a7dbee3a24291bead703ad6a95c54bec9"
+  },
+  "prior_source_revalidation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-handshake-prior-source-revalidation-20261109-v1.json",
+    "sha256": "130c01d8870f91ddcb29db58df6caa968c134c34856ce95e06d604af868b9b71"
+  },
+  "original_launcher_contract": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-root-launcher-source-contract-20261106-v1.json",
+    "sha256": "3385935f453e9d46d7f9af62ceae164961deead01acdeedd4684468bc6fc0007"
+  },
+  "source_preparation_passed": true,
+  "handshake_core_prepared": true,
+  "gated_child_supervisor_prepared": true,
+  "native_worker_successor_prepared": false,
+  "root_supervisor_prepared": false,
+  "tp2_rank_supervisor_prepared": false,
+  "actual_helper_bootstrap_prepared": false,
+  "full_launcher_prepared": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "actual_SDK_helper_executed": false,
+  "model_or_native_runtime_executed": false,
+  "serial_owner_added": false,
+  "current_dory_modified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "implemented": [
+    "Anonymous bounded pipes with canonical nonce/role messages; fixed readiness-before-release ordering; EOF/trailing/oversized/duplicate/bad-scope message checks.",
+    "Child records own PID/start/argv/ppid/cgroup and blocks before native/helper imports. Parent independently captures actual identity twice around fresh caller guard before release.",
+    "Child rechecks own and parent identities plus ready-message digest before continuing. Actual command is the wrapper argv; no claim of original helper post-exec capture.",
+    "Bounded supervisor opens a kernel PID handle while child remains unreaped, closes inherited gate FDs, enforces output and deadline limits and records actual exit.",
+    "Failed capture, independent exit, output excess, guard failure and timeout remain failed even when own-child cleanup/reap succeeds. PID-handle signals cannot target a reused PID.",
+    "Partial output retained up tocap+1 overflow witness; successful output cap enforced. Both STDOUT and STDERR drained together; all child pipe and PID descriptors closed.",
+    "Generated actual stdlib children verify handshake and cleanup. No installed SDK helper or native/model library executed.",
+    "Original119sourcepins, frozenv2worker/plan and shared-library fullstat unchanged; new sources parse forPython3.10."
+  ],
+  "limitations": [
+    "Generic cores cannot admit native or model work. Exact command/environment/cwd builder, source authentication, serial lock, full history and cgroup admission belong to a reviewed caller.",
+    "Frozenv2worker calls the installed helper directly and its verifier requires that argv. New gated wrapper has different argv; prepare immutable worker/plan/verifier successors instead of changing or falsely satisfyingv2.",
+    "No actual helper bootstrap,rootservice supervisor orTP2rank supervisor integrated yet; official263tensors/3973556832params/42layers/431learned+1rank/50cache tests still pending real native execution.",
+    "This supervisor only reaps its owned direct child. It does not prove recursive cgroup drain, handle unknown descendants, or authorize lock release. Root cleanup must retain all failure evidence.",
+    "Existing source guard callbacks and audit hooks are not a native syscall sandbox. Preexisting interpreter/stdlib execution is not certified by this handshake."
+  ],
+  "next": [
+    "Prepare immutable helper bootstrap that waits before executing pinned installed SDK entrypoint in the same captured wrapper process, preserving exact helper path/output/library checks.",
+    "Prepare successor worker and native/TP2 parent integration; retain original six scientific functions and entireBF16/TP2/B4/context4096/FP32SSM/standard sampler scope.",
+    "Replace staleNov6 predecessor history with complete actual terminated chain after Dory -> finite storage maintenance -> Nemotron. No insertion of a new serial owner before that chain.",
+    "Prepare current runtime source/import/library review and full root failure/drain lifecycle before any real SDK/meta/model execution."
+  ]
+}
