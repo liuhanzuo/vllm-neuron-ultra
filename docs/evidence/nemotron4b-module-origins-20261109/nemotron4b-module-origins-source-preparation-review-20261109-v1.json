@@ -1,0 +1,90 @@
+{
+  "schema": "nemotron4b_module_origins_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:39:29.778190+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_module_origin_audit_v1.py": "cd6c53e3dd1add05605bc630ce4f13b1d75c386eaa1a444f25ad905c6608008a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_module_origin_audit_v1.py": "d809a13821cfa4a867c1b478b37f6491dca4345e72456a333f3b5a84bc00f306",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_module_origins_v1_r2.py": "8fdb81009972109c1a2d01bc4cdc07ad653dd85b85431248af705ace058c6232",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_stdlib_origins_v1.py": "dd402f12d8758a460ac0819a3bc5eb9a40aafae161d06d3f2062d7279ad4e471",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v3.py": "3b4f39bbbcb73cf3a12ea7c93926757f61dfd23002a74635437716b768abe948",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_context_v2.py": "f84528a6400b87977387f0ad41d95077d64b060947721258b577bf83c6d71035",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v1.py": "c6aae19d0e5bc145be7785963e88408d81635550b02f042e52456e1c6ba6322e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_guarded_helper_entry_v2.py": "de46ad2cec90f5746e621b8f5f529b666730732bf71831b0fdf273405691b3cf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_site_restore_v1.py": "ebb54bf31edc8b3547e8b8cef5736a092838b36c31988aee052b5c67058bb7c4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v3.py": "523bde213cae18668757213582311f60d00eaf504d6f4cd78f58ed93d4b0d287",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_context_v2.py": "e8e377dd985a7cbed7249dc576dbb3dcf1a16c39fcd127c39ff179b3f321efd3"
+  },
+  "prior_dispatch_startup_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-import-context-source-preparation-review-20261109-v1.json",
+    "sha256": "e0fcc75e7472d30ec266facd6d159ef2f85abb19051ab3aa6019af2efb51d06e"
+  },
+  "prior11source_pins_unchanged": true,
+  "tests_and_inventory_actual_exits": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-module-origins-tests-and-inventory-actual-exits-20261109-v1.json",
+    "sha256": "90b0d80e605c886f8affb1de7cfa90edcb9820fdecfe6f98438f98270eb1dd14"
+  },
+  "selected_tests_passed": 33,
+  "retained_fixture_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-module-origins-fixture-failure-20261109-v1.json",
+    "sha256": "2979acbeaf082fe2da43546fb64e0e282a46d578d5ba0280ab4fd7272c64805d"
+  },
+  "stdlib_origin_inventory": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-stdlib-origin-inventory-20261109-v1.json",
+    "sha256": "fed3b20fe2305238f4c3e03a22ad8ef5d2b9aa496b71dffdc69b99c740d050d3"
+  },
+  "stdlib_python_files": 651,
+  "stdlib_module_origins": 649,
+  "stdlib_auxiliary_sources": 2,
+  "stdlib_source_bytes": 11085295,
+  "merged_source_module_origins": 1023,
+  "source_name_collisions": 0,
+  "recorded_source_aliases": 2,
+  "hardlinked_source_count": 112,
+  "hardlinked_roots": [
+    "distutils",
+    "lib2to3"
+  ],
+  "installed371source_identities_revalidated": true,
+  "prior12startup_identities_revalidated": true,
+  "stdlib_native_files_stat_only": 47,
+  "installed_native_prior_metadata_only": 4,
+  "source_preparation_passed": true,
+  "module_origin_ledger_prepared": true,
+  "findings": [
+    "Import machinery can return sys.modules entries without invoking finders. ModuleOriginAudit checks complete explicitly authenticated preloaded objects and frozen import metadata plus each newly registered source/namespace/interpreter/native/alias origin.",
+    "Source module checks bind the exact selected router/source-loader instance, reference catalog, module file/name/package and spec/package paths. Preloaded same-object spec mutation and module replacement are rejected.",
+    "Legitimate failed optional imports may remove their partially initialized modules; reimport and reload remain permitted under fresh metadata checks.",
+    "16 ledger tests and17 actual gated-startup tests passed, including helper sys.modules injection followed by a fast-path import and preloaded module replacement. All actual generated child processes were reaped.",
+    "Two initial startup assertions failed because a directly invoked final ledger check surfaced ValueError rather than guarded ProvenanceError; unauthorized modules were already rejected. Successor routes final result through router.authenticate. Original failure source/result retained.",
+    "Actual standard-library census authenticated651Pythonfiles/11,085,295bytes.649 map to ordinary or importlib-compatible hyphenated module names;2auxiliary sources retained separately. Combined source catalog1023modules has no name collisions.",
+    "The census preserves2source aliases and112installedhardlinkedfiles.47stdlib native files were only statted;4SDKnative entries remain inherited prior metadata, not newly verified payloads."
+  ],
+  "limits": [
+    "Preloaded authentication callbacks in fixtures validate synthetic environment identity only. Exact real interpreter/stdlib/bytecode provenance and native mapped-library policies still require runtime integration.",
+    "Alias callback is an explicit caller contract, not a complete real six.moves/distutils alias policy. Metadata checks do not attest arbitrary module globals/code values or provide an adversarial Python sandbox.",
+    "The current pinned routerv3 reader rejects source nlink>1. A reviewed immutable successor must support exact recorded hardlinked source identities before a full real stdlib runtime can be admitted; no files were relinked/copied/deduplicated.",
+    "The source inventory is a concrete input catalog, not evidence that all files are imported or that native/dynamic/bytecode dependencies are complete.59observerbuiltin names and3frozen candidates do not authenticate the interpreter binary.",
+    "Real startup policy, original helper bootstrap, native/custom lifecycle callbacks, root/worker integration and full owned-group drain remain unfinished.",
+    "Dory retry remains the only serial scientific owner; no storage cleanup/model/nativeSDK/performance job was launched."
+  ],
+  "all_new_sources_now_frozen": true,
+  "actual_SDK_helper_executed": false,
+  "full_external_import_context_prepared": false,
+  "complete_runtime_dependency_closure_proven": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "hardlinked_source_runtime_reader_prepared": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "serial_owner_added": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next": [
+    "Prepare source-reader successor supporting only explicitly recorded regular hardlinks, preserving fullstat/linkcount and original bytes; integrate it with router/context/ledger successors without changing pinnedversions.",
+    "Implement exact real preloaded/interpreter/native and six.moves/distutils module-alias policies from these source catalogs, then bind actual helper/bootstrap/root/worker.",
+    "Preserve Doryretry -> completedstorage maintenance -> Nemotronv23_r2 -> Mini savedtap retry-v23 order and all15families/scientific requirements."
+  ]
+}

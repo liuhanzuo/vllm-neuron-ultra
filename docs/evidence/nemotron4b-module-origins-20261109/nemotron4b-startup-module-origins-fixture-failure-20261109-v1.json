@@ -1,0 +1,23 @@
+{
+  "schema": "nemotron4b_startup_module_origins_fixture_failure_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:34:40.810753+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_module_origins_v1.py",
+    "sha256": "1c05269cfd8b7026d8a9b438eda76f71d4799edf817d5a2f372e2af4d1d195c1"
+  },
+  "actual_test_result": {
+    "chunk_id": "31ee84",
+    "wall_time_seconds": 1.446611022,
+    "exit_code": 1,
+    "original_token_count": 700,
+    "output": "test_actual_parent_gate_then_site_then_original_helper (__main__.SiteRestoration) ... ok\ntest_bytecode_is_not_written (__main__.SiteRestoration) ... ok\ntest_helper_cannot_change_restored_execution_prefix (__main__.SiteRestoration) ... ok\ntest_helper_cannot_replace_preloaded_module_and_still_finish (__main__.SiteRestoration) ... FAIL\ntest_helper_catch_all_cannot_hide_unpinned_module_origin (__main__.SiteRestoration) ... ok\ntest_helper_fastpath_injected_module_is_checked_after_execution (__main__.SiteRestoration) ... FAIL\ntest_new_pth_file_prevents_initialization (__main__.SiteRestoration) ... ok\ntest_origin_context_denial_prevents_startup (__main__.SiteRestoration) ... ok\ntest_original_nonzero_helper_exit_is_preserved (__main__.SiteRestoration) ... ok\ntest_parent_denial_prevents_all_startup (__main__.SiteRestoration) ... ok\ntest_pth_change_after_parent_gate_prevents_initialization (__main__.SiteRestoration) ... ok\ntest_pth_error_swallowed_by_site_is_still_failure (__main__.SiteRestoration) ... ok\ntest_pth_registers_finder_then_helper_preserves_child_optional_fallback (__main__.SiteRestoration) ... ok\ntest_second_site_restore_cannot_retry_in_same_process (__main__.SiteRestoration) ... ok\ntest_startup_output_overflow_stays_a_failure (__main__.SiteRestoration) ... ok\ntest_startup_stdout_does_not_escape_as_successful_helper_output (__main__.SiteRestoration) ... ok\ntest_wrong_restored_import_path_is_rejected (__main__.SiteRestoration) ... ok\n\n======================================================================\nFAIL: test_helper_cannot_replace_preloaded_module_and_still_finish (__main__.SiteRestoration)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_module_origins_v1.py\", line 331, in test_helper_cannot_replace_preloaded_module_and_still_finish\n    self.assertEqual(value['error']['type'],'ProvenanceError')\nAssertionError: 'ValueError' != 'ProvenanceError'\n- ValueError\n+ ProvenanceError\n\n\n======================================================================\nFAIL: test_helper_fastpath_injected_module_is_checked_after_execution (__main__.SiteRestoration)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_module_origins_v1.py\", line 340, in test_helper_fastpath_injected_module_is_checked_after_execution\n    self.assertEqual(value['error']['type'],'ProvenanceError')\nAssertionError: 'ValueError' != 'ProvenanceError'\n- ValueError\n+ ProvenanceError\n\n\n----------------------------------------------------------------------\nRan 17 tests in 1.489s\n\nFAILED (failures=2)\n"
+  },
+  "tests_total": 17,
+  "failures": 2,
+  "unauthorized_modules_were_already_rejected": true,
+  "reason": "Final ledger result was invoked directly in the fixture, so rejection surfaced as ValueError before the context converted guarded errors. Successor routes that audit through router.authenticate; no acceptance rule changed.",
+  "source_retained": true,
+  "actual_SDK_executed": false,
+  "new_speedup_claim": false
+}
