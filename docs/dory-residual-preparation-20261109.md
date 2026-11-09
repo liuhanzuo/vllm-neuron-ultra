@@ -1,5 +1,8 @@
 # Dory 后续层定位：按循环区分残差采集
 
+2026-11-09 最新状态：Nemotron r9 已失败释放；Dory 的全部 6,200 个原事件元数据准备已完成。首次原生回放 r1 在首次前向前因我们自己的缓存接口接线错误退出；修正后的 r2 已启动。原 7 个数值失败仍保留，尚无新增 Dory 提速或整模型通过结论。下文先前“尚未创建配置”“r9 正在运行”等语句是当时的阶段记录；最新证据见文末。
+
+
 2026-11-09：已准备新的残差采集组件，17 项纯 Python 模拟流程检查通过。**尚未执行真实模型、接入完整重放器或生成运行规格；原先 7 个整模型失败仍保留，也没有新增提速结果。** Nemotron r9 正在占用串行实验队列，本组件留待其实际结束并完成资源释放后再接入。
 
 此前前五层重放和注意力对照已经发现细小差异，但还不能解释最终隐藏状态约 10%～55% 的相对 RMS 差异。下一步需要观察后续传播，包括循环交界处的归一化。这里的“交界处”是源码中的位置，不是已确定的故障原因。
@@ -123,3 +126,19 @@
 [串行执行入口](evidence/dory-residual-source-20261109/run_dory_residual_serial_v1.py)、[原生子进程入口](evidence/dory-residual-source-20261109/dory_residual_worker_v1.py)、[运行约束](evidence/dory-residual-source-20261109/dory_residual_serial_contract_v1.py)、[r9 历史接入](evidence/dory-residual-source-20261109/dory_after_nemotron_r9_v1.py)、[48 项检查](evidence/dory-residual-source-20261109/check_dory_residual_serial_v1.py)、[实际检查记录](evidence/dory-residual-source-20261109/serial-source-tests.json)、[审阅及待完成事项](evidence/dory-residual-source-20261109/serial-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-serial.json)。
 
 这些文件用于审阅本机实验的实现和证据；完整执行仍依赖此前保留的固定上游源码、检查点、环境和历史记录，不能作为下载后直接运行的通用基准。
+
+## 全部事件准备完成，首次原生失败已修正并重试
+
+已认证全部 6,200 个原事件正文：包括 6,185 次成功调用、3 次无效请求拒绝、1 次故障注入、89 次选定调用，以及每次成功调用的 114 个张量描述（其中 112 个 K/V）。成功输出描述总量确认为 5,867,691,008 字节。事件解析读取元数据 1,027,589,818 字节，不读取张量负载；另行源码认证读取 1,465 个文件、1,030,275,407 字节，其中包含 18,622,464 字节旧二进制证据。因此不能笼统宣称“整个准备过程未读取二进制”。这项准备未执行模型或验证张量语义，实际成功退出耗时约 133.58 秒，不属于推理性能。
+
+真实历史重建覆盖 1,149 个服务、342 个已知进程身份和 33 个既有 Dory 实验目录。两次准备失败也保留：最初 128 MiB 元数据上限不足以容纳 614,089,163 字节的 r9 控制记录，后改为有界 1 GiB；进程执行程序切换时实际出现空命令行，现保留该观察及前后完整记录，不补造命令。更新后的准备/串行实现 74 项检查通过，其中 26 项新增、48 项相关回归复验。
+
+机器实际可见内存 33,110,204,416 字节，小于 32 GiB，因此原“初始可用物理内存至少 32 GiB”的条件不可能满足。资源版本 v2 将初始可用门槛定为 26 GiB，保留 32 GiB 地址空间上限、3 GiB 可用内存下限、8 GiB 新输出和 10 小时运行上限。它没有改变模型、精度、正确性门槛或事件范围，也不保证实际运行必然成功。
+
+原生 r1 已实际核对 13 个分词案例、1,000 个特殊 token，加载原始 507 项权重并完成映射。随后首次前向之前失败：缓存管理器把注意力对象交给层号解析函数，而官方函数需要对象的 prefix 名称字符串，触发 ReferenceAttention object has no attribute split。未产生成功前向或残差事件日志，父子进程均已结束并清理；这是我们的诊断接口接线错误，不是模型或上游仓库缺陷。分词器的通用 Mistral 正则警告仍保留，原 token 案例通过，没有修改原分词器或启用新修复标志。
+
+新运行时 v2 仅将回调改为用 cache.prefix 调用原解析函数，其余运行逻辑经 AST 比较保持一致；原模型初始化只更换回放模块导入。6 项接口检查与 58 项串行检查，共 64 项通过，串行检查中 56 项是此前相关复验，2 项新增覆盖真实失败历史。中间测试仍使用 r1 目录而被 v4 正确拒绝，修正测试数据后通过，失败退出记录保留；这些数字不能全部累计为新增测试，也不能替代真实模型结果。
+
+r2 使用新目录和固定规格，加入成功元数据准备及 r1 的实际失败父子进程后，共认证 1,149 个服务和 345 个历史进程身份。父子进程已实际启动并记录，原分词器检查和 507 项权重加载已经通过；发布时回放尚未完成。完整任务仍须覆盖 6,185 次成功前向、56 组独立缓存、224 个层边界、153 行选定残差和原事件 6194 的故障现场。完成且实际退出后，再单独核验保存字节；原 7 个 FP32 失败、未确定根因和所有性能验收要求保持原记录。
+
+[完整元数据结果](evidence/dory-residual-source-20261109/metadata-r1-result.json)、[实际成功退出](evidence/dory-residual-source-20261109/dory-residual-metadata-r1-actual-exit-20261109-v1.json)、[首次原生失败](evidence/dory-residual-source-20261109/dory-residual-native-r1-failed-actual-exit-20261109-v1.json)、[接口修正](evidence/dory-residual-source-20261109/dory_residual_replay_runtime_v2.py)、[64 项检查记录](evidence/dory-residual-source-20261109/dory-residual-native-r2-source-tests-20261109-v1.json)、[r2 固定运行规格](evidence/dory-residual-source-20261109/dory-residual-native-r2-runtime-spec-20261109-v1.json)、[r2 实际启动](evidence/dory-residual-source-20261109/dory-residual-native-r2-live-launch-20261109-v1.json)、[本轮发布清单](evidence/dory-residual-source-20261109/manifest-metadata-native-r2.json)。

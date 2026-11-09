@@ -1,0 +1,95 @@
+{
+  "reviewer": "/root",
+  "actual_external_exit_observed": true,
+  "session_id": 34882,
+  "exit_code": 1,
+  "tool_chunk": "f9f680",
+  "owner": {
+    "pid": 4127686,
+    "start_ticks": "401891445",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v3.py",
+      "--mode",
+      "native",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r1-runtime-spec-20261109-v1.json",
+      "--spec-sha256",
+      "4f946b2de04e7ba9b54168b71c03266ad253fdf79d1627d436245aac7ad28037",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r1-source-review-20261109-v1.json",
+      "--review-sha256",
+      "2ea176535458cc6ea2ac9cc89de107a97090bbc7feb6a81c1d8f7dc736f5461d"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_owner": {
+    "pid": 4133990,
+    "start_ticks": "401893700",
+    "ppid": 4127686,
+    "argv": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_worker_v3.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r1-runtime-spec-20261109-v1.json",
+      "--admission",
+      "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/admission.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r1-runtime-spec-20261109-v1.json",
+    "sha256": "4f946b2de04e7ba9b54168b71c03266ad253fdf79d1627d436245aac7ad28037"
+  },
+  "admission": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/admission.json",
+    "sha256": "779e354e3b80066c6dbc671475b81a269ce6b12c4b16e00fbe6a645e8541e507"
+  },
+  "child": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/child.json",
+    "sha256": "5198db905ec0bd7767742d533dd9ab5a79f28eddf385a47ea27883a28b43cb4a"
+  },
+  "child_owner_record": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/child-owner.json",
+    "sha256": "96858c464e626c9b05bdb966ea27e7ca67ea2e0eca1f7aa57d69b615ab699fbc"
+  },
+  "child_exit": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/child-exit.json",
+    "sha256": "ccc28b99bc2dd9473159d127cfbe42b1d219dd4756e52f8dd055eb6920450453"
+  },
+  "failure": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/failure.json",
+    "sha256": "324c41e210f9d4a51a74f6101c1adb05d97754a3d0d38e7686eaddb22144fbbf"
+  },
+  "worker_log": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/worker.log",
+    "sha256": "d42262ed83d8ec9a71018c9dda82fdcb41aeaa4e9e4dc24378fd259eb328a94c"
+  },
+  "diagnostic_files": {
+    "model.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/diagnostic/model.json",
+      "sha256": "9fdf2d162446a3a19caa67da122c7ea5e44bd1d91fd0192d3652998b8d49458f"
+    },
+    "loader-proof.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/diagnostic/loader-proof.json",
+      "sha256": "a0f5a909d88c31d346649d0f9e6e49a35d95e6b5c7b854404d550aa17a61c247"
+    },
+    "tokenizer.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/diagnostic/tokenizer.json",
+      "sha256": "fd8f3b78268a2d6aa662d4b9c0ccc884aa12902511abf383827d695e2d9388c6"
+    },
+    "loaded-parameters.json": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r1/diagnostic/loaded-parameters.json",
+      "sha256": "27c5f3ab3938b11171bf541a3b0dd8955a2b12445be2ef7e6a502d93504cedcd"
+    }
+  },
+  "error": "ReferenceAttention object has no attribute split; cache ID callback passed module instead of cache.prefix",
+  "model_initialized": true,
+  "checkpoint_loaded": true,
+  "successful_native_calls": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
