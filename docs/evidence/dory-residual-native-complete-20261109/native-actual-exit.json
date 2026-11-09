@@ -1,0 +1,106 @@
+{
+  "schema": "dory_residual_native_actual_external_exit_v1",
+  "reviewer": "/root",
+  "recorded_at": "2026-11-09T18:47:48.748653+00:00",
+  "actual_external_exit_observed": true,
+  "session_id": 29930,
+  "exit_code": 0,
+  "tool_chunk": "75c8b9",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+    "sha256": "5e65071628109101f252eec373a07e2520e1bd46003989d4e9989716a8ca5c5d"
+  },
+  "owner": {
+    "pid": 4137261,
+    "start_ticks": "401941291",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py",
+      "--mode",
+      "native",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+      "--spec-sha256",
+      "5e65071628109101f252eec373a07e2520e1bd46003989d4e9989716a8ca5c5d",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-source-review-20261109-v1.json",
+      "--review-sha256",
+      "6aaaaa9304f228e9d3a38dd82729f78e154d2a47dabfa1d09101060b133a44ea"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_owner": {
+    "pid": 4143689,
+    "start_ticks": "401943559",
+    "ppid": 4137261,
+    "argv": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_worker_v4.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+      "--admission",
+      "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/admission.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-source-review-20261109-v1.json",
+    "sha256": "6aaaaa9304f228e9d3a38dd82729f78e154d2a47dabfa1d09101060b133a44ea"
+  },
+  "admission": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/admission.json",
+    "sha256": "2b719248c4ca8f8ee701156ef430674a791d60cea926e99ff6e67726c9e9af88"
+  },
+  "child": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/child.json",
+    "sha256": "58c55793ae3b5b736f75f4b05f107025dd47a297b78c22ea89ef9fc002097825"
+  },
+  "child_owner_record": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/child-owner.json",
+    "sha256": "44963fb76b753e23203975ab512e2f8ced893297d4fe9c8a225c2361d1c1be89"
+  },
+  "child_exit": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/child-exit.json",
+    "sha256": "fa24ac8e73d31a0b8bc14ad381d67345052a9b39d0a7de29495726ea79b3a89f"
+  },
+  "result": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/result.json",
+    "sha256": "df5513fffd702b2cdaa1295a905c3d16a599d5818b91b7f58fdefabe8de27693"
+  },
+  "predecessor_history": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/predecessor-history.json",
+    "sha256": "2589a6b511135ef5669a2d0c6dbe3a388af8f03e02f4a0d30ecc9c114f010599"
+  },
+  "source_files": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/source-files.json",
+    "sha256": "a161a6690419d3f3daed3cfa55f3f317e1c1611890d1a64e54b4280d52419cc9"
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "independent_saved_review_complete": false,
+  "actual_terminal_review": {
+    "recorded_admission_child_and_external_exit_consistent": true,
+    "exact_recorded_owners_no_longer_running": true,
+    "current_process_observations": [
+      {
+        "pid": 4137261,
+        "start_ticks": "401941291",
+        "observation": "absent"
+      },
+      {
+        "pid": 4143689,
+        "start_ticks": "401943559",
+        "observation": "absent"
+      }
+    ],
+    "external_tool_event_independently_requeried": false,
+    "complete_history_drain_verified": false,
+    "native_loaded_libraries_verified": false,
+    "model_forward_provenance_verified": false,
+    "full_model_qualified": false,
+    "new_speedup_claim": false
+  }
+}
