@@ -65,3 +65,13 @@
 [完整重放草稿](evidence/dory-residual-source-20261109/dory_residual_replay_runtime_v1.py)、[原模型初始化接入](evidence/dory-residual-source-20261109/dory_residual_worker_preparation_v1.py)、[有界输出归档](evidence/dory-residual-source-20261109/dory_residual_output_archive_v1.py)、[15 项检查记录](evidence/dory-residual-source-20261109/runtime-source-tests.json)、[源代码审阅与剩余事项](evidence/dory-residual-source-20261109/runtime-source-review.json)、[保留的模拟用例失败](evidence/dory-residual-source-20261109/dory-residual-archive-close-test-fixture-failure-20261109-v1.json)、[本次文件清单](evidence/dory-residual-source-20261109/manifest-runtime.json)。
 
 本目录提供审阅源码和证据；完整模型初始化仍依赖本机保留的原检查点、固定上游源码及相关加载模块，不能作为下载后即可运行的完整模型基准。
+
+## 独立字节复核：完整输出读取组件新增 21 项检查
+
+已准备独立于本次写入器和执行器的输出读取组件，按原顺序校验隐藏状态、完整输出头及 112 个 K/V 张量。它实际读取保存字节、检查有限值和文件/张量哈希，并将每个 K/V 张量分成四个注意力头逐步重建，核对每次追加前的历史及追加后的完整哈希。两个循环轮次、不同槽位和请求代次分别管理，不能只凭本次追加数据的哈希认定完整缓存正确。
+
+**21 项小型合成数据检查通过**，覆盖全 112 个缓存逐头追加、第二轮缓存数据损坏、非有限输出、原始描述不符、漏张量、错误字节位置、跨请求状态保持、重置/释放/旧请求拒绝、预算不足、符号链接、文件尾多余字节及读取中断。第一次运行有 20 项成功，另 1 项因新测试预期的异常类型写错而报错：底层读取器已正确拒绝多余字节，但使用 ValueError；修正预期后全部通过，旧测试和退出记录保留。
+
+这一步只检查了合成文件，**没有读取原始模型张量，也没有重放 6,200 个真实事件**。完整复核器还需接入选定残差和故障现场数据、原始与新归档分别复核、实际执行/检查点/退出证据及总资源限制。本组件不重算 top1 或 FP32 数值门槛；其中生命周期标记只用于整理缓存历史，不能代替原生故障恢复验证。原 7 个失败及已有提速倍数保持不变。
+
+[完整输出字节读取组件](evidence/dory-residual-source-20261109/dory_residual_saved_archives_v1.py)、[21 项合成数据检查](evidence/dory-residual-source-20261109/check_dory_residual_saved_archives_v1.py)、[实际检查记录](evidence/dory-residual-source-20261109/saved-archives-source-tests.json)、[审阅及尚未覆盖范围](evidence/dory-residual-source-20261109/saved-archives-source-review.json)、[保留的测试错误](evidence/dory-residual-source-20261109/dory-residual-saved-archives-test-failure-20261109-v1.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-saved-archives.json)。
