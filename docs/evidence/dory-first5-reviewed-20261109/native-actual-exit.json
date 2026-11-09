@@ -1,0 +1,83 @@
+{
+  "schema": "dory_first5_actual_external_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T11:21:32.297265+00:00",
+  "session_id": 44682,
+  "exit_code": 0,
+  "tool_chunk": "460472",
+  "actual_external_exit_observed": true,
+  "owner": {
+    "pid": 3796758,
+    "start_ticks": "400298692",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_first5_serial_v1.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-runtime-spec-20261109-v1.json",
+      "--spec-sha256",
+      "ff13691a79a50a2ec7e33e3eb6bb01708c4793ac1f8564638cb1b6863273f22f",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-source-review-20261109-v1.json",
+      "--review-sha256",
+      "6107f259e69085daa8a6ad71d65485abdd09e12def4a78d9f31cd99a75c30c52"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_owner": {
+    "pid": 3800837,
+    "start_ticks": "400300121",
+    "ppid": 3796758,
+    "argv": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_first5_worker_v1.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-runtime-spec-20261109-v1.json",
+      "--admission",
+      "/mnt/nvme/dory-official-cpu-20261108-v1/first5-propagation-r1/admission.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "producer_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-runtime-spec-20261109-v1.json",
+    "sha256": "ff13691a79a50a2ec7e33e3eb6bb01708c4793ac1f8564638cb1b6863273f22f"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-source-review-20261109-v1.json",
+    "sha256": "6107f259e69085daa8a6ad71d65485abdd09e12def4a78d9f31cd99a75c30c52"
+  },
+  "result": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/first5-propagation-r1/result.json",
+    "sha256": "d4f98d64fd1bbe95363bb283e4e7954a83d7df18921cb99401615e59657ef3fb"
+  },
+  "native_result": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/first5-propagation-r1/diagnostic/result.json",
+    "sha256": "117135b04822b77706f804d553b812abdc1d83ccb3b7efa464326201e595fefc"
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "terminal_proof": {
+    "recorded_admission_child_and_external_exit_consistent": true,
+    "exact_recorded_owners_no_longer_running": true,
+    "current_process_observations": [
+      {
+        "pid": 3796758,
+        "start_ticks": "400298692",
+        "observation": "absent"
+      },
+      {
+        "pid": 3800837,
+        "start_ticks": "400300121",
+        "observation": "absent"
+      }
+    ],
+    "external_tool_event_independently_requeried": false,
+    "complete_history_drain_verified": false,
+    "native_loaded_libraries_verified": false,
+    "model_forward_provenance_verified": false,
+    "full_model_qualified": false,
+    "new_speedup_claim": false
+  }
+}
