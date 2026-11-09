@@ -105,3 +105,21 @@
 后续需完成父子进程启动入口、串行运行配置和完整原事件认证，并在 Nemotron r9 实际结束、审计和释放后补齐真实历史。之后才可创建最终规格和执行完整重放；外层复核本身不证明运行时加载的原生库/JIT 身份或生产 API 行为。
 
 [修正后的完整归档读取 v2](evidence/dory-residual-source-20261109/dory_residual_saved_archives_v2.py)、[整体读取 v2](evidence/dory-residual-source-20261109/dory_residual_saved_payloads_v2.py)、[外层证据复核](evidence/dory-residual-source-20261109/dory_residual_saved_complete_v1.py)、[67 项检查记录](evidence/dory-residual-source-20261109/complete-source-tests.json)、[原槽位错误与失败回归](evidence/dory-residual-source-20261109/dory-residual-reference-slot-source-failure-20261109-v1.json)、[资源草案](evidence/dory-residual-source-20261109/dory-residual-resource-proposal-20261109-v1.json)、[审阅与后续事项](evidence/dory-residual-source-20261109/complete-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-complete.json)。
+
+## 完整重放的串行入口：48 项源代码检查通过
+
+已准备三个分别调用的入口：完整事件元数据准备、官方模型残差重放、退出后的独立数据复核。它们固定原 BF16 权重、分词器、官方初始化及完整事件范围；每次运行都要求新的输出目录、已审阅的完整配置、实际完成的前置任务和独占资源。源码已具备入口，**尚未创建最终运行配置，也没有执行新的原生重放**。
+
+新的历史接入代码要求 Nemotron r9 的真实外部退出、审计、资源释放和全部 53 个服务记录。合并后应为 1,149 个服务；进程数量由保存的实际身份推导，不使用猜测的常量。对同一进程启动后更换执行程序的情况，保留原始与后续命令行观察。未记录的子进程启动身份不能补造，只能另外依赖完整进程组清空的现场检查。r9 当前仍在完整模型编译阶段，尚未对其最终记录运行这段重建代码。
+
+元数据准备将逐一认证原 6,200 个事件正文，并要求完整的 6,185 次成功调用、3 次无效请求拒绝、1 次故障注入、89 次选定调用和 114 个张量描述，同时确认成功输出总量为 5,867,691,008 字节。只有这项任务实际成功退出，才能配置后续原生重放。源代码检查中的合成完成记录不提供这项实际完成证明。
+
+原生子进程必须先等待父进程记录其实际身份并确认，才会加载原模型。失败退出、仍存活的子进程、缺失或不匹配的前置记录均保留为失败；清理完成后才释放串行运行权。独立字节复核是原生任务结束后的另一项工作，继续使用修正后的归档/整体读取 v2 和外层复核 v1，没有自动连跑下一项实验。
+
+**48 项最终源代码检查通过**。覆盖原输入与资源限制、旧历史或失败前置任务拒绝、记录绑定、重复/复用进程身份、父子确认，以及“子进程失败”和“主子进程退出但后代仍活着”两类清理顺序。后两类使用模拟进程与服务操作，没有启动真实模型。早先 36 项检查是同一套用例的中间运行，不另计为新增 36 项。
+
+下一步是等待 r9 完成，基于真实终态补齐历史与源码依赖，安排完整元数据准备，再分别配置原生重放和独立复核。原 7 个数值失败、全部验收要求及已有提速表保持原记录；本次没有新增模型或其他仓库缺陷结论，也没有新增提速倍数。
+
+[串行执行入口](evidence/dory-residual-source-20261109/run_dory_residual_serial_v1.py)、[原生子进程入口](evidence/dory-residual-source-20261109/dory_residual_worker_v1.py)、[运行约束](evidence/dory-residual-source-20261109/dory_residual_serial_contract_v1.py)、[r9 历史接入](evidence/dory-residual-source-20261109/dory_after_nemotron_r9_v1.py)、[48 项检查](evidence/dory-residual-source-20261109/check_dory_residual_serial_v1.py)、[实际检查记录](evidence/dory-residual-source-20261109/serial-source-tests.json)、[审阅及待完成事项](evidence/dory-residual-source-20261109/serial-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-serial.json)。
+
+这些文件用于审阅本机实验的实现和证据；完整执行仍依赖此前保留的固定上游源码、检查点、环境和历史记录，不能作为下载后直接运行的通用基准。
