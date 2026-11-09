@@ -89,3 +89,19 @@
 下一步仍需外层复核器认证实际检查点、源码、执行及退出证据，冻结新输出元数据，完成总资源预算和串行运行配置。Nemotron r9 实际结束并完成释放/历史登记后，才可安排完整准备与原生重放。现阶段尚未重新计算原 top1 或 FP32 验收指标，没有新增提速倍数或整模型通过结论。
 
 [残差及故障字节复核](evidence/dory-residual-source-20261109/dory_residual_saved_observations_v1.py)、[整体原始/新输出接入](evidence/dory-residual-source-20261109/dory_residual_saved_payloads_v1.py)、[37 项检查退出记录](evidence/dory-residual-source-20261109/joined-payload-source-tests.json)、[源码审阅和未完成范围](evidence/dory-residual-source-20261109/joined-payload-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-joined-payload.json)。
+
+## 原始参考槽位修正、外层证据复核与资源草案
+
+进一步对照原事件，发现**我们此前发布的读取组件 v1 有槽位范围错误**：只允许业务槽位 0–3，而原始两次完整因果参考使用槽位 10 和 11。用原事件 0 的认证元数据复现了拒绝，v2 改为准确接受原有的 0、1、2、3、10、11 六个槽位，其他槽位仍拒绝。整体读取组件也切换到 v2。旧源码和失败回归记录保留；尚未执行原生重放，因此没有改写模型结果。这不是上游仓库缺陷。
+
+新增外层复核草稿，先绑定完整运行规格、源码、父子进程身份和外部实际退出记录，再冻结新输出元数据、检查完整原始权重映射，最后调用原始/新输出及残差故障数据复核。仍在运行的原进程、失败退出、被替换的源码或元数据都不能获得成功结论。完整输出预计包含 6,206 个 JSON、1 个事件日志和 6,275 个二进制文件；具体字节必须与全部事件和保存数据一致。
+
+最终 **24 项归档检查、16 项整体接入检查、27 项外层证据/元数据检查，共 67 项通过**；其中 31 项为本轮新增，36 项为修改后的相关回归复验。外层检查实际读取小型文件，但权重、完整输出和历史进程由模拟依赖替代，不能当作真实全量复核。另一个测试曾只接受“目录时间戳变化”的报错，遇到同一时间刻度内的改动时实际被“二进制文件清单变化”正确拒绝；已修正测试预期并保留失败记录，生产拒绝逻辑未削弱。
+
+依据固定原设计枚举全部 6,185 次调用，成功归档的**计划字节总量为 5,867,691,008**：隐藏状态 56,581,120、logits 3,276,275,712、缓存追加 2,534,834,176；最大单文件为 500,363,264 字节。另有选定残差 175,472,640 和原时点故障归档预计 8,345,600 字节。这里尚未遍历并认证全部 6,200 个事件正文，因此计划总量还不能冒充实际保存数据核验。
+
+已形成资源草案：原生任务预留 8 GiB 新磁盘、32 GiB 地址空间、10 小时上限；复核预留 8 GiB 地址空间、4 小时上限，包含两份完整缓存重建与选定参考数据。上限不是推理速度或耗时预测，也不是已生效的运行配置。原检查点和精度、全部验收门槛、原 7 个失败以及现有提速倍数保持原记录。
+
+后续需完成父子进程启动入口、串行运行配置和完整原事件认证，并在 Nemotron r9 实际结束、审计和释放后补齐真实历史。之后才可创建最终规格和执行完整重放；外层复核本身不证明运行时加载的原生库/JIT 身份或生产 API 行为。
+
+[修正后的完整归档读取 v2](evidence/dory-residual-source-20261109/dory_residual_saved_archives_v2.py)、[整体读取 v2](evidence/dory-residual-source-20261109/dory_residual_saved_payloads_v2.py)、[外层证据复核](evidence/dory-residual-source-20261109/dory_residual_saved_complete_v1.py)、[67 项检查记录](evidence/dory-residual-source-20261109/complete-source-tests.json)、[原槽位错误与失败回归](evidence/dory-residual-source-20261109/dory-residual-reference-slot-source-failure-20261109-v1.json)、[资源草案](evidence/dory-residual-source-20261109/dory-residual-resource-proposal-20261109-v1.json)、[审阅与后续事项](evidence/dory-residual-source-20261109/complete-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-complete.json)。
