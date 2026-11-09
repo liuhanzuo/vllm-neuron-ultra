@@ -1,0 +1,79 @@
+{
+  "observed_at": "2026-11-09T17:43:29.283212+00:00",
+  "session_id": 29930,
+  "last_actual_poll_chunk": "eeec10",
+  "owner": {
+    "pid": 4137261,
+    "start_ticks": "401941291",
+    "ppid": 433847,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py",
+      "--mode",
+      "native",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+      "--spec-sha256",
+      "5e65071628109101f252eec373a07e2520e1bd46003989d4e9989716a8ca5c5d",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-source-review-20261109-v1.json",
+      "--review-sha256",
+      "6aaaaa9304f228e9d3a38dd82729f78e154d2a47dabfa1d09101060b133a44ea"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_owner": {
+    "pid": 4143689,
+    "start_ticks": "401943559",
+    "ppid": 4137261,
+    "argv": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_worker_v4.py",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+      "--admission",
+      "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/admission.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "actual_parent_and_child_alive": true,
+  "completed_event_files_observed": 4286,
+  "last_event": {
+    "event": 4285,
+    "kind": "call",
+    "phase": "long_decode",
+    "start": 1068,
+    "end": 1069,
+    "archive_comparison": {
+      "exact": true,
+      "header_differences": [],
+      "missing_tensors": [],
+      "extra_tensors": [],
+      "changed_tensors": [],
+      "tensor_count": 114,
+      "independent_raw_review_complete": false
+    },
+    "event_record": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-r2/diagnostic/event-004285-replay.json",
+      "sha256": "1fcf46cec64cf0cc117abf4169df3ed620bf1518345102194712c6c40ac8bbc4"
+    }
+  },
+  "last_worker_progress": {
+    "stage": "complete_residual_replay",
+    "calls": 4224,
+    "selected_rows": 134,
+    "raw_output_bytes": 4512292864
+  },
+  "last_event_only_revalidated_here": true,
+  "raw_tensor_payloads_read": false,
+  "actual_external_exit_observed": false,
+  "independent_saved_byte_review_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "storage_available_bytes": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031": 30731988992,
+    "/mnt/nvme": 44685291520
+  }
+}
