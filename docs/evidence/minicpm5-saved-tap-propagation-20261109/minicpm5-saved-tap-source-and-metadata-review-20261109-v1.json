@@ -1,0 +1,41 @@
+{
+  "schema": "minicpm5_saved_tap_source_and_metadata_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T20:39:20.657568+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_saved_tap_analysis_v1.py": "ecb18047d3736f514f79b24b52965be24ef795f7a094934f541d8c3a8968f1ef",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_minicpm5_saved_tap_metadata_v1.py": "90e29ff3671fca736929d8db4a919fe3e1b4bd36ece566bdff954c06b4805c42",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_analysis_v1.py": "1c23fc865874b4f9bb85b49abd705f767a0a5d9c94b160d8fadd7245eb24c620"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-source-tests-actual-exit-20261109-v1.json",
+    "sha256": "48f9aaf71c4b12572ba3a570c5a5637330b08be1b35b130543f804ffd25a3f28"
+  },
+  "actual_metadata_analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-metadata-actual-exit-20261109-v1.json",
+    "sha256": "50437e2eae2485b0a49bfa00a03ceb8d80fd72e3934b0dfdd098bc27bf91b009"
+  },
+  "numeric_analysis_design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-numeric-analysis-design-20261109-v1.json",
+    "sha256": "d86ca4f54d7d4d02189227f63aa7992345bc56b7f2f41d3d3861a36ab6c845c9"
+  },
+  "source_preparation_passed": true,
+  "metadata_analysis_complete": true,
+  "real_tensor_bytes_read": 0,
+  "findings": [
+    "Across two actual ranks/three arms/all14calls/32frames, all213replicated stage hash maps and endpoint metrics agree across ranks.",
+    "Against strict anchor, prefill-only arm differs first at layer0.self_attn for8prefills; all6decode calls agree through layer1.input_layernorm then differ first at layer1.self_attn.",
+    "After the first changed prefill, all82cache records2..83 differ from anchor while0..1retain their hashes; before first call all84cache hashes agree.",
+    "Both-phase arm differs first at layer0.self_attn for all14calls. Both candidates differ from strict anchor at every full-logits call.",
+    "The two candidate arms have matching213prediction hashes/final logits for all8prefill calls, and differ for6decode calls; matching pass counts do not imply matching decode logits.",
+    "After first divergence, no later recorded stage hash returns to equality within each affected call. This is hash evidence, not a measured amplification magnitude.",
+    "All84bundle descriptors account for3145728bytes and only4numerical saved taps;209other stage entries provide metadata/hashes only.",
+    "Physical decode row permutation is not logical frame order; generated tests explicitly cover[6,5,7,4] andsingleton noncanonical strides."
+  ],
+  "causal_root_cause_established": false,
+  "current_dory_modified": false,
+  "actual_tensor_analysis_executed": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
