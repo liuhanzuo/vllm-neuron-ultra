@@ -1,0 +1,21 @@
+{
+  "schema": "minicpm5_saved_tap_io_fixture_failure_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T20:59:47.900461+00:00",
+  "actual_exit": {
+    "chunk_id": "bf0abb",
+    "wall_time_seconds": 1.3916e-05,
+    "exit_code": 1,
+    "original_token_count": 586,
+    "output": "test_changed_content_same_size_rejected_before_read (__main__.BoundedFiles) ... ERROR\ntest_complete_multichunk_read_and_terminal_accounting (__main__.BoundedFiles) ... ok\ntest_duplicate_manifest_and_small_budget_rejected_before_open (__main__.BoundedFiles) ... ok\ntest_duplicate_read_rejected_and_reader_poisoned (__main__.BoundedFiles) ... ok\ntest_file_or_ancestor_symlink_rejected_during_read (__main__.BoundedFiles) ... ok\ntest_file_replacement_during_read_detected_even_with_equal_content (__main__.BoundedFiles) ... ok\ntest_finish_requires_every_input_and_cannot_resume (__main__.BoundedFiles) ... ok\ntest_guard_abort_before_open_or_between_chunks_never_returns_partial_bytes (__main__.BoundedFiles) ... ok\ntest_hardlink_and_symlink_rejected_during_snapshot (__main__.BoundedFiles) ... ok\ntest_missing_or_modified_ancestor_identity_rejected (__main__.BoundedFiles) ... ok\ntest_no_fd_leak_on_success_or_hash_failure (__main__.BoundedFiles) ... ok\ntest_noncanonical_paths_rejected (__main__.BoundedFiles) ... ok\ntest_parent_replacement_during_read_detected (__main__.BoundedFiles) ... ok\ntest_replaced_file_before_read_rejected_without_payload_read (__main__.BoundedFiles) ... ok\ntest_short_read_poisoned (__main__.BoundedFiles) ... ok\ntest_snapshot_never_opens_or_reads_payload (__main__.BoundedFiles) ... ok\ntest_truncation_or_growth_rejected_before_payload_read (__main__.BoundedFiles) ... ok\ntest_wrong_payload_hash_poisoned_after_complete_read (__main__.BoundedFiles) ... ok\ntest_wrong_ref_size_or_outside_path_stops_before_open (__main__.BoundedFiles) ... ok\n\n======================================================================\nERROR: test_changed_content_same_size_rejected_before_read (__main__.BoundedFiles)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_io_v1.py\", line 132, in test_changed_content_same_size_rejected_before_read\n    self.reader()(self.ref)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_saved_tap_io_v1.py\", line 158, in __call__\n    hasher.update(data)\nTypeError: object supporting the buffer API required\n\n----------------------------------------------------------------------\nRan 19 tests in 0.021s\n\nFAILED (errors=1)\n"
+  },
+  "tests_run": 19,
+  "tests_passed": 18,
+  "errors": 1,
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_saved_tap_io_v1.py",
+    "sha256": "239fb7b20fe09926deb187c9b452fce554b9c09648c0fe7a85b4b0fd81229939"
+  },
+  "cause": "Same-size immediate overwrite can preserve the observed full stat identity. Test mocked os.read assuming stat would necessarily reject first; implementation proceeded to mandatory hash validation as designed, but mocked bytes caused TypeError. Correct fixture accepts rejection either by full stat or actual SHA256. Never remove hash verification.",
+  "real_tensor_bytes_read": 0
+}
