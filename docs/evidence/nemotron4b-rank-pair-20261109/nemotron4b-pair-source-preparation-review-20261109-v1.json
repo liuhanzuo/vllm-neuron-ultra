@@ -1,0 +1,61 @@
+{
+  "schema": "nemotron4b_gated_rank_pair_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T22:27:53.444552+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_rank_pair_v1.py": "e40dfc43491dffa9821e8c75effee7b16f5b2a6a6b0fc859e35d4d3ef3b811e6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_gated_rank_pair_v1.py": "e918bda46cfa80b615367c8f2eb57d480c02c036bd3026155c5a70f47c3812ad",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-pair-tests-actual-exit-20261109-v1.json",
+    "sha256": "14f4a9e959ba2c121e71203860cd8d7608af035f078961dc175e04ce1fd8f083"
+  },
+  "prior_source_revalidation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-pair-prior-source-revalidation-20261109-v1.json",
+    "sha256": "2e82eef44eb5cbefe0b426595145af45d68615029933134cbf179551e379c275"
+  },
+  "prior_source_revalidation_tool_chunk": "caac5c",
+  "prior_handshake_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-handshake-supervisor-source-preparation-review-20261109-v1.json",
+    "sha256": "083775d51df40220343062e6625ccc69a0864046657c03053efd6515a8ed9354"
+  },
+  "source_preparation_passed": true,
+  "paired_rank_lifecycle_core_prepared": true,
+  "tests_passed": 18,
+  "findings": [
+    "Both actual rank identities, argv, parent, cgroup and ready messages are checked and sent to a caller-supplied durable recorder before either rank receives its grant. A second identity/guard check follows the record.",
+    "All pair output pipes are collected concurrently under explicit per-rank caps and deadlines; a failed rank stops the live peer using its kernel PID handle. Both direct children are reaped and their original exit codes and cleanup signals retained.",
+    "Failures before ready, before durable record, after record, on second spawn or second grant, during output, on timeout and after both releases are covered by actual stdlib subprocess fixtures. Forced cleanup never converts the pair failure to success.",
+    "Pair capture and receipt remain available on later failures. Deep copies prevent caller mutations from corrupting recorded actual identities or launch argv.",
+    "All119original source pins (5552337bytes) and5prior handshake/source-test pins revalidated unchanged. No original source modified or installed SDK code executed."
+  ],
+  "limits": [
+    "This is a callable pair lifecycle core, not the actual root launcher or native worker. A reviewed caller must bind exact commands, clean rank environments, all source pins, resources and complete predecessor history.",
+    "Durable record correctness is a caller responsibility: this module requires a bounded JSON receipt but cannot independently prove its storage or contents. Actual root callback and output directory remain to implement.",
+    "Only direct rank children are drained here. Inherited SDK helper identities, all descendants and owned service/cgroup drain still require the root/helper integration. owned_group_drained_proven remains false even when both direct ranks exit0.",
+    "The actual SDK helper bootstrap, authenticated startup/import context, native worker successor and concrete runtime admission remain unfinished. No actual Gloo, torch, Neuron, model, checkpoint, native library or raw tensor execution occurred.",
+    "The original model scope and scientific gates are unchanged. No new native/model correctness or performance denominator is established."
+  ],
+  "original119pins_unchanged": true,
+  "all_fixture_direct_children_reaped": true,
+  "original_pinned_sources_modified": false,
+  "current_dory_modified": false,
+  "serial_owner_added": false,
+  "actual_SDK_helper_executed": false,
+  "model_or_native_runtime_executed": false,
+  "native_payload_bytes_read": 0,
+  "actual_root_supervisor_prepared": false,
+  "actual_worker_successor_prepared": false,
+  "full_runtime_launcher_prepared": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next": [
+    "Retain both new sources unchanged after publication. Use paired run only from a new reviewed exact root/worker lifecycle.",
+    "Complete authenticated pre-site helper bootstrap/import context and immutable worker integration, with actual inherited helper identity and complete owned-group drain.",
+    "Root must hold existing serial lock through native-meta then simultaneousTP2 phases, persist actual pair capture before release and validate all original scientific receipts.",
+    "Keep existing Dory -> finite maintenance -> Nemotron -> prepared MiniCPM5 saved-tap analysis order. Nano4B real work requires fresh complete predecessor history after that queue; old November6 launcher history cannot be reused."
+  ]
+}
