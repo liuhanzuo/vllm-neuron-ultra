@@ -1,0 +1,7514 @@
+{
+  "schema": "nemotron_r8_all_conv_hlo_structure_v2",
+  "complete": true,
+  "observed_at": "2026-11-09T10:07:07.916578+00:00",
+  "analyzer": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron_r8_conv_hlo_v2.py",
+    "bytes": 5900,
+    "sha256": "53026905371ae1cd9a2693a42d629300cf4c852961dd344efd83971164d9e334"
+  },
+  "helper": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron_r8_conv_hlo_v1.py",
+    "bytes": 7746,
+    "sha256": "705b8da14e5ea2b19b22857ce48e33628fecb303213a771328297f9b8ada68fb"
+  },
+  "descriptor_sources": [
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/xla_data_pb2.py",
+      "bytes": 35334,
+      "sha256": "642ae1b5dc64a3188401d5f40dac475e0e4e20878b6473dda8e0e3306d8ba1f3"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/service/hlo_pb2.py",
+      "bytes": 33219,
+      "sha256": "8d332b4180bc80e2b376a3018de0013920e6878b3eb260c52540ef07bc5b0922"
+    }
+  ],
+  "protobuf_implementation": "python",
+  "rows": [
+    {
+      "batch": 1,
+      "length": 128,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t128-original/compiler-work/model/graph.hlo",
+        "bytes": 1616,
+        "sha256": "681b84bb6d12954f11d43f270eecb88daa240cd614a1c6c31859598ce3d37f1c"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-original-worker-result.json",
+        "bytes": 7417853,
+        "sha256": "960e56b1ce1bcc396068cd37ca6225e23e0498628b4b239f93eb27042ed18dde"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-original-retained-exit.json",
+        "bytes": 4400,
+        "sha256": "2fdde262246768534827e9a60e9ea98de1d09765e03be98358d7553cba5a5a15"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-original-retained-drain.json",
+        "bytes": 10140,
+        "sha256": "a8d190fc925b1038322510346049c577c1eea079dd37b4a1b19bdd14fc7852d6"
+      },
+      "sampled_addresses": 1152,
+      "mismatching_sampled_addresses": 1143,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 655360,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 196609,
+          "expected_input_flat_offset": 327681
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 524161,
+          "expected_input_flat_offset": 655233
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 524289,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 65538,
+          "expected_input_flat_offset": 327682
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 393090,
+          "expected_input_flat_offset": 655234
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "c7919e7de3070652042624a1ba2ebe24fbbc3ff10488aa181db614f35e05bdf2",
+          "expected_sha256": "e291bf008c351eb9bb1422dd078fde9b21b51ce44d329417d73f0b08766b242f",
+          "bytes_compared": 2621440,
+          "different_bytes": 1098185
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "406f5452b2b50759168a7063e816cb351a45a91eef2ec24dbb8eaf8eb8b09b64",
+          "expected_sha256": "b6abf64c97ffc55908b1ebcf9a73cda544cf2b0f7c4a676f8ab57b375c8251c5",
+          "bytes_compared": 262144,
+          "different_bytes": 107994
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "50a6bb04b57ce15f00b59d998b44587920ce07e3de44e7fb47f245c9bc4c6af4",
+          "expected_sha256": "6fdbaa0b0177cd29214fd4b259c4e98081159f8ddcc109c2347057e40185976f",
+          "bytes_compared": 262144,
+          "different_bytes": 109681
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "9e9f91a2d7d1fc8ffcfec886c31b68b33ce578a360beb51a987b26c1e3d3b236",
+          "expected_sha256": "01cccdf2bfb9021e655de643e070c9b0890bfa4e314692ebab94f64987abc3c8",
+          "bytes_compared": 2621440,
+          "different_bytes": 1083862
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "107e38048e334ecb9f5c59f8fa0ccee06c8e0be3b193bc9210cf21544a0b761d",
+          "expected_sha256": "50f04d608d33390e760ecffdb928b0567b41e7cea08d78276d16f9fdf6995a8f",
+          "bytes_compared": 262144,
+          "different_bytes": 106775
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "009fa845dc98ba5a67c894e64f26625f1f3bed187adb34b3a6a6455017ddcf01",
+          "expected_sha256": "a07ccd401e5d5e7de9128f7447c3c3a9ec79b467d04a739f98b2246341b71c26",
+          "bytes_compared": 262144,
+          "different_bytes": 107648
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            128
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            786432
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            655360
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 655360,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            786432
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            65536
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 70656,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            786432
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            65536
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 71168,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 128,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t128-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "b0f59fa4b32825683c0827113b65059f65d8c75171f899b75e7a275482ca9a4e"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-tensor-split-worker-result.json",
+        "bytes": 7415138,
+        "sha256": "89d1d6fae5e6ee68667fce82530b909884b8b65154eb8242d687b847cb24e9f1"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-tensor-split-retained-exit.json",
+        "bytes": 4420,
+        "sha256": "7eb11971a66ef56bebfb95d53eeb2368ccd7a780b7161f2a21d856b36b5db310"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t128-tensor-split-retained-drain.json",
+        "bytes": 10188,
+        "sha256": "4dadd5b7c65ce3b89d68b51723dd568ed4792e6ca1d45ae0d5228670d0480716"
+      },
+      "sampled_addresses": 1152,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "e291bf008c351eb9bb1422dd078fde9b21b51ce44d329417d73f0b08766b242f",
+          "expected_sha256": "e291bf008c351eb9bb1422dd078fde9b21b51ce44d329417d73f0b08766b242f",
+          "bytes_compared": 2621440,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b6abf64c97ffc55908b1ebcf9a73cda544cf2b0f7c4a676f8ab57b375c8251c5",
+          "expected_sha256": "b6abf64c97ffc55908b1ebcf9a73cda544cf2b0f7c4a676f8ab57b375c8251c5",
+          "bytes_compared": 262144,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "6fdbaa0b0177cd29214fd4b259c4e98081159f8ddcc109c2347057e40185976f",
+          "expected_sha256": "6fdbaa0b0177cd29214fd4b259c4e98081159f8ddcc109c2347057e40185976f",
+          "bytes_compared": 262144,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "01cccdf2bfb9021e655de643e070c9b0890bfa4e314692ebab94f64987abc3c8",
+          "expected_sha256": "01cccdf2bfb9021e655de643e070c9b0890bfa4e314692ebab94f64987abc3c8",
+          "bytes_compared": 2621440,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "50f04d608d33390e760ecffdb928b0567b41e7cea08d78276d16f9fdf6995a8f",
+          "expected_sha256": "50f04d608d33390e760ecffdb928b0567b41e7cea08d78276d16f9fdf6995a8f",
+          "bytes_compared": 262144,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "a07ccd401e5d5e7de9128f7447c3c3a9ec79b467d04a739f98b2246341b71c26",
+          "expected_sha256": "a07ccd401e5d5e7de9128f7447c3c3a9ec79b467d04a739f98b2246341b71c26",
+          "bytes_compared": 262144,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            128
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            128,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 128,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            128,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 128,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            128,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            128,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 128,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            128,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 256,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t256-original/compiler-work/model/graph.hlo",
+        "bytes": 1616,
+        "sha256": "f2f6e89e5e0503d9381dfc922e78841b5a93d2e5b5a1e4386690ddc66cd4726d"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-original-worker-result.json",
+        "bytes": 7417861,
+        "sha256": "568603ef8d5147f46acba3b412336f8f7320406cfca7c42a650fd21ec64791fc"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-original-retained-exit.json",
+        "bytes": 4400,
+        "sha256": "a3f0dd87e3fe3a0a70e128802bb781b5ac94461ea1432b907322bbaa71e13dd7"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-original-retained-drain.json",
+        "bytes": 10140,
+        "sha256": "8d9784cdb29574f73befe65b7a9e6420bcd868ff3809eee05b2533f35623429c"
+      },
+      "sampled_addresses": 2304,
+      "mismatching_sampled_addresses": 2295,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 1310720,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 393217,
+          "expected_input_flat_offset": 655361
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 1048321,
+          "expected_input_flat_offset": 1310465
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 1048577,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 131074,
+          "expected_input_flat_offset": 655362
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 786178,
+          "expected_input_flat_offset": 1310466
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "84896596d115dfc2da9938672583ee988932f0ad62351cb622ddd9da45b0c08f",
+          "expected_sha256": "0a3aa49b89d0f41978cf7c23010c9cf98918c82d23314437c0955181aabf0652",
+          "bytes_compared": 5242880,
+          "different_bytes": 2213594
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "20f5eafd810513d5886ffc20da1e6b76f2f05fc22dbaa9c134ec83373dfafbea",
+          "expected_sha256": "314622249ce2ed5f301b612db0b27be4ad04bb5e0401f4c7729aa1bfca92337a",
+          "bytes_compared": 524288,
+          "different_bytes": 220039
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b7e494215c463b38e323769a7aa2870f419cb121a64ac73c6a8a3c03e0ad2ec5",
+          "expected_sha256": "f59ef58ae52fc354d5b21f100195fe6621532cdb1940e92fa3be9d24671f275a",
+          "bytes_compared": 524288,
+          "different_bytes": 220128
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "ad826d4f4f77c10d7e92543d5804c9df7bf175309809c0deda96f4b0db527da4",
+          "expected_sha256": "55771f8697edfebce5d20697f0bc1c7ca720e9032f52e0527f5fbadbf00fae8a",
+          "bytes_compared": 5242880,
+          "different_bytes": 2220854
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "4ff3b43694e2a65bdf2f178ddf981eff2bf382c8b9be5e66ce7c56c50cfaaa9b",
+          "expected_sha256": "c599020eef3e592c5e4834b9803af626c1ce9d69222cae0b18cdae433fa7abab",
+          "bytes_compared": 524288,
+          "different_bytes": 218213
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "a170c8145607d7a087d3454d2ed044b2ca679d3ae51c2b06f6849fe7b84f1a2c",
+          "expected_sha256": "b15f3d53f9c24cff1f9b418895afc889b97fe5bc5721a7bc8c85256e29be52e1",
+          "bytes_compared": 524288,
+          "different_bytes": 218196
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            256
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            1572864
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            1310720
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1310720,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            1572864
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            131072
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 136192,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            1572864
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            131072
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 136704,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 256,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t256-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "e925f3f65dc4b4f53328d6e14e081390a1972f1453f01fccb18fb66fdcab15c5"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-tensor-split-worker-result.json",
+        "bytes": 7415138,
+        "sha256": "b6fa32e3adfadba90447cc63efa1f62787a48550c2301ae05a830c6001a27114"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-tensor-split-retained-exit.json",
+        "bytes": 4420,
+        "sha256": "e77f9cb010d969e2134fa9661ba17f782c80419f398f63c4d60f6b583ae1dcc3"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t256-tensor-split-retained-drain.json",
+        "bytes": 10188,
+        "sha256": "bbcf65c9b1ca52ff92a74796c59896bd97cfdc69ec945f1b289a000be519a054"
+      },
+      "sampled_addresses": 2304,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "0a3aa49b89d0f41978cf7c23010c9cf98918c82d23314437c0955181aabf0652",
+          "expected_sha256": "0a3aa49b89d0f41978cf7c23010c9cf98918c82d23314437c0955181aabf0652",
+          "bytes_compared": 5242880,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "314622249ce2ed5f301b612db0b27be4ad04bb5e0401f4c7729aa1bfca92337a",
+          "expected_sha256": "314622249ce2ed5f301b612db0b27be4ad04bb5e0401f4c7729aa1bfca92337a",
+          "bytes_compared": 524288,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "f59ef58ae52fc354d5b21f100195fe6621532cdb1940e92fa3be9d24671f275a",
+          "expected_sha256": "f59ef58ae52fc354d5b21f100195fe6621532cdb1940e92fa3be9d24671f275a",
+          "bytes_compared": 524288,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "55771f8697edfebce5d20697f0bc1c7ca720e9032f52e0527f5fbadbf00fae8a",
+          "expected_sha256": "55771f8697edfebce5d20697f0bc1c7ca720e9032f52e0527f5fbadbf00fae8a",
+          "bytes_compared": 5242880,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "c599020eef3e592c5e4834b9803af626c1ce9d69222cae0b18cdae433fa7abab",
+          "expected_sha256": "c599020eef3e592c5e4834b9803af626c1ce9d69222cae0b18cdae433fa7abab",
+          "bytes_compared": 524288,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b15f3d53f9c24cff1f9b418895afc889b97fe5bc5721a7bc8c85256e29be52e1",
+          "expected_sha256": "b15f3d53f9c24cff1f9b418895afc889b97fe5bc5721a7bc8c85256e29be52e1",
+          "bytes_compared": 524288,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            256
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            256,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 256,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            256,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 256,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            256,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            256,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 256,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            256,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 512,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t512-original/compiler-work/model/graph.hlo",
+        "bytes": 1621,
+        "sha256": "d83e630c555d9eab096dfe939fe40b141d7e395975e76004c57fb828ae309eab"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-original-worker-result.json",
+        "bytes": 7417889,
+        "sha256": "5a2eb475f7b789051632b03d8552a813a8ef67ed6e0cf6966610cd6975d05819"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-original-retained-exit.json",
+        "bytes": 4400,
+        "sha256": "505d7827f56c233771dd3071274dc38fc59e8baf3b551189aa90b9e03dc350a9"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-original-retained-drain.json",
+        "bytes": 10140,
+        "sha256": "0ce81608b945139a5fc608da20b3af635ac66894f079e818025fcf7e81711a17"
+      },
+      "sampled_addresses": 4608,
+      "mismatching_sampled_addresses": 4599,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 2621440,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 786433,
+          "expected_input_flat_offset": 1310721
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 2096641,
+          "expected_input_flat_offset": 2620929
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 2097153,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 262146,
+          "expected_input_flat_offset": 1310722
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 1572354,
+          "expected_input_flat_offset": 2620930
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "dd04c2ec8f99c3b9c706e768813aeadf02ada84a7cefe241e6c99df99a9a09c7",
+          "expected_sha256": "69d930bff759ab977e525f4d17d6e4bc7fcfbb5e68aae8221c5a3785f9d64867",
+          "bytes_compared": 10485760,
+          "different_bytes": 4426221
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b28211bae8a2a4ef3bf886f5f58c75b60b4cb0cb947637f1f0b2f2c4217e640e",
+          "expected_sha256": "815bf0817965fe9f068cee5d1eca61c4e5bf8ff82a9f27464347ad14e72d48f5",
+          "bytes_compared": 1048576,
+          "different_bytes": 442003
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "948d8f4918a3245d48bd36cd791e922410210163810a660fe3665bba19690b4e",
+          "expected_sha256": "6d7d09abdd2dbe8c339f9980bf6188ceb17adb5cc3182bf30a051ca00569ed26",
+          "bytes_compared": 1048576,
+          "different_bytes": 442703
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "4f518661fcfd8c9c1804fa64cc16a7d4f775ffd723335b79144e437a1639dab0",
+          "expected_sha256": "38e4ae0e995125e4dbea769a9287573efb957310004eda5c2ad56241d30fe653",
+          "bytes_compared": 10485760,
+          "different_bytes": 4464840
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "e9d55252d80c72f1b446d3e590ddbe9efdbc4a569104887e789b2db65435e493",
+          "expected_sha256": "af9f19117194a28470b93a4c0aed728c0f340ae8b065c0debe124ed09b528969",
+          "bytes_compared": 1048576,
+          "different_bytes": 443641
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "df8a8b148be79e44a4026a5825ae9ee0aec3624f26d088855c57bc61743ca5d4",
+          "expected_sha256": "cc4143119d7c9158ad7c1e0ac9f915b0cd5f444b2b0213d4204e8aeb263b9c05",
+          "bytes_compared": 1048576,
+          "different_bytes": 444399
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            512
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            3145728
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            2621440
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 2621440,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            3145728
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            262144
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 267264,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            3145728
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            262144
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 267776,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 512,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t512-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "ba2c00442d038e2ae05ca0ce43e51c9758690453b9cf7358dd41bb84dd137df7"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-tensor-split-worker-result.json",
+        "bytes": 7415156,
+        "sha256": "70a8183344c16a18f6e00ffdc8e14caf63ea9aa9409e518b482668a16f4a32d7"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-tensor-split-retained-exit.json",
+        "bytes": 4420,
+        "sha256": "8bb790401b398e5c5c1fe9fb46f689563ababd10794e00866a4b5dedcbe68011"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t512-tensor-split-retained-drain.json",
+        "bytes": 10188,
+        "sha256": "b7931a2900318597079fd012da8c7de088acc876357757793b8eda829f7a5417"
+      },
+      "sampled_addresses": 4608,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "69d930bff759ab977e525f4d17d6e4bc7fcfbb5e68aae8221c5a3785f9d64867",
+          "expected_sha256": "69d930bff759ab977e525f4d17d6e4bc7fcfbb5e68aae8221c5a3785f9d64867",
+          "bytes_compared": 10485760,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "815bf0817965fe9f068cee5d1eca61c4e5bf8ff82a9f27464347ad14e72d48f5",
+          "expected_sha256": "815bf0817965fe9f068cee5d1eca61c4e5bf8ff82a9f27464347ad14e72d48f5",
+          "bytes_compared": 1048576,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "6d7d09abdd2dbe8c339f9980bf6188ceb17adb5cc3182bf30a051ca00569ed26",
+          "expected_sha256": "6d7d09abdd2dbe8c339f9980bf6188ceb17adb5cc3182bf30a051ca00569ed26",
+          "bytes_compared": 1048576,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "38e4ae0e995125e4dbea769a9287573efb957310004eda5c2ad56241d30fe653",
+          "expected_sha256": "38e4ae0e995125e4dbea769a9287573efb957310004eda5c2ad56241d30fe653",
+          "bytes_compared": 10485760,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "af9f19117194a28470b93a4c0aed728c0f340ae8b065c0debe124ed09b528969",
+          "expected_sha256": "af9f19117194a28470b93a4c0aed728c0f340ae8b065c0debe124ed09b528969",
+          "bytes_compared": 1048576,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "cc4143119d7c9158ad7c1e0ac9f915b0cd5f444b2b0213d4204e8aeb263b9c05",
+          "expected_sha256": "cc4143119d7c9158ad7c1e0ac9f915b0cd5f444b2b0213d4204e8aeb263b9c05",
+          "bytes_compared": 1048576,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            512
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            512,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 512,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            512,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 512,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            512,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            512,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 512,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            512,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 1024,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t1024-original/compiler-work/model/graph.hlo",
+        "bytes": 1621,
+        "sha256": "06412e31f91a22af7b916d4f203fcff65afd4b127d8572c7217a17d98ab8a90f"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-original-worker-result.json",
+        "bytes": 7417938,
+        "sha256": "4fcb6810eac8c4c0e199e30b4c5bd99e2024abe12a1050c6adc30b8095f619a9"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-original-retained-exit.json",
+        "bytes": 4405,
+        "sha256": "a7175277e0d13cd4e63c7f108699cd6ae4571b529b7d54d9fca2f80f61308ca2"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-original-retained-drain.json",
+        "bytes": 10152,
+        "sha256": "906d96895b93193d95ddf2774bec115f85011e1e42aefa976476cb6a03efc359"
+      },
+      "sampled_addresses": 9216,
+      "mismatching_sampled_addresses": 9207,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 5242880,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 1572865,
+          "expected_input_flat_offset": 2621441
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 4193281,
+          "expected_input_flat_offset": 5241857
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 4194305,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 524290,
+          "expected_input_flat_offset": 2621442
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 3144706,
+          "expected_input_flat_offset": 5241858
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "8643cb98eb557ecd38b3eaf9983a1eb4582fa4c59711e7f786bb852c5f4ec5a4",
+          "expected_sha256": "b9619cdfbb95a1ce2d1708055bc185ede5a107c6a872da7b92e24dfc10a09b58",
+          "bytes_compared": 20971520,
+          "different_bytes": 8841803
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "670c4f1b1d6206d35ae790c7dff6869bc3942979aae686839d757be97d5d0cb8",
+          "expected_sha256": "f1f7b48ba8a9a30a3fd969820c83af4e4d503d67edd53694f26293d37096214d",
+          "bytes_compared": 2097152,
+          "different_bytes": 885824
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "c8e5e5cf375dde5f34db871607f7d73f1360a26afc998a76c22bf4d827142aac",
+          "expected_sha256": "419f4cde7a86989caa4e96185204cc1bad22d17b70d52109be7556a625b3dcd3",
+          "bytes_compared": 2097152,
+          "different_bytes": 883711
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "026d1f703f80e9a4b718b9e0a08edd881a658d6bc5b88e5997b77f2a9455d6c1",
+          "expected_sha256": "3fef811ac83bf8dc5c874c5b3fdb0a4172c0d4fc5f8dd294ff89f0e1ba54b2d9",
+          "bytes_compared": 20971520,
+          "different_bytes": 9239286
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "195200ea94e5c11152760402826ed637b7e2aec8080d9749dc396ca0b0dd83e9",
+          "expected_sha256": "d1152274e79ad69c6947a1be6b14a7f0afeaaea18d8760210fd9c7c1a414dda1",
+          "bytes_compared": 2097152,
+          "different_bytes": 886114
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "3071c7eedb6b578688e77791ac83712973df0ec4c0567de5688042e87c568556",
+          "expected_sha256": "58711bd3ab73e2aeb6d0d4d01af5b9c9ff10aac738668397688a8dbd9dc78ea2",
+          "bytes_compared": 2097152,
+          "different_bytes": 887081
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            1024
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            6291456
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            5242880
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 5242880,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            6291456
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            524288
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 529408,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            6291456
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            524288
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 529920,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 1024,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t1024-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "778cd4231cb396aab07f6e7dc81e165c5147a0001fb187eae2d2f62be4d60731"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-tensor-split-worker-result.json",
+        "bytes": 7415202,
+        "sha256": "1d10826a358b6f682ff9931c028ae6096bc5702bed96610ea1b28e35d0a691db"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-tensor-split-retained-exit.json",
+        "bytes": 4425,
+        "sha256": "03c4d38de47238832c1384b80faf87ada5098c2c37562e869524536531467f6d"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1024-tensor-split-retained-drain.json",
+        "bytes": 10200,
+        "sha256": "f5a4cc85c5b0a97c4ddbd233452c8744b2e97ca43ec376a11367f8d4d9edf710"
+      },
+      "sampled_addresses": 9216,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b9619cdfbb95a1ce2d1708055bc185ede5a107c6a872da7b92e24dfc10a09b58",
+          "expected_sha256": "b9619cdfbb95a1ce2d1708055bc185ede5a107c6a872da7b92e24dfc10a09b58",
+          "bytes_compared": 20971520,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "f1f7b48ba8a9a30a3fd969820c83af4e4d503d67edd53694f26293d37096214d",
+          "expected_sha256": "f1f7b48ba8a9a30a3fd969820c83af4e4d503d67edd53694f26293d37096214d",
+          "bytes_compared": 2097152,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "419f4cde7a86989caa4e96185204cc1bad22d17b70d52109be7556a625b3dcd3",
+          "expected_sha256": "419f4cde7a86989caa4e96185204cc1bad22d17b70d52109be7556a625b3dcd3",
+          "bytes_compared": 2097152,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "3fef811ac83bf8dc5c874c5b3fdb0a4172c0d4fc5f8dd294ff89f0e1ba54b2d9",
+          "expected_sha256": "3fef811ac83bf8dc5c874c5b3fdb0a4172c0d4fc5f8dd294ff89f0e1ba54b2d9",
+          "bytes_compared": 20971520,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "d1152274e79ad69c6947a1be6b14a7f0afeaaea18d8760210fd9c7c1a414dda1",
+          "expected_sha256": "d1152274e79ad69c6947a1be6b14a7f0afeaaea18d8760210fd9c7c1a414dda1",
+          "bytes_compared": 2097152,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "58711bd3ab73e2aeb6d0d4d01af5b9c9ff10aac738668397688a8dbd9dc78ea2",
+          "expected_sha256": "58711bd3ab73e2aeb6d0d4d01af5b9c9ff10aac738668397688a8dbd9dc78ea2",
+          "bytes_compared": 2097152,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            1024
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1024,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1024,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1024,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1024,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            1024,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1024,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1024,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1024,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 2048,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t2048-original/compiler-work/model/graph.hlo",
+        "bytes": 1621,
+        "sha256": "486a380cca41c198b199a1d3bb93779ff48f0aec85f788cf28a178fdb1284f42"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-original-worker-result.json",
+        "bytes": 7417953,
+        "sha256": "6282803fac61dbcb8edd84ff715e1f644924266e75b3a9cd66c5eecfeb794638"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-original-retained-exit.json",
+        "bytes": 4405,
+        "sha256": "545eb3a5061cee27c6bce4d27e6f92bec03896478164ce4dcf550f34c7a2e26e"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-original-retained-drain.json",
+        "bytes": 10152,
+        "sha256": "c2d59005ec2b12aa3fe1f1cbf484f0eb69e20f83cabc5a23090407cfc4f14c63"
+      },
+      "sampled_addresses": 18432,
+      "mismatching_sampled_addresses": 18423,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 10485760,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 3145729,
+          "expected_input_flat_offset": 5242881
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 8386561,
+          "expected_input_flat_offset": 10483713
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 8388609,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 1048578,
+          "expected_input_flat_offset": 5242882
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 6289410,
+          "expected_input_flat_offset": 10483714
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "98a568f585a2d2c582d3772b38e5431631368b5fd15a673ff59f19caa625d528",
+          "expected_sha256": "cce9819e93a1c9ebc549087f73a1b94c071de2892c7de914969a6f1a33536939",
+          "bytes_compared": 41943040,
+          "different_bytes": 17698001
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "f74ee5caf7b22105b2ecf2038e79aca272d44731c0d9cf45707695ab954e35da",
+          "expected_sha256": "c29ed86172b50b5c3560a9594787082abdda0e932080fcc7b866d6547d86b7ec",
+          "bytes_compared": 4194304,
+          "different_bytes": 1769110
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "b23746d34d3fab4dfd94a15dec1ee8b6ebd8ff68bd6ba4c0f5507a3b3c80e0fe",
+          "expected_sha256": "beb292b6aa979579b4c5eed9ff53d5703b3370a2eb1d1f6bce06d48e8a9986a8",
+          "bytes_compared": 4194304,
+          "different_bytes": 1767614
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "ee8f8af14e353963dc4cecd6a661ff94ce20193f2ab2fffb46fa8d998823061a",
+          "expected_sha256": "ffb35e59df09e7f17a25485d34ec6507b91aec4a6ee233cb3014c68cbbf6d955",
+          "bytes_compared": 41943040,
+          "different_bytes": 17761457
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "07a9e130decc8dd01f52ca19ec5b404a0fe437a86959f68251870467d94d4efe",
+          "expected_sha256": "23fb8b59c629a6a17a7821eba4c142605e7feca131730918106f6cd358c43434",
+          "bytes_compared": 4194304,
+          "different_bytes": 1772266
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "6c9631e80fc9473270981ce4cb90cd16ef5cb310142de28c5f22882c23efd628",
+          "expected_sha256": "5469b271322e3048589e209a097b28f853b055bb038d14ef8b2c7ce6b947369e",
+          "bytes_compared": 4194304,
+          "different_bytes": 1771558
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            2048
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            12582912
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            10485760
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 10485760,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            12582912
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            1048576
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 1053696,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            12582912
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            1048576
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 1054208,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 2048,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t2048-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "9d3f2e88f4196ec12ce7286e390f473311c5f343c3b4cc68c7ae73b64f9c39cc"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-tensor-split-worker-result.json",
+        "bytes": 7415201,
+        "sha256": "dc38e861cbe4dcd15d32904e90894d79c522385a656ccf7aebed6097df0fcd64"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-tensor-split-retained-exit.json",
+        "bytes": 4425,
+        "sha256": "674321c53c7db60367f8210db2e4547ade628b59631a5e6a130d1b66aa397b5f"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t2048-tensor-split-retained-drain.json",
+        "bytes": 10200,
+        "sha256": "f68bbb0702f82d4d6711d6aa2debb611b25a556bd2286d90c66c61366efa78a0"
+      },
+      "sampled_addresses": 18432,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "cce9819e93a1c9ebc549087f73a1b94c071de2892c7de914969a6f1a33536939",
+          "expected_sha256": "cce9819e93a1c9ebc549087f73a1b94c071de2892c7de914969a6f1a33536939",
+          "bytes_compared": 41943040,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "c29ed86172b50b5c3560a9594787082abdda0e932080fcc7b866d6547d86b7ec",
+          "expected_sha256": "c29ed86172b50b5c3560a9594787082abdda0e932080fcc7b866d6547d86b7ec",
+          "bytes_compared": 4194304,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "beb292b6aa979579b4c5eed9ff53d5703b3370a2eb1d1f6bce06d48e8a9986a8",
+          "expected_sha256": "beb292b6aa979579b4c5eed9ff53d5703b3370a2eb1d1f6bce06d48e8a9986a8",
+          "bytes_compared": 4194304,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "ffb35e59df09e7f17a25485d34ec6507b91aec4a6ee233cb3014c68cbbf6d955",
+          "expected_sha256": "ffb35e59df09e7f17a25485d34ec6507b91aec4a6ee233cb3014c68cbbf6d955",
+          "bytes_compared": 41943040,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "23fb8b59c629a6a17a7821eba4c142605e7feca131730918106f6cd358c43434",
+          "expected_sha256": "23fb8b59c629a6a17a7821eba4c142605e7feca131730918106f6cd358c43434",
+          "bytes_compared": 4194304,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "5469b271322e3048589e209a097b28f853b055bb038d14ef8b2c7ce6b947369e",
+          "expected_sha256": "5469b271322e3048589e209a097b28f853b055bb038d14ef8b2c7ce6b947369e",
+          "bytes_compared": 4194304,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            2048
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            2048,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 2048,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            2048,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 2048,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            2048,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            2048,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 2048,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            2048,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 4096,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t4096-original/compiler-work/model/graph.hlo",
+        "bytes": 1625,
+        "sha256": "5c6fa1a97747e668e584a7411d06fa1e9ca71cbf425fb7f0a398e6103f0246f5"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-original-worker-result.json",
+        "bytes": 7417963,
+        "sha256": "9e240d02d2c412b7cf43f4523cce91bed8a2d54bf86cd67a456622c836ee33bc"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-original-retained-exit.json",
+        "bytes": 4405,
+        "sha256": "c71f9770c3f90cc39cbfb8f4c3d050715d23a403cb3c053c5d0287221987e7fb"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-original-retained-drain.json",
+        "bytes": 10152,
+        "sha256": "b40754272c17d2d154d07c850427ea6a68cdf9945fe24aa571446689af399dcb"
+      },
+      "sampled_addresses": 36864,
+      "mismatching_sampled_addresses": 36855,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 20971520,
+          "expected_input_flat_offset": 1
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 6291457,
+          "expected_input_flat_offset": 10485761
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            1,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 16773121,
+          "expected_input_flat_offset": 20967425
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 16777217,
+          "expected_input_flat_offset": 2
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 2097154,
+          "expected_input_flat_offset": 10485762
+        },
+        {
+          "output": 0,
+          "index": [
+            0,
+            2,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 12578818,
+          "expected_input_flat_offset": 20967426
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "44853f072f6a1af9b529f91b5e32ea47d09121c1ab0d9053abbaebe1dd98da28",
+          "expected_sha256": "1cb473e772c2646178134f0685cdb7e3bcf93a95c77b371b80b8f660de9747e8",
+          "bytes_compared": 83886080,
+          "different_bytes": 35380264
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "fee4f7cf0ec6ac5fd006e12455b9f7aa68112f7d9200791f6f5d71584598b91b",
+          "expected_sha256": "9a91306ebadbfaf4c0dc3c2fb4afbdd30b262dfecdc487206b5ac92cb4f1070a",
+          "bytes_compared": 8388608,
+          "different_bytes": 3536638
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "fe43035a7954afcf233757045e6f5826dcdb10c09f052484ef2fc4f8f71f85c3",
+          "expected_sha256": "98049b414f1bce5462327e9126f6cbf1a546f935e127edfa41dd9d755eb43604",
+          "bytes_compared": 8388608,
+          "different_bytes": 3537293
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "ddc39b1da45eef41c41b7d1c67d6fbfeadc3e901573de1c4b9f3dd7010750b96",
+          "expected_sha256": "577bfd3cb3888d82ee0031b274b08b832d83f657f33cebf8d8b9b951c71fec5c",
+          "bytes_compared": 83886080,
+          "different_bytes": 35493043
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "f0d3d744c6e4d696319eb95512f45766eecf47478f457e3d22ca4aac692e5904",
+          "expected_sha256": "5a79dcce3a048fcabf0166c4e638bbb6a2dda8dc67a06a4340c8bf88369c66e4",
+          "bytes_compared": 8388608,
+          "different_bytes": 3547709
+        },
+        {
+          "passed": false,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "cfebe2bd1c82486ba727b68a9219b4936674449a38dfd6aa3897512533ff2642",
+          "expected_sha256": "d3e8385084c309964ce6cc9e1ce88979bfea2496e76602bba87e957c6b831536",
+          "bytes_compared": 8388608,
+          "different_bytes": 3545504
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            25165824
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            20971520
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 20971520,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            25165824
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            2097152
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 2102272,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            25165824
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            2097152
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 2102784,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 4096,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t4096-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1328,
+        "sha256": "fbea911febc5813150669e520fd5b26fe437652690b8c537b1f1320f69267d9a"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-tensor-split-worker-result.json",
+        "bytes": 7415200,
+        "sha256": "6706d4ee19a7c0b0754b3b959da87588a87cfde5b376e8c619b284cf8efa2ca4"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-tensor-split-retained-exit.json",
+        "bytes": 4425,
+        "sha256": "0d8e28aa0f5f07442ab0512e69ba3cfb4c6b0cb3f2c72a12ea0badb21d77ccc5"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t4096-tensor-split-retained-drain.json",
+        "bytes": 10200,
+        "sha256": "2885e81181a131b2576b4cc67f7167b4f8f4eff2f0353137e589b644cb6bea33"
+      },
+      "sampled_addresses": 36864,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "1cb473e772c2646178134f0685cdb7e3bcf93a95c77b371b80b8f660de9747e8",
+          "expected_sha256": "1cb473e772c2646178134f0685cdb7e3bcf93a95c77b371b80b8f660de9747e8",
+          "bytes_compared": 83886080,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "9a91306ebadbfaf4c0dc3c2fb4afbdd30b262dfecdc487206b5ac92cb4f1070a",
+          "expected_sha256": "9a91306ebadbfaf4c0dc3c2fb4afbdd30b262dfecdc487206b5ac92cb4f1070a",
+          "bytes_compared": 8388608,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "98049b414f1bce5462327e9126f6cbf1a546f935e127edfa41dd9d755eb43604",
+          "expected_sha256": "98049b414f1bce5462327e9126f6cbf1a546f935e127edfa41dd9d755eb43604",
+          "bytes_compared": 8388608,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "577bfd3cb3888d82ee0031b274b08b832d83f657f33cebf8d8b9b951c71fec5c",
+          "expected_sha256": "577bfd3cb3888d82ee0031b274b08b832d83f657f33cebf8d8b9b951c71fec5c",
+          "bytes_compared": 83886080,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "5a79dcce3a048fcabf0166c4e638bbb6a2dda8dc67a06a4340c8bf88369c66e4",
+          "expected_sha256": "5a79dcce3a048fcabf0166c4e638bbb6a2dda8dc67a06a4340c8bf88369c66e4",
+          "bytes_compared": 8388608,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "d3e8385084c309964ce6cc9e1ce88979bfea2496e76602bba87e957c6b831536",
+          "expected_sha256": "d3e8385084c309964ce6cc9e1ce88979bfea2496e76602bba87e957c6b831536",
+          "bytes_compared": 8388608,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            4096
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "transpose",
+          "dimensions": [
+            1,
+            4096,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": [
+            0,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            4096,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 4096,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            4096,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 4,
+      "length": 1,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b4-t1-original/compiler-work/model/graph.hlo",
+        "bytes": 1561,
+        "sha256": "09fc3d72322b15c9b7d8643867d66fe3de05b4f992b48465769397b272781b53"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-original-worker-result.json",
+        "bytes": 7417696,
+        "sha256": "47cb6a5ee6886d4db9c199289461f71f26f24d9679021918993a39cbecbf9be6"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-original-retained-exit.json",
+        "bytes": 4390,
+        "sha256": "2308498c15a3080ce3f2844772cea8fe4e8aea4a9f8e292660178a29b8c79134"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-original-retained-drain.json",
+        "bytes": 10116,
+        "sha256": "41b90c3c5c607afdf518a3ef50f8b5b558340ee74de10dd3f3d4db8271267f5e"
+      },
+      "sampled_addresses": 36,
+      "mismatching_sampled_addresses": 27,
+      "first_mismatches": [
+        {
+          "output": 0,
+          "index": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 5120,
+          "expected_input_flat_offset": 6144
+        },
+        {
+          "output": 0,
+          "index": [
+            1,
+            0,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 7680,
+          "expected_input_flat_offset": 8704
+        },
+        {
+          "output": 0,
+          "index": [
+            1,
+            0,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 10239,
+          "expected_input_flat_offset": 11263
+        },
+        {
+          "output": 0,
+          "index": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "actual_input_flat_offset": 10240,
+          "expected_input_flat_offset": 12288
+        },
+        {
+          "output": 0,
+          "index": [
+            2,
+            0,
+            32,
+            0
+          ],
+          "actual_input_flat_offset": 12800,
+          "expected_input_flat_offset": 14848
+        },
+        {
+          "output": 0,
+          "index": [
+            2,
+            0,
+            63,
+            79
+          ],
+          "actual_input_flat_offset": 15359,
+          "expected_input_flat_offset": 17407
+        }
+      ],
+      "producer_cpu_passed": true,
+      "producer_device_exact": false,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "2f69b86ca32e600942cd96a3dc41164c50db4e60a3e652ed101b4c4562e4c448",
+          "expected_sha256": "8414d7eb141475452e3078e00e03033a43bc31daea9a741e6b10d6906a6bc124",
+          "bytes_compared": 81920,
+          "different_bytes": 23704
+        },
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "8727482f6d59ac2780abd7f6a2943f286b67284810fd2860ba77bd3a9e876183",
+          "expected_sha256": "69b08fb9851ea59f84bcb3d0c2eba69162a23a893a33f284c7b8d75d7ee02024",
+          "bytes_compared": 8192,
+          "different_bytes": 2750
+        },
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "5e457ddfe8f25ef810b6dafd3656cfb192698d2eb529c76a6da49b520785185e",
+          "expected_sha256": "2d93e04f682770a7b7243287fb9edcf1eacdd1c565f7496c260b52d76fc612a7",
+          "bytes_compared": 8192,
+          "different_bytes": 2750
+        },
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "2261cf0c365fba74ca2474231628d565185756b9a90911eb4a27224a6666c5c1",
+          "expected_sha256": "ab9c5c092448aba30dc0e8dc044ee8202477d2155667f6883a37a73fd1a8e868",
+          "bytes_compared": 81920,
+          "different_bytes": 28069
+        },
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "8b633adaf151e15232a3f40679b89992d95d81e2ddaff01c3626b67ae1c8d2e9",
+          "expected_sha256": "a7eb4c315b146869ca8de3a5b10970d88f4aff5289da6010a6902292387d90a9",
+          "bytes_compared": 8192,
+          "different_bytes": 2674
+        },
+        {
+          "passed": false,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "da6b66857804eaf1b0b6d34253871e9528a3bddfa55dc1a3a675940e95a656cd",
+          "expected_sha256": "beb4f9c59a5892e92e48930db0ebaf91c7e68bb7a5f822c0dd4bd3dacfb227be",
+          "bytes_compared": 8192,
+          "different_bytes": 2672
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            4,
+            6144,
+            1
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            24576
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            20480
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 20480,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            24576
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            2048
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 7168,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            24576
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            2048
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 7680,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 4,
+      "length": 1,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b4-t1-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1274,
+        "sha256": "5315ba3afaf597710727998f43a1ea98d5e39bfe74d4fd3afd0e7fa27f7594a7"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-tensor-split-worker-result.json",
+        "bytes": 7415010,
+        "sha256": "4e3ba4a8c196ffe918ae96362d521054620ed674f4da903151866e491473ceee"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-tensor-split-retained-exit.json",
+        "bytes": 4410,
+        "sha256": "1d1ad292a285d85d47b7dc2aa1578dd04c26f70ed81fe138bc30c0399c6cf35f"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b4-t1-tensor-split-retained-drain.json",
+        "bytes": 10164,
+        "sha256": "94c477245902cfee51e329d64793fd6a6e13bdb74193d218e816ae459c0e15c5"
+      },
+      "sampled_addresses": 36,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "8414d7eb141475452e3078e00e03033a43bc31daea9a741e6b10d6906a6bc124",
+          "expected_sha256": "8414d7eb141475452e3078e00e03033a43bc31daea9a741e6b10d6906a6bc124",
+          "bytes_compared": 81920,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "69b08fb9851ea59f84bcb3d0c2eba69162a23a893a33f284c7b8d75d7ee02024",
+          "expected_sha256": "69b08fb9851ea59f84bcb3d0c2eba69162a23a893a33f284c7b8d75d7ee02024",
+          "bytes_compared": 8192,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "2d93e04f682770a7b7243287fb9edcf1eacdd1c565f7496c260b52d76fc612a7",
+          "expected_sha256": "2d93e04f682770a7b7243287fb9edcf1eacdd1c565f7496c260b52d76fc612a7",
+          "bytes_compared": 8192,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "ab9c5c092448aba30dc0e8dc044ee8202477d2155667f6883a37a73fd1a8e868",
+          "expected_sha256": "ab9c5c092448aba30dc0e8dc044ee8202477d2155667f6883a37a73fd1a8e868",
+          "bytes_compared": 81920,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "a7eb4c315b146869ca8de3a5b10970d88f4aff5289da6010a6902292387d90a9",
+          "expected_sha256": "a7eb4c315b146869ca8de3a5b10970d88f4aff5289da6010a6902292387d90a9",
+          "bytes_compared": 8192,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "beb4f9c59a5892e92e48930db0ebaf91c7e68bb7a5f822c0dd4bd3dacfb227be",
+          "expected_sha256": "beb4f9c59a5892e92e48930db0ebaf91c7e68bb7a5f822c0dd4bd3dacfb227be",
+          "bytes_compared": 8192,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            4,
+            6144,
+            1
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            4,
+            1,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 4,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            4,
+            1,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 4,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            4,
+            1,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 4,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            4,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 1,
+      "variant": "original",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t1-original/compiler-work/model/graph.hlo",
+        "bytes": 1556,
+        "sha256": "b0313e32984bdb2cc1629c2fa20e3ca88c6a07d7e674013ecd5d3cd2ce3a2348"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-original-worker-result.json",
+        "bytes": 7415018,
+        "sha256": "8f1a79101cd32106d9392b34c817814de3fbf833e45e1c0734b2231f716a00a6"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-original-retained-exit.json",
+        "bytes": 4390,
+        "sha256": "b4cab8766885f8a895a5b7ed32ccc93599d3330a6c637adb9b96723f7c9f9af6"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-original-retained-drain.json",
+        "bytes": 10116,
+        "sha256": "3c789a8efba7ac88a03581f0059b1a4c662d14c83595142da0947ba05e5611a5"
+      },
+      "sampled_addresses": 9,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": true,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "e36ee180bad9cc62b85bc188a46f3faaff3c4ea7215db9c04ac9d23115dfd57e",
+          "expected_sha256": "e36ee180bad9cc62b85bc188a46f3faaff3c4ea7215db9c04ac9d23115dfd57e",
+          "bytes_compared": 20480,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "eb9eeaf01151bf16409bcded8c88f3c73ed0fd6220543ec1ffa30dd2e759f5da",
+          "expected_sha256": "eb9eeaf01151bf16409bcded8c88f3c73ed0fd6220543ec1ffa30dd2e759f5da",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "cc1bcc4c9a1d15595afb075cf6559d5f678d76c796d8bcdf18369edc4db099ba",
+          "expected_sha256": "cc1bcc4c9a1d15595afb075cf6559d5f678d76c796d8bcdf18369edc4db099ba",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "adfcd73c1213a81bdcbb723c8ab97c7786c727469221f6af18c9e0ee7852be14",
+          "expected_sha256": "adfcd73c1213a81bdcbb723c8ab97c7786c727469221f6af18c9e0ee7852be14",
+          "bytes_compared": 20480,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "5194ae0629badb8bae70719d3fc0eab5c876d7a619d514408e0adb8c522a50ac",
+          "expected_sha256": "5194ae0629badb8bae70719d3fc0eab5c876d7a619d514408e0adb8c522a50ac",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "6630cc9335bf62713fb6f3904e2682d38b38cdeeff3208b9a2f31173238935d1",
+          "expected_sha256": "6630cc9335bf62713fb6f3904e2682d38b38cdeeff3208b9a2f31173238935d1",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            1
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "opcode": "reshape",
+          "dimensions": [
+            6144
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "slice",
+          "dimensions": [
+            5120
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            5120
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            5
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "reshape",
+          "dimensions": [
+            6144
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "slice",
+          "dimensions": [
+            512
+          ],
+          "operands": [
+            9
+          ],
+          "slices": [
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 15,
+          "opcode": "reshape",
+          "dimensions": [
+            6144
+          ],
+          "operands": [
+            14
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 16,
+          "opcode": "slice",
+          "dimensions": [
+            512
+          ],
+          "operands": [
+            15
+          ],
+          "slices": [
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 17,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            512
+          ],
+          "operands": [
+            16
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 18,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            17
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 19,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            18
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 20,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            7,
+            13,
+            19
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    },
+    {
+      "batch": 1,
+      "length": 1,
+      "variant": "tensor-split",
+      "hlo": {
+        "path": "/mnt/nvme/nemotron9b-package-r8-20261109/primitives/jobs/split-nemotron-conv-b1-t1-tensor-split/compiler-work/model/graph.hlo",
+        "bytes": 1274,
+        "sha256": "600669fd4fe3b2d6bd8f9e706d35e4e91dc4d383ae30e6334740f7382c6f8a85"
+      },
+      "result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-tensor-split-worker-result.json",
+        "bytes": 7415008,
+        "sha256": "3fcfd4f75f2e7c85a23424ca578602ed03b6c4266986c737178e689bd180057b"
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-tensor-split-retained-exit.json",
+        "bytes": 4410,
+        "sha256": "a8b52181b49c4d7d6736569f763b260c0a5617429f82bc0d967d98e2733a691a"
+      },
+      "retained_drain": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r8-20261109-control/split-nemotron-conv-b1-t1-tensor-split-retained-drain.json",
+        "bytes": 10164,
+        "sha256": "3c26228485b46cfe5ae1f2dc373a1a3b262044fd3ab0c908bee41fcb688a7aa7"
+      },
+      "sampled_addresses": 9,
+      "mismatching_sampled_addresses": 0,
+      "first_mismatches": [],
+      "producer_cpu_passed": true,
+      "producer_device_exact": true,
+      "original_failure_control_confirmed": null,
+      "device_comparisons": [
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "e36ee180bad9cc62b85bc188a46f3faaff3c4ea7215db9c04ac9d23115dfd57e",
+          "expected_sha256": "e36ee180bad9cc62b85bc188a46f3faaff3c4ea7215db9c04ac9d23115dfd57e",
+          "bytes_compared": 20480,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "eb9eeaf01151bf16409bcded8c88f3c73ed0fd6220543ec1ffa30dd2e759f5da",
+          "expected_sha256": "eb9eeaf01151bf16409bcded8c88f3c73ed0fd6220543ec1ffa30dd2e759f5da",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "cc1bcc4c9a1d15595afb075cf6559d5f678d76c796d8bcdf18369edc4db099ba",
+          "expected_sha256": "cc1bcc4c9a1d15595afb075cf6559d5f678d76c796d8bcdf18369edc4db099ba",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "expected_shape": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "adfcd73c1213a81bdcbb723c8ab97c7786c727469221f6af18c9e0ee7852be14",
+          "expected_sha256": "adfcd73c1213a81bdcbb723c8ab97c7786c727469221f6af18c9e0ee7852be14",
+          "bytes_compared": 20480,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "5194ae0629badb8bae70719d3fc0eab5c876d7a619d514408e0adb8c522a50ac",
+          "expected_sha256": "5194ae0629badb8bae70719d3fc0eab5c876d7a619d514408e0adb8c522a50ac",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        },
+        {
+          "passed": true,
+          "shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "expected_shape": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "dtype": "torch.float32",
+          "expected_dtype": "torch.float32",
+          "actual_sha256": "6630cc9335bf62713fb6f3904e2682d38b38cdeeff3208b9a2f31173238935d1",
+          "expected_sha256": "6630cc9335bf62713fb6f3904e2682d38b38cdeeff3208b9a2f31173238935d1",
+          "bytes_compared": 2048,
+          "different_bytes": 0
+        }
+      ],
+      "full_raw_output_bytes_independently_reread": false,
+      "nodes": [
+        {
+          "id": 1,
+          "opcode": "parameter",
+          "dimensions": [
+            1,
+            6144,
+            1
+          ],
+          "operands": [],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 2,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 3,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1,
+            5120
+          ],
+          "operands": [
+            2
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 5120,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 4,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            3
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 5,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            64,
+            80
+          ],
+          "operands": [
+            4
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 6,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 7,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1,
+            512
+          ],
+          "operands": [
+            6
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 5120,
+              "limit": 5632,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 8,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            7
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 9,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            8
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 10,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            6144
+          ],
+          "operands": [
+            1
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 11,
+          "opcode": "slice",
+          "dimensions": [
+            1,
+            1,
+            512
+          ],
+          "operands": [
+            10
+          ],
+          "slices": [
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 0,
+              "limit": 1,
+              "stride": 1
+            },
+            {
+              "start": 5632,
+              "limit": 6144,
+              "stride": 1
+            }
+          ],
+          "transpose_axes": []
+        },
+        {
+          "id": 12,
+          "opcode": "reshape",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            11
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 13,
+          "opcode": "convert",
+          "dimensions": [
+            1,
+            1,
+            4,
+            128
+          ],
+          "operands": [
+            12
+          ],
+          "slices": [],
+          "transpose_axes": []
+        },
+        {
+          "id": 14,
+          "opcode": "tuple",
+          "dimensions": [],
+          "operands": [
+            5,
+            9,
+            13
+          ],
+          "slices": [],
+          "transpose_axes": []
+        }
+      ]
+    }
+  ],
+  "all_original_conv_shapes_reparsed": true,
+  "original_long_and_B4T1_mismatches_preserved": true,
+  "original_B1T1_expected_exact": true,
+  "native_or_compiler_execution": false,
+  "full_raw_device_bytes_independently_reread": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
