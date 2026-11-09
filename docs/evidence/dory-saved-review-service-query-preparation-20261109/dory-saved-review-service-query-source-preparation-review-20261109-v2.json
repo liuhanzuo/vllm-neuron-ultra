@@ -1,0 +1,76 @@
+{
+  "schema": "dory_saved_review_service_query_source_preparation_review_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T19:42:10.242693+00:00",
+  "source_preparation_passed": true,
+  "predecessor_source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-service-query-source-review-20261109-v1.json",
+    "sha256": "ee37c25cf8b3d7ef971d75bf4fe4b5d5a2f82ce411ed07da297b03da048b1afc"
+  },
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_service_query_v1.py": "9e02f2dc025b263628c08f3fda0ddb2ba705acb0c6de2e41984cc9f210470a62",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_service_query_v1.py": "8f4d7a94120f2765c70ea2f2e24e4e93da47b93012e8d9b1e5015108c3364b4b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_service_query_live_v1.py": "a9a32b6637bcb3afba298c7614aaf80b4f96cf29625230e77c7d8bdb4186f982",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_dory_service_query_dependencies_v1.py": "f8fd1adfcf476c8d41d88f643b6263920b6d2b754669f180fcf3562f842b6131",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_service_query_auth_v1.py": "c356f2a2b41733142ac797709eaa8cf07f34f9bd557c7a3a83dca4e9ae54138a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_service_query_auth_v1.py": "07997535e6d567e01d827711154a968e997c51b5ab527f8a6938107967277e55",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_service_query_authenticated_live_v1.py": "ebdc0400372e2e8504a19e395147abf31b5576b5488356bc7ebb29729acd0205",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_guard_v1.py": "928f7db5584b102a9df487175d43541d7576a6339565fc578d1b265ab408f1cd",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_guard_v1.py": "207aa5e7b01a446f13f8b4258c0145a013435409ddfc90b6d5db425d38394636"
+  },
+  "dependency_observation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-service-query-dependency-observation-20261109-v1.json",
+    "sha256": "11de174a895bf018dc209814be7d349b7c7cf88413038fd29d2537eeae8e41c4"
+  },
+  "dependency_observation_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-service-query-dependency-observation-actual-exit-20261109-v1.json",
+    "sha256": "7f350f3eaf755f223bb9a8ffa44814dafddb3b1ed54d5a93dd1314ba56639296"
+  },
+  "authentication_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-service-query-auth-tests-actual-exit-20261109-v1.json",
+    "sha256": "98e708c63a37d0e2d41b795701abd6ff4c833e5727a9615c61ea8844fa3e70e2"
+  },
+  "authenticated_live_parity": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-service-query-authenticated-live-parity-actual-exit-20261109-v1.json",
+    "sha256": "8f0e3335f69a3a921b6943081e2f1900d9bbeb8d609da0ff5c608357dc9a793f"
+  },
+  "guard_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-guard-tests-actual-exit-20261109-v1.json",
+    "sha256": "b0e30597788eaf3b09b154ee67a996d77a332c8860e4f9530273bf6df3267310"
+  },
+  "new_synthetic_tests_passed": 26,
+  "prior_service_query_tests_passed": 12,
+  "authenticated_file_count": 41,
+  "authenticated_bytes": 4326816,
+  "observed_native_file_count": 9,
+  "authenticated_live_parity_cases": 20,
+  "checks": [
+    "All 41 observed dependency files are authenticated before candidate import.",
+    "Python sources compile from authenticated bytes, bypassing cached bytecode.",
+    "Every new file-backed Python import is restricted to the reviewed manifest.",
+    "All nine expected native libraries are byte-authenticated before import and their file mappings checked after connection and on close.",
+    "Expected file pins are rechecked on close, and the original import policy is restored even after a final audit failure.",
+    "Every guard keeps the original lock proof, serial-window check, fresh service query, wall limit, root/NVMe floors and available-memory check.",
+    "Original service query is retained during dependency authentication; a fresh query may attach only after a successful original startup guard.",
+    "Query errors poison the query and guard; no retries, result caching, reduced polling, service mutations or original reviewer changes.",
+    "The 20 actual read-only parity cases observed empty active trn1 service sets; no positive service activation was induced.",
+    "All original model correctness, generation, quality, HTTP and performance requirements remain unchanged."
+  ],
+  "limitations": [
+    "Source preparation only. No successor executor/spec has been created or admitted.",
+    "Dynamic linker initializers are not intercepted. Unreviewed native mappings are rejected after loading, not sandboxed before execution.",
+    "Preexisting interpreter/stdlib execution and full future executor environment are outside this helper authentication claim.",
+    "Full lazy/error path coverage and an actual positive service activation remain untested.",
+    "A future retry must retain the actual previous review exit and all outputs, extend historical-owner/directory counts, and align downstream completion/storage/Nemotron validators.",
+    "If the running review succeeds, use that success rather than rerunning just to exercise this transport."
+  ],
+  "current_reviewer_unchanged": true,
+  "successor_executor_created": false,
+  "successor_spec_created": false,
+  "full_runtime_environment_review_complete": false,
+  "runtime_admitted": false,
+  "latency_benchmark": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "published": false
+}

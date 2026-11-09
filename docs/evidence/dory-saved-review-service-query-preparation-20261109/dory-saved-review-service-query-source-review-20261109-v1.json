@@ -1,0 +1,187 @@
+{
+  "schema": "dory_saved_review_service_query_source_preparation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T19:26:25.237679+00:00",
+  "preparation_review_passed": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_service_query_v1.py": "9e02f2dc025b263628c08f3fda0ddb2ba705acb0c6de2e41984cc9f210470a62",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_service_query_v1.py": "8f4d7a94120f2765c70ea2f2e24e4e93da47b93012e8d9b1e5015108c3364b4b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_service_query_live_v1.py": "a9a32b6637bcb3afba298c7614aaf80b4f96cf29625230e77c7d8bdb4186f982"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-service-query-tests-actual-exit-20261109-v1.json",
+    "sha256": "7c02135d377254a55beae88c472f9721de6260c1e3cbf573fb9b3c5201a2253a"
+  },
+  "live_parity": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-review-service-query-live-parity-actual-exit-20261109-v1.json",
+    "sha256": "e43f4088b66f76d6841c7f8af44c76dc87f0f8fd1435eb5f25ac9f490763a758"
+  },
+  "existing_review_sources_verified_unchanged": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_archives_v2.py": "e343abc62ede3771a500b4f76924d3567c6c3a62027f883cef1dfbcc40e01131",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_residual_serial_v4.py": "9be4c4c97eb1d18cb91bc11650e5c4932e60f33c893cd6fc6e5ec4edf38bd66a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_saved_payloads_v2.py": "4f6ad312d4abcaae79d6eb6d3c6d1275c723ce964fe7602d4d87a01520bdeda9"
+  },
+  "finding": {
+    "single_archive_lower_bound": {
+      "event_guard": 1,
+      "tensor_guards": 114,
+      "hidden_chunks_min": 1,
+      "logits_chunks_min": 8,
+      "cache_head_chunks_min": 448,
+      "total": 572
+    },
+    "original_and_new_archives_per_call": 2,
+    "original_successful_calls": 6185,
+    "minimum_full_service_checks": 7075640,
+    "counter_is_static_lower_bound": true,
+    "other_metadata_source_and_residual_checks_excluded": true,
+    "active_heavy_implementation": "A fresh systemctl --user list-units subprocess for each guard",
+    "measured_end_to_end_overhead": false,
+    "measured_end_to_end_speedup": false
+  },
+  "candidate": {
+    "fresh_ListUnitsFiltered_request_on_every_check": true,
+    "private_connection_reused": true,
+    "result_cache": false,
+    "polling_interval": false,
+    "same_original_state_filter": true,
+    "same_service_type_and_prefix": true,
+    "errors_poison_connection": true,
+    "no_service_mutations": true,
+    "tests_do_not_induce_real_service_activation": true,
+    "dependencies_observed": [
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/__init__.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/__init__.py",
+        "bytes": 3756,
+        "sha256": "02586b3a6b0235d600b1cd1848f3c4dc49e4aac1a4a45aa5c4864de192671f4d"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/_compat.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/_compat.py",
+        "bytes": 148,
+        "sha256": "ba9c23daa7afe079187235cbd1c14641498508339fce765c4e8b12754b4900ba"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/_dbus.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/_dbus.py",
+        "bytes": 8837,
+        "sha256": "45a33008762bba867ae2e95e581496af388fae372a223e2e4e48c24c63fba1b0"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/_expat_introspect_parser.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/_expat_introspect_parser.py",
+        "bytes": 3409,
+        "sha256": "6099cf535c501975559a12463bbe6f9bbb9ba3ad6f087e7ac5e1b6e0856f59f2"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/bus.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/bus.py",
+        "bytes": 17960,
+        "sha256": "e044cabafe8899eb5f10bfbf707bf657d745fc46a398b1d59f643fd5b4c1504f"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/connection.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/connection.py",
+        "bytes": 27806,
+        "sha256": "9ef867546431fb7d16ad0f4ab8e4be10d40c519884269b83eaa92f9c4dc7e536"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/decorators.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/decorators.py",
+        "bytes": 15567,
+        "sha256": "7382fbbdbdd4cba689cf7bbe76fbc31808bb71cb86c2ad20b3c8e7a37ec99768"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/exceptions.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/exceptions.py",
+        "bytes": 4707,
+        "sha256": "4ace3ebb770926e18af8e87dead52eddb4a25c36e75de5132ed97ea40e709bf5"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/gi_service.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/gi_service.py",
+        "bytes": 3517,
+        "sha256": "8c2a5de6033a6b627340f5973a44f9c29591819e5a4d9279d022a47ac6c8dea6"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/glib.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/glib.py",
+        "bytes": 2130,
+        "sha256": "e763c9295ae8ce9afafd808c09800b2c9c3a90f6ba7c50261f9d97505e5b484e"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/lowlevel.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/lowlevel.py",
+        "bytes": 1864,
+        "sha256": "cce77a2acdd70f2637b4b14837aa347a407815841898bfee03ee7d39dd4d8217"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/mainloop/__init__.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/mainloop/__init__.py",
+        "bytes": 2369,
+        "sha256": "b6fd5b7c1dc87d1daaa0f5b9b8ad6e4d01a52763bb693ded12b4bf9f602206b7"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/mainloop/glib.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/mainloop/glib.py",
+        "bytes": 1806,
+        "sha256": "98e37906c14d5f41b388fae2a7549e8b754a55963fc809df5d0b7f9f45eb72cc"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/proxies.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/proxies.py",
+        "bytes": 24821,
+        "sha256": "8b96631ebe17dbb69bee7d1b0c3244ab1757fbc1053da2beb42a57047e76230f"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/server.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/server.py",
+        "bytes": 4657,
+        "sha256": "f7a043e67863447b0b03fda01f2a078fc7f7c8c05aff6cf333eece794872610d"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/service.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/service.py",
+        "bytes": 35602,
+        "sha256": "9e75d4ecf51022e38345b3e8d8666c6bfff5cbf4385fd7d913cf2cdedb80e82b"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/dbus/types.py",
+        "resolved_path": "/usr/lib/python3/dist-packages/dbus/types.py",
+        "bytes": 561,
+        "sha256": "d085aac0fd86216a8d6a6ccdd9d1808c13834b67a738c194903655886d7f6d4b"
+      },
+      {
+        "path": "/usr/lib/python3/dist-packages/_dbus_bindings.cpython-310-x86_64-linux-gnu.so",
+        "resolved_path": "/usr/lib/python3/dist-packages/_dbus_bindings.cpython-310-x86_64-linux-gnu.so",
+        "bytes": 168152,
+        "sha256": "aa160dac465b03b26a9c5ddac4980009fe43cf561a6a6205826db984d23a5c45"
+      },
+      {
+        "path": "/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.19.13",
+        "resolved_path": "/usr/lib/x86_64-linux-gnu/libdbus-1.so.3.19.13",
+        "bytes": 313656,
+        "sha256": "a3d53f7215af9860f3466b94cd8fe3e95c253c46df164dea62af9b9def93dcea"
+      }
+    ],
+    "full_runtime_environment_review_complete": false
+  },
+  "future_integration_requirements": [
+    "Keep session86437 and all pinned/published original sources unchanged; no hot replacement.",
+    "Do not launch any successor while the actual existing reviewer is live.",
+    "If a successor is needed after actual terminal evidence, preserve its outcome and all output, drain exact owner and full history, then add the real completed/failed reviewer to successor history.",
+    "Review all19 observed dbus Python/extension/libdbus dependencies and actual import/cache/native mapping provenance; current parity is not complete runtime admission.",
+    "Retain every original guard call, model/input/byte/tensor/cache/event/statistical check and the original resource budgets. Replace only service query transport, without result caching or reduced checking frequency.",
+    "Bind an immutable exact successor executor/spec/source closure and complete history; align actual-exit completion validators and downstream maintenance/Nemotron admission before launch.",
+    "If current review completes successfully, use that actual result and do not repeat it just to exercise this candidate."
+  ],
+  "runtime_admitted": false,
+  "successor_executor_created": false,
+  "successor_spec_created": false,
+  "running_reviewer_modified": false,
+  "original_model_or_validation_threshold_changed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
