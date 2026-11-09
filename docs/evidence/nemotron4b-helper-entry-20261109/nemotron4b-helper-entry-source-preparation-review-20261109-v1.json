@@ -1,0 +1,66 @@
+{
+  "schema": "nemotron4b_helper_entry_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T21:26:34.826862+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_helper_import_graph_v1.py": "0883afe6bb5e5238ffafbc67d832ef5d826b3b1982acef5e42096bc486608be5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_imports_v1.py": "6bdc7ce8a6655d624a5954b686006d16e86371340110e6f89e6682bbe7ae0bdc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_guarded_helper_entry_v1.py": "82f9f05331e913b25869d5cff1aa35adc4d0921d399f664dac5df5ef22e20d07",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_guarded_helper_entry_v1.py": "5024aec842ff1e3a2b3bfc654278740978b9c8fab0f12768eccec26c1ba97d02"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-entry-source-tests-actual-exits-20261109-v1.json",
+    "sha256": "7679514c93067ec59e866712be503e9e92b2894064df0f472c7734db69406f08"
+  },
+  "actual_source_diagnosis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-import-diagnosis-actual-exit-20261109-v1.json",
+    "sha256": "6dd261e174e7bc3a2a24eacf1b038b31f0a34baf7b3463be45198aa02d69bda1"
+  },
+  "diagnosis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-import-source-diagnosis-20261109-v1.json",
+    "sha256": "2ba34490baf3d47cb3fb0e724cea4f681830da231b2491ae99c3a543f1b87b52"
+  },
+  "prior_handshake_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-handshake-supervisor-source-preparation-review-20261109-v1.json",
+    "sha256": "083775d51df40220343062e6625ccc69a0864046657c03053efd6515a8ed9354"
+  },
+  "source_preparation_passed": true,
+  "guarded_same_process_entry_core_prepared": true,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "full_external_import_context_prepared": false,
+  "root_supervisor_prepared": false,
+  "tp2_rank_supervisor_prepared": false,
+  "immutable_worker_successor_prepared": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "actual_SDK_helper_executed": false,
+  "installed_package_code_executed": false,
+  "model_or_native_runtime_executed": false,
+  "current_dory_modified": false,
+  "serial_owner_added": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "findings": [
+    "Original helper imports its submodule throughlibneuronxla.__init__, whose eager import chain also includes compiler-wrapper/cache/logger/protobuf Python modules.",
+    "All15installed package Python sources/143542bytes match original installedRECORD. Conservative module-body graph reaches13Python modules andproto namespace.",
+    "Five reachable local package sources absent fromoldv2sourcepins: libneuronxla.logger, libneuronxla.neuron_cc_cache, libneuronxla.proto.hlo_pb2, libneuronxla.proto.metrics_pb2, libneuronxla.proto.xla_data_pb2",
+    "Boto3/botocore/google.protobuf are external graph boundaries; no complete runtime closure or actual import trace claimed.",
+    "This is an omission in our prior source-preparation coverage, not evidence of an upstream arithmetic defect or measured helper-startup slowdown.",
+    "New execution core checks exact source bytes, waits for caller-controlled parent release, rechecks library identity, executes source in same wrapper process under caller-supplied import context, verifies exact bounded stdout and preserves actual nonzero exits.",
+    "Generated entrypoint fixtures use synthetic source, not installed helper or SDK package code. All23tests pass; no scientific/model/runtime claims."
+  ],
+  "limitations": [
+    "Static graph conservatively visits both conditional branches/class bodies, defers function bodies, and lists dynamic import calls; arbitrary execution and external/native dependencies are not resolved.",
+    "Guarded entry core depends on authenticated caller callbacks and full import context; it cannot independently establish root serial admission, whole source closure or cgroup drain.",
+    "sys.argv is temporarily set for original script behavior; operating-system argv remains the wrapper and must be recorded as such. No original helper post-exec claim.",
+    "Python stdout cap is supplemental; native stdout/stderr still require parent supervisor caps.",
+    "Library fullstat unchanged,490MB library payload not hashed/read in this source-only pass."
+  ],
+  "next": [
+    "Add all5new local source pins and actualproto namespace to immutable helper/worker successor; retain old119pins and all original science.",
+    "Prepare complete external package/interpreter/native dependency authentication and import context before any actual SDK execution; package-only13modulegraph is insufficient.",
+    "Wire exact helper bootstrap to previously tested handshake/childsupervisor and record real wrapper identity/entrypoint digests/output separately.",
+    "Finish root/TP2supervisors and current history admission only afterexistingDory -> finite storage maintenance -> Nemotron chain."
+  ]
+}
