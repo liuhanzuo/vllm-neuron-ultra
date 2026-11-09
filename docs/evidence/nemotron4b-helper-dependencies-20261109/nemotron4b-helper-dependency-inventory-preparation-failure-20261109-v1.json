@@ -1,0 +1,19 @@
+{
+  "schema": "nemotron4b_helper_dependency_inventory_preparation_failure_v1",
+  "reviewer": "/root",
+  "actual_exit": {
+    "chunk_id": "46ba91",
+    "wall_time_seconds": 2.1828e-05,
+    "exit_code": 1,
+    "original_token_count": 203,
+    "output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_dependencies_v1.py\", line 142, in <module>\n    if __name__ == '__main__': main()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_dependencies_v1.py\", line 33, in main\n    _, prior[path] = read(path, digest)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_imports_v1.py\", line 31, in read\n    require(stat.S_ISREG(before.st_mode)and before.st_nlink==1 and 0<=before.st_size<=8*2**20,\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py\", line 14, in require\n    raise ValueError(message)\nValueError: Bounded ordinary source file\n"
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_nemotron4b_helper_dependencies_v1.py",
+    "sha256": "5f9f920a9e44679f6ed5c80b7830e800c8da159497434cd22f2218fae1ba7d48"
+  },
+  "reason": "Our source-only analyzer reused a reader requiring nlink 1 for all original 119 pins. Nine original native-reference source/metadata files are existing hardlinks with nlink 2 or 3. No source digest mismatch or SDK execution occurred.",
+  "installed_source_modified": false,
+  "model_or_native_executed": false,
+  "new_speedup_claim": false
+}
