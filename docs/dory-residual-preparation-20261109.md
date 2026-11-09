@@ -23,3 +23,17 @@
 原 BF16 权重、官方 oneDNN 与 ReferenceAttention、原 FP32 门槛、冷缓存至 4096、长解码、槽位复用、生成/RNG/停止/文本、质量、真实 HTTP 四并发和配对性能要求继续保留。已有模型提速表不变，全部 15 个家族继续在任务范围内。
 
 [采集源代码](evidence/dory-residual-source-20261109/dory_residual_visit_capture_v1.py)、[17 项模拟检查](evidence/dory-residual-source-20261109/check_dory_residual_visit_capture_v1.py)、[实际检查退出记录](evidence/dory-residual-source-20261109/source-tests.json)、[设计和待接入事项](evidence/dory-residual-source-20261109/design.json)、[文件 SHA256 清单](evidence/dory-residual-source-20261109/manifest.json)。已有实测结果见[注意力对照报告](dory-attention-factors-20261109.md)及[前五层与提速范围](dory-long-reference-status-20261109.md)。
+
+## 56 组缓存与故障清理：新增 25 项模拟检查
+
+后续重放所需的请求缓存管理组件也已准备。它按槽位、请求身份和递增的请求代次管理全部 56 组历史；同一物理层的两轮循环拥有独立缓存。旧请求、外来请求及不连续的位置会在重新绑定缓存之前被拒绝。只有原前向与输出头都成功，且缓存类型、形状和地址检查通过后才提交新状态。
+
+本轮新增 **21 项缓存生命周期检查与 4 项联合检查，共 25 项，均通过**。覆盖请求交错、同名请求重置、释放后复用、失败后新代次恢复、遗漏/未更新缓存、错误类型、重复缓存地址、输出头失败，以及异常归档失败时仍执行清理。地址检查使用 tensor 的 data_ptr；它不等于证明任意重叠视图都完全不相交。未来原生执行器仍须绑定 BF16 形状检查、实际张量地址和原始字节比较。
+
+还重新核对了原始事件 **6194** 的保存记录及其索引哈希：原故障注入在物理层 22 第二轮的输出产生之后发生；此前已完成 63 次层调用和 158 次官方投影调用。原记录中 32 组缓存长度为 34，另外 24 组仍为 33。联合模拟检查逐项复现了这份缓存长度映射，并在异常时保留 126 个输入/输出边界，包括第 22 层第二轮的残差输出，再清理失败请求且保持另一请求的记录不变。
+
+这里修正的是后续诊断的异常时点与证据保留方式。此前 17 项采集模拟检查中的“层内部抛异常”仍是有效异常传播用例，但不能代替这次与原记录一致的“输出之后抛异常”检查。这不是新发现的模型或上游缺陷，也没有重新执行原生模型。
+
+完整事件校验、真实重放、全部缓存/隐藏状态/logits 原始字节核对、独立复核及总资源预算仍待接入。上述工作完成、Nemotron r9 实际结束并完成资源释放后，才可准备新的独占运行；原 7 个整模型失败不变。
+
+[缓存管理代码](evidence/dory-residual-source-20261109/dory_residual_request_banks_v1.py)、[21 项缓存检查](evidence/dory-residual-source-20261109/check_dory_residual_request_banks_v1.py)、[4 项联合检查](evidence/dory-residual-source-20261109/check_dory_residual_capture_bank_integration_v1.py)、[25 项检查退出记录](evidence/dory-residual-source-20261109/banks-source-tests.json)、[原始故障元数据](evidence/dory-residual-source-20261109/dory-residual-original-injection-fixture-20261109-v1.json)、[源代码审阅与待接入事项](evidence/dory-residual-source-20261109/banks-source-review.json)、[本次文件清单](evidence/dory-residual-source-20261109/manifest-banks.json)。
