@@ -1,0 +1,77 @@
+{
+  "schema": "dory_residual_runtime_source_review_v1",
+  "reviewed_at": "2026-11-09T14:04:42.361876+00:00",
+  "reviewer": "root source review",
+  "source_preparation_only": true,
+  "source_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-runtime-source-tests-20261109-v1.json",
+    "sha256": "de92b503526a6e964a49be9b33720bbffe7f95d46ef2ff941331e6c0929daa0a",
+    "bytes": 2568
+  },
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_output_archive_v1.py",
+      "sha256": "8b39584b4df7c591d2e0536026c647459a5017f01af571b2e65f09e9b695e535",
+      "bytes": 4923
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_residual_output_archive_v1.py",
+      "sha256": "d56e1aa83e5f45fd5432b904697af751b279297147f14442e52e00229082579c",
+      "bytes": 6786
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_replay_runtime_v1.py",
+      "sha256": "5e05fd7a7820f412cd2f7213cc1cc431e672161599903a3c059ba87db864469c",
+      "bytes": 19808
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_worker_preparation_v1.py",
+      "sha256": "ee01c05804bb80efeb1965109b182fd891664255377e400f204c46398d237f22",
+      "bytes": 14735
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_residual_runtime_source_v1.py",
+      "sha256": "4806dafbd6934ab4b3e4211e4193e7c3c32ddd196a9c5f19cf1ea42150ec4c3f",
+      "bytes": 3081
+    }
+  ],
+  "unchanged_setup": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_first5_worker_preparation_v1.py",
+    "sha256": "b9cbb6ef95c7c274d93e33624e983d3d9d748fffeb73dde4b29e45537216ec28",
+    "bytes": 14740
+  },
+  "unchanged_delta_writer": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_long_delta_writer_v1.py",
+    "sha256": "c97230fd16554425319bbbf27e3bc9810a0997afbd88f35fabcad4b7ca0700fa",
+    "bytes": 2869
+  },
+  "coverage": [
+    "Prepared complete runtime joins event stream, loop-aware capture, all56 cache banks, original DeltaWriter and bounded observation archive.",
+    "Original setup main AST differs only in runtime import; same507 checkpoint tensors mapped to399 parameters, BF16, oneDNN, ReferenceAttention and tokenizer.",
+    "Native forward uses original token slices, positions and head selection; complete outputs are saved before metadata/hash comparison; original281 official projections required.",
+    "All114 tensor descriptors and saved-payload hashes compared with source-bound original metadata; independent reread remains required.",
+    "Original event6194 fault after layer22 loop1 output; preserve126 boundaries,63 completed visits,158 projections and complete56-cache partial length map before invalidation.",
+    "Invalid handle checks invoke internal bank API, require zero projection/state change, and explicitly do not qualify a production API.",
+    "Archive close/flush errors retain partial prefix metadata and mark failure; complete is set only after close succeeds. Additional unaccounted bytes after I/O failure remain possible.",
+    "Complete summary requires6200 events,6185 calls,3 rejected handles,1 injection,153 selected rows,89 selected archives and175472640 residual bytes.",
+    "Seven original FP32 failure records copied unchanged; original metric dictionaries are not recomputed and no model/Neuron/quality/performance qualification is claimed.",
+    "Successful large temporary tensor references cleared; capture installation and nested hook/cache/journal cleanup are inside try/finally.",
+    "Control setup object still constructed as in original setup, but candidate routing remains inactive."
+  ],
+  "retained_test_issue": "First close-error test failed because its mock lacked write/flush delegation; corrected mock passed. This is our preparation fixture issue, not an upstream/model defect.",
+  "remaining": [
+    "Independent reviewer must reread original and new saved tensor bytes, reconstruct all112 cache histories, recompute selected comparisons and verify failure/cleanup records.",
+    "Finalize authenticated expected_original_raw_bytes and total fresh storage/wall/CPU/single-file limits. Reserve selected residuals plus at least512MiB failure payload space and1GiB metadata.",
+    "Original DeltaWriter partial files survive an I/O failure but no complete per-tensor return descriptor is produced on that exception; admission/reviewer must treat them as incomplete.",
+    "Create an admitted child entry wrapper and fresh runtime specification; current standalone entrypoints remain disabled.",
+    "Only after actual r9 terminal, external exit/audit/physical release and history extension may a complete native replay be admitted.",
+    "Full native replay has not been executed; source checks do not cover all runtime branches with real tensors."
+  ],
+  "runtime_spec_created": false,
+  "native_worker_ready": false,
+  "native_executed": false,
+  "original_pointwise_failures": 7,
+  "root_cause_established": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

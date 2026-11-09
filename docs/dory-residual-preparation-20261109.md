@@ -49,3 +49,19 @@
 真实执行器仍须接入原模型、token/位置/输出头选择、投影调用计数、全部输出字节比较、残差和异常归档，随后完成独立复核及新的串行资源配置。事件读取检查依赖本机保留的原计划、索引和事件文件，不能当作可独立下载运行的完整模型基准。
 
 [完整事件校验](evidence/dory-residual-source-20261109/dory_residual_replay_history_v1.py)、[带哈希校验的读取组件](evidence/dory-residual-source-20261109/dory_residual_event_stream_v1.py)、[27 项检查退出记录](evidence/dory-residual-source-20261109/event-source-tests.json)、[前 6 个原事件元数据](evidence/dory-residual-source-20261109/dory-residual-original-startup-fixture-20261109-v1.json)、[审阅及待接入范围](evidence/dory-residual-source-20261109/event-source-review.json)、[文件清单](evidence/dory-residual-source-20261109/manifest-events.json)。
+
+## 完整重放执行代码：新增 15 项源代码检查
+
+已把事件读取、112 次层访问采集、56 组缓存管理和输出归档接入**完整重放执行代码草稿**。原模型初始化函数的语法树只改变了重放模块的导入：保留原 507 项权重到 399 个参数的映射、BF16、官方 oneDNN 投影、ReferenceAttention、分词器及原 token/位置/输出头选择。候选控制对象沿用原初始化，但执行期间禁止启用候选投影路由。
+
+草稿要求每次成功调用保存隐藏状态、logits 和 112 个 K/V 张量，再与原 114 个张量描述和哈希逐项比较；选定的残差数据也先保存再判定失败。原事件 6194 的故障安排在第 22 层第二轮输出采集之后，保留 63 次层调用的 126 个边界及全部缓存的部分长度，再清理失败请求。无效请求通过诊断内部接口尝试，不能据此宣称生产 API 或 HTTP 验收通过。
+
+新增 **10 项归档模拟检查和 5 项源代码接入检查，共 15 项通过**。归档组件只有在写入、刷新、关闭都成功后才标记完整；异常时保留已完成前缀及部分文件，不将可能存在的额外文件字节冒充已确认数据。第一次关闭失败用例因我们自己的模拟包装器漏转发写入/刷新而失败，修正后通过；旧用例、实际退出码和原因均已保留。这不是模型或其他仓库的缺陷。
+
+这 15 项检查没有加载模型，也没有完整模拟原生重放的所有分支。两个独立入口仍禁用，运行规格、总资源预算、真实子进程入口和独立保存数据复核器尚未完成。原 DeltaWriter 遇到 I/O 异常会留下部分文件，但不能提供正常返回时的完整张量描述，这些输出必须按不完整证据处理。
+
+完整运行计划仍要求 6,200 个事件、6,185 次成功调用、3 次无效请求拒绝、1 次原故障注入，以及 89 次选定调用中的 153 行残差（175,472,640 字节）。全部原输出数据的精确总量仍须经认证后写入预算；异常归档和元数据还需另留空间。只有 Nemotron r9 实际结束、退出及资源释放核验完成，并补齐本轮运行历史，才能安排原生重放。原 7 个 FP32 失败不改判，指标字典尚未重算；没有新增 Dory 提速或整模型通过结论。
+
+[完整重放草稿](evidence/dory-residual-source-20261109/dory_residual_replay_runtime_v1.py)、[原模型初始化接入](evidence/dory-residual-source-20261109/dory_residual_worker_preparation_v1.py)、[有界输出归档](evidence/dory-residual-source-20261109/dory_residual_output_archive_v1.py)、[15 项检查记录](evidence/dory-residual-source-20261109/runtime-source-tests.json)、[源代码审阅与剩余事项](evidence/dory-residual-source-20261109/runtime-source-review.json)、[保留的模拟用例失败](evidence/dory-residual-source-20261109/dory-residual-archive-close-test-fixture-failure-20261109-v1.json)、[本次文件清单](evidence/dory-residual-source-20261109/manifest-runtime.json)。
+
+本目录提供审阅源码和证据；完整模型初始化仍依赖本机保留的原检查点、固定上游源码及相关加载模块，不能作为下载后即可运行的完整模型基准。
