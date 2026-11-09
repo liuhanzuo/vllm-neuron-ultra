@@ -1,0 +1,82 @@
+{
+  "schema": "dory_residual_visit_capture_design_v1",
+  "observed_at": "2026-11-09T13:01:04.408204+00:00",
+  "source_preparation_only": true,
+  "official_source": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/vllm/vllm/model_executor/models/dory.py",
+    "sha256": "483a3adbbef4d2b66e275579e1e505a3d812f3c1c09b10c349e6cbf286df517b",
+    "bytes": 14901
+  },
+  "official_config": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-native-reference-source-20261107-v1/official-config.json",
+    "sha256": "d2d086f5949598a043a00d70e2c28c45305bca7703682de3e4f990a7fd3279a4",
+    "bytes": 2267
+  },
+  "prior_native_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-r1-runtime-spec-20261109-v1.json",
+    "sha256": "ff13691a79a50a2ec7e33e3eb6bb01708c4793ac1f8564638cb1b6863273f22f",
+    "bytes": 134501
+  },
+  "source_identity_matches_completed_first5_spec": true,
+  "source_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-visit-capture-source-tests-20261109-v1.json",
+    "sha256": "e4bd4c1806cd415c94a6de32ef67dfffde1ba7479fcf5be816309aa5f86894c6",
+    "bytes": 1028
+  },
+  "motivation": "Locate later-layer divergence, including recurrent transition normalizations, after first5 and controlled attention results; no root cause asserted.",
+  "physical_layers": 72,
+  "recurrent_loops": 2,
+  "layer_visits": 112,
+  "selected_boundaries_per_row": 224,
+  "visit_order": "layers0..15 loop0; layers16..55 loop0; layers16..55 loop1; layers56..71 loop0",
+  "captured": [
+    "input",
+    "residual_output"
+  ],
+  "hidden_width": 2560,
+  "selected_rows": 153,
+  "selected_BF16_bytes": 175472640,
+  "selected_bytes_are_not_total_disk_budget": true,
+  "boundaries_between_calls": [
+    "layer15 loop0 output -> layer16 loop0 input",
+    "layer55 loop0 output -> layer16 loop1 input",
+    "layer55 loop1 output -> layer56 loop0 input"
+  ],
+  "observation": "Both trajectory inputs and outputs at original decoder hooks; no rewriting normalization, recurrence, attention, projections or output.",
+  "original_facts": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-reviewed-findings-20261109-v1.json",
+      "sha256": "775c832e74fc70eeae8cb6b0a430c558a8267706f1eef4927648c6e2cfc30bbb",
+      "bytes": 288021
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-attention-factors-reviewed-findings-20261109-v1.json",
+      "sha256": "ca6ae9c9957eb27413a0def4d75703b74706f4c76d43e4e3499c6e4ed44527a2",
+      "bytes": 6009
+    }
+  ],
+  "remaining_implementation": [
+    "Prepare a separate full-backbone replay worker; existing first5 replay stops early and its three-cache PrefixBanks cannot be reused unchanged.",
+    "Replay all6200 original lifecycle events and6185 successful saved calls with all56 independent cache histories and original full shapes. Capturing153 rows must not narrow forward inputs.",
+    "Preserve actual original injected exception at physical layer22 loop1 and handle invalidation; retain partial observations and failures without treating them as successful forwards.",
+    "Verify original selected hidden/logit bytes and every cache append/prefix/full-history against retained original archives before interpreting divergence. Keep original seven FP32 failures.",
+    "Use original BF16 weights, official oneDNN projection paths, ReferenceAttention, original input/position/token/head selection and original model configuration. Authenticate callback that copies selected rows without mutation.",
+    "Define total raw/cache/failure/log overhead budget and fresh root/NVMe reservations; selected175472640 bytes alone is insufficient.",
+    "Implement independent saved-byte review and source tests for full request bank lifecycles, archive coverage and failure retention.",
+    "After r9 actual terminal, independent audit and physical release, extend complete history with actual r9 service/process owners and exits before any fresh source-finalized native admission."
+  ],
+  "native_worker_ready": false,
+  "runtime_spec_created": false,
+  "native_executed": false,
+  "original_pointwise_failures": 7,
+  "root_cause_established": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "constraints": [
+    "all15 families retained",
+    "cold4096,long,slotreuse,generation,RNG,stop,text,quality,HTTP C4,paired performance retained",
+    "failed baseline never speed denominator",
+    "canonical inputs and r9 pinned sources immutable",
+    "configured API and original model unchanged"
+  ]
+}
