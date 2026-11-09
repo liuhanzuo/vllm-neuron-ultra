@@ -1,0 +1,85 @@
+{
+  "schema": "nemotron4b_startup_import_context_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:23:35.551023+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v3.py": "3b4f39bbbcb73cf3a12ea7c93926757f61dfd23002a74635437716b768abe948",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_context_v2.py": "f84528a6400b87977387f0ad41d95077d64b060947721258b577bf83c6d71035",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v3.py": "523bde213cae18668757213582311f60d00eaf504d6f4cd78f58ed93d4b0d287",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_context_v2.py": "e8e377dd985a7cbed7249dc576dbb3dcf1a16c39fcd127c39ff179b3f321efd3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_startup_import_context_v2.py": "8bc04b35dc6a6b3d9923e122b63e4936d91c92cb5d6f4769dd34725679a69b5a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_site_restore_v1.py": "ebb54bf31edc8b3547e8b8cef5736a092838b36c31988aee052b5c67058bb7c4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_guarded_helper_entry_v2.py": "de46ad2cec90f5746e621b8f5f529b666730732bf71831b0fdf273405691b3cf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v1.py": "c6aae19d0e5bc145be7785963e88408d81635550b02f042e52456e1c6ba6322e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e"
+  },
+  "prior_router_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-import-router-v2-source-preparation-review-20261109-v1.json",
+    "sha256": "856636a1e9d669639b76ae05a01ead851a4c867f313a491749864b4621d63afe"
+  },
+  "actual_startup_dispatch_inputs": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-helper-startup-import-dispatch-inputs-20261109-v1.json",
+    "sha256": "6952a2436b5d749569334a34643480cdf9354baf40d3c9f18adf60241353693b"
+  },
+  "tests_actual_exits": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-import-context-tests-actual-exits-20261109-v1.json",
+    "sha256": "3cc0e47b80b7157e912436e025f28d6c5c6a12503966c7c6d2125f7e2f029a8d"
+  },
+  "selected_test_counts": {
+    "router": 32,
+    "context": 22,
+    "startup": 15
+  },
+  "tests_passed": 69,
+  "retained_fixture_failures": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-import-context-fixture-failure-20261109-v1.json",
+      "sha256": "e90826ae8e7ba92217e723fb0a466bb24ea815617505e674209c3d777707f774"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-import-context-fixture-failure-20261109-v2.json",
+      "sha256": "ec6c1fe632f65aece173fa65a5a69dd05ea9fa35d97ac52e1e55c8a59a3b2396"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-startup-import-context-fixture-failure-20261109-v3.json",
+      "sha256": "83921fb06484a5183766ebe5a4f6a1ebf0922af04ba1a1c478449e476e9d215d"
+    }
+  ],
+  "source_preparation_passed": true,
+  "dispatch_context_and_site_helper_integration_prepared": true,
+  "original4router_dependency_pins_and8startup_identities_unchanged": true,
+  "findings": [
+    "Real installed editable .pth/distutils/six source mutates and inspects sys.meta_path identity/order. New dispatcher preserves actual objects and live-list iteration; each finder is authorized before attribute access/execution.",
+    "Dispatch hooks cover bootstrap._find_spec and importlib.util cached alias, preserve per-finder import lock, reload and effective existing-module spec selection under explicit caller authentication.",
+    "Concrete finder binding shapes match original interpreter providers plus distutils/editable/six module objects; bindings require actual module authentication and never grant by name alone.",
+    "Source-only parent gate/site/helper integration initially omitted builtin pwd, then system sitecustomize, then encountered its symlink. All three failed fixture versions/results retained; no SDK/model defect inferred.",
+    "Selected router v3 accepts only an explicitly pinned one-hop source alias, verifies link text/fullstat before/after canonical pinned target read, and preserves original module file/spec origin. Changed links/targets and implicit/chained aliases fail.",
+    "Selected startup fixtures now execute actual system site, _sitebuiltins and sitecustomize in temporary virtual environments, synthetic .pth/helper code, and exact pwd builtin; parent release precedes startup. No installed SDK or model is executed.",
+    "69 selected cases passed:32router,22dispatch/bindings,15gatedstartup. Startup failures, catch-all attempt, original SystemExit23/43, bytecode avoidance, dynamicregistration and optionalchildImportError are covered."
+  ],
+  "limits": [
+    "Real SDK interpreter/stdlib/preloaded-module policies, source/native catalog, custom-loader/alias audits and linked-library identity checks remain incomplete. Fixture callbacks do not authorize actual SDK.",
+    "On-disk bootstrap.py source is authenticated as source evidence only; it does not prove equality to interpreter frozen bytecode.",
+    "Context intentionally rejects legacy find_module-only providers and requires nonempty ordinary finder list; observed SDK finders use find_spec. It is not a general Python sandbox and cannot prove arbitrary code does not call original cached loaders/hooks directly.",
+    "Preloaded/dynamic module and environment audits are required caller contracts. Real-source authentication of finder modules and real native failure lifecycle callbacks must be integrated before admission.",
+    "Original no_site flag remains1; wholehelper equivalence, original argv at OS level, root/worker lifecycle and complete owned-group cleanup remain unqualified.",
+    "No new runtime spec, serial enrollment, baseline, model validation or speed claim; exact current Dory job remains unchanged."
+  ],
+  "all_new_sources_now_frozen": true,
+  "actual_SDK_helper_executed": false,
+  "full_external_import_context_prepared": false,
+  "complete_runtime_dependency_closure_proven": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "serial_owner_added": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next": [
+    "Use selected routerv3/contextv2; include pinned system sitecustomize alias and builtin pwd in actual runtime policy.",
+    "Implement concrete preloaded/module/native/custom-provider origin audits and exact SDK bootstrap, then original worker/root integration; retain all scientific requirements.",
+    "Keep Dory retry -> finite completed storage maintenance -> Nemotron v23_r2 -> Mini savedtap retry-v23 before any new Nano4B native slot."
+  ]
+}
