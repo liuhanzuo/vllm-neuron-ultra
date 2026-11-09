@@ -1,0 +1,22 @@
+{
+  "schema": "nemotron4b_import_router_test_expectation_failure_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:01:52.987309+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v1.py",
+    "sha256": "d8e30487fd988e0598a3e78817b2dca271ac773f3da817b8e6a75451ee12ebfb"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v1.py",
+    "sha256": "1b05d04e622fb8c700d2b27c0d3cf9e0f4deba81fc03dfad0a4f22d46340c149"
+  },
+  "actual_external_exit_observed": true,
+  "exit_code": 1,
+  "tool_chunk": "06b4e4",
+  "output": "test_absent_optional_dependency_preserves_importerror_fallback (__main__.Imports) ... ok\ntest_catalog_mutation_after_construction_does_not_rebind_source (__main__.Imports) ... ok\ntest_caught_provenance_failure_still_poisoned_at_finish (__main__.Imports) ... ok\ntest_custom_dynamic_alias_loader_semantics_preserved (__main__.Imports) ... ok\ntest_custom_loader_without_explicit_provider_rejected (__main__.Imports) ... ok\ntest_exact_finder_is_authorized_before_call (__main__.Imports) ... ok\ntest_existing_valid_sourceless_bytecode_cannot_replace_source (__main__.Imports) ... ok\ntest_finder_exception_is_not_reclassified_as_absence (__main__.Imports) ... ok\ntest_found_unpinned_dependency_cannot_become_optional_absence (__main__.Imports) ... ok\ntest_namespace_extra_search_root_rejected (__main__.Imports) ... ok\ntest_namespace_locations_preserved (__main__.Imports) ... ok\ntest_native_rejection_precedes_extension_initialization (__main__.Imports) ... ok\ntest_nonzero_module_exit_remains_original (__main__.Imports) ... ok\ntest_real_package_relative_import_and_original_origin (__main__.Imports) ... FAIL\ntest_source_change_prevents_any_module_body_execution (__main__.Imports) ... ok\n\n======================================================================\nFAIL: test_real_package_relative_import_and_original_origin (__main__.Imports)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v1.py\", line 78, in test_real_package_relative_import_and_original_origin\n    self.assertIsNone(module.__cached__)\nAssertionError: '/tmp/nano4b-import-router-uzr7_lue/_nano_import_package/__pycache__/__init__.cpython-310.pyc' is not None\n\n----------------------------------------------------------------------\nRan 15 tests in 0.021s\n\nFAILED (failures=1)\n",
+  "cause": "Test incorrectly expected module.__cached__ to be None. Import machinery may synthesize a cache pathname even when source is compiled directly and no bytecode is read or written.",
+  "preserved_implementation_unchanged": true,
+  "selected_successor_test_required": true,
+  "actual_SDK_executed": false,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "nemotron4b_import_router_v2_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-09T23:08:57.892187+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v2.py": "01587fbb4f260b93eabd5c4db057bb3baca6ca24722beede28e5b2cae66f92db",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v2.py": "70e592bed99a9fca55cde898fbe87490029a1307ae007a941fd5c1aceb197c96",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a"
+  },
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-import-router-v2-tests-actual-exit-20261109-v1.json",
+    "sha256": "40880cbdaea6af8161cb5766def86768cd37ccee3c73eeefd78267fd0f0f87c7"
+  },
+  "tests_passed": 27,
+  "prior_router_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-import-router-source-preparation-review-20261109-v1.json",
+    "sha256": "0badbd67cd059ac594b99f667f8a2da4d209ff2d1f4d425e3d328228bbf0a6b5"
+  },
+  "retained_original_test_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-import-router-test-expectation-failure-20261109-v1.json",
+    "sha256": "0d61d72ecbecfb1e1637f7680a60f1dd7740c3e636dbeb790df134208b537911"
+  },
+  "prior_startup_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-site-restore-source-preparation-review-20261109-v1.json",
+    "sha256": "a17f72a30ea1138949e282e50aa439fa7a306d9fb7a76c0fd93bec8e620f102d"
+  },
+  "prior_source_pins_revalidated": 8,
+  "prior_source_pins_unchanged": true,
+  "source_preparation_passed": true,
+  "import_dispatch_core_prepared": true,
+  "findings": [
+    "v1 poisoned the router after legitimate optional ImportError escaping an imported module. v2 distinguishes authenticated provider execution from provenance/resource/metadata authorization.",
+    "Parent imports now preserve ordinary child body ImportError and ModuleNotFoundError fallback, natural ValueError, finder errors, and custom loader create/exec ImportError; original provider exception objects are retained.",
+    "Finder/guard/source-reader/provider authorization and structural checks are separately protected. Their ImportError becomes ProvenanceError and sticky failure; catching errors in imported source cannot clear poisoning.",
+    "Custom/native authorization callbacks now audit create_failed(None) and exec_failed(partial_module), because failed initialization can still change native mappings. Callback failure remains fatal.",
+    "Original SystemExit29 source and SystemExit37 provider are preserved. A failed postfailure audit is retained without replacing the original terminal exit.",
+    "The 27 actual synthetic import tests also preserve source identity, package and namespace paths, existing bytecode bypass, ordered finder authorization, alias identity and denial before native loading.",
+    "v1 source/reviews/tests including the earlier cached-path expectation error are preserved; only v2 is selected for future integration."
+  ],
+  "limits": [
+    "This is an import dispatch core, not the complete real SDK import context. It does not install itself or monitor sys.meta_path/sys.path mutation.",
+    "Actual startup .pth and six.moves finders, preloaded modules, interpreter/stdlib/native origins and linked libraries still require concrete caller policies and runtime checks.",
+    "authorize_native/authorize_custom callbacks in these tests are synthetic. No installed SDK, actual native extension or model was loaded; the invalid native candidate was rejected before initialization.",
+    "The v2 failed-provider callback phases are an explicit API addition; future real callbacks must handle both success and failure phases before admission.",
+    "Root/worker/helper integration and complete owned-process-group drain remain unfinished. Original scientific scope and serial queue remain unchanged.",
+    "No runtime spec or serial owner was created, no complete model qualification and no performance result."
+  ],
+  "complete_runtime_dependency_closure_proven": false,
+  "full_external_import_context_prepared": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "actual_SDK_helper_executed": false,
+  "installed_package_code_executed": false,
+  "original_native_payload_bytes_read": 0,
+  "model_or_native_runtime_executed": false,
+  "serial_owner_added": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "all_new_sources_now_frozen": true,
+  "current_dory_modified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next": [
+    "Integrate v2 with authenticated real startup/six finders and preloaded/native origins; require failed-provider callbacks to audit partial initialization.",
+    "Bind exact real SDK startup policy, helper bootstrap and root/worker integration with prepared startup/pair cores.",
+    "After actual Dory retry completion: saved residual summary, finite storage maintenance, Nemotron v23_r2 package builder, then MiniCPM5 retry-v23 saved taps. Do not launch additional native/raw jobs while Dory owns the serial slot."
+  ]
+}
