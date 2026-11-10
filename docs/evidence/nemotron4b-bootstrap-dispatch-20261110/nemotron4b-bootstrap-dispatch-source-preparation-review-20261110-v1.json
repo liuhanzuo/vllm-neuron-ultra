@@ -1,0 +1,73 @@
+{
+  "schema": "nemotron4b_bootstrap_dispatch_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T02:21:28.641848+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_bootstrap_dispatch_v1.py": "0de93877d679775095d388df53e4bb66796e29a1a37f80212ba079d31005c4eb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_bootstrap_dispatch_origin_v1.py": "c4bf341af757f052775345fd3e0a5a4d84ebac9a93a366cedc055b81e3379475",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_interpreter_origin_policy_v1.py": "8c4b33e757df2cd87820741c0d6ef4b028e3d83400ac286e8a0778ab4b7327bb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_native_origin_audit_v1.py": "001f31b51d72955f1c1da456367f1631ae160fd9180924a6876c38639c112659",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v4.py": "aab6eb9fab0f785236bc43c40f07dc55469cf6b50f5757b0c0e584b9be26b51e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_pinned_source_reader_v1.py": "d81ba7c29fa00b058d0aaf441bb78973a1f68bae323019bfc58697029fd7f25f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_interpreter_policy_v1.py": "c028d50d91b4d7f9e570572845806c8a4fc2b944f08c2c91c64396e3e7ade25b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_bootstrap_dispatch_origin_v1.py": "7d7eb30d76c5cf2ec5c88f333d390079408d604f3b0a06dfa79fcc36bad42f7d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_context_v3.py": "993e352f186306fde32710cd7c3caca5ef7560a489dbed5e5ae30bb0be0a958f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_interpreter_origin_policy_v1.py": "f7c0d53f633b1df567d9c8ec911664f670eee88c0a1fc19116d33c703c0102b2"
+  },
+  "new_sources": [
+    "nemotron4b_bootstrap_dispatch_origin_v1.py",
+    "check_nemotron4b_bootstrap_dispatch_origin_v1.py",
+    "observe_nemotron4b_bootstrap_dispatch_v1.py"
+  ],
+  "prior_interpreter_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-policy-source-preparation-review-20261110-v1.json",
+    "sha256": "4c7d988e4779b8e2ac847a740bb57edc59dfaf638690d063fb7fe2766ff4ca6d"
+  },
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-bootstrap-dispatch-tests-actual-exits-20261110-v1.json",
+    "sha256": "26522ba35d32b8fe649fb9675e12cd0aee747cecc2d2d85cfa8a0bb96fadc1f1"
+  },
+  "candidate_manifests": {
+    "native": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-bootstrap-native-manifest-candidate-20261110-v1.json",
+        "sha256": "c7bdc01eda5c44cddbfd0ede364234f50672216999ce496c40c05f6f7fa6cd1e"
+      },
+      "definition_sha256": "c0905651632288a603eb2ae8f16f70ebd6601eca314aa0b70351bb0e0fb3b7bc",
+      "original_interpreter_manifest_unchanged": true
+    },
+    "neuron": {
+      "reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-bootstrap-neuron-manifest-candidate-20261110-v1.json",
+        "sha256": "13eb5b17792cca9b21d67acaaa71df304c7a06fcb34956c26e1553b347ba493d"
+      },
+      "definition_sha256": "5e17baa076ab2c728f61fbee036c1ac5084ff1eaeda0b7098b33d2fee0bb45f9",
+      "original_interpreter_manifest_unchanged": true
+    }
+  },
+  "tests_per_interpreter": 12,
+  "passing_executions": 24,
+  "findings": [
+    "Provides a concrete DispatchContext.authenticate_bootstrap callback. Requires the original frozen canonical module to be authenticated and preloaded-bound by InterpreterPolicy first.",
+    "Pins the original top-level _find_spec definition inside the authenticated frozen module; binds both importlib aliases, exact function globals, defaults and live code object identity.",
+    "The callback runs before dispatch hook installation. During the context, original-function checks deliberately inspect the retained original function rather than rejecting the intended hook; DispatchContext retains responsibility for hook lifecycle.",
+    "Two original Python interpreters executed12tests each, including actual dispatch context install, import of a generated source module via PinnedSourceLoader, normal restore and same-object exception propagation/restore.",
+    "Original-runtime candidate observations match the prior reviewed interpreter manifests. Only frozen Python definitions and native file stat are inspected; original native payloads remain unauthenticated."
+  ],
+  "limits": [
+    "Synthetic native files/maps back InterpreterPolicy tests. No model, Torch, Neuron SDK, real helper or original site hooks ran.",
+    "This closes the original dispatcher callback only. All other preloaded source/code origins, complete native linked-library closure and concrete root/worker/helper CLI integration remain.",
+    "No standalone runtime permission, actual model baseline, full-model qualification or speedup."
+  ],
+  "source_preparation_passed": true,
+  "all_new_sources_now_frozen": true,
+  "actual_native_payload_authenticated": false,
+  "complete_preloaded_source_provenance": false,
+  "complete_runtime_dependency_closure_proven": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
