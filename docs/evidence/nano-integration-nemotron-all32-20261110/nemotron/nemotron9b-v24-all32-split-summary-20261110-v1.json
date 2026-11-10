@@ -1,0 +1,3556 @@
+{
+  "schema": "nemotron9b_v24_all32split_metadata_summary_v1",
+  "observed_at": "2026-11-10T04:11:36.495164+00:00",
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v24-r10-20261110-spec.json",
+    "sha256": "dfb80b098d9f25d8925b1855701b5824e7a8466e75f02b792cb0d7535d2a6a74",
+    "bytes": 13801219
+  },
+  "package_commit": "60ab7f54a2c54ef0bc9b498621a45719ee7f0e84",
+  "software_identity": {
+    "python": "3.10",
+    "versions": {
+      "vllm": "0.11.0",
+      "torch": "2.8.0",
+      "torch-xla": "2.8.1",
+      "torch-neuronx": "2.8.0.2.12.22436+0f1dac25",
+      "neuronx-distributed": "0.17.26814+4b18de63",
+      "neuronx-distributed-inference": "0.8.16251+f3ca5575",
+      "neuronx-cc": "2.23.6484.0+3b612583",
+      "transformers": "4.57.6"
+    }
+  },
+  "compiler_flags": [
+    "--target=trn1",
+    "--auto-cast=none",
+    "--model-type=transformer",
+    "-O1",
+    "--lnc=1",
+    "--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=2 --vectorize-strided-dma"
+  ],
+  "cases": [
+    {
+      "stage": "split-nemotron-projection-b1-t128-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t128-original-worker-result.json",
+        "sha256": "1e81dc59817ac373a12e6e211fc8422e1d4c4804b0620a383d7ca63cbe7614ac",
+        "bytes": 7672938
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t128-original-retained-exit.json",
+        "sha256": "29ef89dc1982024fa69c0037b620dd637ccca4af27c8cb646c3898c09d916eab",
+        "bytes": 4439
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t128-original",
+        "case": {
+          "name": "nemotron_projection-b1-t128",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 128,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            128,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t128-original/compiler-work/model/graph.hlo",
+        "sha256": "f3352545e250214b1612b291b9b49b0a448c3374ffa3fe1c785c9ed89e45916e",
+        "sampled_addresses": 1152,
+        "mismatching_sampled_addresses": 1143,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t128-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t128-tensor-split-worker-result.json",
+        "sha256": "450983fa311b2df674736bb9eb0afe86e7263ace506c48f310beb9cd76612107",
+        "bytes": 7670389
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t128-tensor-split-retained-exit.json",
+        "sha256": "7ba521e7f7a3b1e52aadec70bd99c3e70ee2120fa38a3c2a6fdffe4b43a9e00f",
+        "bytes": 4459
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t128-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t128",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 128,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            128,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t128-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "d1b1ab4d6af8476d141880fd85ab5dc45be56f307206ace7bba90971227b26ca",
+        "sampled_addresses": 1152,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t256-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t256-original-worker-result.json",
+        "sha256": "779063a4ad0b90389f260e896bf69d76e6e894e9cfee26308dfa47fbd2a3c7b8",
+        "bytes": 7672937
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t256-original-retained-exit.json",
+        "sha256": "3d16886de38ec1b44aa1bca7969411a7db8536ac76049f55604f0e0a44e399e7",
+        "bytes": 4439
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t256-original",
+        "case": {
+          "name": "nemotron_projection-b1-t256",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 256,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            256,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t256-original/compiler-work/model/graph.hlo",
+        "sha256": "bca4e5ca09239513ed14c511b957c1881bcb04828c364bcf9cd93a8f11005be9",
+        "sampled_addresses": 2304,
+        "mismatching_sampled_addresses": 2295,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t256-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t256-tensor-split-worker-result.json",
+        "sha256": "39842f501dc81a9cba2b5c4e229de39c427fd640620ad8d001f3f3043460eea8",
+        "bytes": 7670390
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t256-tensor-split-retained-exit.json",
+        "sha256": "0a15c3ceeee0d79ec9673141e4a852573a31d4b9d5498f0c58ac8ab746f06b66",
+        "bytes": 4459
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t256-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t256",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 256,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            256,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t256-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "2229eb662cf448708d8cf2b3964a088719853685c8bb8c812e4890e4e869ac78",
+        "sampled_addresses": 2304,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t512-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t512-original-worker-result.json",
+        "sha256": "7886978321aa71d06d2d77115a4ae7fa597054492545567d4776cf0f272a8c4d",
+        "bytes": 7672957
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t512-original-retained-exit.json",
+        "sha256": "1281eef846fb5a85268b85c7eb0cf59ad1ecb4d444580903f61bff2617f982fa",
+        "bytes": 4439
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t512-original",
+        "case": {
+          "name": "nemotron_projection-b1-t512",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 512,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            512,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t512-original/compiler-work/model/graph.hlo",
+        "sha256": "ca4678cce39ae1e811627fdab4c83c84b54c60f25d4783870d5c20fe0246c787",
+        "sampled_addresses": 4608,
+        "mismatching_sampled_addresses": 4599,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t512-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t512-tensor-split-worker-result.json",
+        "sha256": "8344cf8ef1d02133f463869ed37d8270d0e7d01113b5d6c45571083ced511854",
+        "bytes": 7670409
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t512-tensor-split-retained-exit.json",
+        "sha256": "0864b679fcca1b9690c0f1233b72b1f4bbc39be95181234127732d11a8979108",
+        "bytes": 4459
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t512-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t512",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 512,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            512,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t512-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "8dd5077741e5aaca6dca57f0eebd86537771808ef0a79c6d84c28fdc96945d45",
+        "sampled_addresses": 4608,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1024-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1024-original-worker-result.json",
+        "sha256": "b6445d447f5ec54f0a8e42ec784cd5adb3fe96b8d13277cfa6ee0672b31557f9",
+        "bytes": 7673011
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1024-original-retained-exit.json",
+        "sha256": "8828ea44bad318970aa83cdce61dc76d2786b463434e2ae65bc27d687fdfe36a",
+        "bytes": 4444
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t1024-original",
+        "case": {
+          "name": "nemotron_projection-b1-t1024",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 1024,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            1024,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t1024-original/compiler-work/model/graph.hlo",
+        "sha256": "86dc177275d58fee57517964b2d0a0797e81a3539e99170dee61cff4056484f0",
+        "sampled_addresses": 9216,
+        "mismatching_sampled_addresses": 9207,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1024-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1024-tensor-split-worker-result.json",
+        "sha256": "2226bb7dfdf2cb5060177963ddbe292ac4f5781ecd83f135dddbfedcf5a29255",
+        "bytes": 7670453
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1024-tensor-split-retained-exit.json",
+        "sha256": "a93fd88006a17f4b22e14e6d705dd7eb48b1a28b4419b4b77d663d90c9a50318",
+        "bytes": 4464
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t1024-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t1024",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 1024,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            1024,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t1024-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "28d4f00b61da88cadffa14588708d86a5a4c071cbaa1f6f14b21d0a6f05995c6",
+        "sampled_addresses": 9216,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t2048-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t2048-original-worker-result.json",
+        "sha256": "0cf9d1327dfd75bc3b5cb7c9013904485030a24f27af662ad06145026ca20504",
+        "bytes": 7673012
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t2048-original-retained-exit.json",
+        "sha256": "a4b98c79f4c244fb2900203b20b2d73ce779863f34f18720d0fedbacd7340ac7",
+        "bytes": 4444
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t2048-original",
+        "case": {
+          "name": "nemotron_projection-b1-t2048",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 2048,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            2048,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t2048-original/compiler-work/model/graph.hlo",
+        "sha256": "1b9a3502b95c1add124ad57c372ad72f7770fd44da98549ae703b0495d410606",
+        "sampled_addresses": 18432,
+        "mismatching_sampled_addresses": 18423,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t2048-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t2048-tensor-split-worker-result.json",
+        "sha256": "1192009eebcf54f67b6dec05956170e5440f2ee317d5f366269d2e99fb276483",
+        "bytes": 7670455
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t2048-tensor-split-retained-exit.json",
+        "sha256": "cbdeee0b37b2d211ce7ebc01fe6b363fecb0b2f5815f50c83e4975e4b7ad7d26",
+        "bytes": 4464
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t2048-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t2048",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 2048,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            2048,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t2048-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "714acb2a795613f46d6003f8e7a6cc2e752c510f4b6ea0c444a8d148e216cebd",
+        "sampled_addresses": 18432,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t4096-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t4096-original-worker-result.json",
+        "sha256": "d653ae95225bc4c8c5833b2df01cf741864a93be4902447dead405a10f6597af",
+        "bytes": 7673026
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t4096-original-retained-exit.json",
+        "sha256": "fb66141347ddfe88f5593bf07dc03f98f576280b0a1fa2014b1ffbc9cb8f2227",
+        "bytes": 4444
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t4096-original",
+        "case": {
+          "name": "nemotron_projection-b1-t4096",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 4096,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            4096,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t4096-original/compiler-work/model/graph.hlo",
+        "sha256": "e5bc21ec6d340276ce38b226e46af4b718fad3c73ad1c24b229cc33ee6204c3a",
+        "sampled_addresses": 36864,
+        "mismatching_sampled_addresses": 36855,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0
+            ],
+            "actual": 20480,
+            "expected": 45312
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              2560
+            ],
+            "actual": 23040,
+            "expected": 47872
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              5119
+            ],
+            "actual": 25599,
+            "expected": 50431
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t4096-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t4096-tensor-split-worker-result.json",
+        "sha256": "27d890d44c134cf48b5064065a87b25ef9631a433cab950c02dc8bd23012d01a",
+        "bytes": 7670466
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t4096-tensor-split-retained-exit.json",
+        "sha256": "9de0df007b1bbad53d00ea91d12a6d8f2e35edb08d5e2ee453f7f9f45f1ac797",
+        "bytes": 4464
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t4096-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t4096",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 4096,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            4096,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t4096-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "a143e931d80dd9d8091eb821920cf90b323d5306079ef156dbdc74fbde38e4d0",
+        "sampled_addresses": 36864,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b4-t1-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-original-worker-result.json",
+        "sha256": "9479517a3e2cd72e1e9d3c983088e389ad47ea1cda48296a9fa036e799487e7a",
+        "bytes": 7672799
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-original-retained-exit.json",
+        "sha256": "7ec4562fbd3b51925322f10566dac507192d652eafff0e26f5f85df84f034fff",
+        "bytes": 4429
+      },
+      "job": {
+        "name": "split-nemotron-projection-b4-t1-original",
+        "case": {
+          "name": "nemotron_projection-b4-t1",
+          "kind": "nemotron_projection",
+          "batch": 4,
+          "length": 1,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            4,
+            1,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b4-t1-original/compiler-work/model/graph.hlo",
+        "sha256": "b8bba290536864b8d9143365dbc62dbbdb42a5aaaf1b6df737e4a2c7a7ee848f",
+        "sampled_addresses": 36,
+        "mismatching_sampled_addresses": 27,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "actual": 11264,
+            "expected": 16448
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              3072,
+              0
+            ],
+            "actual": 14336,
+            "expected": 19520
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              6143,
+              0
+            ],
+            "actual": 17407,
+            "expected": 22591
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b4-t1-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-tensor-split-worker-result.json",
+        "sha256": "1d734199ce9e82e5ece75530474fee779eb4cfcbdd4b8735250441dd1c911521",
+        "bytes": 7670268
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-tensor-split-retained-exit.json",
+        "sha256": "1273f0d341554c417deea92b4faeaa190ea3dcc6eeaa43687af2e5fa9ae06398",
+        "bytes": 4449
+      },
+      "job": {
+        "name": "split-nemotron-projection-b4-t1-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b4-t1",
+          "kind": "nemotron_projection",
+          "batch": 4,
+          "length": 1,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            4,
+            1,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b4-t1-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "f408bc30246750276ab942e8916fff9149a6a26647f24657b6b34bde16425e6b",
+        "sampled_addresses": 36,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1-original-worker-result.json",
+        "sha256": "4bdc84df7f7c0f481c917e393a2535b7946063a55130ea51612ae429154b3b0e",
+        "bytes": 7670270
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1-original-retained-exit.json",
+        "sha256": "b648db9616bb3575d5b864a6028a162533fae7b38c18405bbf36024d63626d19",
+        "bytes": 4429
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t1-original",
+        "case": {
+          "name": "nemotron_projection-b1-t1",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 1,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            1,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": true
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t1-original/compiler-work/model/graph.hlo",
+        "sha256": "cf5a77438f77fd255fd98a12eae3c835c03317562084512a05e63a23f39846e2",
+        "sampled_addresses": 9,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-projection-b1-t1-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1-tensor-split-worker-result.json",
+        "sha256": "424b82520173ab9a704904269d9cb7e611ca18883c97260fff6e8f5a034ffd7c",
+        "bytes": 7670262
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b1-t1-tensor-split-retained-exit.json",
+        "sha256": "e613f20c302e7668dd3f32a9a41bc00a9049e39c5fe4c5aa94eec4bd0919d9e5",
+        "bytes": 4452
+      },
+      "job": {
+        "name": "split-nemotron-projection-b1-t1-tensor-split",
+        "case": {
+          "name": "nemotron_projection-b1-t1",
+          "kind": "nemotron_projection",
+          "batch": 1,
+          "length": 1,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            1,
+            1,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": true
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b1-t1-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "253d7974f1318bc9a3b6ae2630318e3f7f7441cfd343de3dd94038e2735a2ae5",
+        "sampled_addresses": 9,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t128-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t128-original-worker-result.json",
+        "sha256": "12f3792c523c3888f63bfb1f22e15fb3c8fa05686b813d19abad623dc4c824a2",
+        "bytes": 7673659
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t128-original-retained-exit.json",
+        "sha256": "a5ffa5f59b5f813ed2f46c5d2a8c720043f2873ef26d93403e37a489710c338b",
+        "bytes": 4412
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t128-original",
+        "case": {
+          "name": "nemotron_conv-b1-t128",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 128,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            128
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t128-original/compiler-work/model/graph.hlo",
+        "sha256": "681b84bb6d12954f11d43f270eecb88daa240cd614a1c6c31859598ce3d37f1c",
+        "sampled_addresses": 1152,
+        "mismatching_sampled_addresses": 1143,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 655360,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 196609,
+            "expected": 327681
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 524161,
+            "expected": 655233
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 524289,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 65538,
+            "expected": 327682
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 393090,
+            "expected": 655234
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 393218,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 720898,
+            "expected": 327683
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 262019,
+            "expected": 655235
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 262147,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 589827,
+            "expected": 327684
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 130948,
+            "expected": 655236
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t128-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t128-tensor-split-worker-result.json",
+        "sha256": "e7f431511b667dc86a0bef3c828d0fe68b4dea5c4ede3fd10d883804f4a845ed",
+        "bytes": 7670942
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t128-tensor-split-retained-exit.json",
+        "sha256": "15df881bc5ca1ed97d897e9de95f0f812c7a7b6793484dbb25131753f4532394",
+        "bytes": 4432
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t128-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t128",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 128,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            128
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t128-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "b0f59fa4b32825683c0827113b65059f65d8c75171f899b75e7a275482ca9a4e",
+        "sampled_addresses": 1152,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t256-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t256-original-worker-result.json",
+        "sha256": "4b09fc16b3dea3564940a67342dbc893742d8ea5b77394df8c96fb1e0406dce8",
+        "bytes": 7673670
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t256-original-retained-exit.json",
+        "sha256": "bd66f6298648ccf21ce4ddb684f44fd70142c4bae9ae272f6d285184751dd9cb",
+        "bytes": 4412
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t256-original",
+        "case": {
+          "name": "nemotron_conv-b1-t256",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 256,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            256
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t256-original/compiler-work/model/graph.hlo",
+        "sha256": "f2f6e89e5e0503d9381dfc922e78841b5a93d2e5b5a1e4386690ddc66cd4726d",
+        "sampled_addresses": 2304,
+        "mismatching_sampled_addresses": 2295,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 1310720,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 393217,
+            "expected": 655361
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 1048321,
+            "expected": 1310465
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 1048577,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 131074,
+            "expected": 655362
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 786178,
+            "expected": 1310466
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 786434,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 1441794,
+            "expected": 655363
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 524035,
+            "expected": 1310467
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 524291,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 1179651,
+            "expected": 655364
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 261892,
+            "expected": 1310468
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t256-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t256-tensor-split-worker-result.json",
+        "sha256": "7faa84e5235cdb198dc32612643c29c639867d608f7d0de4453a1508436dbfa3",
+        "bytes": 7670942
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t256-tensor-split-retained-exit.json",
+        "sha256": "a2ee46c68c07d01d899ab68b50d7c17d099d8d7e314068fdd7a7e183e53c86bd",
+        "bytes": 4432
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t256-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t256",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 256,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            256
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t256-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "e925f3f65dc4b4f53328d6e14e081390a1972f1453f01fccb18fb66fdcab15c5",
+        "sampled_addresses": 2304,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t512-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t512-original-worker-result.json",
+        "sha256": "243372a59cf3e22b8b5ba0cf4000ea3a24f0019b01a80c2c4b907595659f7f0d",
+        "bytes": 7673696
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t512-original-retained-exit.json",
+        "sha256": "be9dde579c7fd1aae55325bc1e7e1910cd41c5e03587bc9ebc10f53e3070ca26",
+        "bytes": 4412
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t512-original",
+        "case": {
+          "name": "nemotron_conv-b1-t512",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 512,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            512
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t512-original/compiler-work/model/graph.hlo",
+        "sha256": "d83e630c555d9eab096dfe939fe40b141d7e395975e76004c57fb828ae309eab",
+        "sampled_addresses": 4608,
+        "mismatching_sampled_addresses": 4599,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 2621440,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 786433,
+            "expected": 1310721
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 2096641,
+            "expected": 2620929
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 2097153,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 262146,
+            "expected": 1310722
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 1572354,
+            "expected": 2620930
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 1572866,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 2883586,
+            "expected": 1310723
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 1048067,
+            "expected": 2620931
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 1048579,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 2359299,
+            "expected": 1310724
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 523780,
+            "expected": 2620932
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t512-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t512-tensor-split-worker-result.json",
+        "sha256": "6c8053a52e9a16fcc05d14bd1dd43dd77e11801f2b8273da6d91d2d8430c89cc",
+        "bytes": 7670959
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t512-tensor-split-retained-exit.json",
+        "sha256": "4222e9142eab0fb181d452217f83ce3f1367a9957ac5650af5453bc64666edac",
+        "bytes": 4432
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t512-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t512",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 512,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            512
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t512-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "ba2c00442d038e2ae05ca0ce43e51c9758690453b9cf7358dd41bb84dd137df7",
+        "sampled_addresses": 4608,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t1024-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1024-original-worker-result.json",
+        "sha256": "cf82fd17366615a1c40c37c81efcfea17c7c51823ec2e1ac3e73d074dd645a89",
+        "bytes": 7673742
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1024-original-retained-exit.json",
+        "sha256": "8c0a08ba7ffd2778145e732ebc65b301801b07c93f0894d459b10bd1ceb975da",
+        "bytes": 4417
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t1024-original",
+        "case": {
+          "name": "nemotron_conv-b1-t1024",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 1024,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            1024
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t1024-original/compiler-work/model/graph.hlo",
+        "sha256": "06412e31f91a22af7b916d4f203fcff65afd4b127d8572c7217a17d98ab8a90f",
+        "sampled_addresses": 9216,
+        "mismatching_sampled_addresses": 9207,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 5242880,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 1572865,
+            "expected": 2621441
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 4193281,
+            "expected": 5241857
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 4194305,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 524290,
+            "expected": 2621442
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 3144706,
+            "expected": 5241858
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 3145730,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 5767170,
+            "expected": 2621443
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 2096131,
+            "expected": 5241859
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 2097155,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 4718595,
+            "expected": 2621444
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 1047556,
+            "expected": 5241860
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t1024-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1024-tensor-split-worker-result.json",
+        "sha256": "d7cc19ca10cb69f1948b9db9fe04be567d06e5aefc117cfb285eb5ecd13b758f",
+        "bytes": 7671006
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1024-tensor-split-retained-exit.json",
+        "sha256": "3767821c928d098c999df12588e6362f0832e728b3980f56a218dc71ec5f7db1",
+        "bytes": 4437
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t1024-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t1024",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 1024,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            1024
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t1024-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "778cd4231cb396aab07f6e7dc81e165c5147a0001fb187eae2d2f62be4d60731",
+        "sampled_addresses": 9216,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t2048-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t2048-original-worker-result.json",
+        "sha256": "8f88519c345fb346c215f40b3f1f8a7f5e427784bd15b7afbbc906a3b9f5647e",
+        "bytes": 7673761
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t2048-original-retained-exit.json",
+        "sha256": "48ef831896d19c2b5c96d49afd5f01b628e5095daf16b5e458293540018108eb",
+        "bytes": 4417
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t2048-original",
+        "case": {
+          "name": "nemotron_conv-b1-t2048",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 2048,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            2048
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t2048-original/compiler-work/model/graph.hlo",
+        "sha256": "486a380cca41c198b199a1d3bb93779ff48f0aec85f788cf28a178fdb1284f42",
+        "sampled_addresses": 18432,
+        "mismatching_sampled_addresses": 18423,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 10485760,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 3145729,
+            "expected": 5242881
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 8386561,
+            "expected": 10483713
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 8388609,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 1048578,
+            "expected": 5242882
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 6289410,
+            "expected": 10483714
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 6291458,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 11534338,
+            "expected": 5242883
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 4192259,
+            "expected": 10483715
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 4194307,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 9437187,
+            "expected": 5242884
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 2095108,
+            "expected": 10483716
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t2048-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t2048-tensor-split-worker-result.json",
+        "sha256": "5797af3162bc43854113507583af9d2da09357ad38290891578346647095ef76",
+        "bytes": 7671005
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t2048-tensor-split-retained-exit.json",
+        "sha256": "9d5ecd533a1c3277a930a4d54c0291ae07df30be34156cc7adea0dee79e37a0c",
+        "bytes": 4437
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t2048-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t2048",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 2048,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            2048
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t2048-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "9d3f2e88f4196ec12ce7286e390f473311c5f343c3b4cc68c7ae73b64f9c39cc",
+        "sampled_addresses": 18432,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t4096-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t4096-original-worker-result.json",
+        "sha256": "e9dcd310fe9db4603d4123d58a966d4684b28805e2de7e033633f9768e7f9c24",
+        "bytes": 7673770
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t4096-original-retained-exit.json",
+        "sha256": "d283b9b94728ad6813f31f9c744b43f1f1d63fa963a21da65fc606c32619bd4c",
+        "bytes": 4417
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t4096-original",
+        "case": {
+          "name": "nemotron_conv-b1-t4096",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 4096,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            4096
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t4096-original/compiler-work/model/graph.hlo",
+        "sha256": "5c6fa1a97747e668e584a7411d06fa1e9ca71cbf425fb7f0a398e6103f0246f5",
+        "sampled_addresses": 36864,
+        "mismatching_sampled_addresses": 36855,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              0,
+              0
+            ],
+            "actual": 20971520,
+            "expected": 1
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              32,
+              0
+            ],
+            "actual": 6291457,
+            "expected": 10485761
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              1,
+              63,
+              79
+            ],
+            "actual": 16773121,
+            "expected": 20967425
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "actual": 16777217,
+            "expected": 2
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              32,
+              0
+            ],
+            "actual": 2097154,
+            "expected": 10485762
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              2,
+              63,
+              79
+            ],
+            "actual": 12578818,
+            "expected": 20967426
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "actual": 12582914,
+            "expected": 3
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              32,
+              0
+            ],
+            "actual": 23068674,
+            "expected": 10485763
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              3,
+              63,
+              79
+            ],
+            "actual": 8384515,
+            "expected": 20967427
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              0,
+              0
+            ],
+            "actual": 8388611,
+            "expected": 4
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              32,
+              0
+            ],
+            "actual": 18874371,
+            "expected": 10485764
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              0,
+              4,
+              63,
+              79
+            ],
+            "actual": 4190212,
+            "expected": 20967428
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t4096-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t4096-tensor-split-worker-result.json",
+        "sha256": "a3bc64d27c950b5eb8fd9cb8314d42b3aeac2fe1352e459627d4a9aec3517295",
+        "bytes": 7671007
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t4096-tensor-split-retained-exit.json",
+        "sha256": "e1fbd2abe31561f42d421c8ea15036d62ad96756a61033043ac66f98116c5169",
+        "bytes": 4437
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t4096-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t4096",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 4096,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            4096
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t4096-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "fbea911febc5813150669e520fd5b26fe437652690b8c537b1f1320f69267d9a",
+        "sampled_addresses": 36864,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b4-t1-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b4-t1-original-worker-result.json",
+        "sha256": "1022be65c38ed011c290ab6ac5e32f562ede45862626d5869834b29d9609c338",
+        "bytes": 7673503
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b4-t1-original-retained-exit.json",
+        "sha256": "9045aaeca8c6926dcd82753f38149cb179c0aa670c4ad8f5abb193316b6c421f",
+        "bytes": 4402
+      },
+      "job": {
+        "name": "split-nemotron-conv-b4-t1-original",
+        "case": {
+          "name": "nemotron_conv-b4-t1",
+          "kind": "nemotron_conv",
+          "batch": 4,
+          "length": 1,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            4,
+            6144,
+            1
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": false,
+      "device_exact": false,
+      "device_comparisons_passed": 0,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b4-t1-original/compiler-work/model/graph.hlo",
+        "sha256": "09fc3d72322b15c9b7d8643867d66fe3de05b4f992b48465769397b272781b53",
+        "sampled_addresses": 36,
+        "mismatching_sampled_addresses": 27,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "actual": 5120,
+            "expected": 6144
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              32,
+              0
+            ],
+            "actual": 7680,
+            "expected": 8704
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              63,
+              79
+            ],
+            "actual": 10239,
+            "expected": 11263
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              0,
+              0
+            ],
+            "actual": 10240,
+            "expected": 12288
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              32,
+              0
+            ],
+            "actual": 12800,
+            "expected": 14848
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              63,
+              79
+            ],
+            "actual": 15359,
+            "expected": 17407
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              0,
+              0
+            ],
+            "actual": 15360,
+            "expected": 18432
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              32,
+              0
+            ],
+            "actual": 17920,
+            "expected": 20992
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              63,
+              79
+            ],
+            "actual": 20479,
+            "expected": 23551
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "actual": 5632,
+            "expected": 11264
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              0,
+              2,
+              0
+            ],
+            "actual": 5888,
+            "expected": 11520
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              0,
+              3,
+              127
+            ],
+            "actual": 6143,
+            "expected": 11775
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b4-t1-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b4-t1-tensor-split-worker-result.json",
+        "sha256": "f9f8ed9ff195b6b5ff37d3fe9f4d5cd3083a7eb736885cbfc5a98f9a3d74248b",
+        "bytes": 7670814
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b4-t1-tensor-split-retained-exit.json",
+        "sha256": "b4b9f31130b1e7962778280f1825829bdc5f64deffb4d82c162a03a8673b05b0",
+        "bytes": 4422
+      },
+      "job": {
+        "name": "split-nemotron-conv-b4-t1-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b4-t1",
+          "kind": "nemotron_conv",
+          "batch": 4,
+          "length": 1,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            4,
+            6144,
+            1
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b4-t1-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "5315ba3afaf597710727998f43a1ea98d5e39bfe74d4fd3afd0e7fa27f7594a7",
+        "sampled_addresses": 36,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t1-original",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1-original-worker-result.json",
+        "sha256": "ce98a0f974019d354bb9a2650d3437dafaebfd827c86172d5e879eb0c5b3b59a",
+        "bytes": 7670824
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1-original-retained-exit.json",
+        "sha256": "7a9ccfe848a896aeb7b0ed1df8958d86b9ca59e9df9c5770ff470b09c5ec52e1",
+        "bytes": 4402
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t1-original",
+        "case": {
+          "name": "nemotron_conv-b1-t1",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 1,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            1
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": true
+        },
+        "variant": "original"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t1-original/compiler-work/model/graph.hlo",
+        "sha256": "b0313e32984bdb2cc1629c2fa20e3ca88c6a07d7e674013ecd5d3cd2ce3a2348",
+        "sampled_addresses": 9,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": true
+    },
+    {
+      "stage": "split-nemotron-conv-b1-t1-tensor-split",
+      "worker_result": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1-tensor-split-worker-result.json",
+        "sha256": "ec9afbab3b381be093ad4f2784d61619b736ae2ae93cd01202be6f5f54bdd90f",
+        "bytes": 7670813
+      },
+      "retained_exit": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-conv-b1-t1-tensor-split-retained-exit.json",
+        "sha256": "d889432f6537ef0fe48bf4ce8682573cd934cfee9013a2ea59d80ac86c2a9fd6",
+        "bytes": 4422
+      },
+      "job": {
+        "name": "split-nemotron-conv-b1-t1-tensor-split",
+        "case": {
+          "name": "nemotron_conv-b1-t1",
+          "kind": "nemotron_conv",
+          "batch": 1,
+          "length": 1,
+          "sizes": [
+            5120,
+            512,
+            512
+          ],
+          "input_shape": [
+            1,
+            6144,
+            1
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": true
+        },
+        "variant": "tensor_split"
+      },
+      "orchestration_passed": true,
+      "retained_successful": true,
+      "primitive_passed": true,
+      "device_exact": true,
+      "device_comparisons_passed": 6,
+      "device_comparisons_total": 6,
+      "device_input_unchanged": true,
+      "cpu_passed": true,
+      "compile_passed": true,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-conv-b1-t1-tensor-split/compiler-work/model/graph.hlo",
+        "sha256": "600669fd4fe3b2d6bd8f9e706d35e4e91dc4d383ae30e6334740f7382c6f8a85",
+        "sampled_addresses": 9,
+        "mismatching_sampled_addresses": 0,
+        "first_mismatches": [],
+        "sampled_mapping_passed": true,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "control_outcome_confirmed": null
+    }
+  ],
+  "candidate_cases": 16,
+  "candidate_comparisons_passed": 96,
+  "candidate_comparisons_total": 96,
+  "original_cases": 16,
+  "original_passing_cases": 2,
+  "original_failing_cases": 14,
+  "original_comparisons_passed": 12,
+  "original_comparisons_total": 96,
+  "conclusions": [
+    "All32splitstages retain successful exits. Original14multi-rowcases numericallyfail as expected; original2single-rowpositivecontrols pass. Candidatesall16cases/96comparisons exact.",
+    "Both projection and conv original single row B1T1 pass; B4T1 fail. ForconvB4T1output[1,0,0,0]original reads5120expected6144. Supports incorrectcrossrowstride in observed transformation; no independent upstream component/version attribution.",
+    "Metadata summary only; no rawtensor/HLO reread or finalfullrunrawaudit. Wholemodelcompile started but not yet qualified. Failed original controls cannot be speedup denominators."
+  ],
+  "raw_payloads_re_read_by_this_summary": false,
+  "independent_whole_run_raw_audit_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

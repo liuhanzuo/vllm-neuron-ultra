@@ -1,0 +1,29 @@
+{
+  "schema": "nano_output_integration_initial_test_failure_v1",
+  "actual_exit": {
+    "chunk_id": "5db09e",
+    "wall_time_seconds": 1.0832e-05,
+    "exit_code": 1,
+    "original_token_count": 933,
+    "output": "{\"argv\": [\"/home/ubuntu/venvs/model_reference_2026/bin/python\", \"-B\", \"-S\", \"-X\", \"pycache_prefix=/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-output-integration-tests-20261110-v1/py312-cache\", \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_native_worker_execution_v4.py\"], \"actual_exit\": 1, \"output\": \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_worker_receipts_v1.py:84: SyntaxWarning: invalid escape sequence '\\\\.'\\n  and all(type(n)is str and re.fullmatch('[a-z0-9][a-z0-9-]*\\\\.json',n)for n in allowed_names),\\ntest_original_scope_environments_and119pins_retained (__main__.OriginalScience.test_original_scope_environments_and119pins_retained) ... ok\\ntest_six_scientific_functions_are_ast_identical_to_pinned_original (__main__.OriginalScience.test_six_scientific_functions_are_ast_identical_to_pinned_original) ... ok\\ntest_early_helper_failure_bytes_survive_in_durable_worker_supervision (__main__.WorkerFlow.test_early_helper_failure_bytes_survive_in_durable_worker_supervision) ... FAIL\\ntest_group_adapter_rejects_forged_completion_and_keeps_v2_compatibility (__main__.WorkerFlow.test_group_adapter_rejects_forged_completion_and_keeps_v2_compatibility) ... ok\\ntest_helper_failure_records_real_helper_exit_before_worker_failure (__main__.WorkerFlow.test_helper_failure_records_real_helper_exit_before_worker_failure) ... ok\\ntest_native_phase_gate_startup_science_runtime_and_durable_receipt (__main__.WorkerFlow.test_native_phase_gate_startup_science_runtime_and_durable_receipt) ... ok\\ntest_no_payload_external_write_remote_network_or_extra_spawn (__main__.WorkerFlow.test_no_payload_external_write_remote_network_or_extra_spawn) ... ok\\ntest_nxd_phase_real_helper_interface_is_composed_once (__main__.WorkerFlow.test_nxd_phase_real_helper_interface_is_composed_once) ... ok\\ntest_parent_capture_failure_prevents_worker_startup_and_science (__main__.WorkerFlow.test_parent_capture_failure_prevents_worker_startup_and_science) ... ok\\ntest_post_science_failures_keep_completed_result_and_runtime (__main__.WorkerFlow.test_post_science_failures_keep_completed_result_and_runtime) ... ok\\ntest_science_exception_and_exit_preserve_failure_without_success (__main__.WorkerFlow.test_science_exception_and_exit_preserve_failure_without_success) ... ok\\ntest_startup_failure_precedes_science (__main__.WorkerFlow.test_startup_failure_precedes_science) ... ok\\ntest_successful_worker_helper_keeps_output_evidence_in_proof_and_group_summary (__main__.WorkerFlow.test_successful_worker_helper_keeps_output_evidence_in_proof_and_group_summary) ... ok\\ntest_two_actual_rank_workers_and_helpers_share_receipt_directory (__main__.WorkerFlow.test_two_actual_rank_workers_and_helpers_share_receipt_directory) ... ok\\n\\n======================================================================\\nFAIL: test_early_helper_failure_bytes_survive_in_durable_worker_supervision (__main__.WorkerFlow.test_early_helper_failure_bytes_survive_in_durable_worker_supervision)\\n----------------------------------------------------------------------\\nTraceback (most recent call last):\\n  File \\\"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_native_worker_execution_v4.py\\\", line 276, in test_early_helper_failure_bytes_survive_in_durable_worker_supervision\\n    self.assertEqual(helper['output']['stderr'],b'generated helper failed before handshake\\\\x00\\\\xff\\\\n')\\nAssertionError: b\\\"/home/ubuntu/experiments/trn1-latest-mod[248 chars]ff\\\\n\\\" != b'generated helper failed before handshake\\\\x00\\\\xff\\\\n'\\n\\n----------------------------------------------------------------------\\nRan 14 tests in 8.744s\\n\\nFAILED (failures=1)\\n\"}\n"
+  },
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-output-integration-tests-20261110-v1/nemotron4b_owned_group_drain_v3.py.initial-test-source.txt",
+      "sha256": "dffecd97348df9d9888b04e85bdbe90ccad236928e3f383384a2c9dac2792fbf"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-output-integration-tests-20261110-v1/nemotron4b_gated_sdk_helper_v2.py.initial-test-source.txt",
+      "sha256": "cc4266cb9fceaf6f85cf76b70bb8c04ddfc69973a84c23f220f83899e5d45bc2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-output-integration-tests-20261110-v1/nemotron4b_native_worker_execution_v4.py.initial-test-source.txt",
+      "sha256": "9bf1df76aff1a96691ec409f04e367e7ed8895b36f9ca2d896a72abb80e71832"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-output-integration-tests-20261110-v1/check_nemotron4b_native_worker_execution_v4.py.initial-test-source.txt",
+      "sha256": "7527f22059c9e1593449566fca6d5c3cf8b43abc6041b7cbc977ed7323b72998"
+    }
+  ],
+  "interpretation": "Python3.10 14/14 passed; Python3.12 13/14 passed. The early helper output was preserved, including an existing frozen ReceiptWriter source SyntaxWarning before the generated marker. Test expected only marker, incorrectly rejecting the additional genuine diagnostic. Keep the warning and assert its exact bytes plus marker; do not suppress it or change frozen source."
+}
