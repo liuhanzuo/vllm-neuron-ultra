@@ -48,6 +48,13 @@ and drain-before-unlock handling. Nemotron r11 has six 128–4096-token projecti
 candidates passing 36/36 recorded device comparisons; original split controls
 remain numerically invalid and cannot be speedup denominators.
 
+The [MiniCPM5 complete saved-data audit report](docs/minicpm5-layer1-saved-audit-20261110.md)
+adds 20 numeric/archive and 16 terminal/lifecycle checks, full-vocabulary metric
+recomputation, and a separate serial audit entrypoint. Real collection and audit
+remain pending. At 07:42 UTC, Nemotron r11 had 31/52 completed stages: eight
+projection candidates passed 48/48 device comparisons, and two convolution
+candidates passed 12/12. These local checks add no full-model or speedup claim.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 
