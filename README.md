@@ -70,6 +70,12 @@ checks. The stream consumes all 84 history calls and yields the 36 original
 decode inputs; every complete replay output must be saved and reread. Native replay
 and its outer serial runner remain pending; these checks add no model speedup.
 
+The [MiniCPM5 serial replay integration report](docs/minicpm5-layer1-own-history-runner-20261110.md)
+adds the outer serial runner, TP2 worker entry and independent full-output review.
+It also corrects our official-shard wrapper to retain the SDK's int32 rank parameter.
+Source/synthetic checks pass; actual collection, saved-data audit and native replay
+remain pending, with all original resource and full-model qualification gates.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 

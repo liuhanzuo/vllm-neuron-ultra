@@ -1,0 +1,121 @@
+{
+  "schema": "minicpm5_layer1_own_history_runner_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-10T09:09:17.380927+00:00",
+  "source_only": true,
+  "source_checks_passed": true,
+  "runtime_admitted": false,
+  "runtime_spec_created": false,
+  "source_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-runner-source-plan-20261110-v1.json",
+    "sha256": "4f15cc54fad628957b477ebdcc058df1aa521dd173b5f75e75fd2b1a832fe92e"
+  },
+  "source_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-runner-source-checks-20261110-v1.json",
+    "sha256": "4822dccc5463acdf8a7ca899d387442902ce86871758a2118ab72a7371eb72c7"
+  },
+  "source_preparation_actual_exit": {
+    "session_id": 84617,
+    "exit_code": 0,
+    "tool_chunk": "392648"
+  },
+  "source_files": 2374,
+  "source_bytes": 160743353,
+  "new_runtime_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_own_history_cpu_runner_v1.py",
+      "sha256": "76f1ce2be46dc387329505a04ab463e81fdbf93b59f1853677ead7c411b688ed"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_own_history_cpu_worker_v1.py",
+      "sha256": "e0b7d3787d4de3ae04cc9430728f7d886096fc081623cb8ef44727cfd31496ab"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_after_saved_audit_v1.py",
+      "sha256": "d6fb435f46c7a68933565ea3050cb846d91b9c382a5309f19f77f080ff110a9a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_own_history_results_v1.py",
+      "sha256": "bb167cede417a840b4819e1ec4f67c915b7bf693b50d05c88f0d8b530034825f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_shards_v2.py",
+      "sha256": "53c323d2314ccc2e7456734ab56efa9a151d2a052cd339aa5a1890bb63129622"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_own_history_cpu_driver_v2.py",
+      "sha256": "0464cf27679da0395ab58d91b547f96c5c8b9e2a4beffe4d38d9b4d49d60a03c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_own_history_runner_v1.py",
+      "sha256": "0cb0df1d718cf809aadae45bdd7921a61d4b38d74b4b81bf784c5b103e8a6387"
+    }
+  ],
+  "actual_test_receipts": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-after-saved-audit-tests-actual-exit-20261110-v1.json",
+      "sha256": "6ec33ee8328c2254a5333f7f7d9e392acf721cc2e39db0be31c954f96a9db500"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-lifecycle-tests-actual-exit-20261110-v1.json",
+      "sha256": "4eb4dc8f8f534c2df791be0a3a9959f9193cd4a8ae8fd4424d14b22573b82bf4"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-results-tests-actual-exit-20261110-v1.json",
+      "sha256": "eaa6a5446f8b6842404e6994cea74b2992f434d755a90e97f9b4f8128037ff40"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-admission-tests-actual-exit-20261110-v1.json",
+      "sha256": "38b86715af3a270dff6974ab499b8980e1540e806838205a53986e23a54f1071"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-shards-v2-tests-actual-exit-20261110-v1.json",
+      "sha256": "63746bcf5c4458edafac5f9f6ef3f74e74ace1eaa49ad6b1a5ec18ca4f1b2c67"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-driver-v2-tests-actual-exit-20261110-v1.json",
+      "sha256": "10382624abe9df60f41097ec995c81bff5a625d360df5b68e0e45c3198e379ed"
+    }
+  ],
+  "source_correction": {
+    "component": "minicpm5_layer1_official_shards_v1.verify_model",
+    "issue": "Projection-only parameter set omitted original SDK rank_util.rank int32 parameter and would reject the unchanged original model.",
+    "evidence": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_cpu_constructor_v1.py",
+        "sha256": "0cdfbf96c789f7f4ee67a5e230ec3cd6f00c9650da5d5bafa54ef8babb0ab6a8"
+      },
+      {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py",
+        "sha256": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8"
+      },
+      {
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py",
+        "sha256": "b179b02c512c2c29a59dcdcfae958fc4f4a55f11cb0b2bbe9c004aef341276ab"
+      }
+    ],
+    "successor": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_shards_v2.py",
+      "sha256": "53c323d2314ccc2e7456734ab56efa9a151d2a052cd339aa5a1890bb63129622"
+    },
+    "old_sources_unchanged": true,
+    "model_parameters_or_precision_modified": false
+  },
+  "verified_scope": [
+    "Actual successful collector and independently successful saved-data audit external tool handles/owners/exits are required; source preparation does not create them.",
+    "New outer service serial runner uses original16GiB/CPU6-7/no-swap/2h resources, original256MiBtotal128MiB/rank16MiB/file512files limits and28GiBroot30GiBNVMe floors.",
+    "All1255 original predecessors plus actual collector and independent audit owners are checked; actual service recursive drain is required before unlock, including failed paths.",
+    "Worker authenticates exact completed metadata and unchanged original scientific plan before importing native SDK; preserves original RuntimeContext environment transition and glooTP2.",
+    "Driver v2 only selects corrected official-shard wrapper. Native callable/math is unchanged. Every36 complete output file is independently reread and compared to original fullfourrow output hash; rank replicas countonce.",
+    "Source candidate captures all original source pins. Actual runtime candidate builder authenticates full collector/audit lineage and binds every collected84call/6arm JSON metadata input before native execution."
+  ],
+  "limitations": [
+    "All tests are source, synthetic or mocked lifecycle checks; no actual OS/service launch or native success path has run.",
+    "Results tests substitute synthetic output hashes in original JSON templates and mock successful lineage; actual raw36outputs and official8shards remain untested.",
+    "Stream/core prior13/11 tests are not additional native qualification. New19shard tests supersede prior16, and driver-v2 11 is a rerun for changed import.",
+    "Actual Nemotron r11 terminal/release, complete Mini collector, separate complete audit and actual runtime source review are still needed before launching replay.",
+    "No paired-history intervention or causal proof is authorized by own-history success alone; separate design required."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
