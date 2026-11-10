@@ -1,0 +1,68 @@
+{
+  "schema": "nemotron4b_recorded_helper_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T00:43:36.295949+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_recorded_child_release_v1.py": "849038d651ce33d68d16ac1d68ce6c224e0ef377cfeb0fcfe804c5761f6472d3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v2.py": "ce22ed52a18cd2033fc631c071991f5813233f706cbd4264e6319ef40fcfe66f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_worker_receipts_v1.py": "8a646e201cfb9773824c21a6f3dde641aa16b3051921b94807d3a7c163f3efd2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_sdk_helper_v1.py": "8a38f1280fbefb3f52daeb9f8323ee3be00492030fb22c00207b8322d9a76a29",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_owned_group_drain_v2.py": "bc027c130806af8beb8bffdeea659b89eb8c4eef135e163a3eb3e7145691e49c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_recorded_sdk_helper_v1.py": "21428bb18d57dc78ed88aa05a6f806be66e4f88f3f9a1fc9f3dd50719d72e4b3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_owned_group_drain_v1.py": "355464b1cfb3d79ce633feaa2576aaff67f37235d063f97479e73c8ece863d9b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a"
+  },
+  "prior_selected_sources_unchanged": true,
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-recorded-helper-tests-actual-exit-20261110-v1.json",
+    "sha256": "a017169b368ec86c43afd9a237597f7ba8acd0a7b10fea4ce75c68fbd14567ec"
+  },
+  "tests_passed": 21,
+  "original119source_revalidation": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-recorded-helper-original-source-revalidation-20261110-v1.json",
+    "sha256": "544d1178372c7d2020aa60998c1e21bcdf30d0e24af03fa044d3f8be2e17f4aa"
+  },
+  "source_preparation_passed": true,
+  "findings": [
+    "A new parent release routine captures actual child twice, writes the capture receipt before granting, then rechecks parent/child identities. Child wire protocol v1 is unchanged; supervisor v2 requires the durable callback.",
+    "ReceiptWriter uses exact predeclared names in preexisting admitted output, exclusive creation, file+directory fsync, exact readback, SHA256 and one-MiB terminal reserve within original64MiB workcap. A local writer flock serializes cooperating receipt writes; partial failed files remain evidence.",
+    "Framed binary outputs preserve exact stdout/stderr bytes through base64 plus typed object/list paths, distinct from original null values. Canonical encoding initially failed because JSON sorted keys but the binary path table followed insertion order; sorted traversal fixes our own serialization bug. Initial failed source/test/output retained.",
+    "GatedSDKHelper accepts the original exact SDK subprocess request once per rank, checks original helper Python hash and installed library fullstat, supervises an explicitly reviewed -B -S wrapper, persists original capture and successful or failed full output, and requires exact original stdout path/newline.",
+    "The helper single20second startup/execution budget includes parent handshake; cleanup remains separately bounded. Unrelated extra subprocesses and a second discovery request are rejected by the dedicated worker audit hook.",
+    "Group adapter v2 handles the actual recorded-child v2 schema and capture-before-grant timestamps, preserves the original v2 binary result for caller persistence, and inherits prior whole-group cleanup semantics unchanged.",
+    "Original119sourcepins /5552337bytes revalidated. Original reference usesPython3.12 while Neuron usesPython3.10; these separate runtimes remain required. Original native/meta science is unchanged and not executed."
+  ],
+  "limits": [
+    "These21checks execute lightweight Python fixtures only; actual installed SDK helper body, native-meta/nxd-meta, model tensors, compiler, Neuron device and performance are not executed.",
+    "A concrete authenticated helper bootstrap with real startup/import/native/interpreter policies is still required. An arbitrary wrapper printing the expected path would not establish real SDK semantics; fixture output is explicitly not such proof.",
+    "Recorded parent callback requires a durable reference. Actual concrete integration must use the reviewed writer and independently read/verify original records; callback shape alone is insufficient.",
+    "Full worker/root successor and phase-specific Python3.12/Python3.10 startup remain unfinished. Current code does not grant native admission or release the serial lock.",
+    "The local receipt lock serializes receipt writers only, not systemd logs or other writers. Actual root must enforce total64MiB output and28GiB root floor plus complete wall/resource budgets.",
+    "Original disk/native metadata check does not recompute native-library hash; complete native closure/authentication is separate and cannot run while Dory occupies the serial slot."
+  ],
+  "recorded_child_gate_prepared": true,
+  "durable_binary_receipts_prepared": true,
+  "exact_sdk_request_adapter_prepared": true,
+  "original_sdk_helper_semantics_verified": false,
+  "original_reference_python": [
+    3,
+    12
+  ],
+  "original_neuron_python": [
+    3,
+    10
+  ],
+  "all_new_sources_now_frozen": true,
+  "complete_runtime_dependency_closure_proven": false,
+  "exact_runnable_root_launcher_prepared": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "immutable_full_scientific_worker_successor_prepared": false,
+  "actual_SDK_helper_executed": false,
+  "original_native_library_payload_read": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "serial_owner_added": false,
+  "systemd_services_mutated": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
