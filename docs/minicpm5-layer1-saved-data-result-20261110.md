@@ -61,3 +61,5 @@
 - [84 次调用与历史精确重放的等价核对](evidence/minicpm5-layer1-saved-data-result-20261110/minicpm5-layer1-metric-history-equivalence-20261110-v1.json)
 - [诊断实现](evidence/minicpm5-layer1-saved-data-result-20261110/minicpm5_layer1_metric_diagnostic_v1.py)、[串行入口](evidence/minicpm5-layer1-saved-data-result-20261110/minicpm5_layer1_metric_diagnostic_runner_v1.py)、[历史等价核对实现](evidence/minicpm5-layer1-saved-data-result-20261110/minicpm5_layer1_metric_history_equivalence_v1.py)
 - [来源路径与完整 SHA-256 清单](evidence/minicpm5-layer1-saved-data-result-20261110/manifest.json)
+
+后续已完成新证据链接入与真实自身历史重放，结果见[第二层自身历史实测](minicpm5-layer1-own-history-result-20261110.md)；原标量容差失败和模型候选回退继续保留。
