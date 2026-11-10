@@ -1,0 +1,64 @@
+{
+  "model": "microsoft/Phi-4-mini-reasoning",
+  "family": "Phi-4-mini",
+  "url": "https://huggingface.co/api/models/microsoft/Phi-4-mini-reasoning?expand%5B%5D=sha&expand%5B%5D=createdAt&expand%5B%5D=lastModified&expand%5B%5D=downloads&expand%5B%5D=likes&expand%5B%5D=safetensors&expand%5B%5D=config&expand%5B%5D=cardData&expand%5B%5D=gated&expand%5B%5D=private&expand%5B%5D=pipeline_tag",
+  "retrieved_at": "2026-11-10T09:52:19.140448+00:00",
+  "http_status": 200,
+  "response": {
+    "_id": "6811256b174c79b9d5176ed4",
+    "id": "microsoft/Phi-4-mini-reasoning",
+    "sha": "0e3b1e2d02ee478a3743abe3f629e9c0cb722e0a",
+    "lastModified": "2025-12-10T20:24:22.000Z",
+    "downloads": 36480,
+    "likes": 252,
+    "config": {
+      "architectures": [
+        "Phi3ForCausalLM"
+      ],
+      "model_type": "phi3",
+      "tokenizer_config": {
+        "bos_token": "<|endoftext|>",
+        "chat_template": "{{ '<|system|>Your name is Phi, an AI math expert developed by Microsoft.' }}{% for message in messages %}{% if message['role'] == 'system' %} {{ message['content'] }}{% if 'tools' in message and message['tools'] is not none %}{{ '<|tool|>' + message['tools'] + '<|/tool|>' }}{% endif %}{% endif %}{% endfor %}{{ '<|end|>' }}{% for message in messages %}{% if message['role'] != 'system' %}{{ '<|' + message['role'] + '|>' + message['content'] + '<|end|>' }}{% endif %}{% endfor %}{% if add_generation_prompt %}{{ '<|assistant|>' }}{% else %}{{ eos_token }}{% endif %}",
+        "eos_token": "<|endoftext|>",
+        "pad_token": "<|endoftext|>",
+        "unk_token": "<|endoftext|>"
+      }
+    },
+    "cardData": {
+      "language": [
+        "en"
+      ],
+      "library_name": "transformers",
+      "license": "mit",
+      "license_link": "https://huggingface.co/microsoft/Phi-4-mini-instruct-reasoning/resolve/main/LICENSE",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "nlp",
+        "math",
+        "code"
+      ],
+      "widget": [
+        {
+          "messages": [
+            {
+              "role": "user",
+              "content": "How to solve 3*x^2+4*x+5=1?"
+            }
+          ]
+        }
+      ]
+    },
+    "gated": false,
+    "private": false,
+    "pipeline_tag": "text-generation",
+    "createdAt": "2025-04-29T19:15:55.000Z",
+    "safetensors": {
+      "parameters": {
+        "BF16": 3836021760
+      },
+      "total": 3836021760
+    }
+  },
+  "raw_response_sha256": "525e1ce8cd04b9641330a380a41389d4f57d39d25648f44a81a488f7deec473b",
+  "response_bytes": 1472
+}

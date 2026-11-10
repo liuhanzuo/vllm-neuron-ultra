@@ -1,0 +1,48 @@
+{
+  "model": "EssentialAI/rnj-1.5-instruct",
+  "family": "rnj",
+  "url": "https://huggingface.co/api/models/EssentialAI/rnj-1.5-instruct?expand%5B%5D=sha&expand%5B%5D=createdAt&expand%5B%5D=lastModified&expand%5B%5D=downloads&expand%5B%5D=likes&expand%5B%5D=safetensors&expand%5B%5D=config&expand%5B%5D=cardData&expand%5B%5D=gated&expand%5B%5D=private&expand%5B%5D=pipeline_tag",
+  "retrieved_at": "2026-11-10T09:52:19.335758+00:00",
+  "http_status": 200,
+  "response": {
+    "_id": "69e924066d4669f079d2a7a2",
+    "id": "EssentialAI/rnj-1.5-instruct",
+    "sha": "126e2fbce5670bbca6a0212a5c293b2e2a397bdf",
+    "lastModified": "2026-05-26T06:18:03.000Z",
+    "downloads": 1302,
+    "likes": 21,
+    "config": {
+      "architectures": [
+        "Rnj1ForCausalLM"
+      ],
+      "model_type": "gemma3_text",
+      "tokenizer_config": {
+        "bos_token": "<|begin_of_text|>",
+        "chat_template": "{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) -%}\n{%- set emit = namespace(started=false) -%}\n\n{# ---------- Build base system message (always emitted) ---------- #}\n{%- set base_system = 'You are rnj-1.5, a foundation model trained by Essential AI.\\n' -%}\n\n{# ---------- Optional tools preface as a synthetic system message ---------- #}\n{%- if tools %}\n  {%- set sys_preamble -%}\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{%- for tool in tools %}\n{{ \"\\n\" ~ (tool | tojson) }}\n{% endfor %}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <|reserved_special_token_7|><|reserved_special_token_8|> XML tags:\n<|reserved_special_token_7|>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n<|reserved_special_token_8|>\n  {%- endset -%}\n\n  {# If the first user-provided message is system, include it above the tools preface #}\n  {%- set combined_system = (messages and messages[0].role == 'system')\n      and (messages[0].content is string) -%}\n  {%- set sys_content = (combined_system and (messages[0].content ~ \"\\n\\n\" ~ sys_preamble)) or sys_preamble -%}\n\n  {%- set content = '<|start_header_id|>system<|end_header_id|>\\n' ~ base_system ~ '\\n' ~ sys_content ~ '<|eot_id|>' -%}\n  {%- if not emit.started -%}{%- set content = bos_token ~ content -%}{%- set emit.started = true -%}{%- endif -%}\n  {{- content -}}\n{%- else %}\n  {# No tools: always emit base_system, and include user's system message if present #}\n  {%- set user_system_content = '' -%}\n  {%- if messages and messages[0].role == 'system' and (messages[0].content is string) -%}\n    {%- set user_system_content = '\\n' ~ messages[0].content -%}\n  {%- endif -%}\n  {%- set content = '<|start_header_id|>system<|end_header_id|>\\n' ~ base_system ~ user_system_content ~ '<|eot_id|>' -%}\n  {%- if not emit.started -%}{%- set content = bos_token ~ content -%}{%- set emit.started = true -%}{%- endif -%}\n  {{- content -}}\n{%- endif -%}\n\n{# ---------- Locate last user query for multi-step tool behavior ---------- #}\n{%- for message in messages[::-1] %}\n  {%- set index = (messages|length - 1) - loop.index0 -%}\n  {%- if ns.multi_step_tool\n        and message.role == \"user\"\n        and message.content is string\n        and not (message.content.startswith('<tool_response>') and message.content.endswith('</tool_response>')) -%}\n    {%- set ns.multi_step_tool = false -%}\n    {%- set ns.last_query_index = index -%}\n  {%- endif -%}\n{%- endfor -%}\n\n{# ---------- Walk all messages and emit in Llama-3 format ---------- #}\n{%- for message in messages %}\n  {# normalize content #}\n  {%- if message.content is string -%}\n    {%- set content = message.content -%}\n  {%- else -%}\n    {%- set content = '' -%}\n  {%- endif -%}\n\n  {# --- user/system (non-initial system already handled above) --- #}\n  {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) -%}\n    {%- set block = '<|start_header_id|>' ~ message.role ~ '<|end_header_id|>\\n' ~ content ~ '<|eot_id|>' -%}\n    {%- if not emit.started -%}{%- set block = bos_token ~ block -%}{%- set emit.started = true -%}{%- endif -%}\n    {{- block -}}\n\n  {# --- assistant --- #}\n  {%- elif message.role == \"assistant\" -%}\n  \n    {%- set body = content -%}\n    {%- set header = '<|start_header_id|>assistant<|end_header_id|>\\n' -%}\n    {%- if not emit.started -%}{{ bos_token }}{%- set emit.started = true -%}{%- endif -%}\n    {{- header -}}\n    {% generation %}\n    {{- body -}}\n    {%- if message.tool_calls -%}\n      {%- for tool_call in message.tool_calls -%}\n        {%- if tool_call.function -%}{%- set tc = tool_call.function -%}{%- else -%}{%- set tc = tool_call -%}{%- endif -%}\n        {%- set args_json = (tc.arguments if (tc.arguments is string) else (tc.arguments | tojson)) -%}\n        {%- if loop.first -%}\n          {{- '<|reserved_special_token_7|>\\n{\"name\": \"' ~ tc.name ~ '\", \"arguments\": ' ~ args_json ~ '}\\n<|reserved_special_token_8|>' -}}\n        {%- else -%}\n          {{- '\\n<|reserved_special_token_7|>\\n{\"name\": \"' ~ tc.name ~ '\", \"arguments\": ' ~ args_json ~ '}\\n<|reserved_special_token_8|>' -}}\n        {%- endif -%}\n      {%- endfor -%}\n    {%- endif -%}\n    {{- '<|eot_id|>' -}}{%- endgeneration -%}\n  {# --- tool messages are wrapped as synthetic user messages with <tool_response> --- #}\n  {%- elif message.role == \"tool\" -%}\n    {%- set open_user = (loop.first or (loop.index0 > 0 and messages[loop.index0 - 1].role != \"tool\")) -%}\n    {%- set close_user = (loop.last or (loop.index0 < messages|length - 1 and messages[loop.index0 + 1].role != \"tool\")) -%}\n\n    {%- if open_user -%}\n      {%- set header = '<|start_header_id|>user<|end_header_id|>\\n' -%}\n      {%- if not emit.started -%}{%- set header = bos_token ~ header -%}{%- set emit.started = true -%}{%- endif -%}\n      {{- header -}}\n    {%- endif -%}\n    {%- if open_user -%}\n      {{- '<tool_response>\\n' -}}\n    {%- else -%}\n      {{- '\\n<tool_response>\\n' -}}\n    {%- endif -%}\n    {{- content -}}\n    {{- '\\n</tool_response>' -}}\n\n    {%- if close_user -%}\n      {{- '<|eot_id|>' -}}\n    {%- endif -%}\n  {%- endif -%}\n{%- endfor -%}\n\n{# ---------- Add generation prompt header for the model to continue ---------- #}\n{%- if add_generation_prompt -%}\n  {%- set tail = '<|start_header_id|>assistant<|end_header_id|>\\n' -%}\n  {{- tail -}}\n{%- endif -%}",
+        "eos_token": "<|end_of_text|>"
+      }
+    },
+    "cardData": {
+      "license": "apache-2.0",
+      "library_name": "transformers",
+      "base_model": [
+        "EssentialAI/rnj-1"
+      ],
+      "language": [
+        "code"
+      ]
+    },
+    "gated": false,
+    "private": false,
+    "pipeline_tag": "text-generation",
+    "createdAt": "2026-04-22T19:39:50.000Z",
+    "safetensors": {
+      "parameters": {
+        "F32": 8310501376
+      },
+      "total": 8310501376
+    }
+  },
+  "raw_response_sha256": "6787a79b589ce44eb782569ae069434d7fc3a4221312b386c2a946a5ad7b01ea",
+  "response_bytes": 6306
+}

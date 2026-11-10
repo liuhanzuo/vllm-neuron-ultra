@@ -1,0 +1,90 @@
+{
+  "model": "XHToken/Spark-X2.6-4B",
+  "family": "Spark-X2.6",
+  "url": "https://huggingface.co/api/models/XHToken/Spark-X2.6-4B?expand%5B%5D=sha&expand%5B%5D=createdAt&expand%5B%5D=lastModified&expand%5B%5D=downloads&expand%5B%5D=likes&expand%5B%5D=safetensors&expand%5B%5D=config&expand%5B%5D=cardData&expand%5B%5D=gated&expand%5B%5D=private&expand%5B%5D=pipeline_tag",
+  "retrieved_at": "2026-11-10T09:52:19.426507+00:00",
+  "http_status": 200,
+  "response": {
+    "_id": "6ad58c57fccdebd3c3cd2d9f",
+    "id": "XHToken/Spark-X2.6-4B",
+    "sha": "64ca8f2a295b8ceb2757b9d4749a6558c4759e5b",
+    "lastModified": "2026-11-06T13:19:12.000Z",
+    "downloads": 24979,
+    "likes": 1032,
+    "config": {
+      "architectures": [
+        "Spark2_5ForCausalLM"
+      ],
+      "auto_map": {
+        "AutoConfig": "configuration_spark.Spark2_5Config",
+        "AutoModel": "modeling_spark.Spark2_5Model",
+        "AutoModelForCausalLM": "modeling_spark.Spark2_5ForCausalLM"
+      },
+      "model_type": "spark2_5",
+      "tokenizer_config": {
+        "bos_token": {
+          "__type": "AddedToken",
+          "content": "<｜start▁of▁sentence｜>",
+          "lstrip": false,
+          "normalized": true,
+          "rstrip": false,
+          "single_word": false
+        },
+        "eos_token": {
+          "__type": "AddedToken",
+          "content": "<｜end▁of▁sentence｜>",
+          "lstrip": false,
+          "normalized": true,
+          "rstrip": false,
+          "single_word": false
+        },
+        "unk_token": {
+          "__type": "AddedToken",
+          "content": "<unk>",
+          "lstrip": false,
+          "normalized": true,
+          "rstrip": false,
+          "single_word": false
+        },
+        "pad_token": {
+          "__type": "AddedToken",
+          "content": "<｜▁pad▁｜>",
+          "lstrip": false,
+          "normalized": true,
+          "rstrip": false,
+          "single_word": false
+        },
+        "chat_template": "{%- if not messages %}{{- raise_exception('No messages provided.') }}{%- endif %}{%- set enable_thinking = enable_thinking | default(true) %}{%- set reasoning_instructions = '' %}{%- if enable_thinking is true %}{%- set resolved_reasoning_effort = reasoning_effort|default('high') %}{%- if resolved_reasoning_effort not in ('high', 'low') %}{{- raise_exception('Unexpected reasoning effort ' ~ reasoning_effort ~ '. Supported types are high (default) and low.') }}{%- endif %}{%- if resolved_reasoning_effort == 'high' %}{%- set reasoning_instructions = '\n`thinking_effort` guides on how much to think in your thinking channel (not including the response channel), supported values include `low` and `high`.\nNow the system is invoked with `thinking_effort=high`.' %}{%- elif resolved_reasoning_effort == 'low' %}{%- set reasoning_instructions = '\n`thinking_effort` guides on how much to think in your thinking channel (not including the response channel), supported values include `low` and `high`.\nNow the system is invoked with `thinking_effort=low`.' %}{%- endif %}{%- endif %}{#- Render a string or a list of text blocks. -#}{%- macro render_content(content, context_name) %}{%- if content is string %}{{- content }}{%- elif content is none or content is undefined %}{{- '' }}{%- elif content is iterable and content is not mapping %}{%- for block in content %}{%- if block.type == 'text' %}{{- block.text }}{%- else %}{{- raise_exception('Unsupported ' ~ context_name ~ ' content block type: ' ~ (block.type | string)) }}{%- endif %}{%- endfor %}{%- else %}{{- raise_exception(context_name ~ ' content must be a string or a list of text blocks') }}{%- endif %}{%- endmacro %}{#- Default system prompt -#}{%- set default_system = \"you are a helpful assistant.\" + reasoning_instructions %}{#- The first message-level system is placed in the initial system block. -#}{%- set ns = namespace(initial_system='') %}{%- if messages[0].role == \"system\" %}{%- set ns.initial_system = render_content(messages[0].content, 'system') %}{%- endif %}{#- System block -#}{{- '<｜start▁of▁sentence｜><|System|>' + '\n' + default_system }}{%- if tools %}{{- '\n\n' + '## Tools' + '\n' + 'You have access to the following functions:' + '\n' + '<tools>' }}{%- for tool in tools %}{{- '\n' + (tool.function | tojson(separators=(',', ':'))) }}{%- endfor %}{{- '\n' + '</tools>' }}{%- endif %}{%- if ns.initial_system %}{{- '\n\n' + ns.initial_system }}{%- endif %}{{- '<｜end▁of▁sentence｜>'}}{#- Conversation turns -#}{%- for message in messages %}{%- if message.role == \"system\" %}{#- The first system message was consumed by the initial block. -#}{%- if not loop.first %}{{- '<｜start▁of▁sentence｜><|System|>\n' + render_content(message.content, 'system') + '<｜end▁of▁sentence｜>' }}{%- endif %}{%- elif message.role == \"user\" %}{{- '<｜start▁of▁sentence｜><|User|>' + render_content(message.content, 'user') + '<｜end▁of▁sentence｜>' }}{%- elif message.role == \"assistant\" %}{%- set assistant_content = render_content(message.content, 'assistant') %}{%- if message.reasoning_content is defined and message.reasoning_content %}{%- set reasoning_content = message.reasoning_content %}{%- else %}{%- set reasoning_content = '' %}{%- endif %}{{- '<｜start▁of▁sentence｜><|Bot|>'}}{%- if reasoning_content %}{{- '<think>' + reasoning_content + '</think>'}}{%- else %}{{- '</think>' }}{%- endif %}{%- if assistant_content %}{{- assistant_content }}{%- endif %}{%- if message.tool_calls is defined and message.tool_calls is not none %}{%- for tool_call in message.tool_calls %}{%- if tool_call.function.arguments is not mapping %}{{- raise_exception('tool_call.function.arguments must be a dictionary; normalize JSON strings before apply_chat_template') }}{%- endif %}{%- set args = tool_call.function.arguments %}{{- '<tool_call>' + tool_call.function.name }}{%- for k, v in args.items() %}{{- '<arg_key>' ~ k ~ '</arg_key><arg_value>' ~ (v if v is string else v | tojson(separators=(', ', ': '))) ~ '</arg_value>' }}{%- endfor %}{{- '</tool_call>' }}{%- endfor %}{%- endif %}{{- '<｜end▁of▁sentence｜>' }}{%- elif message.role == \"tool\" %}{%- if loop.previtem is undefined or loop.previtem.role != \"tool\" %}{{- '<｜start▁of▁sentence｜><|Tool|>' }}{%- endif %}{{- '<tool_response>' ~ message.content ~ '</tool_response>' }}{%- if loop.nextitem is undefined or loop.nextitem.role != \"tool\" %}{{- '<｜end▁of▁sentence｜>' }}{%- endif %}{%- else %}{{- raise_exception('Unsupported message role: ' ~ message.role) }}{%- endif %}{%- endfor %}{#- Generation prompt -#}{%- if add_generation_prompt %}{{- '<｜start▁of▁sentence｜><|Bot|>' }}{%- if enable_thinking is defined and enable_thinking %}{{- '<think>' }}{%- endif %}{%- if enable_thinking is defined and not enable_thinking %}{{- '</think>' }}{%- endif %}{%- endif %}"
+      },
+      "chat_template_jinja": "{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- set enable_thinking = enable_thinking | default(true) %}\n{%- set reasoning_instructions = '' %}\n{%- if enable_thinking is true %}\n    {%- set resolved_reasoning_effort = reasoning_effort|default('high') %}\n    {%- if resolved_reasoning_effort not in ('high', 'low') %}\n        {{- raise_exception('Unexpected reasoning effort ' ~ reasoning_effort ~ '. Supported types are high (default) and low.') }}\n    {%- endif %}\n    {%- if resolved_reasoning_effort == 'high' %}\n        {%- set reasoning_instructions = '\\n`thinking_effort` guides on how much to think in your thinking channel (not including the response channel), supported values include `low` and `high`.\\nNow the system is invoked with `thinking_effort=high`.' %}\n    {%- elif resolved_reasoning_effort == 'low' %}\n        {%- set reasoning_instructions = '\\n`thinking_effort` guides on how much to think in your thinking channel (not including the response channel), supported values include `low` and `high`.\\nNow the system is invoked with `thinking_effort=low`.' %}\n    {%- endif %}\n{%- endif %}\n\n{#- Render a string or a list of text blocks. -#}\n{%- macro render_content(content, context_name) %}\n    {%- if content is string %}\n        {{- content }}\n    {%- elif content is none or content is undefined %}\n        {{- '' }}\n    {%- elif content is iterable and content is not mapping %}\n        {%- for block in content %}\n            {%- if block.type == 'text' %}\n                {{- block.text }}\n            {%- else %}\n                {{- raise_exception('Unsupported ' ~ context_name ~ ' content block type: ' ~ (block.type | string)) }}\n            {%- endif %}\n        {%- endfor %}\n    {%- else %}\n        {{- raise_exception(context_name ~ ' content must be a string or a list of text blocks') }}\n    {%- endif %}\n{%- endmacro %}\n\n{#- Default system prompt -#}\n{%- set default_system = \"you are a helpful assistant.\" + reasoning_instructions %}\n\n{#- The first message-level system is placed in the initial system block. -#}\n{%- set ns = namespace(initial_system='') %}\n{%- if messages[0].role == \"system\" %}\n    {%- set ns.initial_system = render_content(messages[0].content, 'system') %}\n{%- endif %}\n\n{#- System block -#}\n{{- '<｜start▁of▁sentence｜><|System|>' + '\\n' + default_system }}\n{%- if tools %}\n    {{- '\\n\\n' + '## Tools' + '\\n' + 'You have access to the following functions:' + '\\n' + '<tools>' }}\n    {%- for tool in tools %}\n        {{- '\\n' + (tool.function | tojson(separators=(',', ':'))) }}\n    {%- endfor %}\n    {{- '\\n' + '</tools>' }}\n{%- endif %}\n{%- if ns.initial_system %}\n    {{- '\\n\\n' + ns.initial_system }}\n{%- endif %}\n{{- '<｜end▁of▁sentence｜>'}}\n\n{#- Conversation turns -#}\n{%- for message in messages %}\n    {%- if message.role == \"system\" %}\n        {#- The first system message was consumed by the initial block. -#}\n        {%- if not loop.first %}\n            {{- '<｜start▁of▁sentence｜><|System|>\\n' + render_content(message.content, 'system') + '<｜end▁of▁sentence｜>' }}\n        {%- endif %}\n    {%- elif message.role == \"user\" %}\n        {{- '<｜start▁of▁sentence｜><|User|>' + render_content(message.content, 'user') + '<｜end▁of▁sentence｜>' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set assistant_content = render_content(message.content, 'assistant') %}\n        {%- if message.reasoning_content is defined and message.reasoning_content %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- set reasoning_content = '' %}\n        {%- endif %}\n        {{- '<｜start▁of▁sentence｜><|Bot|>'}}\n        {%- if reasoning_content %}\n            {{- '<think>' + reasoning_content + '</think>'}}\n        {%- else %}\n            {{- '</think>' }}\n        {%- endif %}\n        {%- if assistant_content %}\n            {{- assistant_content }}\n        {%- endif %}\n        {%- if message.tool_calls is defined and message.tool_calls is not none %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function.arguments is not mapping %}\n                    {{- raise_exception('tool_call.function.arguments must be a dictionary; normalize JSON strings before apply_chat_template') }}\n                {%- endif %}\n                {%- set args = tool_call.function.arguments %}\n                {{- '<tool_call>' + tool_call.function.name }}\n                {%- for k, v in args.items() %}\n                    {{- '<arg_key>' ~ k ~ '</arg_key><arg_value>' ~ (v if v is string else v | tojson(separators=(', ', ': '))) ~ '</arg_value>' }}\n                {%- endfor %}\n                {{- '</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<｜end▁of▁sentence｜>' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem is undefined or loop.previtem.role != \"tool\" %}\n            {{- '<｜start▁of▁sentence｜><|Tool|>' }}\n        {%- endif %}\n        {{- '<tool_response>' ~ message.content ~ '</tool_response>' }}\n        {%- if loop.nextitem is undefined or loop.nextitem.role != \"tool\" %}\n            {{- '<｜end▁of▁sentence｜>' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unsupported message role: ' ~ message.role) }}\n    {%- endif %}\n{%- endfor %}\n\n{#- Generation prompt -#}\n{%- if add_generation_prompt %}\n    {{- '<｜start▁of▁sentence｜><|Bot|>' }}\n    {%- if enable_thinking is defined and enable_thinking %}\n        {{- '<think>' }}\n    {%- endif %}\n    {%- if enable_thinking is defined and not enable_thinking %}\n        {{- '</think>' }}\n    {%- endif %}\n{%- endif %}\n"
+    },
+    "cardData": {
+      "license": "apache-2.0",
+      "language": [
+        "en",
+        "zh"
+      ],
+      "library_name": "transformers",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "llm",
+        "sparkx2_5"
+      ],
+      "base_model": [
+        "XHToken/Spark-X2.6-4B-Base"
+      ]
+    },
+    "gated": false,
+    "private": false,
+    "pipeline_tag": "text-generation",
+    "createdAt": "2026-10-19T03:19:51.000Z",
+    "safetensors": {
+      "parameters": {
+        "BF16": 4112079360
+      },
+      "total": 4112079360
+    }
+  },
+  "raw_response_sha256": "bd1e041bde33e24002cc6de7d40cdb72fd66efe6a4faea0775c1e7374c8a076b",
+  "response_bytes": 12152
+}

@@ -1,0 +1,51 @@
+{
+  "model": "allenai/Olmo-3-7B-Instruct",
+  "family": "OLMo 3",
+  "url": "https://huggingface.co/api/models/allenai/Olmo-3-7B-Instruct?expand%5B%5D=sha&expand%5B%5D=createdAt&expand%5B%5D=lastModified&expand%5B%5D=downloads&expand%5B%5D=likes&expand%5B%5D=safetensors&expand%5B%5D=config&expand%5B%5D=cardData&expand%5B%5D=gated&expand%5B%5D=private&expand%5B%5D=pipeline_tag",
+  "retrieved_at": "2026-11-10T09:52:19.328059+00:00",
+  "http_status": 200,
+  "response": {
+    "_id": "691e2d713a159e42d9c9eea8",
+    "id": "allenai/Olmo-3-7B-Instruct",
+    "sha": "6e5971d9eba42665f5bd5a0fcf047f299ce1dccc",
+    "lastModified": "2026-06-25T21:41:37.000Z",
+    "downloads": 131687,
+    "likes": 159,
+    "config": {
+      "architectures": [
+        "Olmo3ForCausalLM"
+      ],
+      "model_type": "olmo3",
+      "tokenizer_config": {
+        "bos_token": "<|endoftext|>",
+        "eos_token": "<|endoftext|>",
+        "pad_token": "<|pad|>",
+        "unk_token": "<|endoftext|>"
+      },
+      "chat_template_jinja": "{%- set has_system = messages|selectattr('role', 'equalto', 'system')|list|length > 0 -%}{%- if not has_system -%}{{- '<|im_start|>system\nYou are a helpful function-calling AI assistant. ' -}}{%- if tools is none -%}{{- 'You do not currently have access to any functions. <functions></functions><|im_end|>\n' -}}{%- else -%}{{- 'You are provided with function signatures within <functions></functions> XML tags. You may call one or more functions to assist with the user query. Output any function calls within <function_calls></function_calls> XML tags. Do not make assumptions about what values to plug into functions.' -}}{{- '<functions>' -}}{{- tools | tojson -}}{{- '</functions><|im_end|>\n' -}}{%- endif -%}{%- endif -%}{%- for message in messages -%}{%- if message['role'] == 'system' -%}{{- '<|im_start|>system\n' + message['content'] -}}{%- if tools is not none -%}{{- '<functions>' -}}{{- tools | tojson -}}{{- '</functions>' -}}{%- elif message.get('functions', none) is not none -%}{{- ' <functions>' + message['functions'] + '</functions>' -}}{%- endif -%}{{- '<|im_end|>\n' -}}{%- elif message['role'] == 'user' -%}{{- '<|im_start|>user\n' + message['content'] + '<|im_end|>\n' -}}{%- elif message['role'] == 'assistant' -%}{{- '<|im_start|>assistant\n' -}}{%- if message.get('content', none) is not none -%}{{- message['content'] -}}{%- endif -%}{%- if message.get('function_calls', none) is not none -%}{{- '<function_calls>' + message['function_calls'] + '</function_calls>' -}}{% elif message.get('tool_calls', none) is not none %}{{- '<function_calls>' -}}{%- for tool_call in message['tool_calls'] %}{%- if tool_call is mapping and tool_call.get('function', none) is not none %}{%- set args = tool_call['function']['arguments'] -%}{%- set ns = namespace(arguments_list=[]) -%}{%- for key, value in args.items() -%}{%- set ns.arguments_list = ns.arguments_list + [key ~ '=' ~ (value | tojson)] -%}{%- endfor -%}{%- set arguments = ns.arguments_list | join(', ') -%}{{- tool_call['function']['name'] + '(' + arguments + ')' -}}{%- if not loop.last -%}{{ '\n' }}{%- endif -%}{% else %}{{- tool_call -}}{%- endif %}{%- endfor %}{{- '</function_calls>' -}}{%- endif -%}{%- if not loop.last -%}{{- '<|im_end|>' + '\n' -}}{%- else -%}{{- eos_token -}}{%- endif -%}{%- elif message['role'] == 'environment' -%}{{- '<|im_start|>environment\n' + message['content'] + '<|im_end|>\n' -}}{%- elif message['role'] == 'tool' -%}{{- '<|im_start|>environment\n' + message['content'] + '<|im_end|>\n' -}}{%- endif -%}{%- if loop.last and add_generation_prompt -%}{{- '<|im_start|>assistant\n' -}}{%- endif -%}{%- endfor -%}"
+    },
+    "cardData": {
+      "license": "apache-2.0",
+      "base_model": "allenai/Olmo-3-7B-Instruct-DPO",
+      "language": [
+        "en"
+      ],
+      "library_name": "transformers",
+      "datasets": [
+        "allenai/Dolci-Instruct-RL-7B"
+      ]
+    },
+    "gated": false,
+    "private": false,
+    "pipeline_tag": "text-generation",
+    "createdAt": "2025-11-19T20:49:53.000Z",
+    "safetensors": {
+      "parameters": {
+        "BF16": 7298011136
+      },
+      "total": 7298011136
+    }
+  },
+  "raw_response_sha256": "82afc812f859d7b28b4bc3a9ce86db2a65e25de93926684c2c2509ff63d6acc5",
+  "response_bytes": 3383
+}
