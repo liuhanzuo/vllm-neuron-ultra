@@ -68,3 +68,15 @@
 - [官方小模型复查](evidence/multi-model-progress-20261110-compile/official-small-delta-20261110-v1/selection.json)、[独立文件树核对](evidence/multi-model-progress-20261110-compile/official-small-delta-root-review-20261110-v1.json)和[完整证据清单](evidence/multi-model-progress-20261110-compile/manifest.json)。
 
 已有模型提速倍数及其适用范围继续见[统一分支概览](multi-model.md#existing-results-and-provenance)，本报告不改写历史结果。
+
+## 后续源码接入补充
+
+Dory 的官方路径专用 worker/preparer 现已接通冻结加载器、507 个原 BF16 权重到 399 个物理参数的映射检查、182 个 oneDNN 模块、56 份缓存、两份 RoPE 表与六组原始输入。结果保存发生在观测钩子移除、缓存释放和执行上下文恢复之后；独占有界 JSON 写入器要求文件与目录同步，失败保留现场且不返回完成记录。
+
+新增 33 项检查由作者和根代理分别通过。模型集成检查使用完整 507 份形状和旧摘要的模拟权重，检查真实调用与恢复顺序；加载器、完整权重摘要、采集消费者及该项的保存接口被替换为测试实现。另有小型真实适配器字节链和模拟文件系统检查。没有执行新的原生模型构造、7.95 GB 权重校验或 Stage A 实际采集。正式运行还会完整遍历加载后的权重，不能由这些测试推定运行预算。
+
+MiniCPM5 的结束后调用链只读复查未发现新的必然接口阻断。实际启动及退出证据、独立来源审阅仍须由外部真实观察生成；现有成功退出记录器不能用于失败结果。准备后新增 continuation handoff 会让旧绑定在启动时失效，必须保持真实终止交接与配置一致。
+
+源码与检查见 [Dory 独立复查](evidence/multi-model-progress-20261110-compile/dory-stage-a-worker-preparation-root-review-20261110-v1.json)、[MiniCPM5 启动衔接说明](evidence/multi-model-progress-20261110-compile/minicpm5-sdk-post-terminal-readiness-source-note-20261110-v1.json)及[补充文件清单](evidence/multi-model-progress-20261110-compile/supplement-manifest-v1.json)。Nemotron 在最新[实际观察](evidence/multi-model-progress-20261110-compile/nemotron9b-r12-actual-progress-20261110-v15.json)时仍在编译。上述补充没有新增模型资格或提速倍数。
+
+[Dory 官方 worker 的完整调用说明、测试替身范围和剩余运行要求](evidence/multi-model-progress-20261110-compile/dory-stage-a-official-worker-source-delivery-20261110-v1.md)；[来源清单](evidence/multi-model-progress-20261110-compile/dory-stage-a-official-worker-source-delivery-20261110-v1.json)。

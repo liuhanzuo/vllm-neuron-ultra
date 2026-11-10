@@ -1,0 +1,290 @@
+{
+  "author": "/root/mini_official_history_core_20261110",
+  "bindings_or_specs_or_plans_or_contracts_created": false,
+  "build_called": false,
+  "completed_called": false,
+  "conclusion": "No new unconditional source wiring blocker found in this bounded read-only audit. External actual-evidence/review steps remain root-owned; nonzero Mini execution needs a separate failure record instead of the success-only recorders.",
+  "concrete_conditional_gap": {
+    "classification": "Conditional failure-path recorder gap, not a blocker to the complete successful sequence.",
+    "evidence": [
+      {
+        "function": "actual_tool",
+        "line": 20,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py"
+      },
+      {
+        "function": "record",
+        "line": 26,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py"
+      },
+      {
+        "function": "validate",
+        "line": 46,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py"
+      }
+    ],
+    "impact": "actual_tool requires exit_code==0; model recorder also requires the complete successful output set. On failure, preserve actual session/exit/owner and cleanup evidence separately; do not invoke these success-only APIs or manufacture missing outputs.",
+    "issue": "Mini model/auditor nonzero exits cannot be passed to the existing successful-exit recorders.",
+    "repair_performed": false
+  },
+  "created_at": "2026-11-10T16:26:40.046340+00:00",
+  "invocation_pitfalls": [
+    {
+      "detail": "Model outer owner argv must start /home/ubuntu/venvs/vllm_neuron/bin/python -B <absolute runner_v2> --mode outer. Auditor owner argv must start literal python3 -B <absolute auditor_v2>; substituting /usr/bin/python3 fails the current audit-exit validator even if it invokes the same interpreter.",
+      "evidence": [
+        {
+          "function": "validate",
+          "line": 30,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py"
+        },
+        {
+          "function": "validate",
+          "line": 46,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py"
+        }
+      ],
+      "issue": "Exact argv spellings are part of accepted metadata."
+    },
+    {
+      "detail": "Publishing any newer continuation-handoff after preparing the binding makes require_latest_terminal reject it. Keep the actual terminal handoff latest across preparation/review/launch, or create/review a successor bound to the new actual latest terminal; never modify frozen prepared pins.",
+      "evidence": [
+        {
+          "function": "require_latest_terminal",
+          "line": 139,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_completion_v1.py"
+        },
+        {
+          "function": "build",
+          "line": 117,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py"
+        },
+        {
+          "function": "check_prerequisites",
+          "line": 185,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py"
+        }
+      ],
+      "issue": "The newest handoff is selected by mtime at builder and outer launch."
+    }
+  ],
+  "native_or_model_imported": false,
+  "new_speedup_claim": false,
+  "new_unconditional_callable_or_schema_blockers_found": [],
+  "no_full_source_scan": true,
+  "no_new_handoff": true,
+  "no_prior_tests_rerun": true,
+  "physical_called": false,
+  "raw_or_native_payload_bytes_read": 0,
+  "required_external_handoffs": [
+    {
+      "evidence": [
+        {
+          "function": "validate_actual_exit",
+          "line": 27,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_r4_terminal_metadata_v2.py"
+        },
+        {
+          "function": "terminal_chain",
+          "line": 119,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_after_nemotron_r12_v1.py"
+        }
+      ],
+      "required": "Root-observed original external session28398 actual exit plus exact owner gone and original spec/review refs. On failed outcome, distinct actual supported audit --release-failed session/owner/exit0.",
+      "step": "r12 terminal"
+    },
+    {
+      "evidence": [
+        {
+          "function": "require_complete_binding",
+          "line": 36,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_completion_v1.py"
+        },
+        {
+          "function": "completed",
+          "line": 90,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_completion_v1.py"
+        }
+      ],
+      "required": "Root publishes actual terminal handoff with empty live_tool_sessions/active_heavy_units, nemotron_r12 actual_exit/failed_release_exit and unchanged current_history_factorial refs; binding schema is minicpm5_layer1_sdk_batch_layout_latest_completion_v1 with status complete.",
+      "step": "latest terminal binding"
+    },
+    {
+      "evidence": [
+        {
+          "function": "build",
+          "line": 117,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py"
+        },
+        {
+          "function": "read_bundle",
+          "line": 71,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py"
+        }
+      ],
+      "required": "Builder v5 creates contract/plan/spec only after actual terminal. It returns review_target but does not write an accepted review. Root must independently produce minicpm5_layer1_sdk_batch_layout_runtime_source_review_v2 bound to exact spec and identical complete source_sha256.",
+      "step": "builder and separate source review"
+    },
+    {
+      "evidence": [
+        {
+          "function": "record",
+          "line": 26,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py"
+        },
+        {
+          "function": "validate",
+          "line": 30,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py"
+        }
+      ],
+      "required": "Before model exits, root records schema minicpm5_layer1_sdk_batch_layout_actual_live_v1, reviewer /root, actual_identity_verified true, handle {kind:tool_session,session_id}, owner, spec and review refs. The model runner does not create the external tool-session observation.",
+      "step": "actual model live"
+    },
+    {
+      "evidence": [
+        {
+          "function": "validate",
+          "line": 46,
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py"
+        }
+      ],
+      "required": "Root separately records schema minicpm5_sdk_batch_layout_audit_live_v1, reviewer /root, actual_identity_verified true, actual_execution_handle, owner and model_actual_exit. The strict audit result is not its own actual exit receipt.",
+      "step": "actual auditor live"
+    }
+  ],
+  "resolved_interfaces": [
+    {
+      "alias": "p",
+      "missing": [],
+      "source": "minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "target": "minicpm5_layer0_execution_protocol_v7.py",
+      "unique_attributes": 18
+    },
+    {
+      "alias": "latest",
+      "missing": [],
+      "source": "research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py",
+      "target": "research/minicpm5_layer1_sdk_batch_layout_completion_v1.py",
+      "unique_attributes": 4
+    },
+    {
+      "alias": "runner",
+      "missing": [],
+      "source": "research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py",
+      "target": "minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "unique_attributes": 5
+    },
+    {
+      "alias": "physical_evidence",
+      "missing": [],
+      "source": "research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "target": "research/minicpm5_sdk_physical_evidence_v2.py",
+      "unique_attributes": 4
+    },
+    {
+      "alias": "physical",
+      "missing": [],
+      "source": "research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py",
+      "target": "research/minicpm5_sdk_physical_evidence_v2.py",
+      "unique_attributes": 2
+    },
+    {
+      "alias": "auditor",
+      "missing": [],
+      "source": "research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py",
+      "target": "research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "unique_attributes": 2
+    },
+    {
+      "alias": "runner",
+      "missing": [],
+      "source": "research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py",
+      "target": "minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "unique_attributes": 7
+    },
+    {
+      "alias": "runner",
+      "missing": [],
+      "source": "research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py",
+      "target": "minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "unique_attributes": 7
+    }
+  ],
+  "runtime_ready": false,
+  "schema": "minicpm5_sdk_post_terminal_readiness_source_note_v1",
+  "scope": "Exact post-r12 terminal -> builder v5 -> model runner v2 -> strict auditor v2 -> audit-exit v2 wiring",
+  "source_only": true,
+  "source_refs": {
+    "minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py": {
+      "bytes": 35515,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "sha256": "109f3c9d25d26eee2c2b2ffe291db9dcaf8413c064e020c6ee65a7326d118947"
+    },
+    "nemotron9b_package_controller_v27.py": {
+      "bytes": 11719,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v27.py",
+      "sha256": "bbdb0515e2d0baf15cd0f56dd84c7ff8469e426594b7dec27ffce9ad49f9918e"
+    },
+    "nemotron9b_package_external_v27.py": {
+      "bytes": 14120,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_external_v27.py",
+      "sha256": "14b75a86fb50ebd044edf2ada49e5424a9606a931f9fdecc2bfe819138f4766e"
+    },
+    "research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py": {
+      "bytes": 14405,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "sha256": "50acc669e1f55f7463c8490f23b412986b92276392a6ae7fefcd7d52e19433a2"
+    },
+    "research/minicpm5_after_nemotron_r12_v1.py": {
+      "bytes": 17687,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_after_nemotron_r12_v1.py",
+      "sha256": "4850c930ca70ae3af6e1de0a92ae90783aef6523dd4369981200079215f71d33"
+    },
+    "research/minicpm5_layer1_sdk_batch_layout_completion_v1.py": {
+      "bytes": 9608,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_completion_v1.py",
+      "sha256": "163dbb994e4d4a330dc5af8ec9e562613c7855f29a865950d7d5d63032e1282a"
+    },
+    "research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py": {
+      "bytes": 9482,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py",
+      "sha256": "6fdb0e017ea4f6ef55ae74a62ea96171bb8b20e6db3a6243ac38666f241d3ab7"
+    },
+    "research/minicpm5_layer1_sdk_batch_layout_sources_v2.py": {
+      "bytes": 13100,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py",
+      "sha256": "d1bd188a44f3d30cf52ccd171b1eed05e6fc7246d96d68dff39591449b6ced6b"
+    },
+    "research/minicpm5_sdk_physical_evidence_v2.py": {
+      "bytes": 15443,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_physical_evidence_v2.py",
+      "sha256": "4b1b340fed2728f6191b84cff80fb4906bc5fdc08c5463e414191e6f48c44e17"
+    },
+    "research/nemotron9b_r4_terminal_metadata_v2.py": {
+      "bytes": 12877,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_r4_terminal_metadata_v2.py",
+      "sha256": "fa8adaef083205c1e43ae5cfeb538372230ae063f0612d6c93638eceb18a7e05"
+    },
+    "research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py": {
+      "bytes": 10220,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py",
+      "sha256": "3cfcea76282ea3c151b40aac6ffb60d422e0dd35e50baee924af024eadb6b9d4"
+    },
+    "research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py": {
+      "bytes": 11385,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py",
+      "sha256": "50555fc9805d4cc3ff6eca5837a53975bba86d902f4d2e89bf77bc17be79c2e3"
+    },
+    "research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py": {
+      "bytes": 4648,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py",
+      "sha256": "733bb52abd0d9166e5a41c35a39d80953af907863f9e753b992886c2222f4652"
+    }
+  },
+  "strict_pair_api": {
+    "collect_signature": "collect_pair(done,guard,physical,read_properties,read_empty_group,known_units=...)",
+    "consumer_pair_access": "audit-exit v2 decodes pair and reads pair[first][tree]; current consumers match the helper.",
+    "runtime_called": false,
+    "schema_constant": "PAIR_SCHEMA is defined as SCHEMA"
+  }
+}
