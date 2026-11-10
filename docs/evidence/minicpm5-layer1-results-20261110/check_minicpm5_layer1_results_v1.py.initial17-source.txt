@@ -1,0 +1,265 @@
+"""Metadata and synthetic-byte tests; no saved tensor/native workload reads."""
+import ast
+import copy
+import hashlib
+import json
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+R=Path(__file__).resolve().parents[1];Q=R/'research'
+sys.path[:0]=[str(R),str(Q)]
+from research import minicpm5_layer1_observation_v1 as writer
+from research import minicpm5_layer1_raw_verifier_v1 as raw
+from research import minicpm5_layer1_runtime_results_v1 as results
+from research import minicpm5_layer1_cache_codec_v1 as codec
+
+SOURCE_PLAN=Q/'minicpm5-layer1-observation-source-plan-20261110-v1.json'
+
+def read_ref(ref):
+ data=Path(ref['path']).read_bytes()
+ assert len(data)<8*2**20 and hashlib.sha256(data).hexdigest()==ref['sha256']
+ return json.loads(data)
+
+class Fixture:
+ """Real original JSON only, with clearly synthetic observation payloads."""
+ def __init__(self,root):
+  self.plan=json.loads(SOURCE_PLAN.read_text());self.original_plan=copy.deepcopy(self.plan)
+  self.plan['output_root']=str(root);self.calls={};self.arms={};self.rank_results=[]
+  self.originals={}
+  ending=read_ref(self.plan['layer1_observation']['original_exit'])
+  zero=bytes(codec.CACHE_BYTES);h,packed=codec.encode(zero)
+  for rank in (0,1):
+   result=read_ref(ending['outputs']['rank'+str(rank)+'_result'])
+   result.update(schema='minicpm5_layer1_observation_cpu_rank_v1',full_cache_payloads_written=84,
+    complete84_state_snapshots_written=0,layer1_full_cache_records_written=84,layer1_observation_calls=42)
+   for ai,entry in enumerate(result['arm_reports']):
+    arm=results.ARMS[ai];report=read_ref(dict(path=entry['report'],sha256=entry['sha256']))
+    report.update(schema='minicpm5_layer1_observation_cpu_arm_v1',full_cache_payloads_written=28,
+     complete84_state_snapshots_written=0,layer1_full_cache_records_written=28,layer1_observation_calls=14)
+    previous=None;folder=root/('cpu-rank'+str(rank))/arm;folder.mkdir(parents=True)
+    for ci,callentry in enumerate(report['reports']):
+     call=read_ref(dict(path=callentry['report'],sha256=callentry['sha256']))
+     original=copy.deepcopy(call);self.originals[rank,ai,ci]=original
+     call.update(schema='minicpm5_layer1_observation_cpu_call_v1')
+     callfolder=folder/('call-%02d'%ci);callfolder.mkdir()
+     call['payload']['path']=str(callfolder/'output.pt')
+     callentry['payload']=copy.deepcopy(call['payload'])
+     bundle=call['selected_tap_bundle'];bundle['path']=str(callfolder/'selected-taps.bf16')
+     Path(bundle['path']).write_bytes(bytes(bundle['raw_bytes']))
+     bundle['identity']=results.identity(bundle['path'])
+     order=writer.frame_order(call);entries=[];parts=[];offset=0
+     for name in writer.TAPS:
+      data=bytes(len(order)*4096)
+      entries.append(dict(kind='tap',name=name,offset=offset,bytes=len(data),
+       sha256=call['stage_sha256'][name],shape=[len(order),1,2048],dtype='torch.bfloat16',
+       frame_indices=order,source_metadata=call['stage_metadata'][name]))
+      parts.append(data);offset+=len(data)
+     for i,name in zip((2,3),writer.CACHES):
+      header=copy.deepcopy(h)
+      header['sha256']=call['before_metadata'][i]['sha256']
+      header['base_sha256']=None if previous is None else previous['before_metadata'][i]['sha256']
+      entries.append(dict(kind='cache',name=name,offset=offset,bytes=len(packed),
+       codec=header,source_metadata=call['before_metadata'][i]))
+      parts.append(packed);offset+=len(packed)
+     payload=b''.join(parts);path=callfolder/'layer1-observation.bin';path.write_bytes(payload)
+     ref=self.plan['layer1_observation']['original_calls'][rank*42+ai*14+ci]
+     ref={k:ref[k]for k in ('path','sha256')}
+     call['layer1_observation']=dict(schema='minicpm5_layer1_observation_v1',rank=rank,arm=arm,call=ci,
+      original_call=ref,physical_frame_order=order,entries=entries,payload_bytes=len(payload),
+      payload_sha256=raw.sha(payload),all_original_fields_exact=True,observation_occurs_after_forward=True,
+      full_cache_reconstruction_required=True,caches_are_original_input_not_post_state=True,
+      full_model_qualified=False,new_speedup_claim=False,path=str(path),identity=results.identity(path))
+     self.calls[str(callfolder/'result.json')]=call;previous=call
+     callentry['report']=str(callfolder/'result.json')
+    entry['report']=str(folder/'result.json');self.arms[entry['report']]=report
+   self.rank_results.append(result)
+ def output_reader(self,ref,expected):
+  if ref['path']!=str(expected):raise ValueError('Unexpected fixture metadata path')
+  return self.calls[ref['path']]if ref['path']in self.calls else self.arms[ref['path']]
+ def call(self,rank=0,ai=0,ci=0):
+  return self.calls[str(Path(self.plan['output_root'])/('cpu-rank'+str(rank))/results.ARMS[ai]/('call-%02d'%ci)/'result.json')]
+
+class MetadataValidation(unittest.TestCase):
+ @classmethod
+ def setUpClass(cls):
+  cls.tmp=tempfile.TemporaryDirectory(prefix='mini-layer1-synthetic-')
+  cls.fixture=Fixture(Path(cls.tmp.name))
+ @classmethod
+ def tearDownClass(cls):cls.tmp.cleanup()
+ def validate(self,ranks=None):
+  f=self.fixture
+  with patch.object(results,'checked_output_json',side_effect=f.output_reader):
+   return results.validate_rank_pair(f.rank_results if ranks is None else ranks,f.plan)
+ def test_complete_real_metadata_all84_calls_keeps_raw_pending(self):
+  proof=self.validate()
+  self.assertEqual((proof['layer1_metadata_calls'],proof['layer1_full_cache_records']),(84,168))
+  self.assertTrue(proof['layer1_raw_reconstruction_pending']);self.assertFalse(proof['raw_payloads_read'])
+ def test_rank_count_and_old_zero_cache_schema_rejected(self):
+  for field,value in (('schema','minicpm5_original32_layer0_full_bf16_cpu_rank_v1'),
+   ('layer1_observation_calls',41),('full_cache_payloads_written',0),
+   ('layer1_full_cache_records_written',83),('complete84_state_snapshots_written',1),
+   ('model_forwards',41),('selected_tap_raw_bytes',0)):
+   ranks=copy.deepcopy(self.fixture.rank_results);ranks[0][field]=value
+   with self.subTest(field=field),self.assertRaises((RuntimeError,ValueError)):self.validate(ranks)
+ def test_arm_counts_all_required(self):
+  report=next(iter(self.fixture.arms.values()))
+  for field,value in (('layer1_observation_calls',13),('layer1_full_cache_records_written',27),
+   ('full_cache_payloads_written',0),('complete84_state_snapshots_written',1)):
+   old=report[field];report[field]=value
+   try:
+    with self.subTest(field=field),self.assertRaises((RuntimeError,ValueError)):self.validate()
+   finally:report[field]=old
+ def metadata(self,call,previous=None):
+  d=call['layer1_observation'];original=read_ref(d['original_call'])
+  return results.observation_metadata(call,original,d['original_call'],Path(d['path']).parent,previous)
+ def test_descriptor_identity_frames_and_spans_cannot_change(self):
+  for mutate in (lambda d:d.update(rank=1),lambda d:d.update(call=1),
+   lambda d:d.update(physical_frame_order=[31]),lambda d:d['entries'][0].update(offset=1),
+   lambda d:d['entries'][0].update(sha256='0'*64),
+   lambda d:d['entries'][3]['codec']['pages'].reverse(),
+   lambda d:d['entries'][3]['codec']['pages'].pop(),
+   lambda d:d['entries'][3]['codec'].update(shape=[4,1,4096,128])):
+   call=copy.deepcopy(self.fixture.call());mutate(call['layer1_observation'])
+   with self.assertRaises((RuntimeError,ValueError)):self.metadata(call)
+ def test_history_uses_previous_input_for_delta_but_previous_post_for_model(self):
+  previous=self.fixture.call(ci=0);call=self.fixture.call(ci=1)
+  self.assertNotEqual(previous['before_metadata'][2]['sha256'],previous['post_metadata'][2]['sha256'])
+  self.assertTrue(self.metadata(call,previous)['metadata_complete'])
+  for action in ('post_base','wrong_arm','skip_call','no_history','own_state'):
+   bad=copy.deepcopy(call);prior=copy.deepcopy(previous)
+   if action=='post_base':bad['layer1_observation']['entries'][3]['codec']['base_sha256']=prior['post_metadata'][2]['sha256']
+   if action=='wrong_arm':prior['arm']=results.ARMS[1]
+   if action=='skip_call':prior['call']['index']=7
+   if action=='no_history':prior=None
+   if action=='own_state':prior['post_metadata'][2]['sha256']='0'*64
+   with self.subTest(action=action),self.assertRaises((RuntimeError,ValueError)):self.metadata(bad,prior)
+ def test_first_call_rejects_inherited_history(self):
+  with self.assertRaises((RuntimeError,ValueError)):self.metadata(self.fixture.call(),self.fixture.call())
+ def test_observed_file_identity_change_rejected(self):
+  call=copy.deepcopy(self.fixture.call());call['layer1_observation']['identity']['inode']+=1
+  with self.assertRaises((RuntimeError,ValueError)):self.metadata(call)
+ def test_original_numeric_and_precision_checks_remain(self):
+  f=self.fixture;call=f.call();original=copy.deepcopy(call)
+  for action in ('threshold','precision','state','route'):
+   try:
+    if action=='threshold':call['HF_metrics'][0]['failed_criteria']=['invented']
+    if action=='precision':call['output_metadata']['dtype']='torch.bfloat16'
+    if action=='state':call['before_metadata'][0]['sha256']='0'*64
+    if action=='route':call['route_records'].pop()
+    with self.subTest(action=action),self.assertRaises((RuntimeError,ValueError)):self.validate()
+   finally:call.clear();call.update(copy.deepcopy(original))
+ def test_original_result_logic_is_retained(self):
+  """Remove only declared additions, then compare complete old validator AST."""
+  old=ast.parse((R/'minicpm5_original32_layer0_full_bf16_cpu_runner_v1.py').read_text())
+  new=ast.parse((Q/'minicpm5_layer1_runtime_results_v1.py').read_text())
+  oldfn=next(n for n in old.body if getattr(n,'name',None)=='validate_rank_result')
+  newfn=next(n for n in new.body if getattr(n,'name',None)=='validate_rank_result')
+  class Normalize(ast.NodeTransformer):
+   def visit_Constant(self,node):
+    if type(node.value)is str:
+     node.value=node.value.replace('minicpm5_layer1_observation_cpu_','minicpm5_original32_layer0_full_bf16_cpu_')
+    return node
+   def visit_Expr(self,node):
+    if isinstance(node.value,ast.Call):
+     text=ast.unparse(node)
+     if 'complete84_state_snapshots_written'in text or text.startswith('observation_metadata('):return None
+     if 'full_cache_payloads_written'in text:
+      node.value.args[1].elts[0]=ast.Constant(0)
+    return self.generic_visit(node)
+   def visit_Assign(self,node):
+    if any(isinstance(t,ast.Name)and t.id in ('previous_observation','original_ref','original_call')for t in node.targets):
+     return None
+    return self.generic_visit(node)
+  self.assertEqual(ast.dump(oldfn),ast.dump(Normalize().visit(newfn)))
+
+class IndependentRaw(unittest.TestCase):
+ @classmethod
+ def setUpClass(cls):
+  plan=json.loads(SOURCE_PLAN.read_text())
+  cls.templates=[read_ref(plan['layer1_observation']['original_calls'][i])for i in range(14)]
+  cls.snapshots=[]
+  for ci in range(15):
+   caches={}
+   for index,name in enumerate(raw.CACHES):
+    buf=bytearray(bytes([index+1])*raw.CACHE_BYTES)
+    for slot in range(4):
+     for pos in (0,4095,4096,4223):buf[(slot*4224+pos)*256+127]=(ci+slot+index)%256
+    caches[name]=bytes(buf)
+   cls.snapshots.append(caches)
+  cls.synthetic_ref=dict(path='/synthetic/frozen-call.json',sha256='a'*64)
+ def fixture(self,ci=0,rank=0,ai=0,previous=None):
+  row=copy.deepcopy(self.templates[ci]);row.update(rank=rank,arm=raw.ARMS[ai])
+  taps={name:bytes([k+3])*(len(row['physical_rows'])*4096)for k,name in enumerate(raw.TAPS)}
+  for name,data in taps.items():row['stage_sha256'][name]=raw.sha(data)
+  for k,name in zip((2,3),raw.CACHES):
+   for field in ('before_metadata','input_after_metadata'):row[field][k]['sha256']=raw.sha(self.snapshots[ci][name])
+   row['post_metadata'][k]['sha256']=raw.sha(self.snapshots[ci+1][name])
+  original=copy.deepcopy(row)
+  descriptor,payload,state=writer.build(row,original,self.synthetic_ref,taps,self.snapshots[ci],previous)
+  row['layer1_observation']=descriptor
+  return row,original,payload,state
+ def test_all84_calls_all168_full_cache_records_and_every_frame(self):
+  trajectory=raw.Trajectory()
+  for rank in (0,1):
+   for ai in range(3):
+    previous=None
+    for ci in range(14):
+     row,original,payload,previous=self.fixture(ci,rank,ai,previous)
+     report=trajectory.accept(row,original,self.synthetic_ref,payload)
+     self.assertEqual(report['cache_sha256'],{k:raw.sha(v)for k,v in self.snapshots[ci].items()})
+  proof=trajectory.finish()
+  self.assertEqual((proof['calls'],proof['full_cache_records'],proof['complete_cache_bytes']),(84,168,726663168))
+  self.assertFalse(proof['attention_causality_proven']);self.assertFalse(proof['new_speedup_claim'])
+  with self.assertRaises(ValueError):trajectory.finish()
+ def test_incomplete_or_wrong_rank_arm_call_order_rejected(self):
+  t=raw.Trajectory()
+  with self.assertRaises(ValueError):t.finish()
+  for rank,ai,ci in ((1,0,0),(0,1,0),(0,0,1)):
+   row,original,payload,_=self.fixture()
+   for d in (row,original):d.update(rank=rank,arm=raw.ARMS[ai]);d['call']['index']=ci
+   with self.assertRaises(ValueError):t.accept(row,original,self.synthetic_ref,payload)
+ def test_all_original_fields_remain_required(self):
+  row,original,payload,_=self.fixture()
+  for field in raw.ORIGINAL_FIELDS:
+   bad=copy.deepcopy(original);bad[field]=None
+   with self.subTest(field=field),self.assertRaises(ValueError):raw.verify_call(row,bad,self.synthetic_ref,payload)
+ def test_whole_payload_and_tap_corruption_rejected(self):
+  row,original,payload,_=self.fixture()
+  corrupted=b'!'+payload[1:]
+  with self.assertRaises(ValueError):raw.verify_call(row,original,self.synthetic_ref,corrupted)
+  row['layer1_observation']['payload_sha256']=raw.sha(corrupted)
+  with self.assertRaisesRegex(ValueError,'tap byte'):raw.verify_call(row,original,self.synthetic_ref,corrupted)
+ def test_cache_corruption_survives_outer_rehash_but_is_rejected(self):
+  row,original,payload,_=self.fixture();entry=row['layer1_observation']['entries'][3]
+  offset=entry['offset'];broken=payload[:offset]+b'!'+payload[offset+1:]
+  row['layer1_observation']['payload_sha256']=raw.sha(broken)
+  entry['codec']['packed_sha256']=raw.sha(broken[offset:offset+entry['bytes']])
+  with self.assertRaises((ValueError,raw.zlib.error)):raw.verify_call(row,original,self.synthetic_ref,broken)
+ def test_wrong_full_cache_hash_geometry_and_page_table_rejected(self):
+  for mutate in (lambda h:h.update(sha256='0'*64),lambda h:h.update(shape=[4,1,4096,128]),
+   lambda h:h['pages'].reverse(),lambda h:h['pages'].pop(),
+   lambda h:h['pages'][0].update(index=True),lambda h:h['pages'][0].update(raw_bytes=65535)):
+   row,original,payload,_=self.fixture();mutate(row['layer1_observation']['entries'][3]['codec'])
+   with self.assertRaises(ValueError):raw.verify_call(row,original,self.synthetic_ref,payload)
+ def test_wrong_delta_base_poststate_and_different_history_rejected(self):
+  row,original,payload,encoded=self.fixture();_,previous=raw.verify_call(row,original,self.synthetic_ref,payload)
+  row,original,payload,_=self.fixture(1,previous=encoded)
+  raw.verify_call(row,original,self.synthetic_ref,payload,previous)
+  for action in ('base_post','wrong_rank','wrong_arm','prior_post','prior_bytes'):
+   bad=copy.deepcopy(row);prior=copy.deepcopy(previous)
+   if action=='base_post':bad['layer1_observation']['entries'][3]['codec']['base_sha256']=previous['post_metadata'][2]['sha256']
+   if action=='wrong_rank':prior['rank']=1
+   if action=='wrong_arm':prior['arm']=raw.ARMS[1]
+   if action=='prior_post':prior['post_metadata'][2]['sha256']='0'*64
+   if action=='prior_bytes':prior['caches'][raw.CACHES[0]]=bytes(raw.CACHE_BYTES)
+   with self.subTest(action=action),self.assertRaises(ValueError):raw.verify_call(bad,original,self.synthetic_ref,payload,prior)
+ def test_independent_verifier_imports_only_standard_library(self):
+  tree=ast.parse((Q/'minicpm5_layer1_raw_verifier_v1.py').read_text())
+  imports=[alias.name for n in ast.walk(tree)if isinstance(n,ast.Import)for alias in n.names]
+  self.assertEqual(imports,['hashlib','re','zlib'])
+  self.assertFalse(any(isinstance(n,ast.ImportFrom)for n in ast.walk(tree)))
+  self.assertFalse({'torch','numpy','torch_neuronx','neuronxcc'}&set(sys.modules))
+
+if __name__=='__main__':unittest.main(verbosity=2)
