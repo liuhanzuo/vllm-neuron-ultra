@@ -1,0 +1,173 @@
+{
+  "schema": "nemotron4b_interpreter_policy_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T02:09:02.107372+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_interpreter_origin_policy_v1.py": "8c4b33e757df2cd87820741c0d6ef4b028e3d83400ac286e8a0778ab4b7327bb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_interpreter_origin_policy_v1.py": "f7c0d53f633b1df567d9c8ec911664f670eee88c0a1fc19116d33c703c0102b2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_interpreter_policy_v1.py": "c028d50d91b4d7f9e570572845806c8a4fc2b944f08c2c91c64396e3e7ade25b"
+  },
+  "prior_native_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-native-origin-source-preparation-review-20261110-v1.json",
+    "sha256": "6ee046ade7a7396bd36090ca7913402f13fb4dd1ac8dfc7e7b39af5d76479ffc"
+  },
+  "prior_selected_sources_revalidated": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_native_origin_audit_v1.py": "001f31b51d72955f1c1da456367f1631ae160fd9180924a6876c38639c112659",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_native_origin_audit_v1.py": "1de430bdba10423e9f498e11aeb9507c8685a1ca007bc7ec139f9e6a40679dc1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v4.py": "aab6eb9fab0f785236bc43c40f07dc55469cf6b50f5757b0c0e584b9be26b51e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_pinned_source_reader_v1.py": "d81ba7c29fa00b058d0aaf441bb78973a1f68bae323019bfc58697029fd7f25f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a"
+  },
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-policy-tests-actual-exits-20261110-v1.json",
+    "sha256": "afa82d2e483149ccabcfc9f16516152ae52122424c5ae715b6f09ea250e6e505"
+  },
+  "tests_per_interpreter": 23,
+  "passing_executions": 44,
+  "skipped_executions": 2,
+  "manifest_observations": {
+    "native": {
+      "candidate": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-native-manifest-candidate-20261110-v2.json",
+        "sha256": "ee9113cd790b58b7c89019adaec3b8fccab3e31e56be3ab48a6c7d517bbb4918"
+      },
+      "independent_seed": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-native-manifest-hashseed-20261110-v1.json",
+        "sha256": "c4ab12768d06d3d716627b26bacd055e08b0a7e641ab96709ea42f5d859ff665"
+      },
+      "module_counts": {
+        "builtin": 96,
+        "frozen": 29
+      },
+      "frozen_name_discovery": {
+        "complete_enumerator": true,
+        "method": "interpreter _imp._frozen_module_names",
+        "names": [
+          "__hello__",
+          "__hello_alias__",
+          "__hello_only__",
+          "__phello__",
+          "__phello__.__init__",
+          "__phello__.ham",
+          "__phello__.ham.__init__",
+          "__phello__.ham.eggs",
+          "__phello__.spam",
+          "__phello_alias__",
+          "__phello_alias__.spam",
+          "_collections_abc",
+          "_frozen_importlib",
+          "_frozen_importlib_external",
+          "_sitebuiltins",
+          "abc",
+          "codecs",
+          "genericpath",
+          "importlib.machinery",
+          "importlib.util",
+          "io",
+          "ntpath",
+          "os",
+          "os.path",
+          "posixpath",
+          "runpy",
+          "site",
+          "stat",
+          "zipimport"
+        ]
+      },
+      "native_stat_only_files": 8,
+      "native_candidate_payload_bytes": 34495336,
+      "aliases": [
+        {
+          "module_name": "importlib._bootstrap",
+          "registry_name": "importlib._bootstrap",
+          "spec_name": "_frozen_importlib"
+        },
+        {
+          "module_name": "importlib._bootstrap_external",
+          "registry_name": "importlib._bootstrap_external",
+          "spec_name": "_frozen_importlib_external"
+        },
+        {
+          "module_name": "posixpath",
+          "registry_name": "os.path",
+          "spec_name": "posixpath"
+        }
+      ],
+      "manifest_crossprocess_equal": true
+    },
+    "neuron": {
+      "candidate": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-neuron-manifest-candidate-20261110-v2.json",
+        "sha256": "a617625673b9821221f55442af52577bd5ffdcf4b21015a94e47128827627e93"
+      },
+      "independent_seed": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-neuron-manifest-hashseed-20261110-v1.json",
+        "sha256": "7c784feb8cb8badde2db7feeb014d30b6448e697a4b95f3e770ee2a3a5dd28cf"
+      },
+      "module_counts": {
+        "builtin": 59,
+        "frozen": 6
+      },
+      "frozen_name_discovery": {
+        "complete_enumerator": false,
+        "method": "stdlib source names, preloaded names and explicit CPython frozen names",
+        "names": [
+          "__hello__",
+          "__phello__",
+          "__phello__.spam",
+          "_frozen_importlib",
+          "_frozen_importlib_external",
+          "zipimport"
+        ]
+      },
+      "native_stat_only_files": 9,
+      "native_candidate_payload_bytes": 14220280,
+      "aliases": [
+        {
+          "module_name": "importlib._bootstrap",
+          "registry_name": "importlib._bootstrap",
+          "spec_name": "_frozen_importlib"
+        },
+        {
+          "module_name": "importlib._bootstrap_external",
+          "registry_name": "importlib._bootstrap_external",
+          "spec_name": "_frozen_importlib_external"
+        }
+      ],
+      "manifest_crossprocess_equal": true
+    }
+  },
+  "frozen_canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "initial_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-interpreter-policy-syntax-failure-20261110-v1.json",
+    "sha256": "6faa08153481d7f3b573917e66a2a77175a2e3852c92b0e19da50da0487923be"
+  },
+  "source_preparation_passed": true,
+  "all_new_sources_now_frozen": true,
+  "findings": [
+    "InterpreterPolicy binds builtin/frozen providers and _imp primitives to an already authenticated NativeFiles catalog and actual current executable mapping. It cannot establish that catalog itself.",
+    "Frozen code pins include nested code, constants and code locations; public code fields are canonically encoded so independent process hash seeds do not change the manifest.",
+    "Original provider descriptors, function code identity, defaults and decorator closures are checked; explicit interpreter aliases preserve canonical module identities and import metadata.",
+    "Native reference Python3.12 has 96 importable builtins and 29 frozen modules; Neuron Python3.10 has 59 and 6. Python3.10 frozen-name discovery is a disclosed source-name scan, not a complete interpreter enumerator.",
+    "44 test executions passed and two version-inapplicable cases skipped. Real Python frozen definitions and loaders were used; native executable identities, native file bytes and mapping evidence in policy tests were synthetic.",
+    "Actual original-runtime manifest observations and independent hash-seed runs inspected frozen Python definitions in memory and native file stat only. No original native payload files were read or authenticated."
+  ],
+  "remaining": [
+    "Complete original linked-library/native catalog still needs serial authenticated payload reads. Observed process maps are not future worker maps.",
+    "Concrete preloaded source/code provenance, exact SDK bootstrap and root/worker/helper integration remain incomplete. No runtime admission from this review.",
+    "Model execution, original SDK/helper calls, cold4096, long decode, slot reuse, generation/RNG/stop/text/quality, HTTP C4 and paired performance remain required before any model or speedup conclusion."
+  ],
+  "actual_original_native_payload_authenticated": false,
+  "actual_original_science_executed": false,
+  "actual_SDK_helper_executed": false,
+  "complete_runtime_dependency_closure_proven": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

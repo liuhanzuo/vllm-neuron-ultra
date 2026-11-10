@@ -1,0 +1,188 @@
+"""Real stdlib provider/code tests backed by synthetic native-file evidence.
+
+Both the executable observation and process maps are explicit test doubles.
+No original interpreter/SDK binary is opened or hashed. Passing tests do not
+authenticate an installed interpreter, admit SDK work or prove model behavior.
+"""
+import copy
+import hashlib
+import importlib.machinery as machinery
+import importlib.util
+import _imp
+import os
+from pathlib import Path
+import sys
+import tempfile
+import types
+import unittest
+from unittest.mock import patch
+
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+import nemotron4b_interpreter_origin_policy_v1 as policy
+import nemotron4b_native_origin_audit_v1 as native
+import nemotron4b_import_router_v4 as routing
+
+
+def mapped(path,info,begin):
+    return (f'{begin:x}-{begin+4096:x} r-xp 00000000 '
+            f'{os.major(info.st_dev):02x}:{os.minor(info.st_dev):02x} {info.st_ino} {path}\n')
+
+
+def module_row(spec,module):
+    values=vars(module)
+    return dict(spec=policy.spec_description(spec),module_name=values['__name__'],
+        module_package=values.get('__package__'),module_file=values.get('__file__'),
+        code_sha256=policy.code_sha256(_imp.get_frozen_object(spec.name))if spec.origin=='frozen'else None)
+
+
+class Interpreter(unittest.TestCase):
+    def setUp(self):
+        temporary=tempfile.TemporaryDirectory(prefix='nano-interpreter-policy-');self.addCleanup(temporary.cleanup)
+        self.root=Path(temporary.name);self.exe=self.root/'generated-interpreter'
+        raw=b'Nonexecutable generated interpreter evidence only.\n';self.exe.write_bytes(raw)
+        stat=self.exe.stat();row=dict(path=str(self.exe),sha256=hashlib.sha256(raw).hexdigest(),
+                                     bytes=len(raw),fullstat=native.fullstat(stat))
+        self.files=native.NativeFiles({str(self.exe):row},native_read_guard=lambda:None)
+        self.files.authenticate_all()
+        self.maps=mapped(self.exe,stat,4096)+'10000-11000 r-xp 00000000 00:00 0 [vdso]\n'
+        kernel=native.parse_maps(self.maps)[-1:]
+        self.audit=native.NativeMappingAudit(self.files,read_maps=lambda:self.maps,approved_kernel_exec=kernel)
+        self.runtime=policy.runtime_description();self.runtime.update(executable=str(self.exe),resolved_executable=str(self.exe))
+        self.process=dict(path=str(self.exe),fullstat=row['fullstat'])
+        for target,side in(('runtime_description',lambda:copy.deepcopy(self.runtime)),
+                            ('running_executable',lambda:copy.deepcopy(self.process))):
+            manager=patch.object(policy,target,side_effect=side);manager.start();self.addCleanup(manager.stop)
+        self.spec=machinery.FrozenImporter.find_spec('zipimport')
+        self.module=importlib.util.module_from_spec(self.spec)
+        self.builtin_spec=machinery.BuiltinImporter.find_spec('errno')
+        self.builtin=importlib.util.module_from_spec(self.builtin_spec)
+        self.manifest=dict(runtime=copy.deepcopy(self.runtime),executable=copy.deepcopy(self.process),
+            providers=policy.provider_bindings()[1],modules={'zipimport':module_row(self.spec,self.module),
+                                                          'errno':module_row(self.builtin_spec,self.builtin)})
+
+    def make(self,guard=lambda:None):
+        return policy.InterpreterPolicy(self.manifest,mapping_audit=self.audit,guard=guard)
+
+    def test_real_frozen_definition_selected_and_executed_with_original_loader(self):
+        p=self.make();p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+        self.spec.loader.exec_module(self.module)
+        p.authenticate_module('zipimport',self.module,dict(origin='frozen'))
+        self.assertTrue(callable(self.module.zipimporter));self.assertIs(self.module.__loader__,machinery.FrozenImporter)
+        self.assertFalse(p.result()['arbitrary_live_memory_authenticated'])
+
+    def test_original_builtin_module_and_finder_are_bound(self):
+        p=self.make();p.authorize_builtin('errno',self.builtin_spec,machinery.BuiltinImporter)
+        p.authenticate_module('errno',self.builtin,dict(origin='built-in'))
+        for name in policy.PROVIDERS:p.authorize_finder(getattr(machinery,name))
+        with self.assertRaises(ValueError):p.authorize_finder(object())
+
+    def test_current_router_uses_concrete_interpreter_callbacks(self):
+        p=self.make();router=routing.ImportRouter(finders=[machinery.FrozenImporter],modules={},namespaces={},
+            guard=lambda:None,authorize_finder=p.authorize_finder,authorize_builtin=p.authorize_builtin,
+            authorize_native=lambda *a:None,authorize_custom=lambda *a:None)
+        spec=router.find_spec('zipimport');module=importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module);p.authenticate_module('zipimport',module)
+        self.assertIs(spec.loader,machinery.FrozenImporter)
+        self.assertEqual(router.events[-1]['kind'],'interpreter')
+
+    def test_serial_guard_denial_precedes_provider_code_or_frozen_access(self):
+        def deny():raise RuntimeError('serial slot unavailable')
+        with patch.object(policy,'provider_bindings')as binding,patch.object(_imp,'get_frozen_object')as code:
+            with self.assertRaisesRegex(RuntimeError,'serial slot'):self.make(deny)
+            binding.assert_not_called();code.assert_not_called()
+
+    def test_unhashed_or_missing_executable_mapping_cannot_authorize(self):
+        self.files.verified.clear()
+        with self.assertRaises(ValueError):self.make()
+        self.files.authenticate_all();self.maps=self.maps.split('\n',1)[1]
+        with self.assertRaisesRegex(ValueError,'executable mapping'):self.make()
+
+    def test_wrong_actual_executable_and_runtime_fail(self):
+        for part in('version','executable'):
+            with self.subTest(part=part):
+                old=copy.deepcopy(self.runtime);self.runtime[part]+='-changed'
+                with self.assertRaisesRegex(ValueError,'runtime'):self.make()
+                self.runtime=old
+        self.process['fullstat']['st_ino']+=1
+        with self.assertRaisesRegex(ValueError,'executing interpreter'):self.make()
+
+    def test_changed_native_file_revokes_existing_policy(self):
+        p=self.make();self.exe.write_bytes(b'changed')
+        with self.assertRaises(ValueError):p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+
+    def test_changed_provider_manifest_rejected_at_binding(self):
+        self.manifest['providers']['FrozenImporter']['get_code']['function'][3]='0'*64
+        with self.assertRaisesRegex(ValueError,'provider code definitions'):self.make()
+
+    def test_provider_descriptor_or_primitive_replacement_rejected(self):
+        p=self.make()
+        with patch.object(machinery.FrozenImporter,'get_code',classmethod(lambda cls,name:None)):
+            with self.assertRaisesRegex(ValueError,'provider implementation'):p.check()
+        with patch.object(_imp,'get_frozen_object',lambda name:None):
+            with self.assertRaisesRegex(ValueError,'primitive retained'):p.check()
+
+    def test_nested_decorator_function_code_mutation_rejected(self):
+        p=self.make();function=vars(machinery.FrozenImporter)['get_code'].__func__
+        self.assertTrue(function.__closure__)
+        nested=next(c.cell_contents for c in function.__closure__if type(c.cell_contents)is types.FunctionType)
+        original=nested.__code__
+        try:
+            nested.__code__=original.replace(co_name=original.co_name+'_changed')
+            with self.assertRaisesRegex(ValueError,'provider implementation'):p.check()
+        finally:nested.__code__=original
+
+    def test_wrong_frozen_pin_and_unknown_name_rejected(self):
+        self.manifest['modules']['zipimport']['code_sha256']='0'*64;p=self.make()
+        with self.assertRaisesRegex(ValueError,'frozen code definition'):p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+        with self.assertRaisesRegex(ValueError,'outside reviewed'):p.authorize_builtin('missing',self.spec,machinery.FrozenImporter)
+
+    def test_exact_spec_origin_package_and_state_required(self):
+        p=self.make()
+        for field,value in(('origin','built-in'),('submodule_search_locations',[]),('loader_state',types.SimpleNamespace(filename='/wrong',origname='zipimport'))):
+            old=getattr(self.spec,field)
+            with self.subTest(field=field):
+                try:
+                    setattr(self.spec,field,value)
+                    with self.assertRaises(ValueError):p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+                finally:setattr(self.spec,field,old)
+
+    def test_wrong_finder_and_unselected_module_rejected(self):
+        p=self.make()
+        with self.assertRaisesRegex(ValueError,'selected or preloaded'):p.authenticate_module('zipimport',self.module)
+        with self.assertRaisesRegex(ValueError,'original provider'):p.authorize_builtin('zipimport',self.spec,machinery.PathFinder)
+
+    def test_module_metadata_and_object_replacement_rejected(self):
+        p=self.make();p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+        p.authenticate_module('zipimport',self.module)
+        replacement=types.ModuleType('zipimport');vars(replacement).update(vars(self.module))
+        with self.assertRaisesRegex(ValueError,'cannot be replaced'):p.authenticate_module('zipimport',replacement)
+        self.module.__package__='wrong'
+        with self.assertRaisesRegex(ValueError,'module identity'):p.authenticate_module('zipimport',self.module)
+
+    def test_explicit_preloaded_binding_and_ledger_policy(self):
+        p=self.make();p.bind_preloaded('zipimport',self.module)
+        p.authenticate_module('zipimport',self.module,p.ledger_modules()['zipimport'])
+        with self.assertRaises(ValueError):p.bind_preloaded('zipimport',self.module)
+        with self.assertRaises(ValueError):p.authenticate_module('zipimport',self.module,dict(origin='built-in'))
+
+    def test_frozen_site_callback_does_not_accept_source_or_other_module(self):
+        p=self.make()
+        with self.assertRaisesRegex(ValueError,'Only original frozen site'):p.authenticate_frozen_site(self.spec,None)
+        spec=machinery.ModuleSpec('site',machinery.SourceFileLoader('site','/some/site.py'),origin='/some/site.py')
+        with self.assertRaisesRegex(ValueError,'Only original frozen site'):p.authenticate_frozen_site(spec,None)
+
+    def test_manifest_is_snapshotted_and_frozen_pin_is_required(self):
+        p=self.make();self.manifest['modules']['zipimport']['code_sha256']='0'*64
+        p.authorize_builtin('zipimport',self.spec,machinery.FrozenImporter)
+        self.manifest['modules']['zipimport']['code_sha256']=None
+        with self.assertRaisesRegex(ValueError,'Frozen code requires'):self.make()
+
+    def test_code_digest_preserves_nested_constants_and_locations(self):
+        a=compile('def f(x):\n return x in {"a", "b", "c"}\n','<frozen fixture>','exec')
+        b=compile('def f(x):\n return x in {"c", "b", "a"}\n','<frozen fixture>','exec')
+        self.assertEqual(policy.code_sha256(a),policy.code_sha256(b))
+        self.assertNotEqual(policy.code_sha256(a),policy.code_sha256(a.replace(co_filename='/changed')))
+        self.assertNotEqual(policy.code_sha256(a),policy.code_sha256(a.replace(co_consts=a.co_consts+(None,))))
+
+
+if __name__=='__main__':unittest.main(verbosity=2)
