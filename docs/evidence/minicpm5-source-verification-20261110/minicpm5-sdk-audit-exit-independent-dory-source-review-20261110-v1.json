@@ -1,0 +1,139 @@
+{
+  "schema": "minicpm5_sdk_audit_exit_independent_dory_source_review_v1",
+  "reviewer": "/root/dory_next_diagnostic_20261110",
+  "source_only": true,
+  "passed": false,
+  "reviewed_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "sha256": "3100a22ad6ad2206ac84c9a433db54e31b3806665825daedd9f076daf131c2df",
+      "bytes": 10816
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "sha256": "61e69a74eb93c80649fae5b2a4b16029ed66004b5eca2a1b54514b2441321683",
+      "bytes": 10810
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v3.py",
+      "sha256": "e543f953ad94c87976c748e68ae26d0d467d63424f4ae97909e333ef309d8069",
+      "bytes": 9750
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_prepare_minicpm5_layer1_sdk_batch_layout_v3.py",
+      "sha256": "ff4e528d86fea2c17d330a64b3d59800f688d92c624c860e78d207f6cbe1c2fe",
+      "bytes": 6720
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v1.py",
+      "sha256": "c6d27456c0eb70fc86aba372073d8a9fbdaf3e286173160acc70ba996443b6de",
+      "bytes": 13329
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v2.py",
+      "sha256": "5ef62ba96f98da10f5f8fdd8298cf2720c6224679720d59d21554b053bf7659b",
+      "bytes": 9537
+    }
+  ],
+  "existing_tests": {
+    "recorder": {
+      "tests": 26,
+      "passed": 26,
+      "actual_session": 7329,
+      "exit_code": 0,
+      "final_tool_chunk": "457ce9",
+      "seconds": 0.936
+    },
+    "builder_v3": {
+      "tests": 12,
+      "passed": 12,
+      "exit_code": 0,
+      "tool_chunk": "eb9500",
+      "seconds": 0.013
+    }
+  },
+  "independent_mutations": {
+    "actual_exit_code": 0,
+    "actual_tool_chunk": "79994e",
+    "synthetic_only": true,
+    "all_five_incorrectly_accepted": true,
+    "full1308_complete_receipt_returned": true,
+    "reproduction": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/probe_minicpm5_sdk_audit_exit_dory_review_v1.py",
+      "sha256": "bdc55981a9b390f05e4384a795b098794f3d9382b264d1360bb2f2f58b0406c6",
+      "bytes": 2534
+    },
+    "cases": [
+      "all1308_name_only_no_samples",
+      "nonempty_historical_cgroup",
+      "unit_properties_id_mismatch",
+      "one_unit_observation_missing",
+      "historical_pending_job"
+    ]
+  },
+  "blockers": [
+    {
+      "priority": "P1",
+      "title": "Per-unit evidence can be absent while exact1308 name set passes",
+      "recorder_lines": [
+        80,
+        112,
+        115
+      ],
+      "helper_lines": [
+        66,
+        75,
+        82
+      ],
+      "detail": "drain_units unions bare unit names and properties Id independently, and validates samples only when the key exists. Removing every sample (or one full unit observation), or replacing one properties Id with a different existing unit, preserves set equality and returns complete_audit_metadata_independently_verified=True.",
+      "required_fix": "Require each actual unit observation to bind its own unit/Id to two complete equal samples; reject name-only, missing, mismatched or ambiguous evidence before deriving the full exact unit set."
+    },
+    {
+      "priority": "P1",
+      "title": "Historical group and pending-job contradictions are accepted",
+      "recorder_lines": [
+        80,
+        112,
+        115
+      ],
+      "helper_lines": [
+        70,
+        81
+      ],
+      "detail": "Group/group-list evidence is checked only for container type; nonempty pids/populated group data and nonempty Job with zero MainPID/ControlPID are accepted. Compressed JSON remains lossless but its decoded physical-drain semantics are not independently validated.",
+      "required_fix": "Validate all actual group return schemas, expected unit-owned cgroup path, absence or completely empty process/thread/child evidence, empty Job and legitimate terminal service state for both samples."
+    }
+  ],
+  "positive_findings": [
+    "actual audit handle matches separately recorded live session; original model session must differ and actual successful exit is required",
+    "Exact auditor argv and matching owner, result/model reference and lock checked",
+    "Current auditor plus four model owners are gone and original model-owned service drain is rechecked",
+    "Compressed length<=32MiB, encoded/compressed bounds, validated base64, bounded decompress, EOF/no trailing/multistream/excess and whole digest enforced",
+    "Original1308 required set and supplemental unit set equality plus complete additional-owner list are checked, but sample/group semantics have blockers",
+    "Original source closure, inherited native receipt and stat identities revalidated without native/payload reads in the recorder"
+  ],
+  "trust_boundary": "actual_tool validates supplied external session/chunk/code syntax and live-session binding; root must supply an actually observed tool terminal. Recorder does not independently query tool backend.",
+  "builder_v3": {
+    "diff_review_passed": true,
+    "only_docstring_and_three_entrypoints_added": true,
+    "entrypoints_added": [
+      "record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "check_record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "check_prepare_minicpm5_layer1_sdk_batch_layout_v3.py"
+    ],
+    "self_v3_included": true,
+    "v2_retained_via_old_check_import": true,
+    "local_imports_handles_research_from_import": true,
+    "production_builder_not_called": true,
+    "overall_blocked_on_recorder": true
+  },
+  "frozen_sources_modified": false,
+  "actual_physical_checks_executed": false,
+  "production_binding": false,
+  "torch_imported": false,
+  "numpy_imported": false,
+  "model_or_raw_payload_reads": 0,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

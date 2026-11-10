@@ -1,0 +1,183 @@
+{
+  "schema": "minicpm5_sdk_strict_paired_auditor_source_delivery_v2",
+  "author": "/root/dory_next_diagnostic_20261110",
+  "source_only": true,
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_physical_evidence_v2.py",
+      "sha256": "4b1b340fed2728f6191b84cff80fb4906bc5fdc08c5463e414191e6f48c44e17",
+      "bytes": 15443
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_physical_evidence_v2.py",
+      "sha256": "7404f09bd1256b7a3945ee734b94cb01107e6af79daa7139e97a79cae69ab220",
+      "bytes": 13174
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "sha256": "50acc669e1f55f7463c8490f23b412986b92276392a6ae7fefcd7d52e19433a2",
+      "bytes": 14405
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "sha256": "5c028859d008a2dbd7c72e0b383e52b5de20c277adb9d07f20f7b9daf1a65780",
+      "bytes": 15112
+    }
+  ],
+  "failed_original_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-audit-exit-independent-dory-source-review-20261110-v1.json",
+    "sha256": "f8027e8b2d4fc8ef763ab8bcb501a9ad665df1e1f1d13cbdfd50049477d744c0",
+    "bytes": 6189
+  },
+  "frozen_original_files_verified_unchanged": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "sha256": "3100a22ad6ad2206ac84c9a433db54e31b3806665825daedd9f076daf131c2df",
+      "bytes": 10816
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_record_minicpm5_layer1_sdk_batch_layout_audit_exit_v1.py",
+      "sha256": "61e69a74eb93c80649fae5b2a4b16029ed66004b5eca2a1b54514b2441321683",
+      "bytes": 10810
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v3.py",
+      "sha256": "e543f953ad94c87976c748e68ae26d0d467d63424f4ae97909e333ef309d8069",
+      "bytes": 9750
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_prepare_minicpm5_layer1_sdk_batch_layout_v3.py",
+      "sha256": "ff4e528d86fea2c17d330a64b3d59800f688d92c624c860e78d207f6cbe1c2fe",
+      "bytes": 6720
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v1.py",
+      "sha256": "c6d27456c0eb70fc86aba372073d8a9fbdaf3e286173160acc70ba996443b6de",
+      "bytes": 13329
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v2.py",
+      "sha256": "5ef62ba96f98da10f5f8fdd8298cf2720c6224679720d59d21554b053bf7659b",
+      "bytes": 9537
+    }
+  ],
+  "tests": {
+    "command": "python3 -B nemotron9b_package_window_v27.py --observe --timeout 45 -- python3 -B -m unittest research.check_minicpm5_sdk_physical_evidence_v2 research.check_audit_minicpm5_layer1_sdk_batch_layout_result_v2 -v",
+    "total": 61,
+    "passed": 61,
+    "helper_tests": 27,
+    "auditor_tests": 34,
+    "actual_session": 24951,
+    "exit_code": 0,
+    "final_tool_chunk": "72cbb2",
+    "seconds": 10.042
+  },
+  "public_api": {
+    "helper": "research/minicpm5_sdk_physical_evidence_v2.py",
+    "PAIR_SCHEMA": "minicpm5_sdk_complete_physical_pair_v2",
+    "validate_pair": "validate_pair(pair, required_units=None, expected_owners=None, lock=None) -> set unit basenames",
+    "collect_pair": "collect_pair(done,guard,physical,read_properties,read_empty_group,known_units=<authenticated saved unit set>)",
+    "decoded_envelope": {
+      "schema": "minicpm5_sdk_complete_physical_pair_v2",
+      "first": {
+        "tree": "complete unchanged original latest.physical return",
+        "supplemental_observations": "sorted exact list of {unit,properties,group}"
+      },
+      "second": "same complete shape; entire first == second required"
+    },
+    "owner_path": "pair['first']['tree']['all_additional_owners_checked']",
+    "auditor_result_schema": "minicpm5_layer1_sdk_batch_layout_post_exit_audit_v2",
+    "auditor_drain_units": "strict decoded pair only",
+    "legacy_drain_units": "old tree name/Id/exact owned group path binding only; not new semantic qualification"
+  },
+  "changes": [
+    "Retain every complete original tree and all supplemental units",
+    "Exact properties Id/unit match, explicit empty Job, terminal state pair, no MainPID/ControlPID",
+    "Actual four known group forms validated including path, emptiness, bounded recursive summary or detailed directories",
+    "Existing nested samples must be two equal complete samples; old single observations protected by paired entire trees",
+    "Exact legacy missing-Job schema retained without inserted values; requires real future supplemental props/group",
+    "Only-group units require supplemental evidence; supplements restricted to authenticated saved unit allowlist before callbacks",
+    "Original1308 required names plus additional units preserved; exact owners/lock binding",
+    "Both full physical passes plus supplements occur before raw verifier and must compare equal",
+    "Legacy outer proof remains binding evidence with limitations explicit"
+  ],
+  "saved_metadata_shape_check": {
+    "reference": {
+      "path": "/mnt/nvme/minicpm5-layer1-current-history-factorial-r1-20261110/predecessor-drain.json",
+      "sha256": "78ed15010fcbeabb2676bd5b90137559f2261a7bb1c4bbc0c49d6d636d6dc654",
+      "bytes": 2211382
+    },
+    "actual_tool_exit": 0,
+    "tool_chunk": "785851",
+    "saved_legacy_units": 1261,
+    "strict_units": 1261,
+    "set_equal": true,
+    "needs_supplement": 1255,
+    "new_physical_executed": false
+  },
+  "callback_source_mapping": {
+    "path": "runner.p = masks.p = five.p = minicpm5_layer0_execution_protocol_v7",
+    "properties": "protocol_v7:21 properties=low.properties; protocol_v4:71-74 actual systemctl interface",
+    "empty_group": "protocol_v7:21 empty_group=low.empty_group; protocol_v4:99-111",
+    "source_refs": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_decode_mask_analysis_v1.py",
+        "sha256": "6eff41371dc6a78b59ffea14019d65fbac1f3eaa7d4285f4a53791e337d4b139",
+        "bytes": 20294
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py",
+        "sha256": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1",
+        "bytes": 19276
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v7.py",
+        "sha256": "8fef6d5ed823de6179d30183331ad0c9adc39cb76920c673e06d45234f3bcb94",
+        "bytes": 24731
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py",
+        "sha256": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185",
+        "bytes": 22969
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_observer_invariance_lifecycle_v24.py",
+        "sha256": "bd6a0af742060fb709710d16155891a66648b75daa27e766ca95352dcd3d2b6b",
+        "bytes": 45642
+      }
+    ]
+  },
+  "resource_limits_unchanged": {
+    "address_space_bytes": 2147483648,
+    "cpu_seconds": 600,
+    "hard_cpu_seconds": 605,
+    "wall_seconds": 900,
+    "output_file_bytes": 2097152,
+    "uncompressed_pair_cap_bytes": 33554432,
+    "compressed_cap_bytes_exclusive": 2097152,
+    "base64_cap_bytes_exclusive": 2097152
+  },
+  "resource_estimate": {
+    "actual_fresh_pair_not_available": true,
+    "complete_full_history_passes": 2,
+    "supplement_property_reads_per_pass": "one per exact legacy-missing-Job or only-group unit; old fixture1255",
+    "extra_native_or_device_jobs": 0,
+    "CPU_wall_bound_fit_unproven": true,
+    "exceed_any_existing_limit": "fail; no reduced history, dropped fields or extended limits",
+    "metadata_byte_estimate": "Independent metadata sizing delegated by root to mini_official_history_core_20261110; attach its report separately when available"
+  },
+  "limitations": [
+    "Physical group summary form {group,absent:false,cgroups:N} inherits source-pinned original recursive empty scan; no new thread inventory invented",
+    "Original group/props producer identity and completed model/auditor exit still require root admission",
+    "Strict whole-tree equality may fail if supposedly drained historical state changes; do not weaken",
+    "Source tests are not actual machine drainage or full model numerical checks"
+  ],
+  "runtime_runner_created": false,
+  "new_physical_checks_executed": false,
+  "production_binding": false,
+  "native_imported": false,
+  "model_or_tensor_or_raw_payload_read": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

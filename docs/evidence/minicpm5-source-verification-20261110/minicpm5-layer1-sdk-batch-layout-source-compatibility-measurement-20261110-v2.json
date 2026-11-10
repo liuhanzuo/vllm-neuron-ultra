@@ -1,0 +1,79 @@
+{
+  "actual_build_called": false,
+  "actual_completed_or_physical_called": false,
+  "actual_native_hashing": false,
+  "actual_r12_completion_binding_created": false,
+  "byte_metric_note": "verified_*_returned_bytes are complete authenticated source bytes returned; read_open_file_extent_bytes sums regular-file extents at read opens, not physical storage IO.",
+  "cpu_seconds": 0.027343621,
+  "elapsed_seconds": 0.02974764769896865,
+  "error": "Forbidden native/model import: _decimal",
+  "error_type": "RuntimeError",
+  "failed_path": null,
+  "failed_stage": "bootstrap",
+  "full_model_qualified": false,
+  "limits": {
+    "address_space_bytes": 1073741824,
+    "cpu": 6,
+    "cpu_seconds": 120,
+    "hard_cpu_seconds": 125,
+    "nice": 19,
+    "output_file_bytes": 1048576,
+    "wall_seconds": 180
+  },
+  "model_or_tensor_bytes_read": 0,
+  "new_speedup_claim": false,
+  "no_unapproved_native_imports_after_hook": false,
+  "observations": {
+    "current_path": null,
+    "forbidden_open_attempts": [],
+    "forbidden_operations": [
+      "import:_decimal"
+    ],
+    "guard_calls": 0,
+    "read_open_events": 86,
+    "read_open_file_extent_bytes": 1348074,
+    "stage": "bootstrap",
+    "stdlib_ctypes_exceptions": [
+      {
+        "operation": "import:_ctypes",
+        "path": "/usr/lib/python3.10/lib-dynload/_ctypes.cpython-310-x86_64-linux-gnu.so",
+        "purpose": "Frozen stdlib-only lifecycle module imports ctypes; no project ctypes function execution"
+      },
+      {
+        "argument": null,
+        "operation": "ctypes.dlopen",
+        "purpose": "Exact stdlib initialization pythonapi=PyDLL(None)",
+        "source": "/usr/lib/python3.10/ctypes/__init__.py"
+      }
+    ],
+    "verified_python_bytes_files": 0,
+    "verified_python_bytes_returned_bytes": 0,
+    "verified_text_files": 0,
+    "verified_text_returned_bytes": 0,
+    "virtual_contract_bytes": 0,
+    "virtual_contract_reads": 0
+  },
+  "observer_gate_retained": true,
+  "passed": false,
+  "peak_rss_kib": 28860,
+  "phase_seconds": {
+    "bootstrap": 0.02974764769896865
+  },
+  "production_files_written": false,
+  "runtime_admitted": false,
+  "schema": "minicpm5_sdk_batch_layout_source_compatibility_measurement_v1",
+  "source_only": true,
+  "stdlib_bootstrap_native_modules": {
+    "_asyncio": "/usr/lib/python3.10/lib-dynload/_asyncio.cpython-310-x86_64-linux-gnu.so",
+    "_bz2": "/usr/lib/python3.10/lib-dynload/_bz2.cpython-310-x86_64-linux-gnu.so",
+    "_contextvars": "/usr/lib/python3.10/lib-dynload/_contextvars.cpython-310-x86_64-linux-gnu.so",
+    "_hashlib": "/usr/lib/python3.10/lib-dynload/_hashlib.cpython-310-x86_64-linux-gnu.so",
+    "_json": "/usr/lib/python3.10/lib-dynload/_json.cpython-310-x86_64-linux-gnu.so",
+    "_lzma": "/usr/lib/python3.10/lib-dynload/_lzma.cpython-310-x86_64-linux-gnu.so",
+    "_opcode": "/usr/lib/python3.10/lib-dynload/_opcode.cpython-310-x86_64-linux-gnu.so",
+    "_ssl": "/usr/lib/python3.10/lib-dynload/_ssl.cpython-310-x86_64-linux-gnu.so",
+    "_uuid": "/usr/lib/python3.10/lib-dynload/_uuid.cpython-310-x86_64-linux-gnu.so",
+    "resource": "/usr/lib/python3.10/lib-dynload/resource.cpython-310-x86_64-linux-gnu.so"
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v2.py\", line 130, in <module>\n    from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py\", line 13, in <module>\n    import nemotron9b_package_metadata_v27 as metadata\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py\", line 15, in <module>\n    import historical_b3_payload_partition_v2 as history\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/historical_b3_payload_partition_v2.py\", line 7, in <module>\n    import nemotron9b_post_dory_history_v1 as current\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_post_dory_history_v1.py\", line 9, in <module>\n    import nemotron9b_post_upstream_history_v1 as previous\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_post_upstream_history_v1.py\", line 3, in <module>\n    import minicpm5_upstream_completed_history_v1 as h\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_upstream_completed_history_v1.py\", line 5, in <module>\n    import minicpm5_post_dory_history_v1 as previous\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_post_dory_history_v1.py\", line 4, in <module>\n    import dory_rotary_completed_history_v1 as dory\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/dory_rotary_completed_history_v1.py\", line 12, in <module>\n    import nemotron9b_package_protocol_v14 as p\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_protocol_v14.py\", line 9, in <module>\n    import statistics\n  File \"/usr/lib/python3.10/statistics.py\", line 134, in <module>\n    from fractions import Fraction\n  File \"/usr/lib/python3.10/fractions.py\", line 6, in <module>\n    from decimal import Decimal\nRuntimeError: Forbidden native/model import: _decimal\n"
+}

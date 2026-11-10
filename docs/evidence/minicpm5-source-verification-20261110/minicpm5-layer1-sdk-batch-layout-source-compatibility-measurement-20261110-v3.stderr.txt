@@ -1,0 +1,91 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 197, in <module>
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py", line 149, in verify_text_sources
+    if path in partition['metadata_aliases']else hashlib.sha256(text(path,sha)).hexdigest())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 179, in measured_text
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py", line 69, in text
+    if envelope_kind(path)is None:return metadata.text(path,expected)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py", line 210, in text
+    return completed_smol.source_bytes(path, expected, stable_bytes)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_completed_smol_metadata_v1.py", line 32, in source_bytes
+    raw=stable_reader(path,RECEIPT_LIMIT);raw.decode('utf8')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py", line 183, in stable_bytes
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 111, in audit
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 72, in failure
+RuntimeError: Unclassified source-only read path
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 204, in <module>
+  File "/usr/lib/python3.10/traceback.py", line 183, in format_exc
+    return "".join(format_exception(*sys.exc_info(), limit=limit, chain=chain))
+  File "/usr/lib/python3.10/traceback.py", line 135, in format_exception
+    te = TracebackException(type(value), value, tb, limit=limit, compact=True)
+  File "/usr/lib/python3.10/traceback.py", line 502, in __init__
+    self.stack = StackSummary.extract(
+  File "/usr/lib/python3.10/traceback.py", line 383, in extract
+    f.line
+  File "/usr/lib/python3.10/traceback.py", line 306, in line
+    self._line = linecache.getline(self.filename, self.lineno)
+  File "/usr/lib/python3.10/linecache.py", line 30, in getline
+    lines = getlines(filename, module_globals)
+  File "/usr/lib/python3.10/linecache.py", line 46, in getlines
+    return updatecache(filename, module_globals)
+  File "/usr/lib/python3.10/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+  File "/usr/lib/python3.10/tokenize.py", line 394, in open
+    buffer = _builtin_open(filename, 'rb')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 113, in audit
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 72, in failure
+RuntimeError: Read outside complete source/metadata/guard allowlist
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 55, in apport_excepthook
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 100, in audit
+RuntimeError: Forbidden native/model import: apt_pkg
+
+Original exception was:
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 197, in <module>
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py", line 149, in verify_text_sources
+    if path in partition['metadata_aliases']else hashlib.sha256(text(path,sha)).hexdigest())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 179, in measured_text
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py", line 69, in text
+    if envelope_kind(path)is None:return metadata.text(path,expected)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py", line 210, in text
+    return completed_smol.source_bytes(path, expected, stable_bytes)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_completed_smol_metadata_v1.py", line 32, in source_bytes
+    raw=stable_reader(path,RECEIPT_LIMIT);raw.decode('utf8')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py", line 183, in stable_bytes
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 111, in audit
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 72, in failure
+RuntimeError: Unclassified source-only read path
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 204, in <module>
+  File "/usr/lib/python3.10/traceback.py", line 183, in format_exc
+    return "".join(format_exception(*sys.exc_info(), limit=limit, chain=chain))
+  File "/usr/lib/python3.10/traceback.py", line 135, in format_exception
+    te = TracebackException(type(value), value, tb, limit=limit, compact=True)
+  File "/usr/lib/python3.10/traceback.py", line 502, in __init__
+    self.stack = StackSummary.extract(
+  File "/usr/lib/python3.10/traceback.py", line 383, in extract
+    f.line
+  File "/usr/lib/python3.10/traceback.py", line 306, in line
+    self._line = linecache.getline(self.filename, self.lineno)
+  File "/usr/lib/python3.10/linecache.py", line 30, in getline
+    lines = getlines(filename, module_globals)
+  File "/usr/lib/python3.10/linecache.py", line 46, in getlines
+    return updatecache(filename, module_globals)
+  File "/usr/lib/python3.10/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+  File "/usr/lib/python3.10/tokenize.py", line 394, in open
+    buffer = _builtin_open(filename, 'rb')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 113, in audit
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/measure_minicpm5_layer1_sdk_batch_layout_sources_v2_compatibility_v3.py", line 72, in failure
+RuntimeError: Read outside complete source/metadata/guard allowlist
