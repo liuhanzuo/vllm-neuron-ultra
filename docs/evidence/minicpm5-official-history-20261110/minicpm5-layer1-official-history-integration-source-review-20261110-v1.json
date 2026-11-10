@@ -1,0 +1,78 @@
+{
+  "schema": "minicpm5_layer1_official_history_integration_source_review_v1",
+  "reviewer": "/root/mini_official_history_core_20261110",
+  "observed_at": "2026-11-10T12:22:26.037588+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "independent_source_review_passed": true,
+  "blockers": [],
+  "reviewed_files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_after_native_cache_v1.py",
+      "sha256": "e71def7ed00e1cf8dba943901cd6f178cfdb6fdca00681880b0be5a4ffb7d3e5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_history_inputs_v1.py",
+      "sha256": "a07b8281af3f0ce0ac5df6a5d266d9d97b18c25212c9b524e1811601bed86d2d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_history_cpu_driver_v1.py",
+      "sha256": "47dabd471ba68f7d0c5a772f882527e385d27ec49e3351916f4d00983689392b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_history_results_v1.py",
+      "sha256": "4f06be6fa98a36498f5867d2e02521b8fe550f09e8bf9a421b8175a8e7cc5154"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_official_history_cpu_runner_v1.py",
+      "sha256": "488fb0ecb1075f67ecbe8d885e0adce014a3a45b16ada8ce7a5773877ecaba95"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_official_history_cpu_worker_v1.py",
+      "sha256": "1dd2a691cc3faa229f612bc9348c58eebaae1454433362805a06603cfee76ef0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_official_history_v1.py",
+      "sha256": "a5a747a4ccbc59c9f0a663b9af8162a0c1b673e5e3d9ed0ef816df37422fbf53"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_official_history_integration_v1.py",
+      "sha256": "76fafb76806638ee9dcd0813871340fb299c946cbb538097cd3bc06462ca25cc"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-history-integration-checks-20261110-v1.txt",
+      "sha256": "9d3213a866923e169fbe2a1d78e77d9be75d3385371a3cbaf9343e1c70a2a9aa"
+    }
+  ],
+  "tests": {
+    "count": 18,
+    "actual_tool_session": 53805,
+    "actual_exit_code": 0,
+    "actual_exit_chunk": "dcab5d",
+    "seconds": 2.959,
+    "affinity": [
+      6
+    ],
+    "nice": 19,
+    "actual_native_metadata_only": true,
+    "model_raw_payload_reads": false,
+    "native_imports": false
+  },
+  "findings": [
+    "The actual native completion helper accepted all bound metadata and five distinct collector/auditor/comparator owners.",
+    "Model/external-audit/comparator failures and forged comparison lineage were rejected.",
+    "The mock complete source stream validates 90 calls per rank, both 36 own and 36 restored controls, and108 interventions.",
+    "Native donors are previous-step records; targets are complete current-frame attention outputs in original physical slot order.",
+    "Wrong mode, rank, target digest/reference, missing restore, rehashed changed restore, nonfinite output and rank divergence are rejected.",
+    "Worker/input guard blocks before native imports or payload access.",
+    "Runner preserves original CPU interpreter, TP2 rank environment,16GiB/no-swap resource limits and control-group cleanup. Physical drain covers both ranks and lock release follows retain_until_drained.",
+    "Preparation deep-copies native spec/plan, keeps original source pins, binds all32 frame JSON and all128 raw descriptors, and carries native/factorial predecessor references."
+  ],
+  "limitations": [
+    "Model and SDK execution were not performed in these tests.",
+    "Result-validation adversarial checks mock admitted source streams and raw output reading; actual runtime must reconstruct and reread the complete original data.",
+    "AST checks prove selected invocation/preparation structure, not native behavior."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

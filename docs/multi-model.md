@@ -6,7 +6,9 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
-[MiniCPM5 官方第二层缓存及 288 组比较已完成](minicpm5-layer1-native-cache-result-20261110.md)：32 帧完整 logits、6,816 个选定中间输出和全部缓存历史复核通过。候选缓存整体更接近官方，但既有整模型通过率仍为原对照 29/32、候选 28/32；候选继续拒绝采用，没有新增提速。比较覆盖 CPU 参考适配实现，不能直接归因到 Neuron 芯片。
+[MiniCPM5 官方历史干预的 180 次完整调用已完成](minicpm5-official-history-20261110.md)：在此前 [32 帧官方缓存采集](minicpm5-layer1-native-cache-result-20261110.md)基础上，固定当前输入换入官方 K/V，原对照注意力输出相对误差从 1.2720% 降至 1.1048%，但 6/24 帧变差，仍无一帧完全复现官方输出。原历史与恢复对照、双 rank 完整输出和退出后独立字节复核通过。既有整模型通过率仍为对照 29/32、候选 28/32，未新增提速；这是 CPU 参考局部诊断，不能直接归因到 Neuron 芯片。
+
+[Nemotron 存储维护已完成](nemotron-storage-recovery-20261110.md)，六份旧日志完整压缩保留后释放约 768 MiB 根盘空间；整模型重试仍需检查实时空间。[Dory 下一步诊断设计](dory-next-diagnostic-20261110.md)保留全部 87 个检查点与 7 个数值失败，计划区分注意力与残差归一化影响，尚未执行。
 
 The exact `e0a01d3` wheel passed [nine native installation/plugin/spawn/configuration checks](unified-native-checks-20261108.md) on 2026-11-08, after fixing a JSON-input bug in the probe. Fresh device and end-to-end qualification
 of the merged branch is pending. Use the recorded source commits for reproducing

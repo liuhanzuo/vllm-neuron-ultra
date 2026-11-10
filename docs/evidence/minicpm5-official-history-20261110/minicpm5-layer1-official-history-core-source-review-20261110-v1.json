@@ -1,0 +1,75 @@
+{
+  "schema": "minicpm5_layer1_official_history_core_source_review_v1",
+  "reviewer": "/root/mini_official_history_core_20261110",
+  "observed_at": "2026-11-10T12:15:39.282185+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "source_checks_passed": true,
+  "root_review_pending": true,
+  "files": {
+    "minicpm5_layer1_official_history_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_history_v1.py",
+      "sha256": "66d1e4878c1c4637a2337533e86c119445d9e9be21fa6c923ecc8155208569e3"
+    },
+    "minicpm5_layer1_official_history_callable_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_history_callable_v1.py",
+      "sha256": "ff4be4794cda2c502b3417eabb5269f6e4702433e86d7f33757206dc6ace37b5"
+    },
+    "check_minicpm5_layer1_official_history_core_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_official_history_core_v1.py",
+      "sha256": "9c44e4a3ec8049354169ec386898ca1cd569b02fd6fee5fdc31b0fd676bf6dd5"
+    },
+    "minicpm5-layer1-official-history-core-checks-20261110-v1.txt": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-history-core-checks-20261110-v1.txt",
+      "sha256": "d16ce780b6fb11fad9afd63dad6a17458a16a2e84ac0cb5805a7f02f0cad33bc"
+    }
+  },
+  "frozen_callable": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_kv_factorial_callable_v1.py",
+    "sha256": "0d7c99727d164479589fcefb5ae42e7b9ff440cca409690fc218f209a63115c6"
+  },
+  "tests": {
+    "count": 16,
+    "actual_tool_session": 11115,
+    "actual_exit_code": 0,
+    "actual_exit_chunk": "0e0e6d",
+    "stdlib_only": true,
+    "seconds": 7.687,
+    "affinity": [
+      6
+    ],
+    "nice": 19
+  },
+  "api": {
+    "overlay": "overlay(case, own_cache_raw, donors, mode) -> (new_cache_raw, proof)",
+    "replay": "replay(torch, model, case, mode, normalized_raw, own_cache_raw, donors, expected_attention_raw, official_shard_hashes, guard) -> (result, raw)",
+    "modes": [
+      "own",
+      "official_key",
+      "official_value",
+      "official_both",
+      "restore"
+    ]
+  },
+  "verified": [
+    "All original full SDK cache hashes and layouts; finite full BF16 storage",
+    "Native donors match same fixture/physical slot/previous step/index and both complete head payload digests",
+    "Only selected valid prefixes replaced; all current/future/padded bytes retained",
+    "Own and restore byte identity; mode-specific replacement and both rank/head mappings",
+    "Original SDK attention/cache getter/RoPE call AST unchanged",
+    "Every current input, prepared cache and official weight shard checked unchanged across callable",
+    "Complete output layout/finiteness and exact own/restore outputs enforced"
+  ],
+  "not_run": [
+    "Actual Torch/model/SDK invocation",
+    "Original native data payload reads or causal replay",
+    "Any Neuron device/compile/performance work"
+  ],
+  "limitations": [
+    "Caller must bind exact source case and native frame records to actual completed collection/audit before replay.",
+    "full_input_cache_unchanged covers preservation across the attention call after explicit overlay preparation.",
+    "This source preparation provides no quality, causal result or speedup."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
