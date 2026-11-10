@@ -1,0 +1,51 @@
+{
+  "observation": {
+    "process": {
+      "pid": 489445,
+      "start_ticks": "407944439",
+      "ppid": 488664,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-m",
+        "vllm_neuron.models.nemotron9b.serve",
+        "--model",
+        "/mnt/nvme/nemotron9b-package-r11-20261110-evidence/view",
+        "--served-model-name",
+        "nemotron-nano-9b-v2",
+        "--tensor-parallel-size",
+        "2",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "4096",
+        "--max-num-seqs",
+        "4",
+        "--no-enable-prefix-caching",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010",
+        "--additional-config",
+        "{\"override_neuron_config\":{\"on_device_sampling_config\":null,\"apply_seq_ids_mask\":true,\"context_encoding_buckets\":[128,256,512,1024,2048,4096]}}"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-compile.service"
+    },
+    "pgid": 489445,
+    "sid": 489445,
+    "exe": {
+      "realpath": "/usr/bin/python3.10",
+      "device": 66306,
+      "inode": 6333,
+      "size": 5941864,
+      "mtime_ns": 1788171497000000000,
+      "ctime_ns": 1790232137499498335
+    },
+    "live": true
+  },
+  "original_error": "RuntimeError('Unreduced root filesystem floor')",
+  "workload_complete": false,
+  "signal": 15,
+  "transport": "pidfd",
+  "qualifying": false
+}

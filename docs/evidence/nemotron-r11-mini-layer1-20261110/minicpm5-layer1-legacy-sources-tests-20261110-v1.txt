@@ -1,0 +1,32 @@
+test_collector_scientific_and_lifecycle_functions_unchanged (check_minicpm5_layer1_legacy_sources_v1.PreservedHistoricalChecks) ... ok
+test_layer0_checks_only_add_current_closure_and_route_checked_predecessor (check_minicpm5_layer1_legacy_sources_v1.PreservedHistoricalChecks) ... ok
+test_oproj_checks_only_change_current_import_lookup (check_minicpm5_layer1_legacy_sources_v1.PreservedHistoricalChecks) ... ok
+test_archive_conflict_rejected (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_historical_source_cannot_be_removed_even_when_not_loaded (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_historical_source_cannot_be_replaced (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_missing_current_helper_rejected (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_newly_loaded_archived_helper_need_not_belong_to_historical_run (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_no_native_modules_loaded (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_one_of_multiple_archives_conflicts (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_tampered_current_helper_rejected (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+test_unrelated_archive_entries_do_not_become_current_imports (check_minicpm5_layer1_legacy_sources_v1.SourcePins) ... ok
+dory-rotary-source-20261108-v1 (unittest.loader._FailedTest) ... ERROR
+
+======================================================================
+ERROR: dory-rotary-source-20261108-v1 (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: dory-rotary-source-20261108-v1
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/unittest/loader.py", line 470, in _find_test_path
+    package = self._get_module_from_name(name)
+  File "/usr/lib/python3.10/unittest/loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-rotary-source-20261108-v1/__init__.py", line 7, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.150s
+
+FAILED (errors=1)
