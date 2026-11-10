@@ -1,0 +1,54 @@
+{
+  "schema": "minicpm5_sdk_batch_layout_root_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-10T14:02:04.602684+00:00",
+  "source_only": true,
+  "source_integration_accepted": true,
+  "reviewed_deliveries": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-source-design-20261110-v1.json",
+      "sha256": "8af038326ac1383b4ae9d040e05d7a1079f80dddde498733149eb6d0a08aed28"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-callable-source-delivery-20261110-v1.json",
+      "sha256": "07c85bf9bfbfcbcadca34fa01dd506daa994e3f87e4ca9c62b4c96f6ae58c90b"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-driver-source-delivery-20261110-v1.json",
+      "sha256": "62f6bcebedd63b9f0f787c4761c6485a8267e6514ec7f6ab72916f67b967965d"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-analysis-source-delivery-20261110-v1.json",
+      "sha256": "a8eb6077ba415a58fb36a4dde14a46ca42a3f2b0dbe6fe44a29b110334392d55"
+    }
+  ],
+  "analysis_independent_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-analysis-independent-review-20261110-v1.json",
+    "sha256": "c790fb5633fb4a5838632c8e165836dc22f48b1f3ad3e055e669f4edc532d3d9"
+  },
+  "evidence_basis": [
+    "Root read full byte core, callable, source selector, driver and independent result verifier",
+    "Compared installed SDK prep_qkv_tensors/compute_for_token_gen/standard_causal_attention_forward source to injected interface and original TP2/BF16 route",
+    "Scope retains original model constructor/shards, full anchor storage and own/restore/previous both full outputs",
+    "AnchorStream exhausts all42history calls and18decode inputs perrank;12nonanchor decode inputs verified but not reexecuted",
+    "Pair verifier independently rereads72fulloutputs/1179648bytes and checks all24frames plus both ranks; view formulas checked against original byte buffers",
+    "RoPE numerical byte agreement is checked at runtime, while independent verifier has metadata only; no independent RoPE raw payload claim",
+    "Analysis cancellation bug fixed and independently reviewed;17analysis+17callable+18integration+15bytecore checks"
+  ],
+  "source_check_counts": {
+    "byte_core": 15,
+    "callable": 17,
+    "analysis": 17,
+    "integration": 18
+  },
+  "runtime_admission_granted": false,
+  "real_native_interface_test_pending": true,
+  "remaining": [
+    "Exact actual current Nemotron terminal and all serial owners must be authenticated",
+    "New worker, runner and post-exit auditor need concrete latest-source review and exact source/input closure",
+    "Native full model construction and full144SDKattention invocations not yet executed",
+    "Independent full raw byte post-exit review and all original fullmodel gates remain"
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "minicpm5_layer1_sdk_batch_layout_driver_source_delivery_v1",
+  "reviewer": "/root/mini_official_history_core_20261110",
+  "observed_at": "2026-11-10T14:01:04.075495+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "production_runner_integrated": false,
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_inputs_v1.py",
+      "sha256": "5f62ed21d6e6393ad4e96bb595dd6d213737b2f9b7fdc9ef3531307684c50a7e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_cpu_driver_v1.py",
+      "sha256": "0b528846b3197b521ed81627a40334d37850b83255c67a1b373df7e077815d49"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_results_v1.py",
+      "sha256": "6a736400acc320509a715c6e984ffc4ecaf43ac3f8f87a1c27a082b82ecb490e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_sdk_batch_layout_integration_v1.py",
+      "sha256": "c16a8a2eb02369de7c9d3a8a430d659f48ccc3ea78af0d64aa7cdc449cc3bf7b"
+    }
+  ],
+  "previous_callable_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-callable-source-delivery-20261110-v1.json",
+    "sha256": "07c85bf9bfbfcbcadca34fa01dd506daa994e3f87e4ca9c62b4c96f6ae58c90b"
+  },
+  "frozen_design_and_callable_sources_unchanged": true,
+  "analysis_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_analysis_v1.py",
+    "sha256": "fb02d073e6cd9166c2646f36ed8faec14459149d505d1d141395de451be8beb8"
+  },
+  "api": {
+    "driver": "run_rank(context,torch,collector_plan,rank_result,audit,read_json,guard,native_bundle,previous_bundle)->rank_result",
+    "validate_rank": "validate_rank_result(result,plan,rank,collector_bundle,native_bundle,previous_bundle,read_json,guard)->JSONproof",
+    "validate_pair": "validate_rank_pair(results,plan,collector_bundle,native_bundle,previous_bundle,read_json,guard)->JSONpairproof_and_descriptive",
+    "collector_bundle": "{collector_plan,collector_chain:{rank_results},audit_result} authenticated externally",
+    "native_bundle": "Original completed native cache bundle required by frozen official_history_inputs_v1.load",
+    "previous_bundle": "{binding,spec,records:{rank0_result,rank1_result}} from actual completed current/history; externally authenticated",
+    "new_plan_binding": "plan.layer1_sdk_batch_layout == previous_bundle.binding",
+    "retained_native_binding": "plan.layer1_official_history == native_bundle.binding",
+    "frozen_input_descriptors": "Future plan must include previous own/official_both/restore output identities and hashes in plan.inputs"
+  },
+  "stream_scope": {
+    "per_rank_original_history_calls_verified": 42,
+    "per_rank_decode_inputs_verified": 18,
+    "per_rank_anchor_calls_replayed": 6,
+    "per_rank_nonanchor_decode_calls_verified_not_reexecuted": 12,
+    "original_full_RankStream_exhausted": true,
+    "prefill_reexecuted": false,
+    "other_arms_reexecuted": false
+  },
+  "expected_runtime_output": {
+    "ranks": 2,
+    "anchor_decode_calls": 12,
+    "physical_attention_invocations": 144,
+    "full_B4_invocations": 48,
+    "B1_invocations": 96,
+    "complete_four_row_output_files": 72,
+    "bytes_per_output": 16384,
+    "total_raw_output_bytes": 1179648,
+    "unique_decode_frames": 24,
+    "variants": [
+      "own",
+      "b4_strided",
+      "b4_contiguous",
+      "b1_strided",
+      "b1_contiguous",
+      "restore"
+    ]
+  },
+  "independent_verification": [
+    "Reconstruct original full source stream and exact selected/skipped order",
+    "Reconstruct official current/prior selection without relabelling original cases",
+    "Read all new full outputs and all prior own/restore/both raw controls with original frozen identities",
+    "Check exact full own/restore and previous both-official outputs",
+    "Reconstruct every normalized/mask/position/slot/cache shape/stride/offset and expected selected digest",
+    "Verify each B1 output digest against its actual physical-slot part of saved full four-row output",
+    "Check original full model loading proof, newly verified official shards, BF16 collective scope and bucket metadata",
+    "Pass complete72rawoutputs and exact controls to independent24frame analysis; compare replicated ranks by actual bytes"
+  ],
+  "rope_scope": {
+    "raw_payload_independently_reread": false,
+    "reason": "Frozen callable saved RoPE metadata only. Verifier checks actual runtime shape/stride/offset, repeated digests and original callable byte-check guarantees, not unavailable saved RoPE bytes."
+  },
+  "tests": {
+    "count": 18,
+    "actual_execution_handle": {
+      "kind": "tool_session",
+      "session_id": 73708
+    },
+    "actual_exit_code": 0,
+    "actual_exit_chunk": "213958",
+    "seconds": 90.251,
+    "log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-integration-checks-20261110-v2.txt",
+      "sha256": "ee61baadd75b7e2e2bd3b086197e30c1b6e8ff8e959f631ad2650dcd2c789292"
+    },
+    "affinity": [
+      6
+    ],
+    "nice": 19,
+    "synthetic_complete_streams": true,
+    "synthetic_tensor_interfaces": true,
+    "real_temporary_file_write_uses_synthetic_bytes_only": true,
+    "native_imports": false,
+    "real_tensor_reads": false,
+    "actual_attention_arithmetic_executed": false,
+    "first_16_test_log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-integration-checks-20261110-v1.txt",
+      "sha256": "ffcbc55b384317ace3c63f6dd1cc495f88a469e88928b40c7d21bf76f1434e84"
+    }
+  },
+  "external_work_policy": "Every command wrapped in v27 --observe --timeout45 from experiment root",
+  "remaining_parent_integration": [
+    "Independent source review",
+    "Bind latest actual Nemotron and Mini terminal chain",
+    "Freeze source/input closure and add worker/runner/auditor only after current serial work terminates"
+  ],
+  "no_new_continuation_handoff": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

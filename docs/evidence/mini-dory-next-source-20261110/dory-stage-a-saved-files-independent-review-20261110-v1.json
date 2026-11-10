@@ -1,0 +1,110 @@
+{
+  "schema": "dory_stage_a_saved_files_independent_review_v1",
+  "reviewer": "/root/branch_integration_review",
+  "observed_at": "2026-11-10T14:03:40.116534+00:00",
+  "verdict": "source_bridge_acceptable_after_confirmed_fixes_with_snapshot_and_caller_boundaries",
+  "final_source_pins": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_saved_files_v1.py",
+      "bytes": 5283,
+      "sha256": "d35623ed655c76e1b2f883b9c1577e0b946ffbcbb34aa3d77fe7556a8ba82423"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_dory_stage_a_saved_files_v1.py",
+      "bytes": 7234,
+      "sha256": "dff6a890e3c1708b8be05dc2001ee4cfa72909ff1cf4eb8906ffb05f5106dcf3"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_saved_core_v1.py",
+      "bytes": 8573,
+      "sha256": "2a5fa88df4a54d9ab9868e86e3b58ff01ca2c7e40720bcf2a35d938c62044cbd"
+    }
+  ],
+  "original_source_sha256": "992b0279c22ed4d7052013ceffee3bf5d2e1cbef13d7d7e3357566c475516c2a",
+  "original_test_sha256": "4de797c7e93ed9b6ba722ce248af436940944aba9d7c617f89c1480d8bd99bef",
+  "baseline_before_fixes": {
+    "tests": 15,
+    "passed": 15,
+    "reported_seconds": 0.011,
+    "chunk": "5b3cba"
+  },
+  "final_tests_independently_rerun": {
+    "tests": 18,
+    "passed": 18,
+    "failures": 0,
+    "errors": 0,
+    "reported_seconds": 0.013,
+    "chunk": "a0db6f",
+    "includes": "Ancestor-symlink rejection,fdopen pre-adoption cleanup and after-close primary-exception preservation."
+  },
+  "additional_successful_controls": {
+    "chunk": "a0db6f",
+    "count": 4,
+    "names": [
+      "100 repeated successful verifications with unchanged fd count",
+      "same-inode content write then original bytes restored rejected in observed run",
+      "same-inode shrink then original extent/bytes restored rejected in observed run",
+      "hardlink added during read rejected"
+    ],
+    "fd_count_unchanged": true
+  },
+  "findings": [
+    {
+      "id": "DORY-FILE-1",
+      "original_severity": "P2",
+      "status": "fixed_by_root_and_independently_verified",
+      "original_lines": [
+        58,
+        77,
+        78,
+        79
+      ],
+      "issue": "Entry-only canonical-path check allowed an intermediate ancestor to become a symlink while reading. Final root.stat(follow_symlinks=False) protected only final component.",
+      "actual_reproducer": "Under a tiny temporary tree,parent/archive/capture.bf16 was16B. Guard3 renamed parent to moved and symlinked parent->moved. Original file inode/stat and bytes remained equal; original bridge returned complete=True despite root.resolve()!=root.",
+      "original_chunk": "5b3cba",
+      "impact_limit": "Canonical/no-symlink path stability gap,not file-byte or inode forgery.",
+      "fix": "Root repeats root.resolve()==root before final directory acceptance. Source-inspected; independently rerun regression now rejects."
+    },
+    {
+      "id": "DORY-FILE-2",
+      "original_severity": "defensive_exception_ownership_gap",
+      "status": "hardened_by_root_and_independently_verified",
+      "original_lines": [
+        65,
+        66
+      ],
+      "issue": "Injected fdopen pre-adoption OSError left a newly opened fd unclosed;original finally covered directory only. Probe count5->6;reviewer closed its leaked test fd.",
+      "counterevidence": "Actual CPython fdopen on a directory already closes its input and raises IsADirectoryError;no leak before patch (chunk1d25a6). This was a pre-adoption fault seam,not an ordinary directory-error leak.",
+      "fix": "On construction exception root attempts close(fd),tolerates OSError if fdopen already closed it,and bare-raises original exception. Independently rerun tests cover both pre-adoption and after-close faults;primary error preserved rather than EBADF masking."
+    }
+  ],
+  "additional_scope_observation": {
+    "topic": "Mode is not included in five-field identity",
+    "chunk": "e96d6c",
+    "observed": "Actual chmod0664->0764 in guard3 left ctime_ns unchanged on this filesystem. Five-field identity and bytes remained equal and verification accepted.",
+    "assessment": "Not a declared-contract defect:owned regular single-link and five-field identity are required,not fixed0600 or permission-history freezing. Root confirmed this scope.",
+    "probe_correction": "Supplementary chmod probes incorrectly assumed ctime must change and failed their own assertions (chunksc9c210,a0db6f). Separate stat probe established actual filesystem behavior. These failures are not product test failures; no chmod-rejection claim is made."
+  },
+  "remaining_confirmed_defects": [],
+  "acceptance_basis": [
+    "Known complete extent<=max before opening. File identity binds dev/ino/size/mtime_ns/ctime_ns; actual file must be current-uid-owned,regular and single-link. Name opened relative to owned directory fd with O_NOFOLLOW|O_NONBLOCK.",
+    "BoundedReader checks initial offset0,sequential tell==consumed,positive requests<=65536,declared extent and EOF. Unchanged pinned verifier checks finite bytes,full tensor/whole hashes,original controls and selected rows.",
+    "After byte verification,guard and fd/path stats repeated,then final canonical path and original directory dev/ino. Final18 tests and targeted extra probes support source acceptance within these boundaries."
+  ],
+  "limitations": [
+    "Before/after filesystem observations are not an atomic namespace snapshot or protection against mutation after return. Serial guard/lease and actual producer exit remain external. Timestamp equality does not establish complete mutation history.",
+    "Caller authenticates producer identity,old cases,new archive metadata,source/weights and exit. Bridge explicitly does not establish runtime admission or source/exit provenance.",
+    "One-file bridge only;future independent admitted reviewer must bind all6 cases/18 archives,resource bounds and persisted review results. No native runner/reviewer execution accepted."
+  ],
+  "restrictions": {
+    "all_commands_and_file_access_under_v27_observe_wrapper": true,
+    "native_libraries_imported": false,
+    "real_tensor_weight_or_archive_bytes_read": 0,
+    "only_tiny_disposable_files_used": true,
+    "reviewer_modified_production_source": false,
+    "continuation_handoff_created": false,
+    "root_approval": false,
+    "runtime_admitted": false,
+    "full_model_qualified": false
+  }
+}

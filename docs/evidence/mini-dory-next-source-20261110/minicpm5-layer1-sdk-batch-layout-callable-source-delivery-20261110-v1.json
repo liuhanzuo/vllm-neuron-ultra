@@ -1,0 +1,94 @@
+{
+  "schema": "minicpm5_layer1_sdk_batch_layout_callable_source_delivery_v1",
+  "reviewer": "/root/mini_official_history_core_20261110",
+  "observed_at": "2026-11-10T13:49:04.040900+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_callable_v1.py",
+      "sha256": "6e7313e010bcd53df2938b72eea52bfa757b729d3a2dac722bf09cd492e43eb6"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_sdk_batch_layout_callable_v1.py",
+      "sha256": "4efbc705ceb9c255756fea0eced21e9fdaf7888261ecf7dd1f2d658d5d38bba4"
+    }
+  ],
+  "design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-source-design-20261110-v1.json",
+    "sha256": "8af038326ac1383b4ae9d040e05d7a1079f80dddde498733149eb6d0a08aed28"
+  },
+  "all_delivered_design_sources_unchanged": true,
+  "api": {
+    "function": "replay(torch,model,case,own_normalized_raw,own_cache_raw,prior_donors,current_donors,expected_attention_raw,previous_controls,official_shard_hashes,guard)",
+    "result": "(JSON result metadata, rows)",
+    "rows": "[{rank,call:original complete dict,variant,raw:complete16384bytes}]",
+    "order": [
+      "own",
+      "b4_strided",
+      "b4_contiguous",
+      "b1_strided",
+      "b1_contiguous",
+      "restore"
+    ],
+    "previous_controls": "{own,official_both,restore} -> {result: previous current/history callable record, output: original full raw descriptor, raw: admitted full raw bytes}"
+  },
+  "per_case": {
+    "rank_cases_in_design": 12,
+    "physical_attention_invocations": 12,
+    "full_B4_invocations": 4,
+    "B1_invocations": 8,
+    "assembled_four_row_outputs": 6,
+    "raw_output_bytes": 98304,
+    "official_RoPE_evaluations": 1,
+    "own_restore": "reuse unchanged prior full B4 callable",
+    "official_variants": "same SDK attention method and original keyword set; B1 narrows B4 views"
+  },
+  "invariants": [
+    "Full anchor padded cache storage and original cache getter retained",
+    "Normalized B1 storage holes not selected or zeroed, full backing remains byte-identical",
+    "Original physical slot, logical position, prior mask and bucket unchanged",
+    "One official B4 cos/sin reused with actual source stride/offset/alias and selected byte equality",
+    "Original full B4 model configuration and all four official weights checked before/after calls",
+    "Original rank-local BF16 projections and BF16 collective dtype",
+    "Own/restore and previous both-official outputs compared as complete raw bytes",
+    "Every variant assembles all four rows in original physical slot order"
+  ],
+  "tests": {
+    "count": 17,
+    "actual_execution_handle": {
+      "kind": "tool_session",
+      "session_id": 33739
+    },
+    "actual_exit_code": 0,
+    "actual_exit_chunk": "e40913",
+    "seconds": 12.258,
+    "log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-callable-checks-20261110-v2.txt",
+      "sha256": "e10584fbbec9d4a90291906a3897e94891cc503e6057c6052b34ecdb24256d2b"
+    },
+    "affinity": [
+      6
+    ],
+    "nice": 19,
+    "fake_tensor_interfaces_only": true,
+    "numerical_attention_not_executed": true,
+    "native_imports": false,
+    "first_failed_check": "Initial test used12args for11arg API; corrected before final passing17checks",
+    "first_log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-callable-checks-20261110-v1.txt",
+      "sha256": "e03465120d2cae0d4efd42d7ebee042a7248618d3585b5edf4df383a2ff8a578"
+    }
+  },
+  "external_work_policy": "Every command used v27 --observe --timeout45; no detached source work",
+  "future_admission_requirement": "Parent must bind actual terminal Nemotron r12 and any later serial owners; this delivery and old v425 design are not runtime admission",
+  "not_performed": [
+    "Torch/NumPy imports",
+    "Real tensor reads",
+    "Model or attention arithmetic execution",
+    "Production builder/runner admission",
+    "Continuation handoff"
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

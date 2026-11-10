@@ -1,0 +1,1290 @@
+{
+  "schema": "nemotron9b_r12_actual_progress_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T14:03:22.932028+00:00",
+  "actual_live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-r12-actual-external-live-20261110-v1.json",
+    "sha256": "4a81f4c2eef387b6955f9da3dfcf42bc759833f460a00af4d654f80b4aa414ab"
+  },
+  "actual_execution_handle": {
+    "session_id": 28398,
+    "tool_chunk": "c82a7b"
+  },
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+    "sha256": "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+    "sha256": "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+  },
+  "external_owner": {
+    "pid": 723810,
+    "start_ticks": "409772894",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v27.py",
+      "--launch",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+      "--spec-sha256",
+      "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+      "--review-sha256",
+      "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "controller": {
+    "pid": 727516,
+    "start_ticks": "409785848",
+    "ppid": 1583,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v27.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+      "--spec-sha256",
+      "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+      "--review-sha256",
+      "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+    "invocation_id": "1eaac4fd6907434688e74b4a9cd91bd2"
+  },
+  "controller_live_and_serial_lock_verified": true,
+  "completed_stage_count": 8,
+  "total_stages": 52,
+  "completed": [
+    {
+      "stage": "prepare",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/prepare-worker-result.json",
+        "sha256": "acc2f710e52b056c730bd9dc7f71e5f37066c61daedc7b211f2b5e7cbb42e670"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/prepare-retained-exit.json",
+        "sha256": "2a4d2af30d1e58444ec0721abd0d50e7ca94ed95f0ba882ba9f0249937ea91c6"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "prepare",
+              "owner": {
+                "pid": 731912,
+                "start_ticks": "409804943",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "prepare",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+                "invocation_id": "44b6761a3bd64258b4b66c2b7704688c"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "1h",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "731912",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase prepare --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:32:21 UTC] ; stop_time=[Tue 2026-11-10 13:35:13 UTC] ; pid=731912 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "3221225472",
+                "MemoryMax": "4294967296",
+                "MemorySwapMax": "0",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "44b6761a3bd64258b4b66c2b7704688c",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "prepare",
+              "owner": {
+                "pid": 731912,
+                "start_ticks": "409804943",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "prepare",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+                "invocation_id": "44b6761a3bd64258b4b66c2b7704688c"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "1h",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "731912",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase prepare --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:32:21 UTC] ; stop_time=[Tue 2026-11-10 13:35:13 UTC] ; pid=731912 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "3221225472",
+                "MemoryMax": "4294967296",
+                "MemorySwapMax": "0",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "44b6761a3bd64258b4b66c2b7704688c",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-prepare.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-nemotron-conv-r4",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-nemotron-conv-r4-worker-result.json",
+        "sha256": "33aa1fb02dfc5888ad25dfa6c75da8736fcafd4051ac4531988e1080b6a5255b"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-nemotron-conv-r4-retained-exit.json",
+        "sha256": "e266c5736b9f4180adba0cab5e192fc8467114f060d93d653769c7aa71233c48"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-nemotron-conv-r4",
+              "owner": {
+                "pid": 735221,
+                "start_ticks": "409834325",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-nemotron-conv-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+                "invocation_id": "e7c89d1e0312405b91e9a99c93646165"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "735221",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-nemotron-conv-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:37:14 UTC] ; stop_time=[Tue 2026-11-10 13:38:47 UTC] ; pid=735221 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "basic.target app.slice -.mount trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "e7c89d1e0312405b91e9a99c93646165",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-nemotron-conv-r4",
+              "owner": {
+                "pid": 735221,
+                "start_ticks": "409834325",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-nemotron-conv-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+                "invocation_id": "e7c89d1e0312405b91e9a99c93646165"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "735221",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-nemotron-conv-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:37:14 UTC] ; stop_time=[Tue 2026-11-10 13:38:47 UTC] ; pid=735221 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "basic.target app.slice -.mount trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "e7c89d1e0312405b91e9a99c93646165",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-conv-r4.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-nemotron-ssm-r4",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-nemotron-ssm-r4-worker-result.json",
+        "sha256": "1d15dac4286dcec13211c0d0151a83587ebd7aa5ad02c5180c848be5eb932836"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-nemotron-ssm-r4-retained-exit.json",
+        "sha256": "43c4619479be49bcad08ac2bdb24673074cdcea7d6f642498ab349b255b5b275"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-nemotron-ssm-r4",
+              "owner": {
+                "pid": 737606,
+                "start_ticks": "409855778",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-nemotron-ssm-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+                "invocation_id": "5298e57e56dd4ff5aafea036b2509a1b"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "737606",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-nemotron-ssm-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:40:49 UTC] ; stop_time=[Tue 2026-11-10 13:42:21 UTC] ; pid=737606 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "app.slice trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "5298e57e56dd4ff5aafea036b2509a1b",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-nemotron-ssm-r4",
+              "owner": {
+                "pid": 737606,
+                "start_ticks": "409855778",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-nemotron-ssm-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+                "invocation_id": "5298e57e56dd4ff5aafea036b2509a1b"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "737606",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-nemotron-ssm-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:40:49 UTC] ; stop_time=[Tue 2026-11-10 13:42:21 UTC] ; pid=737606 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "app.slice trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "5298e57e56dd4ff5aafea036b2509a1b",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-nemotron-ssm-r4.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-ministral-kv256-r1",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv256-r1-worker-result.json",
+        "sha256": "d4d05491c2e5d0f2c7a85afe9f7ff6135745d8524dcbb3b882925cfb3d78e079"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv256-r1-retained-exit.json",
+        "sha256": "8741add783b37372114ae2d878119bccc9f3c4575190b01ce63e8259f2bc3181"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv256-r1",
+              "owner": {
+                "pid": 739917,
+                "start_ticks": "409877153",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv256-r1",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+                "invocation_id": "ec5c2828893d42a299483a2d7bd16b20"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "739917",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv256-r1 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:44:23 UTC] ; stop_time=[Tue 2026-11-10 13:45:55 UTC] ; pid=739917 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "ec5c2828893d42a299483a2d7bd16b20",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv256-r1",
+              "owner": {
+                "pid": 739917,
+                "start_ticks": "409877153",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv256-r1",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+                "invocation_id": "ec5c2828893d42a299483a2d7bd16b20"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "739917",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv256-r1 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:44:23 UTC] ; stop_time=[Tue 2026-11-10 13:45:55 UTC] ; pid=739917 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice -.mount basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "ec5c2828893d42a299483a2d7bd16b20",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r1.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-ministral-kv256-r4",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv256-r4-worker-result.json",
+        "sha256": "fd8a1b620bc6046267bfbb5c15f8299a712d25a499d2d1213ae405fae5af5bc5"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv256-r4-retained-exit.json",
+        "sha256": "63f415f943ab97917dcaa33471810481822f6f064d4001023c73bf775ce277ff"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv256-r4",
+              "owner": {
+                "pid": 742483,
+                "start_ticks": "409898605",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv256-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+                "invocation_id": "59cb860fb5104a0292820d711509a15c"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "742483",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv256-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:47:57 UTC] ; stop_time=[Tue 2026-11-10 13:49:28 UTC] ; pid=742483 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service -.mount basic.target app.slice",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "59cb860fb5104a0292820d711509a15c",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv256-r4",
+              "owner": {
+                "pid": 742483,
+                "start_ticks": "409898605",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv256-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+                "invocation_id": "59cb860fb5104a0292820d711509a15c"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "742483",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv256-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:47:57 UTC] ; stop_time=[Tue 2026-11-10 13:49:28 UTC] ; pid=742483 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service -.mount basic.target app.slice",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "59cb860fb5104a0292820d711509a15c",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv256-r4.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-ministral-kv4096-r1",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv4096-r1-worker-result.json",
+        "sha256": "e3afddd8719cfeeeb4cca18ed2a8cfcebfd7be190a2f15a46feaac96adc55401"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv4096-r1-retained-exit.json",
+        "sha256": "f1c7d9e54e148827c863f938ed8a542053bd04c507c786c9e0cd084a12168973"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv4096-r1",
+              "owner": {
+                "pid": 744806,
+                "start_ticks": "409919873",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv4096-r1",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+                "invocation_id": "62541babf17b476e869f6064110b309f"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "744806",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv4096-r1 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:51:30 UTC] ; stop_time=[Tue 2026-11-10 13:53:06 UTC] ; pid=744806 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service basic.target app.slice -.mount",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "62541babf17b476e869f6064110b309f",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv4096-r1",
+              "owner": {
+                "pid": 744806,
+                "start_ticks": "409919873",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv4096-r1",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+                "invocation_id": "62541babf17b476e869f6064110b309f"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "744806",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv4096-r1 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:51:30 UTC] ; stop_time=[Tue 2026-11-10 13:53:06 UTC] ; pid=744806 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service basic.target app.slice -.mount",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "62541babf17b476e869f6064110b309f",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r1.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-ministral-kv4096-r4",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv4096-r4-worker-result.json",
+        "sha256": "f46a8cf2b69f68acc35ef50d8238cf888ce4be8219eeb645c7339933e521add9"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-ministral-kv4096-r4-retained-exit.json",
+        "sha256": "c5d85a7404f180802b93cb4b6070ce337daccfd26491445232efc96aae1f79fd"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv4096-r4",
+              "owner": {
+                "pid": 747183,
+                "start_ticks": "409941665",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv4096-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+                "invocation_id": "b33dec39987e4887b49601ea4914d660"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "747183",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv4096-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:55:08 UTC] ; stop_time=[Tue 2026-11-10 13:56:43 UTC] ; pid=747183 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "-.mount trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "b33dec39987e4887b49601ea4914d660",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-ministral-kv4096-r4",
+              "owner": {
+                "pid": 747183,
+                "start_ticks": "409941665",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-ministral-kv4096-r4",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+                "invocation_id": "b33dec39987e4887b49601ea4914d660"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "747183",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-ministral-kv4096-r4 --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:55:08 UTC] ; stop_time=[Tue 2026-11-10 13:56:43 UTC] ; pid=747183 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "-.mount trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice basic.target",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "b33dec39987e4887b49601ea4914d660",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-ministral-kv4096-r4.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "stage": "alias-control-functional-raw",
+      "result": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-control-functional-raw-worker-result.json",
+        "sha256": "b7493ec32ca42080dfb2daf415ce20b143fe0ad6104474d5901dfbb477197060"
+      },
+      "retained_exit": {
+        "path": "/mnt/nvme/nemotron9b-package-r12-20261110-control/alias-control-functional-raw-retained-exit.json",
+        "sha256": "d35fa798c66cb5d2c8922ba86969ebafa52961dec771ca8fc81d0ca9de7b576c"
+      },
+      "actual_drain": {
+        "physically_drained": true,
+        "successful_exit": true,
+        "retained_for_external_audit": true,
+        "samples": [
+          {
+            "snapshot": {
+              "stage": "alias-control-functional-raw",
+              "owner": {
+                "pid": 749564,
+                "start_ticks": "409963398",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-control-functional-raw",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+                "invocation_id": "dfbf468c11fd49529565d080f95b70af"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "749564",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-control-functional-raw --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:58:45 UTC] ; stop_time=[Tue 2026-11-10 14:00:16 UTC] ; pid=749564 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice basic.target -.mount",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "dfbf468c11fd49529565d080f95b70af",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+              "absent": true
+            }
+          },
+          {
+            "snapshot": {
+              "stage": "alias-control-functional-raw",
+              "owner": {
+                "pid": 749564,
+                "start_ticks": "409963398",
+                "ppid": 1583,
+                "argv": [
+                  "/home/ubuntu/venvs/vllm_neuron/bin/python",
+                  "-B",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py",
+                  "--phase",
+                  "alias-control-functional-raw",
+                  "--spec",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json",
+                  "--spec-sha256",
+                  "4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa",
+                  "--review",
+                  "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json",
+                  "--review-sha256",
+                  "99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40"
+                ],
+                "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+                "invocation_id": "dfbf468c11fd49529565d080f95b70af"
+              },
+              "properties": {
+                "TimeoutStopUSec": "2min",
+                "RuntimeMaxUSec": "15min",
+                "RemainAfterExit": "yes",
+                "MainPID": "0",
+                "ControlPID": "0",
+                "Result": "success",
+                "ExecMainPID": "749564",
+                "ExecMainCode": "1",
+                "ExecMainStatus": "0",
+                "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONUNBUFFERED=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-nemotron9b-v1:/home/ubuntu/experiments/trn1-latest-models-20261031 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 HF_HOME=/mnt/nvme/nemotron9b-package-r12-20261110-evidence/hf TMPDIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/tmp XDG_CACHE_HOME=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/xdg TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/temporary/torch BASE_COMPILE_WORK_DIR=/mnt/nvme/nemotron9b-package-r12-20261110/compile-work NEURON_COMPILE_CACHE_URL=/mnt/nvme/nemotron9b-package-r12-20261110/compile-cache NEURON_COMPILED_ARTIFACTS=/mnt/nvme/nemotron9b-package-r12-20261110/artifact NEURON_NEMOTRON9B=1 NEURON_NEMOTRON9B_ALLOW_COMPILE=0 NEURON_CPU_SAMPLER_FAST=0 XLA_DISABLE_FUNCTIONALIZATION=1 NEURON_RT_VISIBLE_CORES=0-1 VLLM_WORKER_MULTIPROC_METHOD=spawn VLLM_PLUGINS=neuron TOKENIZERS_PARALLELISM=false OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TORCHINDUCTOR_COMPILE_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v27.py --phase alias-control-functional-raw --spec /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-spec.json --spec-sha256 4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa --review /home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v27-r12-20261110-source-review.json --review-sha256 99b0cdb4ab842ca97b4b6b3283aacd595f8dabb60806e0823fae89458fcdef40 ; ignore_errors=no ; start_time=[Tue 2026-11-10 13:58:45 UTC] ; stop_time=[Tue 2026-11-10 14:00:16 UTC] ; pid=749564 ; code=exited ; status=0 }",
+                "ControlGroup": "",
+                "AllowedCPUs": "0-7",
+                "MemoryHigh": "5368709120",
+                "MemoryMax": "6442450944",
+                "MemorySwapMax": "2147483648",
+                "TasksMax": "2048",
+                "Environment": "",
+                "LimitFSIZE": "17179869184",
+                "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+                "Nice": "10",
+                "CPUAffinity": "0-7",
+                "KillMode": "control-group",
+                "SendSIGKILL": "yes",
+                "Id": "trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+                "BindsTo": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service",
+                "After": "trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service app.slice basic.target -.mount",
+                "LoadState": "loaded",
+                "ActiveState": "active",
+                "SubState": "exited",
+                "Job": "",
+                "InvocationID": "dfbf468c11fd49529565d080f95b70af",
+                "ExecStopPost": ""
+              },
+              "identity_verified": true,
+              "successful": true
+            },
+            "group": {
+              "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r12-20261110-alias-control-functional-raw.service",
+              "absent": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "status": {
+    "stage": "alias-control-functional-finite_nonzero",
+    "performance_window": false
+  },
+  "canonical_unchanged": true,
+  "model_qualified": false,
+  "new_speedup_claim": false
+}

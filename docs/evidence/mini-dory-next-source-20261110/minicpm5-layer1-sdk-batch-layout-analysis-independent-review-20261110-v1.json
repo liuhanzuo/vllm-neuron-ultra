@@ -1,0 +1,180 @@
+{
+  "schema": "minicpm5_layer1_sdk_batch_layout_analysis_independent_review_v1",
+  "reviewer": "/root/branch_integration_review",
+  "observed_at": "2026-11-10T13:52:42.541218+00:00",
+  "verdict": "source_acceptable_after_confirmed_interaction_fix",
+  "final_source_pins": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_analysis_v1.py",
+      "bytes": 9291,
+      "sha256": "fb02d073e6cd9166c2646f36ed8faec14459149d505d1d141395de451be8beb8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_sdk_batch_layout_analysis_v1.py",
+      "bytes": 8010,
+      "sha256": "3e334e3dd70b16f9c38d8b108249b04054b9ca0e4fcc2bfb73274a5c01800c01"
+    }
+  ],
+  "original_reviewed_sha256": {
+    "core": "6073b6cf34b73b516cc9c51a0564225dba447b32c6363dfcbef776fe14cc2660",
+    "tests": "1ed71d65181367a2e8034c189e7acc1ad57abf709d3fbc44d1da691ee7dc7274"
+  },
+  "original_baseline_tests": {
+    "passed": 16,
+    "reported_seconds": 5.43,
+    "completion_chunk": "7a15a3"
+  },
+  "final_tests": {
+    "count": 17,
+    "passed": 17,
+    "failures": 0,
+    "errors": 0,
+    "elapsed_seconds": 6.636436919216067
+  },
+  "independent_controls": [
+    {
+      "name": "all24_nonuniform_physical_rows_and144_metrics",
+      "passed": true,
+      "detail": "Distinct target1..24 and per-slot errors; all per-frame energies/maxima and weighted aggregate norms match exact scalar formulas. Additive four-cell effect has zero interaction."
+    },
+    {
+      "name": "all96_pair_metrics_exactly_checked",
+      "passed": true,
+      "detail": "Four pairing directions,24 frames each; denominators equal each RHS output energy."
+    },
+    {
+      "name": "input_order_permutation",
+      "passed": true,
+      "detail": "Reversing cases/rows/controls preserves all results."
+    },
+    {
+      "name": "reject_duplicate_case",
+      "passed": true,
+      "detail": "Unique original anchor cases"
+    },
+    {
+      "name": "reject_missing_control",
+      "passed": true,
+      "detail": "Exact complete case and control sets"
+    },
+    {
+      "name": "reject_unexpected_call",
+      "passed": true,
+      "detail": "Unique original anchor cases"
+    },
+    {
+      "name": "reject_wrong_arm",
+      "passed": true,
+      "detail": "Unique original anchor cases"
+    },
+    {
+      "name": "reject_wrong_phase",
+      "passed": true,
+      "detail": "Unique original anchor cases"
+    },
+    {
+      "name": "reject_nonbytes_output",
+      "passed": true,
+      "detail": "Complete four-row output"
+    },
+    {
+      "name": "reject_nonbytes_official",
+      "passed": true,
+      "detail": "Full old and official controls"
+    },
+    {
+      "name": "reject_last_channel_corruption",
+      "passed": true,
+      "detail": "All original/own/restore full bytes exact"
+    },
+    {
+      "name": "reject_consistent_duplicate_frame_index",
+      "passed": true,
+      "detail": "All24 unique original decode frames"
+    },
+    {
+      "name": "all65280_finite_bf16_encodings",
+      "passed": true,
+      "detail": "Independent ldexp decoding agrees, including signed zeros/subnormals/full exponent-mantissa range."
+    },
+    {
+      "name": "finite_extrema_metric_stability",
+      "passed": true,
+      "detail": "Smallest subnormal positive denominator; largest opposite-signed finite BF16 full vectors have finite energy and relative_l2=2."
+    },
+    {
+      "name": "original_independent_cancellation_reproducer_now_passes",
+      "passed": true,
+      "detail": "All72 full outputs,24 frames,two ranks,official=1: expected24 nonzero frames, exact2^-60 relative norm and max_abs recovered after fix."
+    },
+    {
+      "name": "minimal_patch_matches_original_source_hashes",
+      "passed": true,
+      "detail": "Exactly one core arithmetic expression changed and one10-line regression test added; reverting those edits in memory recreates reviewed original SHA256s."
+    }
+  ],
+  "independent_control_count": 16,
+  "findings": [
+    {
+      "id": "MINI-ANALYSIS-1",
+      "original_severity": "P2",
+      "status": "fixed_by_root_and_independently_verified",
+      "file": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_analysis_v1.py",
+      "line": 126,
+      "title": "Sequential interaction arithmetic erased nonzero BF16 interaction",
+      "original_reproducer": {
+        "variants": {
+          "own": 1,
+          "b4_strided": 1,
+          "b4_contiguous": 1,
+          "b1_strided": 8.673617379884035e-19,
+          "b1_contiguous": 0,
+          "restore": 1
+        },
+        "official_target": 1,
+        "previous_both": 1,
+        "full_tensors": 72,
+        "both_ranks_identical": true,
+        "all_original_control_gates_passed": true,
+        "original_actual_nonzero_frames": 0,
+        "original_actual_per_frame_l2_squared": 0,
+        "expected_nonzero_frames": 24,
+        "expected_per_frame_l2_squared": 1.5407439555097887e-33,
+        "expected_max_abs": 8.673617379884035e-19,
+        "expected_aggregate_relative_l2": 8.673617379884035e-19,
+        "original_completion_chunk": "7a15a3"
+      },
+      "cause": "Left-associated0-1-2^-60+1 discards the small BF16 term before cancellation; fsum of squares afterward cannot recover it. This does not show the real model has this pattern.",
+      "root_fix": "math.fsum((w,-y,-z,x)) per element and full72-output cancellation regression test.",
+      "independent_final_result": {
+        "frames": 24,
+        "aggregate_relative_l2": 8.673617379884035e-19,
+        "nonzero_frames": 24
+      },
+      "original_finding_retained": true,
+      "reviewer_modified_production_source": false
+    }
+  ],
+  "remaining_confirmed_defects": [],
+  "review_basis": {
+    "coverage": "Exact12 rank/call cases from2x6 expected set;72 unique outputs=6 variants each; every output16384B=4x2048 BF16. Both rank call/frame metadata and replicated output bytes agree; stats count24 frames once,144 official-distance records,96 pair records,24 interactions. All8x3 fixture-step pairs and24 unique frame IDs required.",
+    "controls": "Complete original bytes hash-bound to trusted case expected_attention; original==previous_own==previous_restore==current own==current restore; previous_both==current b4_strided. All finite full bytes. Both rank official target bytes identical.",
+    "metrics": "Exact BF16 decoding; FP64 full-row L2/max_abs; aggregate norm uses summed squared errors and summed reference energies, not mean relative errors. Four pairing directions and RHS denominators match definition. Official interaction normalization uses official target norm. Signed zero raw difference distinct from numeric difference; zero norm explicitly None. No acceptance thresholds or causal percentage claims introduced.",
+    "provenance_boundary": "Module explicitly takes authenticated cases/controls. It cross-checks identity and coverage but does not authenticate files or independently reconstruct canonical call/frame mapping. Caller must bind original_call,official target and previous controls. Flags correctly say authenticated_file_provenance_checked_here=false. No native reader or runtime admission reviewed."
+  },
+  "restrictions": {
+    "all_commands_and_file_access_under_v27_observe_wrapper": true,
+    "native_modules_imported": false,
+    "real_tensor_payloads_read": false,
+    "production_files_modified_by_reviewer": false,
+    "continuation_handoff_created": false,
+    "root_approval": false,
+    "runtime_admitted": false,
+    "full_model_qualified": false,
+    "root_cause_proven": false
+  },
+  "audit": {
+    "blocked_attempts": [],
+    "native_modules_loaded": []
+  }
+}
