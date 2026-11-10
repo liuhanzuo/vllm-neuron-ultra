@@ -1,0 +1,48 @@
+{
+  "schema": "minicpm5_layer1_decode_boundary_source_review_v1",
+  "reviewer": "/root",
+  "passed": true,
+  "source_only": true,
+  "blockers": [],
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-decode-boundary-source-plan-20261110-v1.json",
+    "sha256": "03d018e787ce6242b6e727e0a791d9d0852f5d554d87cf6832354e098d2f1a50"
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-decode-boundary-tests-actual-exit-20261110-v1.json",
+    "sha256": "5b1c03b2094b68b624589e489a415abe8a8409a8b26f883d6ac25f3b536e8507"
+  },
+  "preparation_actual_exit": {
+    "exit_code": 0,
+    "tool_chunk": "7d75e9"
+  },
+  "conclusions": [
+    "All36 original rank/arm/decode records authenticated. All4 current rows retain original slot order, widened int64 values,strict prior-only masks and real positions; all entry hashes reproduced.",
+    "PredictionHooks stores original source stride separately from contiguous exported bytes; normalized input source is [4,1,2048] stride[1,4,4] offset0 for all36calls.",
+    "Synthetic65536BF16 bit patterns survive exact restore without numerical conversion; naive contiguous storage rejected as a negative control.",
+    "All full4224-position4-slot caches retained. Original SDK get_kv_by_layer_id slices views to bucket128/2048 while batchstride540672 remains,so cropped contiguous caches are not equivalent layouts.",
+    "Native projection requirement derives all8 rank-local layer1 shards from actual full BF16 official header; raw weight comparison still required at runtime.",
+    "Pinned13 SDK/capture functions confirm direct normalized input,prior-layer carried RoPE caches,non-fused route and original cache slicing. Finished config omits moe_mask_padded_tokens; SDK effective default False retained without changing config.",
+    "Two ranks have replicated normalized/current attention output but retain distinct rank-local caches.36calls contain144physical rows,72after replica accounting. This is not throughput trial counting."
+  ],
+  "runtime_requirements": [
+    "Complete84call collection, independent full cache/full logits/HF audit and actual external exits are mandatory first.",
+    "Admitted native TP2 worker must bind exact current tensors,all8 official shards,and native SDK source/module contracts.",
+    "RoPE must use original SDK layer0 RotaryEmbedding and non-None carried BF16 caches, same device/dtype/position/base. Original function only uses x for dtype/device; source proof does not substitute for actual output replay.",
+    "All36 complete4row attention outputs must exactly reproduce before paired-history causality tests.",
+    "Prefill prediction taps are not complete prefill inputs. Original fullmodel cold/long/slot/quality/HTTPC4/pairedperf gates remain."
+  ],
+  "native_callable_draft": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_own_history_callable_v1.py",
+      "sha256": "154cfd68bfe83eaef7ad33dd1f0d11afe55a16dd67cd0b894fe1280c7fc455d7"
+    },
+    "source_review_accepted": false,
+    "runtime_admitted": false,
+    "remaining": "Caller actual admission, complete source closure, full model constructor plus8 official raw shard proofs, guarded audited payload loader, native SDK integration tests and actual36call own-history run"
+  },
+  "real_tensor_payloads_read": false,
+  "attention_causality_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
