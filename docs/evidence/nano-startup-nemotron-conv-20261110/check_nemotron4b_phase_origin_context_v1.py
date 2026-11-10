@@ -1,0 +1,400 @@
+"""Exercise composed startup checks; native evidence is generated fixture data.
+
+Actual typing source and frozen dispatcher are checked. Other preloaded origins
+and native cache wrapper authentication are explicit test doubles. No original
+site hooks, SDK/model or native payload bytes are executed/read.
+"""
+import copy
+import importlib
+import importlib._bootstrap as bootstrap
+import importlib.machinery as machinery
+import importlib.util as util
+import json
+import os
+from pathlib import Path
+import sys
+import types
+import typing
+import unittest
+from unittest.mock import patch
+
+import nemotron4b_phase_origin_context_v1 as composed
+import nemotron4b_phase_site_restore_v2 as phase_restore
+import nemotron4b_helper_dependency_catalog_v1 as catalog
+import nemotron4b_bootstrap_dispatch_origin_v1 as dispatch_origin
+import nemotron4b_interpreter_origin_policy_v1 as interpreter
+import nemotron4b_import_router_v4 as routing
+from nemotron4b_empty_bytecode_cache_v1 import EmptyBytecodeCache,record_empty_directory
+from nemotron4b_typing_source_policy_v1 import TypingSourcePolicy
+import check_nemotron4b_interpreter_origin_policy_v1 as native_fixture
+import check_nemotron4b_import_router_v4_r2 as source_fixture
+import check_nemotron4b_import_context_v3 as context_fixture
+import check_nemotron4b_six_alias_policy_v1 as six_fixture
+
+Q=Path(__file__).resolve().parent
+ALLOWED_GENERATED_SITE=None
+
+
+def guard():
+    assert not {'torch','transformers','vllm','neuronx_distributed','libneuronxla'}&set(sys.modules)
+    module=sys.modules.get('site')
+    if module is not None:
+        assert ALLOWED_GENERATED_SITE is not None
+        values=vars(module);spec=values.get('__spec__')
+        assert values.get('__file__')==ALLOWED_GENERATED_SITE
+        assert type(spec)is machinery.ModuleSpec and spec.origin==ALLOWED_GENERATED_SITE
+        assert type(spec.loader)is routing.PinnedSourceLoader
+
+
+class ComposedOrigins(unittest.TestCase):
+    source=source_fixture.Imports.source
+
+    def setUp(self):
+        native_fixture.Interpreter.setUp(self)
+        self.modules={};self.namespaces={};self.names=set();self.source_calls=[]
+        # Bind only actual builtin/frozen canonical entries; explicit aliases
+        # are collected separately. Native evidence remains fixture-generated.
+        canonical={};aliases=[]
+        for name,module in tuple(sys.modules.items()):
+            if type(module)is not types.ModuleType:continue
+            spec=vars(module).get('__spec__')
+            if type(spec)is not machinery.ModuleSpec or spec.origin not in('built-in','frozen'):continue
+            if name==spec.name:
+                canonical[name]=native_fixture.module_row(spec,module)
+            else:aliases.append(dict(registry_name=name,spec_name=spec.name,module_name=vars(module)['__name__']))
+        self.manifest['modules']=canonical
+        self.ip=native_fixture.Interpreter.make(self,guard=guard)
+        self.alias_rows=aliases
+        self.cache=EmptyBytecodeCache(record_empty_directory(sys.pycache_prefix,guard=guard),guard=guard)
+        self.cache.audit_preloaded_source_caches()
+        phase='neuron'if sys.version_info[:2]==(3,10)else'native'
+        manifest=json.loads((Q/'nemotron4b-typing-code-observation-20261110-v1'/(phase+'-typing-source-manifest.json')).read_text())
+        self.tp=TypingSourcePolicy(manifest,cache=self.cache,guard=guard,
+            authenticate_external=lambda n,v:n=='_lazy_load_getattr_static'and v is vars(typing)[n])
+        self.preloaded=dict(sys.modules)
+        self.dispatch_manifest=dispatch_origin.description()
+
+    def source_code(self,name,module,row):
+        self.source_calls.append(name)
+        return name in self.modules and row==self.modules[name]
+
+    def preloaded_origin(self,name,module):
+        return name in self.preloaded and module is self.preloaded[name]
+
+    def make(self,**kwargs):
+        args=dict(cache=self.cache,interpreter=self.ip,mapping=self.audit,typing_policy=self.tp,
+            dispatch_manifest=self.dispatch_manifest,interpreter_aliases=self.alias_rows,
+            modules=self.modules,namespaces=self.namespaces,six_aliases={},guard=guard,
+            authenticate_other_preloaded=self.preloaded_origin,
+            audit_preloaded=lambda entries:all(sys.modules.get(n)is m for n,m in self.preloaded.items()),
+            authenticate_source_code=self.source_code,authenticate_alias_target=lambda *a:False,
+            audit_environment=lambda:True)
+        args.update(kwargs)
+        return composed.PhaseOriginContext(**args)
+
+    def runtime_context(self):return context_fixture.ContextImports.runtime(self)
+
+    def test_real_typing_bootstrap_ledger_and_source_import_compose(self):
+        name='_nano_import_composed';self.source(name,'VALUE=191\n')
+        with self.runtime_context():
+            scope=self.make();original=bootstrap._find_spec
+            with scope.installed()as report:
+                self.assertIs(bootstrap._find_spec,scope.scope.hook)
+                self.assertIs(util._find_spec,scope.scope.hook)
+                self.assertEqual(importlib.import_module(name).VALUE,191)
+            self.assertIs(bootstrap._find_spec,original)
+            self.assertTrue(report['complete'])
+            self.assertTrue(report['dispatch']['dispatch_context_completed'])
+            self.assertTrue(report['module_origins']['origin_ledger_checked'])
+            self.assertTrue(report['typing_source']['original_source_hash_and_code_definitions_checked'])
+            self.assertFalse(report['complete_runtime_dependency_closure_proven'])
+            self.assertFalse(report['actual_SDK_runtime_qualified'])
+            self.assertFalse(report['runtime_admitted'])
+
+    def test_body_failure_propagates_and_both_dispatch_aliases_restore(self):
+        with self.runtime_context():
+            scope=self.make();original=bootstrap._find_spec;error=RuntimeError('synthetic body failure')
+            with self.assertRaises(RuntimeError)as caught:
+                with scope.installed():raise error
+            self.assertIs(caught.exception,error)
+            self.assertIs(bootstrap._find_spec,original);self.assertIs(util._find_spec,original)
+            self.assertFalse(scope.imports['complete'])
+            self.assertTrue(scope.router.poisoned)
+
+    def test_optional_importerror_remains_catchable(self):
+        child='_nano_import_composed_optional';self.source(child,'raise ImportError("optional")\n')
+        with self.runtime_context():
+            scope=self.make()
+            with scope.installed()as report:
+                with self.assertRaises(ImportError):importlib.import_module(child)
+            self.assertTrue(report['complete']);self.assertFalse(scope.router.poisoned)
+
+    def test_remaining_preloaded_denial_poisoned_before_hook_install(self):
+        with self.runtime_context():
+            original=bootstrap._find_spec
+            with self.assertRaises(routing.ProvenanceError):self.make(authenticate_other_preloaded=lambda *a:False)
+            self.assertIs(bootstrap._find_spec,original)
+
+    def test_environment_denial_prevents_import_body(self):
+        name='_nano_import_composed_denied';path=self.source(name,'VALUE=193\n')
+        with self.runtime_context():
+            scope=self.make(audit_environment=lambda:False);original=bootstrap._find_spec
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():importlib.import_module(name)
+            self.assertNotIn(name,sys.modules);self.assertIs(bootstrap._find_spec,original)
+
+    def test_preloaded_revalidation_revocation_aborts(self):
+        permitted=[True]
+        with self.runtime_context():
+            scope=self.make(audit_preloaded=lambda entries:permitted[0])
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():permitted[0]=False
+            self.assertFalse(scope.imports['complete'])
+
+    def test_cache_entry_created_during_body_rejected(self):
+        new=Path(sys.pycache_prefix)/'generated-unexpected-cache'
+        try:
+            with self.runtime_context():
+                scope=self.make()
+                with self.assertRaises(routing.ProvenanceError):
+                    with scope.installed():new.write_bytes(b'fixture')
+                self.assertTrue(new.exists())
+        finally:
+            if new.exists():new.unlink()
+
+    def test_wrong_dispatch_manifest_rejected(self):
+        with self.runtime_context():
+            self.dispatch_manifest['definition_sha256']='0'*64
+            with self.assertRaisesRegex(ValueError,'reviewed frozen'):self.make()
+
+    def test_mismatched_shared_policy_rejected(self):
+        other=object()
+        with self.assertRaisesRegex(ValueError,'selected cache'):
+            self.make(cache=other)
+
+    def test_missing_actual_native_authentication_rejected(self):
+        self.files.verified.clear()
+        with self.assertRaisesRegex(ValueError,'catalog authenticated'):self.make()
+
+    def test_source_changed_after_catalog_rejected_before_body(self):
+        name='_nano_import_composed_changed';path=self.source(name,'VALUE=197\n')
+        with self.runtime_context():
+            scope=self.make();path.write_text('VALUE=199\n')
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():importlib.import_module(name)
+            self.assertNotIn(name,sys.modules)
+
+    def test_unknown_custom_provider_rejected_before_property_execution(self):
+        calls=[]
+        class Rogue:
+            @property
+            def find_spec(self):
+                calls.append(True);return lambda *a:None
+        with self.runtime_context():
+            scope=self.make()
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():
+                    sys.meta_path.insert(0,Rogue())
+                    importlib.import_module('_nano_import_composed_unknown')
+            self.assertEqual(calls,[])
+
+    def test_typing_code_replacement_is_caught_by_composed_environment(self):
+        function=vars(typing)['_type_check'];old=function.__code__
+        try:
+            with self.runtime_context():
+                scope=self.make()
+                with self.assertRaises(routing.ProvenanceError):
+                    with scope.installed():function.__code__=old.replace()
+        finally:function.__code__=old
+
+    def test_original_finder_list_identity_required(self):
+        with self.runtime_context():
+            scope=self.make();original=sys.meta_path
+            try:
+                with self.assertRaises(routing.ProvenanceError):
+                    with scope.installed():sys.meta_path=list(original)
+            finally:sys.meta_path=original
+
+    def test_context_cannot_be_reused_after_success(self):
+        with self.runtime_context():
+            scope=self.make()
+            with scope.installed():pass
+            with self.assertRaisesRegex(ValueError,'one-use'):
+                with scope.installed():pass
+
+    def test_registered_sdk_finder_uses_source_authentication(self):
+        provider='__editable___vllm_neuron_0_2_2_lts_finder'
+        self.assertNotIn(provider,sys.modules)
+        self.source(provider,'from importlib.machinery import PathFinder\nclass _EditableFinder:\n @classmethod\n def find_spec(cls,name,path=None,target=None):\n  return PathFinder.find_spec(name,path,target)\n')
+        name='_nano_import_composed_editable';self.source(name,'VALUE=211\n')
+        with self.runtime_context():
+            scope=self.make()
+            with scope.installed():
+                module=importlib.import_module(provider)
+                sys.meta_path.insert(0,module._EditableFinder)
+                self.assertEqual(importlib.import_module(name).VALUE,211)
+            self.assertIn(provider,self.source_calls)
+
+    def test_registered_finder_source_code_denial_rejected(self):
+        provider='__editable___vllm_neuron_0_2_2_lts_finder'
+        self.source(provider,'class _EditableFinder:\n @classmethod\n def find_spec(cls,*args):\n  return None\n')
+        with self.runtime_context():
+            scope=self.make(authenticate_source_code=lambda *a:False)
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():
+                    module=importlib.import_module(provider);sys.meta_path.insert(0,module._EditableFinder)
+                    importlib.import_module('_nano_import_composed_editable_denied')
+
+    def test_existing_spec_callback_rejects_mismatched_spec(self):
+        name='_nano_import_composed_spec';self.source(name,'VALUE=223\n')
+        with self.runtime_context():
+            scope=self.make()
+            with scope.installed():
+                module=importlib.import_module(name)
+                with self.assertRaisesRegex(ValueError,'actual module spec'):
+                    scope.approve_existing_spec(name,module,machinery.ModuleSpec(name,None),machinery.PathFinder)
+
+
+    def prepare_six_fixture(self):
+        self.assertNotIn('six',sys.modules)
+        self.names.update(six_fixture.MAPPING)
+        self.source('six',six_fixture.SIX_FIXTURE)
+        self.source('_nano_import_alias_target','VALUE=227\n')
+
+    def alias_target_fixture(self,name,module,original_metadata):
+        self.assertEqual(name,'_nano_import_alias_target')
+        self.assertIs(sys.modules[name],module)
+        self.assertEqual(module.VALUE,227)
+        self.assertEqual(module.__file__,self.modules[name]['path'])
+        if original_metadata is None:
+            self.assertEqual(module.__spec__.name,name)
+            self.assertEqual(module.__spec__.origin,self.modules[name]['path'])
+        else:
+            self.assertEqual(original_metadata[4][1],name)
+            self.assertEqual(original_metadata[4][2],self.modules[name]['path'])
+        return True
+
+    def test_composed_six_moved_target_preserves_identity_and_spec_transition(self):
+        self.prepare_six_fixture()
+        with self.runtime_context():
+            scope=self.make(six_aliases=six_fixture.MAPPING,
+                            authenticate_alias_target=self.alias_target_fixture)
+            with scope.installed()as report:
+                module=importlib.import_module('six.moves.demo')
+                self.assertIs(module,sys.modules['_nano_import_alias_target'])
+                self.assertEqual(module.__spec__.name,'six.moves.demo')
+            self.assertTrue(report['complete'])
+            self.assertEqual([x['phase']for x in scope.six.events if x['name']=='six.moves.demo'],
+                             ['create','exec'])
+            self.assertIn('six',self.source_calls)
+
+    def test_composed_six_shared_aliases_reuse_one_synthetic_module(self):
+        self.prepare_six_fixture()
+        with self.runtime_context():
+            scope=self.make(six_aliases=six_fixture.MAPPING,
+                            authenticate_alias_target=self.alias_target_fixture)
+            with scope.installed():
+                first=importlib.import_module('six.moves.virtual')
+                second=importlib.import_module('six.moves.virtual_alt')
+                self.assertIs(first,second)
+                self.assertEqual(second.__spec__.name,'six.moves.virtual_alt')
+
+    def test_composed_six_registry_change_is_rejected(self):
+        self.prepare_six_fixture()
+        with self.runtime_context():
+            scope=self.make(six_aliases=six_fixture.MAPPING,
+                            authenticate_alias_target=self.alias_target_fixture)
+            with self.assertRaises(routing.ProvenanceError):
+                with scope.installed():
+                    importlib.import_module('six.moves')
+                    module=sys.modules['six']
+                    module._importer.known_modules['six.moves.demo']=module.MovedModule('demo','_nano_import_alias_target')
+            self.assertFalse(scope.imports['complete'])
+
+    def test_composed_six_preloaded_target_metadata_transition_is_authorized(self):
+        self.prepare_six_fixture()
+        with self.runtime_context():
+            original=importlib.import_module('_nano_import_alias_target')
+            self.preloaded['_nano_import_alias_target']=original
+            scope=self.make(six_aliases=six_fixture.MAPPING,
+                            authenticate_alias_target=self.alias_target_fixture)
+            with scope.installed():
+                alias=importlib.import_module('six.moves.demo')
+                self.assertIs(alias,original)
+                self.assertEqual(alias.__spec__.name,'six.moves.demo')
+
+
+    def prepare_generated_site(self,mode='normal'):
+        global ALLOWED_GENERATED_SITE
+        self.assertNotIn('site',sys.modules)
+        old_allowed=ALLOWED_GENERATED_SITE
+        def restore_allowed():
+            global ALLOWED_GENERATED_SITE
+            ALLOWED_GENERATED_SITE=old_allowed
+        self.addCleanup(restore_allowed)
+        package=self.root/'generated-site-packages';package.mkdir()
+        venv=self.root/'pyvenv.cfg';venv.write_text('include-system-site-packages = false\n')
+        text='import sys\nENABLE_USER_SITE=False\ndef main():\n sys.path.append('+repr(str(package))+')\n'
+        if mode=='noisy':text+=' print("synthetic swallowed startup warning")\n'
+        if mode=='body-failure':text+=' raise RuntimeError("synthetic site body failure")\n'
+        site=self.source('site',text)
+        ALLOWED_GENERATED_SITE=str(site)
+        provider='__editable___vllm_neuron_0_2_2_lts_finder'
+        self.source(provider,'import importlib.util\nclass _EditableFinder:\n @classmethod\n def find_spec(cls,name,path=None,target=None):\n  if name=="site":return importlib.util.spec_from_file_location(name,'+repr(str(site))+')\n')
+        module=importlib.import_module(provider)
+        self.preloaded[provider]=module
+        sys.meta_path.insert(0,module._EditableFinder)
+        files={}
+        for path in [site,venv]:
+            _,row=catalog.source(path);files[str(path)]=row
+        before=phase_restore.prefixes();aliases={}
+        for value in [*sys.path,*before.values(),sys.argv[0],str(venv),str(site)]:
+            for part in (Path(value),*Path(value).parents):
+                if part.is_symlink():
+                    aliases[str(part)]=dict(link_text=os.readlink(part),target=str(part.resolve()),
+                                           fullstat=phase_restore.identity(part.lstat()))
+        return dict(script=sys.argv[0],pre_argv=list(sys.argv),site_file=str(site),site_origin=str(site),
+            venv_config=str(venv),site_packages=str(package),files=files,pth_files=[],
+            pre_path=list(sys.path),post_path=[*sys.path,str(package)],
+            pre_prefixes=before,post_prefixes=dict(before),directory_aliases=aliases)
+
+    def test_generated_site_restores_inside_actual_composed_context(self):
+        with self.runtime_context():
+            startup=self.prepare_generated_site();scope=self.make()
+            with patch.object(phase_restore,'USED',False):
+                with scope.restored_startup(startup)as result:
+                    self.assertTrue(result['startup_complete'])
+                    self.assertEqual(sys.path,startup['post_path'])
+                    self.assertIs(bootstrap._find_spec,scope.scope.hook)
+                    self.assertTrue(sys.modules['site'].__loader__.router is scope.router)
+                self.assertTrue(result['complete'])
+                self.assertTrue(result['imports']['complete'])
+                self.assertFalse(result['actual_SDK_runtime_qualified'])
+
+    def test_generated_site_failure_restores_dispatch_and_retains_failure(self):
+        with self.runtime_context():
+            startup=self.prepare_generated_site('body-failure');scope=self.make();old=bootstrap._find_spec
+            with patch.object(phase_restore,'USED',False):
+                with self.assertRaisesRegex(RuntimeError,'synthetic site body failure'):
+                    with scope.restored_startup(startup):pass
+            self.assertIs(bootstrap._find_spec,old)
+            self.assertFalse(scope.imports['complete'])
+
+    def test_generated_site_output_cannot_be_silently_accepted(self):
+        with self.runtime_context():
+            startup=self.prepare_generated_site('noisy');scope=self.make()
+            with patch.object(phase_restore,'USED',False):
+                with self.assertRaisesRegex(ValueError,'Silent complete'):
+                    with scope.restored_startup(startup):pass
+            self.assertFalse(scope.imports['complete'])
+
+    def test_source_site_authentication_denial_prevents_main(self):
+        with self.runtime_context():
+            startup=self.prepare_generated_site();scope=self.make(authenticate_source_code=lambda *a:False)
+            with patch.object(phase_restore,'USED',False):
+                with self.assertRaisesRegex(ValueError,'source-code callback'):
+                    with scope.restored_startup(startup):pass
+            self.assertNotIn(startup['site_packages'],sys.path)
+
+
+if __name__=='__main__':unittest.main(verbosity=2)
