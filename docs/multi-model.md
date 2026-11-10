@@ -6,6 +6,8 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
+[MiniCPM5 官方第二层缓存及 288 组比较已完成](minicpm5-layer1-native-cache-result-20261110.md)：32 帧完整 logits、6,816 个选定中间输出和全部缓存历史复核通过。候选缓存整体更接近官方，但既有整模型通过率仍为原对照 29/32、候选 28/32；候选继续拒绝采用，没有新增提速。比较覆盖 CPU 参考适配实现，不能直接归因到 Neuron 芯片。
+
 The exact `e0a01d3` wheel passed [nine native installation/plugin/spawn/configuration checks](unified-native-checks-20261108.md) on 2026-11-08, after fixing a JSON-input bug in the probe. Fresh device and end-to-end qualification
 of the merged branch is pending. Use the recorded source commits for reproducing
 the existing measured comparisons; new merged source identities need new
