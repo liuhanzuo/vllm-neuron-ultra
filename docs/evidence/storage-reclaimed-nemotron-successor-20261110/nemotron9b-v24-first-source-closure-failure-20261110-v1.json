@@ -1,0 +1,30 @@
+{
+  "schema": "nemotron9b_v24_initial_source_test_failure_v1",
+  "observed_at": "2026-11-10T01:39:07.449374+00:00",
+  "actual_exit": {
+    "chunk_id": "c728ab",
+    "wall_time_seconds": 0.69002186,
+    "exit_code": 1,
+    "original_token_count": 513,
+    "output": "ok\ntest_rebound_source_or_missing_new_worker_rejected (check_prepare_nemotron9b_package_runtime_v24.Builder) ... ERROR\n\n======================================================================\nERROR: test_retained_v22_source_pins_preserved (check_nemotron9b_package_exec_v24.Source)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_package_exec_v24.py\", line 28, in test_retained_v22_source_pins_preserved\n    self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),receipt['source_sha256'][str(path)])\nKeyError: '/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_primitive_oracles_v22.py'\n\n======================================================================\nERROR: test_rebound_source_or_missing_new_worker_rejected (check_prepare_nemotron9b_package_runtime_v24.Builder)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_prepare_nemotron9b_package_runtime_v24.py\", line 81, in test_rebound_source_or_missing_new_worker_rejected\n    pins=dict(self.pins);pins.pop(str(R/'nemotron9b_package_worker_v24.py'))\nKeyError: '/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v24.py'\n\n======================================================================\nFAIL: test_fourteen_execution_modules_only_rename_version (check_nemotron9b_package_exec_v24.Source)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_package_exec_v24.py\", line 33, in test_fourteen_execution_modules_only_rename_version\n    self.assertEqual(len(paths),14)\nAssertionError: 16 != 14\n\n----------------------------------------------------------------------\nRan 53 tests in 56.821s\n\nFAILED (failures=1, errors=2)\n"
+  },
+  "failed_source_snapshots": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_package_protocol_v24.py.first-source-closure-failure-20261110-v1.txt",
+      "sha256": "459bb83e39949f41a73ea11de8f2ec83c01d8e0cce86c216d440d763dfbf227e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_package_exec_v24.py.first-source-closure-failure-20261110-v1.txt",
+      "sha256": "a53aaaa1520e428caf257b76eda925d6936fce08198ceccb20d0ea4ebda25594"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_prepare_nemotron9b_package_runtime_v24.py.first-source-closure-failure-20261110-v1.txt",
+      "sha256": "44e9ce45558789e0262db60f0e605f2dece95352c1602c43744db235a1f2ce8f"
+    }
+  ],
+  "tests_executed": 53,
+  "diagnosis": "Version substitution missed wildcard file globs: v24 required_sources still globbed v23, while two integration assertions still globbed v22. This was detected before any runtime spec or admission.",
+  "runtime_admitted": false,
+  "model_payloads_read": false,
+  "new_speedup_claim": false
+}
