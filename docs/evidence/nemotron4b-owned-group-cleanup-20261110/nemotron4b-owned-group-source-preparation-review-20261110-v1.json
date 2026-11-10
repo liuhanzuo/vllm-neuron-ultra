@@ -1,0 +1,57 @@
+{
+  "schema": "nemotron4b_owned_group_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T00:27:23.679524+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_owned_group_drain_v1.py": "355464b1cfb3d79ce633feaa2576aaff67f37235d063f97479e73c8ece863d9b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_owned_group_drain_v1.py": "88f1f54655ac2a4da18e25a27d0661883860800344f266e2975fe9c1716723c0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_child_supervisor_v1.py": "c6aae19d0e5bc145be7785963e88408d81635550b02f042e52456e1c6ba6322e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_gated_rank_pair_v1.py": "e40dfc43491dffa9821e8c75effee7b16f5b2a6a6b0fc859e35d4d3ef3b811e6"
+  },
+  "prior_selected_sources_unchanged": true,
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-owned-group-tests-actual-exit-20261110-v1.json",
+    "sha256": "ad34517a82573f64bee93b11fe2d4720c776ffae36a74235ca9908aa281c7c92"
+  },
+  "tests_passed": 36,
+  "source_preparation_passed": true,
+  "owned_group_cleanup_core_prepared": true,
+  "child_and_pair_result_adapter_prepared": true,
+  "original_root_contract": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-root-launcher-source-contract-20261106-v1.json",
+    "sha256": "3385935f453e9d46d7f9af62ceae164961deead01acdeedd4684468bc6fc0007"
+  },
+  "prior_native_origin_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-native-origin-source-preparation-review-20261110-v1.json",
+    "sha256": "6ee046ade7a7396bd36090ca7913402f13fb4dd1ac8dfc7e7b39af5d76479ffc"
+  },
+  "findings": [
+    "Exact nonce-bearing service command, invocation and group are checked independently of resource properties, so wrong resource limits still permit cleanup only of the authenticated owned service.",
+    "Cleanup observes terminal service state, all recorded original PID/start identities gone, and recursive cgroup.procs plus kernel populated metadata twice. Empty direct-child results cannot stand in for whole-tree drain.",
+    "Main process capture is required for lifecycle success, and terminal ExecMainPID must match it. A captured descendant cannot substitute for the service main. PID reuse is not the original owner; a same-start zombie/escaped process still blocks drain.",
+    "Stop precedes kill-all if needed, with fresh invocation/command ownership checks before each operation and persisted intent. Replaced invocation is never stopped or killed; no unowned numeric PID is signalled.",
+    "Any forced cleanup, command error, child failure or nonzero service exit prevents lifecycle success even when the group finally drains.",
+    "Existing child supervisor returns successful, while existing pair supervisor returns direct_children_successful. Adapter handles their actual schemas, validates captured/granted/zero-exit/reaped evidence, and requires caller persistence of original binary stdout/stderr before combined terminal receipt.",
+    "Malformed supervisor result or output-persistence failure still triggers owned-group cleanup and retains failure. The core never authorizes serial-lock release.",
+    "36tests include generated nested cgroups/fake service transitions and actual lightweight Python child/pair executions with existing frozen supervisors; no actual model service operation occurred."
+  ],
+  "limits": [
+    "No real systemd model service was started/stopped/killed. Actual service/cgroup integration remains a future serial admission, not established by generated metadata tests.",
+    "systemctl has no atomic invocation-ID conditional stop. A cooperating exclusive root lock plus fresh fixed namespace must prevent replacement between authentication and mutation; no adversarial atomicity claim.",
+    "The polling budget is at most60seconds; each actual service command separately caps at10seconds. The actual root must enforce its complete wall/resource cleanup budget, retain the serial lock on cleanup failure, and independently verify all scientific receipts.",
+    "Full exact source/env/bootstrap/native origin closure, fresh predecessor history, worker successor, service main/rank/helper capture and durable output writer still require complete root integration. Original Nov6 v2 source contract remains non-runnable.",
+    "Only known recorded escaped identities are checked outside the group. Arbitrary native-process migration is not sandboxed here; actual service permissions and full launch policy remain required."
+  ],
+  "all_new_sources_now_frozen": true,
+  "whole_owned_group_actual_drain_proven": false,
+  "exact_runnable_root_launcher_prepared": false,
+  "exact_runnable_helper_bootstrap_prepared": false,
+  "actual_SDK_helper_executed": false,
+  "runtime_spec_created": false,
+  "runtime_admitted": false,
+  "serial_owner_added": false,
+  "systemd_services_mutated": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
