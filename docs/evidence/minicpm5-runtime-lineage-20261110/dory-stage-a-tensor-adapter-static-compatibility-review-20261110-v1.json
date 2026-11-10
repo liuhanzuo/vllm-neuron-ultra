@@ -1,0 +1,480 @@
+{
+  "schema": "dory_stage_a_tensor_adapter_static_compatibility_review_v1",
+  "reviewer": "/root/dory_next_diagnostic_20261110",
+  "source_only": true,
+  "adapter": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_tensor_adapter_v1.py",
+    "sha256": "bc1583419e5598ac72fe85787aa6aa4e2c0dff796562a24a27bbf0901a657949",
+    "bytes": 11357
+  },
+  "adapter_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-tensor-adapter-delivery-20261110-v1.json",
+    "sha256": "a86e348919b736249209dbadc16a9e3fba0d88a462c32a9d86da3a39cf9249bc",
+    "bytes": 4490
+  },
+  "previous_native_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-native-r2-runtime-spec-20261109-v1.json",
+    "sha256": "5e65071628109101f252eec373a07e2520e1bd46003989d4e9989716a8ca5c5d",
+    "bytes": 471948
+  },
+  "environment": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1",
+  "torch_package": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch",
+  "version_text": "2.14.0+cpu",
+  "git_version_text": "08187d9e0fba026dc8217405802ab5381dc88d90",
+  "result": "Signatures and documented semantics support API calls; native runtime compatibility and exact singleton strides remain unproven",
+  "method": "Bounded local source/docs/pyi/headers and original Dory reads only; no network search or native imports/execution",
+  "signatures_confirmed": true,
+  "original_dory_method_mapping_confirmed": true,
+  "native_ABI_verified": false,
+  "actual_loaded_binary_provenance_verified": false,
+  "findings": [
+    {
+      "api": "clone(memory_format=torch.contiguous_format)",
+      "status": "signature_copy_contract_confirmed_not_native_dispatch",
+      "evidence": [
+        "clone_sig",
+        "clone_functional_sig",
+        "clone_docs",
+        "clone_header",
+        "clone_native_header"
+      ],
+      "confirmed": [
+        "memory_format keyword accepted",
+        "clone documented as a copy; default preserve_format differs from explicit contiguous intent"
+      ],
+      "unproven": [
+        "Actual fixed CPU clone dispatch path",
+        "Canonical strides and storage_offset0 for all singleton/noncontiguous/broadcast inputs",
+        "Native BF16/F32 signed-zero/subnormal/NaN bit identity"
+      ]
+    },
+    {
+      "api": "view(torch.uint8)",
+      "status": "dtype_overload_and_preconditions_confirmed",
+      "evidence": [
+        "view_sig",
+        "view_docs",
+        "view_native_header"
+      ],
+      "confirmed": [
+        "Same-data dtype reinterpretation is supported",
+        "Smaller uint8 elements expand final dimension",
+        "Positive rank and last stride1 required; adapter checks clone stride before view",
+        "Additional divisibility requirements only apply for larger destination dtype"
+      ],
+      "unproven": [
+        "Actual native implementation identity",
+        "Byte-for-byte equivalence to old NumPy serialization on real tensors"
+      ]
+    },
+    {
+      "api": "torch.index_select(tensor,0,index).contiguous()",
+      "status": "signature_dimension_storage_contract_confirmed",
+      "evidence": [
+        "index_select_functional_sig",
+        "index_docs",
+        "index_header",
+        "dory_head",
+        "dory_selected",
+        "contiguous_docs"
+      ],
+      "confirmed": [
+        "1-D LongTensor indices supported",
+        "All nonselected dimensions retain original size",
+        "Output storage independent of input",
+        "Original Dory uses equivalent Tensor index_select followed by contiguous"
+      ],
+      "unproven": [
+        "Exact [width,1] stride for singleton output row",
+        "Actual selected values and head equivalence"
+      ]
+    },
+    {
+      "api": "torch.argmax(tensor,dim=-1)",
+      "status": "signature_dim_first_tie_contract_confirmed",
+      "evidence": [
+        "argmax_functional_sig",
+        "argmax_docs",
+        "argmax_dim",
+        "argmax_header",
+        "dory_top"
+      ],
+      "confirmed": [
+        "Dimension argmax returns LongTensor indices",
+        "First maximal index on ties",
+        "Original Dory logits.argmax(-1).tolist() corresponds to adapter full-width operation"
+      ],
+      "unproven": [
+        "Actual complete131072-column native result and provenance"
+      ]
+    },
+    {
+      "api": "strict singleton stride assertions",
+      "status": "conditionally_supported_not_proven_for_dispatched_ops",
+      "evidence": [
+        "restride",
+        "contiguous_docs",
+        "contiguous_predicate"
+      ],
+      "confirmed": [
+        "Installed Contiguous restride body sets last stride1 and prior stride=next_stride*max(next_size,1)",
+        "For positive sizes this matches adapter canonical product-stride formula, including singleton axes",
+        "Contiguous predicates can ignore size1 axes; contiguous() alone cannot prove exact singleton strides"
+      ],
+      "risk": "Strict exact stride and offset0 checks could reject a valid native contiguous tensor if dispatched clone/index_select preserves arbitrary singleton strides. Such a rejection must remain a diagnostic failure until a reviewed successor; do not silently relax the check.",
+      "unproven": [
+        "Actual clone/index_select CPU path reaches canonical restride",
+        "Fresh allocation with exact zero offset for all required shapes"
+      ]
+    },
+    {
+      "api": "chunked uint8.tolist()/bytes vs original raw()",
+      "status": "operation_mapping_only",
+      "evidence": [
+        "dory_raw"
+      ],
+      "confirmed": [
+        "Original raw uses detach().contiguous().view(uint8).numpy().tobytes()",
+        "Adapter bounded clone(contiguous_format).view(uint8).reshape(-1).tolist()/bytes performs no Python float conversion",
+        "Only observation serialization changes; forward inputs and model math are untouched"
+      ],
+      "unproven": [
+        "Native bit-identical streams across layouts",
+        "Native resource costs, including uint8-list overhead"
+      ]
+    }
+  ],
+  "evidence": {
+    "version": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/version.py",
+        "sha256": "bf2545c0618684c7f273502d70c896ca3a6ef3f0a94cb5d3e071379698e314d1",
+        "bytes": 313
+      },
+      "begin_line": 1,
+      "end_line": 10,
+      "reason": "Text only; no import or native binary provenance proof",
+      "text": "from typing import Optional\n\n__all__ = ['__version__', 'debug', 'cuda', 'git_version', 'hip', 'rocm', 'xpu']\n__version__ = '2.14.0+cpu'\ndebug = False\ncuda: Optional[str] = None\ngit_version = '08187d9e0fba026dc8217405802ab5381dc88d90'\nhip: Optional[str] = None\nrocm: Optional[str] = None\nxpu: Optional[str] = None",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "clone_sig": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C/__init__.pyi",
+        "sha256": "87801323cde8baee1db5026c027ea3b7a852e2194b234d11c0cd38c68b0010e5",
+        "bytes": 407552
+      },
+      "begin_line": 3666,
+      "end_line": 3672,
+      "reason": "Tensor.clone keyword-only memory_format",
+      "text": "    def clone(self, *, memory_format: memory_format | None = None) -> Tensor:\n        r\"\"\"\n        clone(*, memory_format=torch.preserve_format) -> Tensor\n\n        See :func:`torch.clone`\n        \"\"\"\n",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "view_sig": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C/__init__.pyi",
+        "sha256": "87801323cde8baee1db5026c027ea3b7a852e2194b234d11c0cd38c68b0010e5",
+        "bytes": 407552
+      },
+      "begin_line": 10955,
+      "end_line": 10961,
+      "reason": "Tensor.view dtype overload",
+      "text": "    def view(self, dtype: _dtype) -> Tensor:\n        r\"\"\"\n        view(*shape) -> Tensor\n\n        Returns a new tensor with the same data as the :attr:`self` tensor but of a\n        different :attr:`shape`.\n",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "clone_functional_sig": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C/_VariableFunctions.pyi",
+        "sha256": "075455485c23471ef35cd8175141b7e4b0c04a5ffcee612a7cf69ec02eb421b1",
+        "bytes": 1110250
+      },
+      "begin_line": 9655,
+      "end_line": 9665,
+      "reason": "Functional signature in fixed installation",
+      "text": "def clone(\n    input: Tensor,\n    *,\n    memory_format: memory_format | None = None,\n) -> Tensor:\n    r\"\"\"\n    clone(input, *, memory_format=torch.preserve_format) -> Tensor\n\n    Returns a copy of :attr:`input`.\n\n    .. note::",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "index_select_functional_sig": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C/_VariableFunctions.pyi",
+        "sha256": "075455485c23471ef35cd8175141b7e4b0c04a5ffcee612a7cf69ec02eb421b1",
+        "bytes": 1110250
+      },
+      "begin_line": 16354,
+      "end_line": 16364,
+      "reason": "Functional signature in fixed installation",
+      "text": "def index_select(\n    input: Tensor,\n    dim: _int,\n    index: Tensor,\n    *,\n    out: Tensor | None = None,\n) -> Tensor:\n    r\"\"\"\n    index_select(input, dim, index, *, out=None) -> Tensor\n\n    Returns a new tensor which indexes the :attr:`input` tensor along dimension",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "argmax_functional_sig": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C/_VariableFunctions.pyi",
+        "sha256": "075455485c23471ef35cd8175141b7e4b0c04a5ffcee612a7cf69ec02eb421b1",
+        "bytes": 1110250
+      },
+      "begin_line": 6792,
+      "end_line": 6802,
+      "reason": "Functional signature in fixed installation",
+      "text": "def argmax(\n    input: Tensor,\n    dim: _int | None = None,\n    keepdim: _bool = False,\n    *,\n    out: Tensor | None = None,\n) -> Tensor:\n    r\"\"\"\n    argmax(input) -> LongTensor\n\n    Returns the indices of the maximum value of all elements in the :attr:`input` tensor.",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "clone_docs": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_torch_docs.py",
+        "sha256": "f3962a2a4973e7d4917a3b3f265903d4a534085343bbe40d003728385d1949e5",
+        "bytes": 445068
+      },
+      "begin_line": 2909,
+      "end_line": 2933,
+      "reason": "Clone is a copy with memory_format",
+      "text": "add_docstr(\n    torch.clone,\n    r\"\"\"\nclone(input, *, memory_format=torch.preserve_format) -> Tensor\n\nReturns a copy of :attr:`input`.\n\n.. note::\n\n    This function is differentiable, so gradients will flow back from the\n    result of this operation to :attr:`input`. To create a tensor without an\n    autograd relationship to :attr:`input` see :meth:`~Tensor.detach`.\n\n    In addition, when ``torch.preserve_format`` is used:\n    If the input tensor is dense (i.e., non-overlapping strided),\n    its memory format (including strides) is retained.\n    Otherwise (e.g., a non-dense view like a stepped slice),\n    the output is converted to the dense (contiguous) format.\n\nArgs:\n    {input}\n\nKeyword args:\n    {memory_format}\n\"\"\".format(**common_args),",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "view_docs": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_tensor_docs.py",
+        "sha256": "9c3d4d0bcef8041352cc87cff68980c39ddd8c506d4e8db6410af306bd46f189",
+        "bytes": 142677
+      },
+      "begin_line": 6094,
+      "end_line": 6126,
+      "reason": "dtype view reinterprets same data; rank positive and stride(-1)=1; extra alignment only when destination elements are larger",
+      "text": ".. method:: view(dtype) -> Tensor\n   :noindex:\n\nReturns a new tensor with the same data as the :attr:`self` tensor but of a\ndifferent :attr:`dtype`.\n\nIf the element size of :attr:`dtype` is different than that of ``self.dtype``,\nthen the size of the last dimension of the output will be scaled\nproportionally.  For instance, if :attr:`dtype` element size is twice that of\n``self.dtype``, then each pair of elements in the last dimension of\n:attr:`self` will be combined, and the size of the last dimension of the output\nwill be half that of :attr:`self`. If :attr:`dtype` element size is half that\nof ``self.dtype``, then each element in the last dimension of :attr:`self` will\nbe split in two, and the size of the last dimension of the output will be\ndouble that of :attr:`self`. For this to be possible, the following conditions\nmust be true:\n\n    * ``self.dim()`` must be greater than 0.\n    * ``self.stride(-1)`` must be 1.\n\nAdditionally, if the element size of :attr:`dtype` is greater than that of\n``self.dtype``, the following conditions must be true as well:\n\n    * ``self.size(-1)`` must be divisible by the ratio between the element\n      sizes of the dtypes.\n    * ``self.storage_offset()`` must be divisible by the ratio between the\n      element sizes of the dtypes.\n    * The strides of all dimensions, except the last dimension, must be\n      divisible by the ratio between the element sizes of the dtypes.\n\nIf any of the above conditions are not met, an error is thrown.\n\n.. warning::",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "index_docs": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_torch_docs.py",
+        "sha256": "f3962a2a4973e7d4917a3b3f265903d4a534085343bbe40d003728385d1949e5",
+        "bytes": 445068
+      },
+      "begin_line": 5564,
+      "end_line": 5586,
+      "reason": "index_select keeps other dimensions and uses independent storage",
+      "text": "    torch.index_select,\n    r\"\"\"\nindex_select(input, dim, index, *, out=None) -> Tensor\n\nReturns a new tensor which indexes the :attr:`input` tensor along dimension\n:attr:`dim` using the entries in :attr:`index`.\n\nThe returned tensor has the same number of dimensions as the original tensor\n(:attr:`input`).  The :attr:`dim`\\ th dimension has the same size as the length\nof :attr:`index`; other dimensions have the same size as in the original tensor.\n\n.. note:: The returned tensor does **not** use the same storage as the original\n          tensor.  If :attr:`out` has a different shape than expected, we\n          silently change it to the correct shape, reallocating the underlying\n          storage if necessary.\n\nArgs:\n    {input}\n    dim (int): the dimension in which we index\n    index (IntTensor or LongTensor): the 1-D tensor containing the indices to index\n\nKeyword args:\n    {out}",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "argmax_docs": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_torch_docs.py",
+        "sha256": "f3962a2a4973e7d4917a3b3f265903d4a534085343bbe40d003728385d1949e5",
+        "bytes": 445068
+      },
+      "begin_line": 7107,
+      "end_line": 7118,
+      "reason": "First maximal index on ties",
+      "text": "    torch.argmax,\n    r\"\"\"\nargmax(input) -> LongTensor\n\nReturns the indices of the maximum value of all elements in the :attr:`input` tensor.\n\nThis is the second value returned by :meth:`torch.max`. See its\ndocumentation for the exact semantics of this method.\n\n.. note:: If there are multiple maximal values then the indices of the first maximal value are returned.\n\nArgs:",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "argmax_dim": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_torch_docs.py",
+        "sha256": "f3962a2a4973e7d4917a3b3f265903d4a534085343bbe40d003728385d1949e5",
+        "bytes": 445068
+      },
+      "begin_line": 7132,
+      "end_line": 7143,
+      "reason": "Dimension argmax overload",
+      "text": ".. function:: argmax(input, dim, keepdim=False) -> LongTensor\n   :noindex:\n\nReturns the indices of the maximum values of a tensor across a dimension.\n\nThis is the second value returned by :meth:`torch.max`. See its\ndocumentation for the exact semantics of this method.\n\nArgs:\n    {input}\n    {opt_dim} If ``None``, the argmax of the flattened input is returned.\n    {opt_keepdim}",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "restride": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/c10/core/TensorImpl.h",
+        "sha256": "3fd716b2b73437f96c5c4bab338736433701fe99ed04e32ea8b0806a23226229",
+        "bytes": 117016
+      },
+      "begin_line": 2401,
+      "end_line": 2441,
+      "reason": "Contiguous restride body handles singleton dimensions canonically; dispatch route unproven",
+      "text": "   * Set the strides of the tensor to match memory_format\n   *\n   * WARNING: This function doesn't rearrange data and assumes tensor is a\n   * memory contiguous\n   */\n  void empty_tensor_restride(MemoryFormat memory_format) {\n    if (has_symbolic_sizes_strides_) {\n      empty_tensor_restride_symint(memory_format);\n      return;\n    }\n#ifdef DEBUG\n    TORCH_INTERNAL_ASSERT(\n        compute_numel() == numel_,\n        \"If you are seeing this error, that means empty_tensor_restride was \"\n        \"called before setting correct numel\");\n#endif\n    // Set when the branch writes canonical row-major strides, so the trailing\n    // refresh can skip recomputing contiguity (see _refresh_contiguous).\n    bool assume_contiguous = false;\n    switch (memory_format) {\n      case MemoryFormat::Contiguous: {\n        // dim_ is a virtual call, don't repeat it\n        const auto dim_ = dim();\n        sizes_and_strides_.resize(dim_);\n        if (dim_ > 0) {\n          bool overflowed = false;\n          const auto last_idx = dim_ - 1;\n          sizes_and_strides_.stride_at_unchecked(last_idx) = 1;\n          for (auto i = last_idx - 1; i >= 0; --i) {\n            overflowed |= c10::mul_overflows(\n                sizes_and_strides_.stride_at_unchecked(i + 1),\n                std::max<int64_t>(\n                    sizes_and_strides_.size_at_unchecked(i + 1), 1),\n                std::addressof(sizes_and_strides_.stride_at_unchecked(i)));\n          }\n          TORCH_CHECK(!overflowed, \"Stride calculation overflowed\");\n        }\n        // Sparse tensors are never reported contiguous (compute_contiguous()\n        // returns false for them), so only claim contiguity otherwise.\n        assume_contiguous = !is_sparse();\n        break;",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "contiguous_docs": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_tensor_docs.py",
+        "sha256": "9c3d4d0bcef8041352cc87cff68980c39ddd8c506d4e8db6410af306bd46f189",
+        "bytes": 142677
+      },
+      "begin_line": 1134,
+      "end_line": 1144,
+      "reason": "Already contiguous inputs can return self; not sufficient proof of canonical singleton strides",
+      "text": "contiguous(memory_format=torch.contiguous_format) -> Tensor\n\nReturns a contiguous in memory tensor containing the same data as :attr:`self` tensor. If\n:attr:`self` tensor is already in the specified memory format, this function returns the\n:attr:`self` tensor.\n\nArgs:\n    memory_format (:class:`torch.memory_format`, optional): the desired memory format of\n        returned Tensor. Default: ``torch.contiguous_format``.\n\"\"\",\n)",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "contiguous_predicate": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_prims_common/__init__.py",
+        "sha256": "eae5386a789dec6a9bac310e581d23da6a0b4e37510b8de3558f48109acec5a7",
+        "bytes": 75474
+      },
+      "begin_line": 305,
+      "end_line": 330,
+      "reason": "Python utility skips singleton axes; reference implementation, not CPU dispatch proof",
+      "text": "def is_contiguous(a: TensorLikeType, false_if_dde=False) -> bool:\n    \"\"\"\n    Tests whether a tensor is contiguous or not.\n\n    Tensors are contiguous when they have no elements,\n    one element, or when they have \"nested\" strides.\n    \"\"\"\n    from torch.fx.experimental.symbolic_shapes import (\n        guard_or_false,\n        guard_size_oblivious,\n    )\n\n    def eval_eager(x):\n        return bool(x)\n\n    maybe_guard_or_false = guard_or_false if false_if_dde else eval_eager\n\n    if maybe_guard_or_false(a.numel() < 2):\n        return True\n\n    return check_contiguous_sizes_strides(\n        a.shape, a.stride(), false_if_dde=false_if_dde\n    )\n\n\n# This function is equivalent to compute_channels_last_contiguous_2d() in TensorImpl.cpp",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "clone_header": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/ATen/ops/clone.h",
+        "sha256": "25ede4910b23c45f2cf35c1bd38247e49753b87c84c8d8849b9595205f379706",
+        "bytes": 1598
+      },
+      "begin_line": 27,
+      "end_line": 30,
+      "reason": "C++ declaration/dispatch, not native kernel implementation",
+      "text": "// aten::clone(Tensor self, *, MemoryFormat? memory_format=None) -> Tensor\ninline at::Tensor clone(const at::Tensor & self, ::std::optional<at::MemoryFormat> memory_format=::std::nullopt) {\n    return at::_ops::clone::call(self, memory_format);\n}",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "clone_native_header": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/ATen/ops/clone_native.h",
+        "sha256": "138f802332409c50d9a5bdc18c933f39aacdafdf2c38d24207ccc4cfdbae1b7d",
+        "bytes": 1553
+      },
+      "begin_line": 19,
+      "end_line": 22,
+      "reason": "C++ declaration/dispatch, not native kernel implementation",
+      "text": "namespace native {\nTORCH_API at::Tensor clone(const at::Tensor & self, ::std::optional<at::MemoryFormat> memory_format=::std::nullopt);\nTORCH_API at::Tensor & clone_out(const at::Tensor & self, ::std::optional<at::MemoryFormat> memory_format, at::Tensor & out);\nTORCH_API at::Tensor clone_nested(const at::Tensor & self, ::std::optional<at::MemoryFormat> memory_format=::std::nullopt);",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "view_native_header": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/ATen/ops/view_native.h",
+        "sha256": "fb73c9b35fae1e08d659364abeb7d85b0750dcf4332c03d90c9376152e9d67a7",
+        "bytes": 1077
+      },
+      "begin_line": 23,
+      "end_line": 26,
+      "reason": "C++ declaration/dispatch, not native kernel implementation",
+      "text": "TORCH_API at::Tensor mkldnn_view(const at::Tensor & self, at::IntArrayRef size);\nTORCH_API at::Tensor view_dtype(const at::Tensor & self, at::ScalarType dtype);\n} // namespace native\n} // namespace at",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "index_header": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/ATen/ops/index_select.h",
+        "sha256": "f136e46a649ba07c51996eec928cc89c06e1eb99013c89239e6f828dc79b862e",
+        "bytes": 1563
+      },
+      "begin_line": 36,
+      "end_line": 39,
+      "reason": "C++ declaration/dispatch, not native kernel implementation",
+      "text": "// aten::index_select(Tensor self, int dim, Tensor index) -> Tensor\ninline at::Tensor index_select(const at::Tensor & self, int64_t dim, const at::Tensor & index) {\n    return at::_ops::index_select::call(self, dim, index);\n}",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "argmax_header": {
+      "source": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/include/ATen/ops/argmax.h",
+        "sha256": "04e696914182439daf10514e8069e985d59cee168bdacc84c5299e5bac709342",
+        "bytes": 1602
+      },
+      "begin_line": 27,
+      "end_line": 30,
+      "reason": "C++ declaration/dispatch, not native kernel implementation",
+      "text": "// aten::argmax(Tensor self, int? dim=None, bool keepdim=False) -> Tensor\ninline at::Tensor argmax(const at::Tensor & self, ::std::optional<int64_t> dim=::std::nullopt, bool keepdim=false) {\n    return at::_ops::argmax::call(self, dim, keepdim);\n}",
+      "matched_previous_runtime_spec_pin": null
+    },
+    "dory_raw": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_worker_preparation_v2.py",
+        "sha256": "3d1d9ab84471832fd478cd2e1ed3679dc311c53f1846dbde3792d1a8b4a3316c",
+        "bytes": 14735
+      },
+      "begin_line": 126,
+      "end_line": 127,
+      "reason": "Original contiguous uint8 view followed by NumPy byte serialization",
+      "text": "    def raw(t):\n        return t.detach().contiguous().view(torch.uint8).numpy().tobytes()",
+      "matched_previous_runtime_spec_pin": true
+    },
+    "dory_head": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_replay_runtime_v2.py",
+        "sha256": "7f86896f85a072131c854eff3760b6fce157746a3c7f6e567c947c862d467546",
+        "bytes": 19836
+      },
+      "begin_line": 138,
+      "end_line": 147,
+      "reason": "Original full forward and exact output-head index selection",
+      "text": "        rows = torch.tensor(selectors, dtype=torch.long)\n        hidden, observations = capture.run(tokens, positions, rows)\n        pending_outputs[\"hidden\"] = hidden\n        head_rows = (list(stream.history.reference_positions)\n                     if action.get(\"phase\") == \"full_causal\" else [end-begin-1])\n        head = hidden.index_select(0, torch.tensor(head_rows, dtype=torch.long)).contiguous()\n        logits = official.compute_logits(head)\n        pending_outputs[\"logits\"] = logits\n        require(logits is not None, \"Original output head produced logits\")\n        return hidden, logits, observations, list(head.shape)",
+      "matched_previous_runtime_spec_pin": true
+    },
+    "dory_top": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_replay_runtime_v2.py",
+        "sha256": "7f86896f85a072131c854eff3760b6fce157746a3c7f6e567c947c862d467546",
+        "bytes": 19836
+      },
+      "begin_line": 260,
+      "end_line": 263,
+      "reason": "Original logits.argmax(-1).tolist()",
+      "text": "                    residual_raw_bytes += selected[\"bytes\"]\n                    selected_files.append(selected[\"file\"])\n                actual_top1 = logits.argmax(-1).tolist()\n                actual_layers = {str(key): value for key, value in env[\"layer_calls\"].items()}",
+      "matched_previous_runtime_spec_pin": true
+    },
+    "dory_selected": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_replay_runtime_v2.py",
+        "sha256": "7f86896f85a072131c854eff3760b6fce157746a3c7f6e567c947c862d467546",
+        "bytes": 19836
+      },
+      "begin_line": 54,
+      "end_line": 56,
+      "reason": "Original BF16 index_select/clone/contiguous residual observation",
+      "text": "    def select_copy(tensor, selectors):\n        require(tensor.dtype == torch.bfloat16, \"Original BF16 residual boundary\")\n        return tensor.index_select(0, selectors).detach().clone().contiguous()",
+      "matched_previous_runtime_spec_pin": true
+    }
+  },
+  "exact_stride_native_cases_required": [
+    [
+      1,
+      2560
+    ],
+    [
+      33,
+      2560
+    ],
+    [
+      2060,
+      2560
+    ],
+    [
+      1,
+      131072
+    ],
+    [
+      4,
+      1,
+      256
+    ],
+    [
+      4,
+      2060,
+      256
+    ],
+    [
+      1,
+      2,
+      1
+    ]
+  ],
+  "later_file_reviewer_requirements": [
+    "verify_archive starts at authenticated stream offset0",
+    "Full fstat size equals complete archive extent",
+    "Producer st_dev/st_ino/st_size/st_mtime_ns/st_ctime_ns bind stable owned regular single-link file",
+    "Canonical path and directory stability checked",
+    "EOF plus postread identity; actual producer exit and file provenance remain caller requirements"
+  ],
+  "local_kernel_implementation_status": "Public/native declarations and TensorImpl restride body inspected; clone/index_select/view_dtype CPU kernel bodies and actual dispatch routes not established. No broader search.",
+  "original_stage_a_and_adapter_delivery_files_unchanged": true,
+  "torch_imported": false,
+  "numpy_imported": false,
+  "real_tensor_payload_bytes_read": 0,
+  "weight_payload_bytes_read": 0,
+  "old_raw_archive_bytes_read": 0,
+  "native_experiments_executed": false,
+  "new_tests_executed": false,
+  "runtime_runner_created": false,
+  "runtime_admitted": false,
+  "continuation_handoff_created": false,
+  "original_FP32_failures_retained": 7,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

@@ -6,6 +6,8 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
+[MiniCPM5 后继运行接入及审查发现](minicpm5-runtime-lineage-20261110.md)：新增结束记录、运行器与进程检查通过；全量历史来源的分类接入仍待修正，未启动新实验。Dory 完成固定 Torch 接口的静态审阅；Nemotron 已独立核实 16/52 阶段，完整运行继续，无新增提速。
+
 [MiniCPM5 当前输入×历史的 180 次完整调用已完成](minicpm5-current-history-20261110.md)：原对照同时使用官方当前归一化输入和历史 K/V，注意力输出汇总相对 L2 从 1.2720% 降至 0.4464%，24 帧全部改善，但仍无一帧完全复现官方输出。108 次上一轮真实输出对照、双 rank 一致性和退出后独立复核通过；40 项检查通过。三个路径在两项均来自官方时输出完全相同。既有整模型通过率仍为对照 29/32、候选 28/32，未新增提速；这是 CPU 参考局部诊断。此前[仅换官方历史的结果](minicpm5-official-history-20261110.md)完整保留。
 
 [MiniCPM5 下一轮诊断源码接入与 Dory 适配器准备](mini-dory-next-source-20261110.md)：MiniCPM5 四组共 67 项合成检查通过，补齐完整输出复核；Dory 原生张量适配与稳定文件审核已准备。Nemotron 已实际完成前 8/52 阶段，完整运行继续；没有新增模型资格或提速。
