@@ -1,0 +1,44 @@
+{
+  "schema": "minicpm5_layer1_current_history_factorial_root_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-10T12:54:45.104234+00:00",
+  "passed": true,
+  "blockers": [],
+  "integration_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-current-history-factorial-integration-source-handoff-20261110-v1.json",
+    "sha256": "8b0a504056044ebb7e0fba4d89c2104cd4b1127d0a1a9adb3551e3c19d4af065"
+  },
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_after_official_history_v1.py": "3bd1b396d442843198e709ef18e63943f21e773cf32900ceec36efde7d31491e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_controls_v1.py": "1f2a7d519cc64bab5656481e6974c756d6819552d71defea0e3a38ecb9987865",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_cpu_driver_v1.py": "c1477b7adac4933237355300e212d0f26a7de44cad342c4797133384562eef97",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_results_v1.py": "ad216850f269b2f3d30a67f0d3c49ba577c2ee2b487a1e4babed5027b657fc22",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_current_history_factorial_cpu_worker_v1.py": "43f7d7019393ab65f071cf75958804f11773ab6475bf63d22f51d11a6bad9515",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_current_history_factorial_cpu_runner_v1.py": "5784ec8cccf63fbf3a19f20086d17f3fd99fecfa38171c2cad15858dc49c64f3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_current_history_factorial_v1.py": "b6ff8a086689a19693bfe3cfb4761aa54c6a3f2ef40e5ac3de718b83a5cff96d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_current_history_factorial_integration_v1.py": "fa6065b7f78a422d47d8fd68ec81952b6c8a5db13b05219f9cf2b1fcaee06d25",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_analysis_v1.py": "a55e6c31d71db089669456851223950edf7258e4de56395e3c8703a7216f8b51",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_current_history_factorial_analysis_v1.py": "f82e3246f6bb1e39ec762c3dff7ddddfb6a27cc33722dd78b45292885eea4de3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_current_history_factorial_result_v1.py": "17207333842fdfd7d38330ef8d3c99f68c19d63b3f48059e04ae956c11770cae",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_current_history_factorial_exit_v1.py": "b11d26dd2a193c356915bc6af8f7831ff62b9550743a3c65903f6c3d8ba728da",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_v1.py": "2e96d91cab6a7e5f5776a2f274041a5d1d52208ee1261bc1f6ceebf5332149dc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_callable_v1.py": "e55ad160f831b6c57d4bce5b9b64ecf3e3a32321b1c6496c9a0b2753c80cebd9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_current_history_factorial_v1.py": "0d7f443ef858f7b5dab3d2bd1a4f795c838dab5c9e97c1b0d7f440411958af5c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-current-history-factorial-checks-20261110-v1.txt": "5bee65f540103bc2a4c0fa438295a539e9020611c64f76d0b4ea36a641078442"
+  },
+  "reviewed_scope": [
+    "2x2 current normalized input/history selection; current input affects Q/K/V jointly",
+    "Original full4row physical stride, BF16 official shards, masks/RoPE/cache invocation unchanged",
+    "Full previous own/official_both/restore byte controls;108 controls derived across2ranks",
+    "Exact official model+independent audit and lossless storage+auditor termination under original serial lock",
+    "Original resource caps/floors and full original model construction;180 calls; independent byte reread",
+    "Complete2x2distances and vector interaction; no promotion of whole-model numeric or performance gates"
+  ],
+  "test_count": 40,
+  "tests": {
+    "core": 15,
+    "integration": 19,
+    "analysis": 6
+  },
+  "runtime_admitted": false
+}

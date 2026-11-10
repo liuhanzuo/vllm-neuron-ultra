@@ -1,0 +1,124 @@
+{
+  "schema": "minicpm5_layer1_current_history_factorial_source_handoff_v1",
+  "reviewer": "/root/mini_official_history_core_20261110",
+  "observed_at": "2026-11-10T12:43:06.608009+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_v1.py",
+      "sha256": "2e96d91cab6a7e5f5776a2f274041a5d1d52208ee1261bc1f6ceebf5332149dc"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_current_history_factorial_callable_v1.py",
+      "sha256": "e55ad160f831b6c57d4bce5b9b64ecf3e3a32321b1c6496c9a0b2753c80cebd9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_current_history_factorial_v1.py",
+      "sha256": "0d7f443ef858f7b5dab3d2bd1a4f795c838dab5c9e97c1b0d7f440411958af5c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-current-history-factorial-checks-20261110-v1.txt",
+      "sha256": "5bee65f540103bc2a4c0fa438295a539e9020611c64f76d0b4ea36a641078442"
+    }
+  ],
+  "prerequisite_official_history": {
+    "actual_exit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-history-r1-actual-exit-20261110-v1.json",
+      "sha256": "1f7a61dead9227f7187ed4ddac9e40d5dbce6fee2ab751f80ac575c5e75c848a"
+    },
+    "independent_audit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-history-post-exit-audit-20261110-v1.json",
+      "sha256": "4895b0e3df2346b17d1cdf4d399a504a8157fbea3ea8bb5ec93fd0588f473883"
+    },
+    "independent_audit_exit": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-history-post-exit-audit-actual-exit-20261110-v1.json",
+      "sha256": "647d37ab13ee102574864f2899a382050c660af4ca2bf35eb89f484c069ba0d0"
+    }
+  },
+  "scientific_question": "Does the current normalized input, prior KV history, or their interaction explain remaining second-layer attention differences?",
+  "modes": [
+    {
+      "mode": "own",
+      "current": "own",
+      "history": "own"
+    },
+    {
+      "mode": "official_current",
+      "current": "official",
+      "history": "own"
+    },
+    {
+      "mode": "official_history",
+      "current": "own",
+      "history": "official"
+    },
+    {
+      "mode": "official_both",
+      "current": "official",
+      "history": "official"
+    },
+    {
+      "mode": "restore",
+      "current": "own",
+      "history": "own"
+    }
+  ],
+  "current_stage": "layers.1.input_layernorm",
+  "current_frame_scope": "Current original fixture/step/slot/index, BF16 [1,1,2048]; all4rows repacked to actual original [4,1,2048] stride[1,4,4]",
+  "history_frame_scope": "Same fixture, PREVIOUS native frame, nativehead=TP rank, original physical slot, valid prior prefix only; full SDK stores and all padding retained",
+  "expected_scope": {
+    "arms": 3,
+    "decode_calls_per_arm_per_rank": 6,
+    "modes_per_call": 5,
+    "ranks": 2,
+    "total_full_four_row_calls": 180,
+    "raw_bytes": 2949120,
+    "own_controls": 36,
+    "restore_controls": 36
+  },
+  "api": {
+    "for_call": "for_call(plan,native_data,case)->prior_donors,current_donors,target,target_refs",
+    "select": "select(case,own_normalized_raw,own_cache_raw,prior_donors,current_donors,mode)->selected_normalized_raw,packed_original_stride,cache_raw,proof",
+    "replay": "replay(torch,model,case,mode,own_normalized_raw,own_cache_raw,prior_donors,current_donors,expected_attention_raw,official_shard_hashes,guard)->result,raw"
+  },
+  "tests": {
+    "count": 15,
+    "actual_tool_session": 86936,
+    "actual_exit_code": 0,
+    "actual_exit_chunk": "8a1d67",
+    "seconds": 12.068,
+    "stdlib_only": true,
+    "synthetic_buffers_only": true,
+    "affinity": [
+      6
+    ],
+    "nice": 19
+  },
+  "source_review": {
+    "original_attention_cache_getter_rope_invocation_ast_identical": true,
+    "current_shape_dtype_position_hash_checks": true,
+    "own_restore_inputs_and_caches_exact": true,
+    "no_original_case_relabelled": true,
+    "all_selected_byte_provenance_retained": true,
+    "five_frozen_predecessor_sources_match_executed_spec": true
+  },
+  "root_integration_needed": [
+    "Create successor driver/worker/results/runner, keeping executed official-history sources frozen. Driver can reuse official_history_inputs_v1.load(plan,native_bundle,guard), then new for_call and replay.",
+    "Keep complete original full model constructor/official weight shard comparison, both TP ranks and all original source stream calls. Iterate original3arms*6decodecalls*5MODES=90calls/rank, save full16384byte outputs.",
+    "Bind actual official-history model exit and independent audit exit from v419, plus any later root serial storage/archive exit, before launch. Drain all predecessor owners under original lock; no worker launch is provided here.",
+    "Validator independently load original complete stream and native row sources, rerun select for every case/mode, reread full outputs, verify exact own/restore, complete finite outputs, both-rank replication, original source metadata and no quality/speed claims.",
+    "Require original current/original history cells to match previous official-history own outputs, and original current/official history cells to match previous official-history official_both outputs. Existing actual controls must not be replaced by synthetic evidence.",
+    "Analysis should compare full attention outputs with same CURRENT official frame target. Report the2x2change and nonadditive interaction plus unchanged own/restore controls; official-current selection changes currentQ/K/V together, so do not label query-only.",
+    "Even both official input/history do not require equality to native output: original SDK split projection/reduction path still runs. Keep old full-model thresholds, cold4096,longdecode,slotreuse,quality and pairedHTTP gates separate; no promotion from local attention success."
+  ],
+  "not_performed": [
+    "Torch/NumPy/Neuron imports",
+    "Actual model/raw payload reads",
+    "Serial lock acquisition or device/model task",
+    "Runtime spec or runner admission",
+    "New continuation handoff or publication"
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
