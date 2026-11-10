@@ -28,9 +28,9 @@ records seven independently reproduced CPU numerical failures and the passing
 13-call reference/release crosscheck. It includes archived review evidence and
 does not claim a Dory Neuron result or speedup.
 
-The [Nemotron v20 preparation report](docs/nemotron9b-v20-residual-integration-20261109.md)
-records the next-run integration checks, preserved experimental conditions,
-ongoing Dory replay, and remaining storage and full-model validation work.
+The [Nemotron startup integration report](docs/nemotron9b-startup-integration-20261110.md)
+records 81 applicable checks, the separate startup deadlines, preserved
+validation and storage limits, and the fresh r11 serial revalidation.
 It does not add a qualified model result or speedup.
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.

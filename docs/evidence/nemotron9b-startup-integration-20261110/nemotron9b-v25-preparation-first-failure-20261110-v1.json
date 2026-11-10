@@ -1,0 +1,19 @@
+{
+  "actual_external_exit_observed": true,
+  "session_id": 54902,
+  "exit_code": 1,
+  "tool_result": {
+    "chunk_id": "a90717",
+    "wall_time_seconds": 1.0252e-05,
+    "exit_code": 1,
+    "original_token_count": 247,
+    "output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25.py\", line 113, in <module>\n    print(json.dumps(build(args.run_id)))\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25.py\", line 92, in build\n    spec,observer,graph=assemble(run_id)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25.py\", line 55, in assemble\n    graph=local_imports(entries=entries)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_dory_residual_spec_v3.py\", line 64, in local_imports\n    require(within(path) and len(pins) < 2048, 'Bounded local source closure')\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_layer0_serial_contract_v2.py\", line 14, in require\n    if not value:raise RuntimeError(message)\nRuntimeError: Bounded local source closure\n"
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25.py",
+    "sha256": "ba3797e1afb5aa69d3b14dd7ad2a3fa64894a575f9c4276ca4adf740bc1d44bd"
+  },
+  "diagnosis": "All534 required source entries were passed to a local Python import parser;28 are outside its roots and include JSON. Keep every source pin, but parse only local .py entries.",
+  "spec_written": false,
+  "native_started": false
+}

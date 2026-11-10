@@ -1,0 +1,19 @@
+{
+  "actual_external_exit_observed": true,
+  "session_id": 90518,
+  "exit_code": 1,
+  "tool_result": {
+    "chunk_id": "5c1f04",
+    "wall_time_seconds": 1.1481e-05,
+    "exit_code": 1,
+    "original_token_count": 348,
+    "output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25_r2.py\", line 115, in <module>\n    print(json.dumps(build(args.run_id)))\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25_r2.py\", line 99, in build\n    checks=source_checks(spec,{str(paths['observer-contract']):observer})\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_nemotron9b_package_runtime_v25_r2.py\", line 78, in source_checks\n    if path in spec['metadata_aliases'] else p.metadata.sha(path,digest))\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v25.py\", line 222, in sha\n    return hashlib.sha256(text(path, expected)).hexdigest()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v25.py\", line 214, in text\n    raw = stable_bytes(path, cap)\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v25.py\", line 185, in stable_bytes\n    require(stat.S_ISREG(before.st_mode) and before.st_size <= cap, 'Ordinary bounded metadata')\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py\", line 17, in require\n    if not value:raise RuntimeError(message)\nRuntimeError: Ordinary bounded metadata\n"
+  },
+  "large_inventory": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-v25-large-source-inventory-20261110-v1.json",
+    "sha256": "42f536c1659908eee5ed858a40cc19f1e50e61ba1e177baa60309146a629e871"
+  },
+  "cause": "Three exact retained Mini r1 JSON records exceed the ordinary8MiB limit. They used32MiB caps in their authenticated original producer. All original limits remain; successor needs exact path/hash envelopes.",
+  "spec_written": false,
+  "native_started": false
+}

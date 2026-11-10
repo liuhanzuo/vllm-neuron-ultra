@@ -1,0 +1,146 @@
+{
+  "schema": "nemotron9b_v26_r11_live_admission_observation_v1",
+  "observed_at": "2026-11-10T05:52:18.859314+00:00",
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+    "sha256": "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+    "sha256": "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+  },
+  "records": {
+    "external-launch-intent.json": {
+      "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/external-launch-intent.json",
+      "sha256": "07d98649565870c9fc8b0d0539f4e41dbff4aabba5247f7252cb77fdb43ad557"
+    },
+    "external-controller-owner.json": {
+      "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/external-controller-owner.json",
+      "sha256": "ea280f4e1a37cb5083129e07d89b7dd64965aa317234d4815942f4f0bbc29e6c"
+    },
+    "admission.json": {
+      "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/admission.json",
+      "sha256": "acfb655e77f5800c66e7c14adf00268208fb802cf7b2c3e95f78bf15fc69f7a1"
+    }
+  },
+  "external_launch_session": 74703,
+  "external_owner": {
+    "pid": 384527,
+    "start_ticks": "407012946",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v26.py",
+      "--launch",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+      "--spec-sha256",
+      "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+      "--review-sha256",
+      "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "controller": {
+    "pid": 387618,
+    "start_ticks": "407024336",
+    "ppid": 1583,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v26.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+      "--spec-sha256",
+      "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+      "--review-sha256",
+      "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-controller.service",
+    "invocation_id": "5f9357398bc4497ea6c44e2baad4634b"
+  },
+  "controller_active": "active",
+  "controller_substate": "running",
+  "serial_lock_owner_verified": true,
+  "canonical_unchanged": true,
+  "runtime_admitted": true,
+  "metadata_observation": {
+    "status.json": {
+      "stage": "prepare",
+      "performance_window": false
+    },
+    "prepare-owner.json": {
+      "pid": 391707,
+      "start_ticks": "407041540",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v26.py",
+        "--phase",
+        "prepare",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+        "--spec-sha256",
+        "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+        "--review-sha256",
+        "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-prepare.service",
+      "invocation_id": "8366ee829fba4bcc95eaacaadf16f32c"
+    },
+    "prepare-lease.json": {
+      "phase": "prepare",
+      "execution_spec": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+        "sha256": "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a"
+      },
+      "source_review": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+        "sha256": "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+      },
+      "producer": {
+        "pid": 391707,
+        "starttime": 407041540,
+        "invocation_id": "8366ee829fba4bcc95eaacaadf16f32c"
+      },
+      "controller": {
+        "pid": 387618,
+        "start_ticks": "407024336",
+        "ppid": 1583,
+        "argv": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v26.py",
+          "--execute",
+          "--spec",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+          "--spec-sha256",
+          "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+          "--review",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+          "--review-sha256",
+          "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-controller.service",
+        "invocation_id": "5f9357398bc4497ea6c44e2baad4634b"
+      },
+      "admission": {
+        "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/admission.json",
+        "sha256": "acfb655e77f5800c66e7c14adf00268208fb802cf7b2c3e95f78bf15fc69f7a1"
+      },
+      "runtime_admitted": true
+    }
+  },
+  "all52_scientific_stages_complete": false,
+  "model_qualified": false,
+  "new_speedup_claim": false
+}
