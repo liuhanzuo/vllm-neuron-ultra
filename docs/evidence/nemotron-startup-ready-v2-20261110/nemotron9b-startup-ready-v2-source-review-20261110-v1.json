@@ -1,0 +1,41 @@
+{
+  "schema": "nemotron9b_startup_ready_source_preparation_review_v2",
+  "reviewer": "/root",
+  "source_preparation_passed": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_startup_deadlines_v2.py": "7cd607b0f3ba3b2fdedebb07dce1c0466b75a4092d432981c812d51e5fcda373",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_exec_transition_v2.py": "a64455b1e7bd7389bbe37cd1fc93cd85bb8a83d8d402acb76cc8d92b3c7af843",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_package_worker_startup_candidate_v2.py": "6d70844af5964fab0b3bc303e5c94418a17e18af191f167695ad3b6adbcc3969",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_startup_deadlines_v2.py": "263c0f3cb2dacf76ec44eb7a128258e5752169473dc04a20adfda3fbdcdf136b"
+  },
+  "test_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-startup-ready-v2-tests-actual-exit-20261110-v1.json",
+    "sha256": "002ea106cdf84e9311317f72ca1f2a4c7e4655d7790f3a494623610a96784ac5"
+  },
+  "tests_passed": 30,
+  "unchanged_transition_regression_tests": 15,
+  "unchanged_transition_regression_receipt": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-startup-deadlines-tests-actual-exits-20261110-v1.json",
+    "sha256": "69bf93329442d120b16d22b02f47e95c50d2b41e125734f6b158d1ead22306af"
+  },
+  "total_applicable_tests": 45,
+  "previous_candidate": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-startup-deadlines-source-review-20261110-v1.json",
+    "sha256": "3e4a24a12c97d70e3100f4846c2917ceeae70ee1a91803829b436f74620d8433"
+  },
+  "issue": "Original p.once creates file before writing JSON; existence is not completion. v1 candidate could read an incomplete exec intent and fail closed.",
+  "correction": "Child publishes a separate atomic mkdir marker only after existing once/flush/fsync returns; parent validates real owned0700 directory then authenticates original exec-intent content. Existing file bytes alone never indicate readiness.",
+  "previous_document_atomic_file_wording_corrected": true,
+  "original_science_unchanged": true,
+  "serve_child_only_change": "Two statements import and publish ready directory between completed exec-intent write and existing execve; AST otherwise identical.",
+  "budgets_seconds": {
+    "preparation": 300,
+    "exec": 60,
+    "independent_ack": 60,
+    "empty_argv": 0.25
+  },
+  "runtime_admitted": false,
+  "entrypoint_rejects_runtime": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
