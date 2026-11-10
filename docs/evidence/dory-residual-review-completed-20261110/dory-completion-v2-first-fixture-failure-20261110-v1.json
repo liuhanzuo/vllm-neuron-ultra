@@ -1,0 +1,14 @@
+{
+  "actual_exit": {
+    "chunk_id": "afe1c5",
+    "wall_time_seconds": 0.568721018,
+    "exit_code": 1,
+    "original_token_count": 535,
+    "output": "ERROR\nERROR\n\n======================================================================\nERROR: setUpClass (__main__.Completion)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_saved_retry_v2.py\", line 83, in setUpClass\n    Retry.setUpClass()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_contract_v1.py\", line 34, in setUpClass\n    cls.positive = c.failed_history(cls.fixture_ref, read, gone=lambda owner: None,\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_retry_contract_v1.py\", line 154, in failed_history\n    require(actual == set(history['known_admitted_directories'])\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_layer0_serial_contract_v2.py\", line 14, in require\n    if not value:raise RuntimeError(message)\nRuntimeError: All native and failed-review services, owners and admitted directories retained\n\n======================================================================\nERROR: setUpClass (check_dory_saved_review_retry_contract_v1.Retry)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_saved_review_retry_contract_v1.py\", line 34, in setUpClass\n    cls.positive = c.failed_history(cls.fixture_ref, read, gone=lambda owner: None,\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_saved_review_retry_contract_v1.py\", line 154, in failed_history\n    require(actual == set(history['known_admitted_directories'])\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_layer0_serial_contract_v2.py\", line 14, in require\n    if not value:raise RuntimeError(message)\nRuntimeError: All native and failed-review services, owners and admitted directories retained\n\n----------------------------------------------------------------------\nRan 0 tests in 0.505s\n\nFAILED (errors=2)\n"
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_after_dory_saved_retry_v2.py.first-fixture-failure-20261110-v1.txt",
+    "sha256": "46fc5b26df64d020a0165c962f3dd0eff5bf19cf52ff61c6b93d704053dd3915"
+  },
+  "diagnosis": "Inherited pre-r3 fixture enumerates current admitted directories; successful r3 adds a real directory. Use the immutable saved predecessor history for the synthetic prior-history fixture, never change actual completion directory checks."
+}

@@ -1,0 +1,741 @@
+{
+  "schema": "dory_saved_residual_propagation_summary_v1",
+  "complete": true,
+  "scope": {
+    "marked_calls": 87,
+    "original_failed_calls": 7,
+    "physical_layers": 72,
+    "executed_visits": 112,
+    "boundaries": 224,
+    "selected_calls": 89,
+    "selected_rows": 153
+  },
+  "first_bit_difference_counts": {
+    "layer-0-loop-0-residual_output": 67,
+    "layer-2-loop-0-residual_output": 14,
+    "layer-1-loop-0-residual_output": 6
+  },
+  "first_numeric_difference_counts": {
+    "layer-0-loop-0-residual_output": 67,
+    "layer-2-loop-0-residual_output": 14,
+    "layer-1-loop-0-residual_output": 6
+  },
+  "failed_events": [
+    3607,
+    4105,
+    4113,
+    6160,
+    6164,
+    6176,
+    6181
+  ],
+  "residual_metrics_recomputed_here": false,
+  "original_FP32_metrics_recomputed": false,
+  "metric_arithmetic": "Previously independently reviewed BF16 rows, float64 explanatory differences",
+  "observed_growth_is_causal_proof": false,
+  "original_FP32_acceptance_passed": false,
+  "root_cause_established": false,
+  "production_lifecycle_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "actual_saved_review_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r3-actual-exit-20261110-v1.json",
+    "sha256": "90ff8fb033bcaa5de600a049c961b6699ef14bf2cc5d3560f3cf579487ac8cfa"
+  },
+  "saved_review": {
+    "path": "/mnt/nvme/dory-official-cpu-20261108-v1/residual-replay-review-r3/saved-residual-review.json",
+    "sha256": "946a5fc4b28e46e434e161b34d70f6a2076bf9b2b92358bd8ea68b1fed31c08a"
+  },
+  "selection_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-first5-propagation-plan-20261109-v1.json",
+    "sha256": "a6ff5ba1f8c237e62d536725f9b19eb374a69d9ab4b516cbfdf52fd891be7ecf"
+  },
+  "completed_history_owners": 349,
+  "failed_saved_review_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-residual-saved-review-r2-failed-actual-exit-20261109-v1.json",
+    "sha256": "61d5d6645d086c883e3b2efc70b700b8f21d529c64f4ea430cafc185c9a589e2"
+  },
+  "completion_protocol": "nemotron9b_after_dory_saved_retry_v2",
+  "metadata_only": true,
+  "raw_tensor_bytes_read": 0,
+  "weight_bytes_read": 0,
+  "full_local_summary": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-saved-residual-propagation-summary-after-retry-20261110-v2.json",
+    "sha256": "1a60e849d71629e351af1085c17b29c4ca31bfcbf4e7691cf7718b32b7cdebf7"
+  },
+  "publication_is_explicit_extract": true,
+  "first_difference_counts_cover_selected87_not_all_calls": true,
+  "failed_frames": [
+    {
+      "event": 3607,
+      "fixture": 1,
+      "slot": 1,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 1025,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 1,
+        "position": 1025,
+        "slot": 1,
+        "phase": "long_decode",
+        "max_abs_error": 1.159926414489746,
+        "mean_abs_error": 0.2070104330778122,
+        "cosine": 0.9932719469070435,
+        "kl_reference_to_neuron": 1.5703675671829842e-05,
+        "argmax_match": true,
+        "reference_margin": 9.572519302368164,
+        "reference_top1": 11000,
+        "neuron_top1": 11000
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.0015894597290950507,
+          "output_rms": 0.0032260280017335076,
+          "rms_change": 0.0016365682726384569,
+          "rms_ratio": 2.029638085621853,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 32,
+          "physical_layer": 32,
+          "recurrent_loop": 0,
+          "input_rms": 0.0013832248546163577,
+          "output_rms": 0.002883435908439699,
+          "rms_change": 0.0015002110538233414,
+          "rms_ratio": 2.0845749690056214,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.00041961320434941797,
+          "output_rms": 0.0018955440654472252,
+          "rms_change": 0.0014759308610978073,
+          "rms_ratio": 4.517360382846242,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 30,
+          "physical_layer": 30,
+          "recurrent_loop": 0,
+          "input_rms": 0.0008447114655045959,
+          "output_rms": 0.001966614538591608,
+          "rms_change": 0.0011219030730870122,
+          "rms_ratio": 2.3281494556449918,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 64,
+          "physical_layer": 24,
+          "recurrent_loop": 1,
+          "input_rms": 0.0017124168796554262,
+          "output_rms": 0.002825338170776332,
+          "rms_change": 0.0011129212911209058,
+          "rms_ratio": 1.6499125909952772,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 4105,
+      "fixture": 1,
+      "slot": 2,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 1023,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 1,
+        "position": 1023,
+        "slot": 2,
+        "phase": "long_decode",
+        "max_abs_error": 1.5559844970703125,
+        "mean_abs_error": 0.20321258902549744,
+        "cosine": 0.9930159449577332,
+        "kl_reference_to_neuron": 9.820186278375331e-06,
+        "argmax_match": true,
+        "reference_margin": 8.659578323364258,
+        "reference_top1": 17804,
+        "neuron_top1": 17804
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.0005183592297223314,
+          "output_rms": 0.0030318225995963084,
+          "rms_change": 0.002513463369873977,
+          "rms_ratio": 5.848883217957477,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 86,
+          "physical_layer": 46,
+          "recurrent_loop": 1,
+          "input_rms": 0.004047755699575919,
+          "output_rms": 0.005532320268907971,
+          "rms_change": 0.0014845645693320518,
+          "rms_ratio": 1.3667623936611561,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.0011079590187949911,
+          "output_rms": 0.002462599290788732,
+          "rms_change": 0.0013546402719937407,
+          "rms_ratio": 2.2226447449897906,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 84,
+          "physical_layer": 44,
+          "recurrent_loop": 1,
+          "input_rms": 0.0028606179191376234,
+          "output_rms": 0.0041326851800692465,
+          "rms_change": 0.001272067260931623,
+          "rms_ratio": 1.444682686359983,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 82,
+          "physical_layer": 42,
+          "recurrent_loop": 1,
+          "input_rms": 0.00246681729750621,
+          "output_rms": 0.0037236284294935437,
+          "rms_change": 0.0012568111319873339,
+          "rms_ratio": 1.5094869138699032,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 4113,
+      "fixture": 1,
+      "slot": 2,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 1025,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 1,
+        "position": 1025,
+        "slot": 2,
+        "phase": "long_decode",
+        "max_abs_error": 2.2644646167755127,
+        "mean_abs_error": 0.3969501554965973,
+        "cosine": 0.9750162959098816,
+        "kl_reference_to_neuron": 3.3484146115370095e-05,
+        "argmax_match": true,
+        "reference_margin": 9.572519302368164,
+        "reference_top1": 11000,
+        "neuron_top1": 11000
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.00415163598291269,
+          "output_rms": 0.008114297122645917,
+          "rms_change": 0.003962661139733227,
+          "rms_ratio": 1.9544818370499615,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.0008964502673140144,
+          "output_rms": 0.004020655997234974,
+          "rms_change": 0.0031242057299209597,
+          "rms_ratio": 4.485085390494499,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 32,
+          "physical_layer": 32,
+          "recurrent_loop": 0,
+          "input_rms": 0.0020531440804200185,
+          "output_rms": 0.004669102057519822,
+          "rms_change": 0.0026159579770998033,
+          "rms_ratio": 2.2741229424895733,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 74,
+          "physical_layer": 34,
+          "recurrent_loop": 1,
+          "input_rms": 0.004898520587398588,
+          "output_rms": 0.007484010747005663,
+          "rms_change": 0.002585490159607075,
+          "rms_ratio": 1.5278104099956693,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 30,
+          "physical_layer": 30,
+          "recurrent_loop": 0,
+          "input_rms": 0.0008885974872525416,
+          "output_rms": 0.0029592972092753723,
+          "rms_change": 0.002070699722022831,
+          "rms_ratio": 3.330301122531008,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 6160,
+      "fixture": 0,
+      "slot": 0,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 2047,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 0,
+        "position": 2047,
+        "slot": 0,
+        "phase": "long_decode",
+        "max_abs_error": 5.528078079223633,
+        "mean_abs_error": 0.8017481565475464,
+        "cosine": 0.9710726737976074,
+        "kl_reference_to_neuron": 1.4161306353344116e-05,
+        "argmax_match": true,
+        "reference_margin": 13.413079261779785,
+        "reference_top1": 1049,
+        "neuron_top1": 1049
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.0024805822308877107,
+          "output_rms": 0.020000480833198924,
+          "rms_change": 0.017519898602311214,
+          "rms_ratio": 8.062817101629191,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 104,
+          "physical_layer": 64,
+          "recurrent_loop": 0,
+          "input_rms": 0.012207216567100469,
+          "output_rms": 0.01888465052079211,
+          "rms_change": 0.006677433953691641,
+          "rms_ratio": 1.5470070852751083,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 106,
+          "physical_layer": 66,
+          "recurrent_loop": 0,
+          "input_rms": 0.013488107332370512,
+          "output_rms": 0.019624648018811967,
+          "rms_change": 0.006136540686441455,
+          "rms_ratio": 1.4549593605111806,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 93,
+          "physical_layer": 53,
+          "recurrent_loop": 1,
+          "input_rms": 0.004266989992452148,
+          "output_rms": 0.009974664148382781,
+          "rms_change": 0.005707674155930633,
+          "rms_ratio": 2.337634765028018,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 110,
+          "physical_layer": 70,
+          "recurrent_loop": 0,
+          "input_rms": 0.005815355315696573,
+          "output_rms": 0.010775335426912683,
+          "rms_change": 0.004959980111216109,
+          "rms_ratio": 1.852910930107457,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 6164,
+      "fixture": 0,
+      "slot": 0,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 2048,
+      "first_bit_difference": "layer-2-loop-0-residual_output",
+      "first_numeric_difference": "layer-2-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 0,
+        "position": 2048,
+        "slot": 0,
+        "phase": "long_decode",
+        "max_abs_error": 4.700051784515381,
+        "mean_abs_error": 0.8575372695922852,
+        "cosine": 0.988848865032196,
+        "kl_reference_to_neuron": 4.0915587305789813e-05,
+        "argmax_match": true,
+        "reference_margin": 11.66305923461914,
+        "reference_top1": 1050,
+        "neuron_top1": 1050
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.0017267389352040546,
+          "output_rms": 0.009899287618715275,
+          "rms_change": 0.00817254868351122,
+          "rms_ratio": 5.732938209067164,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 110,
+          "physical_layer": 70,
+          "recurrent_loop": 0,
+          "input_rms": 0.003907381132308885,
+          "output_rms": 0.007768907830145395,
+          "rms_change": 0.0038615266978365105,
+          "rms_ratio": 1.9882646629751015,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.004257238135176756,
+          "output_rms": 0.007548353235947929,
+          "rms_change": 0.0032911151007711734,
+          "rms_ratio": 1.7730634266327059,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 92,
+          "physical_layer": 52,
+          "recurrent_loop": 1,
+          "input_rms": 0.007658390869513927,
+          "output_rms": 0.010507393211824157,
+          "rms_change": 0.0028490023423102303,
+          "rms_ratio": 1.3720105686497892,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 74,
+          "physical_layer": 34,
+          "recurrent_loop": 1,
+          "input_rms": 0.004941455575899258,
+          "output_rms": 0.007186923058175515,
+          "rms_change": 0.0022454674822762572,
+          "rms_ratio": 1.454414179746546,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 6176,
+      "fixture": 0,
+      "slot": 0,
+      "epoch": 1,
+      "phase": "long_decode",
+      "position": 2051,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 0,
+        "position": 2051,
+        "slot": 0,
+        "phase": "long_decode",
+        "max_abs_error": 14.202959060668945,
+        "mean_abs_error": 0.8410423994064331,
+        "cosine": 0.9860349893569946,
+        "kl_reference_to_neuron": 0.07528703659772873,
+        "argmax_match": true,
+        "reference_margin": 5.436266899108887,
+        "reference_top1": 70320,
+        "neuron_top1": 70320
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.002360190607825222,
+          "output_rms": 0.012351269740818321,
+          "rms_change": 0.009991079132993099,
+          "rms_ratio": 5.233166211181264,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.005524695555406544,
+          "output_rms": 0.010713869058889665,
+          "rms_change": 0.005189173503483121,
+          "rms_ratio": 1.939268680317583,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 76,
+          "physical_layer": 36,
+          "recurrent_loop": 1,
+          "input_rms": 0.008409474833812984,
+          "output_rms": 0.01298187560358393,
+          "rms_change": 0.004572400769770946,
+          "rms_ratio": 1.5437201323661907,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 74,
+          "physical_layer": 34,
+          "recurrent_loop": 1,
+          "input_rms": 0.007422881535363476,
+          "output_rms": 0.011826033084062437,
+          "rms_change": 0.004403151548698961,
+          "rms_ratio": 1.593186288602591,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 82,
+          "physical_layer": 42,
+          "recurrent_loop": 1,
+          "input_rms": 0.011352623381601265,
+          "output_rms": 0.014994404240435119,
+          "rms_change": 0.0036417808588338537,
+          "rms_ratio": 1.3207876044523716,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    },
+    {
+      "event": 6181,
+      "fixture": 1,
+      "slot": 1,
+      "epoch": 1,
+      "phase": "decode_after_slot_reuse",
+      "position": 1668,
+      "first_bit_difference": "layer-0-loop-0-residual_output",
+      "first_numeric_difference": "layer-0-loop-0-residual_output",
+      "original_pointwise_failed": true,
+      "original_FP32_metrics": {
+        "fixture": 1,
+        "position": 1668,
+        "slot": 1,
+        "phase": "decode_after_slot_reuse",
+        "max_abs_error": 2.3651123046875,
+        "mean_abs_error": 0.18711093068122864,
+        "cosine": 0.9959779381752014,
+        "kl_reference_to_neuron": 9.62383855949156e-05,
+        "argmax_match": true,
+        "reference_margin": 8.370780944824219,
+        "reference_top1": 63710,
+        "neuron_top1": 63710
+      },
+      "largest_rms_increases": [
+        {
+          "visit": 96,
+          "physical_layer": 56,
+          "recurrent_loop": 0,
+          "input_rms": 0.00034455281053324147,
+          "output_rms": 0.0018286777780190506,
+          "rms_change": 0.0014841249674858092,
+          "rms_ratio": 5.3073947508625094,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 72,
+          "physical_layer": 32,
+          "recurrent_loop": 1,
+          "input_rms": 0.0012861746210722548,
+          "output_rms": 0.0027317389023335213,
+          "rms_change": 0.0014455642812612665,
+          "rms_ratio": 2.123925365636691,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 74,
+          "physical_layer": 34,
+          "recurrent_loop": 1,
+          "input_rms": 0.0017544540124033428,
+          "output_rms": 0.0026830945526317004,
+          "rms_change": 0.0009286405402283576,
+          "rms_ratio": 1.529304577756505,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 32,
+          "physical_layer": 32,
+          "recurrent_loop": 0,
+          "input_rms": 0.0006813155633339698,
+          "output_rms": 0.001560795577683649,
+          "rms_change": 0.0008794800143496792,
+          "rms_ratio": 2.290855605948594,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        },
+        {
+          "visit": 56,
+          "physical_layer": 16,
+          "recurrent_loop": 1,
+          "input_rms": 0.00019293588430274933,
+          "output_rms": 0.0009696448592843727,
+          "rms_change": 0.0007767089749816233,
+          "rms_ratio": 5.025736206556757,
+          "numeric_difference_first_appears_here": false,
+          "numeric_difference_disappears_here": false,
+          "root_cause_established": false
+        }
+      ]
+    }
+  ],
+  "largest_boundary_rms": [
+    {
+      "boundary": "layer-60-loop-0-residual_output",
+      "frames": 87,
+      "bit_different_frames": 87,
+      "numeric_different_frames": 87,
+      "failed_original_frames_with_difference": 7,
+      "max_abs": 0.875,
+      "max_rms": 0.02394974314197113,
+      "max_relative_rms": 1.2136563966071345,
+      "min_cosine": 0.2641991683233792,
+      "largest_rms_event": 6160
+    },
+    {
+      "boundary": "layer-61-loop-0-input",
+      "frames": 87,
+      "bit_different_frames": 87,
+      "numeric_different_frames": 87,
+      "failed_original_frames_with_difference": 7,
+      "max_abs": 0.875,
+      "max_rms": 0.02394974314197113,
+      "max_relative_rms": 1.2136563966071345,
+      "min_cosine": 0.2641991683233792,
+      "largest_rms_event": 6160
+    },
+    {
+      "boundary": "layer-59-loop-0-residual_output",
+      "frames": 87,
+      "bit_different_frames": 87,
+      "numeric_different_frames": 87,
+      "failed_original_frames_with_difference": 7,
+      "max_abs": 0.85400390625,
+      "max_rms": 0.02252103780776731,
+      "max_relative_rms": 1.1404733564581298,
+      "min_cosine": 0.3502925360285193,
+      "largest_rms_event": 6160
+    },
+    {
+      "boundary": "layer-60-loop-0-input",
+      "frames": 87,
+      "bit_different_frames": 87,
+      "numeric_different_frames": 87,
+      "failed_original_frames_with_difference": 7,
+      "max_abs": 0.85400390625,
+      "max_rms": 0.02252103780776731,
+      "max_relative_rms": 1.1404733564581298,
+      "min_cosine": 0.3502925360285193,
+      "largest_rms_event": 6160
+    },
+    {
+      "boundary": "layer-58-loop-0-residual_output",
+      "frames": 87,
+      "bit_different_frames": 87,
+      "numeric_different_frames": 87,
+      "failed_original_frames_with_difference": 7,
+      "max_abs": 0.84912109375,
+      "max_rms": 0.022424477888932943,
+      "max_relative_rms": 1.1360319520964879,
+      "min_cosine": 0.3554105712130555,
+      "largest_rms_event": 6160
+    }
+  ]
+}
