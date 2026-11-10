@@ -42,6 +42,12 @@ adds 28 source/synthetic-data checks, an independent complete-cache decoder and
 guarded payload reads. It records 15 completed Nemotron r11 phases at 06:44 UTC;
 actual MiniCPM5 collection/audit admission and model qualification remain pending.
 
+The [MiniCPM5 collector integration report](docs/minicpm5-layer1-runner-20261110.md)
+records 29 source/lifecycle checks, complete original trajectory integration,
+and drain-before-unlock handling. Nemotron r11 has six 128–4096-token projection
+candidates passing 36/36 recorded device comparisons; original split controls
+remain numerically invalid and cannot be speedup denominators.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 
