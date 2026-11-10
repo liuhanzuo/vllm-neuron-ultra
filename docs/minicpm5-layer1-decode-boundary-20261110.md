@@ -43,6 +43,16 @@ MiniCPM5 第二层注意力重放的输入准备已覆盖全部 **36 次原解�
 
 准备时发现完成配置中没有 `moe_mask_padded_tokens` 字段；原 SDK 明确以 False 为默认值。准备脚本按该原实现读取缺省值，没有改写模型配置。首次准备失败记录保留，修正后源码准备退出 0。
 
+## 官方权重逐字节校验的后续准备
+
+新增官方第二层分片校验器，读取之前先由已有运行上下文认证完整官方 safetensors 文件与固定头信息，再按原范围读取 Q/K/V/O。Q/K/V 按行、O 按列切分，两个 rank 共八个分片均与实际模型参数的 BF16 原字节比较，不做精度转换。读取过程持续核对文件身份、完整范围及串行任务许可。
+
+**16 项合成数据测试通过**。使用原矩阵尺寸、独立生成的逐元素位模式验证两个 rank；负控制覆盖 O 错用行切分、错误 rank、四种投影各自单字节变化、错误形状／精度／设备、头信息不一致、文件身份变化、短读及运行许可撤销。测试只读取新建的合成文件，未读取真实模型权重，也未导入原生张量运行时。
+
+这补齐了权重比对辅助代码。原生模型包装函数只验证了提前拒绝未准入调用，成功执行路径仍须在实际 TP2 任务中验证。校验器不提供启动入口或独立准入，后续完整运行器仍须接入真实采集与独立审计结果。
+
+[校验源码](evidence/minicpm5-layer1-decode-boundary-20261110/minicpm5_layer1_official_shards_v1.py)、[测试](evidence/minicpm5-layer1-decode-boundary-20261110/check_minicpm5_layer1_official_shards_v1.py)、[16 项实际退出记录](evidence/minicpm5-layer1-decode-boundary-20261110/minicpm5-layer1-official-shards-tests-actual-exit-20261110-v1.json)和[源码审查范围](evidence/minicpm5-layer1-decode-boundary-20261110/minicpm5-layer1-official-shards-source-review-20261110-v1.json)分别保留。
+
 ## 当前可以和不可以得出的结论
 
 15 项检查通过，验证了全部原解码元数据、物理行映射、原掩码、完整缓存布局、官方分片范围及 BF16 位模式恢复。检查没有导入 Torch、NumPy 或原生模型运行时。
@@ -55,11 +65,13 @@ MiniCPM5 第二层注意力重放的输入准备已覆盖全部 **36 次原解�
 
 ## 同时运行的 Nemotron r11
 
-2026-11-10 08:16 UTC 的独立元数据观察确认 **41／52 个阶段完成**：准备 1 项、状态读写 9 项、切分诊断 31 项。八种投影候选完成 48／48 次精确设备比较，已完成的七种卷积候选完成 42／42 次；两类原路径各八种形状均只有 batch=1、单 token 控制通过 6／6，其他七种各为 0／6。
+2026-11-10 08:23 UTC 的独立元数据观察确认全部 **42 个准备与局部诊断阶段完成**，对应总计划的 42／52：准备 1 项、状态读写 9 项、切分诊断 32 项。八种投影候选和八种卷积候选分别完成 **48／48** 次精确设备比较；两类原路径各八种形状均只有 batch=1、单 token 控制通过 6／6，其他七种各为 0／6。
 
-诊断阶段完成包括预期失败的控制，不代表原路径数值正确；失败控制不能用于计算提速倍数。这次观察独立核对结果元数据、实际退出身份及进程组清理，没有读取真实张量。模型服务尚未进入 compile 阶段，最终完整字节复核、整模型验收与配对性能仍待完成。
+诊断阶段完成包括预期失败的控制，不代表原路径数值正确；失败控制不能用于计算提速倍数。这次观察独立核对结果元数据、实际退出身份及进程组清理，没有读取真实张量。最终完整字节复核、整模型验收与配对性能仍待完成。
 
-[独立观察与完整逐阶段记录](evidence/minicpm5-layer1-decode-boundary-20261110/nemotron9b-r11-split-progress-observation-20261110-v4.json)保留了观察时刻，后续进度应以新的实际记录为准。
+08:26 UTC 进一步确认：编译 worker PID 488664 和模型服务 PID 489445 已启动。服务在原 PID、启动时刻、父进程和进程组不变的情况下，按已审查的命令进入 vLLM-Neuron。这里确认的是实际服务进程和启动转换，尚未证明 HTTP 就绪或整模型编译完成。首次独立观察误把启动前参数当作启动后参数，因断言失败退出；后继按原 v26 明确允许的 exec 转换核对，未改运行器或放宽模型条件。
+
+[42 阶段逐项证据](evidence/minicpm5-layer1-decode-boundary-20261110/nemotron9b-r11-split-progress-observation-20261110-v5.json)、[实际模型服务启动观察](evidence/minicpm5-layer1-decode-boundary-20261110/nemotron9b-r11-compile-startup-observation-20261110-v1.json)与[观察脚本首次失败记录](evidence/minicpm5-layer1-decode-boundary-20261110/nemotron9b-r11-compile-observer-initial-exit-20261110-v1.json)已保存。[此前 08:16 UTC 的 41 阶段观察](evidence/minicpm5-layer1-decode-boundary-20261110/nemotron9b-r11-split-progress-observation-20261110-v4.json)也完整保留。
 
 ## 源码与证据
 

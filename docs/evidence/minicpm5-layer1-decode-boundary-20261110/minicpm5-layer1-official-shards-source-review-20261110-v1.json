@@ -1,0 +1,49 @@
+{
+  "schema": "minicpm5_layer1_official_shards_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-10T08:26:52.108423+00:00",
+  "source_only": true,
+  "runtime_admitted": false,
+  "source_refs": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_official_shards_v1.py",
+      "sha256": "d8e2f7621149ee278667f1a4378c71d797e86b87018dd48a8828b58c1c0bd198"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_official_shards_v1.py",
+      "sha256": "739c8aceac45a7b0b3b88e3e9ad17934e652f3da529f73088c501b7a9ebe4e9f"
+    }
+  ],
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-official-shards-tests-actual-exit-20261110-v1.json",
+    "sha256": "48f010933942b9d64dd838e4fa123b06e3925c7091d0d03fed021c7648161e49"
+  },
+  "tests_passed": 16,
+  "decode_boundary_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-decode-boundary-source-plan-20261110-v1.json",
+    "sha256": "03d018e787ce6242b6e727e0a791d9d0852f5d554d87cf6832354e098d2f1a50"
+  },
+  "inherited_runtime_auth": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py",
+    "sha256": "92e6f2e7cf1009e94ce548474ea5cd455b7cc1ea00813fb44f5790ae85fb1a27"
+  },
+  "source_checks_passed": true,
+  "verified_contract": [
+    "Guard and authenticated complete source closure precede official file or native object access.",
+    "Use the inherited authenticated full official file and safetensors header; compare every original BF16 shard byte, not just shapes or header metadata.",
+    "Q/K/V split rows, O splits columns; both original TP2 ranks and all four projection matrices retained.",
+    "Every bounded file read checks original inode/extent/timestamps and live external guard; no source or model precision changes.",
+    "Synthetic tests use independent word formulas, full official matrix shapes, both ranks, O wrong-axis controls, every-projection byte mutation, wrong rank/dtype/device, file identity and guard denial/revocation."
+  ],
+  "limitations": [
+    "Actual official weights and actual native model parameters have not been read or compared.",
+    "verify_model native wrapper only has an early guard-denial test; native success path remains unexecuted.",
+    "Helper provides no runtime admission, process group, launcher or real-data loader.",
+    "Actual TP2 worker still must bind successful collector and independent saved-data audit external exits, complete source/input closure, prior drains, storage limits and serial ownership.",
+    "Frozen own-history native callable remains an unreviewed draft; all36 complete four-row replay outputs must reproduce before paired-history interventions."
+  ],
+  "real_tensor_payloads_read": false,
+  "native_runtime_imported": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

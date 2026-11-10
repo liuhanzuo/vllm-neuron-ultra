@@ -57,10 +57,12 @@ candidates passed 12/12. These local checks add no full-model or speedup claim.
 
 The [MiniCPM5 decode-boundary report](docs/minicpm5-layer1-decode-boundary-20261110.md)
 adds 15 source/bit-pattern checks for all 36 original decode calls, exact input
-layouts and complete SDK cache views. Native own-history replay is still pending.
-At 08:16 UTC, Nemotron r11 had 41/52 completed diagnostic stages, with candidate
-projection comparisons at 48/48 and completed convolution comparisons at 42/42;
-full-model qualification and new speedup claims remain pending.
+layouts and complete SDK cache views, plus 16 synthetic official-weight shard
+checks. Actual weight comparison and native own-history replay remain pending.
+At 08:23 UTC, Nemotron r11 had completed all 42 preparation/diagnostic stages,
+with projection and convolution candidates each passing 48/48 device comparisons.
+The model service has entered startup; full-model compilation, qualification and
+new speedup claims remain pending.
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).

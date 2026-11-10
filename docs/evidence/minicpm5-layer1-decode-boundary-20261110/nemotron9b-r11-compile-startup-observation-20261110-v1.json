@@ -1,0 +1,165 @@
+{
+  "schema": "nemotron9b_r11_compile_startup_observation_v1",
+  "observed_at": "2026-11-10T08:26:07.202773+00:00",
+  "observer_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron9b_r11_compile_startup_v1.py",
+    "sha256": "4a1aaf8d3a0b262e45dedbeebb07c9c29d516b508266f58feed40f0294899235"
+  },
+  "execution_spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+    "sha256": "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a"
+  },
+  "source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+    "sha256": "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+  },
+  "controller": {
+    "pid": 387618,
+    "start_ticks": "407024336",
+    "ppid": 1583,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_controller_v26.py",
+      "--execute",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+      "--spec-sha256",
+      "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+      "--review-sha256",
+      "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-controller.service",
+    "invocation_id": "5f9357398bc4497ea6c44e2baad4634b"
+  },
+  "original_lock_held": true,
+  "external_session": 74703,
+  "compile_worker": {
+    "pid": 488664,
+    "start_ticks": "407937172",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v26.py",
+      "--phase",
+      "compile",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+      "--spec-sha256",
+      "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+      "--review-sha256",
+      "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-compile.service",
+    "invocation_id": "c0366b970bbe44f1a1289411aafb08d6"
+  },
+  "server_original": {
+    "pid": 489445,
+    "start_ticks": "407944439",
+    "ppid": 488664,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v26.py",
+      "--phase",
+      "compile",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-spec.json",
+      "--spec-sha256",
+      "6dbf28f32d003f01b7d0a93759ef1494a1bca9f78b196dfa2c61ce7cebee7d4a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b-package-runtime-v26-r11-20261110-source-review.json",
+      "--review-sha256",
+      "525932a71cf0c39d8142d549b6a2df2d8fd5b686fe616f0cbc0f838e4ae9a833",
+      "--server-child"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-compile.service"
+  },
+  "server_actual": [
+    {
+      "pid": 489445,
+      "start_ticks": "407944439",
+      "ppid": 488664,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-m",
+        "vllm_neuron.models.nemotron9b.serve",
+        "--model",
+        "/mnt/nvme/nemotron9b-package-r11-20261110-evidence/view",
+        "--served-model-name",
+        "nemotron-nano-9b-v2",
+        "--tensor-parallel-size",
+        "2",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "4096",
+        "--max-num-seqs",
+        "4",
+        "--no-enable-prefix-caching",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010",
+        "--additional-config",
+        "{\"override_neuron_config\":{\"on_device_sampling_config\":null,\"apply_seq_ids_mask\":true,\"context_encoding_buckets\":[128,256,512,1024,2048,4096]}}"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-compile.service"
+    },
+    {
+      "pid": 489445,
+      "start_ticks": "407944439",
+      "ppid": 488664,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "-m",
+        "vllm_neuron.models.nemotron9b.serve",
+        "--model",
+        "/mnt/nvme/nemotron9b-package-r11-20261110-evidence/view",
+        "--served-model-name",
+        "nemotron-nano-9b-v2",
+        "--tensor-parallel-size",
+        "2",
+        "--dtype",
+        "bfloat16",
+        "--max-model-len",
+        "4096",
+        "--max-num-seqs",
+        "4",
+        "--no-enable-prefix-caching",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8010",
+        "--additional-config",
+        "{\"override_neuron_config\":{\"on_device_sampling_config\":null,\"apply_seq_ids_mask\":true,\"context_encoding_buckets\":[128,256,512,1024,2048,4096]}}"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-latest-verify-nemotron9b-package-r11-20261110-compile.service"
+    }
+  ],
+  "ack": {
+    "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/compile-server-ack.json",
+    "sha256": "8682c485e20f1f2d7b23dce2519f0b137f3424a002a647de483161a66789af87"
+  },
+  "exec_intent": {
+    "path": "/mnt/nvme/nemotron9b-package-r11-20261110-control/compile-server-exec.json",
+    "sha256": "cae88b905c9daaa4939a6d9d5b33f2986ada683e6910877bc65ecd4c8f5b7393"
+  },
+  "current_status": {
+    "stage": "compile",
+    "performance_window": false
+  },
+  "server_process_started": true,
+  "actual_preparation_to_serving_exec_verified": true,
+  "server_ready_not_proven": true,
+  "compile_complete_not_proven": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
