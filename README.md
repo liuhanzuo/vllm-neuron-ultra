@@ -76,6 +76,11 @@ It also corrects our official-shard wrapper to retain the SDK's int32 rank param
 Source/synthetic checks pass; actual collection, saved-data audit and native replay
 remain pending, with all original resource and full-model qualification gates.
 
+The [Nano 4B paired-output report](docs/nemotron4b-paired-output-20261110.md)
+records a fix for losing both ranks' diagnostics before startup completes,
+with 38 source/generated-process checks passing under each original Python.
+Actual Nano SDK/model admission remains pending; this adds no speedup claim.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 
