@@ -1,0 +1,195 @@
+"""Bind five Nano4B participant invocations to the existing gated startup.
+
+Source preparation only: no process launch, admission, native payload read or
+SDK import. The root supplies reviewed bootstrap/admission references, five
+already-created private caches, and actual admission/resource guards. Native
+and rank execution still uses native_worker_execution_v3; the helper still
+uses guarded_helper_entry_v2. This module does not complete their origin
+manifests or authorize the serial slot.
+"""
+import copy
+import os
+from pathlib import Path
+import re
+import sys
+import time
+
+from nemotron4b_empty_bytecode_cache_v1 import EmptyBytecodeCache
+from nemotron4b_process_handshake_v1 import ROLES,child_wait,owner,require,scope
+
+ROOT=Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+WORK=ROOT/'nemotron4b-native-prerequisite-v3'
+PYTHONS={
+    'native-meta':'/home/ubuntu/venvs/model_reference_2026/bin/python',
+    'nxd-meta':'/home/ubuntu/venvs/vllm_neuron/bin/python',
+}
+VERSIONS={'native-meta':(3,12),'nxd-meta':(3,10)}
+FLAGS=('--nonce','--role','--admission','--admission-sha256','--ready-fd','--release-fd')
+CACHE_ENV={
+    'HF_HOME':'hf','XDG_CACHE_HOME':'cache','TMPDIR':'tmp',
+    'TORCHINDUCTOR_CACHE_DIR':'torch-cache',
+    'NEURON_COMPILE_CACHE_URL':'forbidden-compile-cache',
+}
+
+
+def reference(value,suffix):
+    require(type(value)is dict and set(value)=={'path','sha256'},
+            'Exact reviewed source/admission reference')
+    path=value['path'];digest=value['sha256']
+    require(type(path)is str and Path(path).is_absolute()
+            and str(Path(path))==path and '..'not in Path(path).parts
+            and '\0'not in path and path.endswith(suffix)
+            and type(digest)is str and re.fullmatch('[0-9a-f]{64}',digest),
+            'Canonical absolute reference and complete SHA256')
+    return dict(value)
+
+
+def phase(role):
+    require(role in ROLES,'One of the five original participant roles')
+    return 'native-meta'if role=='native-meta'else 'nxd-meta'
+
+
+def descriptors(ready,release):
+    require(type(ready)is int and type(release)is int and 3<=ready<2**31 and 3<=release<2**31 and ready!=release,
+            'Distinct inherited descriptors above standard streams')
+    return ['--ready-fd',str(ready),'--release-fd',str(release)]
+
+
+def arguments(argv):
+    """Parse only the exact canonical command suffix, without flag abbreviations."""
+    require(type(argv)is list and len(argv)==2*len(FLAGS)
+            and all(type(x)is str and '\0'not in x for x in argv)
+            and tuple(argv[::2])==FLAGS,'Exact participant argument order and fields')
+    result=dict(zip((x[2:].replace('-','_')for x in FLAGS),argv[1::2]))
+    scope(result['nonce'],result['role'])
+    reference({'path':result['admission'],'sha256':result['admission_sha256']},'.json')
+    for name in('ready_fd','release_fd'):
+        value=result[name]
+        require(re.fullmatch('[1-9][0-9]{0,9}',value),'Canonical positive descriptor')
+        result[name]=int(value)
+    descriptors(result['ready_fd'],result['release_fd'])
+    return result
+
+
+def environment(plan,role,nonce):
+    """Clean explicit environment; never copies the calling shell environment."""
+    scope(nonce,role);which=phase(role)
+    require(plan['environments'][which]['python']==PYTHONS[which]
+            and tuple(plan['environments'][which]['python_version'])==VERSIONS[which],
+            'Original phase-specific interpreter')
+    result=dict(plan['expected_environment'])
+    for name,directory in CACHE_ENV.items():
+        require(result[name]==str(ROOT/'nemotron4b-native-prerequisite-v2'/directory),
+                'Original cache placement before successor namespace mapping')
+        result[name]=str(WORK/directory)
+    require(result['PJRT_DEVICE']=='NEURON','Original Neuron backend')
+    result.update(HOME='/home/ubuntu',USER='ubuntu',LANG='C.UTF-8',
+        PATH=str(Path(PYTHONS[which]).parent)+':/opt/aws/neuron/bin:/usr/bin:/bin',
+        NEMOTRON4B_NATIVE_PREREQUISITE_ATTEMPT=nonce)
+    if role!='native-meta':
+        rank=role[-1]
+        result.update(RANK=rank,WORLD_SIZE='2',LOCAL_RANK=rank)
+    require(all(type(k)is str and type(v)is str and '\0'not in k+v for k,v in result.items()),
+            'Exact string environment')
+    require(not any(k in result for k in(
+        'PYTHONPATH','PYTHONHOME','PYTHONPYCACHEPREFIX','LD_PRELOAD',
+        'NEURON_CC_FLAGS','NEURON_COMPILED_ARTIFACTS')),
+        'No inherited import, bytecode or compile overrides')
+    return result
+
+
+class AttemptInvocations:
+    def __init__(self,*,plan,nonce,bootstrap,admission,caches,guard):
+        scope(nonce,'native-meta')
+        require(callable(guard)and type(caches)is dict and set(caches)==set(ROLES),
+                'Five participant caches and actual caller guard')
+        self.nonce=nonce;self.bootstrap=reference(bootstrap,'.py')
+        self.admission=reference(admission,'.json');self.guard=guard
+        self.caches={role:EmptyBytecodeCache(caches[role],guard=guard)for role in ROLES}
+        paths=[x.manifest['path']for x in self.caches.values()]
+        identities=[(x.manifest['identity']['st_dev'],x.manifest['identity']['st_ino'])
+                    for x in self.caches.values()]
+        require(len(set(paths))==len(ROLES)and len(set(identities))==len(ROLES),
+                'Every participant has its own empty bytecode cache')
+        self.environments={role:environment(plan,role,nonce)for role in ROLES}
+
+    def prefix(self,role):
+        which=phase(role);self.guard()
+        return self.caches[role].prefix_argv(PYTHONS[which],self.bootstrap['path'])+[
+            '--nonce',self.nonce,'--role',role,'--admission',self.admission['path'],
+            '--admission-sha256',self.admission['sha256']]
+
+    def command(self,role,ready_fd,release_fd):
+        return self.prefix(role)+descriptors(ready_fd,release_fd)
+
+    def environment(self,role):
+        phase(role);return dict(self.environments[role])
+
+    def bind(self,argv,*,expected_cgroup):
+        parsed=arguments(argv)
+        require(parsed['nonce']==self.nonce and parsed['admission']==self.admission['path']
+                and parsed['admission_sha256']==self.admission['sha256'],
+                'Exact prepared attempt and admission reference')
+        return ParticipantBinding(self,parsed,expected_cgroup)
+
+
+class ParticipantBinding:
+    def __init__(self,attempt,parsed,cgroup):
+        require(type(attempt)is AttemptInvocations and type(cgroup)is str
+                and cgroup.startswith('0::/')and '\n'not in cgroup,
+                'Actual invocation set and expected unified cgroup')
+        self.attempt=attempt;self.parsed=copy.deepcopy(parsed);self.role=parsed['role']
+        self.phase=phase(self.role);self.group=cgroup;self.used=False;self.release=None
+        self.argv=attempt.command(self.role,parsed['ready_fd'],parsed['release_fd'])
+        self.guard=attempt.guard
+        self.check_initial()
+
+    def check_initial(self):
+        self.guard()
+        self.attempt.caches[self.role].check_runtime()
+        require(sys.executable==PYTHONS[self.phase]
+                and sys.version_info[:2]==VERSIONS[self.phase],
+                'Actual original participant Python')
+        require(sys.argv==self.argv[5:]and os.getcwd()==str(ROOT)
+                and dict(os.environ)==self.attempt.environment(self.role),
+                'Actual exact participant argv, cwd and clean environment')
+        actual=owner(os.getpid())
+        require(actual['argv']==self.argv and actual['cgroup']==self.group,
+                'Operating-system participant argv and cgroup')
+        require(not {'site','torch','transformers','vllm','neuronx_distributed','libneuronxla'}&set(sys.modules),
+                'Participant binding precedes site and SDK imports')
+        return actual
+
+    def parent_gate(self):
+        require(not self.used,'One parent release per participant');self.used=True
+        before=self.check_initial()
+        release=child_wait(self.parsed['ready_fd'],self.parsed['release_fd'],
+            nonce=self.attempt.nonce,role=self.role,deadline=time.monotonic()+10)
+        require(self.check_initial()==before,'Participant retained across parent release')
+        self.release=release
+        return release
+
+    def startup_policy(self,template):
+        """Bind pre_argv after pipe allocation; all other reviewed fields are retained."""
+        require(type(template)is dict and template.get('script')==self.attempt.bootstrap['path']
+                and template.get('pre_argv')==[self.attempt.bootstrap['path']],
+                'Reviewed startup template for this exact bootstrap')
+        result=copy.deepcopy(template);result['pre_argv']=self.argv[5:]
+        return result
+
+    def startup_context(self,origin,template):
+        # Import only when a concrete caller has assembled the reviewed context.
+        from nemotron4b_phase_origin_context_v1 import PhaseOriginContext
+        require(type(origin)is PhaseOriginContext
+                and origin.cache is self.attempt.caches[self.role]and origin.guard is self.guard,
+                'Same actual participant cache and guard in composed origin policy')
+        policy=self.startup_policy(template)
+        def start():
+            require(self.release is not None,'Parent grant before phase startup')
+            self.guard()
+            return origin.restored_startup(copy.deepcopy(policy))
+        return start
+
+
+if __name__=='__main__':
+    raise SystemExit('Invocation preparation only; concrete reviewed root/bootstrap admission is still required')

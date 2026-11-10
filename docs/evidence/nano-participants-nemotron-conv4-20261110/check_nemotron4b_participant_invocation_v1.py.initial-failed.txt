@@ -1,0 +1,224 @@
+"""Generated-process tests for exact Nano participant invocation binding.
+
+The five original phase interpreter paths are used with -B -S and private
+empty caches. Fixtures never import site/SDK/model, authenticate real native
+payloads, or claim runtime admission. Generated admission and guards exercise
+the existing real pipe handshake and durable capture order only.
+"""
+import copy
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+
+import nemotron4b_participant_invocation_v1 as invocation
+from nemotron4b_empty_bytecode_cache_v1 import record_empty_directory
+from nemotron4b_process_handshake_v1 import ROLES,owner
+from nemotron4b_gated_child_supervisor_v2 import run as supervise
+from nemotron4b_worker_receipts_v1 import ReceiptWriter
+
+Q=Path(__file__).resolve().parent
+PLAN=Q/'nemotron4b-native-prerequisite-plan-20261106-v2.json'
+NONCE='e'*32
+FIXTURE="""import sys
+sys.path.insert(0,RESEARCH)
+import json,os
+from pathlib import Path
+from nemotron4b_participant_invocation_v1 import AttemptInvocations
+from nemotron4b_worker_receipts_v1 import unpack
+from nemotron4b_process_handshake_v1 import owner
+root=Path(FIXTURE_ROOT)
+data=json.loads((root/'fixture.json').read_text())
+def guard():
+    if (root/'deny-guard').exists():raise ValueError('generated guard denial')
+attempt=AttemptInvocations(plan=data['plan'],nonce=data['nonce'],bootstrap=data['bootstrap'],
+    admission=data['admission'],caches=data['caches'],guard=guard)
+bound=attempt.bind(sys.argv[1:],expected_cgroup=data['group'])
+released=bound.parent_gate()
+capture=unpack((root/'parent-capture.json').read_bytes())
+assert capture['ready']['owner']==owner(os.getpid())
+policy=bound.startup_policy(dict(script=str(root/'bootstrap.py'),
+    pre_argv=[str(root/'bootstrap.py')],generated_template=True))
+assert policy['pre_argv']==sys.argv
+assert bound.release is released
+try:bound.parent_gate()
+except ValueError as error:
+    assert str(error)=='One parent release per participant'
+else:raise AssertionError('second release accepted')
+(root/'after-grant.json').write_text(json.dumps(dict(role=bound.role,
+    nonce=released['ready']['nonce'],python=sys.executable,
+    parent_capture_read_before_marker=True,
+    actual_site_executed=False,actual_SDK_executed=False,
+    actual_native_closure_authenticated=False,runtime_admitted=False)))
+"""
+
+
+def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+class InvocationTests(unittest.TestCase):
+    def setUp(self):
+        self.temporary=tempfile.TemporaryDirectory(prefix='nano-participant-fixture-')
+        self.addCleanup(self.temporary.cleanup)
+        self.root=Path(self.temporary.name);self.plan=json.loads(PLAN.read_text())
+        self.bootstrap=self.root/'bootstrap.py'
+        self.bootstrap.write_text(FIXTURE.replace('RESEARCH',repr(str(Q))).replace('FIXTURE_ROOT',repr(str(self.root))))
+        self.admission=self.root/'admission.json'
+        self.admission.write_text('{"generated_fixture_only":true,"runtime_admitted":false}\n')
+        self.caches={}
+        for role in ROLES:
+            p=self.root/('cache-'+role);p.mkdir(mode=0o700)
+            self.caches[role]=record_empty_directory(p,guard=lambda:None)
+        self.kw=dict(plan=self.plan,nonce=NONCE,
+            bootstrap=dict(path=str(self.bootstrap),sha256=digest(self.bootstrap)),
+            admission=dict(path=str(self.admission),sha256=digest(self.admission)),
+            caches=self.caches,guard=lambda:None)
+
+    def make(self,**changes):
+        kw=dict(self.kw);kw.update(changes)
+        return invocation.AttemptInvocations(**kw)
+
+    def test_all_five_exact_original_pythons_environments_and_distinct_caches(self):
+        attempt=self.make()
+        for role in ROLES:
+            actual=attempt.command(role,3,4)
+            which=invocation.phase(role)
+            self.assertEqual(actual[:5],[self.plan['environments'][which]['python'],'-B','-S',
+                '-X','pycache_prefix='+self.caches[role]['path']])
+            self.assertEqual(actual[5],str(self.bootstrap))
+            self.assertEqual(invocation.arguments(actual[6:])['role'],role)
+            env=attempt.environment(role)
+            self.assertEqual(env['NEMOTRON4B_NATIVE_PREREQUISITE_ATTEMPT'],NONCE)
+            self.assertNotIn('PYTHONPATH',env);self.assertNotIn('PYTHONPYCACHEPREFIX',env)
+            self.assertEqual(env['HF_HOME'],str(invocation.WORK/'hf'))
+            if role=='native-meta':self.assertNotIn('RANK',env)
+            else:self.assertEqual((env['RANK'],env['LOCAL_RANK'],env['WORLD_SIZE']),(role[-1],role[-1],'2'))
+
+    def test_no_environment_inheritance_and_caller_changes_do_not_mutate_prepared_data(self):
+        attempt=self.make();expected=attempt.command('rank-0',3,4)
+        self.kw['admission']['path']='/changed.json'
+        self.caches['rank-0']['path']='/changed-cache'
+        env=attempt.environment('rank-0');env['PYTHONPATH']='/injected'
+        self.assertEqual(attempt.command('rank-0',3,4),expected)
+        self.assertNotIn('PYTHONPATH',attempt.environment('rank-0'))
+
+    def test_missing_shared_nonempty_or_wrong_mode_cache_rejected(self):
+        missing=dict(self.caches);missing.pop('helper-1')
+        with self.assertRaisesRegex(ValueError,'Five participant caches'):self.make(caches=missing)
+        shared=copy.deepcopy(self.caches);shared['helper-1']=shared['helper-0']
+        with self.assertRaisesRegex(ValueError,'Every participant'):self.make(caches=shared)
+        path=Path(self.caches['helper-0']['path'])
+        (path/'old.pyc').write_bytes(b'old')
+        with self.assertRaisesRegex(ValueError,'must remain empty'):self.make()
+
+    def test_cache_identity_changes_after_preparation_rejected(self):
+        attempt=self.make();path=Path(self.caches['native-meta']['path'])
+        path.rename(path.with_name('old-cache'));path.mkdir(mode=0o700)
+        with self.assertRaisesRegex(ValueError,'identity retained'):attempt.command('native-meta',3,4)
+
+    def test_interpreter_and_cache_override_rejected(self):
+        for field,value in [('PYTHONPATH','/x'),('PYTHONHOME','/x'),('PYTHONPYCACHEPREFIX','/x')]:
+            plan=copy.deepcopy(self.plan);plan['expected_environment'][field]=value
+            with self.assertRaisesRegex(ValueError,'No inherited'):self.make(plan=plan)
+        plan=copy.deepcopy(self.plan);plan['environments']['nxd-meta']['python']='/usr/bin/python3'
+        with self.assertRaisesRegex(ValueError,'Original phase-specific'):self.make(plan=plan)
+
+    def test_canonical_argument_parser_rejects_altered_duplicate_unknown_and_short_flags(self):
+        argv=self.make().command('rank-0',3,4)[6:]
+        cases=[argv+['--role','rank-1'],argv[:-2],['--non',*argv[1:]],
+               [*argv[:2],'--wrong',*argv[3:]],list(reversed(argv))]
+        for bad in cases:
+            with self.subTest(bad=bad),self.assertRaises(ValueError):invocation.arguments(bad)
+        for role in ['root','rank-2','helper-2']:
+            bad=list(argv);bad[3]=role
+            with self.assertRaises(ValueError):invocation.arguments(bad)
+
+    def test_descriptor_pair_validation(self):
+        for ready,release in [(0,4),(3,3),(True,4),(3,'4'),(-3,4),(3,False)]:
+            with self.subTest(pair=(ready,release)),self.assertRaises(ValueError):
+                self.make().command('native-meta',ready,release)
+        for value in ['03','+3','3.0','0','-1','10000000000']:
+            argv=self.make().command('native-meta',3,4)[6:];argv[-3]=value
+            with self.subTest(value=value),self.assertRaises(ValueError):invocation.arguments(argv)
+
+    def test_reference_and_nonce_validation(self):
+        for value in ['/tmp/../x.json','relative.json','/x.txt']:
+            with self.assertRaises(ValueError):
+                self.make(admission=dict(path=value,sha256='0'*64))
+        for nonce in ['x'*32,'0'*31,'0'*33]:
+            with self.assertRaises(ValueError):self.make(nonce=nonce)
+
+    def invoke(self,role,mode='normal'):
+        attempt=self.make();group=owner(os.getpid())['cgroup']
+        data={k:v for k,v in self.kw.items()if k!='guard'};data['group']=group
+        (self.root/'fixture.json').write_text(json.dumps(data))
+        env=attempt.environment(role)
+        if mode=='environment':env['UNREVIEWED_EXTRA']='1'
+        if mode=='nonce':env['NEMOTRON4B_NATIVE_PREREQUISITE_ATTEMPT']='f'*32
+        if mode=='cache':(Path(self.caches[role]['path'])/'old.pyc').write_bytes(b'old')
+        writer=ReceiptWriter(self.root,allowed_names=['parent-capture.json'],guard=lambda:None)
+        def capture(value):
+            if mode=='capture-denied':raise ValueError('generated capture failure')
+            result=writer.write('parent-capture.json',value)
+            self.assertFalse((self.root/'after-grant.json').exists())
+            return result
+        # Build before negative cache injection, to exercise the child's check.
+        if mode=='cache':
+            Path(self.caches[role]['path'],'old.pyc').unlink()
+            prefix=attempt.prefix(role)
+            Path(self.caches[role]['path'],'old.pyc').write_bytes(b'old')
+            command=lambda ready,release:prefix+invocation.descriptors(ready,release)
+        else:command=lambda ready,release:attempt.command(role,ready,release)
+        result=supervise(command,environment=env,cwd=str(invocation.ROOT),
+            nonce=NONCE,role=role,expected_cgroup=group,guard=lambda:None,
+            record_capture=capture,handshake_seconds=5,execution_seconds=5,
+            stdout_cap=4096,stderr_cap=16384)
+        self.assertTrue(result['child_reaped']);self.assertEqual(result['cleanup_errors'],[])
+        return result
+
+    def test_actual_phase_python_native_role_released_only_after_durable_capture(self):
+        result=self.invoke('native-meta')
+        self.assertTrue(result['successful'],result)
+        value=json.loads((self.root/'after-grant.json').read_text())
+        self.assertEqual(value['role'],'native-meta')
+        self.assertEqual(value['python'],invocation.PYTHONS['native-meta'])
+        self.assertFalse(value['actual_site_executed']);self.assertFalse(value['runtime_admitted'])
+
+    def test_actual_phase_python_rank_role(self):
+        result=self.invoke('rank-0')
+        self.assertTrue(result['successful'],result)
+        self.assertEqual(json.loads((self.root/'after-grant.json').read_text())['role'],'rank-0')
+
+    def test_actual_phase_python_helper_role(self):
+        result=self.invoke('helper-1')
+        self.assertTrue(result['successful'],result)
+        self.assertEqual(json.loads((self.root/'after-grant.json').read_text())['role'],'helper-1')
+
+    def test_parent_capture_failure_prevents_participant_body(self):
+        result=self.invoke('rank-1','capture-denied')
+        self.assertFalse(result['successful'])
+        self.assertFalse((self.root/'after-grant.json').exists())
+
+    def test_environment_mismatch_precedes_handshake(self):
+        result=self.invoke('helper-0','environment')
+        self.assertFalse(result['successful'])
+        self.assertIn(b'Actual exact participant argv, cwd and clean environment',result['output']['stderr'])
+        self.assertFalse((self.root/'parent-capture.json').exists())
+
+    def test_changed_nonce_environment_precedes_handshake(self):
+        result=self.invoke('rank-0','nonce')
+        self.assertFalse(result['successful'])
+        self.assertFalse((self.root/'parent-capture.json').exists())
+
+    def test_nonempty_child_cache_precedes_handshake(self):
+        result=self.invoke('native-meta','cache')
+        self.assertFalse(result['successful'])
+        self.assertIn(b'Bytecode-cache directory must remain empty',result['output']['stderr'])
+        self.assertFalse((self.root/'parent-capture.json').exists())
+
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)
