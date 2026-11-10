@@ -33,6 +33,10 @@ records 81 applicable checks, the separate startup deadlines, preserved
 validation and storage limits, and the fresh r11 serial revalidation.
 It does not add a qualified model result or speedup.
 
+The [MiniCPM5 layer1 observation report](docs/minicpm5-layer1-observation-20261110.md)
+records 30 source and byte-level checks, complete-cache observation preparation,
+and six completed Nemotron r11 state checks. MiniCPM5 runtime admission remains pending.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 
