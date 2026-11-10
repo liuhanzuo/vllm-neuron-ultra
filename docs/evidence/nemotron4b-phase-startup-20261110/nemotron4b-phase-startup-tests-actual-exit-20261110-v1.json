@@ -1,0 +1,65 @@
+{
+  "schema": "nemotron4b_phase_startup_tests_actual_exit_v1",
+  "first_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-phase-startup-first-failure-20261110-v1.json",
+    "sha256": "a2ceb4875dd09f1efbc240a96cfab74442438a773622770191016500caff6879"
+  },
+  "diagnostic": {
+    "actual_chunk_id": "d71679",
+    "actual_exit_code": 1,
+    "tests_run": 1,
+    "failures": 2,
+    "supervisor_failure": {
+      "type": "ValueError",
+      "message": "No output symlinks"
+    },
+    "actual_child_exit_codes": [
+      -15,
+      -15
+    ],
+    "diagnosis": "Fixture venv bin/python symlink lay inside ReceiptWriter output inventory; capture rejected before release. Production writer unchanged; dedicated receipts subdirectory fixes fixture."
+  },
+  "targeted": {
+    "chunk_id": "559d0c",
+    "wall_time_seconds": 0.106652498,
+    "exit_code": 0,
+    "original_token_count": 47,
+    "output": "test_both_original_interpreters_restore_after_parent_release (__main__.BothPhases) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.150s\n\nOK\n"
+  },
+  "full": {
+    "chunk_id": "318e80",
+    "wall_time_seconds": 1.199856858,
+    "exit_code": 0,
+    "original_token_count": 201,
+    "output": "test_both_original_interpreters_restore_after_parent_release (__main__.BothPhases) ... ok\ntest_changed_or_extra_startup_source_rejected_before_execution (__main__.BothPhases) ... ok\ntest_denied_site_policy_prevents_frozen_or_source_site_execution (__main__.BothPhases) ... ok\ntest_missing_original_directory_alias_is_rejected (__main__.BothPhases) ... ok\ntest_post_startup_base_prefix_mutation_rejected (__main__.BothPhases) ... ok\ntest_python312_preserves_actual_unequal_base_prefixes_and_frozen_site (__main__.BothPhases) ... ok\ntest_site_swallowed_errors_fail_both_phase_startups (__main__.BothPhases) ... ok\ntest_wrong_prefix_or_site_origin_rejected_on_both_interpreters (__main__.BothPhases) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 1.244s\n\nOK\n"
+  },
+  "metadata_observation_exits": {
+    "native": {
+      "chunk_id": "fe2195",
+      "wall_time_seconds": 3.2884e-05,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "neuron": {
+      "chunk_id": "73610c",
+      "wall_time_seconds": 1.6952e-05,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  },
+  "tests_passed": 8,
+  "subcases_passed": 18,
+  "actual_interpreters": [
+    "3.10",
+    "3.12"
+  ],
+  "generated_venvs": true,
+  "synthetic_pth": true,
+  "actual_model_or_SDK_executed": false,
+  "actual_frozen_payload_authenticated": false,
+  "runtime_admitted": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-10T01:03:58.040550+00:00"
+}

@@ -1,0 +1,174 @@
+"""Real Python3.10/3.12 startup in generated venvs, after a recorded gate.
+
+Original SDK/model packages are not imported. Source/frozen policy callbacks
+are fixture checks; this does not authenticate the actual frozen code payload.
+"""
+from contextlib import contextmanager
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+import tempfile
+import time
+import unittest
+
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+import nemotron4b_phase_site_restore_v2 as restore
+import nemotron4b_process_handshake_v1 as handshake
+import nemotron4b_gated_child_supervisor_v2 as supervisor
+from nemotron4b_worker_receipts_v1 import ReceiptWriter
+
+NONCE='9'*32
+PYTHONS={
+    '310':dict(python='/usr/bin/python3.10',version=[3,10],home='/usr/bin',site_origin='source'),
+    '312':dict(python='/home/ubuntu/venvs/model_reference_2026/bin/python',version=[3,12],
+               home='/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/bin',site_origin='frozen'),
+}
+
+
+def source_row(path):
+    p=Path(path);raw=p.read_bytes();info=p.stat()
+    return dict(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw),fullstat=restore.identity(info),
+                **({'original_nlink':info.st_nlink}if p.suffix=='.py'else {}))
+
+
+def fixture():
+    root=Path(sys.argv[2]);mode=sys.argv[3]
+    ready=int(sys.argv[sys.argv.index('--ready-fd')+1]);release=int(sys.argv[sys.argv.index('--release-fd')+1])
+    expected_argv=list(sys.argv);pre_path=list(sys.path)
+    pre_prefixes=restore.prefixes();version='%d.%d'%sys.version_info[:2]
+    package=root/'lib'/('python'+version)/'site-packages';site_file=Path(sys.base_prefix)/'lib'/('python'+version)/'site.py'
+    aliases={}
+    post_path=list(dict.fromkeys(str(Path(p).absolute())for p in pre_path))+[str(package),str(root/'extra-source')]
+    post_prefixes=dict(pre_prefixes,prefix=str(root),exec_prefix=str(root))
+    declared=[*pre_path,*post_path,*pre_prefixes.values(),*post_prefixes.values()]
+    for name in declared:
+        p=Path(name)
+        for part in(p,*p.parents):
+            if part.is_symlink():aliases[str(part)]=dict(link_text=os.readlink(part),target=str(part.resolve()),fullstat=restore.identity(part.lstat()))
+    files=[root/'pyvenv.cfg',site_file,site_file.parent/'_sitebuiltins.py',package/'synthetic.pth',package/'_nano_phase_marker.py']
+    customize=site_file.parent/'sitecustomize.py'
+    if customize.exists():files.append(customize.resolve())
+    origin=importlib.util.find_spec('site').origin
+    policy=dict(script=expected_argv[0],pre_argv=expected_argv,site_file=str(site_file),site_origin=origin,
+        venv_config=str(root/'pyvenv.cfg'),site_packages=str(package),files={str(p):source_row(p)for p in files},
+        pth_files=[str(package/'synthetic.pth')],pre_path=pre_path,post_path=post_path,
+        pre_prefixes=pre_prefixes,post_prefixes=post_prefixes,directory_aliases=aliases)
+    state=dict(original_prefixes=pre_prefixes,site_origin=origin,python=list(sys.version_info[:2]),
+               actual_SDK_helper_executed=False,actual_frozen_payload_authenticated=False)
+    @contextmanager
+    def origins():
+        state['origin_enter_ns']=time.monotonic_ns();yield {'fixture_context':True}
+    def authenticate_site(spec,module):
+        state.setdefault('site_callback_phases',[]).append('before_import'if module is None else 'after_import')
+        if mode=='denied-site':raise RuntimeError('unapproved site implementation')
+        assert spec.name=='site'and spec.origin==origin
+        if module is not None:assert module.__file__==str(site_file)
+    proof=handshake.child_wait(ready,release,nonce=NONCE,role='native-meta',deadline=time.monotonic()+5)
+    state['release']=proof
+    if mode=='wrong-prefix':policy['pre_prefixes']['exec_prefix']=policy['pre_prefixes']['prefix']+'/wrong'
+    if mode=='wrong-origin':policy['site_origin']=str(site_file)if origin=='frozen'else 'frozen'
+    if mode=='extra-pth':(package/'extra.pth').write_text('import _nano_phase_marker\n')
+    if mode=='changed-pth':(package/'synthetic.pth').write_text('import _nano_phase_marker; print("modified")\n')
+    if mode=='missing-alias':policy['directory_aliases']={}
+    provenance={}
+    try:
+        with restore.restore(policy,guard=lambda:None,origin_context=origins,
+                             authenticate_site=authenticate_site,provenance=provenance):
+            state['body_ran']=True
+            if mode=='mutate-post-prefix':sys.base_exec_prefix+='/changed'
+        state['success']=True
+    except BaseException as error:state.update(success=False,error=dict(type=type(error).__name__,message=str(error)))
+    state.update(provenance=provenance,final_prefixes=restore.prefixes(),site_imported='site'in sys.modules,
+                 no_site=sys.flags.no_site,no_user_site=sys.flags.no_user_site)
+    marker=root/'marker.json';state['marker']=json.loads(marker.read_text())if marker.exists()else None
+    print(json.dumps(state),flush=True)
+
+
+class BothPhases(unittest.TestCase):
+    def invoke(self,label,mode='normal'):
+        runtime=PYTHONS[label]
+        temporary=tempfile.TemporaryDirectory(prefix='nano-phase-startup-'+label+'-');self.addCleanup(temporary.cleanup)
+        root=Path(temporary.name);(root/'bin').mkdir();python=root/'bin/python';python.symlink_to(runtime['python'])
+        (root/'pyvenv.cfg').write_text('home = '+runtime['home']+'\ninclude-system-site-packages = false\n')
+        package=root/'lib'/('python%d.%d'%tuple(runtime['version']))/'site-packages';package.mkdir(parents=True)
+        extra=root/'extra-source';extra.mkdir()
+        (package/'_nano_phase_marker.py').write_text('import json,time,sys\nfrom pathlib import Path\nPath('
+            +repr(str(root/'marker.json'))+').write_text(json.dumps({"time_ns":time.monotonic_ns(),"prefix":sys.prefix}))\n')
+        pth='import _nano_phase_marker\n'+str(extra)+'\n'
+        if mode=='swallowed-error':pth='import missing_nano_phase_startup_fixture\n'
+        (package/'synthetic.pth').write_text(pth)
+        writer=ReceiptWriter(root,allowed_names=['capture.json'],guard=lambda:None)
+        def command(ready,release):return [str(python),'-B','-S',str(Path(__file__).resolve()),'--fixture',str(root),mode,
+                                         '--ready-fd',str(ready),'--release-fd',str(release)]
+        result=supervisor.run(command,environment=dict(PATH='/usr/bin:/bin',LANG='C.UTF-8',PYTHONNOUSERSITE='1',PYTHONDONTWRITEBYTECODE='1'),
+            cwd=str(root),nonce=NONCE,role='native-meta',expected_cgroup=handshake.owner(os.getpid())['cgroup'],guard=lambda:None,
+            record_capture=lambda value:writer.write('capture.json',value),handshake_seconds=3,execution_seconds=5,
+            stdout_cap=262144,stderr_cap=32768)
+        self.assertTrue(result['child_reaped']);self.assertEqual(result['cleanup_errors'],[])
+        self.assertTrue(result['successful'],result['output']['stderr'].decode())
+        return root,json.loads(result['output']['stdout'])
+
+    def test_both_original_interpreters_restore_after_parent_release(self):
+        for label in PYTHONS:
+            with self.subTest(python=label):
+                root,state=self.invoke(label);self.assertTrue(state['success'],state)
+                self.assertEqual(state['python'],PYTHONS[label]['version'])
+                self.assertTrue(state['provenance']['complete']);self.assertEqual(state['final_prefixes']['prefix'],str(root))
+                self.assertEqual(state['final_prefixes']['exec_prefix'],str(root))
+                for name in ['base_prefix','base_exec_prefix']:self.assertEqual(state['final_prefixes'][name],state['original_prefixes'][name])
+                self.assertLess(state['release']['child_release_ns'],state['origin_enter_ns'])
+                self.assertLess(state['origin_enter_ns'],state['marker']['time_ns'])
+                self.assertEqual(state['site_callback_phases'],['before_import','after_import'])
+                self.assertEqual(state['no_site'],1);self.assertEqual(state['no_user_site'],1)
+                self.assertFalse(state['provenance']['no_site_flag_equivalence_proven'])
+
+    def test_python312_preserves_actual_unequal_base_prefixes_and_frozen_site(self):
+        root,state=self.invoke('312');self.assertTrue(state['success'],state)
+        self.assertNotEqual(state['original_prefixes']['prefix'],state['original_prefixes']['exec_prefix'])
+        self.assertNotEqual(state['original_prefixes']['base_prefix'],state['original_prefixes']['base_exec_prefix'])
+        self.assertEqual(state['site_origin'],'frozen')
+        self.assertFalse(state['actual_frozen_payload_authenticated'])
+
+    def test_missing_original_directory_alias_is_rejected(self):
+        root,state=self.invoke('312','missing-alias');self.assertFalse(state['success'])
+        self.assertIn('unreviewed startup path alias',state['error']['message']);self.assertIsNone(state['marker'])
+
+    def test_wrong_prefix_or_site_origin_rejected_on_both_interpreters(self):
+        for label in PYTHONS:
+            for mode in ['wrong-prefix','wrong-origin']:
+                with self.subTest(python=label,mode=mode):
+                    root,state=self.invoke(label,mode);self.assertFalse(state['success']);self.assertIsNone(state['marker'])
+
+    def test_denied_site_policy_prevents_frozen_or_source_site_execution(self):
+        for label in PYTHONS:
+            with self.subTest(python=label):
+                root,state=self.invoke(label,'denied-site');self.assertFalse(state['success'])
+                self.assertFalse(state['site_imported']);self.assertIsNone(state['marker'])
+
+    def test_changed_or_extra_startup_source_rejected_before_execution(self):
+        for label in PYTHONS:
+            for mode in ['changed-pth','extra-pth']:
+                with self.subTest(python=label,mode=mode):
+                    root,state=self.invoke(label,mode);self.assertFalse(state['success']);self.assertIsNone(state['marker'])
+
+    def test_site_swallowed_errors_fail_both_phase_startups(self):
+        for label in PYTHONS:
+            with self.subTest(python=label):
+                root,state=self.invoke(label,'swallowed-error');self.assertFalse(state['success'])
+                self.assertIn('Silent complete',state['error']['message'])
+                self.assertIn('Remainder of file ignored',state['provenance']['startup_stderr'])
+                self.assertNotIn('body_ran',state)
+
+    def test_post_startup_base_prefix_mutation_rejected(self):
+        for label in PYTHONS:
+            with self.subTest(python=label):
+                root,state=self.invoke(label,'mutate-post-prefix');self.assertFalse(state['success'])
+                self.assertTrue(state['body_ran']);self.assertIn('retained',state['error']['message'])
+
+
+if __name__=='__main__':
+    if len(sys.argv)>1 and sys.argv[1]=='--fixture':fixture()
+    else:unittest.main(verbosity=2)
