@@ -1,0 +1,26 @@
+{
+  "schema": "nemotron4b_typing_preparation_first_failures_v1",
+  "observer_first_attempt": {
+    "chunk_id": "c13a11",
+    "wall_time_seconds": 0.035693432,
+    "exit_code": 1,
+    "original_token_count": 264,
+    "output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_typing_code_v1.py\", line 106, in <module>\n    print(json.dumps(observe(sys.argv[1]),sort_keys=True))\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_typing_code_v1.py\", line 37, in observe\n    caches=cache.audit_preloaded_source_caches()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py\", line 106, in audit_preloaded_source_caches\n    self.check_runtime();rows=[];aliases=typing_registry_aliases()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py\", line 96, in check_runtime\n    require(sys.dont_write_bytecode and sys.flags.dont_write_bytecode==1\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py\", line 27, in require\n    raise ValueError(message)\nValueError: Original gated -B -S no-user-site unoptimized runtime\n"
+  },
+  "observer_failure_reason": "Invocation omitted PYTHONNOUSERSITE=1; empty-cache policy correctly rejected sys.flags.no_user_site=0 before source observation. Source unchanged; successor output uses original required environment.",
+  "test_source_parse_failure": {
+    "chunk_id": "cc4488",
+    "exit_code": 1,
+    "type": "SyntaxError",
+    "message": "expected else after if expression; missing whitespace in else200",
+    "source_snapshot": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_typing_source_policy_v1.initial-syntax-failure-20261110.txt"
+  },
+  "test_not_started": {
+    "chunk_id": "db4008",
+    "exit_code": 2,
+    "reason": "Source creation failed at parse; attempted test path did not exist. Not a test result."
+  },
+  "failures_retained": true,
+  "model_or_SDK_executed": false,
+  "observed_at": "2026-11-10T03:19:13.314732+00:00"
+}

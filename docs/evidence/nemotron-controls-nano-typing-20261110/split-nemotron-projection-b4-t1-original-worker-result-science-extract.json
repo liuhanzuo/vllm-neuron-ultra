@@ -1,0 +1,607 @@
+{
+  "schema": "nemotron_stage_science_extract_v1",
+  "original_record": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-original-worker-result.json",
+    "sha256": "9479517a3e2cd72e1e9d3c983088e389ad47ea1cda48296a9fa036e799487e7a",
+    "bytes": 7672799
+  },
+  "omitted_fields": [
+    "result.source_sha256"
+  ],
+  "omitted_source_pin_count": 42573,
+  "all_other_fields_preserved": true,
+  "record": {
+    "complete": true,
+    "passed": true,
+    "phase": "split-nemotron-projection-b4-t1-original",
+    "producer": {
+      "pid": 94833,
+      "starttime": 406042593,
+      "invocation_id": "f0dd2305d97e46d9adf0c862b6ac65a0"
+    },
+    "lease": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-original-lease.json",
+      "sha256": "a1de8a28126cb39ebb7554cd1901e1dbc24cbed41a5e09f85343ba829f6b4715"
+    },
+    "result": {
+      "complete": true,
+      "primitive_passed": false,
+      "job": {
+        "name": "split-nemotron-projection-b4-t1-original",
+        "case": {
+          "name": "nemotron_projection-b4-t1",
+          "kind": "nemotron_projection",
+          "batch": 4,
+          "length": 1,
+          "sizes": [
+            5120,
+            6144,
+            64
+          ],
+          "input_shape": [
+            4,
+            1,
+            11328
+          ],
+          "dtype": "bfloat16",
+          "single_row_control": false
+        },
+        "variant": "original"
+      },
+      "cpu_checks": [
+        {
+          "prime": 251,
+          "variant": "original",
+          "comparisons": [
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "00f20a7e7f632a43b7c57e95fa2f4073961f90fbb11d3a6c21a474a4fb1d6e07",
+              "expected_sha256": "00f20a7e7f632a43b7c57e95fa2f4073961f90fbb11d3a6c21a474a4fb1d6e07",
+              "bytes_compared": 81920,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "c1ff9d1f81b3e2cf1a6cd6a5fb36b2f2e8329f1cdf7d634b5026da35336122aa",
+              "expected_sha256": "c1ff9d1f81b3e2cf1a6cd6a5fb36b2f2e8329f1cdf7d634b5026da35336122aa",
+              "bytes_compared": 98304,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "cb03b929586f252ce94559bf9e2c7f66c50a88cea631829c7d7d3563c81da0ee",
+              "expected_sha256": "cb03b929586f252ce94559bf9e2c7f66c50a88cea631829c7d7d3563c81da0ee",
+              "bytes_compared": 1024,
+              "different_bytes": 0
+            }
+          ],
+          "input_unchanged": true
+        },
+        {
+          "prime": 251,
+          "variant": "tensor_split",
+          "comparisons": [
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "00f20a7e7f632a43b7c57e95fa2f4073961f90fbb11d3a6c21a474a4fb1d6e07",
+              "expected_sha256": "00f20a7e7f632a43b7c57e95fa2f4073961f90fbb11d3a6c21a474a4fb1d6e07",
+              "bytes_compared": 81920,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "c1ff9d1f81b3e2cf1a6cd6a5fb36b2f2e8329f1cdf7d634b5026da35336122aa",
+              "expected_sha256": "c1ff9d1f81b3e2cf1a6cd6a5fb36b2f2e8329f1cdf7d634b5026da35336122aa",
+              "bytes_compared": 98304,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "cb03b929586f252ce94559bf9e2c7f66c50a88cea631829c7d7d3563c81da0ee",
+              "expected_sha256": "cb03b929586f252ce94559bf9e2c7f66c50a88cea631829c7d7d3563c81da0ee",
+              "bytes_compared": 1024,
+              "different_bytes": 0
+            }
+          ],
+          "input_unchanged": true
+        },
+        {
+          "prime": 241,
+          "variant": "original",
+          "comparisons": [
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "7aa7bb9693cbb019b7586d588dd830d3c0f07d93ac78a6a9ed481e619c654639",
+              "expected_sha256": "7aa7bb9693cbb019b7586d588dd830d3c0f07d93ac78a6a9ed481e619c654639",
+              "bytes_compared": 81920,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "5e42aac77bb51049e167b0a5c8877f8f1ffd6bc2b3c20bf78c277666f5ace770",
+              "expected_sha256": "5e42aac77bb51049e167b0a5c8877f8f1ffd6bc2b3c20bf78c277666f5ace770",
+              "bytes_compared": 98304,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "c0cc55dde5c4b3686f93894a03e45b5755b0e1a691f7bc2af42aea2014104a4e",
+              "expected_sha256": "c0cc55dde5c4b3686f93894a03e45b5755b0e1a691f7bc2af42aea2014104a4e",
+              "bytes_compared": 1024,
+              "different_bytes": 0
+            }
+          ],
+          "input_unchanged": true
+        },
+        {
+          "prime": 241,
+          "variant": "tensor_split",
+          "comparisons": [
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "7aa7bb9693cbb019b7586d588dd830d3c0f07d93ac78a6a9ed481e619c654639",
+              "expected_sha256": "7aa7bb9693cbb019b7586d588dd830d3c0f07d93ac78a6a9ed481e619c654639",
+              "bytes_compared": 81920,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "5e42aac77bb51049e167b0a5c8877f8f1ffd6bc2b3c20bf78c277666f5ace770",
+              "expected_sha256": "5e42aac77bb51049e167b0a5c8877f8f1ffd6bc2b3c20bf78c277666f5ace770",
+              "bytes_compared": 98304,
+              "different_bytes": 0
+            },
+            {
+              "passed": true,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "c0cc55dde5c4b3686f93894a03e45b5755b0e1a691f7bc2af42aea2014104a4e",
+              "expected_sha256": "c0cc55dde5c4b3686f93894a03e45b5755b0e1a691f7bc2af42aea2014104a4e",
+              "bytes_compared": 1024,
+              "different_bytes": 0
+            }
+          ],
+          "input_unchanged": true
+        }
+      ],
+      "device_checks": [
+        {
+          "prime": 251,
+          "comparisons": [
+            {
+              "passed": false,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "2f69b86ca32e600942cd96a3dc41164c50db4e60a3e652ed101b4c4562e4c448",
+              "expected_sha256": "00f20a7e7f632a43b7c57e95fa2f4073961f90fbb11d3a6c21a474a4fb1d6e07",
+              "bytes_compared": 81920,
+              "different_bytes": 27777
+            },
+            {
+              "passed": false,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "00ed744d2fbabca0da0e52c22557bc47a5641317c167fa945d30cea335efbd9c",
+              "expected_sha256": "c1ff9d1f81b3e2cf1a6cd6a5fb36b2f2e8329f1cdf7d634b5026da35336122aa",
+              "bytes_compared": 98304,
+              "different_bytes": 30702
+            },
+            {
+              "passed": false,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "a486a3141258179a83ff2230c651832cbbf403cdfdb73587d43e5096997657a3",
+              "expected_sha256": "cb03b929586f252ce94559bf9e2c7f66c50a88cea631829c7d7d3563c81da0ee",
+              "bytes_compared": 1024,
+              "different_bytes": 322
+            }
+          ],
+          "input_unchanged": true
+        },
+        {
+          "prime": 241,
+          "comparisons": [
+            {
+              "passed": false,
+              "shape": [
+                4,
+                1,
+                5120
+              ],
+              "expected_shape": [
+                4,
+                1,
+                5120
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "2261cf0c365fba74ca2474231628d565185756b9a90911eb4a27224a6666c5c1",
+              "expected_sha256": "7aa7bb9693cbb019b7586d588dd830d3c0f07d93ac78a6a9ed481e619c654639",
+              "bytes_compared": 81920,
+              "different_bytes": 28358
+            },
+            {
+              "passed": false,
+              "shape": [
+                4,
+                6144,
+                1
+              ],
+              "expected_shape": [
+                4,
+                6144,
+                1
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "991b3b0cd6bd9cd272fdfb737c713f36f84e3e2f980b323344e17e67dce2a38c",
+              "expected_sha256": "5e42aac77bb51049e167b0a5c8877f8f1ffd6bc2b3c20bf78c277666f5ace770",
+              "bytes_compared": 98304,
+              "different_bytes": 31445
+            },
+            {
+              "passed": false,
+              "shape": [
+                4,
+                1,
+                64
+              ],
+              "expected_shape": [
+                4,
+                1,
+                64
+              ],
+              "dtype": "torch.float32",
+              "expected_dtype": "torch.float32",
+              "actual_sha256": "809fcbd52270e0f4192945fa911a590f664802b1652d1838d68bcfdf76b02ca9",
+              "expected_sha256": "c0cc55dde5c4b3686f93894a03e45b5755b0e1a691f7bc2af42aea2014104a4e",
+              "bytes_compared": 1024,
+              "different_bytes": 343
+            }
+          ],
+          "input_unchanged": true
+        }
+      ],
+      "compiler_flags": [
+        "--target=trn1",
+        "--auto-cast=none",
+        "--model-type=transformer",
+        "-O1",
+        "--lnc=1",
+        "--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=2 --vectorize-strided-dma"
+      ],
+      "functionalization_environment": "1",
+      "scope": "Exact split consumers only. No full model, quality, throughput or baseline qualification.",
+      "cpu_passed": true,
+      "stage": "complete",
+      "compile_passed": true,
+      "artifact": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b4-t1-original/model.pt",
+      "artifact_sha256": "8614ed7b8f8d822fa50925debfc0d3aefec25d964c0d6580240cdac68ffcbeaa",
+      "compile_seconds": 1.26845230627805,
+      "hlo": {
+        "hlo": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b4-t1-original/compiler-work/model/graph.hlo",
+        "sha256": "b8bba290536864b8d9143365dbc62dbbdb42a5aaaf1b6df737e4a2c7a7ee848f",
+        "sampled_addresses": 36,
+        "mismatching_sampled_addresses": 27,
+        "first_mismatches": [
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "actual": 5120,
+            "expected": 11328
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              2560
+            ],
+            "actual": 7680,
+            "expected": 13888
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              1,
+              0,
+              5119
+            ],
+            "actual": 10239,
+            "expected": 16447
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              0
+            ],
+            "actual": 10240,
+            "expected": 22656
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              2560
+            ],
+            "actual": 12800,
+            "expected": 25216
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              2,
+              0,
+              5119
+            ],
+            "actual": 15359,
+            "expected": 27775
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              0
+            ],
+            "actual": 15360,
+            "expected": 33984
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              2560
+            ],
+            "actual": 17920,
+            "expected": 36544
+          },
+          {
+            "output": 0,
+            "coordinates": [
+              3,
+              0,
+              5119
+            ],
+            "actual": 20479,
+            "expected": 39103
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              0,
+              0
+            ],
+            "actual": 11264,
+            "expected": 16448
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              3072,
+              0
+            ],
+            "actual": 14336,
+            "expected": 19520
+          },
+          {
+            "output": 1,
+            "coordinates": [
+              1,
+              6143,
+              0
+            ],
+            "actual": 17407,
+            "expected": 22591
+          }
+        ],
+        "sampled_mapping_passed": false,
+        "scope": "Every logical batch/token row; first, middle and last channel per split. This sampled structural check is paired with complete output byte comparisons."
+      },
+      "raw_failure": {
+        "path": "/mnt/nvme/nemotron9b-package-r10-20261110/primitives/jobs/split-nemotron-projection-b4-t1-original/first-failure.pt",
+        "sha256": "ef3486b640947fca16361306480eb9a75317dc9ad07ce89a32a027239e31e89c",
+        "bytes": 456351
+      },
+      "device_exact": false,
+      "compiler_error_codes": [],
+      "control_outcome_confirmed": true,
+      "seconds": 14.396122592035681,
+      "cgroup_memory": {
+        "memory.max": "8589934592",
+        "memory.high": "7516192768",
+        "memory.swap.max": "2147483648",
+        "memory.peak": "788549632",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+      },
+      "raw_manifest": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b-package-r10-20261110-control/split-nemotron-projection-b4-t1-original-raw-manifest.json",
+        "sha256": "458c502cd1d8f87a1e1b23274ff3a4a771c2e07b6d91c1b482f936769cbc042c"
+      }
+    },
+    "seconds": 14.763083481229842,
+    "new_speedup_claim": false
+  }
+}
