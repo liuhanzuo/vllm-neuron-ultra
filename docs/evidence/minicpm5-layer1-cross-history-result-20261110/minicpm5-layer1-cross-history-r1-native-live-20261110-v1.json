@@ -1,0 +1,131 @@
+{
+  "schema": "minicpm5_layer1_cross_history_actual_native_live_v1",
+  "observed_at": "2026-11-10T11:24:56.637214+00:00",
+  "admission": {
+    "path": "/mnt/nvme/minicpm5-layer1-cross-history-r1-20261110/admission.json",
+    "sha256": "7e94828553b75902bd4bdad27a5d5a4d4cc259fc9693fbe1d9b12abd7973895c"
+  },
+  "outer": {
+    "pid": 631830,
+    "start_ticks": "409018038",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_cross_history_cpu_runner_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-cross-history-r1-20261110-spec.json",
+      "--spec-sha256",
+      "ebcfa2f11d1d65dbc21c781d23baaa41f57f614315dc839b8738004fa66c00f2",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-cross-history-r1-20261110-review.json",
+      "--review-sha256",
+      "8f7919cad08b535285c8e8805612d5fe5073f3d88a209e419a70ae7ce8845c1b"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "coordinator": {
+    "pid": 639128,
+    "start_ticks": "409036815",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_cross_history_cpu_runner_v1.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/mnt/nvme/minicpm5-layer1-cross-history-r1-20261110/admission.json",
+      "--admission-sha256",
+      "7e94828553b75902bd4bdad27a5d5a4d4cc259fc9693fbe1d9b12abd7973895c"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-cross-history-r1-20261110.service",
+    "unit": "trn1-mini-layer1-cross-history-r1-20261110",
+    "invocation_id": "dcfd65ac92ae4d5eb89b23adcc6f8bea"
+  },
+  "ranks": [
+    {
+      "pid": 639174,
+      "start_ticks": "409036916",
+      "ppid": 639128,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_cross_history_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-cross-history-r1-20261110/admission.json",
+        "--admission-sha256",
+        "7e94828553b75902bd4bdad27a5d5a4d4cc259fc9693fbe1d9b12abd7973895c"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-cross-history-r1-20261110.service"
+    },
+    {
+      "pid": 639175,
+      "start_ticks": "409036916",
+      "ppid": 639128,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_cross_history_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-cross-history-r1-20261110/admission.json",
+        "--admission-sha256",
+        "7e94828553b75902bd4bdad27a5d5a4d4cc259fc9693fbe1d9b12abd7973895c"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-cross-history-r1-20261110.service"
+    }
+  ],
+  "properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "639128",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "639128",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=97f8b91d42da1e2f83331f926fe2dc91 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_cross_history_cpu_runner_v1.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-cross-history-r1-20261110/admission.json --admission-sha256 7e94828553b75902bd4bdad27a5d5a4d4cc259fc9693fbe1d9b12abd7973895c ; ignore_errors=no ; start_time=[Tue 2026-11-10 11:24:19 UTC] ; stop_time=[n/a] ; pid=639128 ; code=(null) ; status=0/0 }",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-cross-history-r1-20261110.service",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-layer1-cross-history-r1-20261110.service",
+    "BindsTo": "",
+    "After": "-.mount basic.target app.slice",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running",
+    "Job": "",
+    "InvocationID": "dcfd65ac92ae4d5eb89b23adcc6f8bea",
+    "ExecStopPost": ""
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "four_original_processes_alive": true,
+  "usage": {
+    "allocated_bytes": 2449408,
+    "files": 19,
+    "per_rank_allocated_bytes": {
+      "cpu-rank0": 98304,
+      "cpu-rank1": 98304
+    }
+  }
+}
