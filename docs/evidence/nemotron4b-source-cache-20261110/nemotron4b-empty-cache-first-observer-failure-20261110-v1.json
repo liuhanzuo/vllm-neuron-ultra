@@ -1,0 +1,60 @@
+{
+  "schema": "nemotron4b_empty_cache_first_observer_failure_v1",
+  "tests_before_observation": {
+    "python310": {
+      "chunk_id": "e35483",
+      "wall_time_seconds": 0.519767764,
+      "exit_code": 0,
+      "original_token_count": 228,
+      "output": "test_B_alone_loads_stale_cache_but_private_prefix_reads_current_source (__main__.Cache) ... ok\ntest_changed_and_replaced_directory_rejected (__main__.Cache) ... ok\ntest_directory_alias_rejected (__main__.Cache) ... ok\ntest_exact_prefix_retains_original_python_script_and_flags (__main__.Cache) ... ok\ntest_existing_private_empty_directory_required (__main__.Cache) ... ok\ntest_guard_denial_precedes_directory_access (__main__.Cache) ... ok\ntest_manifest_snapshot_does_not_follow_caller_rebinding (__main__.Cache) ... ok\ntest_new_cache_file_is_rejected_and_retained (__main__.Cache) ... ok\ntest_real_startup_encodings_cache_already_uses_private_prefix (__main__.Cache) ... ok\ntest_source_module_cache_path_cannot_escape_prefix (__main__.Cache) ... ok\ntest_wrong_runtime_prefix_is_rejected (__main__.Cache) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.575s\n\nOK\n"
+    },
+    "python312": {
+      "chunk_id": "576155",
+      "wall_time_seconds": 0.543672681,
+      "exit_code": 0,
+      "original_token_count": 365,
+      "output": "test_B_alone_loads_stale_cache_but_private_prefix_reads_current_source (__main__.Cache.test_B_alone_loads_stale_cache_but_private_prefix_reads_current_source) ... ok\ntest_changed_and_replaced_directory_rejected (__main__.Cache.test_changed_and_replaced_directory_rejected) ... ok\ntest_directory_alias_rejected (__main__.Cache.test_directory_alias_rejected) ... ok\ntest_exact_prefix_retains_original_python_script_and_flags (__main__.Cache.test_exact_prefix_retains_original_python_script_and_flags) ... ok\ntest_existing_private_empty_directory_required (__main__.Cache.test_existing_private_empty_directory_required) ... ok\ntest_guard_denial_precedes_directory_access (__main__.Cache.test_guard_denial_precedes_directory_access) ... ok\ntest_manifest_snapshot_does_not_follow_caller_rebinding (__main__.Cache.test_manifest_snapshot_does_not_follow_caller_rebinding) ... ok\ntest_new_cache_file_is_rejected_and_retained (__main__.Cache.test_new_cache_file_is_rejected_and_retained) ... ok\ntest_real_startup_encodings_cache_already_uses_private_prefix (__main__.Cache.test_real_startup_encodings_cache_already_uses_private_prefix) ... ok\ntest_source_module_cache_path_cannot_escape_prefix (__main__.Cache.test_source_module_cache_path_cannot_escape_prefix) ... ok\ntest_wrong_runtime_prefix_is_rejected (__main__.Cache.test_wrong_runtime_prefix_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.591s\n\nOK\n"
+    }
+  },
+  "actual_observation_failures": {
+    "python310": {
+      "chunk_id": "e520af",
+      "wall_time_seconds": 0.131964673,
+      "exit_code": 1,
+      "original_token_count": 217,
+      "output": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_private_source_cache_v1.py\", line 60, in <module>\n    print(json.dumps(observe(sys.argv[1],manifest),sort_keys=True))\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_private_source_cache_v1.py\", line 44, in observe\n    rows=cache.audit_preloaded_source_caches()\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py\", line 78, in audit_preloaded_source_caches\n    require(isinstance(module,types.ModuleType),'Original module registry entries')\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py\", line 27, in require\n    raise ValueError(message)\nValueError: Original module registry entries\n"
+    },
+    "python312": {
+      "chunk_id": "bced31",
+      "wall_time_seconds": 0.229714574,
+      "exit_code": 1,
+      "original_token_count": 301,
+      "output": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_worker_receipts_v1.py:84: SyntaxWarning: invalid escape sequence '\\.'\n  and all(type(n)is str and re.fullmatch('[a-z0-9][a-z0-9-]*\\.json',n)for n in allowed_names),\nTraceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_private_source_cache_v1.py\", line 60, in <module>\n    print(json.dumps(observe(sys.argv[1],manifest),sort_keys=True))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_private_source_cache_v1.py\", line 44, in observe\n    rows=cache.audit_preloaded_source_caches()\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py\", line 78, in audit_preloaded_source_caches\n    require(isinstance(module,types.ModuleType),'Original module registry entries')\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py\", line 27, in require\n    raise ValueError(message)\nValueError: Original module registry entries\n"
+    }
+  },
+  "nonmodule_registry_observations": {
+    "python310": {
+      "chunk_id": "64985e",
+      "wall_time_seconds": 1.5754e-05,
+      "exit_code": 0,
+      "original_token_count": 141,
+      "output": "{\"python\": \"/home/ubuntu/venvs/vllm_neuron/bin/python\", \"nonmodule_entries\": [{\"registry_name\": \"typing.io\", \"type_module\": \"builtins\", \"type_name\": \"type\", \"value_module\": \"typing\", \"value_name\": \"typing.io\", \"dictionary_keys\": [\"BinaryIO\", \"IO\", \"TextIO\", \"__all__\", \"__dict__\", \"__doc__\", \"__module__\", \"__weakref__\"]}, {\"registry_name\": \"typing.re\", \"type_module\": \"builtins\", \"type_name\": \"type\", \"value_module\": \"typing\", \"value_name\": \"typing.re\", \"dictionary_keys\": [\"Match\", \"Pattern\", \"__all__\", \"__dict__\", \"__doc__\", \"__module__\", \"__weakref__\"]}]}\n"
+    },
+    "python312": {
+      "chunk_id": "79fb0f",
+      "wall_time_seconds": 1.3789e-05,
+      "exit_code": 0,
+      "original_token_count": 207,
+      "output": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_worker_receipts_v1.py:84: SyntaxWarning: invalid escape sequence '\\.'\n  and all(type(n)is str and re.fullmatch('[a-z0-9][a-z0-9-]*\\.json',n)for n in allowed_names),\n{\"python\": \"/home/ubuntu/venvs/model_reference_2026/bin/python\", \"nonmodule_entries\": [{\"registry_name\": \"typing.io\", \"type_module\": \"typing\", \"type_name\": \"_DeprecatedType\", \"value_module\": \"typing\", \"value_name\": \"typing.io\", \"dictionary_keys\": [\"BinaryIO\", \"IO\", \"TextIO\", \"__all__\", \"__dict__\", \"__doc__\", \"__module__\", \"__weakref__\"]}, {\"registry_name\": \"typing.re\", \"type_module\": \"typing\", \"type_name\": \"_DeprecatedType\", \"value_module\": \"typing\", \"value_name\": \"typing.re\", \"dictionary_keys\": [\"Match\", \"Pattern\", \"__all__\", \"__dict__\", \"__doc__\", \"__module__\", \"__weakref__\"]}]}\n"
+    }
+  },
+  "finding": "typing.io and typing.re are original class objects in sys.modules; the source-cache scanner incorrectly assumed every non-None entry was a ModuleType. Python3.10 uses type; Python3.12 uses typing._DeprecatedType. This is a preparation failure, not model execution.",
+  "actual_SDK_or_model_executed": false,
+  "runtime_admitted": false,
+  "recorded_at": "2026-11-10T02:49:58.446858+00:00",
+  "retained_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py.initial-failed-20261110-v1.txt": "7369bdc8715fc1141cab8295c4c161e657d242268d8a7b7baaf1708c41e59fec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_empty_bytecode_cache_v1.py.initial-failed-20261110-v1.txt": "e8cc72f5a45370d914bcfdd32fc2c0e47e20a72ed709021ecd35b8d8078f7070",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/observe_nemotron4b_private_source_cache_v1.py.initial-failed-20261110-v1.txt": "c945d34f206536a4a449be54f1b5ddb068b5550b7110d7c747175b93c786afd1"
+  }
+}
