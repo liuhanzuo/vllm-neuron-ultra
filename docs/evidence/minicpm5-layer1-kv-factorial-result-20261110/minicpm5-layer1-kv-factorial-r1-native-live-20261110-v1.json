@@ -1,0 +1,131 @@
+{
+  "schema": "minicpm5_layer1_kv_factorial_actual_native_live_v1",
+  "observed_at": "2026-11-10T11:39:46.160361+00:00",
+  "admission": {
+    "path": "/mnt/nvme/minicpm5-layer1-kv-factorial-r1-20261110/admission.json",
+    "sha256": "9a76a61897d52f8738f08e08eb17d34e90d985c01094e0c6d7a105b349b5ac5b"
+  },
+  "outer": {
+    "pid": 645022,
+    "start_ticks": "409106452",
+    "ppid": 433847,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_kv_factorial_cpu_runner_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-kv-factorial-r1-20261110-spec.json",
+      "--spec-sha256",
+      "caaf09c19d56fbdee01ed539f81c37c04310c2fd9a470d1232e070a631ecbc13",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-kv-factorial-r1-20261110-review.json",
+      "--review-sha256",
+      "9111ea408cca1cb27780e62ddbf9f06a5246c83edbfea552390f77c858bac610"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "coordinator": {
+    "pid": 652510,
+    "start_ticks": "409125235",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_kv_factorial_cpu_runner_v1.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/mnt/nvme/minicpm5-layer1-kv-factorial-r1-20261110/admission.json",
+      "--admission-sha256",
+      "9a76a61897d52f8738f08e08eb17d34e90d985c01094e0c6d7a105b349b5ac5b"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-kv-factorial-r1-20261110.service",
+    "unit": "trn1-mini-layer1-kv-factorial-r1-20261110",
+    "invocation_id": "502d75f23d484faf8d8ce5eef1f67cc4"
+  },
+  "ranks": [
+    {
+      "pid": 652514,
+      "start_ticks": "409125338",
+      "ppid": 652510,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_kv_factorial_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-kv-factorial-r1-20261110/admission.json",
+        "--admission-sha256",
+        "9a76a61897d52f8738f08e08eb17d34e90d985c01094e0c6d7a105b349b5ac5b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-kv-factorial-r1-20261110.service"
+    },
+    {
+      "pid": 652515,
+      "start_ticks": "409125338",
+      "ppid": 652510,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_kv_factorial_cpu_runner_v1.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-kv-factorial-r1-20261110/admission.json",
+        "--admission-sha256",
+        "9a76a61897d52f8738f08e08eb17d34e90d985c01094e0c6d7a105b349b5ac5b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-kv-factorial-r1-20261110.service"
+    }
+  ],
+  "properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "652510",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "652510",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=b3d6b0c978be31977285596228e95637 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_kv_factorial_cpu_runner_v1.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-kv-factorial-r1-20261110/admission.json --admission-sha256 9a76a61897d52f8738f08e08eb17d34e90d985c01094e0c6d7a105b349b5ac5b ; ignore_errors=no ; start_time=[Tue 2026-11-10 11:39:04 UTC] ; stop_time=[n/a] ; pid=652510 ; code=(null) ; status=0/0 }",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-kv-factorial-r1-20261110.service",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-layer1-kv-factorial-r1-20261110.service",
+    "BindsTo": "",
+    "After": "app.slice -.mount basic.target",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running",
+    "Job": "",
+    "InvocationID": "502d75f23d484faf8d8ce5eef1f67cc4",
+    "ExecStopPost": ""
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "four_original_processes_alive": true,
+  "usage": {
+    "allocated_bytes": 2756608,
+    "files": 37,
+    "per_rank_allocated_bytes": {
+      "cpu-rank0": 245760,
+      "cpu-rank1": 245760
+    }
+  }
+}

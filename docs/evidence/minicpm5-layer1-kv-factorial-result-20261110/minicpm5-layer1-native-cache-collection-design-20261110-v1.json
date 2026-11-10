@@ -1,0 +1,734 @@
+{
+  "schema": "minicpm5_layer1_native_cache_collection_design_v1",
+  "source_only": true,
+  "runtime_admitted": false,
+  "official_revision": "f97400052a43d642bbc6e9975e2397e3ae6a6b52",
+  "official_model_class": "transformers.models.llama.modeling_llama.LlamaForCausalLM",
+  "original_native_provenance": {
+    "model_class": "transformers.models.llama.modeling_llama.LlamaForCausalLM",
+    "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/llama/modeling_llama.py",
+    "source_sha256": "363df58c077a8fcfd3593b2817538e53f90eeab32294d3c6bbb7241f094669de",
+    "revision": "f97400052a43d642bbc6e9975e2397e3ae6a6b52",
+    "dtype": "torch.bfloat16",
+    "attention": "eager",
+    "parameters": 2516756480,
+    "tensors": 381,
+    "independent_embedding_and_lm_head": true,
+    "loading_info": {
+      "missing_keys": [],
+      "unexpected_keys": [],
+      "mismatched_keys": [],
+      "error_msgs": []
+    },
+    "native_threads": 2,
+    "device": "cpu",
+    "math_implementation_modified": false
+  },
+  "source_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-kv-factorial-r1-20261110-plan.json",
+    "sha256": "d848ccfb73783b5047788bc11ab263d110636d335fdd90dfc6ae269c1db6dd00"
+  },
+  "availability": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-native-cache-availability-20261110-v1.json",
+    "sha256": "1301c2ac02ad2f4b8fb432f00fa651d3d88220ad755a51c62b0a0217e36ba160"
+  },
+  "native_reference": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+    "sha256": "6cd455e1d9f37c935981f056ba6c33733acf3079faeb8a2cf91b0c030cfe36dd",
+    "identity": {
+      "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-baseline-full-v4/hf-reference.pt",
+      "device": 66306,
+      "inode": 8526513,
+      "size": 16722957,
+      "mtime_ns": 1793809562096223676,
+      "ctime_ns": 1793809562096223676
+    }
+  },
+  "frame_mapping": [
+    {
+      "frame": {
+        "index": 0,
+        "fixture": 0,
+        "slot": 3,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        24,
+        128
+      ],
+      "kv_pair_bytes": 24576,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 1,
+        "fixture": 7,
+        "slot": 1,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        1231,
+        128
+      ],
+      "kv_pair_bytes": 1260544,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 2,
+        "fixture": 2,
+        "slot": 0,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        28,
+        128
+      ],
+      "kv_pair_bytes": 28672,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 3,
+        "fixture": 5,
+        "slot": 2,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        27,
+        128
+      ],
+      "kv_pair_bytes": 27648,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 4,
+        "fixture": 0,
+        "slot": 3,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        25,
+        128
+      ],
+      "kv_pair_bytes": 25600,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 5,
+        "fixture": 7,
+        "slot": 1,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        1232,
+        128
+      ],
+      "kv_pair_bytes": 1261568,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 6,
+        "fixture": 2,
+        "slot": 0,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        29,
+        128
+      ],
+      "kv_pair_bytes": 29696,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 7,
+        "fixture": 5,
+        "slot": 2,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        28,
+        128
+      ],
+      "kv_pair_bytes": 28672,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 8,
+        "fixture": 0,
+        "slot": 3,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        26,
+        128
+      ],
+      "kv_pair_bytes": 26624,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 9,
+        "fixture": 7,
+        "slot": 1,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        1233,
+        128
+      ],
+      "kv_pair_bytes": 1262592,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 10,
+        "fixture": 2,
+        "slot": 0,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        30,
+        128
+      ],
+      "kv_pair_bytes": 30720,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 11,
+        "fixture": 5,
+        "slot": 2,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        29,
+        128
+      ],
+      "kv_pair_bytes": 29696,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 12,
+        "fixture": 0,
+        "slot": 3,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        27,
+        128
+      ],
+      "kv_pair_bytes": 27648,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 13,
+        "fixture": 7,
+        "slot": 1,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        1234,
+        128
+      ],
+      "kv_pair_bytes": 1263616,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 14,
+        "fixture": 2,
+        "slot": 0,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        31,
+        128
+      ],
+      "kv_pair_bytes": 31744,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 15,
+        "fixture": 5,
+        "slot": 2,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        30,
+        128
+      ],
+      "kv_pair_bytes": 30720,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 16,
+        "fixture": 4,
+        "slot": 3,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        27,
+        128
+      ],
+      "kv_pair_bytes": 27648,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 17,
+        "fixture": 1,
+        "slot": 1,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        28,
+        128
+      ],
+      "kv_pair_bytes": 28672,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 18,
+        "fixture": 6,
+        "slot": 0,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        35,
+        128
+      ],
+      "kv_pair_bytes": 35840,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 19,
+        "fixture": 3,
+        "slot": 2,
+        "step": 0
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        27,
+        128
+      ],
+      "kv_pair_bytes": 27648,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 20,
+        "fixture": 4,
+        "slot": 3,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        28,
+        128
+      ],
+      "kv_pair_bytes": 28672,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 21,
+        "fixture": 1,
+        "slot": 1,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        29,
+        128
+      ],
+      "kv_pair_bytes": 29696,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 22,
+        "fixture": 6,
+        "slot": 0,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        36,
+        128
+      ],
+      "kv_pair_bytes": 36864,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 23,
+        "fixture": 3,
+        "slot": 2,
+        "step": 1
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        28,
+        128
+      ],
+      "kv_pair_bytes": 28672,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 24,
+        "fixture": 4,
+        "slot": 3,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        29,
+        128
+      ],
+      "kv_pair_bytes": 29696,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 25,
+        "fixture": 1,
+        "slot": 1,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        30,
+        128
+      ],
+      "kv_pair_bytes": 30720,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 26,
+        "fixture": 6,
+        "slot": 0,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        37,
+        128
+      ],
+      "kv_pair_bytes": 37888,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 27,
+        "fixture": 3,
+        "slot": 2,
+        "step": 2
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        29,
+        128
+      ],
+      "kv_pair_bytes": 29696,
+      "corresponding_next_decode_input": true,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    },
+    {
+      "frame": {
+        "index": 28,
+        "fixture": 4,
+        "slot": 3,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        30,
+        128
+      ],
+      "kv_pair_bytes": 30720,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 3
+    },
+    {
+      "frame": {
+        "index": 29,
+        "fixture": 1,
+        "slot": 1,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        31,
+        128
+      ],
+      "kv_pair_bytes": 31744,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 1
+    },
+    {
+      "frame": {
+        "index": 30,
+        "fixture": 6,
+        "slot": 0,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        38,
+        128
+      ],
+      "kv_pair_bytes": 38912,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 0
+    },
+    {
+      "frame": {
+        "index": 31,
+        "fixture": 3,
+        "slot": 2,
+        "step": 3
+      },
+      "complete_post_cache_shape": [
+        1,
+        2,
+        30,
+        128
+      ],
+      "kv_pair_bytes": 30720,
+      "corresponding_next_decode_input": false,
+      "native_head_to_tp_rank": [
+        0,
+        1
+      ],
+      "native_fixture_to_sdk_slot": 2
+    }
+  ],
+  "expected_complete_kv_bytes": 5894144,
+  "expected_complete_logits_bytes": 16711680,
+  "collector_requirements": [
+    "Use exact original native loader, officialBF16weights,eagerattention,B1unpadded,2CPUthreads,original8fixturesand32forwards.",
+    "Require full logits rawexact vs original reference and all213selected tap hashes exact vs frozen per-frame metadata, before accepting new cache evidence.",
+    "Save full layer1postforward K and V perframe,all2KVheads,allvalidprefixpositions; read-only observation with original outputs and no cache mutation.",
+    "For each savedSDKdecode input use nativepreviousstep cache from SAMEfixture. Map nativeKVheadrank to TP2rank and original fixture to physicalslot. Compare only nativevalidprefix; preserve fullSDKcache evidence and masks separately.",
+    "NoCPU strictanchor substitution for officialreference. Capture complete full vocabulary; no new numerical tolerance or precision change.",
+    "Separate serial runtime admission must validate factorial actual successfulexit+independentbyteaudit,drainallpreviousowners/groups,andretain16GiBnoswap/root28GiB/NVMe30GiB floors.",
+    "Afteractualexit independently reread allnativecompletecache/logitbytes and verify lineage,then compareSDKvalidhistory values. No model qualification or speedup from cachecapture alone."
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
