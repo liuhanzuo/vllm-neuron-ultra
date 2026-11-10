@@ -1,0 +1,56 @@
+{
+  "schema": "nemotron4b_module_origin_v4_source_preparation_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T03:04:42.039921+00:00",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_module_origin_audit_v4.py": "595fadea29aedb94a20ef73ffb50756c69577f2f2024cb9f00c739bb7ef4f339",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_module_origin_audit_v4.py": "7f59a5e47fabbb8fac13479f573bc4d7fb8f44e46554585fec76b553684ad418",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_empty_bytecode_cache_v1.py": "24747ce016d3a07d4c814762b3e3126b6f4ff793f3144463cf00d4a5f98892ba",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_process_handshake_v1.py": "6b2f2486bae25532991d07ada49dba4f7b1bd83c9b1f62a7ed2cd8b40166112a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_router_v4.py": "aab6eb9fab0f785236bc43c40f07dc55469cf6b50f5757b0c0e584b9be26b51e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_pinned_source_reader_v1.py": "d81ba7c29fa00b058d0aaf441bb78973a1f68bae323019bfc58697029fd7f25f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_dependency_catalog_v1.py": "9003d129d19dd4bfe724af7e4c5eb745e4c867b43454fe84268fe524a6ce6589",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_helper_import_graph_v1.py": "177ffdcdc78fb557fbcbaf05c59db4a97c827b46ddd3b6c933bd21ea3d66ba1e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_context_v3.py": "a25e8e9daa2b448623ba0fd2cd0d609856f3b0f50df3e98aa457641e165f88db",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b_import_context_v3.py": "993e352f186306fde32710cd7c3caca5ef7560a489dbed5e5ae30bb0be0a958f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron4b_import_router_v4_r2.py": "39b911a4cc2d560f0cc281d2831c0f548f44cdbde243b1566da97b9e9d588791"
+  },
+  "prior_source_reviews_revalidated": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-module-origins-source-preparation-review-20261109-v1.json",
+      "sha256": "deaf9861c5cf336dd3325c02175e1d9ba6b7d55c6eb11d49918b833d3e42eec9"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-empty-cache-source-preparation-review-20261110-v1.json",
+      "sha256": "00125d957655ab6e1e66c3c5c7c3352a571d0bcbb1e565230225d9d07fed206a"
+    }
+  ],
+  "tests_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron4b-module-origin-v4-tests-actual-exits-20261110-v1.json",
+    "sha256": "4df4432cc5de3cfa7906ddad1ca47f0143c1bda12fda8456368f6de03f375010"
+  },
+  "tests_per_interpreter": 26,
+  "passing_executions": 52,
+  "new_sources": [
+    "nemotron4b_module_origin_audit_v4.py",
+    "check_nemotron4b_module_origin_audit_v4.py"
+  ],
+  "findings": [
+    "v3 assumes preloaded non-None entries are ModuleType. v4 accepts only structurally checked original typing.io/re class entries with a separate explicit callback authenticating the owning typing source/code and exact objects.",
+    "Owner callback must return literal True and is invoked on every alias metadata check. Missing, denied or revoked authentication fails.",
+    "Object identity, owner, metaclass, class metadata, bases, descriptor identities, exports order and export object identities are captured. Unknown classes, replacement and export mutation fail; module-transition callback cannot bypass changed class metadata.",
+    "All 16 original origin-ledger scenarios and 10 new compatibility/failure scenarios passed in each original Python environment under -B -S with separate empty pycache prefixes.",
+    "Callbacks in these tests are explicit fixture policies. They do not authenticate actual typing source/native code or admit a model."
+  ],
+  "remaining": [
+    "Concrete preloaded-source/code authentication must supply the typing owner callback.",
+    "Connect v4, private cache manifests, interpreter and bootstrap checks into actual root/rank/helper startup successors; no existing admitted invocation changed.",
+    "Full actual source/native/linked-library closure and all model correctness, cold4096, long decode, slot reuse, quality, HTTP4 and paired performance checks remain."
+  ],
+  "source_preparation_passed": true,
+  "new_sources_frozen": true,
+  "actual_typing_source_authenticated": false,
+  "complete_runtime_dependency_closure_proven": false,
+  "runtime_admitted": false,
+  "new_speedup_claim": false
+}
