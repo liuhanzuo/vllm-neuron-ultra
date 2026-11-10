@@ -1,0 +1,56 @@
+{
+  "schema": "nemotron9b_startup_deadlines_tests_actual_exits_v1",
+  "actual_external_exit_observed": true,
+  "all_passed": true,
+  "tests_passed": 38,
+  "interpreter": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+  "python_minor": "3.10",
+  "results": [
+    {
+      "chunk_id": "cba0fc",
+      "wall_time_seconds": 0.117609099,
+      "exit_code": 0,
+      "original_token_count": 416,
+      "output": "test_prepare_empty_grace_not_restarted (__main__.EmptyHandoff) ... ok\ntest_prepare_empty_reversion_rejected (__main__.EmptyHandoff) ... ok\ntest_ack_deadline_not_shared_with_preparation (__main__.Timing) ... ok\ntest_ack_has_fresh_60_seconds (__main__.Timing) ... ok\ntest_all_kernel_identity_changes_rejected (__main__.Timing) ... ok\ntest_argv_must_be_nonempty_and_distinct (__main__.Timing) ... ok\ntest_bad_intent_rejected (__main__.Timing) ... ok\ntest_exec_timeout_fresh_and_bounded (__main__.Timing) ... ok\ntest_existing_empty_grace_retained (__main__.Timing) ... ok\ntest_fast_target_with_valid_intent (__main__.Timing) ... ok\ntest_guard_failure_preserved (__main__.Timing) ... ok\ntest_missing_or_exited_child_rejected (__main__.Timing) ... ok\ntest_nonfinite_and_unbounded_budgets_rejected (__main__.Timing) ... ok\ntest_preparation_deadline (__main__.Timing) ... ok\ntest_preparation_over_60_and_separate_exec_budget (__main__.Timing) ... ok\ntest_preparation_validation_cannot_overrun_budget (__main__.Timing) ... ok\ntest_ready_ack_still_requires_live_identity (__main__.Timing) ... ok\ntest_ready_at_preparation_deadline_rejected (__main__.Timing) ... ok\ntest_transition_requires_intent_even_if_target_already_visible (__main__.Timing) ... ok\ntest_unexpected_argv_rejected (__main__.Timing) ... ok\ntest_actual_worker_flow_accepts_67s_preparation_53s_exec_50s_ack (__main__.WorkerIntegration) ... ok\ntest_actual_worker_timeout_retains_cleanup_and_error (__main__.WorkerIntegration) ... ok\ntest_all_other_functions_ast_unchanged (__main__.WorkerIntegration) ... ok\n\n----------------------------------------------------------------------\nRan 23 tests in 0.033s\n\nOK\n"
+    },
+    {
+      "chunk_id": "718c66",
+      "wall_time_seconds": 1.2757e-05,
+      "exit_code": 0,
+      "original_token_count": 374,
+      "output": "test_authenticated_empty_resolves (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_child_exit_not_accepted (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_direct_exact_target (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_double_observation_still_required (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_empty_reverts_rejected (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_empty_without_bound_intent_rejected (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_late_target_does_not_bypass_grace (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_missing_child_not_accepted (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_original_never_execs (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_original_then_target (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_parent_group_pid_changes_rejected (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_persistent_empty_timeout (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_pid_reuse_rejected (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_target_intent_still_required (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\ntest_unexpected_nonempty_argv_saved_and_rejected (check_nemotron9b_exec_transition_v1.TestTransition) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 0.002s\n\nOK\n"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_startup_deadlines_v1.py",
+      "sha256": "dff0a8e709bd7cc0ffa396ecb9a31860ded9ae05a39f664488400b64e08e9cc5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_exec_transition_v2.py",
+      "sha256": "a64455b1e7bd7389bbe37cd1fc93cd85bb8a83d8d402acb76cc8d92b3c7af843"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_package_worker_startup_candidate_v1.py",
+      "sha256": "475e6f48c96067ca483c87faeb96af32c140e7f34692ba6818820de17add597a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_startup_deadlines_v1.py",
+      "sha256": "113cf449956d6e1adfd33ba023d504d6eda915a60075c70da4ddfabe3da71b13"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_nemotron9b_exec_transition_v1.py",
+      "sha256": "5c3b017e8eaa38d545941f00859982f587e55370d6498454ebc5c10480375465"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_exec_transition_v1.py",
+      "sha256": "4a7509ca3a3bd10b1f76fa32860518ea14eee5c9001f6f40308f5e89ef0361b5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_worker_v24.py",
+      "sha256": "ccef608be0d6d0fa8ed2b3a397d18dec55cbf6a426a6f096453e40edfe1f9151"
+    }
+  ],
+  "model_executed": false,
+  "new_speedup_claim": false
+}

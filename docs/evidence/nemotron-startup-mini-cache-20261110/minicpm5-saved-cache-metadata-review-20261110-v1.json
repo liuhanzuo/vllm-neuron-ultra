@@ -1,0 +1,54 @@
+{
+  "schema": "minicpm5_saved_cache_metadata_review_v1",
+  "reviewer": "/root",
+  "passed": true,
+  "actual_exit_code": 0,
+  "actual_tool_chunk": "2f889a",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/analyze_minicpm5_saved_cache_metadata_v2.py",
+    "sha256": "e7b77e629c55ddd54d919d9d080e5d0da328274ad26c07602bc73b7283e2f420"
+  },
+  "result": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-cache-metadata-crosscheck-20261110-v2.json",
+    "sha256": "ab0659d59e3a03b30a01a323ced5a033955f83f396a9a83a4350fa1348d6e675"
+  },
+  "previous_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-cache-metadata-first-failure-20261110-v1.json",
+    "sha256": "529bd6332ec36d640b9db7e9b1744d8c31e27d441726739bdc012db8d5aa05bc"
+  },
+  "original_metadata_files": 95,
+  "metadata_bytes_read": 28101099,
+  "calls": 84,
+  "own_history_links": 78,
+  "comparisons_all_three_arm_pairs": true,
+  "both_ranks_checked": true,
+  "ranks_are_replicas_not_independent_trials": true,
+  "original_call_order_and_slot_mapping_preserved": true,
+  "prefill_only_vs_anchor": {
+    "decode_calls": 6,
+    "current_seven_inputs_equal": true,
+    "all42_mask_position_routes_equal": true,
+    "layer1_normalized_input_hash_equal": true,
+    "layer0_KV_equal": true,
+    "layer1_K_hash_differs": true,
+    "layer1_V_hash_differs": true,
+    "first_recorded_prediction_difference": "layers.1.self_attn"
+  },
+  "original_sdk_mapping_verified": {
+    "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/kvcache/kv_cache_manager.py",
+    "sha256": "416a3f40d4ba84c72813783783d1d848e4757b34c48298d7b78475642ec2d249"
+  },
+  "no_raw_cache_payload_was_saved": true,
+  "cache_error_magnitude_or_cell_not_established": true,
+  "causal_root_cause_established": false,
+  "model_reexecuted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "next_experiment": {
+    "aim": "Separate same current layer1 input from differing prefill history under complete original trajectory",
+    "retain": "Original BF16 weights, 14 calls/32 frames, both ranks, request/physical row mapping and cache continuity",
+    "collect": "After forward, export existing layer1 input_layernorm/attention/output taps plus unchanged before-forward layer1 K/V; input caches already verified unchanged by forward",
+    "controls": "First verify observer-added runs preserve original endpoints; then independently replay layer1 with fixed current input/positions/masks and controlled own versus paired history, retaining unmodified whole-model arm",
+    "caveats": "No cache swap or new model run admitted by this metadata review; hashes do not prove causality or cache bug; original CPU29/32 and candidate28/32 failures remain authoritative"
+  }
+}

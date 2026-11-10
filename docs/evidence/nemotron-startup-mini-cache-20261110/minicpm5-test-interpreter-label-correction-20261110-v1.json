@@ -1,0 +1,145 @@
+{
+  "schema": "minicpm5_test_interpreter_label_correction_v1",
+  "actual_interpreters": [
+    {
+      "executable": "/usr/bin/python3",
+      "prefix": "/usr",
+      "version": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "version_info": [
+        3,
+        10,
+        12,
+        "final",
+        0
+      ]
+    },
+    {
+      "executable": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "prefix": "/home/ubuntu/venvs/vllm_neuron",
+      "version": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "version_info": [
+        3,
+        10,
+        12,
+        "final",
+        0
+      ]
+    }
+  ],
+  "affected_test_receipts": [
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v3-cap-tests-20261110-v1/py310-exit.json",
+        "sha256": "9eab3b338102bc04cf0819a32529bc8c6a8e6685417ec024e6c988c29ef3e10c"
+      },
+      "record": {
+        "command": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_minicpm5_saved_tap_runtime_contract_v3",
+          "check_prepare_minicpm5_saved_tap_runtime_v3"
+        ],
+        "returncode": 0
+      }
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v3-cap-tests-20261110-v1/py310-lifecycle-exit.json",
+        "sha256": "1d7494dd6c3bdb6edc97ac4f2c5a93e3520920fe869704089425a546fc8da1ae"
+      },
+      "record": {
+        "command": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_run_minicpm5_saved_tap_serial_v3"
+        ],
+        "returncode": 0
+      }
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v3-cap-tests-20261110-v1/py312-exit.json",
+        "sha256": "f2f7b43daac161705e9673af1c543a62c4da76da2e6a6f4ce79956cc0866b636"
+      },
+      "record": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_minicpm5_saved_tap_runtime_contract_v3",
+          "check_prepare_minicpm5_saved_tap_runtime_v3"
+        ],
+        "returncode": 0
+      }
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v3-cap-tests-20261110-v1/py312-lifecycle-exit.json",
+        "sha256": "3fb248a07c59551c2c4fa7012436cd4aca014d8aac22e4039786e1fa548c53b2"
+      },
+      "record": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_run_minicpm5_saved_tap_serial_v3"
+        ],
+        "returncode": 0
+      }
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v4-signature-tests-20261110-v1/py310-exit.json",
+        "sha256": "345f053b41e1545863a626dccc5cd234611402c5d62ea627fad7e44467d3fd6b"
+      },
+      "record": {
+        "command": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_minicpm5_saved_tap_runtime_contract_v4",
+          "check_prepare_minicpm5_saved_tap_runtime_v4",
+          "check_run_minicpm5_saved_tap_serial_v4"
+        ],
+        "returncode": 0
+      }
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-v4-signature-tests-20261110-v1/py312-exit.json",
+        "sha256": "1128710ddb58112354b532a520b83e50330fcc472915172ba67ab83ff784cb41"
+      },
+      "record": {
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "-v",
+          "check_minicpm5_saved_tap_runtime_contract_v4",
+          "check_prepare_minicpm5_saved_tap_runtime_v4",
+          "check_run_minicpm5_saved_tap_serial_v4"
+        ],
+        "returncode": 0
+      }
+    }
+  ],
+  "correction": "py312 denotes /usr/bin/python3 in these Mini v3/v4 files, observed Python 3.10.12; py310 denotes the separate vllm_neuron venv, also 3.10.12. Two environments, not two Python minor versions.",
+  "v3_test_executions": 66,
+  "v4_test_executions": 70,
+  "frozen_files_modified": false,
+  "nano_tests_not_reclassified": true,
+  "scientific_results_changed": false
+}
