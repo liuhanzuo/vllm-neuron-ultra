@@ -8,6 +8,8 @@ so an invalid saved artifact continues to fail instead of being silently rebuilt
 
 [MiniCPM5 当前输入×历史的 180 次完整调用已完成](minicpm5-current-history-20261110.md)：原对照同时使用官方当前归一化输入和历史 K/V，注意力输出汇总相对 L2 从 1.2720% 降至 0.4464%，24 帧全部改善，但仍无一帧完全复现官方输出。108 次上一轮真实输出对照、双 rank 一致性和退出后独立复核通过；40 项检查通过。三个路径在两项均来自官方时输出完全相同。既有整模型通过率仍为对照 29/32、候选 28/32，未新增提速；这是 CPU 参考局部诊断。此前[仅换官方历史的结果](minicpm5-official-history-20261110.md)完整保留。
 
+[Nemotron r12 已通过实际运行准入，完整 52 阶段验证重新启动](nemotron-r12-20261110.md)：106 项源码与启动检查通过，原科学、资源和性能门槛全部保留；整模型结果仍待运行及独立复核。MiniCPM5 下一步批大小／布局诊断和 Dory 目标层观测均仅完成源码准备。
+
 [Nemotron 存储维护已完成](nemotron-storage-recovery-20261110.md)，六份旧日志完整压缩保留后释放约 768 MiB 根盘空间；整模型重试仍需检查实时空间。[Dory 下一步诊断设计](dory-next-diagnostic-20261110.md)保留全部 87 个检查点与 7 个数值失败，计划区分注意力与残差归一化影响，尚未执行。
 
 The exact `e0a01d3` wheel passed [nine native installation/plugin/spawn/configuration checks](unified-native-checks-20261108.md) on 2026-11-08, after fixing a JSON-input bug in the probe. Fresh device and end-to-end qualification
