@@ -64,6 +64,12 @@ with projection and convolution candidates each passing 48/48 device comparisons
 The model service has entered startup; full-model compilation, qualification and
 new speedup claims remain pending.
 
+The [MiniCPM5 own-history replay driver report](docs/minicpm5-layer1-replay-driver-20261110.md)
+adds 13 synthetic full-history stream checks and 11 mocked native-driver/output
+checks. The stream consumes all 84 history calls and yields the 36 original
+decode inputs; every complete replay output must be saved and reread. Native replay
+and its outer serial runner remain pending; these checks add no model speedup.
+
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.
 This guide describes how to utilize AWS Inferentia and AWS Trainium AI accelerators in vLLM by using NxD Inference (`neuronx-distributed-inference`).
 

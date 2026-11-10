@@ -1,0 +1,54 @@
+{
+  "schema": "minicpm5_layer1_replay_driver_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-10T08:44:26.093447+00:00",
+  "source_preparation_passed": true,
+  "source_only": true,
+  "runtime_admitted": false,
+  "source_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-driver-source-plan-20261110-v1.json",
+    "sha256": "bf3a581007ee578566f171335c1ae60dc3d799a9e951c8bc2336f69a6f6d0705"
+  },
+  "source_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-own-history-driver-source-checks-20261110-v1.json",
+    "sha256": "03d63ca793a3027fabd5438eafe90e52e916e1af21d4aeb1fd031de00877e888"
+  },
+  "source_preparation_actual_exit": {
+    "session_id": 97604,
+    "exit_code": 0,
+    "tool_chunk": "73b509"
+  },
+  "stream_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-decode-stream-tests-actual-exit-20261110-v1.json",
+    "sha256": "26322e00e9068b399f49a747d45ce9c143179075def723a7fa8c9b5638b89e25"
+  },
+  "driver_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-driver-tests-actual-exit-20261110-v1.json",
+    "sha256": "172c9357b3574fd83c5afd10bf4490a6d10e6a7df4b21ac702d261200dadc499"
+  },
+  "actual_stream_tests": 13,
+  "actual_driver_tests": 11,
+  "verified_scope": [
+    "Stream reads all42 calls per rank and restores every full input cache including prefill history, then yields18 complete four-row decode inputs per rank.",
+    "Every reread payload/cache/tap report must exactly match the independent saved-data audit. Source fixtures cover all84calls and36decodes without native imports.",
+    "Native driver core uses unchanged full42layer decode constructor, original bucket selection, official layer1 shard byte verifier and original attention callable.",
+    "Every complete16KiB output is saved under owned rank/arm/call path and independently reread. Both ranks36outputs require589824rawbytes. Partial/duplicate/mismatched outputs cannot produce a completed driver result.",
+    "Complete source preparation preserves original scientific plan and every previous source pin;2363files160634812bytes."
+  ],
+  "limitations": [
+    "Actual original collection and combined saved-data audit are not yet executed.",
+    "Stream tests use synthetic payloads and a numeric-audit provenance fixture, not actual numeric audit exit lineage.",
+    "Driver11tests mock native constructor, weights, bucket selection, attention and stream; they prove sequencing/output handling only.",
+    "Original native attention callable remains unexecuted and unadmitted. Its success path is not covered by the new synthetic driver checks.",
+    "Separate serial outer runner, actual TP2 rank entrypoint, exact runtime plan/review, full successful collector/audit exit provenance, physical drain, resource/output limits and cleanup-before-unlock still require integration.",
+    "No actual complete cache/tap/official-weight bytes or native model parameters were read this turn."
+  ],
+  "original_cpu_numerical_passed": 29,
+  "original_cpu_top1_passed": 32,
+  "both_bf16_candidates_numerical_passed": 28,
+  "both_bf16_candidates_top1_passed": 31,
+  "original_frames": 32,
+  "attention_causality_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
