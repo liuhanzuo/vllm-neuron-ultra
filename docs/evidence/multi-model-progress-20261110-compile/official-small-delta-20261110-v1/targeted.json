@@ -1,0 +1,464 @@
+{
+  "schema": "official_small_targeted_20261110_v1",
+  "checked_at": "2026-11-10T16:02:15.528671+00:00",
+  "candidates": [
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-DSpark-gguf",
+      "sha": "cab493a5a26516a1c4c6e07c73b4470ff854a898",
+      "createdAt": "2026-10-26T08:46:38.000Z",
+      "lastModified": "2026-11-09T11:07:31.000Z",
+      "downloads": 8910,
+      "likes": 10,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": null,
+      "config": {},
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "library_name": "llama.cpp",
+        "tags": [
+          "minicpm-ocr",
+          "dspark",
+          "speculative-decoding",
+          "draft-model",
+          "gguf",
+          "llama.cpp",
+          "ocr"
+        ],
+        "base_model": "openbmb/MiniCPM-OCR-1.0",
+        "base_model_relation": "finetune"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-DSpark",
+      "sha": "cb24ab4f593389832024a688216e05bf3803950e",
+      "createdAt": "2026-10-26T08:46:24.000Z",
+      "lastModified": "2026-11-09T11:01:41.000Z",
+      "downloads": 8459,
+      "likes": 14,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": {
+        "parameters": {
+          "I64": 114688,
+          "BF16": 296837889
+        },
+        "total": 296952577
+      },
+      "config": {
+        "architectures": [
+          "Qwen3DSparkModel"
+        ],
+        "model_type": "qwen3"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "library_name": "transformers",
+        "tags": [
+          "minicpm-ocr",
+          "dspark",
+          "speculative-decoding",
+          "draft-model",
+          "ocr",
+          "multimodal"
+        ],
+        "base_model": "openbmb/MiniCPM-OCR-1.0",
+        "base_model_relation": "finetune"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-GPTQ",
+      "sha": "d835d9252d54f8505ec490e5f88ec342b3905eb7",
+      "createdAt": "2026-10-25T08:04:20.000Z",
+      "lastModified": "2026-11-09T11:06:36.000Z",
+      "downloads": 6005,
+      "likes": 6,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": {
+        "parameters": {
+          "I32": 497025024,
+          "BF16": 548856240,
+          "F16": 254552896
+        },
+        "total": 1300434160
+      },
+      "config": {
+        "architectures": [
+          "MiniCPMOcrForConditionalGeneration"
+        ],
+        "model_type": "minicpm_ocr",
+        "quantization_config": {
+          "bits": 4,
+          "quant_method": "gptq"
+        },
+        "tokenizer_config": {
+          "bos_token": "<|im_start|>",
+          "eos_token": "<|im_end|>",
+          "unk_token": "<unk>",
+          "pad_token": "<|endoftext|>"
+        },
+        "chat_template_jinja": "{%- if enable_thinking is not defined -%}\n    {%- set enable_thinking = false -%}\n{%- endif -%}\n{%- macro render_content(content, is_system_content=false) -%}\n    {%- if content is string -%}\n        {{- content -}}\n    {%- elif content is iterable and content is not mapping -%}\n        {%- set ns = namespace(parts=[]) -%}\n        {%- for item in content -%}\n            {%- if 'image' in item or 'image_url' in item or item.type == 'image' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain images.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|image_pad|>'] -%}\n            {%- elif 'video' in item or item.type == 'video' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain videos.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|video_pad|>'] -%}\n            {%- elif 'text' in item -%}\n                {%- set ns.parts = ns.parts + [item.text] -%}\n            {%- else -%}\n                {{- raise_exception('Unexpected item type in content.') -}}\n            {%- endif -%}\n        {%- endfor -%}\n        {{- ns.parts | join('\\n') -}}\n    {%- elif content is none or content is undefined -%}\n        {{- '' -}}\n    {%- else -%}\n        {{- raise_exception('Unexpected content type.') -}}\n    {%- endif -%}\n{%- endmacro -%}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"# Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {%- if content %}\n            {{- '\\n\\n' + content }}\n        {%- endif %}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {{- '<|im_start|>system\\n' + content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" %}\n        {%- set content = render_content(message.content)|trim %}\n        {%- if not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if ns.multi_step_tool %}\n    {{- raise_exception('No user query found in messages.') }}\n{%- endif %}\n{%- for message in messages %}\n    {%- set content = render_content(message.content)|trim %}\n    {%- if message.role == \"system\" %}\n        {%- if not loop.first %}\n            {{- raise_exception('System message must be at the beginning.') }}\n        {%- endif %}\n    {%- elif message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if loop.index0 > ns.last_query_index and reasoning_content %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n\\n</think>\\n\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is defined %}\n                    {%- for args_name, args_value in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected message role.') }}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is true %}\n        {{- '<think>\\n' }}\n    {%- else %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "library_name": "minicpm-ocr",
+        "tags": [
+          "minicpm-ocr",
+          "ocr",
+          "document-parsing",
+          "multimodal",
+          "gptq",
+          "4-bit",
+          "quantized"
+        ],
+        "base_model": "openbmb/MiniCPM-OCR-1.0",
+        "base_model_relation": "quantized"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-AWQ",
+      "sha": "b7e9594897a3677f0ccff15a10cfe80b4305f70c",
+      "createdAt": "2026-10-25T07:55:44.000Z",
+      "lastModified": "2026-11-09T11:06:58.000Z",
+      "downloads": 8560,
+      "likes": 5,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": {
+        "parameters": {
+          "I32": 497025024,
+          "BF16": 803409136
+        },
+        "total": 1300434160
+      },
+      "config": {
+        "architectures": [
+          "MiniCPMOcrForConditionalGeneration"
+        ],
+        "model_type": "minicpm_ocr",
+        "quantization_config": {
+          "bits": 4,
+          "quant_method": "awq",
+          "modules_to_not_convert": [
+            "in_proj_b",
+            "in_proj_a",
+            "model.vision_tower",
+            "model.merger",
+            "vpm",
+            "vit_merger",
+            "merger",
+            "lm_head"
+          ]
+        },
+        "tokenizer_config": {
+          "bos_token": "<|im_start|>",
+          "eos_token": "<|im_end|>",
+          "unk_token": "<unk>",
+          "pad_token": "<|endoftext|>"
+        },
+        "chat_template_jinja": "{%- if enable_thinking is not defined -%}\n    {%- set enable_thinking = false -%}\n{%- endif -%}\n{%- macro render_content(content, is_system_content=false) -%}\n    {%- if content is string -%}\n        {{- content -}}\n    {%- elif content is iterable and content is not mapping -%}\n        {%- set ns = namespace(parts=[]) -%}\n        {%- for item in content -%}\n            {%- if 'image' in item or 'image_url' in item or item.type == 'image' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain images.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|image_pad|>'] -%}\n            {%- elif 'video' in item or item.type == 'video' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain videos.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|video_pad|>'] -%}\n            {%- elif 'text' in item -%}\n                {%- set ns.parts = ns.parts + [item.text] -%}\n            {%- else -%}\n                {{- raise_exception('Unexpected item type in content.') -}}\n            {%- endif -%}\n        {%- endfor -%}\n        {{- ns.parts | join('\\n') -}}\n    {%- elif content is none or content is undefined -%}\n        {{- '' -}}\n    {%- else -%}\n        {{- raise_exception('Unexpected content type.') -}}\n    {%- endif -%}\n{%- endmacro -%}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"# Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {%- if content %}\n            {{- '\\n\\n' + content }}\n        {%- endif %}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {{- '<|im_start|>system\\n' + content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" %}\n        {%- set content = render_content(message.content)|trim %}\n        {%- if not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if ns.multi_step_tool %}\n    {{- raise_exception('No user query found in messages.') }}\n{%- endif %}\n{%- for message in messages %}\n    {%- set content = render_content(message.content)|trim %}\n    {%- if message.role == \"system\" %}\n        {%- if not loop.first %}\n            {{- raise_exception('System message must be at the beginning.') }}\n        {%- endif %}\n    {%- elif message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if loop.index0 > ns.last_query_index and reasoning_content %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n\\n</think>\\n\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is defined %}\n                    {%- for args_name, args_value in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected message role.') }}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is true %}\n        {{- '<think>\\n' }}\n    {%- else %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "library_name": "minicpm-ocr",
+        "tags": [
+          "minicpm-ocr",
+          "ocr",
+          "document-parsing",
+          "multimodal",
+          "awq",
+          "4-bit",
+          "quantized"
+        ],
+        "base_model": "openbmb/MiniCPM-OCR-1.0",
+        "base_model_relation": "quantized"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-gguf",
+      "sha": "0133ad8db635210441a55dcf421e25bfb9915142",
+      "createdAt": "2026-10-21T15:52:39.000Z",
+      "lastModified": "2026-11-09T10:02:59.000Z",
+      "downloads": 48053,
+      "likes": 132,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": null,
+      "config": {},
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "library_name": "minicpm-ocr",
+        "tags": [
+          "minicpm-ocr",
+          "ocr",
+          "document-parsing",
+          "gguf",
+          "llama.cpp",
+          "multimodal",
+          "quantized"
+        ],
+        "base_model": [
+          "openbmb/MiniCPM-V-4.6"
+        ],
+        "base_model_relation": "quantized"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0",
+      "sha": "883ca368d17335b9ce5aa6fef4d000ef0684fcaa",
+      "createdAt": "2026-10-21T15:51:40.000Z",
+      "lastModified": "2026-11-08T17:07:22.000Z",
+      "downloads": 99118,
+      "likes": 454,
+      "pipeline_tag": "image-text-to-text",
+      "safetensors": {
+        "parameters": {
+          "BF16": 1300434160
+        },
+        "total": 1300434160
+      },
+      "config": {
+        "architectures": [
+          "MiniCPMOcrForConditionalGeneration"
+        ],
+        "model_type": "minicpm_ocr",
+        "tokenizer_config": {
+          "bos_token": "<|im_start|>",
+          "eos_token": "<|im_end|>",
+          "unk_token": "<unk>",
+          "pad_token": "<|endoftext|>"
+        },
+        "chat_template_jinja": "{%- if enable_thinking is not defined -%}\n    {%- set enable_thinking = false -%}\n{%- endif -%}\n{%- macro render_content(content, is_system_content=false) -%}\n    {%- if content is string -%}\n        {{- content -}}\n    {%- elif content is iterable and content is not mapping -%}\n        {%- set ns = namespace(parts=[]) -%}\n        {%- for item in content -%}\n            {%- if 'image' in item or 'image_url' in item or item.type == 'image' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain images.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|image_pad|>'] -%}\n            {%- elif 'video' in item or item.type == 'video' -%}\n                {%- if is_system_content -%}\n                    {{- raise_exception('System message cannot contain videos.') -}}\n                {%- endif -%}\n                {%- set ns.parts = ns.parts + ['<|video_pad|>'] -%}\n            {%- elif 'text' in item -%}\n                {%- set ns.parts = ns.parts + [item.text] -%}\n            {%- else -%}\n                {{- raise_exception('Unexpected item type in content.') -}}\n            {%- endif -%}\n        {%- endfor -%}\n        {{- ns.parts | join('\\n') -}}\n    {%- elif content is none or content is undefined -%}\n        {{- '' -}}\n    {%- else -%}\n        {{- raise_exception('Unexpected content type.') -}}\n    {%- endif -%}\n{%- endmacro -%}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"# Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {%- if content %}\n            {{- '\\n\\n' + content }}\n        {%- endif %}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n    {%- if messages[0].role == 'system' %}\n        {%- set content = render_content(messages[0].content, true)|trim %}\n        {{- '<|im_start|>system\\n' + content + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" %}\n        {%- set content = render_content(message.content)|trim %}\n        {%- if not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if ns.multi_step_tool %}\n    {{- raise_exception('No user query found in messages.') }}\n{%- endif %}\n{%- for message in messages %}\n    {%- set content = render_content(message.content)|trim %}\n    {%- if message.role == \"system\" %}\n        {%- if not loop.first %}\n            {{- raise_exception('System message must be at the beginning.') }}\n        {%- endif %}\n    {%- elif message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if loop.index0 > ns.last_query_index and reasoning_content %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n\\n</think>\\n\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is defined %}\n                    {%- for args_name, args_value in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected message role.') }}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is true %}\n        {{- '<think>\\n' }}\n    {%- else %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- endif %}\n{%- endif %}"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "language": [
+          "en",
+          "zh"
+        ],
+        "pipeline_tag": "image-text-to-text",
+        "tags": [
+          "minicpm-ocr",
+          "ocr",
+          "document-parsing",
+          "multimodal",
+          "vision-language",
+          "table-recognition",
+          "formula-recognition"
+        ],
+        "base_model": [
+          "openbmb/MiniCPM-V-4.6"
+        ],
+        "library_name": "minicpm-ocr"
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    },
+    {
+      "id": "tencent/Qwen3.8-27B-DSpine-b16",
+      "sha": "5f54174d301dbca65d9aa4448dc47e56732d9a12",
+      "createdAt": "2026-11-07T14:20:29.000Z",
+      "lastModified": "2026-11-09T09:26:40.000Z",
+      "downloads": 2627,
+      "likes": 160,
+      "pipeline_tag": "text-generation",
+      "safetensors": {
+        "parameters": {
+          "BF16": 2025912064
+        },
+        "total": 2025912064
+      },
+      "config": {
+        "architectures": [
+          "DFlashDraftModel"
+        ],
+        "model_type": "qwen3"
+      },
+      "cardData": {
+        "license": "apache-2.0",
+        "base_model": [
+          "Qwen/Qwen3.8-27B"
+        ],
+        "pipeline_tag": "text-generation",
+        "inference": false,
+        "tags": [
+          "dspine",
+          "speculative-decoding",
+          "draft-model",
+          "sglang"
+        ]
+      },
+      "gated": false,
+      "private": false,
+      "disabled": false
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-DSpark",
+      "file": "config.json",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "cb24ab4f593389832024a688216e05bf3803950e",
+          "bytes": 1409,
+          "sha256": "ba0a9ed774ca1e5e4d7d97517379e477c7e8b6c151154e4b0556b0abd449d2e3",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0-DSpark.current.config.json"
+        },
+        {
+          "kind": "previous",
+          "revision": "2dbf4b618bc9889330c3e267eec15fe2b0a8f672",
+          "bytes": 1409,
+          "sha256": "ba0a9ed774ca1e5e4d7d97517379e477c7e8b6c151154e4b0556b0abd449d2e3",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0-DSpark.previous.config.json"
+        }
+      ],
+      "byte_identical": true
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0-DSpark",
+      "file": "README.md",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "cb24ab4f593389832024a688216e05bf3803950e",
+          "bytes": 7919,
+          "sha256": "281d255aaaf9b3f9b24c8723f22aa7582034d6eaeb544659bef7541eb326bc90",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0-DSpark.current.README.md"
+        },
+        {
+          "kind": "previous",
+          "revision": "2dbf4b618bc9889330c3e267eec15fe2b0a8f672",
+          "bytes": 6192,
+          "sha256": "be84d7044f6d8454feeee221442bfd4cc1cea96706f298530e63dd597deaf3bc",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0-DSpark.previous.README.md"
+        }
+      ],
+      "byte_identical": false
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0",
+      "file": "config.json",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "883ca368d17335b9ce5aa6fef4d000ef0684fcaa",
+          "bytes": 2275,
+          "sha256": "762025491b206967a3c29c3e36ff2cccd8af6a8c750360b61dc91882b573f759",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0.current.config.json"
+        },
+        {
+          "kind": "previous",
+          "revision": "b2890ab4ce9d18c7f75b90966b76a972b6c9ac58",
+          "bytes": 2275,
+          "sha256": "762025491b206967a3c29c3e36ff2cccd8af6a8c750360b61dc91882b573f759",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0.previous.config.json"
+        }
+      ],
+      "byte_identical": true
+    },
+    {
+      "id": "openbmb/MiniCPM-OCR-1.0",
+      "file": "README.md",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "883ca368d17335b9ce5aa6fef4d000ef0684fcaa",
+          "bytes": 19162,
+          "sha256": "41397755907ff633bc4aa689c3660a1ef8e1e62b642e0944c0abccc97004ad27",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0.current.README.md"
+        },
+        {
+          "kind": "previous",
+          "revision": "b2890ab4ce9d18c7f75b90966b76a972b6c9ac58",
+          "bytes": 17446,
+          "sha256": "0d93de070f7bf0c1764445c5ac02849dc316bae59c907782ec16984250566ec2",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/openbmb__MiniCPM-OCR-1.0.previous.README.md"
+        }
+      ],
+      "byte_identical": false
+    },
+    {
+      "id": "tencent/Qwen3.8-27B-DSpine-b16",
+      "file": "config.json",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "5f54174d301dbca65d9aa4448dc47e56732d9a12",
+          "bytes": 2302,
+          "sha256": "c2aa9e3ff22766ea7df0fa5b5f5f7d2035ae722671c6b7eb58b65578705e6815",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/tencent__Qwen3.8-27B-DSpine-b16.current.config.json"
+        },
+        {
+          "kind": "previous",
+          "revision": "ea909c0f5fab8865f9e14600334f55f7ce47308f",
+          "bytes": 2302,
+          "sha256": "c2aa9e3ff22766ea7df0fa5b5f5f7d2035ae722671c6b7eb58b65578705e6815",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/tencent__Qwen3.8-27B-DSpine-b16.previous.config.json"
+        }
+      ],
+      "byte_identical": true
+    },
+    {
+      "id": "tencent/Qwen3.8-27B-DSpine-b16",
+      "file": "README.md",
+      "versions": [
+        {
+          "kind": "current",
+          "revision": "5f54174d301dbca65d9aa4448dc47e56732d9a12",
+          "bytes": 10731,
+          "sha256": "f81e53db946c55ca6787a3fefd479ebc5852540dd86db69ef340f2b108bfb14b",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/tencent__Qwen3.8-27B-DSpine-b16.current.README.md"
+        },
+        {
+          "kind": "previous",
+          "revision": "ea909c0f5fab8865f9e14600334f55f7ce47308f",
+          "bytes": 10628,
+          "sha256": "2df6198c3150dd9c2b65c708fc5d144c970fd90b8c1393c45a9eafe4b764ee54",
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261110-v1/tencent__Qwen3.8-27B-DSpine-b16.previous.README.md"
+        }
+      ],
+      "byte_identical": false
+    }
+  ],
+  "source_only": true,
+  "weights_downloaded": false,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,40 @@
+{
+  "schema": "minicpm5_sdk_source_compatibility_root_review_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-10T16:03:37.511367+00:00",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-source-compatibility-measurement-delivery-20261110-v2.json",
+    "sha256": "d470a75c3934800d838c44ac9f59512692b5b7dd69845334137566bcaa74c0c0"
+  },
+  "source_only": true,
+  "source_review_passed": true,
+  "all_references_hash_size_stability_verified": 9,
+  "measurement_harness_diff": [
+    "--- \n",
+    "+++ \n",
+    "@@ -138,10 +138,10 @@\n",
+    " ",
+    " result=dict(schema='minicpm5_sdk_batch_layout_source_compatibility_measurement_v1',",
+    "-    measurement_version=4,source_only=True,limits=LIMITS,production_files_written=False,actual_build_called=False,",
+    "+    measurement_version=5,measured_builder_module='research.prepare_minicpm5_layer1_sdk_batch_layout_v5',source_only=True,limits=LIMITS,production_files_written=False,actual_build_called=False,",
+    "     actual_r12_completion_binding_created=False,actual_completed_or_physical_called=False,",
+    "     actual_native_hashing=False,model_or_tensor_bytes_read=0)",
+    " try:",
+    "     from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources",
+    "-    from research import prepare_minicpm5_layer1_sdk_batch_layout_v2 as builder",
+    "+    from research import prepare_minicpm5_layer1_sdk_batch_layout_v5 as builder",
+    "     from research.prepare_dory_residual_spec_v3 import local_imports",
+    "     if any(n.split('.')[0]in NATIVE_PREFIXES for n in sys.modules):raise RuntimeError('Native/model dependency unexpectedly imported')"
+  ],
+  "actual_exit_reported_by": "/root/mini_official_history_core_20261110",
+  "actual_session": 60910,
+  "actual_terminal_chunk": "2a7ab1",
+  "actual_exit_code": 0,
+  "full_source_scan_repeated_by_root": false,
+  "measured_source_count": 44021,
+  "measured_local_closure_files": 544,
+  "production_guard_cost_not_measured": true,
+  "production_admission": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

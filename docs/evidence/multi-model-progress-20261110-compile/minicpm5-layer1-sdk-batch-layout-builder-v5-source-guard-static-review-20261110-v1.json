@@ -1,0 +1,114 @@
+{
+  "alias_chain": [
+    "runner.p = masks.p",
+    "masks.p = five.p",
+    "five.p = minicpm5_layer0_execution_protocol_v7",
+    "protocol_v7.lock_proof = protocol_v4.lock_proof",
+    "protocol_v7.clear_window = protocol_v4.clear_window",
+    "protocol_v4.clear_window imported from minicpm5_layer0_runtime_auth_v1"
+  ],
+  "builder": {
+    "build_line": 117,
+    "complete_text_verification": "Every text source still authenticated; no sampling or skipped inherited pins.",
+    "input_metadata_reader": "Reader guards before/after each metadata read and compares that input identity only; it does not rescan all prior inputs every call.",
+    "io_count_note": "Static Python read invocations only: current owner stat/cmdline/cgroup/stat, /proc/locks, two performance status JSONs. Excludes lstat/stat calls, kernel caching and other builder phases; not measured physical IO or latency.",
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py",
+    "per_source_complete_historical_owner_scan": false,
+    "per_source_complete_metadata_file_scan": false,
+    "per_source_guard": "runner.p.lock_proof(owner,lock); runner.p.clear_window()",
+    "previous_owner_scan": "One explicit loop over done['owners'] before source closure/classification verification.",
+    "reader_line": 23,
+    "source_guard_calls_in_measured_partition": 43994,
+    "successful_guard_small_read_invocations_for_same_count": 307958,
+    "successful_guard_small_read_invocations_per_call": 7
+  },
+  "concrete_guard_implementations": [
+    {
+      "function": "lock_proof",
+      "line": 116,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py"
+    },
+    {
+      "function": "proc",
+      "line": 86,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py"
+    },
+    {
+      "function": "clear_window",
+      "line": 20,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py"
+    }
+  ],
+  "frozen_files_changed": false,
+  "guard_runtime_cost_measured": false,
+  "limitations": [
+    "Measurement guard checks inherited observer FD with fstat only;71.49s must not be presented as production builder/worker/auditor runtime.",
+    "Full metadata completion, canonical checks, runtime admission, physical historical drains, and any production resource budget remain unmeasured.",
+    "No frozen code changed or new guard optimization implemented."
+  ],
+  "production_builder_executed": false,
+  "related_paths": {
+    "auditor": "Auditor v2 guard scans lineage['owners'] (exact outer/coordinator/two ranks from core.validate) plus that one owned model cgroup per invocation. This is not the entire historical owners set, but recursive cgroup work is not covered by source-only timing.",
+    "rank_guard": "RankGuard performs constant-scope fast owner/lock/performance checks every call; all done owners, watched metadata identities and output usage are checked at first call, at >=1-second intervals, and required boundaries.",
+    "runtime_context": "Inherited guard adds current-rank identity/environment checks; after receipt authentication two runtime receipt identities and nine native identities are checked by stat, not native hashes. This is separate from builder source-only measurement."
+  },
+  "schema": "minicpm5_sdk_builder_v5_guard_static_cost_review_v1",
+  "source_only": true,
+  "source_refs": [
+    {
+      "bytes": 10220,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py",
+      "sha256": "3cfcea76282ea3c151b40aac6ffb60d422e0dd35e50baee924af024eadb6b9d4"
+    },
+    {
+      "bytes": 35515,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py",
+      "sha256": "109f3c9d25d26eee2c2b2ffe291db9dcaf8413c064e020c6ee65a7326d118947"
+    },
+    {
+      "bytes": 4289,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_runtime_context_v2.py",
+      "sha256": "121315cf5df51fc9a85f86eb2c863dc89270402032d28ec9a6a152071e2b7f05"
+    },
+    {
+      "bytes": 13100,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py",
+      "sha256": "d1bd188a44f3d30cf52ccd171b1eed05e6fc7246d96d68dff39591449b6ced6b"
+    },
+    {
+      "bytes": 20294,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_decode_mask_analysis_v1.py",
+      "sha256": "6eff41371dc6a78b59ffea14019d65fbac1f3eaa7d4285f4a53791e337d4b139"
+    },
+    {
+      "bytes": 19276,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py",
+      "sha256": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1"
+    },
+    {
+      "bytes": 24731,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v7.py",
+      "sha256": "8fef6d5ed823de6179d30183331ad0c9adc39cb76920c673e06d45234f3bcb94"
+    },
+    {
+      "bytes": 22969,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py",
+      "sha256": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185"
+    },
+    {
+      "bytes": 8169,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py",
+      "sha256": "92e6f2e7cf1009e94ce548474ea5cd455b7cc1ea00813fb44f5790ae85fb1a27"
+    },
+    {
+      "bytes": 14405,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py",
+      "sha256": "50acc669e1f55f7463c8490f23b412986b92276392a6ae7fefcd7d52e19433a2"
+    },
+    {
+      "bytes": 9482,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py",
+      "sha256": "6fdb0e017ea4f6ef55ae74a62ea96171bb8b20e6db3a6243ac38666f241d3ab7"
+    }
+  ]
+}
