@@ -1,0 +1,1499 @@
+{
+  "schema": "minicpm5_saved_tap_r2_summary_v1",
+  "actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-saved-tap-r2-actual-exit-20261110-v1.json",
+    "sha256": "9c11fd1c6bd4dc7a90cb85809fe7bfd9fb130359a7b3fdd7d88569e0c6ec8abf",
+    "bytes": 3512
+  },
+  "numeric_report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-saved-tap-analysis-20261110-r2/numeric-report.json",
+    "sha256": "b6dfb9990659560475e47e304ec48ed1f6c4172ef16321c961c297423d2329bb"
+  },
+  "elapsed_seconds": 330.6756475321017,
+  "original_summaries": {
+    "strict_anchor_s0": {
+      "complete": true,
+      "frames": 32,
+      "prefill_frames": 8,
+      "decode_frames": 24,
+      "passed": false,
+      "failed_frames": [
+        1,
+        9,
+        13
+      ],
+      "prefill_failed": 1,
+      "decode_failed": 2,
+      "argmax_match_fraction": 1.0,
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 0.75,
+          "mean_abs_error": 0.10412118583917618,
+          "cosine": 0.9987252354621887,
+          "kl_reference_to_neuron": 0.10126954317092896,
+          "argmax_match": true,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 1062
+        },
+        "failed_criteria": [
+          "KL"
+        ]
+      },
+      "full_model_qualified": false
+    },
+    "strict_layer0_full_bf16_prefill_only": {
+      "complete": true,
+      "frames": 32,
+      "prefill_frames": 8,
+      "decode_frames": 24,
+      "passed": false,
+      "failed_frames": [
+        1,
+        13,
+        16,
+        17
+      ],
+      "prefill_failed": 3,
+      "decode_failed": 1,
+      "argmax_match_fraction": 0.96875,
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292347431183,
+          "cosine": 0.9971520304679871,
+          "kl_reference_to_neuron": 0.32932785153388977,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      },
+      "full_model_qualified": false
+    },
+    "strict_layer0_full_bf16_both_phases": {
+      "complete": true,
+      "frames": 32,
+      "prefill_frames": 8,
+      "decode_frames": 24,
+      "passed": false,
+      "failed_frames": [
+        1,
+        13,
+        16,
+        17
+      ],
+      "prefill_failed": 3,
+      "decode_failed": 1,
+      "argmax_match_fraction": 0.96875,
+      "frame1": {
+        "frame": {
+          "index": 1,
+          "fixture": 7,
+          "slot": 1,
+          "step": 0
+        },
+        "physical_row": 0,
+        "current_position": 1230,
+        "metrics": {
+          "max_abs_error": 1.375,
+          "mean_abs_error": 0.15589292347431183,
+          "cosine": 0.9971520304679871,
+          "kl_reference_to_neuron": 0.32932785153388977,
+          "argmax_match": false,
+          "reference_margin": 1.125,
+          "reference_top1": 1062,
+          "neuron_top1": 15182
+        },
+        "failed_criteria": [
+          "KL",
+          "high_margin_argmax"
+        ]
+      },
+      "full_model_qualified": false
+    }
+  },
+  "pairwise_vector_comparisons": 384,
+  "raw_bytes_validated": 3145728,
+  "replicated_ranks_byte_equal": true,
+  "ranks_counted_once": true,
+  "comparisons": [
+    {
+      "left": "strict_anchor_s0",
+      "right": "strict_layer0_full_bf16_prefill_only",
+      "by_phase": {
+        "prefill": {
+          "layers.0.self_attn": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 4.920197038418253e-05,
+            "delta_rms_max": 0.00018327822188888757,
+            "relative_l2_median": 0.0018783764438313972,
+            "max_abs_delta": 0.0078125
+          },
+          "layers.0": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.00014055730699865903,
+            "delta_rms_max": 0.00040389396836615414,
+            "relative_l2_median": 0.00258713451679053,
+            "max_abs_delta": 0.001953125
+          },
+          "layers.41.self_attn": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.015741917396532308,
+            "delta_rms_max": 0.09021117933612605,
+            "relative_l2_median": 0.05666286861474795,
+            "max_abs_delta": 0.375
+          },
+          "layers.41": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.05595675904439124,
+            "delta_rms_max": 0.21563221320754553,
+            "relative_l2_median": 0.045009750501975254,
+            "max_abs_delta": 1.5
+          }
+        },
+        "decode": {
+          "layers.0.self_attn": {
+            "frames": 24,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          },
+          "layers.0": {
+            "frames": 24,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          },
+          "layers.41.self_attn": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.008540290776038212,
+            "delta_rms_max": 0.04874981585368719,
+            "relative_l2_median": 0.035868195450644624,
+            "max_abs_delta": 0.4375
+          },
+          "layers.41": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.05727163848879634,
+            "delta_rms_max": 0.16242955406244122,
+            "relative_l2_median": 0.033671755672951595,
+            "max_abs_delta": 2.0
+          }
+        }
+      },
+      "key_frames": [
+        {
+          "frame": 1,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 0.75,
+                "mean_abs_error": 0.10412118583917618,
+                "cosine": 0.9987252354621887,
+                "kl_reference_to_neuron": 0.10126954317092896,
+                "argmax_match": true,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 1062
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 1.375,
+                "mean_abs_error": 0.15589292347431183,
+                "cosine": 0.9971520304679871,
+                "kl_reference_to_neuron": 0.32932785153388977,
+                "argmax_match": false,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 15182
+              },
+              "failed_criteria": [
+                "KL",
+                "high_margin_argmax"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 695,
+              "delta_rms": 4.920197038418253e-05,
+              "relative_l2": 0.0014803337429731573,
+              "max_abs_delta": 0.00048828125
+            },
+            "layers.0": {
+              "changed_values": 998,
+              "delta_rms": 0.0001783253033456044,
+              "relative_l2": 0.003140170171070222,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1995,
+              "delta_rms": 0.037847801005219235,
+              "relative_l2": 0.06313097484595243,
+              "max_abs_delta": 0.1484375
+            },
+            "layers.41": {
+              "changed_values": 1982,
+              "delta_rms": 0.16209187721990673,
+              "relative_l2": 0.05419618406999637,
+              "max_abs_delta": 1.125
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 4.920197038418253e-05,
+              "late_delta_rms": 0.037847801005219235,
+              "late_to_early_rms_ratio": 769.2334414596241,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0001783253033456044,
+              "late_delta_rms": 0.16209187721990673,
+              "late_to_early_rms_ratio": 908.967343270201,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 9,
+          "phase": "decode",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 1.125,
+                "mean_abs_error": 0.17521408200263977,
+                "cosine": 0.9977738261222839,
+                "kl_reference_to_neuron": 0.028122015297412872,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 0.9375,
+                "mean_abs_error": 0.15719074010849,
+                "cosine": 0.9981546998023987,
+                "kl_reference_to_neuron": 0.006437154486775398,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": []
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.0": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1992,
+              "delta_rms": 0.039629541091500554,
+              "relative_l2": 0.06899393994118891,
+              "max_abs_delta": 0.4375
+            },
+            "layers.41": {
+              "changed_values": 1989,
+              "delta_rms": 0.16242955406244122,
+              "relative_l2": 0.06905075862921563,
+              "max_abs_delta": 0.6875
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.039629541091500554,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": true,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.16242955406244122,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": true,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 16,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.125,
+                "mean_abs_error": 0.16635869443416595,
+                "cosine": 0.9969666600227356,
+                "kl_reference_to_neuron": 0.018798664212226868,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": []
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.359375,
+                "mean_abs_error": 0.2043772041797638,
+                "cosine": 0.9954079389572144,
+                "kl_reference_to_neuron": 0.026069695129990578,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 692,
+              "delta_rms": 6.536931533510959e-05,
+              "relative_l2": 0.001961287780241132,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.0": {
+              "changed_values": 842,
+              "delta_rms": 0.0001583322866875325,
+              "relative_l2": 0.0025868328772591,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1990,
+              "delta_rms": 0.09021117933612605,
+              "relative_l2": 0.08096094131755957,
+              "max_abs_delta": 0.34375
+            },
+            "layers.41": {
+              "changed_values": 1994,
+              "delta_rms": 0.20050443880552643,
+              "relative_l2": 0.06862866758295794,
+              "max_abs_delta": 1.0
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 6.536931533510959e-05,
+              "late_delta_rms": 0.09021117933612605,
+              "late_to_early_rms_ratio": 1380.02331634754,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0001583322866875325,
+              "late_delta_rms": 0.20050443880552643,
+              "late_to_early_rms_ratio": 1266.3521951225293,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 17,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 0.6875,
+                "mean_abs_error": 0.12014298141002655,
+                "cosine": 0.998630166053772,
+                "kl_reference_to_neuron": 0.010951168835163116,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": []
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.1353095918893814,
+                "cosine": 0.9982230067253113,
+                "kl_reference_to_neuron": 0.039746783673763275,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 673,
+              "delta_rms": 0.00018234980572426072,
+              "relative_l2": 0.005411120427173652,
+              "max_abs_delta": 0.0078125
+            },
+            "layers.0": {
+              "changed_values": 1607,
+              "delta_rms": 0.00040389396836615414,
+              "relative_l2": 0.006558220189234841,
+              "max_abs_delta": 0.001953125
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1999,
+              "delta_rms": 0.0552336443436799,
+              "relative_l2": 0.06970533939167153,
+              "max_abs_delta": 0.375
+            },
+            "layers.41": {
+              "changed_values": 1988,
+              "delta_rms": 0.21563221320754553,
+              "relative_l2": 0.06616900703144818,
+              "max_abs_delta": 1.0625
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.00018234980572426072,
+              "late_delta_rms": 0.0552336443436799,
+              "late_to_early_rms_ratio": 302.8993868367546,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.00040389396836615414,
+              "late_delta_rms": 0.21563221320754553,
+              "late_to_early_rms_ratio": 533.8832220739231,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "left": "strict_anchor_s0",
+      "right": "strict_layer0_full_bf16_both_phases",
+      "by_phase": {
+        "prefill": {
+          "layers.0.self_attn": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 4.920197038418253e-05,
+            "delta_rms_max": 0.00018327822188888757,
+            "relative_l2_median": 0.0018783764438313972,
+            "max_abs_delta": 0.0078125
+          },
+          "layers.0": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.00014055730699865903,
+            "delta_rms_max": 0.00040389396836615414,
+            "relative_l2_median": 0.00258713451679053,
+            "max_abs_delta": 0.001953125
+          },
+          "layers.41.self_attn": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.015741917396532308,
+            "delta_rms_max": 0.09021117933612605,
+            "relative_l2_median": 0.05666286861474795,
+            "max_abs_delta": 0.375
+          },
+          "layers.41": {
+            "frames": 8,
+            "changed_frames": 8,
+            "delta_rms_min": 0.05595675904439124,
+            "delta_rms_max": 0.21563221320754553,
+            "relative_l2_median": 0.045009750501975254,
+            "max_abs_delta": 1.5
+          }
+        },
+        "decode": {
+          "layers.0.self_attn": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 2.742749308691571e-05,
+            "delta_rms_max": 9.254293317332938e-05,
+            "relative_l2_median": 0.0016545042779386651,
+            "max_abs_delta": 0.00390625
+          },
+          "layers.0": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.00012059620872546779,
+            "delta_rms_max": 0.0004909281124848524,
+            "relative_l2_median": 0.0033032632847163753,
+            "max_abs_delta": 0.0078125
+          },
+          "layers.41.self_attn": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.007803389612903477,
+            "delta_rms_max": 0.05337205504776089,
+            "relative_l2_median": 0.03587985106646582,
+            "max_abs_delta": 0.3125
+          },
+          "layers.41": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.04596813216578681,
+            "delta_rms_max": 0.1794702911926855,
+            "relative_l2_median": 0.035107009130694686,
+            "max_abs_delta": 1.5
+          }
+        }
+      },
+      "key_frames": [
+        {
+          "frame": 1,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 0.75,
+                "mean_abs_error": 0.10412118583917618,
+                "cosine": 0.9987252354621887,
+                "kl_reference_to_neuron": 0.10126954317092896,
+                "argmax_match": true,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 1062
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 1.375,
+                "mean_abs_error": 0.15589292347431183,
+                "cosine": 0.9971520304679871,
+                "kl_reference_to_neuron": 0.32932785153388977,
+                "argmax_match": false,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 15182
+              },
+              "failed_criteria": [
+                "KL",
+                "high_margin_argmax"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 695,
+              "delta_rms": 4.920197038418253e-05,
+              "relative_l2": 0.0014803337429731573,
+              "max_abs_delta": 0.00048828125
+            },
+            "layers.0": {
+              "changed_values": 998,
+              "delta_rms": 0.0001783253033456044,
+              "relative_l2": 0.003140170171070222,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1995,
+              "delta_rms": 0.037847801005219235,
+              "relative_l2": 0.06313097484595243,
+              "max_abs_delta": 0.1484375
+            },
+            "layers.41": {
+              "changed_values": 1982,
+              "delta_rms": 0.16209187721990673,
+              "relative_l2": 0.05419618406999637,
+              "max_abs_delta": 1.125
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 4.920197038418253e-05,
+              "late_delta_rms": 0.037847801005219235,
+              "late_to_early_rms_ratio": 769.2334414596241,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0001783253033456044,
+              "late_delta_rms": 0.16209187721990673,
+              "late_to_early_rms_ratio": 908.967343270201,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 9,
+          "phase": "decode",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 1.125,
+                "mean_abs_error": 0.17521408200263977,
+                "cosine": 0.9977738261222839,
+                "kl_reference_to_neuron": 0.028122015297412872,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.15811707079410553,
+                "cosine": 0.9980624914169312,
+                "kl_reference_to_neuron": 0.005752911325544119,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": []
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 666,
+              "delta_rms": 3.1314603566682655e-05,
+              "relative_l2": 0.0013143558540485393,
+              "max_abs_delta": 0.000244140625
+            },
+            "layers.0": {
+              "changed_values": 837,
+              "delta_rms": 0.00015324065535107228,
+              "relative_l2": 0.0029616766310026576,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1993,
+              "delta_rms": 0.04360763000400857,
+              "relative_l2": 0.07591968321125549,
+              "max_abs_delta": 0.3125
+            },
+            "layers.41": {
+              "changed_values": 1990,
+              "delta_rms": 0.17855233863801567,
+              "relative_l2": 0.07590474842549899,
+              "max_abs_delta": 0.75
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 3.1314603566682655e-05,
+              "late_delta_rms": 0.04360763000400857,
+              "late_to_early_rms_ratio": 1392.5652902214974,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.00015324065535107228,
+              "late_delta_rms": 0.17855233863801567,
+              "late_to_early_rms_ratio": 1165.1760313146317,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 16,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.125,
+                "mean_abs_error": 0.16635869443416595,
+                "cosine": 0.9969666600227356,
+                "kl_reference_to_neuron": 0.018798664212226868,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": []
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.359375,
+                "mean_abs_error": 0.2043772041797638,
+                "cosine": 0.9954079389572144,
+                "kl_reference_to_neuron": 0.026069695129990578,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 692,
+              "delta_rms": 6.536931533510959e-05,
+              "relative_l2": 0.001961287780241132,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.0": {
+              "changed_values": 842,
+              "delta_rms": 0.0001583322866875325,
+              "relative_l2": 0.0025868328772591,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1990,
+              "delta_rms": 0.09021117933612605,
+              "relative_l2": 0.08096094131755957,
+              "max_abs_delta": 0.34375
+            },
+            "layers.41": {
+              "changed_values": 1994,
+              "delta_rms": 0.20050443880552643,
+              "relative_l2": 0.06862866758295794,
+              "max_abs_delta": 1.0
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 6.536931533510959e-05,
+              "late_delta_rms": 0.09021117933612605,
+              "late_to_early_rms_ratio": 1380.02331634754,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0001583322866875325,
+              "late_delta_rms": 0.20050443880552643,
+              "late_to_early_rms_ratio": 1266.3521951225293,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 17,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 0.6875,
+                "mean_abs_error": 0.12014298141002655,
+                "cosine": 0.998630166053772,
+                "kl_reference_to_neuron": 0.010951168835163116,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": []
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.1353095918893814,
+                "cosine": 0.9982230067253113,
+                "kl_reference_to_neuron": 0.039746783673763275,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 673,
+              "delta_rms": 0.00018234980572426072,
+              "relative_l2": 0.005411120427173652,
+              "max_abs_delta": 0.0078125
+            },
+            "layers.0": {
+              "changed_values": 1607,
+              "delta_rms": 0.00040389396836615414,
+              "relative_l2": 0.006558220189234841,
+              "max_abs_delta": 0.001953125
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1999,
+              "delta_rms": 0.0552336443436799,
+              "relative_l2": 0.06970533939167153,
+              "max_abs_delta": 0.375
+            },
+            "layers.41": {
+              "changed_values": 1988,
+              "delta_rms": 0.21563221320754553,
+              "relative_l2": 0.06616900703144818,
+              "max_abs_delta": 1.0625
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.00018234980572426072,
+              "late_delta_rms": 0.0552336443436799,
+              "late_to_early_rms_ratio": 302.8993868367546,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.00040389396836615414,
+              "late_delta_rms": 0.21563221320754553,
+              "late_to_early_rms_ratio": 533.8832220739231,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "left": "strict_layer0_full_bf16_prefill_only",
+      "right": "strict_layer0_full_bf16_both_phases",
+      "by_phase": {
+        "prefill": {
+          "layers.0.self_attn": {
+            "frames": 8,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          },
+          "layers.0": {
+            "frames": 8,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          },
+          "layers.41.self_attn": {
+            "frames": 8,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          },
+          "layers.41": {
+            "frames": 8,
+            "changed_frames": 0,
+            "delta_rms_min": 0.0,
+            "delta_rms_max": 0.0,
+            "relative_l2_median": 0.0,
+            "max_abs_delta": 0.0
+          }
+        },
+        "decode": {
+          "layers.0.self_attn": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 2.742749308691571e-05,
+            "delta_rms_max": 9.254293317332938e-05,
+            "relative_l2_median": 0.0016545042779386651,
+            "max_abs_delta": 0.00390625
+          },
+          "layers.0": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.00012059620872546779,
+            "delta_rms_max": 0.0004909281124848524,
+            "relative_l2_median": 0.0033032632847163753,
+            "max_abs_delta": 0.0078125
+          },
+          "layers.41.self_attn": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.007188796617523613,
+            "delta_rms_max": 0.049524031156625736,
+            "relative_l2_median": 0.02653533113204606,
+            "max_abs_delta": 0.25
+          },
+          "layers.41": {
+            "frames": 24,
+            "changed_frames": 24,
+            "delta_rms_min": 0.046369983766337046,
+            "delta_rms_max": 0.1582186784722204,
+            "relative_l2_median": 0.025907286298335525,
+            "max_abs_delta": 1.5
+          }
+        }
+      },
+      "key_frames": [
+        {
+          "frame": 1,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 1.375,
+                "mean_abs_error": 0.15589292347431183,
+                "cosine": 0.9971520304679871,
+                "kl_reference_to_neuron": 0.32932785153388977,
+                "argmax_match": false,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 15182
+              },
+              "failed_criteria": [
+                "KL",
+                "high_margin_argmax"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 1,
+                "fixture": 7,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 1230,
+              "metrics": {
+                "max_abs_error": 1.375,
+                "mean_abs_error": 0.15589292347431183,
+                "cosine": 0.9971520304679871,
+                "kl_reference_to_neuron": 0.32932785153388977,
+                "argmax_match": false,
+                "reference_margin": 1.125,
+                "reference_top1": 1062,
+                "neuron_top1": 15182
+              },
+              "failed_criteria": [
+                "KL",
+                "high_margin_argmax"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.0": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 9,
+          "phase": "decode",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 0.9375,
+                "mean_abs_error": 0.15719074010849,
+                "cosine": 0.9981546998023987,
+                "kl_reference_to_neuron": 0.006437154486775398,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": []
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 9,
+                "fixture": 7,
+                "slot": 1,
+                "step": 2
+              },
+              "physical_row": 1,
+              "current_position": 1232,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.15811707079410553,
+                "cosine": 0.9980624914169312,
+                "kl_reference_to_neuron": 0.005752911325544119,
+                "argmax_match": true,
+                "reference_margin": 0.625,
+                "reference_top1": 130073,
+                "neuron_top1": 130073
+              },
+              "failed_criteria": []
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 666,
+              "delta_rms": 3.1314603566682655e-05,
+              "relative_l2": 0.0013143558540485393,
+              "max_abs_delta": 0.000244140625
+            },
+            "layers.0": {
+              "changed_values": 837,
+              "delta_rms": 0.00015324065535107228,
+              "relative_l2": 0.0029616766310026576,
+              "max_abs_delta": 0.0009765625
+            },
+            "layers.41.self_attn": {
+              "changed_values": 1957,
+              "delta_rms": 0.027268781116798077,
+              "relative_l2": 0.04839240823075939,
+              "max_abs_delta": 0.125
+            },
+            "layers.41": {
+              "changed_values": 1956,
+              "delta_rms": 0.12028970870202255,
+              "relative_l2": 0.05119763477302094,
+              "max_abs_delta": 0.5625
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 3.1314603566682655e-05,
+              "late_delta_rms": 0.027268781116798077,
+              "late_to_early_rms_ratio": 870.8007769835173,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.00015324065535107228,
+              "late_delta_rms": 0.12028970870202255,
+              "late_to_early_rms_ratio": 784.9725546164002,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 16,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.359375,
+                "mean_abs_error": 0.2043772041797638,
+                "cosine": 0.9954079389572144,
+                "kl_reference_to_neuron": 0.026069695129990578,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 16,
+                "fixture": 4,
+                "slot": 3,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 26,
+              "metrics": {
+                "max_abs_error": 1.359375,
+                "mean_abs_error": 0.2043772041797638,
+                "cosine": 0.9954079389572144,
+                "kl_reference_to_neuron": 0.026069695129990578,
+                "argmax_match": true,
+                "reference_margin": 0.125,
+                "reference_top1": 608,
+                "neuron_top1": 608
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.0": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        },
+        {
+          "frame": 17,
+          "phase": "prefill",
+          "endpoints": {
+            "left_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.1353095918893814,
+                "cosine": 0.9982230067253113,
+                "kl_reference_to_neuron": 0.039746783673763275,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            },
+            "right_original_endpoint": {
+              "frame": {
+                "index": 17,
+                "fixture": 1,
+                "slot": 1,
+                "step": 0
+              },
+              "physical_row": 0,
+              "current_position": 27,
+              "metrics": {
+                "max_abs_error": 1.0,
+                "mean_abs_error": 0.1353095918893814,
+                "cosine": 0.9982230067253113,
+                "kl_reference_to_neuron": 0.039746783673763275,
+                "argmax_match": true,
+                "reference_margin": 1.625,
+                "reference_top1": 1216,
+                "neuron_top1": 1216
+              },
+              "failed_criteria": [
+                "KL"
+              ]
+            }
+          },
+          "taps": {
+            "layers.0.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.0": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41.self_attn": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            },
+            "layers.41": {
+              "changed_values": 0,
+              "delta_rms": 0.0,
+              "relative_l2": 0.0,
+              "max_abs_delta": 0.0
+            }
+          },
+          "propagation": {
+            "attention": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            },
+            "layer_output": {
+              "early_delta_rms": 0.0,
+              "late_delta_rms": 0.0,
+              "late_to_early_rms_ratio": null,
+              "zero_early_nonzero_late": false,
+              "causal_amplification_established": false
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "query_guard_accounting": {
+    "original_service_checks": 92142,
+    "persistent_service_checks": 2068,
+    "successful_guards": 94210,
+    "closed": true,
+    "poisoned": false,
+    "poll_results_cached": false,
+    "guard_frequency_reduced": false
+  },
+  "absolute_HF_error_measured": false,
+  "causal_amplification_established": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
