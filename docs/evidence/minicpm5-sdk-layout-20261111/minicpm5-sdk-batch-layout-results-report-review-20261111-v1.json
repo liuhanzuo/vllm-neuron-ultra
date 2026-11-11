@@ -1,0 +1,157 @@
+{
+  "schema": "mini_sdk_batch_layout_report_review_v1",
+  "reviewer": "/root/dory_probe_mini_failure_review",
+  "created_at": "2026-11-11T03:35:30.130273+00:00",
+  "review_status": "numbers_and_scope_passed_minor_wording_clarifications_recommended",
+  "draft": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-batch-layout-results-report-draft-20261111-v1.md",
+    "sha256": "4c53416c30dae21c350710ea36176e799e0defe2a92c8065f047ffc0636f08cc",
+    "bytes": 2909
+  },
+  "coordinator": {
+    "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-result.json",
+    "sha256": "faa6621963d387b23778754c3889bfe95de6463c89be48c6c257ce6e900f860c",
+    "bytes": 4095569
+  },
+  "model_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-actual-exit-20261111-v1.json",
+    "sha256": "aa4c60e6eff2b0800eb470f1d3dbdb8180abfc1727da9c3393b861c6f0b26a43",
+    "bytes": 10559
+  },
+  "source_formulas": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_analysis_v1.py",
+      "sha256": "fb02d073e6cd9166c2646f36ed8faec14459149d505d1d141395de451be8beb8",
+      "bytes": 9291
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_results_v1.py",
+      "sha256": "6a736400acc320509a715c6e984ffc4ecaf43ac3f8f87a1c27a082b82ecb490e",
+      "bytes": 15621
+    }
+  ],
+  "verified_table": [
+    {
+      "variant": "own",
+      "ratio": 0.012720366718754088,
+      "display_percent": "1.27204%",
+      "exact_official_frames": "0/24"
+    },
+    {
+      "variant": "b4_strided",
+      "ratio": 0.00446357787123175,
+      "display_percent": "0.44636%",
+      "exact_official_frames": "0/24"
+    },
+    {
+      "variant": "b4_contiguous",
+      "ratio": 0.00446357787123175,
+      "display_percent": "0.44636%",
+      "exact_official_frames": "0/24"
+    },
+    {
+      "variant": "b1_strided",
+      "ratio": 0.004465040877035361,
+      "display_percent": "0.44650%",
+      "exact_official_frames": "0/24"
+    },
+    {
+      "variant": "b1_contiguous",
+      "ratio": 0.004465040877035361,
+      "display_percent": "0.44650%",
+      "exact_official_frames": "0/24"
+    }
+  ],
+  "verified_counts": {
+    "physical_invocations": 144,
+    "full_b4_invocations": 48,
+    "b1_invocations": 96,
+    "saved_four_row_outputs": 72,
+    "unique_case_variant_outputs_after_rank_dedup": 36,
+    "saved_output_bytes": 1179648,
+    "distinct_frames": 24,
+    "fixtures": 8,
+    "steps": [
+      1,
+      2,
+      3
+    ],
+    "elements_per_frame": 2048
+  },
+  "batch_difference": {
+    "changed_distinct_frames": 2,
+    "unchanged_distinct_frames": 22,
+    "changed_bf16_elements": 233,
+    "word_means": "one16-bit BF16 element, not a generated token, byte count or Chinese word",
+    "frame_breakdown": [
+      {
+        "call": 5,
+        "frame": 11,
+        "fixture": 5,
+        "slot": 2,
+        "step": 2,
+        "changed_elements": 1,
+        "official_distance_improved": true
+      },
+      {
+        "call": 5,
+        "frame": 8,
+        "fixture": 0,
+        "slot": 3,
+        "step": 2,
+        "changed_elements": 232,
+        "official_distance_improved": false
+      }
+    ],
+    "pair_relative_l2_ratio": 0.0003131697483809625,
+    "pair_relative_l2_percent": 0.03131697483809625,
+    "pair_denominator": "L2 norm of b4_strided output across24 distinct complete2048-element rows",
+    "max_absolute_numeric_difference": 0.00048828125,
+    "improved_frames": 1,
+    "worsened_frames": 1,
+    "aggregate_official_error_not_lower": true
+  },
+  "layout_difference": {
+    "b4_exact_frames": 24,
+    "b1_exact_frames": 24,
+    "interaction_nonzero_frames": 0,
+    "interaction_definition": "b1_contiguous - b4_contiguous - b1_strided + b4_strided; not error contribution percentages"
+  },
+  "scope_assessment": [
+    "Draft correctly labels CPU-local SDK attention diagnosis, not Neuron hardware or whole-model performance.",
+    "Percent entries are relative numeric error values, not speedup factors; no speedup or model qualification is claimed.",
+    "Both ranks are identical in stored metadata and counted once in numerical frame summaries;233 must not be multiplied by ranks or layouts.",
+    "Draft preserves pending independent post-exit payload audit and correctly excludes unsaved RoPE payload from post-exit reread claims.",
+    "Draft correctly says no proven operator cause, no universal layout conclusion, and no SDK-B1/native-attention equivalence.",
+    "Original recorder first-failure cause remains unknown despite unchanged-code retry success; draft does not claim a fix."
+  ],
+  "recommended_wording": [
+    {
+      "original": "覆盖24个独立解码帧",
+      "suggested": "覆盖24个不同解码检查点（8个样例×3个解码步）",
+      "reason": "unique_frames means distinct checkpoints; adjacent steps from the same sample are not established statistically independent observations."
+    },
+    {
+      "original": "保存72份完整四行BF16输出",
+      "suggested": "双rank共保存72份完整四行BF16输出（包含rank副本，对应36组case×variant）；数值统计按24个不同解码检查点计。",
+      "reason": "Separates saved artifact count from distinct numerical observations."
+    }
+  ],
+  "minor_wording_only": true,
+  "blocking_numeric_findings": [],
+  "limitations": [
+    "Only coordinator JSON statistics and source formulas were checked; no output payload was opened.",
+    "Whole-model historical29/32 and28/32 counts are not generated by this coordinator; they remain inherited status and were not independently revalidated in this narrowly scoped review.",
+    "Current independent audit tool completion was not observed by this reviewer; root must update the draft status only from actual final audit evidence."
+  ],
+  "arithmetic_check_actual_tool": {
+    "chunk": "343037",
+    "exit_code": 0
+  },
+  "draft_edited": false,
+  "serial_lock_acquired": false,
+  "model_or_native_executed": false,
+  "raw_payload_bytes_read": 0,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

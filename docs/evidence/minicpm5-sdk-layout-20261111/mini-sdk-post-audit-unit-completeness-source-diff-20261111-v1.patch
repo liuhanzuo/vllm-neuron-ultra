@@ -1,0 +1,525 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_physical_evidence_v2.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_physical_evidence_v3.py
+@@ -9,7 +9,7 @@
+ import re
+ from pathlib import PurePosixPath
+ 
+-SCHEMA = 'minicpm5_sdk_complete_physical_pair_v2'
++SCHEMA = 'minicpm5_sdk_complete_physical_pair_v3'
+ PAIR_SCHEMA = SCHEMA
+ GROUP_PREFIX = '/user.slice/user-1000.slice/user@1000.service/app.slice/'
+ LEGACY_PROPERTIES = {'ActiveState', 'ControlPID', 'ExecMainCode', 'ExecMainPID',
+@@ -111,10 +111,12 @@
+ 
+     Some pinned old producers omit Job, or retain only model_group summaries.
+     These need a complete successor observation; neither is silently accepted
+-    as a full service terminal. Bare unit rows without observations are invalid.
++    as a full service terminal. Complete service owners identify supplemental scope; bare unit rows without
++    process identities are invalid. Owner identities never imply terminal state.
+     """
+     require(type(tree) is dict, 'Complete historical physical tree')
+     units, grouped, complete, incomplete, observations = set(), set(), set(), set(), {}
++    owner_units, owner_records = set(), {}
+     nodes = 0
+ 
+     def track_sample(sample, expected=None):
+@@ -157,25 +159,57 @@
+             for key, child in value.items():
+                 if key not in ('properties', 'group', 'groups', 'unit', 'stage'): walk(child, depth+1)
+             return
+-        if 'unit' in value:
+-            # Process owner metadata is not a substitute for service samples.
++        if 'cgroup' in value or 'unit' in value:
++            # An owner is only an identity, never terminal/group evidence.
++            # Legacy sparse owners with no cgroup/unit remain verbatim and are
++            # checked by their original producers and exact owner-list binding.
+             require({'pid', 'start_ticks', 'argv', 'cgroup'} <= set(value)
+                     and type(value['pid']) is int and value['pid'] > 0
+-                    and str(value['start_ticks']).isdigit() and bool(value['argv'])
+-                    and value['cgroup'] == '0::'+GROUP_PREFIX+unit_name(value['unit'])+'.service',
+-                    'Bare unit names or missing observation sets cannot count as evidence')
++                    and type(value['start_ticks']) in (str, int)
++                    and re.fullmatch(r'[1-9][0-9]*', str(value['start_ticks']))
++                    and type(value['argv']) is list and len(value['argv']) <= 4096
++                    and all(type(arg) is str and arg and '\x00' not in arg for arg in value['argv'])
++                    and type(value['cgroup']) is str and value['cgroup'].startswith('0::/'),
++                    'Original owner identity and canonical unified cgroup')
++            path = value['cgroup'][3:]
++            require(str(PurePosixPath(path)) == path and '..' not in PurePosixPath(path).parts,
++                    'Canonical owner cgroup has no traversal or alias')
++            if path.startswith(GROUP_PREFIX) or 'unit' in value:
++                name = group_unit(path)
++                require(type(value.get('ppid')) is int and value['ppid'] > 0,
++                        'Owned service process has its complete original parent identity')
++                if 'unit' in value:
++                    require(unit_name(value['unit']) == name
++                            and type(value.get('invocation_id')) is str
++                            and re.fullmatch(r'[a-f0-9]{32}', value['invocation_id']),
++                            'Coordinator unit, cgroup and actual invocation are bound')
++                owner_records.setdefault(name, []).append(deepcopy(value))
++                units.add(name); owner_units.add(name)
+         if 'stage' in value and type(value['stage']) is str:
+             require('samples' in value or 'properties' in value,
+                     'Historical stage cannot lose its property/group observation')
+         for child in value.values(): walk(child, depth+1)
+ 
+     walk(tree)
+-    require(units and len(units) <= MAX_UNITS and units == grouped, 'Every named unit has owned group evidence')
++    for name in owner_units - grouped:
++        # Existing historical service observations may retain pre-exec, exec
++        # and zombie owner snapshots. Keep them all under original semantics.
++        # Newly owner-only scope must have full consistent process identities.
++        identities = {}
++        for owner in owner_records[name]:
++            require(owner['argv'], 'Owner-only service requires complete nonempty original argv')
++            common = {key: owner[key] for key in ('pid','start_ticks','ppid','argv','cgroup')}
++            key = (owner['pid'], str(owner['start_ticks']))
++            require(key not in identities or identities[key] == common,
++                    'Owner-only repeated coordinator/rank retains all common identity fields')
++            identities[key] = common
++    require(units and len(units) <= MAX_UNITS and units == grouped | owner_units,
++            'Every named unit has original group or validated owner identity')
+     if known_units is not None:
+         known = {unit_name(x) for x in known_units}
+-        require(units <= known, 'No unknown service outside authenticated unit set')
+-    return dict(units=units, needs_supplement=(grouped-complete) | incomplete,
+-                properties=observations, nodes=nodes)
++        require(units == known, 'Exact complete authenticated service set without missing or extra units')
++    return dict(units=units, needs_supplement=(units-complete) | incomplete,
++                properties=observations, owner_only={name: owner_records[name] for name in owner_units-grouped}, nodes=nodes)
+ 
+ 
+ def _tree_header(tree):
+@@ -196,14 +230,23 @@
+     scan = inspect_tree(tree, known_units)
+     supplements = value['supplemental_observations']
+     require(type(supplements) is list and len(supplements) == len(scan['needs_supplement']),
+-            'Exactly every missing Job or group-only unit receives real evidence')
++            'Exactly every missing Job, group-only or owner-only unit receives real evidence')
+     expected = sorted(scan['needs_supplement'])
+     require([row.get('unit') for row in supplements if type(row) is dict] == expected,
+             'Sorted exact supplemental unit set without omissions, substitutions or duplicates')
+     for row in supplements:
+         require(set(row) == {'unit', 'properties', 'group'}, 'Exact new full supplemental observation')
++        require(LEGACY_PROPERTIES | {'Job'} <= set(row['properties'])
++                and all(type(v) is str for v in row['properties'].values()),
++                'Supplement retains full real terminal property set including explicit Job')
+         name, missing = observation(row, row['unit'])
+         require(not missing and name in scan['needs_supplement'], 'Supplement has actual explicit empty Job')
++        if row['properties']['LoadState'] == 'loaded':
++            for owner in scan['owner_only'].get(name, []):
++                if 'unit' in owner:
++                    require(row['properties']['InvocationID'] == owner['invocation_id']
++                            and row['properties']['ExecMainPID'] == str(owner['pid']),
++                            'Loaded owner-only service retains original coordinator invocation and PID')
+         # Preserve all observable original properties, not merely its unit name.
+         for prior in scan['properties'].get(name, []):
+             for key in ('Id', 'MainPID', 'ControlPID', 'ActiveState', 'SubState', 'Job',
+@@ -213,7 +256,7 @@
+     return scan['units']
+ 
+ 
+-def validate_pair(pair, required_units=None, expected_owners=None, lock=None):
++def validate_pair(pair, required_units=None, expected_owners=None, lock=None, *, known_units=None):
+     """Public API: decoded {schema,first,second} -> exact set of unit basenames.
+ 
+     first and second are {tree, supplemental_observations}. Caller recorder can
+@@ -224,8 +267,8 @@
+     require(type(pair) is dict and set(pair) == {'schema', 'first', 'second'}
+             and pair['schema'] == SCHEMA, 'Explicit paired complete-tree envelope')
+     first, second = pair['first'], pair['second']
+-    units = validate_observation(first)
+-    other = validate_observation(second)
++    units = validate_observation(first, known_units)
++    other = validate_observation(second, known_units)
+     require(first == second and units == other, 'Both entire original trees and supplements are stable and equal')
+     if required_units is not None:
+         wanted = {unit_name(x) for x in required_units}
+@@ -276,5 +319,5 @@
+         values.append(value)
+         guard()
+     pair = dict(schema=SCHEMA, first=values[0], second=values[1])
+-    validate_pair(pair, required, done['owners'], done['lock_identity'])
++    validate_pair(pair, required, done['owners'], done['lock_identity'], known_units=known)
+     return pair
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v4.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v5.py
+@@ -23,7 +23,8 @@
+ from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v3 as core
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from minicpm5_layer0_runtime_auth_v1 import identity
+-from research import minicpm5_sdk_physical_evidence_v2 as physical_evidence
++from research import minicpm5_sdk_physical_evidence_v3 as physical_evidence
++from research import minicpm5_sdk_post_exit_source_supplement_v1 as supplement
+ require=core.require
+ LIMITS=dict(address_space_bytes=2*2**30,cpu_seconds=600,hard_cpu_seconds=605,
+     output_file_bytes=2*2**20,wall_seconds=900,cpu=6,nice=19)
+@@ -132,7 +133,7 @@
+     return result
+ 
+ 
+-def audit(runner,exit_ref,owner,lock):
++def audit(runner,exit_ref,owner,lock,supplement_ref):
+     """Requires caller-owned original serial lock; tests inject only doubles."""
+     p=runner.p;observed={}
+     def lease():p.lock_proof(owner,lock);p.clear_window()
+@@ -146,7 +147,7 @@
+     live=load(ended['live'])
+     for old in [ended['owner'],ended['coordinator'],*ended['ranks']]:p.gone(old)
+     p.active_heavy()
+-    spec,plan=runner.read_bundle(ended['spec'],ended['review'],lease);review=load(ended['review'])
++    spec,plan=supplement.read_bundle(runner,ended['spec'],ended['review'],lease,supplement_ref,exit_ref);review=load(ended['review'])
+     records={key:load(ref)for key,ref in ended['outputs'].items()}
+     lineage=core.validate(ended,live,spec,plan,review,records);admission=records['admission']
+     guard_evidence=verify_rank_guards(records)
+@@ -161,7 +162,7 @@
+     native=records['source_authentication']
+     inherited=sources.validate_native_receipt(native,partition,ended['owner'],lock,admission['attempt_id'])
+     sources.check_native_identities(native,partition,guard)
+-    done,read_json=runner.admitted_bundles(plan,guard)
++    done,read_json=supplement.admitted_bundles(runner,plan,guard,supplement_ref,exit_ref)
+     require(done['lock_identity']==lock,'Every predecessor uses same original serial lock')
+     require(all(e['owners']==len(done['owners'])for rank in (0,1)
+         for e in records['rank%d_result'%rank]['guard_checks']['events']),
+@@ -171,11 +172,19 @@
+     # own lock. No property/name from a future or replacement service is exempt.
+     # Preserve the complete legacy tree and its limitations. New strict proof
+     # comes only from two original physical passes plus exact missing fields.
+-    saved_units=legacy_drain_units(records['drains']['latest_physical'])
++    legacy_units=legacy_drain_units(records['drains']['latest_physical'])
++    saved_scan=physical_evidence.inspect_tree(records['drains']['latest_physical'])
++    saved_units=saved_scan['units']
++    require(legacy_units <= saved_units, 'Every original legacy name retained in complete owner-cgroup scope')
++    saved=dict(saved,legacy_named_unit_count=len(legacy_units),complete_owner_cgroup_unit_count=len(saved_units),
++        additional_owner_cgroup_units=sorted(saved_units-legacy_units),
++        owner_only_historical_invocation_unavailable=sorted(name for name,owners in saved_scan['owner_only'].items()
++            if not any('unit' in old for old in owners)),
++        historical_invocation_match_claimed_for_unanchored_units=False)
+     actual=physical_evidence.collect_pair(done,guard,runner.latest.physical,p.properties,p.empty_group,known_units=saved_units)
+     required_units={row['unit']for row in done['nemotron']['history']['rows']}
+-    fresh_units=physical_evidence.validate_pair(actual,required_units,done['owners'],lock)
+-    require(len(required_units)==1308 and required_units<=saved_units==fresh_units,
++    fresh_units=physical_evidence.validate_pair(actual,required_units,done['owners'],lock,known_units=saved_units)
++    require(len(required_units)==1308 and required_units<=legacy_units<=saved_units==fresh_units,
+         'Every original historical and supplemental unit retained in legacy and new paired evidence')
+     encoded=packed_physical(actual);del actual
+     def pair(results,exact_plan,exact_guard):
+@@ -186,14 +195,14 @@
+     require(not {'torch','numpy','torch_neuronx','neuronxcc'}&set(sys.modules),'Independent stdlib audit only')
+     sources.verify_text_sources(partition,guard)
+     sources.check_native_identities(native,partition,guard)
+-    loaded=runner.verify_loaded_sources(plan,guard)
++    loaded=supplement.verify_loaded_sources(runner,plan,guard,supplement_ref,exit_ref)
+     require(all(identity(path)==old for path,old in observed.items()),'All complete model receipt metadata remains stable')
+     require({n:p.sha(ROOT/n)for n in spec['canonical_sha256']}==spec['canonical_sha256'],
+         'Original canonical scientific state unchanged')
+     runner.usage(spec['output_root'],spec['root_floor_bytes']);p.active_heavy();guard()
+     return dict(schema='minicpm5_layer1_sdk_batch_layout_post_exit_audit_v2',complete=True,reviewer='/root',
+         observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=runner.reference(__file__),
+-        model_exit=exit_ref,owner=owner,lock_identity=lock,result=proof,descriptive=proof['descriptive'],
++        model_exit=exit_ref,post_exit_source_supplement=supplement_ref,owner=owner,lock_identity=lock,result=proof,descriptive=proof['descriptive'],
+         actual_model_drain=model_drain,actual_predecessor_drain=encoded,saved_outer_drain=saved,rank_guard_verification=guard_evidence,
+         actual_predecessor_pair_schema=physical_evidence.PAIR_SCHEMA,
+         full_predecessor_passes=2,strict_paired_physical_semantics_verified=True,
+@@ -205,7 +214,8 @@
+         full_model_qualified=False,new_speedup_claim=False,self_exit_claimed=False)
+ 
+ 
+-def run(exit_ref,target):
++def run(exit_ref,target,supplement_ref):
++    sources.reference(supplement_ref)
+     sources.reference(exit_ref);require(Path(exit_ref['path']).suffix=='.json','Actual model JSON exit reference')
+     target=output_path(target)
+     import minicpm5_layer1_sdk_batch_layout_cpu_runner_v4 as runner
+@@ -218,7 +228,7 @@
+         resource.setrlimit(resource.RLIMIT_FSIZE,(LIMITS['output_file_bytes'],)*2)
+         signal.signal(signal.SIGALRM,lambda *args:(_ for _ in ()).throw(TimeoutError('Original independent audit bound')))
+         signal.alarm(LIMITS['wall_seconds'])
+-        result=audit(runner,exit_ref,owner,lock)
++        result=audit(runner,exit_ref,owner,lock,supplement_ref)
+         raw=(json.dumps(result,indent=2,allow_nan=False)+'\n').encode()
+         require(len(raw)<LIMITS['output_file_bytes'],'Complete independent audit within original2MiB bound')
+         runner.p.once(target,result);print(json.dumps(runner.reference(target)))
+@@ -228,5 +238,7 @@
+ 
+ if __name__=='__main__':
+     cli=argparse.ArgumentParser();cli.add_argument('--model-exit',required=True);cli.add_argument('--model-exit-sha256',required=True)
++    cli.add_argument('--source-supplement',required=True);cli.add_argument('--source-supplement-sha256',required=True)
+     cli.add_argument('--output',required=True);args=cli.parse_args()
+-    run(dict(path=args.model_exit,sha256=args.model_exit_sha256),args.output)
++    run(dict(path=args.model_exit,sha256=args.model_exit_sha256),args.output,
++        dict(path=args.source_supplement,sha256=args.source_supplement_sha256))
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v4.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v5.py
+@@ -17,12 +17,13 @@
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path[:0]=[str(ROOT),str(Q)]
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v3 as core
+-from research import audit_minicpm5_layer1_sdk_batch_layout_result_v4 as auditor
+-from research import minicpm5_sdk_physical_evidence_v2 as physical
++from research import audit_minicpm5_layer1_sdk_batch_layout_result_v5 as auditor
++from research import minicpm5_sdk_physical_evidence_v3 as physical
+ from research.record_minicpm5_layer1_sdk_batch_layout_exit_v3 import actual_tool
+ from minicpm5_layer0_runtime_auth_v1 import identity
++from research import minicpm5_sdk_post_exit_source_supplement_v1 as supplement
+ require=core.require
+-AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v4.py'
++AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v5.py'
+ 
+ 
+ def unpack(proof):
+@@ -43,14 +44,18 @@
+     return json.loads(raw)
+ 
+ 
+-def validate(live,result,model,session,chunk,exit_code,result_ref,lock):
++def validate(live,result,model,session,chunk,exit_code,result_ref,lock,supplement_ref):
+     handle=actual_tool(session,chunk,exit_code)
+     require(live['schema']=='minicpm5_sdk_batch_layout_audit_live_v1' and live['reviewer']=='/root'
+         and live['actual_identity_verified']is True and live['actual_execution_handle']==handle,
+         'Exact root-observed auditor live-to-terminal tool session')
+     owner=live['owner'];core.same_owner(owner,result['owner'])
+     model_ref=live['model_actual_exit'];sources.reference(model_ref);sources.reference(result_ref)
++    sources.reference(supplement_ref)
++    require(live['post_exit_source_supplement']==result['post_exit_source_supplement']==supplement_ref,
++        'Actual live and terminal audit bind the same independent post-exit supplement')
+     expected=['python3','-B',str(AUDITOR),'--model-exit',model_ref['path'],'--model-exit-sha256',model_ref['sha256'],
++        '--source-supplement',supplement_ref['path'],'--source-supplement-sha256',supplement_ref['sha256'],
+         '--output',result_ref['path']]
+     require(owner['argv']==expected,'Exact actual independent auditor command')
+     require(result['schema']=='minicpm5_layer1_sdk_batch_layout_post_exit_audit_v2' and result['reviewer']=='/root'
+@@ -91,7 +96,7 @@
+         historical_unit_count=len(units),physical_metadata_sha256=result['actual_predecessor_drain']['sha256'],units=units,physical=actual,pair=pair)
+ 
+ 
+-def record(runner,live_ref,result_ref,session,chunk,exit_code,recorder,lock):
++def record(runner,live_ref,result_ref,session,chunk,exit_code,recorder,lock,supplement_ref):
+     actual_tool(session,chunk,exit_code);p=runner.p;seen={}
+     def guard():p.lock_proof(recorder,lock);p.clear_window()
+     def load(ref):
+@@ -99,35 +104,51 @@
+         require(identity(ref['path'])==before,'Stable complete audit terminal metadata')
+         seen[ref['path']]=before;return value
+     live=load(live_ref);result=load(result_ref);model=load(live['model_actual_exit'])
+-    checked=validate(live,result,model,session,chunk,exit_code,result_ref,lock)
++    checked=validate(live,result,model,session,chunk,exit_code,result_ref,lock,supplement_ref)
+     p.gone(checked['owner']);p.active_heavy();guard()
+     require(hashlib.sha256(sources.text(str(AUDITOR),result['source']['sha256'])).hexdigest()==result['source']['sha256'],
+         'Exact executed independent auditor source retained')
+     for owner in [model['owner'],model['coordinator'],*model['ranks']]:p.gone(owner)
+-    spec,plan=runner.read_bundle(model['spec'],model['review'],guard)
++    spec,plan=supplement.read_bundle(runner,model['spec'],model['review'],guard,supplement_ref,live['model_actual_exit'])
+     review=load(model['review']);model_live=load(model['live'])
+     records={key:load(ref)for key,ref in model['outputs'].items()}
+     core.validate(model,model_live,spec,plan,review,records)
+     a=records['admission']
+     owned=runner.verify_owned_drain(spec,model['outputs']['admission'],a['attempt_id'],model['coordinator'],True)
+     require(owned['physically_drained']is True,'Current model service actually drained')
+-    done,_=runner.admitted_bundles(plan,guard)
++    done,_=supplement.admitted_bundles(runner,plan,guard,supplement_ref,live['model_actual_exit'])
+     auditor.verify_outer_drain(records,done,model['owner'],lock)
+     required={row['unit']for row in done['nemotron']['history']['rows']}
+-    saved=auditor.legacy_drain_units(records['drains']['latest_physical'])
+-    physical.validate_pair(checked['pair'],required_units=required,expected_owners=done['owners'],lock=lock)
+-    require(len(required)==1308 and required<=saved==checked['units']
++    legacy=auditor.legacy_drain_units(records['drains']['latest_physical'])
++    saved_scan=physical.inspect_tree(records['drains']['latest_physical'])
++    saved=saved_scan['units']
++    physical.validate_pair(checked['pair'],required_units=required,expected_owners=done['owners'],lock=lock,known_units=saved)
++    require(len(required)==1308 and required<=legacy<=saved==checked['units']
+         and checked['physical']['all_additional_owners_checked']==done['owners'],
+         'Exact full saved/actual unit names and historical owners, never count-only')
+     partition=sources.classify(spec['source_sha256'],spec['source_contract'])
+     sources.validate_native_receipt(records['source_authentication'],partition,model['owner'],lock,a['attempt_id'])
+     sources.check_native_identities(records['source_authentication'],partition,guard)
+-    runner.verify_loaded_sources(plan,guard)
++    loaded=supplement.verify_loaded_sources(runner,plan,guard,supplement_ref,live['model_actual_exit'])
++    audited=result['loaded_source_closure']
++    require(audited['complete'] is True and audited['post_exit_source_supplement']==supplement_ref
++        and audited['model_source_map_sha256']==loaded['model_source_map_sha256']
++        and audited['supplement_source_sha256']==loaded['supplement_source_sha256']
++        and audited['frozen_model_closure_unchanged'] is True
++        and result['source']['sha256']==loaded['supplement_source_sha256'][str(AUDITOR)],
++        'Executed auditor source and full source supplement independently authenticated')
++    require(result['saved_outer_drain']['legacy_named_unit_count']==len(legacy)
++        and result['saved_outer_drain']['complete_owner_cgroup_unit_count']==len(saved)
++        and result['saved_outer_drain']['additional_owner_cgroup_units']==sorted(saved-legacy)
++        and result['saved_outer_drain']['owner_only_historical_invocation_unavailable']==sorted(
++            name for name,owners in saved_scan['owner_only'].items() if not any('unit' in old for old in owners))
++        and result['saved_outer_drain']['historical_invocation_match_claimed_for_unanchored_units'] is False,
++        'Exact documented legacy-name and complete owner-cgroup scopes')
+     require(all(identity(path)==old for path,old in seen.items()),'All actual terminal evidence remains unchanged')
+     p.active_heavy();guard()
+     return dict(schema='minicpm5_layer1_sdk_batch_layout_post_exit_audit_actual_exit_v2',reviewer='/root',
+         observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),live=live_ref,result=result_ref,
+-        model_exit=live['model_actual_exit'],owner=checked['owner'],actual_tool_exit_observed=True,
++        model_exit=live['model_actual_exit'],post_exit_source_supplement=supplement_ref,owner=checked['owner'],actual_tool_exit_observed=True,
+         actual_execution_handle=checked['handle'],actual_exit_code=exit_code,tool_chunk=chunk,
+         exact_owner_gone=True,serial_lock_reacquired=True,lock_identity=lock,
+         complete_audit_metadata_independently_verified=True,full_physical_metadata_decoded=True,
+@@ -136,7 +157,7 @@
+         full_model_qualified=False,new_speedup_claim=False)
+ 
+ 
+-def run(live_ref,result_ref,session,chunk,exit_code,target):
++def run(live_ref,result_ref,session,chunk,exit_code,target,supplement_ref):
+     actual_tool(session,chunk,exit_code);sources.reference(live_ref);sources.reference(result_ref);target=Path(target)
+     require(target.parent==Q and re.fullmatch(r'minicpm5-layer1-sdk-batch-layout-[a-z0-9-]+-audit-actual-exit-[a-z0-9-]+\.json',target.name)
+         and not target.exists(),'Fresh independent auditor actual-exit receipt')
+@@ -144,13 +165,14 @@
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,recorder,lock=runner.post.external.acquire_lock()
+     try:
+-        value=record(runner,live_ref,result_ref,session,chunk,exit_code,recorder,lock)
++        value=record(runner,live_ref,result_ref,session,chunk,exit_code,recorder,lock,supplement_ref)
+         runner.p.once(target,value);print(json.dumps(runner.reference(target)))
+     finally:runner.post.external.release_lock(fd)
+ 
+ 
+ if __name__=='__main__':
+     cli=argparse.ArgumentParser()
+-    for name in ('live','live-sha256','result','result-sha256','chunk','output'):cli.add_argument('--'+name,required=True)
++    for name in ('live','live-sha256','result','result-sha256','chunk','output','source-supplement','source-supplement-sha256'):cli.add_argument('--'+name,required=True)
+     cli.add_argument('--session',type=int,required=True);cli.add_argument('--exit-code',type=int,required=True);a=cli.parse_args()
+-    run(dict(path=a.live,sha256=a.live_sha256),dict(path=a.result,sha256=a.result_sha256),a.session,a.chunk,a.exit_code,a.output)
++    run(dict(path=a.live,sha256=a.live_sha256),dict(path=a.result,sha256=a.result_sha256),a.session,a.chunk,a.exit_code,a.output,
++        dict(path=a.source_supplement,sha256=a.source_supplement_sha256))
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_post_exit_source_supplement_v1.py
+@@ -0,0 +1,136 @@
++"""Explicit post-exit source supplement, separate from frozen model closure.
++
++The root writes an independently reviewed immutable JSON only after these four
++sources are final. No original plan/spec/review is changed. The two admission
++functions below retain the original runner bodies with explicit runner binding
++and only their loaded-source call replaced. The original loaded-source validator
++itself runs unchanged on an ephemeral union used ONLY for source verification.
++No import-time model, physical, process or native work.
++"""
++import hashlib
++from pathlib import Path
++import re
++from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
++from minicpm5_layer0_runtime_auth_v1 import digest, identity
++ROOT = Path(__file__).resolve().parents[1]
++Q = ROOT / 'research'
++require = sources.require
++SCHEMA = 'minicpm5_sdk_post_exit_source_supplement_v1'
++MODEL_EXIT = dict(path=str(Q / 'minicpm5-layer1-sdk-batch-layout-r2-actual-exit-20261111-v1.json'),
++    sha256='aa4c60e6eff2b0800eb470f1d3dbdb8180abfc1727da9c3393b861c6f0b26a43')
++SOURCE_NAMES = ('minicpm5_sdk_physical_evidence_v3.py',
++    'audit_minicpm5_layer1_sdk_batch_layout_result_v5.py',
++    'record_minicpm5_layer1_sdk_batch_layout_audit_exit_v5.py',
++    'minicpm5_sdk_post_exit_source_supplement_v1.py')
++SOURCE_PATHS = frozenset(str(Q / name) for name in SOURCE_NAMES)
++
++
++def validate_review(review, model_exit, plan):
++    require(type(review) is dict and set(review) == {'schema','reviewer','passed','blockers',
++            'model_exit','model_source_map_sha256','source_sha256','original_model_sources_preserved',
++            'frozen_model_closure_unchanged'}, 'Exact independent post-exit supplement schema')
++    require(review['schema'] == SCHEMA and review['reviewer'] == '/root'
++            and review['passed'] is True and review['blockers'] == [],
++            'Independent root-approved complete post-exit source supplement')
++    require(model_exit == MODEL_EXIT == review['model_exit']
++            and review['model_source_map_sha256'] == digest(plan['source_sha256'])
++            and review['original_model_sources_preserved'] is True
++            and review['frozen_model_closure_unchanged'] is True,
++            'Exact actual model exit and complete unmodified original model source map')
++    pins = review['source_sha256']
++    sources.metadata.pin_shape(pins)
++    require(set(pins) == SOURCE_PATHS and not set(pins) & set(plan['source_sha256']),
++            'Only four explicitly reviewed new post-exit sources; no model pin replaced')
++    return pins
++
++
++def verify_loaded_sources(runner, plan, guard, supplement_ref, model_exit):
++    sources.reference(supplement_ref)
++    path = Path(supplement_ref['path'])
++    require(path.parent == Q and re.fullmatch(
++            r'minicpm5-sdk-post-exit-source-supplement-[a-z0-9-]{1,80}\.json', path.name),
++            'Explicit independent supplement review namespace')
++    guard(); before = identity(path)
++    review = sources.load(supplement_ref)
++    require(identity(path) == before, 'Stable independent source supplement metadata')
++    pins = validate_review(review, model_exit, plan)
++    for source, sha in pins.items():
++        guard(); old = identity(source)
++        require(hashlib.sha256(sources.text(source, sha)).hexdigest() == sha
++                and identity(source) == old, 'Every exact supplement source authenticated')
++    original = digest(plan)
++    # Only this explicit verification view includes extra sources. It is never
++    # passed to completion, raw-byte verification, model or scientific checks.
++    view = dict(plan, source_sha256=dict(plan['source_sha256'], **pins))
++    loaded = runner.verify_loaded_sources(view, guard)
++    require(digest(plan) == original, 'Frozen scientific plan unchanged by source verification')
++    guard(); require(identity(path) == before, 'Supplement unchanged throughout source verification')
++    return dict(loaded, post_exit_source_supplement=supplement_ref,
++        model_source_map_sha256=review['model_source_map_sha256'],
++        supplement_source_sha256=dict(pins), frozen_model_closure_unchanged=True)
++
++
++def read_bundle(runner, spec_ref, review_ref, guard, supplement_ref, model_exit):
++    guard()
++    spec = runner.source_auth.load(spec_ref)
++    runner.latest.require_complete_binding(spec['latest_completion'])
++    review = runner.source_auth.load(review_ref)
++    runner.p.require(spec['schema'] == 'minicpm5_layer1_sdk_batch_layout_cpu_execution_spec_v2', 'Exact new observation runtime')
++    runner.p.require(review['schema'] == 'minicpm5_layer1_sdk_batch_layout_runtime_source_review_v2' and review['reviewer'] == '/root' and (review['passed'] is True) and (review['blockers'] == []), 'Final concrete runtime source review')
++    runner.same(review['spec'], spec_ref, 'Exact reviewed runtime spec')
++    runner.same(review['source_sha256'], spec['source_sha256'], 'Complete reviewed source closure')
++    runner.same([spec['runner'], spec['worker']], [runner.SELF, str(runner.ROOT / 'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py')], 'Only new collector runner and worker')
++    partition = runner.source_auth.classify(spec['source_sha256'], spec['source_contract'])
++    runner.source_auth.verify_text_sources(partition, guard)
++    for path in (runner.SELF, spec['worker']):
++        wanted = spec['source_sha256'].get(path)
++        runner.same(hashlib.sha256(runner.source_auth.text(path, wanted)).hexdigest(), wanted, 'Both actual entrypoints pinned')
++    plan = runner.source_auth.load(spec['plan'])
++    runner.same(plan['source_sha256'], spec['source_sha256'], 'Scientific runtime source closure')
++    runner.same(plan['source_contract'], spec['source_contract'], 'One exact reviewed source contract')
++    runner.same(plan['output_root'], spec['output_root'], 'Exact output root')
++    runner.p.require(Path(spec['output_root']).parent == Path('/mnt/nvme') and Path(spec['output_root']).name.startswith('minicpm5-layer1-sdk-batch-layout-'), 'Fresh layer1-only output namespace')
++    runner.same([spec['output_cap_bytes'], spec['root_floor_bytes'], spec['output_floor_bytes']], [runner.CAP, 28 * 2 ** 30, 30 * 2 ** 30], 'Original output cap and current serial storage floors')
++    runner.same(spec['resources'], runner.PROPS, 'Original16GiB/TP2 CPU resources')
++    runner.p.require(type(spec['master_port']) is int and 29000 < spec['master_port'] < 30000, 'Finite rendezvous port')
++    runner.p.require(re.fullmatch('trn1-mini-layer1-sdk-batch-layout-[a-z0-9-]{1,80}', spec['unit']) is not None, 'Fresh layer1 service')
++    runner.p.require(spec['model_qualification_claim'] is spec['automatic_full_gates_launch'] is False, 'Diagnostic only')
++    runner.same(spec['original_completed_collection'], runner.OBSERVED_EXIT, 'Actual completed original trajectory')
++    runner.same(spec['prepared_source_plan'], runner.RESULTS_SOURCE_PLAN, 'Reviewed complete observation/validator source plan')
++    runner.same(spec['latest_completion'], plan['latest_completion'], 'Latest complete external r12 and MiniCPM lineage')
++    runner.same(spec['completed_current_history'], plan['layer1_sdk_batch_layout'], 'Completed full180-call current/history prerequisite')
++    runner.same(spec['completed_native_cache'], plan['layer1_official_history'], 'Completed native capture/audit/comparison')
++    runner.same(spec['completed_official_history'], plan['layer1_current_history_factorial'], 'Completed original official history')
++    runner.same(spec['completed_storage'], plan['completed_storage_maintenance'], 'Completed storage maintenance and audit')
++    runner.same(spec['completed_factorial'], plan['layer1_native_cache'], 'Completed independent K/V matrix')
++    runner.same(spec['completed_cross_history'], plan['layer1_kv_factorial'], 'Actual completed paired-history and audit')
++    runner.same(spec['completed_own_history'], plan['layer1_cross_history'], 'Actual completed own-history plus post-exit audit')
++    runner.same(spec['completed_layer1_data'], plan['layer1_own_history_replay'], 'Actual collection and audit binding')
++    verify_loaded_sources(runner, plan, guard, supplement_ref, model_exit)
++    return (spec, plan)
++
++
++def admitted_bundles(runner, plan, guard, supplement_ref, model_exit):
++    guard()
++    runner.latest.require_complete_binding(plan['latest_completion'])
++
++    def read(ref):
++        guard()
++        row = plan['inputs'][ref['path']]
++        runner.same(row['sha256'], ref['sha256'], 'Admitted completion metadata digest')
++        before = identity(ref['path'])
++        runner.same(before, row['identity'], 'Admitted completion metadata identity')
++        value = runner.source_auth.load(ref)
++        runner.same(identity(ref['path']), before, 'Stable completion metadata read')
++        return value
++    done = runner.latest.completed(plan['latest_completion'], read, guard)
++    runner.validate_current_history_extension(plan, done)
++    runner.same(done['current_history']['binding'], plan['layer1_sdk_batch_layout'], 'Latest authenticated current/history')
++    runner.same(done['native']['binding'], plan['layer1_official_history'], 'Latest authenticated native cache')
++    for (path, sha) in done['source_sha256'].items():
++        runner.same(plan['source_sha256'].get(path), sha, 'Completed sources retained in admitted plan')
++    verify_loaded_sources(runner, plan, guard, supplement_ref, model_exit)
++
++    def read_json(path, sha):
++        return read(dict(path=path, sha256=sha))
++    return (done, read_json)

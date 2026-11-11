@@ -1,0 +1,143 @@
+{
+  "schema": "mini_sdk_exit_recorder_lock_source_review_v1",
+  "reviewer": "/root/dory_probe_mini_failure_review",
+  "observed_at": "2026-11-11T03:31:38.762602+00:00",
+  "source_only": true,
+  "task": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/mini-sdk-exit-recorder-lock-review-task-20261111-v1.md",
+    "sha256": "74645a682988b37879b8d3b32e5a056d415ed38cba8adbb93e3b6e5c45c7abfc",
+    "bytes": 849
+  },
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_sdk_batch_layout_exit_v3.py",
+      "sha256": "d373fc5051f5bcec39bbbb4cd6d8a5207ed58e4b5a96fc8b5dd4078006555fed",
+      "bytes": 4648
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+      "sha256": "ec750658ead10d4f4c1a4013ef1d86c9d0788c92fb9347d236773e3c3722cfa1",
+      "bytes": 35511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py",
+      "sha256": "d1bd188a44f3d30cf52ccd171b1eed05e6fc7246d96d68dff39591449b6ced6b",
+      "bytes": 13100
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_external_supervisor_v7.py",
+      "sha256": "6265c9ad9bd9541d1d152b9e65ec46b764b87e8c23d4a22ce12502260217b28d",
+      "bytes": 21658
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v7.py",
+      "sha256": "8fef6d5ed823de6179d30183331ad0c9adc39cb76920c673e06d45234f3bcb94",
+      "bytes": 24731
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py",
+      "sha256": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185",
+      "bytes": 22969
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_decode_mask_analysis_v1.py",
+      "sha256": "6eff41371dc6a78b59ffea14019d65fbac1f3eaa7d4285f4a53791e337d4b139",
+      "bytes": 20294
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_original88_first_five_analysis_v2.py",
+      "sha256": "516f4dfda864aaa91f08228666b1857ccbab4ef459b134f6c81109a7e99d67a1",
+      "bytes": 19276
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_original88_python_trace_root_20261107_v3.py",
+      "sha256": "2c07e4567ed74a8ba4812bb6e68adb0ba728f883a9e97961e12810a6d7f96087",
+      "bytes": 18699
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py",
+      "sha256": "cc0cfb2beddf985673a8c286446ad7de460fd2823b79b5044b892b9c793ed4f8",
+      "bytes": 16985
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_alias_v1.py",
+      "sha256": "8d1650ce18405a4963d7bed96ebace4decdc4ebe12cf9d7a1d69c47149e41654",
+      "bytes": 4020
+    }
+  ],
+  "actual_root_evidence": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-terminal-tool-observation-20261111-v1.json",
+      "sha256": "70021147081ba3d00091a4e3b715ac66cba17fa7f8ea314426a3b2641b39f044",
+      "bytes": 650
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-original-lock-diagnostic-20261111-v1.json",
+      "sha256": "c2a3585db7d9b9a7c57b424daa8ac88b5f81a38eb568fc4d67bb552f53047bfb",
+      "bytes": 519
+    }
+  ],
+  "confirmed_facts": [
+    "Original model session54068 exited0 (chunkbebe50); first recorder session94318 exited1 (chunkf7df3e); no successful model exit receipt or independent raw audit had been created at that observation.",
+    "runner.p and runner.post.external.p resolve to protocol_v7, which aliases the same protocol_v4 lock_proof and serial LOCK. No mismatch between acquire and verification lock providers was found.",
+    "acquire_lock opens the original file, obtains LOCK_EX|LOCK_NB, validates the file and immediately calls lock_proof. It returns the fd to recorder.run; the source holds that fd across record() and releases it only in finally.",
+    "The reported final lock_proof message follows successful regular-file/single-link/path inode/device checks and successful exact recorded process comparison at that failing invocation. It specifically means /proc/locks had not exactly one matching FLOCK ADVISORY WRITE row with that owner/device/inode and extent0 EOF.",
+    "verify_text_sources calls guard before every admitted source and after completion. stable_bytes opens its own read fd, wraps it with closefd=False, and closes that same newly opened fd exactly once. No original lock fd is passed into those readers.",
+    "No unlock/close of the held original fd was found along the inspected recorder/read_bundle/verify_text_sources/stable_bytes call path. Opening and closing an independent source fd is not by itself evidence of releasing an existing flock.",
+    "The failed guard does not preserve raw /proc/locks bytes, match count, fd state, or failing source path. recorder finally releases its fd during exception unwind, so subsequent observations cannot reconstruct that instant.",
+    "Root independently exercised the unchanged lock_proof20000 times without a failure. The saved diagnostic reports2.2880503279156983s and no failures; this does not establish the cause of the earlier failure or certify it transient."
+  ],
+  "findings": [],
+  "root_cause_status": "unresolved_not_proven_transient",
+  "plausible_but_unproven_causes": [
+    {
+      "hypothesis": "The held flock was actually absent or altered when checked.",
+      "evidence_needed": "Failure-time original fd fstat/fdinfo and raw global lock table. No such source operation was found on the inspected path."
+    },
+    {
+      "hypothesis": "The one global /proc/locks observation omitted, duplicated, or otherwise differently represented the matching entry while the lock remained held.",
+      "evidence_needed": "Original failing raw string and matches plus same-instant descriptor-specific fdinfo. Global-table observation instability is a hypothesis, not a demonstrated kernel defect."
+    },
+    {
+      "hypothesis": "An uninspected runtime fd lifetime, thread/process, or namespace interaction affected ownership/visibility.",
+      "evidence_needed": "Actual failing process fdinfo, true command/process/namespace identities and stack-local fd. Static initial PID namespace incompatibility is disfavored because acquisition and earlier checks passed, but dynamic behavior was not measured."
+    }
+  ],
+  "minimal_failure_capture_plan": {
+    "status": "proposal_only_not_implemented_or_executed",
+    "method": "Separately reviewed bounded observation launcher with sys.settrace and runpy.run_path of the exact frozen recorder_v3; no monkeypatch and no original source edits.",
+    "setup": [
+      "Authenticate launcher source/arguments independently and preserve exact original recorder and dependency hashes before running.",
+      "Set sys.argv for the original CLI and runpy.run_path(original_recorder_path,run_name=\"__main__\"). Record the real outer process argv and tool session honestly; a wrapper is a distinct invocation, not the original direct CLI.",
+      "Install a global trace returning a local trace only for the exact frozen protocol_v4 lock_proof code/file. All other call frames returnNone.",
+      "The local callback handles only exception events carrying the exact RuntimeError message. Keep a strict once-only capture cap and no model/native imports."
+    ],
+    "failure_time_capture": [
+      "Copy the original failing frame locals raw, matches, owner, lock, actual and the relevant stat fields from info before any replacement observation. This is the primary evidence for the failed check.",
+      "Walk active parent frames to the exact original recorder.run frame and obtain its already-held fd; for acquisition failures the acquire_lock frame may instead hold fd. Never open/acquire another serial flock.",
+      "Read os.fstat(fd), fcntl.F_GETFD, /proc/self/fdinfo/<fd>, /proc/self/fd/<fd> target and actual process identity. F_GETFD only proves fd validity, not lock ownership.",
+      "Optionally read one additional bounded /proc/locks and record PID namespace link. Label all these as later observations, not replacements for the original raw.",
+      "Validate capture sizes and save immutable exclusive diagnostic JSON while the original finally has not yet run, or retain an in-memory capture for later exclusive persistence. No source hashing/model work from the exception callback."
+    ],
+    "preservation": [
+      "Never suppress, replace, retry or reinterpret the original exception. Trace callback capture failure must be separately recorded or ignored without changing the original exception propagation.",
+      "Original recorder.run remains solely responsible for acquire/release and its finally executes normally. The same original error must still produce nonzero outer exit.",
+      "No target success receipt is created unless the unchanged original recorder itself completes all checks.",
+      "The tracer is diagnostic with timing overhead; it cannot be used in a performance window or counted as native/model/quality qualification.",
+      "Do not repair by adding blind retries, accepting missing global entries, fabricating old success, or changing the already-executed frozen runner closure."
+    ],
+    "future_robustness": "If captured evidence demonstrates a global-table-only observation defect while exact descriptor-specific FLOCK ownership remains intact, design and independently review a successor proof that binds the original fd, exact inode/device, actual owner and0 EOF lock extent before and after the observation. Do not replace or relax the existing proof based solely on the20000-pass diagnostic."
+  },
+  "scope_limits": [
+    "This child performed only bounded source and small JSON reads and created this review JSON.",
+    "No serial lock acquisition, live proc/fd/cgroup/systemctl query, model execution, native import, payload read or full source scan was performed by this child.",
+    "No tracer, successor verifier or production modification was implemented.",
+    "One controlled retry was reported running by root; its outcome was not observed by this reviewer and is not inferred."
+  ],
+  "frozen_files_changed": false,
+  "serial_lock_acquired": false,
+  "model_or_native_executed": false,
+  "production_state_changed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

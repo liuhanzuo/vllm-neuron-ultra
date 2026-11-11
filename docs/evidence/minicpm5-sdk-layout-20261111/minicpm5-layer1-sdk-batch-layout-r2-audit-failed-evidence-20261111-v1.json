@@ -1,0 +1,510 @@
+{
+  "schema": "minicpm5_sdk_actual_failed_execution_evidence_v1",
+  "reviewer": "/root",
+  "phase": "auditor",
+  "failed": true,
+  "successful": false,
+  "observed_at": "2026-11-11T03:35:20.890976+00:00",
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-audit-live-20261111-v1.json",
+    "sha256": "d45001309e59e47f22ed5ca4420c3feef1fc2101ed0a4da858b624a041e5ff88"
+  },
+  "model_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-actual-exit-20261111-v1.json",
+    "sha256": "aa4c60e6eff2b0800eb470f1d3dbdb8180abfc1727da9c3393b861c6f0b26a43"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-spec.json",
+    "sha256": "a6cc11d365438512f6d0bd1639c59a4bbef52e2ded77faf7a5407e5d8470f7b7"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-source-review.json",
+    "sha256": "272095ed6e4bd0ce5718c535af28260244909c806252c2937ab93a429f935618"
+  },
+  "actual_tool_exit_observed": true,
+  "actual_execution_handle": {
+    "kind": "tool_session",
+    "session_id": 11173
+  },
+  "actual_exit_code": 1,
+  "tool_chunk": "0c6d16",
+  "failed_owner": {
+    "pid": 1162582,
+    "start_ticks": "414837913",
+    "ppid": 1003516,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v4.py",
+      "--model-exit",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-actual-exit-20261111-v1.json",
+      "--model-exit-sha256",
+      "aa4c60e6eff2b0800eb470f1d3dbdb8180abfc1727da9c3393b861c6f0b26a43",
+      "--output",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-post-exit-audit-20261111-v1.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "recorder": {
+    "pid": 1169687,
+    "start_ticks": "414862751",
+    "ppid": 1169677,
+    "argv": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "exact_recorded_processes_gone": [
+    {
+      "pid": 1162582,
+      "start_ticks": "414837913",
+      "ppid": 1003516,
+      "argv": [
+        "python3",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v4.py",
+        "--model-exit",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-actual-exit-20261111-v1.json",
+        "--model-exit-sha256",
+        "aa4c60e6eff2b0800eb470f1d3dbdb8180abfc1727da9c3393b861c6f0b26a43",
+        "--output",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-post-exit-audit-20261111-v1.json"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 1151505,
+      "start_ticks": "414746946",
+      "ppid": 1151495,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-spec.json",
+        "--spec-sha256",
+        "a6cc11d365438512f6d0bd1639c59a4bbef52e2ded77faf7a5407e5d8470f7b7",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-source-review.json",
+        "--review-sha256",
+        "272095ed6e4bd0ce5718c535af28260244909c806252c2937ab93a429f935618"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 1155426,
+      "start_ticks": "414762959",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+        "--mode",
+        "coordinator",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+        "--admission-sha256",
+        "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+      "unit": "trn1-mini-layer1-sdk-batch-layout-r2-20261111",
+      "invocation_id": "5a96ecaba68d4f3195f703272f349b74"
+    },
+    {
+      "pid": 1156233,
+      "start_ticks": "414770831",
+      "ppid": 1155426,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+        "--admission-sha256",
+        "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service"
+    },
+    {
+      "pid": 1156234,
+      "start_ticks": "414770831",
+      "ppid": 1155426,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+        "--mode",
+        "rank",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+        "--admission-sha256",
+        "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service"
+    }
+  ],
+  "owned_model_drain": {
+    "physically_drained": true,
+    "properties": {
+      "TimeoutStopUSec": "1min 30s",
+      "RuntimeMaxUSec": "infinity",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "ControlPID": "0",
+      "Result": "success",
+      "ExecMainPID": "0",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "AllowedCPUs": "",
+      "MemoryHigh": "infinity",
+      "MemoryMax": "infinity",
+      "MemorySwapMax": "infinity",
+      "TasksMax": "37867",
+      "Environment": "",
+      "LimitFSIZE": "infinity",
+      "WorkingDirectory": "",
+      "Nice": "0",
+      "CPUAffinity": "",
+      "KillMode": "control-group",
+      "SendSIGKILL": "yes",
+      "Id": "trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+      "BindsTo": "",
+      "After": "",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "Job": "",
+      "InvocationID": "",
+      "ExecStopPost": ""
+    },
+    "group": {
+      "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+      "absent": true
+    },
+    "owners_checked": [
+      {
+        "pid": 1155426,
+        "start_ticks": "414762959",
+        "ppid": 1583,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+          "--mode",
+          "coordinator",
+          "--admission",
+          "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+          "--admission-sha256",
+          "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+        "unit": "trn1-mini-layer1-sdk-batch-layout-r2-20261111",
+        "invocation_id": "5a96ecaba68d4f3195f703272f349b74"
+      },
+      {
+        "pid": 1156233,
+        "start_ticks": "414770831",
+        "ppid": 1155426,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+          "--mode",
+          "rank",
+          "--admission",
+          "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+          "--admission-sha256",
+          "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service"
+      },
+      {
+        "pid": 1156234,
+        "start_ticks": "414770831",
+        "ppid": 1155426,
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+          "--mode",
+          "rank",
+          "--admission",
+          "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+          "--admission-sha256",
+          "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service"
+      }
+    ]
+  },
+  "available_partial_metadata": {
+    "admission.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+        "sha256": "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+        "device": 66304,
+        "inode": 524292,
+        "size": 1458223,
+        "mtime_ns": 1794367121277972302,
+        "ctime_ns": 1794367121278972280
+      }
+    },
+    "launch-intent.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/launch-intent.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/launch-intent.json",
+        "sha256": "c1f211e28387eb8b9b51c2f86d96ca2f2b5f75ec35c3cc264ab0d226b74227e6"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/launch-intent.json",
+        "device": 66304,
+        "inode": 524293,
+        "size": 2101,
+        "mtime_ns": 1794367121281972214,
+        "ctime_ns": 1794367121281972214
+      }
+    },
+    "coordinator-owner.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-owner.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-owner.json",
+        "sha256": "854e145709756114d582d658e0a5c59fd48d4cdf204f35e1ca479a72fa17fd8c"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-owner.json",
+        "device": 66304,
+        "inode": 524295,
+        "size": 721,
+        "mtime_ns": 1794367121301971772,
+        "ctime_ns": 1794367121302971750
+      }
+    },
+    "rank0-owner.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-owner.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-owner.json",
+        "sha256": "71276a250217ec0df38807fcfc54e6137652cdcbaf6f36078079063eff5df4f0"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-owner.json",
+        "device": 66304,
+        "inode": 524296,
+        "size": 603,
+        "mtime_ns": 1794367200009233437,
+        "ctime_ns": 1794367200009233437
+      }
+    },
+    "rank1-owner.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-owner.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-owner.json",
+        "sha256": "0548f5a9e38c9d3ad60865dd435f7294a417808bb16ff46499cc9b282f59afd2"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-owner.json",
+        "device": 66304,
+        "inode": 524297,
+        "size": 603,
+        "mtime_ns": 1794367200015233304,
+        "ctime_ns": 1794367200015233304
+      }
+    },
+    "children-exits.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/children-exits.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/children-exits.json",
+        "sha256": "e3185d28f453c274157984815f7a2a60b5d2eb6529f3c9193606d2818b910e68"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/children-exits.json",
+        "device": 66304,
+        "inode": 524461,
+        "size": 1443,
+        "mtime_ns": 1794367566157140421,
+        "ctime_ns": 1794367566158140400
+      }
+    },
+    "service-exit.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/service-exit.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/service-exit.json",
+        "sha256": "02742c3570396c1c4a048dfa5d72f9d6edef28bde54c289fd072a8653d4060fb"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/service-exit.json",
+        "device": 66304,
+        "inode": 524462,
+        "size": 3875,
+        "mtime_ns": 1794367566922123525,
+        "ctime_ns": 1794367566922123525
+      }
+    },
+    "outer-result.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/outer-result.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/outer-result.json",
+        "sha256": "d5af17a494e0c59f8ded7bfae7821aaeee4f1221b7509ba828fae7d4bcfbdaba"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/outer-result.json",
+        "device": 66304,
+        "inode": 524463,
+        "size": 1592,
+        "mtime_ns": 1794367566960122687,
+        "ctime_ns": 1794367566960122687
+      }
+    },
+    "outer-failure.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/outer-failure.json",
+      "status": "missing"
+    },
+    "cleanup-pending.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/cleanup-pending.json",
+      "status": "missing"
+    },
+    "cleanup-drained.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/cleanup-drained.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/cleanup-drained.json",
+        "sha256": "2fba462052cbaa1aa813d20a188bc42a652a7acd1ff0456d5ea546d61a5ec900"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/cleanup-drained.json",
+        "device": 66304,
+        "inode": 524464,
+        "size": 4123,
+        "mtime_ns": 1794367566982122202,
+        "ctime_ns": 1794367566983122180
+      }
+    },
+    "source-authentication.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/source-authentication.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/source-authentication.json",
+        "sha256": "be7ac8ed76ee5c0f1f9864b72dfbe598ab05764e781f3ade9f959c632c5f44c2"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/source-authentication.json",
+        "device": 66304,
+        "inode": 524290,
+        "size": 5774,
+        "mtime_ns": 1794367120968979125,
+        "ctime_ns": 1794367120969979103
+      }
+    },
+    "predecessor-drain.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/predecessor-drain.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/predecessor-drain.json",
+        "sha256": "871ac1d3767e561c4f806dafb677c78af74abef703e56f58f71447fb31a4e431"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/predecessor-drain.json",
+        "device": 66304,
+        "inode": 524291,
+        "size": 4119698,
+        "mtime_ns": 1794367121250972898,
+        "ctime_ns": 1794367121254972810
+      }
+    },
+    "coordinator-result.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-result.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-result.json",
+        "sha256": "faa6621963d387b23778754c3889bfe95de6463c89be48c6c257ce6e900f860c"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/coordinator-result.json",
+        "device": 66304,
+        "inode": 524460,
+        "size": 4095569,
+        "mtime_ns": 1794367566152140532,
+        "ctime_ns": 1794367566157140421
+      }
+    },
+    "rank0-result.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-result.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-result.json",
+        "sha256": "bb0e2153f4cf6fe6cc80671ddcaa4879cdc93cbc8b2684203139caa4e2cdfc58"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-result.json",
+        "device": 66304,
+        "inode": 524458,
+        "size": 1709903,
+        "mtime_ns": 1794367519999159934,
+        "ctime_ns": 1794367520002159868
+      }
+    },
+    "rank1-result.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-result.json",
+      "status": "present",
+      "ref": {
+        "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-result.json",
+        "sha256": "e6f5937a738fb6ff99b52ea5f89aad4aa4693b17ce0e12c6b4b7710dc0c1fb95"
+      },
+      "identity": {
+        "realpath": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-result.json",
+        "device": 66304,
+        "inode": 524459,
+        "size": 1710053,
+        "mtime_ns": 1794367520000159912,
+        "ctime_ns": 1794367520002159868
+      }
+    },
+    "rank0-failure.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank0-failure.json",
+      "status": "missing"
+    },
+    "rank1-failure.json": {
+      "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/rank1-failure.json",
+      "status": "missing"
+    },
+    "auditor-output": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-post-exit-audit-20261111-v1.json",
+      "status": "missing"
+    }
+  },
+  "full_source_verification_performed": false,
+  "raw_tensor_bytes_read": false,
+  "source_authentication_not_requalified": true,
+  "historical_release_not_requalified": true,
+  "original_cleanup_receipts_not_invented": true,
+  "absent_outputs_not_invented": true,
+  "no_stop_or_kill_performed": true,
+  "lock_acquired_or_released_by_helper": false,
+  "automatic_successor_release": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "root_observed_error": "RuntimeError: Every original historical and supplemental unit retained in legacy and new paired evidence"
+}

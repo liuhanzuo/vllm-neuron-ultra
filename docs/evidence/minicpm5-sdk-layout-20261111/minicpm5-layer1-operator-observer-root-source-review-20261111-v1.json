@@ -1,0 +1,30 @@
+{
+  "schema": "minicpm5_operator_observer_root_initial_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T03:41:16.826050+00:00",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-post-sdk-layout-next-design-child-delivery-20261111-v1.json",
+    "sha256": "500d6f5035d566ff28f06e44dbc17aa59a8a55dee798a992b570a5856a18a161"
+  },
+  "source_pins_all_match": true,
+  "actual_tests": {
+    "command": "python3 -B research/check_minicpm5_layer1_operator_observer_v1.py",
+    "exit_code": 0,
+    "tool_chunk": "700693",
+    "passed": 8
+  },
+  "source_diff_reviewed": true,
+  "scope": "Initial source-only observer review; original return objects, layer1/decode scope, native cache index, PV and actual output-reduction capture retained",
+  "runtime_ready": false,
+  "remaining": [
+    "Driver/runtime/auditor integration",
+    "Exact full shape/dtype event manifest and allocation budget",
+    "Actual unobserved/noop/full endpoint controls",
+    "Independent raw-byte verification and numerical interpretation"
+  ],
+  "notes": [
+    "SDK layer-owner error text still says layers[0] although check uses layer1_owner; correct in a successor when integrating, not a numeric failure"
+  ],
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

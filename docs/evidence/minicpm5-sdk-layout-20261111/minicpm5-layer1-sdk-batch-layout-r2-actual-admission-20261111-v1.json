@@ -1,0 +1,116 @@
+{
+  "schema": "minicpm5_sdk_batch_layout_actual_admission_observation_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T03:19:45.930236+00:00",
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-actual-live-20261111-v1.json",
+    "sha256": "15c21352b5298a79734228497c447c7ca70a8f98cbdbc0ff5733031600c871bd"
+  },
+  "admission": {
+    "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+    "sha256": "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+  },
+  "source_authentication": {
+    "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/source-authentication.json",
+    "sha256": "be7ac8ed76ee5c0f1f9864b72dfbe598ab05764e781f3ade9f959c632c5f44c2"
+  },
+  "native_authentication": {
+    "complete": true,
+    "files": 9,
+    "bytes": 3920408,
+    "native_libraries_loaded_here": false,
+    "model_or_tensor_bytes_read": 0,
+    "full_runtime_environment_verified": false
+  },
+  "predecessor_drain": {
+    "path": "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/predecessor-drain.json",
+    "sha256": "871ac1d3767e561c4f806dafb677c78af74abef703e56f58f71447fb31a4e431"
+  },
+  "coordinator": {
+    "pid": 1155426,
+    "start_ticks": "414762959",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+      "--mode",
+      "coordinator",
+      "--admission",
+      "/mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json",
+      "--admission-sha256",
+      "f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+    "unit": "trn1-mini-layer1-sdk-batch-layout-r2-20261111",
+    "invocation_id": "5a96ecaba68d4f3195f703272f349b74"
+  },
+  "coordinator_properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "1155426",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "1155426",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=7346f4122107172145f633c3fd21f440 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NXD_CPU_MODE=1 NEURON_RT_VISIBLE_CORES=0-1 NEURON_COMPILE_CACHE_URL=file:///tmp/mini-layer0-no-compile TOKENIZERS_PARALLELISM=false OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-sdk-batch-layout-r2-20261111/admission.json --admission-sha256 f12b579e839d347059f8b1b55da9a605e6713021a4d8bdd8881c42bb577a9766 ; ignore_errors=no ; start_time=[Wed 2026-11-11 03:18:41 UTC] ; stop_time=[n/a] ; pid=1155426 ; code=(null) ; status=0/0 }",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-layer1-sdk-batch-layout-r2-20261111.service",
+    "BindsTo": "",
+    "After": "basic.target app.slice -.mount",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running",
+    "Job": "",
+    "InvocationID": "5a96ecaba68d4f3195f703272f349b74",
+    "ExecStopPost": ""
+  },
+  "actual_outer_lock": {
+    "owner": {
+      "pid": 1151505,
+      "start_ticks": "414746946",
+      "ppid": 1151495,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-spec.json",
+        "--spec-sha256",
+        "a6cc11d365438512f6d0bd1639c59a4bbef52e2ded77faf7a5407e5d8470f7b7",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-sdk-batch-layout-r2-20261111-source-review.json",
+        "--review-sha256",
+        "272095ed6e4bd0ce5718c535af28260244909c806252c2937ab93a429f935618"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    "lock": {
+      "device": 66306,
+      "inode": 8294421
+    },
+    "whole_file_write": true,
+    "actual_proc_locks_line": "8: FLOCK ADVISORY WRITE 1151505 103:02:8294421 0 EOF"
+  },
+  "runtime_admitted": true,
+  "model_output_complete": false,
+  "independent_audit_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
