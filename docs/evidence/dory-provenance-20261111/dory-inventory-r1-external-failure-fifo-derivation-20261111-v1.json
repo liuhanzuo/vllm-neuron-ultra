@@ -1,0 +1,70 @@
+{
+  "schema": "dory_inventory_r1_external_failure_fifo_derivation_v1",
+  "created_at": "2026-11-11T06:20:55.073002+00:00",
+  "sources": {
+    "queue": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r1-external-queue-metadata-20261111-v1.json",
+      "bytes": 30486,
+      "sha256": "40f67847c8a893a1aeb7e2ea75f8cfd5bded62f68717f9cc97dec044ad6464b7"
+    },
+    "stats": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r1-external-failure-stat-candidates-20261111-v1.json",
+      "bytes": 4337,
+      "sha256": "4ca83e855f84415866732188e1a566232d146531a8dbc70e1325f889d21f77ce"
+    },
+    "failed_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_native_inventory_finish_v2.py",
+      "bytes": 36627,
+      "sha256": "e346433bef365ebc4b2e0010af0c4de0bd0f717786b96727aa488d381ffd6ead"
+    }
+  },
+  "original_seed_count": 9,
+  "completed_external_rows": 15,
+  "exact_completed_fifo_sequence": [
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/libiomp5.so",
+    "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/_C.cpython-312-x86_64-linux-gnu.so",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so",
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so",
+    "/lib64/ld-linux-x86-64.so.2",
+    "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+    "/usr/lib/x86_64-linux-gnu/libm.so.6",
+    "/usr/lib/x86_64-linux-gnu/librt.so.1"
+  ],
+  "next_unvisited_requested": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "next_unvisited_resolved": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "derived_first_failure_file": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "basis": "Exact FIFO replay from frozen source and all15 saved external rows; original failing descriptor path was not recorded. Current stat observation supports nlink predicate diagnosis, not retrospective descriptor-byte certification.",
+  "current_stat": {
+    "requested": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    "resolved": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+    "identity": {
+      "st_dev": 66306,
+      "st_ino": 7014,
+      "st_mode": 33261,
+      "st_nlink": 2,
+      "st_size": 2220400,
+      "st_mtime_ns": 1788445204000000000,
+      "st_ctime_ns": 1793481818489299425,
+      "st_uid": 0,
+      "st_gid": 0
+    },
+    "predicates": {
+      "canonical": true,
+      "regular": true,
+      "single_link": false,
+      "size_within_64MiB": true
+    }
+  },
+  "failed_predicate_supported": "st_nlink == 1 (current st_nlink=2); regular and 64MiB size bounds pass",
+  "raw_library_bytes_read": false,
+  "full_gzip_read_by_this_child": false,
+  "native_imports": false,
+  "locks": false
+}

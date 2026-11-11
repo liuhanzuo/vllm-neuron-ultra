@@ -70,9 +70,13 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 [诊断后继独立审查](evidence/dory-provenance-20261111/minicpm5-operator-sdk-original-lock-diagnostic-independent-source-review-20261111-v1.json)、[r2 配置实际生成与主任务复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r2-root-preparation-complete-20261111-v1.json)、[r2 实际启动身份](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-live-20261111-v1.json)、[r2 实际准入观察](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-admission-20261111-v1.json)。
 
-Dory 的有界分阶段启动器已通过 17 项独立检查和新增最终文件预算检查。清单阶段统一由独立工作进程执行，父进程持锁至工作进程及其子进程组退出；最终结果文件计入占用预算。绑定上述 MiniCPM5 真实失败与完整历史服务范围后，清单检查已实际启动，结果尚待完成。它复用已完成的 163 包比较，不重做下载或整包对比。原生 ABI 与 Stage A 仍需随后分别验证。
+Dory 的有界分阶段启动器已通过 17 项独立检查和新增最终文件预算检查。清单阶段统一由独立工作进程执行，父进程持锁至工作进程及其子进程组退出；最终结果文件计入占用预算。绑定上述 MiniCPM5 真实失败与完整历史服务范围后，清单检查实际运行并退出 1，失败发生在外部库读取的单硬链接检查。父进程和子进程已退出、进程组已清空，失败和 70,726 条事件完整保留。退出后持原锁完整复读压缩日志：40,522 条 SITE 清单、21,723 条排除项、8,464 条官方源码清单和 15 条已处理外部依赖均在记录内，尚无完整最终清单。根据完整已保存依赖队列与冻结代码推导，下一项是 libc.so.6；随后 stat 观察确认该文件有两个硬链接，文件类型与大小符合要求。失败当刻的描述符路径未直接保存，因此这是队列推导与后续观察，不冒充当刻记录。libstdc++.so.6.0.30 也观察到两个硬链接。下一版将只在这两个系统路径的外部读取边界支持严格稳定的双硬链接文件，系统库来源仍单独待核实。它复用已完成的 163 包比较，不重做下载或整包对比。原生 ABI 与 Stage A 仍需随后分别验证。
 
 [MiniCPM5 汇总失败实际终态](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-failed-terminal-20261111-v1.json)、[完整失败与文件保留证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-model-failed-evidence-20261111-v1.json)、[Dory 启动器独立审查](evidence/dory-provenance-20261111/dory-serial-stage-independent-source-review-20261111-v3.json)、[Dory 清单实际启动](evidence/dory-provenance-20261111/dory-serial-inventory-r1-actual-live-20261111-v1.json)。
+
+MiniCPM5 汇总超限已用实际两份 rank 元数据复现：旧嵌套序列化约 8,740,236 字节，引用两份原文件并保留校验证明的示例为 2,377 字节。用于这次尺寸复现的校验证明是固定结构模板，不能当作原始字节审计结果。紧凑格式与失败恢复纯验证模块的 10 项独立检查通过；实际恢复审计程序仍在接入。
+
+[Dory 清单实际失败与退出](evidence/dory-provenance-20261111/dory-serial-inventory-r1-actual-exit-20261111-v1.json)、[完整保存事件复读](evidence/dory-provenance-20261111/dory-inventory-r1-failed-saved-events-review-20261111-v1.json)、[失败位置的队列推导](evidence/dory-provenance-20261111/dory-inventory-r1-external-failure-fifo-derivation-20261111-v1.json)、[MiniCPM5 紧凑汇总与失败恢复核心复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-compact-recovery-independent-source-review-20261111-v1.json)。
 
 ## 证据
 
