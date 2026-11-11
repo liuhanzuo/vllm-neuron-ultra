@@ -1,4 +1,6 @@
-最新进展：[Qwen3.5 启动失败、Dory 102 份源码补充与 LFM3 完整测试准备](qwen-bootstrap-dory-followup-20261111.md)。Dory 采集与独立复核完成；Qwen3.5 启动修复通过 38 项检查并已启动第二轮历史核验，MiniCPM5 五阶段接入通过 18 项检查；暂无新增整模型提速。
+最新进展：[Qwen3.5 原生预检与 MiniCPM5 固定输入对照](qwen-native-preflight-and-mini-pv-20261111.md)。Qwen3.5 虚拟模块修复通过 44 项检查，补齐历史清单后第四轮已启动；MiniCPM5 的 24 份原生输出逐字节重放及独立复核通过，后续 SDK 导入失败；LFM3 发现启动环境遗漏，完整 CPU v1 保持不运行；Dory 候选 ELF 工具通过 21 项检查，实际采集待执行。暂无新增整模型提速，既有提速表及条件完整保留。
+
+此前进展：[Qwen3.5 启动失败、Dory 102 份源码补充与 LFM3 完整测试准备](qwen-bootstrap-dory-followup-20261111.md)。
 
 最新进展：[LFM3 BF16 写回完整对照：32 项与全部编码通过](lfm-writeback-characterization-20261111.md)。原实现失败保留，暂无新增整模型提速。
 

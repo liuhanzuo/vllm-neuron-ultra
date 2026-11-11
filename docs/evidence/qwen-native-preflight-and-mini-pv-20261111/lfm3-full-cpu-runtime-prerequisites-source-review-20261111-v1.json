@@ -1,0 +1,268 @@
+{
+  "actual_RECORD_read": false,
+  "actual_framework_imports": false,
+  "actual_native_binary_or_model_or_tensor_bytes_read": 0,
+  "actual_prefix_import_compatibility_verified": false,
+  "actual_process_service_lock_operations": false,
+  "actual_seven_distribution_failure_executed": false,
+  "frozen_sources_changed": false,
+  "frozen_v1_must_not_run": true,
+  "full_model_qualified": false,
+  "initial_pure_checker_failure": {
+    "cause": "Checker literal_eval did not resolve fixed CACHE/SOURCE references inside constant lists; corrected only this new source-review checker, no frozen source or native execution.",
+    "exit_code": 1,
+    "terminal_chunk": "dcd9a9"
+  },
+  "interpreter_finding": "The called verifier hashes existing files and checks metadata/script bytes; it does not compile Python3.10 sources or execute relocated console scripts. The original protocol guard requiring the old interpreter is outside this call chain. This is not native ABI/import qualification.",
+  "minimal_successor_design": [
+    "Create a new immutable runner version; preserve frozen v1.",
+    "Set PYTHONPYCACHEPREFIX to output_root/tmp/empty-pycache in the clean service environment before starting Python. Every original/new batch already derives its environment from this function.",
+    "Keep -B and PYTHONDONTWRITEBYTECODE=1; invoke the original isolated predicate at admitted worker startup and before batch native imports, without calling the old model/service guard.",
+    "Keep the original seven-distribution verifier, all script/source/RECORD checks, 874 children and stage order; no extra authentication subprocess or interpreter migration is required by the source-level file-hash logic.",
+    "Never create or exempt this prefix from storage or audit rules. Preserve 1GiB/2048files/256KiB and existing memory/time limits; unexpected creation fails isolation and remains subject to global accounting."
+  ],
+  "mock_payload_read_attempts": 0,
+  "new_speedup_claim": false,
+  "numpy_record_sha256_from_frozen_JSON": "925374351f08d0b515d0997e4d6a1663a27a36c1ff6af22bed65f64b2f716b80",
+  "original874_sequence_and_all_scientific_gates_retained": true,
+  "prefix_finding": "WORKER_PYCACHE must be an absolute, nonexistent, non-symlink path. It is an import-cache isolation destination selected before interpreter startup, not a writable cache or generated output directory.",
+  "prerequisite_configuration_mismatch_confirmed": true,
+  "pure_check_count": 13,
+  "pure_checks": [
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "v1_clean_environment_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "v1_original_hashed_cache_branch_rejected_before_payload_IO"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "environment_only_late_patch_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "sys_only_late_patch_rejected"
+    },
+    {
+      "expected_acceptance": true,
+      "matched": true,
+      "name": "startup_prefix_and_B_flags_accepted_by_original_predicate"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "existing_prefix_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "symlink_prefix_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "relative_prefix_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "bytecode_write_flag_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "dont_write_bytecode_false_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "bytecode_environment_false_rejected"
+    },
+    {
+      "expected_acceptance": false,
+      "matched": true,
+      "name": "wrong_sys_prefix_rejected"
+    },
+    {
+      "expected_acceptance": true,
+      "matched": true,
+      "name": "no_hashed_bytecode_rows_return_without_isolation_branch"
+    }
+  ],
+  "reused_verifier_source_call_inventory": {
+    "lfm3_bitcopy_store_diagnostic_protocol_v4.py:sha": {
+      "calls": [
+        "Path",
+        "Path(path).open",
+        "hashlib.sha256",
+        "iter",
+        "stream.read",
+        "value.hexdigest",
+        "value.update"
+      ],
+      "line": 62
+    },
+    "lfm3_bitcopy_store_diagnostic_protocol_v4.py:source_sha": {
+      "calls": [
+        "Path",
+        "Path(path).resolve",
+        "path.stat",
+        "sha"
+      ],
+      "line": 70
+    },
+    "lfm3_movement_device_protocol_v3.py:verify_distribution": {
+      "calls": [
+        "(base / relative).resolve",
+        "(directory / 'RECORD').read_text",
+        "(directory / 'RECORD').read_text().splitlines",
+        "Path",
+        "base64.urlsafe_b64decode",
+        "base64.urlsafe_b64decode(value + '=' * (-len(value) % 4)).hex",
+        "bytecode.ignored_bytecode_rows",
+        "csv.reader",
+        "dict",
+        "distribution['source_sha256'].items",
+        "encoded.split",
+        "int",
+        "len",
+        "list",
+        "overrides.get",
+        "path.is_relative_to",
+        "path.stat",
+        "script_oracle.verify",
+        "script_proofs.append",
+        "sha",
+        "source_sha",
+        "str"
+      ],
+      "line": 139
+    },
+    "lfm3_movement_device_protocol_v3.py:verify_runtime_distributions": {
+      "calls": [
+        "len",
+        "verify_distribution"
+      ],
+      "line": 164
+    },
+    "smollm3_record_bytecode_v1.py:ignored_bytecode_rows": {
+      "calls": [
+        "Path",
+        "base.is_absolute",
+        "base64.urlsafe_b64encode",
+        "base64.urlsafe_b64encode(hashlib.sha256(source.read_bytes()).digest()).decode",
+        "base64.urlsafe_b64encode(hashlib.sha256(source.read_bytes()).digest()).decode().rstrip",
+        "cache.exists",
+        "cache.is_file",
+        "cache.is_symlink",
+        "cache.resolve",
+        "csv.reader",
+        "data.decode",
+        "data.decode().splitlines",
+        "hashlib.sha256",
+        "hashlib.sha256(data).hexdigest",
+        "hashlib.sha256(source.read_bytes()).digest",
+        "int",
+        "isolated",
+        "list",
+        "record.is_symlink",
+        "record.read_bytes",
+        "record.resolve",
+        "record.stat",
+        "row[0].endswith",
+        "set",
+        "source.is_file",
+        "source.is_symlink",
+        "source.read_bytes",
+        "source.resolve",
+        "source.stat",
+        "str"
+      ],
+      "line": 28
+    },
+    "smollm3_record_bytecode_v1.py:isolated": {
+      "calls": [
+        "Path",
+        "os.environ.get",
+        "prefix.exists",
+        "prefix.is_absolute",
+        "prefix.is_symlink",
+        "str"
+      ],
+      "line": 19
+    },
+    "smollm3_script_record_oracle_v3.py:digest": {
+      "calls": [
+        "hashlib.sha256",
+        "hashlib.sha256(data).hexdigest"
+      ],
+      "line": 23
+    },
+    "smollm3_script_record_oracle_v3.py:record_digest": {
+      "calls": [
+        "base64.b64decode",
+        "base64.urlsafe_b64encode",
+        "base64.urlsafe_b64encode(raw).decode",
+        "base64.urlsafe_b64encode(raw).decode().rstrip",
+        "encoded.split",
+        "len",
+        "raw.hex"
+      ],
+      "line": 27
+    },
+    "smollm3_script_record_oracle_v3.py:verify": {
+      "calls": [
+        "(directory / 'RECORD').read_bytes",
+        "(directory / 'RECORD').read_text",
+        "(directory / 'RECORD').read_text().splitlines",
+        "Path",
+        "config.read_string",
+        "configparser.ConfigParser",
+        "csv.reader",
+        "data.decode",
+        "data.startswith",
+        "dict",
+        "digest",
+        "entry.read_bytes",
+        "len",
+        "lexical.is_symlink",
+        "lexical.lstat",
+        "lexical.read_bytes",
+        "lexical.resolve",
+        "lexical.stat",
+        "record_digest",
+        "relative.startswith",
+        "row['installed_header'].encode",
+        "row['original_header'].encode",
+        "set",
+        "stat.S_ISREG",
+        "str",
+        "type"
+      ],
+      "line": 35
+    }
+  },
+  "reviewer": "/root/lfm_after_writeback_design_20261111",
+  "runtime_admitted": false,
+  "runtime_plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-movement-device-diagnostic-v3/plan.json",
+    "sha256": "846251d079aa459edf699c30b2a2a35688e13b4fe2a4b5b398be402563065374"
+  },
+  "schema": "lfm3_full_cpu_runtime_prerequisites_source_review_v1",
+  "source_only": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_bitcopy_store_diagnostic_protocol_v4.py": "57604f860ff4f40d7b939aba806307ca25553df84fda1a935ff53912a2adb4d2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_movement_device_protocol_v3.py": "ff969dfdd30d7325fc7f2431b1b54f39682fdf1ff5ba583aff161c0298a5c7e6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v1.py": "6489f9262fba72c223f2f4d96b1d95659fe98d2b6bc3d1f267ac417d565c08c9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v1.py": "0d40699c4d70f0c8287730dcd1b8c56f7e550ba210e7a5147ba37c51b4eeed8d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_record_bytecode_v1.py": "ec8d9fbc0cc6583aff223f5c64ed0221bbb9f3d2f9262d327a6c3aa025eb6c6e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_script_record_oracle_v3.py": "b1358d4c793b171e802705bb2aa63ea7018e9a5f88d4edbe5a1cc1924e3b23fb"
+  },
+  "whole_resource_fit_verified": false
+}
