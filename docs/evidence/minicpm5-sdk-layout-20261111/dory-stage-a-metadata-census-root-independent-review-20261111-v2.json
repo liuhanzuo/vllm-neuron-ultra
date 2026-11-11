@@ -1,0 +1,67 @@
+{
+  "schema": "dory_stage_a_metadata_census_root_source_review_v2",
+  "reviewer": "/root/dory_resolver_final_review",
+  "created_at": "2026-11-11T04:06:23.459737+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_stage_a_metadata_census_root_v4.py",
+    "sha256": "26523b34154672ef53fe30f37038429aef9064af25bdc5d53d721ca5a1594316",
+    "bytes": 6877
+  },
+  "supersedes": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-metadata-census-root-independent-review-20261111-v1.json",
+    "sha256": "e0555815fca0920aa372ecc79cebec8456d97717298b6497bcd2d3fe8e66c376"
+  },
+  "passed": true,
+  "blockers": [],
+  "scope": "Lightweight source/metadata review; no actual census execution by reviewer",
+  "resolved_findings": [
+    "JSON pieces now buffer into <=65536-byte batches with guard before each gzip write; long single JSON strings split into <=65536-byte pieces",
+    "BoundedWriter checks guard and compressed total before each actual gzip output write, including header/footer; cap 16MiB unchanged",
+    "Directory creation followed by setup/affinity/rlimit/owner persistence inside failure-recording try; outer finally still releases original lock",
+    "Complete JSON digest/count maintained in original encoder byte order; no projection or truncation"
+  ],
+  "retained_checks": [
+    "Mini actual model exit, full audit exit and external exit recorder are exact SHA-bound; required fields match actual saved files",
+    "Reviewed census_v2 source SHA exact, summary output fields match",
+    "Original serial-enrollment flock and owner identity checked through guard",
+    "Root28GiB and NVMe30GiB floors unchanged; CPU5, RLIMIT_AS2GiB, CPU360/365 and single output16MiB remain",
+    "Full gzip decompression verifies exact uncompressed length and SHA before result.json",
+    "Failures retain output and are externally observable; no self-certified actual exit or native/model/speedup claim"
+  ],
+  "reviewer_observations": {
+    "v2_per_token_guard_issue_synthetic": {
+      "tool_chunk": "77dcc0",
+      "exit_code": 0,
+      "entries": 1000,
+      "JSON_bytes": 245793,
+      "guard_calls": 62014,
+      "empty_compressed_writes": 62005
+    },
+    "v4_buffered_body_source_inspected": true,
+    "v4_AST_syntax_and_exact_sha_verified": true,
+    "root_reported_v4_exact_AST_body_roundtrip": {
+      "tool_chunk": "d4fc9d",
+      "exit_code": 0,
+      "entries": 10000,
+      "escaped_text_bytes_approx": 900000,
+      "uncompressed_bytes": 2758935,
+      "guard_calls": 95,
+      "elapsed_seconds": 0.147,
+      "complete_value_and_digest_count_match": true,
+      "provenance": "Root message, not independently rerun by reviewer"
+    }
+  },
+  "operational_limits_not_scientific_gates": [
+    "Valid census may still exceed 16MiB compressed, 256MiB JSON,2GiB address space or execution time; record actual failure, do not truncate",
+    "Default OS hard termination may prevent Python failure.json; external actual exit observation remains required",
+    "Census itself is metadata-only, not independently authenticated payload inventory or global atomic snapshot"
+  ],
+  "ready_for_root_serial_invocation": true,
+  "actual_runtime_pass_claimed": false,
+  "reviewer_imported_or_executed_root_caller": false,
+  "real_census_run": false,
+  "serial_lock_acquired": false,
+  "native_model_payload_read": false,
+  "original_files_modified": false,
+  "new_scientific_gate": false
+}

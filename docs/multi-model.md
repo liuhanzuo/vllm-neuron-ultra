@@ -6,7 +6,7 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
-[2026-11-11 MiniCPM5 批大小与布局实测](minicpm5-sdk-batch-layout-20261111.md)：144 次局部 SDK 调用、72 份完整输出及退出后独立复核完成。连续布局不改变输出；B1 仅改变 2/24 个检查点的 233 个 BF16 元素，局部相对官方误差由 0.44636% 变为 0.44650%，未改善。历史服务扫描漏计已修正，实际两遍完整核对 1,316 项；此前锁检查异常根因仍未知，失败记录保留。MiniCPM5 内部边界与 Dory 依赖清点仍为源码准备，没有新增合格模型提速。此前 [Nemotron 失败释放与存储恢复](recovery-20261111.md)保留。
+[2026-11-11 MiniCPM5 批大小与布局实测](minicpm5-sdk-batch-layout-20261111.md)：144 次局部 SDK 调用、72 份完整输出及退出后独立复核完成。连续布局不改变输出；B1 仅改变 2/24 个检查点的 233 个 BF16 元素，局部相对官方误差由 0.44636% 变为 0.44650%，未改善。历史服务扫描漏计已修正，实际两遍完整核对 1,316 项；此前锁检查异常根因仍未知，失败记录保留。MiniCPM5 内部边界仍为源码准备；Dory 依赖清点已完成并独立复核 79,789 个普通文件，下一步补齐 Torch／解释器来源和真实 ABI 验证。没有新增合格模型提速。此前 [Nemotron 失败释放与存储恢复](recovery-20261111.md)保留。
 
 [MiniCPM5 完整来源实测与审核修正](minicpm5-source-verification-20261110.md)：44,007 条真实来源记录完整保留，文本认证 71.38 秒、峰值约 304 MiB；没有读取模型或历史张量。独立审阅发现历史退出证据遗漏，后继严格审核与记录程序通过 99 项针对性检查，实际准入仍待完成。Nemotron 已独立核实 37/52 阶段，完整运行继续，无新增模型提速。
 
