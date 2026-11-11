@@ -46,7 +46,7 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 ## MiniCPM5 观测驱动
 
-已准备两侧的可调用源码和精确事件清单，尚未接入实际运行：
+两侧的可调用源码和精确事件清单已准备；SDK 侧新一轮已实际准入并启动，结果尚待完成和退出后审计。官方原生侧仍待接入：
 
 | 阶段 | 固定范围 | 原始保存量 |
 | --- | --- | ---: |
@@ -63,6 +63,12 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 随后 SDK 采集执行程序实际启动，但在模型加载前再次触发 `Controller does not hold whole serial flock`，实际退出 1。失败证据核对确认进程已退出、服务从未启动、输出目录不存在，没有注意力调用或新数值结果。这次已经通过修正后的状态衔接检查，不能混为同一故障。原串行锁保护未放宽。后续 300,000 次单独原锁检查未复现；此结果不能证明间歇异常已经消失，也不能说明失败瞬间真的丢失了锁。另一次 50 秒有界对照中，独立子进程在独立临时文件上切换锁 36,535,040 次，原检查通过 342,143 次，仍未复现；子进程正常退出并回收。因此锁表变化这一假说目前也未得到验证，下一次实际启动应在原检查失败当刻保留原始锁表与描述符证据，继续保持原保护条件。
 
 [实际准备失败](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-preparation-failed-actual-exit-20261111-v1.json)、[状态衔接修正独立复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-freshness-correction-independent-review-20261111-v1.json)、[新版准备实际完成](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-root-preparation-complete-20261111-v2.json)、[执行程序实际失败与退出](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-failed-terminal-20261111-v1.json)、[完整失败证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-model-failed-evidence-20261111-v1.json)。
+
+诊断后继通过独立源码审查及 13 项针对性检查；原锁检查、失败传播及清理流程保持不变。它只在原检查失败时保存当刻证据，不重试或改用宽松条件。新一轮 r2 配置实际生成成功，主任务确认原科学输入、624 份采集文件范围、资源与验收条件均保留；生成配置后的完整读取检查也通过。实际执行随后通过加载前检查，启动了服务和两个 rank。此处记录的是实际准入，采集结果、实际退出及独立完整原始数据复核仍待完成；不能据此宣布锁异常已修复或模型合格。
+
+为保存新配置，在原串行锁内整理已发布仓库的 Git 对象，回收 34,603,008 字节；没有裁剪 Git 历史、删除实验文件或扩容磁盘。
+
+[诊断后继独立审查](evidence/dory-provenance-20261111/minicpm5-operator-sdk-original-lock-diagnostic-independent-source-review-20261111-v1.json)、[r2 配置实际生成与主任务复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r2-root-preparation-complete-20261111-v1.json)、[r2 实际启动身份](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-live-20261111-v1.json)、[r2 实际准入观察](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-admission-20261111-v1.json)。
 
 ## 证据
 
