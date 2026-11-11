@@ -1,0 +1,56 @@
+{
+  "schema": "descriptor_serial_lock_proof_independent_source_review_v1",
+  "reviewer": "/root",
+  "created_at": "2026-11-11T08:00:30.154816+00:00",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/descriptor-serial-lock-proof-source-delivery-20261111-v1.json",
+    "sha256": "e6ebcb1fb17b2cbdec4b5a527f93eec820218bbd8f1e1e653866c1ea75aae986"
+  },
+  "passed": true,
+  "blockers": [],
+  "source_pins": {
+    "descriptor_serial_lock_proof_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/descriptor_serial_lock_proof_v1.py",
+      "bytes": 9917,
+      "sha256": "f3faa10356e16dce6b689298ceebf11441f3821ce391f54896cbffed1c82b003"
+    },
+    "check_descriptor_serial_lock_proof_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_descriptor_serial_lock_proof_v1.py",
+      "bytes": 10205,
+      "sha256": "0146c6d9636dbb36e8eea3168496aff7d4550f86de1fc29ccaa3bf91d1c96352"
+    },
+    "descriptor-serial-lock-proof-interface-20261111-v1.md": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/descriptor-serial-lock-proof-interface-20261111-v1.md",
+      "bytes": 5190,
+      "sha256": "c41893795ba71649a2b0cac17f6317cc4b534ba596c9f0f500216f2ed3a2bacd"
+    }
+  },
+  "original_protocol_unchanged": true,
+  "tests": {
+    "terminal_chunk": "68342c",
+    "exit_code": 0,
+    "original14": true,
+    "additional8": [
+      "fd-wrong-device",
+      "fd-wrong-inode",
+      "global-overlap-range",
+      "descriptor-empty",
+      "global-missing-target",
+      "same-inode-OFD",
+      "same-inode-lease",
+      "stat-owner-change"
+    ],
+    "all_negative_rejected": true
+  },
+  "scope": "Standalone observation core only; runtime integration/lifetime/real IO providers require separate review",
+  "limits": [
+    "Global malformed or unknown unrelated row rejects intentionally; no silent ignored conflict.",
+    "CLOEXEC does not prevent fork inheritance; parent-only lifetime must be proven by caller lifecycle.",
+    "No uninterrupted lifetime or same-inode descriptor ABA proof from point observations.",
+    "Fresh stream factory and original proc contract are required authenticated dependencies.",
+    "Same-inode blocked/POSIX/OFD/lease conflicts conservatively deny."
+  ],
+  "actual_lock_or_process_operations": false,
+  "runtime_admitted": false,
+  "historical_failure_reclassified": false
+}

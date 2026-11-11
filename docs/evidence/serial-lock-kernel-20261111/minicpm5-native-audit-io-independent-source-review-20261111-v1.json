@@ -1,0 +1,53 @@
+{
+  "schema": "minicpm5_native_audit_io_independent_source_review_v1",
+  "reviewer": "/root",
+  "created_at": "2026-11-11T07:56:42.114976+00:00",
+  "source_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-audit-io-source-delivery-20261111-v1.json",
+    "sha256": "c9dea50928d15dba4f1d4b37290f4e96f445c5e0db130ac91476ed88f5febdde"
+  },
+  "pins_verified": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_audit_io_v1.py": "1c6f5743602ca9edb5fdbdda08f174b318691f6d909b3191fa156583b41173a7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_operator_native_audit_io_v2.py": "16530adb871890d14c34757c26a6b7936c0cd7eaec7e0c2ee782c52ac774db13",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-audit-io-interface-20261111-v1.md": "948b96e9deea2cc2e245f50a388121a6e03b217529d1401955aab6e0d32b0cf7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-audit-io-synthetic-first-failure-20261111-v1.json": "e903300381a75d2742859289677a198a44eee938cb2ca3582ab944926fd7b5bb"
+  },
+  "passed": true,
+  "blockers": [],
+  "original_suite": {
+    "session": 60478,
+    "terminal_chunk": "4cf2d3",
+    "exit_code": 0,
+    "tests": 10
+  },
+  "additional_controls": {
+    "session": 15010,
+    "terminal_chunk": "89d78e",
+    "exit_code": 0,
+    "tests": [
+      "donor-hash",
+      "donor-identity",
+      "donor-uid",
+      "donor-symlink",
+      "donor-short",
+      "guard-during-inventory",
+      "fd-open-failure",
+      "final-extra-entry"
+    ],
+    "all_rejected": true,
+    "all_descriptors_closed": true
+  },
+  "review_findings": [
+    "Constructor performs no IO; caller admission/actual exits/full physical drain remain mandatory.",
+    "Parents opened descriptor-relative with nofollow and stable link/held-descriptor binding.",
+    "Full output inventory includes97 driver directories plus output-root budget; final unchanged scan required.",
+    "Read callback enforces exact bounded path/reference/identity/full bytes/hash/EOF and guard per chunk.",
+    "read_source remains external original partition policy; no native import.",
+    "Single-owned frozen output is required; before/after observations do not claim arbitrary adversarial ABA prevention."
+  ],
+  "actual_filesystem_payload_io": false,
+  "actual_process_lock_operations": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

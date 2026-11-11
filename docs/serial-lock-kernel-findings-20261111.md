@@ -32,3 +32,9 @@
 接下来补齐真实文件读取与进程退出核验，再执行原生对照。源码测试不等于模型已执行，也不等于质量或速度通过。原权重、精度、冷缓存 4096、长解码、请求槽位复用、质量与匹配 HTTP 验收继续保留。
 
 证据：[内核来源](evidence/serial-lock-kernel-20261111/retrieval.json)、[源码独立复核](evidence/serial-lock-kernel-20261111/linux-lock-exact-ubuntu-source-independent-review-20261111-v1.json)、[内存模拟源码](evidence/serial-lock-kernel-20261111/check_proc_locks_buffered_iteration_v1.py)、[主任务记录](evidence/serial-lock-kernel-20261111/proc-locks-kernel-source-root-findings-20261111-v1.json)、[MiniCPM5 修正独立复核](evidence/serial-lock-kernel-20261111/minicpm5-native-output-verifier-independent-source-review-20261111-v2.json)、[文件哈希清单](evidence/serial-lock-kernel-20261111/manifest.json)。
+
+## 后续源码接入进度
+
+指定描述符的独立检查模块已完成，14 项原测试和 8 项追加检查通过；尚未用于实际运行。MiniCPM5 的稳定读取模块通过 10 项原测试和 8 项追加检查，合成验证完整读取 1,176 份文件并重新核对目录。完整运行输出清单也已接入小配置解析器，7 项合成检查通过。三个组件目前都只通过源码与模拟验证，实际父子进程启动、退出记录及最新串行状态检查仍待接入。
+
+[描述符模块复核](evidence/serial-lock-kernel-20261111/descriptor-serial-lock-proof-independent-source-review-20261111-v1.json)、[稳定读取复核](evidence/serial-lock-kernel-20261111/minicpm5-native-audit-io-independent-source-review-20261111-v1.json)、[完整清单接入复核](evidence/serial-lock-kernel-20261111/minicpm5-native-complete-overlay-independent-source-review-20261111-v1.json)、[具体接入口与剩余工作](evidence/serial-lock-kernel-20261111/minicpm5-native-accepted-source-integration-handoff-20261111-v1.md)。
