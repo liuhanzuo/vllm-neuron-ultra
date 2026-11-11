@@ -1,0 +1,81 @@
+{
+  "schema": "dory_torch_cpython_archive_verifier_independent_source_review_v2",
+  "reviewer": "/root/dory_resolver_final_review",
+  "created_at": "2026-11-11T04:31:11.091596+00:00",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/verify_dory_torch_cpython_archives_root_v5.py",
+    "bytes": 14667,
+    "sha256": "f27adb21dfdff311fadce7518daf8a76d5853d06af179454c0be6dd80b050251"
+  },
+  "checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_archive_verifier_independent_v3.py",
+    "bytes": 20753,
+    "sha256": "4d362c9c84ad8ee02765e3c4d6903e6f718e0d7a0a0bb9e572634bfc7a4d615c"
+  },
+  "prior_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-torch-cpython-archive-verifier-independent-review-20261111-v1.json",
+    "bytes": 5827,
+    "sha256": "57b6a63bb55567ba6dae068bfcdcd081b8aedf79193e281a2474594cd262795d"
+  },
+  "passed": true,
+  "blockers": [],
+  "ready_for_root_serial_execution": true,
+  "actual_prior_failure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-torch-cpython-archive-r1-failed-terminal-20261111-v1.json",
+    "bytes": 1434,
+    "sha256": "744d6b93749891e9d662f06ef2d84c04cbdd59827ae432be44da25825d6bc8ab"
+  },
+  "prior_owner_binding_verified": {
+    "path": "/mnt/nvme/dory-torch-cpython-archive-verification-r1-20261111/owner.json",
+    "sha256": "2634f5a76e6d6765333986a68b120935c7904cda161e37c1d3200382b43e7b87"
+  },
+  "prior_runtime_failed": true,
+  "prior_lock_failure_root_cause_known": false,
+  "reviewed_changes": [
+    "Fresh r2 namespace retains original failed r1 directory and exact failed-terminal SHA/tool result",
+    "Failed owner loaded through its SHA-bound evidence reference; current guard requires original failed owner gone",
+    "Retained torch and CPython archives are fully rehashed against independent upstream lengths/SHA, with pre/post path identity check; main has no download call",
+    "Original lock_proof is called once per guard with no retry, relaxation, or fallback",
+    "Original exception traceback locals raw/matches/owner/lock/actual captured separately from later fdinfo/proc locks; same exception rethrown",
+    "Diagnostic errors are recorded without replacing the original strict lock failure; only first capture retained",
+    "fdinfo read bounded to65537 bytes, later /proc/locks read bounded to2MiB+1; diagnostics remain attached to failure.json before finally unlock",
+    "Archive mapping, comparison, full gzip persistence and original resource/scientific restrictions unchanged"
+  ],
+  "actual_synthetic_tests": {
+    "count": 30,
+    "failures": 0,
+    "errors": 0,
+    "unittest_seconds": 0.288,
+    "tool_chunk": "1330d1",
+    "actual_exit_code": 0,
+    "command": "taskset -c 5 prlimit --as=805306368 --cpu=30 -- /usr/bin/python3 -I -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_archive_verifier_independent_v3.py",
+    "reused_previous23": true,
+    "added7": [
+      "retained archive exact hash/no network",
+      "retained wrong SHA keeps bytes",
+      "retained symlink rejected",
+      "failed traceback snapshot distinct from later proc snapshot; one strict check only",
+      "diagnostic error preserves original exception",
+      "first diagnostic not overwritten while every subsequent guard still fails",
+      "failure receipt carries diagnostics and outer finally releases"
+    ],
+    "only_AST_extracted_code_executed": true,
+    "root_main_executed": false,
+    "actual_lock_or_proc_diagnostics_run": false,
+    "real_network_or_subprocesses": false,
+    "real_archives_or_installed_runtime_opened": false
+  },
+  "remaining_interpretation": [
+    "Review authorizes a root serial archive comparison attempt, not runtime success or an explanation of the earlier flock anomaly",
+    "Diagnostic capture covers guard exceptions during verification; errors before output namespace creation remain externally observed failures, and cannot imply a completed run",
+    "Archive comparison remains archive-to-installation; installed extras and complete-source authority are subsequent root work",
+    "Review Python links and venv copies along with regular-file nonexact rows; no nonexact category is silently waived",
+    "Root must observe actual exit and independently verify the complete saved result"
+  ],
+  "frozen_prior_files_modified": false,
+  "prior_synthetic_failure_preserved": true,
+  "serial_lock_acquired": false,
+  "archive_or_native_payload_read": false,
+  "historical_unlocked_prebuild_deviation_unchanged": true,
+  "real_runtime_success_claim": false
+}
