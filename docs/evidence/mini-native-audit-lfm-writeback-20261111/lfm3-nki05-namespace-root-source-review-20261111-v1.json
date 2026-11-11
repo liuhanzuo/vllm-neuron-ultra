@@ -1,0 +1,55 @@
+{
+  "schema": "lfm3_nki05_namespace_root_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T20:53:18.085427+00:00",
+  "source_author": "/root/lfm_writeback_second_arm_failure_20261111",
+  "source_only": true,
+  "passed": true,
+  "blockers": [],
+  "closure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-namespace-source-closure-20261111-v1.json",
+    "sha256": "df394d087cefd5edfc22097c75ea5a85764b801112e5098c762af56211d469fa"
+  },
+  "source_count": 567,
+  "all561_previous_pins_preserved": true,
+  "sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v3.py",
+      "sha256": "c8a4dfbc29b7b8aab8f2634c4ec245ce38d7cdeb5ebc84ad1217cc7e1ee2bcd8"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_torch_namespace_sources_v1.py",
+      "sha256": "f220e415895c2a265939cbf7fc7bf30cce09f44ec92eadf68179aac41a7b191c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_lfm3_nki05_torch_namespace_sources_v1.py",
+      "sha256": "39d21b0851164769b512a6983bc7f2bbae9517d797b4f2493acc4dd17f347d6a"
+    }
+  ],
+  "analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-namespace-failure-source-analysis-20261111-v1.json",
+    "sha256": "d868cc23515ae3c49d6aa4d13aa79ae97e359ce698254968bbba557387125aee"
+  },
+  "actual_root_tests": {
+    "kind": "tool_call",
+    "terminal_chunk": "113dfc",
+    "exit_code": 0,
+    "tests": 8,
+    "interpreter": "/home/ubuntu/venvs/model_reference_2026/bin/python3",
+    "native_imports": false
+  },
+  "reviewed": [
+    "Only verify_sources function changes; old diagnostic_v2 and probe_v1 exact hashes and all other runner functions retained.",
+    "Exact torch.ops/classes singleton/type/installed origin/source/code provenance; no general relative-path exemption.",
+    "Four explicit installed source pins; source compiled as text without package imports.",
+    "Pure old verifier reproduces missing _ops.py and _classes.py paths; actual historical filename absent from saved exception, so exact historical path remains unproven.",
+    "Unknown namespaces, forged class/callable/origin/source, ordinary missing/unpinned relative source all reject.",
+    "Repeated admission after lazy namespace creation covered with explicit small stdlib fixtures.",
+    "Original32 cases/all65536/negative/arithmetic/cast/full-restoration and required nonzero original-failure semantics retained."
+  ],
+  "runtime_admitted": false,
+  "actual_successor_executed": false,
+  "actual_three_arm_characterization_complete": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

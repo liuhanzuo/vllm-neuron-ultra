@@ -1,0 +1,60 @@
+{
+  "schema": "lfm3_nki05_writeback_root_source_review_v1",
+  "reviewer": "/root",
+  "created_at": "2026-11-11T19:00:30.388076+00:00",
+  "source_only": true,
+  "passed": true,
+  "blockers": [],
+  "closure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-characterization-source-closure-20261111-v1.json",
+    "sha256": "59feb3573c3811738813247d37272152de6e11ede52e0ecc7b8d8099bc157250"
+  },
+  "sources_verified": 561,
+  "original558_retained_verbatim": true,
+  "runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v2.py",
+    "sha256": "7029adf0cb320c9857db0de5ca92b1d3dea52ec4003324b45b7d120def3910c7"
+  },
+  "diagnostic": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_transport_diagnostic_v2.py",
+    "sha256": "cf83c634b0f71f5d8a483704b7fed2bdad2588736866d81f28d19416ac11263a"
+  },
+  "probe": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_writeback_probe_v1.py",
+    "sha256": "abdb58d5acc086ac11f177fa98d38b6424d5fa02d9612e5343c534331534e073"
+  },
+  "checks": [
+    {
+      "terminal_chunk": "17b4e5",
+      "exit_code": 0,
+      "tests": 9,
+      "scope": "probe_and_original_science"
+    },
+    {
+      "terminal_chunk": "18f60c",
+      "exit_code": 0,
+      "tests": 8,
+      "scope": "complete_serialization_and_failure_boundary"
+    }
+  ],
+  "serialization_envelope": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-three-arm-serialization-envelope-20261111-v2.json",
+    "sha256": "cdeb3f118524759cf7a1a9ff82a17c20b9182d281864166740724227255e40ce"
+  },
+  "actual_frozen_writer_bytes": 226045,
+  "cap_bytes": 262144,
+  "reviewed": [
+    "Original32cases/all65536encoding/negative/arithmetic/cast suite body retained.",
+    "Only pinned simulate_kernel omitted-precision BF16 writeback intercepted; other callers and explicit precision unchanged.",
+    "All input hashes/word-bit counters and detached false/true controls; exact original function restored on every arm.",
+    "Three arms separate original failure, candidate and restored failure.",
+    "Complete report and characterization status preserved, original failure still produces nonzero worker/outer path.",
+    "Original serial lock/history/resource/physical drain paths preserved; no installed SDK edits."
+  ],
+  "runtime_admitted": false,
+  "actual_native_probe_run": false,
+  "legacy_full3716_passed": false,
+  "device_behavior_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

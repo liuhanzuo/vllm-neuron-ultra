@@ -1,0 +1,91 @@
+{
+  "schema": "lfm3_nki05_namespace_failure_source_analysis_v1",
+  "source_only": true,
+  "observed_at": "2026-11-11T20:52:18.219584+00:00",
+  "actual_saved_diagnostic": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r3-writeback-20261111/diagnostic-result.json",
+    "sha256": "8ac161bfe916ab547c89aaf116a75d56f46c937104381aec0c0231287a717eb1"
+  },
+  "actual_runtime_log": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r3-writeback-20261111/runtime.log",
+    "sha256": "dd1336175d3153773f67e99effeb1b5c43332fb670067ba621048b2f7ed7bed3"
+  },
+  "actual_error": "FileNotFoundError(2, 'No such file or directory')",
+  "actual_missing_filename_saved": false,
+  "actual_inner_traceback_saved": false,
+  "actual_candidate_checks": 0,
+  "actual_restored_arm_executed": false,
+  "source_supported_explanation": "First simulated NumPy call lazily imports Torch; its two sys.modules namespace objects have relative synthetic __file__ labels. Repeated admit calls verify_sources, which resolves them into ROOT and attempts to hash nonexistent files.",
+  "source_routes": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v2.py",
+      "lines": [
+        232,
+        236,
+        459
+      ],
+      "role": "Relative __file__ hashes in repeated admit"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/nki/framework/_simulate.py",
+      "lines": [
+        63,
+        132
+      ],
+      "role": "convert_args calls is_torch_tensor for NumPy arguments"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/nki/framework/_torch_convert.py",
+      "lines": [
+        56,
+        197
+      ],
+      "role": "First conversion lazily imports Torch"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/torch/__init__.py",
+      "lines": [
+        2268,
+        2271,
+        2272
+      ],
+      "role": "Register singleton namespaces in sys.modules"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/torch/_ops.py",
+      "lines": [
+        1426,
+        1427
+      ],
+      "role": "Relative synthetic _ops.py label"
+    },
+    {
+      "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/torch/_classes.py",
+      "lines": [
+        19,
+        20
+      ],
+      "role": "Relative synthetic _classes.py label"
+    }
+  ],
+  "pure_reproduction": {
+    "actual_original_verify_sources_function_executed": true,
+    "namespace_objects": "Synthetic ModuleType instances from isolated installed class ASTs",
+    "missing_paths": [
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/_ops.py",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/_classes.py"
+    ],
+    "both_raise_original_FileNotFoundError": true,
+    "native_package_imports": false,
+    "simulation_executed": false
+  },
+  "historical_exact_missing_filename_proven": false,
+  "new_runtime_result_claimed": false,
+  "fix_scope": "Strict original namespace identity and constructor source/code authentication; ordinary relative and missing sources retain original checks.",
+  "closure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-namespace-source-closure-20261111-v1.json",
+    "sha256": "df394d087cefd5edfc22097c75ea5a85764b801112e5098c762af56211d469fa"
+  },
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
