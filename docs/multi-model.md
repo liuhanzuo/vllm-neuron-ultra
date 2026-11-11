@@ -152,3 +152,5 @@ declared fully optimized.
 [MiniCPM5 第二层自身历史注意力实测复现](minicpm5-layer1-own-history-result-20261110.md)：真实双 rank 的 36 次完整四行调用全部逐字节一致；退出后独立复核全部 589,824 字节。新证据链接通原 FP32 精确重放、独立 FP64 判定和完整缓存，保留标量容差失败。交叉历史矩阵尚未执行，整模型和提速结论不变。
 
 [Dory 原生环境来源核对](dory-runtime-provenance-20261111.md)：Torch 官方归档12,395/12,396文件相同，仅安装清单不同；Python解释器及三份环境副本匹配上游，配置源码和三份字节码差异保留。MiniCPM5内部观测驱动两侧32项源码检查通过，尚待运行接入。无新增整模型合格结果或提速倍数。
+
+最新环境验证：[Dory 签名状态、Release 图标路径与空 XZ 尾流的实际兼容诊断](dory-signed-metadata-compatibility-20261111.md)。原失败及其独立复核完整保留，没有新增模型提速。MiniCPM5 原生 r1 的失败记录已完成，尚无原生张量。
