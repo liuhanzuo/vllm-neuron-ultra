@@ -1,0 +1,135 @@
+{
+  "schema": "qwen35_sampler_capture_stride_source_review_v1",
+  "reviewer": "/root/qwen35_runtime_science_review_20261111",
+  "reviewed_at": "2026-11-11T19:41:23.875517+00:00",
+  "scope": "Supplemental source-only trace of tensors included by NativeSnapshotter. No runtime adapter acceptance or native execution.",
+  "prior_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-frozen-science-independent-review-20261111-v1.json",
+    "sha256": "ef03814082c8c12236ff36760d0e94a3b835b677b19d032379a4260d0915053c"
+  },
+  "source_sha256": {
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/worker/gpu_input_batch.py": "ae4c75dbee6a6d768ce79a1bf1f148aa2590cabd510d0e01e486fad845393abd",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/utils.py": "534820beadd6bded01f6cb2c0179843c1f80a8d936b224c3fc0e898268ab381a",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/sampler.py": "3720fbfd59c1f064a62b8e0489ec0436468188b69f8b8eb84d2d62eba31f3912",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/ops/penalties.py": "07721972bbcf0719768f34d5625221dd3cb6552239cb8083ea17b5077365931f",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/ops/bad_words.py": "24e9eb257ab6443e39700edc99e3d7da4b518c183fd6e250b0fa8273481fd95c",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py": "536ed05e4cbf2eef8817d57c04fd0e424441f4b05ee5282cf072722d2592b203",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/model_executor/layers/utils.py": "7102fb0fa39dcf3beef4f7030737be4399d2ea5bf3dd671235e220305cfa086b",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_runner.py": "3ea2fc8a6b9fea84bc488e17e71a90083218009d0f873d8d39d526cb77b45e68",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/random.py": "eb448c131beccaf865b52927bdb620bafccaf765f65912e1f46f7f30cc433ceb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_capture_v1.py": "76a88edea1613d7847550a744f054f21b21a0ecdfc4d16217c8154b847ef39ec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_replay_v1.py": "6eae6c039f851dd84ddf86c34e6e27c3b4a985dbd0167c3c955056f27fa70413",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_worker_v1.py": "2b0efa44a66078c49e358b3975299db4cbe6c7e0d4d66503cd4d3834b5a08ee2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_bias_fix.py": "591602d07cec699a7bb2f0ec028d9c2b82be55565a4c4c49b50e868cecea2262",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_state_inplace_reset_v1.py": "6a3f45eb63b3b1251334da56dc6d7520e9eec01240f43e2258751e2c36d148ce"
+  },
+  "conclusion": "No reviewed intended capture producer constructs a nonempty expanded stride-zero tensor. The observed source graph does not by itself require replacing the frozen v1 codec. This is not runtime proof or arbitrary-overlap support.",
+  "trace": [
+    {
+      "captured_fields": [
+        "temperature",
+        "top_p",
+        "top_k",
+        "frequency_penalties",
+        "presence_penalties",
+        "repetition_penalties"
+      ],
+      "evidence": [
+        "gpu_input_batch.py:150-219 allocates independent one-dimensional torch.empty buffers",
+        "gpu_input_batch.py:711-771 uses simple leading slices and copy_slice",
+        "v1/utils.py:322-332 copy_slice returns to_tensor[:length].copy_(from_tensor[:length])"
+      ],
+      "result": "No expand/as_strided transformation in these producers; penalties remain allocated slices even when no_penalties is true."
+    },
+    {
+      "captured_fields": [
+        "prompt_token_ids",
+        "allowed_token_ids_mask"
+      ],
+      "evidence": [
+        "gpu_input_batch.py:786-802 allocates two-dimensional prompt-token storage, fills via NumPy, returns .to(device)",
+        "gpu_input_batch.py:405-414 allocates independent two-dimensional bool zeros for allowed-token masks",
+        "gpu_input_batch.py:746-751 copies and returns a simple leading mask slice"
+      ],
+      "result": "None or independently allocated/sliced tensors, with no expanded destination construction."
+    },
+    {
+      "captured_fields": [
+        "processed_logits"
+      ],
+      "evidence": [
+        "neuronx_distributed_model_runner.py:1214-1221 constructs long reorder indices and advanced-indexes hidden_states before CPU sampling",
+        "sampler.py:88-109 converts dtype, applies masks, processors and penalties",
+        "sampler.py apply_temperature uses in-place div_; allowed-token masking uses masked_fill_; bad-word application assigns selected logits",
+        "v1/sample/ops/penalties.py delegates to model_executor/layers/utils.py:52-85, which invokes repetition penalties in place and subtracts frequency/presence penalties in place",
+        "qwen35_sampler_native_capture_v1.py:161-164 rejects nonempty argmax-invariant and non-argmax-invariant processor lists"
+      ],
+      "result": "Source operations preserve a materialized logit tensor. Temporary broadcasting RHS operands are not captured as replacement logits or metadata."
+    },
+    {
+      "captured_fields": [
+        "sampled_token_ids",
+        "processed_logits_or_logprobs_output"
+      ],
+      "evidence": [
+        "topk_topp_sampler.py forward_native returns argmax(...).view(-1) from random_sample",
+        "topk_topp_sampler.py apply_top_k_top_p either retains the supplied materialized tensor or returns sort/scatter output",
+        "qwen35_sampler_bounded_operation_v1.py:129 returns torch.stack(selected), None"
+      ],
+      "result": "No producer explicitly creates an expanded output view. Native output strides still need runtime observation."
+    },
+    {
+      "captured_fields": [
+        "rng_before",
+        "rng_after"
+      ],
+      "evidence": [
+        "qwen35_sampler_native_capture_v1.py:144-152 serializes torch.get_rng_state() and CPU Generator.get_state()",
+        "torch/random.py:22-29 documents a CPU ByteTensor returned directly by default_generator.get_state()"
+      ],
+      "result": "No Python expansion is applied. Native RNG-state layout remains a runtime validation item; native library implementation/payload was not read."
+    },
+    {
+      "captured_fields": [
+        "request_context",
+        "output_token_ids",
+        "bad_words_token_ids"
+      ],
+      "evidence": [
+        "qwen35_sampler_native_capture_v1.py request_context casts slot/count fields to int and prompt/output IDs to lists",
+        "gpu_input_batch.py returns output-token lists and bad-word mappings"
+      ],
+      "result": "Plain scalar/list/mapping request data, not broadcast tensor metadata."
+    },
+    {
+      "captured_fields": [],
+      "evidence": [
+        "qwen35_neuron_adapter.py:194 expands an internal gather index, which torch.gather consumes at line195",
+        "qwen35_neuron_adapter.py:231 expands an internal one-token attention mask"
+      ],
+      "result": "These internal expanded tensors are not fields serialized by the sampler capture."
+    }
+  ],
+  "codec_limit": {
+    "source": "qwen35_sampler_native_replay_v1.py:37-42 allocates torch.empty_strided then copy_ from canonical values",
+    "nonempty_expanded_stride0": "Overlapping destination risk; do not claim supported reconstruction.",
+    "singleton_stride0": "Nonoverlapping singleton stride-zero geometry must be exercised by a real explicit native positive preflight, not inferred from base[::3,:1]."
+  },
+  "required_runtime_checks": [
+    "Run real singleton stride-zero roundtrip positive control preserving values, dtype, shape and original stride.",
+    "Run nonempty expanded stride-zero negative control and explicitly report expected rejection; do not count it as codec support.",
+    "Verify actual CPU RNG-state tensors and selected complete actual packets through the original decoder/replay.",
+    "If any intended captured tensor actually has an overlapping expanded stride-zero layout, stop this path and create a separately reviewed codec/leaf successor without mutating frozen v1.",
+    "Retain all original scientific gates and actual13 named sampler controls."
+  ],
+  "native_imports_or_tests_performed": false,
+  "model_tensor_or_native_payload_read": false,
+  "process_or_service_inspection": false,
+  "frozen_files_modified": false,
+  "runtime_admission": false,
+  "full_model_qualified": false,
+  "speedup_claim": false
+}

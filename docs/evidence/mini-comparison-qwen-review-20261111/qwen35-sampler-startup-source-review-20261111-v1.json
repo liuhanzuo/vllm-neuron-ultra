@@ -1,0 +1,74 @@
+{
+  "schema": "qwen35_sampler_startup_source_review_v1",
+  "reviewer": "/root/qwen35_runtime_science_review_20261111",
+  "reviewed_at": "2026-11-11T19:47:02.955629+00:00",
+  "scope": "Exact installed Neuron worker/model-runner/model-loader and vLLM startup, memory-profile and warmup call flow; source-only, no lifecycle/process audit.",
+  "source_sha256": {
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuron_worker.py": "3f3c2195e1fc399e56b701d63a6d1f67f46d6bcaef38b42ffce095fe1a1201ba",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_runner.py": "3ea2fc8a6b9fea84bc488e17e71a90083218009d0f873d8d39d526cb77b45e68",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_loader.py": "328ddd70fa0c47939400d6275612a37a790d82a0aa1d27421414b641e395c994",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/platform.py": "4387dfe509f055d72b93d955c1fb103142e000c452898680bb71e3e0886f8f26",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/executor/uniproc_executor.py": "f8d2b673b5112c5c27a18c29af112fac8ac419f461aabf2abe9d4a44c8043a5a",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/executor/abstract.py": "d1aae71056b8e55bebcf41cdcd07acf1484c511f840e5f57f2277b306e9ef907",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/engine/core.py": "4573563d926cafe0f1e11ebb25e862ce3bc722af9a24425dec791b9d43cfbedd",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/parallel.py": "33def3bb46ce10a43df3cd97879a4299b25e48beaceede8203e1941c43c415e1",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/worker/gpu_input_batch.py": "ae4c75dbee6a6d768ce79a1bf1f148aa2590cabd510d0e01e486fad845393abd",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/sampler.py": "3720fbfd59c1f064a62b8e0489ec0436468188b69f8b8eb84d2d62eba31f3912",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_worker_v1.py": "2b0efa44a66078c49e358b3975299db4cbe6c7e0d4d66503cd4d3834b5a08ee2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_capture_v1.py": "76a88edea1613d7847550a744f054f21b21a0ecdfc4d16217c8154b847ef39ec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v1.py": "b391033b4726ac715d6bc4ff1eb3fab511f3de5fb8037f624098dd987b10bd3f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f"
+  },
+  "conclusion": "With ordinary single-data-parallel engine configuration, reviewed initialization and warmup do not invoke the hooked runner.cpu_sampler.topk_topp_sampler. There is a distinct dummy-batch path in the data-parallel engine loop, so this conclusion is conditional on actual configuration and is not a blanket assertion that Neuron never attempts dummy sampling.",
+  "normal_startup": [
+    "qwen35_sampler_instance_v1.py worker factory attaches hooks only to the newly constructed runner.cpu_sampler instance; no global sampler class patch.",
+    "vllm/executor/uniproc_executor.py:53-55 initializes worker/device and loads model.",
+    "vllm_neuron/worker/neuron_worker.py:51-63 determine_available_memory reads runtime memory statistics, not a model profile run.",
+    "vllm/v1/engine/core.py:169-207 initializes KV cache via executor; v1/executor/abstract.py:67-75 calls initialize_from_config and compile_or_warm_up_model.",
+    "Neuron worker compile_or_warm_up_model at lines88-90 returns immediately; runner initialize_kv_cache at lines145-153 also returns immediately.",
+    "Runner load_model at lines215-238 loads the model and validates configuration, without invoking runner CPU sampling.",
+    "Neuron loader _load_compiled_model at lines214-218 calls the NxDI application load method.",
+    "qwen35_neuron_adapter.py NeuronQwen35ForCausalLM inherits NeuronBaseForCausalLM, which inherits NeuronApplicationBase; neither defines a load/warmup override.",
+    "NxDI application_base.py:339-362 warmup calls the compiled nxd_model.forward or forward_async directly for generated example inputs. It does not call the vLLM model runner or its CPU sampler.",
+    "Normal EngineCoreProc loop at v1/engine/core.py:720-728 processes queued actual work without execute_dummy_batch."
+  ],
+  "separate_dummy_path": {
+    "call_chain": [
+      "NeuronWorker.execute_dummy_batch at lines149-151",
+      "NeuronxDistributedModelRunner._dummy_run at lines1387-1441",
+      "_execute_model_for_text at lines638-659",
+      "_sample then _cpu_sample"
+    ],
+    "automatic_callsite": "vllm/v1/engine/core.py:1056 inside DPEngineCoreProc.run_busy_loop; constructor selection at lines689-699 uses this variant for data_parallel_size>1 or dp_rank>0.",
+    "request_context_limitation": "Dummy input uses request_ids=[dummy_request] but does not populate runner.requests, input_batch request membership or sampling metadata with a corresponding real request.",
+    "empty_batch_behavior": "Fresh input_batch has no requests. Both all_greedy and all_random are true by gpu_input_batch.py:832-837. This must not be described as an ordinary greedy bypass: empty reordered logits can fail debug reduction in _cpu_sample; if sampler.sample were reached, its mutually-exclusive flag assertion at lines153-154 would fail before topk/topp.",
+    "nonempty_batch_behavior": "If an unrelated active input_batch remains, reordering looks up actual request IDs in the dummy request mapping and can fail before sampling.",
+    "exception_handling": "The original _dummy_run catches Exception at lines1438-1441 and logs a warning. These observations do not qualify dummy inference as successful.",
+    "source_risk_classification": "No demonstrated startup-quota consumption in the reviewed ordinary single-DP path. Any configuration or future dummy path that reaches non-greedy topk with synthetic context requires explicit validation and may need a separately reviewed hook design."
+  },
+  "configuration_scope": {
+    "frozen_args": "qwen35_sampler_pair_driver_v1.py:66-71 sets TP2, batch4 and context4096; it does not set a DP flag.",
+    "default": "vllm/config/parallel.py:71 and :76 defaults are data_parallel_size1 and data_parallel_rank0.",
+    "environment_override": "vllm/config/parallel.py:406-412 can replace these values from VLLM_DP_SIZE/VLLM_DP_RANK environment values; no live environment or process was inspected.",
+    "required": "Actual native startup evidence must confirm intended single-DP configuration."
+  },
+  "quota_caveat": "CaptureObserver observed_operation at lines214-218 increments call_id and budget.select before request_context. Zero written packets alone does not prove no failed-context calls consumed seen quota.",
+  "required_native_evidence": [
+    "Actual intended single-DP startup reaches ready without capture/context exceptions.",
+    "No capture packets before first diagnostic request; if observer counters are available, call_id and seen counts must also be zero.",
+    "Complete actual B1 and B4 diagnostic captures each contain the original16 selected calls, with no missing records or silently consumed quota.",
+    "Do not report this source review as native startup success."
+  ],
+  "frozen_source_change_required_by_this_review": false,
+  "native_imports_or_tests_performed": false,
+  "model_tensor_or_native_payload_read": false,
+  "process_or_service_inspection": false,
+  "frozen_files_modified": false,
+  "runtime_admission": false,
+  "full_model_qualified": false,
+  "speedup_claim": false
+}

@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+最新审阅：[MiniCPM5 保存算子比较与 Qwen3.5 采样补充](mini-comparison-qwen-review-20261111.md)。比较工具 9 项、后续准备工具 29 项独立检查通过；说明采集布局／启动结论边界，并将采样控制数量更正为原清单的 13 项。真实比较待原生退出和审计，无新增提速。
+
 最新准备记录：[Qwen3.5-2B 采样优化与 MiniCPM5 后续核验修正](qwen35-sampler-preparation-20261111.md)。源码检查已通过，实机结果与提速仍待验收。
 
 [2026-11-11 MiniCPM5 修正后重跑准入与 LFM3 写回对照准备](mini-r3-and-lfm-writeback-preparation-20261111.md)：新 MiniCPM5 任务已通过实际准入；LFM3 三组对照通过 17 项独立源码检查，Dory 有限补充采集通过 34 项检查，后两项实际运行待串行槽位。没有新增模型提速。

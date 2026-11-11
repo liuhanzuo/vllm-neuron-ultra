@@ -1,0 +1,54 @@
+{
+  "schema": "minicpm5_saved_operator_comparison_root_source_review_v1",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-11T19:53:57.819177+00:00",
+  "source_preparation_accepted": true,
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-saved-operator-comparison-source-delivery-20261111-v1.json",
+    "sha256": "2e7b9ecf3a645ad99cc8b8280a919e916c3a9c0223d86f28fae47a697dc69f73"
+  },
+  "source_and_manifest_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_saved_operator_comparison_v1.py": "8004bec5519ac732bc1a547d02e1a39ca0e63d9f5bdada7b06acece4446805ae",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_saved_operator_comparison_v1.py": "94a1fb3db2838851a09d953eaa66995891135cc2c68c340ea232d67699df5ef2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-saved-operator-comparison-design-20261111-v1.md": "ac8616dc3d27fe50aff713feed473f480be8fa6e2aca594f85170b57e2fd70fa",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-manifest.json": "778b08b75f31e6e5b48e56d888bdc53f306d2dd198513fa8959e6cae221171d3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-event-manifest-20261111-v1.json": "0b8d7b5f8b9c1d9d0fc7cbcaa5f2fb0a4b8ab646afaf9998105606a146c085f6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_manifest_v1.py": "5bd76826bf3b2264e8db2ba7c1e2d784dc4d167834fab589916c559f28ba0054",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_manifest_v1.py": "4ea1b9244a8e020a18d7ab30e579b5405ae7b9809b539be053716f6c6ebad7c6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_capture_observer_v1.py": "09a7f466f31919af2567eb2770fbf00dba1fea1b985490374066eeb5f27485e2",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8"
+  },
+  "independent_tests": {
+    "command": "python3 -B research/check_minicpm5_layer1_saved_operator_comparison_v1.py",
+    "tool_chunk": "b36e29",
+    "exit_code": 0,
+    "tests_passed": 9,
+    "synthetic_payload_bytes": 368380,
+    "largest_synthetic_leaf_bytes": 16384,
+    "maximum_metadata_only_call_report_bytes": 429837,
+    "experimental_raw_payloads_read": 0
+  },
+  "review_findings": [
+    "Exact original native manifest and full SDK manifest bind all 24 frames, 6 calls and 2 ranks.",
+    "Physical slot, not call.frames order, selects SDK rows. Rank-local Q heads map to native heads 0..7 and 8..15; each rank uses one KV head.",
+    "All 1284 supplied capture leaves are inventoried in full; 77,790,564 bytes are the full future input scope, not bytes read by this review.",
+    "Packed logical shape controls addressing. Source stride and offset are retained by existing auditors, never used as packed raw offsets.",
+    "Original SDK masking uses finite dtype minimum, compatible with rejecting NaN/Inf in full-domain inputs.",
+    "BF16 to FP32 uses exact bit embedding including signed zero; combined valid-key comparisons concatenate saved prior and active bytes without new tensor arithmetic.",
+    "44 complete comparison domains and 22 SDK-only summaries per frame. SDK-only PV partials and local output projection cannot become invented native counterparts.",
+    "First differing saved boundary is descriptive, not a causal proof.",
+    "This pure core has no independent raw reader or lifecycle authorization; a separately reviewed root-owned serial reader must enforce authentic exits and audits."
+  ],
+  "runtime_admitted": false,
+  "actual_raw_comparison_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "unchanged_requirements": [
+    "original model and BF16",
+    "cold4096",
+    "long decode",
+    "slot reuse and inactive behavior",
+    "quality96",
+    "matched HTTP"
+  ]
+}
