@@ -55,7 +55,14 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 保存完整 Q/K/V、RoPE、注意力分数、softmax 概率、PV/context 和输出投影边界。每组独立恢复原缓存，要求观测输出及更新后缓存逐字节重现原参考；不重新执行已完成的布局矩阵或整模型轨迹。原生恢复显式选择第 1 层缓存；原 normalized tap 未保存的 storage offset 仍标为未知，不能声称已重现该属性。
 
-主任务复跑两侧共 32 项源码与合成检查通过。执行器组件修复进一步通过独立复核：18 项原检查与 6 项追加检查通过，解决临时文件计数和字段顺序依赖；具体启动配置、外部退出记录及完整原始数据审计接入仍待完成。实际采集尚未开始；这些源码检查不能替代真实数值或性能结果。冷缓存 4096、长解码、请求槽位复用、质量和匹配 HTTP 性能要求保持不变。
+主任务复跑两侧共 32 项源码与合成检查通过。执行器组件修复进一步通过独立复核：18 项原检查与 6 项追加检查通过，解决临时文件计数和字段顺序依赖；具体启动配置、外部退出记录及完整原始数据审计接入已完成源码交付；这些源码检查不能替代真实数值或性能结果。冷缓存 4096、长解码、请求槽位复用、质量和匹配 HTTP 性能要求保持不变。
+
+
+下一轮实际准备首先暴露了历史状态检查的接线错误：新任务把上一轮完成状态误当成当前串行终态，准备程序实际退出 1，尚未写配置。修正保留历史完成链，在三个新启动入口校验当前串行目录；69 项作者检查、68 项独立检查通过（独立检查未重复一项完整历史元数据组装）。新版准备程序实际退出 0，生成的完整配置与源码清单经主任务复核。
+
+随后 SDK 采集执行程序实际启动，但在模型加载前再次触发 `Controller does not hold whole serial flock`，实际退出 1。失败证据核对确认进程已退出、服务从未启动、输出目录不存在，没有注意力调用或新数值结果。这次已经通过修正后的状态衔接检查，不能混为同一故障。原串行锁保护未放宽。后续 300,000 次单独原锁检查未复现；此结果不能证明间歇异常已经消失，也不能说明失败瞬间真的丢失了锁。
+
+[实际准备失败](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-preparation-failed-actual-exit-20261111-v1.json)、[状态衔接修正独立复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-freshness-correction-independent-review-20261111-v1.json)、[新版准备实际完成](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-root-preparation-complete-20261111-v2.json)、[执行程序实际失败与退出](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-failed-terminal-20261111-v1.json)、[完整失败证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-model-failed-evidence-20261111-v1.json)。
 
 ## 证据
 
