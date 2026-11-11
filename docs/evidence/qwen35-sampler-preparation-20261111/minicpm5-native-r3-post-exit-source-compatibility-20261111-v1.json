@@ -1,0 +1,336 @@
+{
+  "schema": "minicpm5_native_r3_post_exit_source_compatibility_review_v1",
+  "created_at": "2026-11-11T19:08:49.615312+00:00",
+  "author": "/root/dory_loader_route_analysis_20261111",
+  "scope": "Source and small saved metadata only; no running-source, spec, handoff or catalog modification",
+  "conclusion": "Old science/receipt/true-exit semantics are compatible with current runner_v12/driver_v5, but recorder_v2/audit_v3 cannot be reused unchanged because they require already-inherited entry/core pins in a strictly disjoint new extension.",
+  "sources": {
+    "record_minicpm5_layer1_operator_native_model_exit_v3.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v3.py",
+      "bytes": 17924,
+      "sha256": "8d00037c25d64c56a90fa624f3290c52667f89caff49fb59eb1d012f33690b1e"
+    },
+    "audit_minicpm5_layer1_operator_native_result_v4.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v4.py",
+      "bytes": 23233,
+      "sha256": "193fad5fc091d537b9835759e451b4147d6a84a397d4552ea2e2c131e84dded0"
+    },
+    "check_minicpm5_native_post_exit_inherited_sources_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_post_exit_inherited_sources_v1.py",
+      "bytes": 19727,
+      "sha256": "d2b2caf8221ef27dbb3ba947cbcd868d4e9ff84ebee25e289b7daa2608b10cd8"
+    }
+  },
+  "unchanged_sources": {
+    "record_minicpm5_layer1_operator_native_model_exit_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v2.py",
+      "bytes": 17609,
+      "sha256": "bc9069fd858916017f7c42fbc7e3638111ee77411830801d394e5f39d22f8f1d"
+    },
+    "audit_minicpm5_layer1_operator_native_result_v3.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v3.py",
+      "bytes": 16500,
+      "sha256": "3df92c9b4c0a5a9c88a8defa66fc0f5f54413ed08839fe42547e52697ae8b15a"
+    },
+    "minicpm5_layer1_operator_native_post_exit_core_v5.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v5.py",
+      "bytes": 6132,
+      "sha256": "0b7d19f0b53fd09cc55716b451eee89c90e765e02ea42c43d53c8ff7989ba189"
+    },
+    "minicpm5_layer1_operator_native_post_exit_core_v4.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v4.py",
+      "bytes": 7971,
+      "sha256": "12898b2ca035723cdd0995880d53ec7ed6e27594ee39fe00d2a47daa2bd07804"
+    },
+    "prepare_minicpm5_layer1_operator_native_v6.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v6.py",
+      "bytes": 32788,
+      "sha256": "369241b70d98908a94f35a71be96d87ca7f2c3cbd589e354c3f0b09434e646aa"
+    }
+  },
+  "metadata": {
+    "catalog": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261111-v50.json",
+      "bytes": 2001785,
+      "sha256": "55db2de4ecd4232c3d7e232d5d34ef148a6df785b6a5a9bbf5fe3f4b3de5bc7a"
+    },
+    "overlay": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-overlay.json",
+      "bytes": 771466,
+      "sha256": "65b5b22b80cc562a9fc3e28ab66cba09bdcc46abf7e88ba9fd2409e67e17612a"
+    },
+    "catalog_rows": 92,
+    "overlay_extension_entries": 3291
+  },
+  "blockers": [
+    {
+      "id": "inherited_required_pin_conflict",
+      "facts": "Current r3 overlay source_extension already contains recorder_v2, audit_v3 and core_v5; catalog rows 87 and 91 retain the same hashes. Old validators require SELF/core in the new extension, while merged_plan rejects every overlapping inherited key, even an identical hash.",
+      "inherited_entries": {
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v2.py": "bc9069fd858916017f7c42fbc7e3638111ee77411830801d394e5f39d22f8f1d",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v3.py": "3df92c9b4c0a5a9c88a8defa66fc0f5f54413ed08839fe42547e52697ae8b15a",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v5.py": "0b7d19f0b53fd09cc55716b451eee89c90e765e02ea42c43d53c8ff7989ba189"
+      },
+      "evidence": [
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v2.py",
+          "bytes": 17609,
+          "sha256": "bc9069fd858916017f7c42fbc7e3638111ee77411830801d394e5f39d22f8f1d",
+          "start_line": 47,
+          "end_line": 52,
+          "excerpt": "    pins=spec['source_extension'];require(type(pins)is dict and 0<len(pins)<=2048,'Bounded additive recorder source extension')\n    for path,sha in pins.items():\n        require(type(path)is str and Path(path).is_absolute()and str(Path(path))==path and '..'not in Path(path).parts\n            and path.startswith(str(ROOT)+'/')and Path(path).suffix in ('.py','.json','.md','.txt','.sh')\n            and type(sha)is str and re.fullmatch('[a-f0-9]{64}',sha),'Exact local new text pins only')\n    require(SELF in pins and str(Path(core.__file__).resolve())in pins,'Recorder and model-only core explicitly pinned')"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v3.py",
+          "bytes": 16500,
+          "sha256": "3df92c9b4c0a5a9c88a8defa66fc0f5f54413ed08839fe42547e52697ae8b15a",
+          "start_line": 40,
+          "end_line": 52,
+          "excerpt": "    pins=spec['source_extension'];require(type(pins)is dict and 0<len(pins)<=2048,'Bounded additional text-source map')\n    for name,sha in pins.items():\n        require(type(name)is str and Path(name).is_absolute()and str(Path(name))==name and '..'not in Path(name).parts\n            and name.startswith(str(ROOT)+'/')and Path(name).suffix in ('.py','.json','.md','.txt','.sh')\n            and type(sha)is str and re.fullmatch('[a-f0-9]{64}',sha),'Only exact new local text pins')\n    require(SELF in pins and str(Path(core.__file__).resolve())in pins,'Both new independent auditor sources explicitly reviewed')\n\n\ndef merged_plan(plan,extension):\n    value=copy.deepcopy(plan);pins=value['source_sha256']\n    for path,sha in extension.items():\n        require(path not in pins,'Audit source extension cannot replace or reclassify original scientific pins');pins[path]=sha\n    return value"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_overlay_v3.py",
+          "bytes": 6134,
+          "sha256": "c8ce48c315d76a4ed871ae33ceca6008a4488cf882e4480cac06920cad5e20a6",
+          "start_line": 35,
+          "end_line": 43,
+          "excerpt": "        'Fresh native-only NVMe namespace supplied by reviewed future outer')\n    base=recovered['base_plan'];plan=copy.deepcopy(base);pins=dict(recovered['source_sha256'])\n    require(all(pins.get(path)==sha for path,sha in base['source_sha256'].items()),'Every original source retained unchanged')\n    for path,sha in overlay['source_extension'].items():\n        require(type(path)is str and Path(path).is_absolute() and str(Path(path))==path and '..'not in Path(path).parts\n            and path not in pins and type(sha)is str and re.fullmatch('[a-f0-9]{64}',sha),\n            'Only new explicit native/current-serial source pins, never replacements')\n        pins[path]=sha\n    inputs=copy.deepcopy(base['inputs'])"
+        }
+      ]
+    }
+  ],
+  "semantic_compatibility": {
+    "lifecycle_v2_v3_equal_functions": [
+      "build_contract",
+      "binding",
+      "command",
+      "process",
+      "coordinator_process",
+      "check_driver_result",
+      "wrap_native_result",
+      "unwrap_native_result"
+    ],
+    "outer_v4_v5_verify_drained_ast_identical": true,
+    "driver_v5_delegates_unchanged_v4_run_loaded": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_driver_v5.py",
+      "bytes": 1896,
+      "sha256": "f27daed1461297962b9372f7cc0b359d12aef3270fa56f7d307e0ee361c91e9b",
+      "start_line": 29,
+      "end_line": 35,
+      "excerpt": "        torch, model, reference, records = loader.load(context)\n        module = importlib.import_module(type(model.model.layers[1].self_attn).__module__)\n        require(module is native, 'Original imported native module retained after official load')\n        source = source_text(context, module, 'native')\n        context.verify_loaded_sources()\n        del reference, records\n        return scientific.run_loaded(torch, model, module, context, guard, native_bundle, source)"
+    },
+    "result_schema_retained": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_driver_v4.py",
+      "bytes": 28634,
+      "sha256": "ed78b4ecfaf41227d7abb3489ae97c8739a2139ec6507c13bbf9265be3675910",
+      "start_line": 434,
+      "end_line": 443,
+      "excerpt": "    return dict(schema='minicpm5_layer1_operator_native_driver_v4',complete=True,rank=-1,records=reports,\n        frames=24,direct_attention_calls=72,manifest_sha256=manifest.digest(contract),raw_bytes=files.raw_bytes,\n        arm_journals=files.journals,durable_journal_layout=files.layout,all_arm_journals_completed=True,\n        raw_files=files.raw_files,metadata_bytes=files.metadata_bytes,projection_weight_sha256=before_weights,\n        native_provenance=plan['native_provenance'],completed_sdk_layout=plan['layer1_operator_boundary'],\n        all_unobserved_noop_full_endpoints_and_full_caches_exact=True,\n        original_weights_and_functions_restored=True,all_observer_bytes_preserved=True,\n        prefill_reexecuted=False,full_model_forward_reexecuted=False,independent_post_exit_raw_audit_pending=True,\n        attention_causality_proven=False,full_model_qualified=False,new_speedup_claim=False,self_exit_claimed=False)\n"
+    },
+    "old_core_v5_and_core_v4_retained": true,
+    "actual_zero_nonzero_exit_checks_retained": true,
+    "scientific_scope": {
+      "frames": 24,
+      "direct_attention_calls": 72,
+      "raw_files": 936,
+      "journals": 72,
+      "arm_result_files": 72
+    },
+    "no_model_or_speedup_promotion": true
+  },
+  "limit_distinction": {
+    "catalog_input": {
+      "bytes": 2001785,
+      "headroom_to_2mib": 95367,
+      "ordinary_input_cap_bytes": 8388608,
+      "evidence": [
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_process_adapter_v7.py",
+          "bytes": 26971,
+          "sha256": "29ff6d48424a1b4783acf250a7f5357352939f43faf3b19f0171f25132e65c64",
+          "start_line": 40,
+          "end_line": 47,
+          "excerpt": "class Metadata:\n    def __init__(self,guard):self.guard=guard;self.identities={}\n    def read(self,reference):\n        self.guard();sources.reference(reference);before=identity(reference['path']);value=sources.load(reference)\n        require(identity(reference['path'])==before,'Stable complete authenticated metadata')\n        require(reference['path']not in self.identities or self.identities[reference['path']]==before,'No metadata identity rebound')\n        self.identities[reference['path']]=before;self.guard();return value\n    def unchanged(self):"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_sources_v1.py",
+          "bytes": 13445,
+          "sha256": "cdc679752fdad493fd00e7f7339e700b91a65604760fcdbbc8f70f49d1f93c30",
+          "start_line": 71,
+          "end_line": 87,
+          "excerpt": "def text(path,expected=None):\n    # Existing historical envelopes/aliases stay with their reviewed transports.\n    if predecessor.envelope_kind(path)is not None:return predecessor.text(path,expected)\n    if envelope_kind(path)is None:return metadata.text(path,expected)\n    require(type(expected)is str and re.fullmatch('[a-f0-9]{64}',expected),\n        'New large Mini envelopes require a frozen digest before reading')\n    raw=metadata.stable_bytes(path,metadata.ENVELOPE_LIMIT)\n    require(hashlib.sha256(raw).hexdigest()==expected,'Exact new Mini envelope digest')\n    value=json.loads(raw.decode('utf8'));envelope_shape(path,value);return raw\n\n\ndef load(ref):\n    reference(ref);require(Path(ref['path']).suffix=='.json','Metadata JSON only')\n    raw=text(ref['path'],ref['sha256'])\n    require('bytes'not in ref or len(raw)==ref['bytes'],'Exact metadata reference length')\n    return json.loads(raw)\n"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py",
+          "bytes": 16985,
+          "sha256": "cc0cfb2beddf985673a8c286446ad7de460fd2823b79b5044b892b9c793ed4f8",
+          "start_line": 30,
+          "end_line": 32,
+          "excerpt": "LIMIT = 8*2**20\nENVELOPE_LIMIT = 32*2**20\nLIMITS = dict(ordinary_file_bytes=LIMIT, named_json_envelope_bytes=ENVELOPE_LIMIT)"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py",
+          "bytes": 16985,
+          "sha256": "cc0cfb2beddf985673a8c286446ad7de460fd2823b79b5044b892b9c793ed4f8",
+          "start_line": 213,
+          "end_line": 220,
+          "excerpt": "    require(path.suffix in TEXT_SUFFIXES or (not path.suffix and path.name in TEXT_BASENAMES) or\n            (str(path) in SPECIAL_TEXT_PINS and expected == SPECIAL_TEXT_PINS[str(path)]), 'Reviewed UTF8 text only')\n    cap = ENVELOPE_LIMIT if research_envelope(path) or runtime_envelope(path) else LIMIT\n    raw = stable_bytes(path, cap)\n    raw.decode('utf8')\n    require(expected is None or hashlib.sha256(raw).hexdigest() == expected, 'Metadata fingerprint changed: '+str(path))\n    if len(raw) > LIMIT: envelope_shape(path, json.loads(raw))\n    return raw"
+        }
+      ],
+      "interpretation": "Catalog is input metadata through the existing ordinary 8 MiB transport. serial_catalog has a 256-row cap, not a 2 MiB input cap."
+    },
+    "output_and_handoff": {
+      "file_cap_bytes": 2097152,
+      "evidence": [
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_sdk_result_v3.py",
+          "bytes": 12759,
+          "sha256": "27a105e601c92028fbaf0c4d53c995e75da985e659e0e5d63953f5bbfeec129e",
+          "start_line": 30,
+          "end_line": 31,
+          "excerpt": "LIMITS=dict(address_space_bytes=2*2**30,cpu_seconds=600,hard_cpu_seconds=605,\n    output_file_bytes=2*2**20,wall_seconds=900,cpu=6,nice=19)"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v6.py",
+          "bytes": 32788,
+          "sha256": "369241b70d98908a94f35a71be96d87ca7f2c3cbd589e354c3f0b09434e646aa",
+          "start_line": 270,
+          "end_line": 274,
+          "excerpt": "\ndef write_small(path,value,guard):\n    guard();raw=encoded(value);require(len(raw)<LIMITS['output_file_bytes'],'Original2MiB individual preparation metadata bound')\n    r.atomic_once(path,value);ref=object_ref(path,value)\n    require(r.sources.load(ref)==value,'Complete authenticated durable small metadata readback');guard();return ref"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_runtime_completion_v4.py",
+          "bytes": 11617,
+          "sha256": "674c9508dcc1cab25a98196c90be2eece202eee475a87c544e00dd36ae859c13",
+          "start_line": 111,
+          "end_line": 117,
+          "excerpt": "    require(base['serial_execution']is True,'Original serial execution retained')\n    first=latest_handoff(paths,stat);path=first['path'];before=first['identity']\n    # Discover exactly one bounded root-owned metadata object, then authenticate\n    # it through the same Reader so preparation pins its actual file identity.\n    raw=read_text(path);require(type(raw)is bytes and len(raw)<=2*2**20,'Bounded current handoff JSON')\n    tip=dict(path=path,sha256=hashlib.sha256(raw).hexdigest());value=read(tip)\n    require(stat(path)==before,'Discovered handoff stable across authenticated read')"
+        }
+      ],
+      "interpretation": "The 2 MiB limit governs individual preparation/audit/recorder outputs and current handoff content. It does not lower the catalog input reader to 2 MiB."
+    },
+    "catalog_growth": {
+      "one_pretty_overlay_source_map_bytes": 702073,
+      "adding_one_full_map_exceeds_2mib": true,
+      "existing_catalog_plus_two_maps_bytes": 3405931,
+      "existing_catalog_plus_two_maps_below_8mib": true,
+      "no_projected_catalog_written": true,
+      "requirement": "Keep all 92 old rows byte-equivalent as objects and all complete new row provenance. Do not reject or truncate a complete future catalog merely because an unrelated root write helper uses a 2 MiB output cap. A writer for that catalog must use a separately justified bound consistent with the existing 8 MiB input transport. Actual new record overhead and full file hash/size still need checking."
+    },
+    "extension": {
+      "max_new_text_sources": 2048,
+      "empty_extension_allowed_after_complete_inherited_binding": true,
+      "full_model_overlay_extension_entries": 3291,
+      "recorder_auditor_need_only_new_local_sources": true,
+      "interpretation": "3151 package source pins, including ones already in the original base, are model provenance. They are not a mandatory recorder extension. Copying the 3291-item overlay map into recorder/audit extension would exceed the count cap, include prohibited outside-root paths, and duplicate inherited keys."
+    }
+  },
+  "successor": {
+    "recorder": "record_minicpm5_layer1_operator_native_model_exit_v3.py",
+    "auditor": "audit_minicpm5_layer1_operator_native_result_v4.py",
+    "changes": [
+      "Accept a disjoint additive extension of 0..2048 local text pins. Existing path/hash constraints and refusal to replace any inherited key remain.",
+      "Require producer/auditor/core_v4/core_v5 entry pins in the complete inherited-plus-new map, then use unchanged full source classification, text verification, inherited native identity and loaded-source checks.",
+      "Publish a small source_binding that points to exact model spec/review/overlay and binds inherited plan/map, extension map and complete map by digest/count. Entry hashes remain explicit. Consumers must reconstruct the full authenticated inherited plan and compare this binding; hashes alone are not a replacement for source provenance.",
+      "Keep all scientific and actual-exit runtime require predicates unchanged; retain original core_v5/core_v4, physical drains, finite output catalog and 2 MiB result-output budget.",
+      "The actual audit_v4 runtime now reads ended.recorder_spec/review with its stable Metadata reader, validates their accepted review/model/true-exit bindings, validates ended.source_binding against the fully reconstructed resolved model plan using the actual recorder_v3 producer path, and requires the entire recorder source map to be covered by the auditor source map before raw auditing."
+    ],
+    "source_binding_function": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v4.py",
+      "bytes": 19863,
+      "sha256": "38c0f4992015527c4aa97445ae915c7c4972e83fe3cf8172a599b57e23e1da1c",
+      "start_line": 58,
+      "end_line": 98,
+      "excerpt": "def source_binding(plan,extension,model_spec,model_review,model_overlay,producer):\n    \"\"\"Pure complete-source binding, preserving all inherited keys and origins.\n\n    This receipt is only published after the existing full source classification,\n    text verification, native-identity and loaded-source gates pass. The exact\n    model spec/review/overlay references allow future consumers to reconstruct\n    the complete inherited map; digests/counts never replace that reconstruction.\n    \"\"\"\n    require(type(extension)is dict and 0<=len(extension)<=2048,'Bounded only-new post-exit source extension')\n    for path,sha in extension.items():\n        require(type(path)is str and Path(path).is_absolute()and str(Path(path))==path\n            and '..'not in Path(path).parts and path.startswith(str(ROOT)+'/')\n            and Path(path).suffix in ('.py','.json','.md','.txt','.sh')\n            and type(sha)is str and re.fullmatch('[a-f0-9]{64}',sha),'Exact new local text source binding')\n    for reference in (model_spec,model_review,model_overlay):r.life.ref(reference)\n    allowed={SELF,str(Q/'record_minicpm5_layer1_operator_native_model_exit_v3.py')}\n    require(producer in allowed,'Exact reviewed current post-exit producer path')\n    inherited=plan['source_sha256'];r.sources.metadata.pin_shape(inherited)\n    value=merged_plan(plan,extension);pins=value['source_sha256']\n    paths={producer,SELF,str(Path(core.__file__).resolve()),\n        str(Q/'minicpm5_layer1_operator_native_post_exit_core_v4.py')}\n    require(all(path in pins and type(pins[path])is str and re.fullmatch('[a-f0-9]{64}',pins[path])for path in paths),\n        'Every executed post-exit entry/core retained in complete inherited-or-new map')\n    require(all(pins.get(path)==sha for path,sha in inherited.items())\n        and len(pins)==len(inherited)+len(extension),'Complete inherited source map preserved exactly without duplicate pins')\n    proof=dict(schema='minicpm5_native_post_exit_complete_source_binding_v1',\n        model_spec=copy.deepcopy(model_spec),model_review=copy.deepcopy(model_review),model_overlay=copy.deepcopy(model_overlay),\n        inherited_plan_sha256=r.digest(plan),inherited_source_map_sha256=r.digest(inherited),\n        inherited_source_files=len(inherited),extension_source_map_sha256=r.digest(extension),extension_source_files=len(extension),\n        complete_source_map_sha256=r.digest(pins),complete_source_files=len(pins),\n        producer=producer,entry_sources={path:pins[path]for path in sorted(paths)},\n        inherited_sources_replaced=False,inherited_sources_omitted=False,\n        complete_source_reconstruction_required=True)\n    return value,proof\n\n\ndef validate_source_binding(proof,plan,extension,model_spec,model_review,model_overlay,producer):\n    \"\"\"Future metadata consumer must reconstruct the full original plan first.\"\"\"\n    value,wanted=source_binding(plan,extension,model_spec,model_review,model_overlay,producer)\n    require(proof==wanted,'Exact complete inherited-source reference/count/digest/entry binding')\n    return value"
+    },
+    "binding_receipt_bytes_in_real_overlay_subset_test": 2378,
+    "minimally_new_entry_sources": 2,
+    "no_runtime_launch_performed": true,
+    "unchanged_predicate_scope": "Scientific result checks, genuine exit checks, physical drains and lifecycle predicates stay unchanged. Entry source-extension validation intentionally changes from mandatory new entry/core pins to inherited-or-new complete binding with a 0..2048 only-new extension.",
+    "actual_next_consumer_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v4.py",
+      "bytes": 23233,
+      "sha256": "193fad5fc091d537b9835759e451b4147d6a84a397d4552ea2e2c131e84dded0",
+      "start_line": 101,
+      "end_line": 136,
+      "excerpt": "def validate_recorded_source_binding(ended,model_exit_ref,recorder_spec,recorder_review,\n                                    plan,model_overlay,audit_plan):\n    \"\"\"Consume the actual recorder receipt using its authenticated spec/review.\n\n    Caller reads both references through the same stable Metadata reader and\n    has already revalidated the model/recorder true exits and original model\n    plan. The complete recorder map must also be covered by the auditor map.\n    \"\"\"\n    for reference in (model_exit_ref,ended['recorder_spec'],ended['recorder_review'],ended['recorder_source']):\n        r.life.ref(reference)\n    producer=str(Q/'record_minicpm5_layer1_operator_native_model_exit_v3.py')\n    require(ended['recorder_source']['path']==producer,'Exact actually executed recorder_v3 source')\n    require(type(ended.get('source_binding'))is dict,'Actual recorder complete source-binding receipt required')\n    require(set(recorder_spec)=={'schema','live','model_spec','model_review','actual_tool','source_extension','output','limits'}\n        and recorder_spec['schema']=='minicpm5_native_model_exit_recorder_spec_v1'\n        and recorder_spec['limits']==LIMITS and recorder_spec['output']==model_exit_ref['path']\n        and recorder_spec['live']==ended['live'] and recorder_spec['model_spec']==ended['spec']\n        and recorder_spec['model_review']==ended['review'] and recorder_spec['actual_tool']==ended['actual_tool'],\n        'Actual recorder spec binds this complete model terminal and unchanged resource/true-exit contract')\n    core.actual_tool(recorder_spec['actual_tool'])\n    require(set(recorder_review)=={'schema','reviewer','passed','blockers','spec','source_extension'}\n        and recorder_review['schema']=='minicpm5_native_model_exit_recorder_source_review_v1'\n        and recorder_review['reviewer']=='/root' and recorder_review['passed']is True\n        and recorder_review['blockers']==[] and recorder_review['spec']==ended['recorder_spec']\n        and recorder_review['source_extension']==recorder_spec['source_extension'],\n        'Actual recorder reviewed extension, not a caller-invented source map')\n    recorded=validate_source_binding(ended['source_binding'],plan,recorder_spec['source_extension'],\n        ended['spec'],ended['review'],model_overlay,producer)\n    require(ended['recorder_source']==dict(path=producer,sha256=recorded['source_sha256'][producer])\n        and all(audit_plan['source_sha256'].get(path)==sha for path,sha in recorded['source_sha256'].items()),\n        'Entire actual recorder source map is retained and verified by the auditor source closure')\n    return dict(verified=True,recorder_spec=copy.deepcopy(ended['recorder_spec']),\n        recorder_review=copy.deepcopy(ended['recorder_review']),producer=producer,\n        source_binding_sha256=r.digest(ended['source_binding']),\n        complete_recorder_sources=ended['source_binding']['complete_source_files'],\n        complete_inherited_plan_reconstructed=True,all_recorded_sources_covered_by_auditor=True)"
+    },
+    "actual_next_consumer_runtime_call": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v4.py",
+      "bytes": 23233,
+      "sha256": "193fad5fc091d537b9835759e451b4147d6a84a397d4552ea2e2c131e84dded0",
+      "start_line": 225,
+      "end_line": 230,
+      "excerpt": "    recorder_spec=metadata.read(ended['recorder_spec']);recorder_review=metadata.read(ended['recorder_review'])\n    recorder_source_proof=validate_recorded_source_binding(ended,spec['model_exit'],recorder_spec,recorder_review,\n        resolved['plan'],model_spec['overlay'],pins_plan)\n    partition=r.sources.classify(pins_plan['source_sha256'],pins_plan['source_contract'],metadata.read)\n    r.sources.verify_text_sources(partition,guard);r.sources.check_native_identities(records['source_authentication'],model_partition,guard)\n    r.verify_loaded(pins_plan,guard)"
+    }
+  },
+  "future_preparation_requirement": {
+    "required": true,
+    "existing_v6_unchanged": true,
+    "evidence": [
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v6.py",
+        "bytes": 32788,
+        "sha256": "369241b70d98908a94f35a71be96d87ca7f2c3cbd589e354c3f0b09434e646aa",
+        "start_line": 70,
+        "end_line": 71,
+        "excerpt": "        scripts={str(Q/'record_minicpm5_layer1_operator_native_model_exit_v1.py'),\n            str(Q/'record_minicpm5_layer1_operator_native_model_exit_v2.py')}"
+      },
+      {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v6.py",
+        "bytes": 32788,
+        "sha256": "369241b70d98908a94f35a71be96d87ca7f2c3cbd589e354c3f0b09434e646aa",
+        "start_line": 90,
+        "end_line": 121,
+        "excerpt": "        scripts={str(Q/'audit_minicpm5_layer1_operator_native_result_v2.py'),\n            str(Q/'audit_minicpm5_layer1_operator_native_result_v3.py')}\n        output=terminal['result'];source=result['source']\n    r.life.ref(source);script=source['path']\n    require(script in scripts,'Only exact original or catalog256 producer, never an arbitrary future version')\n    r.life.ref(spec_ref);r.life.ref(review_ref);spec=read(spec_ref);review=read(review_ref)\n    expected={'schema','live','model_spec','model_review','actual_tool','source_extension','output','limits'}if recorder else {\n        'schema','model_exit','recorder_exit','current_serial_catalog','source_extension','output','limits'}\n    require(set(spec)==expected and spec['schema']==spec_schema and spec['limits']==LIMITS\n        and spec['output']==output['path'],'Exact executed producer spec and original resource limits')\n    require(set(review)=={'schema','reviewer','passed','blockers','spec','source_extension'}\n        and review['schema']==review_schema and review['reviewer']=='/root'and review['passed']is True\n        and review['blockers']==[]and review['spec']==spec_ref and review['source_extension']==spec['source_extension'],\n        'Hash-authenticated exact executed source review, not a standalone source assertion')\n    pins=spec['source_extension'];r.sources.metadata.pin_shape(pins)\n    require(0<len(pins)<=2048 and source==dict(path=script,sha256=pins[script])\n        and all(row['source_sha256'].get(path)==sha for path,sha in pins.items()),\n        'Every executed extension source retained exactly in its catalog row')\n    current=script in {str(Q/'record_minicpm5_layer1_operator_native_model_exit_v2.py'),\n        str(Q/'audit_minicpm5_layer1_operator_native_result_v3.py')}\n    if current:\n        # Auditor v3 imports core v5, which exports the unchanged full validator\n        # from v4; recorder v2 imports that same exact audit/core chain. These\n        # are new paths, so the original disjoint-extension rule stays intact.\n        executed={str(Q/'audit_minicpm5_layer1_operator_native_result_v3.py'),\n            str(Q/'minicpm5_layer1_operator_native_post_exit_core_v4.py'),\n            str(Q/'minicpm5_layer1_operator_native_post_exit_core_v5.py')}\n        require(executed<=set(pins),'Complete actually executed catalog256 auditor/core source chain')\n    else:\n        executed={str(Q/'audit_minicpm5_layer1_operator_native_result_v2.py'),\n            str(Q/'minicpm5_layer1_operator_native_post_exit_core_v2.py')}\n        if recorder:executed.add(str(Q/'minicpm5_layer1_operator_native_post_exit_core_v3.py'))"
+      }
+    ],
+    "blocker": "executed_extension has exact script allowlists ending at recorder_v2/audit_v3, requires a nonempty extension with the entry source inside it, and requires the entire current audit/core chain inside that extension. It will reject the new actual producer paths and inherited-core binding.",
+    "next_source_only_successor_scope": [
+      "Explicitly add only recorder_v3/audit_v4 to a new preparation-source version; preserve all older producer validation branches unchanged.",
+      "For the two new producers, authenticate actual terminal, exact producer spec/review, owner argv and true exit first. Reconstruct the complete original model plan from its pinned spec/review/overlay and original recovery lineage.",
+      "Use validate_source_binding against that complete plan and exact additive extension; require all entry/core hashes to agree with their retained inherited or new provenance. Do not turn a bare count/digest assertion into authority.",
+      "Retain all prior serial rows and full source history. No existing catalog row schema change is implemented here; a source_map_reference field is not currently accepted by serial_catalog.",
+      "Keep the current preparation v6 and all actual catalogs immutable. This delivery does not implement or run the future preparation successor."
+    ]
+  },
+  "tests": {
+    "passed": true,
+    "check_count": 44,
+    "actual_tool_chunk": "851621",
+    "observed_exit_code": 0,
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_post_exit_inherited_sources_v1.py",
+      "bytes": 19727,
+      "sha256": "d2b2caf8221ef27dbb3ba947cbcd868d4e9ff84ebee25e289b7daa2608b10cd8"
+    },
+    "real_r3_overlay_extension_subset_entries": 3291,
+    "real_complete_catalog_rows": 92,
+    "full_historical_base_plan_read_or_reconstructed": false,
+    "scope": "AST-extracted pure functions plus actual small metadata, preserving every overlay pin. This does not run the recorder/auditor, authenticate native payloads, or certify the full historical source closure.",
+    "coverage": [
+      "Identical/conflicting inherited-pin duplication rejected",
+      "Missing core or new entry rejected",
+      "Unknown paths/native/path traversal rejected",
+      "Dropped unrelated inherited pin invalidates existing binding",
+      "Model spec/review/overlay reference tampering rejected",
+      "Unknown receipt/spec fields rejected",
+      "True nonzero and zero recorder exits preserved; bool exit rejected",
+      "Original runtime require predicates and protected functions AST-equal",
+      "Old/new lifecycle contract/result checks and outer drain verifier AST-equal",
+      "92 catalog rows unchanged; 2 MiB/8 MiB distinctions computed",
+      "Actual audit runtime reads both ended recorder spec/review references and calls receipt validation before raw audit",
+      "Recorder binding absence, digest, entry hash, internally matching substituted spec/review extension, unaccepted review, model-output rebound, false boolean exit and missing unrelated inherited package pin reject"
+    ]
+  },
+  "target_packages_imported": false,
+  "raw_native_or_archive_payload_read": false,
+  "process_lock_service_inspection": false,
+  "running_sources_modified": false,
+  "spec_handoff_catalog_modified": false,
+  "actual_exit_created": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "updated_at": "2026-11-11T19:11:21.746937+00:00"
+}

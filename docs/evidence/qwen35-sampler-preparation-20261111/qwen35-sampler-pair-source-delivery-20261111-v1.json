@@ -1,0 +1,612 @@
+{
+  "schema": "qwen35_sampler_pair_source_delivery_v1",
+  "observed_at": "2026-11-11T19:15:26.216274+00:00",
+  "source_only": true,
+  "implementation_prepared": true,
+  "runtime_admission": false,
+  "native_imported": false,
+  "model_or_device_executed": false,
+  "large_payload_contents_read": false,
+  "process_service_or_queue_inspection": false,
+  "canonical_state_or_handoff_changed": false,
+  "frozen_or_installed_sources_modified": false,
+  "full_model_qualified": false,
+  "speedup_claimed": false,
+  "all_model_families_preserved": true,
+  "baseline_case": {
+    "name": "latest-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4",
+    "model_path": "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031",
+    "served_name": "qwen3.5-2b-text",
+    "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4",
+    "batch": 4,
+    "tp": 2,
+    "max_model_len": 4096,
+    "cpu": true,
+    "adapter": "qwen35_text",
+    "compile_workers": 1,
+    "skip_sampling_probe": true,
+    "extra_overrides": {
+      "apply_seq_ids_mask": true,
+      "context_encoding_buckets": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ]
+    },
+    "note": "Fresh experimental Qwen3.5 text baseline: only the last-axis Q/K/V split changes to tensor_split. Original BF16 weights, FP32 recurrent state, TP2/B4/context4096, standard CPU sampler, six context and six decode buckets. Explicit context buckets equal the original SDK defaults. Compilation and all correctness/serving gates pending. Vision and MTP excluded; no speedup claimed against the failed old baseline.",
+    "qwen35_tensor_split": true,
+    "split_correction_sha256": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+    "startup_runtime_limit_s": 14400,
+    "startup_wait_limit_s": 14100,
+    "host_limits": {
+      "memory_max_gib": 26,
+      "memory_high_gib": 25,
+      "swap_gib": 12
+    },
+    "no_retry": true
+  },
+  "finite_scientific_protocol": {
+    "schema": "qwen35_sampler_pair_source_contract_v1",
+    "source_only": true,
+    "runtime_admission": false,
+    "model_case_shared_unchanged": true,
+    "fresh_server_per_arm_and_phase": true,
+    "compile_permitted": false,
+    "fresh_output_rule": "Call original benchmark/evaluate functions directly with new arm outputs. Never call orchestrate.run_case or reuse case-name HTTP JSON: the shared frozen case would reuse historical results.",
+    "graph_reuse": "Validate frozen adapter-provenance, config, all12 graphs and model.pt separately; never rewrite fingerprints.",
+    "weights": "original BF16",
+    "recurrent_state": "FP32",
+    "context": 4096,
+    "arms": [
+      "baseline",
+      "candidate"
+    ],
+    "full_gates_each_arm": {
+      "state_copy": {
+        "bindings": 96,
+        "fill_comparisons": 192,
+        "zero_comparisons": 192
+      },
+      "numeric": {
+        "full_vocabulary_frames": 32
+      },
+      "cold": {
+        "full_vocabulary_frames": 84,
+        "prefixes": [
+          32,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          2052
+        ],
+        "zero_checks": 672,
+        "duplicate_pairs": 42,
+        "same_bindings": 96,
+        "in_place_clears": 7,
+        "original_partial_vectors_exact": 72,
+        "graph_routes": 12,
+        "buckets": [
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ]
+      },
+      "long": {
+        "teacher_forced_steps": 1541,
+        "full_vocabulary_frames": 87,
+        "slot_reuse": true,
+        "partial_batch": true,
+        "resume_inactive": true,
+        "original_full_causal_oracle_and_incremental_crosscheck": true
+      },
+      "full_vector_reproduction": {
+        "frames": 203,
+        "bitwise_equal_to_qualified_baseline": 203
+      },
+      "smoke": {
+        "serial": 4,
+        "concurrent": 4,
+        "identical_prompt_outputs": 4
+      },
+      "quality": {
+        "questions": 96,
+        "baseline_correct": 69,
+        "baseline_texts_reproduced": 96,
+        "candidate_texts_equal": 96,
+        "lost_correct_cases": 0,
+        "concurrency": 4,
+        "temperature": 0,
+        "truncate": false,
+        "regrade_all_saved_texts": true
+      },
+      "initial_http": {
+        "output_tokens_per_request": 120,
+        "rounds": 3,
+        "single_and_c4": true,
+        "streaming_c4": true,
+        "warmup_tokens": 8,
+        "greedy_texts_equal": true
+      },
+      "http": {
+        "workloads": 5,
+        "rounds": 3,
+        "recorded_requests": 124,
+        "recorded_output_tokens": 30848,
+        "greedy_texts_equal": 57,
+        "streaming_retained": true,
+        "mixed_requests_per_round": 16,
+        "mixed_concurrency": 4,
+        "warmup_requests": 4,
+        "warmup_tokens_each": 8,
+        "original_seed_omission_preserved": true,
+        "request_timeout_s": 240,
+        "original_force_min_tokens_and_ignore_eos": true
+      }
+    },
+    "sampler_gates": {
+      "mandatory_captured_calls_by_rows": {
+        "1": 16,
+        "4": 16
+      },
+      "optional_actual_batch_sizes": [
+        2,
+        3
+      ],
+      "full_vocab_distributions_not_topk_only": true,
+      "distribution_support_equal": true,
+      "total_variation_max": 1e-06,
+      "max_probability_error_max": 1e-06,
+      "own_operation_token_and_rng_reproduction": true,
+      "explicit_generator_whole_call_token_and_rng_equal": true,
+      "controls": [
+        "partial_explicit_generators",
+        "all_explicit_generators",
+        "k_absent",
+        "k_zero",
+        "k_above64",
+        "non_float32",
+        "invalid_p",
+        "processed_logits",
+        "processed_logprobs",
+        "excessive_kth_ties",
+        "nonfinite_max_or_kth",
+        "cdf_near_boundary",
+        "cdf_boundary_tie"
+      ],
+      "unseeded_token_sequence_equality_required": false,
+      "historical_missing_penalties_or_rng_may_be_inferred": false
+    },
+    "extra_diagnostic_requests": {
+      "waves": [
+        1,
+        4
+      ],
+      "prompt_tokens": 128,
+      "output_tokens_each": 32,
+      "requests_per_arm": 5,
+      "output_tokens_per_arm": 160,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "top_k": 40,
+      "seed_added": false,
+      "retry_if_B1_or_B4_quota_missing": false,
+      "original_full_http_replaced": false
+    },
+    "capture": {
+      "selection": "first16 actual top-k/top-p calls for each row count1..4",
+      "max_calls_per_arm": 64,
+      "max_rows_per_arm": 160,
+      "max_processed_logit_bytes_per_arm": 158924800,
+      "max_total_packet_bytes_per_arm": 268435456,
+      "max_single_packet_bytes": 12582912,
+      "max_packet_json_bytes": 1048576,
+      "cap_includes": "packet header, metadata, all tensors, logits, RNG, outputs",
+      "cap_overflow": "fail diagnostic; no silent truncation or fabricated completion",
+      "max_two_arm_packet_bytes": 536870912,
+      "source": "fresh actual processed logits/metadata/request-slot order/RNG before and after",
+      "timing_eligible": false
+    },
+    "remaining_resource_admission": "Root must account numerical payloads, HTTP, logs, transient peaks and writer bookkeeping in addition to packet caps.",
+    "order": [
+      "exclusive runtime admission by root",
+      "immutable artifact reuse validation",
+      "full model gates on both arms",
+      "separate bounded correctness captures",
+      "native distribution/own-operation/negative-control validation",
+      "quality96 on both arms",
+      "unobserved matched initial HTTP and full5x3 HTTP on both arms",
+      "independent final audit"
+    ],
+    "timing_rules": "Identical host/debug/thread settings. No capture hooks in either measured arm. Ratios only after all gates. Report every workload; no universal multiplier.",
+    "historical_limits": "The old GDN candidate remains disqualified. This does not recover absent historical penalties/RNG or extend model/multimodal coverage."
+  },
+  "new_source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_full_checks_v1.py": "0337a9cefb12d82f189c71bbf4c5913fbf19cfe7ad97be4b30d3fa35e1773e5c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_capture_v1.py": "76a88edea1613d7847550a744f054f21b21a0ecdfc4d16217c8154b847ef39ec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_leaves_v1.py": "7c4aca1a47627d35c5f43ae64144763c24a5b69a3e8683a8794bdbcc051cfe4b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_replay_v1.py": "6eae6c039f851dd84ddf86c34e6e27c3b4a985dbd0167c3c955056f27fa70413",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v1.py": "b391033b4726ac715d6bc4ff1eb3fab511f3de5fb8037f624098dd987b10bd3f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py": "c46775d7a046a6351db7576e86c64456ea8e8bc5edf22b119977e44462430b13",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_worker_v1.py": "2b0efa44a66078c49e358b3975299db4cbe6c7e0d4d66503cd4d3834b5a08ee2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_qwen35_sampler_pair_source_v1.py": "2eebb7dffa6414b7334b09b26b66fd55feff12ce01cb6bb340e733f704514224"
+  },
+  "new_source_bytes": 120759,
+  "prospective_host_dependency_sha256": {
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuron_worker.py": "3f3c2195e1fc399e56b701d63a6d1f67f46d6bcaef38b42ffce095fe1a1201ba",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_runner.py": "3ea2fc8a6b9fea84bc488e17e71a90083218009d0f873d8d39d526cb77b45e68",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/platform.py": "4387dfe509f055d72b93d955c1fb103142e000c452898680bb71e3e0886f8f26",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/sampler.py": "3720fbfd59c1f064a62b8e0489ec0436468188b69f8b8eb84d2d62eba31f3912",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/metadata.py": "1fa5a3e469cbfefc45aaafff34c6284ccd811056f67e7b07069b89e360fcc223",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/ops/topk_topp_sampler.py": "536ed05e4cbf2eef8817d57c04fd0e424441f4b05ee5282cf072722d2592b203",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/sample/logits_processor/state.py": "b6f33a89f7db2510b19d32e33e62e7e168beb8bc1561b71d7bc007e915798208",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/worker/gpu_input_batch.py": "ae4c75dbee6a6d768ce79a1bf1f148aa2590cabd510d0e01e486fad845393abd",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/sampling_params.py": "8219442773ae7cca6d3b63507438e8b0654fbcf024bf7f037dd80ed9f860bf01",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/entrypoints/openai/protocol.py": "15f1a0de9c28bfb2072a68bab6d66f3349913993118392fb37a18f2197a54eda",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/entrypoints/openai/serving_completion.py": "d9b751d11d391e7ce2e80e662d5a5bbd6cdb4e2593ae3e047dc8b27c5960fb34",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/__editable___vllm_neuron_0_2_2_lts_finder.py": "44998894985332f2df183563b724e8f078e91c05e5ed25dd929d09e76176b6da",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_gdn_serving_checks_v2.py": "8c52905e303c180e2eb87fc5a6d97b90afcfc6bf12a32e4314fcb411a385b916",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/evaluate_quality.py": "9dc5842eb7d02c1254f1ab9052078843a1e12adf33abc1dd830ae9dc6404fb94",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/benchmark_workloads.py": "8a1798ee3b4d5518673125caec9d2878a3ad9c1d282553003b35b8354617b039",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/bench_http.py": "82009a4d3bdcabdaf0f1df41cdd473f5a8759b60e7fa27883192b62c8b821a80",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/orchestrate.py": "6fbd6c43f1a071aa8bf3e8e4423ef5f1d60a3e16c3856b60aadf39ce05f7d185",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/probe_qwen35_state_copy_v1.py": "99a6c46cfd98a99e17540937143713288cf1c6a166ae8d18104470e8df081051",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/diagnose_qwen35_state_reset_cold_v1.py": "339cc077ae3235522e0454a187df09f4600139d8dcec9b2e52444f895b38ad8f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_real_logits.py": "1f77e72f1cfcd8d6ee7253daea78e8d598cb7c07d9c98acc7ece9e1e4b41161f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_qwen35_long_decode.py": "b9f4bf6d1db700c0b56c57ec3b9917a03487a665256087df1fd2bbc8aa8cab9f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_state_inplace_reset_v1.py": "6a3f45eb63b3b1251334da56dc6d7520e9eec01240f43e2258751e2c36d148ce"
+  },
+  "historical_metadata_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/qualified-baseline-record-v1.json": "ac86ea6cacc40a75bffe39c5ed2d344a978687591d16f975a73bd4e2cbccd034",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/completion-metadata-audit-v1.json": "8b8ed580f844aef57166ec09b27e34e84d1a6b9db9a297fae043e4d3c4291536",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/plan.json": "db4a5c46e37da0896da5157efe585251205b23826de5f18dfe18bdc53a520a76",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-gdn-full-v2/baseline-reproduction-metadata-audit-v1.json": "d8dc2e403a3f602f5a6f76706543eda32291986e3930b54ddb28f164044bc7a7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-baseline/long-decode-hf-reference.json": "dfa000e272ba888180bd5ffa6d378cd0eb72d49e2b2f2bb093ccf286142ac608",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/quality-suite.json": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-2b-sampler-closure-source-evidence-20261106-v1.json": "3d97dd5541f4f0d99372a036850b4471e62bd09271fa213556b98f9961a45fc4"
+  },
+  "bounded_operation_origin": {
+    "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/cpu_sampler.py",
+    "sha256": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "successor_path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py",
+    "byte_identical": true
+  },
+  "graph_identity": {
+    "provenance_path": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4/adapter-provenance.json",
+    "provenance_file_sha256": "85b788be141fc9650fc8e70f0df04ab7bccb94c4d9d7a0985b633790d90457d6",
+    "frozen_graph_fingerprint": "d24862a53e7df36e3537777194bf0484c95db2cf8fa516823edfa7c991a81d9b",
+    "neuron_config_sha256": "90c028255defead3e2a15977f17386259a8826a8df79473c1328e54a626cccf5",
+    "source_pins": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py": {
+        "expected_sha256": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+        "observed_sha256": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_text_port.py": {
+        "expected_sha256": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34",
+        "observed_sha256": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_primitives.py": {
+        "expected_sha256": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf",
+        "observed_sha256": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_vllm_registration.py": {
+        "expected_sha256": "1455ca3b4d82b919a893b9e792435a38d71b854717a6c75544474acde540846c",
+        "observed_sha256": "1455ca3b4d82b919a893b9e792435a38d71b854717a6c75544474acde540846c"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend_split_correction_v2.py": {
+        "expected_sha256": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+        "observed_sha256": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend_split_protocol_v2.py": {
+        "expected_sha256": "13fbe7977a0aa1477cabade541b77dfeaaedfb4b245a7563a7e825ab26b32e20",
+        "observed_sha256": "13fbe7977a0aa1477cabade541b77dfeaaedfb4b245a7563a7e825ab26b32e20"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_split_runtime_v4.py": {
+        "expected_sha256": "423677588248dcab659a582a88026ae1da889d28bd89e3008d452a04aa5a0082",
+        "observed_sha256": "423677588248dcab659a582a88026ae1da889d28bd89e3008d452a04aa5a0082"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_split_full_protocol_v4.py": {
+        "expected_sha256": "6ba3e04c39469c3d4b4acb3f3ed9f1bc611050bcb781b952aac7115c666cf2c2",
+        "observed_sha256": "6ba3e04c39469c3d4b4acb3f3ed9f1bc611050bcb781b952aac7115c666cf2c2"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py": {
+        "expected_sha256": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f",
+        "observed_sha256": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_bias_fix.py": {
+        "expected_sha256": "591602d07cec699a7bb2f0ec028d9c2b82be55565a4c4c49b50e868cecea2262",
+        "observed_sha256": "591602d07cec699a7bb2f0ec028d9c2b82be55565a4c4c49b50e868cecea2262"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend-split-correction-v2/plan.json": {
+        "expected_sha256": "59d5ae3a822079113a07670ac5200e04efcab2ff4f42e9653de0b1f4b4487960",
+        "observed_sha256": "59d5ae3a822079113a07670ac5200e04efcab2ff4f42e9653de0b1f4b4487960"
+      }
+    },
+    "all_graph_source_pins_currently_match": true,
+    "legitimate_nonfinite_config_metadata": [
+      {
+        "path": "neuron_config.quantize_clamp_bound",
+        "value": "inf"
+      }
+    ],
+    "rewritten": false,
+    "model_pt_contents_rehashed": false
+  },
+  "large_artifact_metadata": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-2b-hf-reference.pt",
+      "expected_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-2b-hf-reference.pt",
+        "device": 66306,
+        "inode": 8329020,
+        "size": 30142861,
+        "mtime_ns": 1793421692359699871,
+        "ctime_ns": 1793421692359699871
+      },
+      "observed_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-2b-hf-reference.pt",
+        "device": 66306,
+        "inode": 8329020,
+        "size": 30142861,
+        "mtime_ns": 1793421692359699871,
+        "ctime_ns": 1793421692359699871
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-baseline/long-decode-hf-reference.pt",
+      "expected_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-baseline/long-decode-hf-reference.pt",
+        "device": 66306,
+        "inode": 8826927,
+        "size": 65574445,
+        "mtime_ns": 1793425077218032091,
+        "ctime_ns": 1793425077218032091
+      },
+      "observed_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-baseline/long-decode-hf-reference.pt",
+        "device": 66306,
+        "inode": 8826927,
+        "size": 65574445,
+        "mtime_ns": 1793425077218032091,
+        "ctime_ns": 1793425077218032091
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031/model.safetensors-00001-of-00001.safetensors",
+      "expected_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/model.safetensors-00001-of-00001.safetensors",
+        "device": 66304,
+        "inode": 10485779,
+        "size": 4548221488,
+        "mtime_ns": 1793420550581878286,
+        "ctime_ns": 1793420551252863496
+      },
+      "observed_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/model.safetensors-00001-of-00001.safetensors",
+        "device": 66304,
+        "inode": 10485779,
+        "size": 4548221488,
+        "mtime_ns": 1793420550581878286,
+        "ctime_ns": 1793420551252863496
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031/tokenizer.json",
+      "expected_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/tokenizer.json",
+        "device": 66304,
+        "inode": 10485783,
+        "size": 12807982,
+        "mtime_ns": 1793420545475990836,
+        "ctime_ns": 1793420545485990615
+      },
+      "observed_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/tokenizer.json",
+        "device": 66304,
+        "inode": 10485783,
+        "size": 12807982,
+        "mtime_ns": 1793420545475990836,
+        "ctime_ns": 1793420545485990615
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031/vocab.json",
+      "expected_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/vocab.json",
+        "device": 66304,
+        "inode": 10485787,
+        "size": 6722759,
+        "mtime_ns": 1793420545778984156,
+        "ctime_ns": 1793420545778984156
+      },
+      "observed_identity": {
+        "realpath": "/mnt/nvme/models/Qwen3.5-2B/vocab.json",
+        "device": 66304,
+        "inode": 10485787,
+        "size": 6722759,
+        "mtime_ns": 1793420545778984156,
+        "ctime_ns": 1793420545778984156
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4/model.pt",
+      "expected_identity": {
+        "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4/model.pt",
+        "device": 66304,
+        "inode": 13369694,
+        "size": 294473003,
+        "mtime_ns": 1793638086016430575,
+        "ctime_ns": 1793638086016430575
+      },
+      "observed_identity": {
+        "realpath": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4/model.pt",
+        "device": 66304,
+        "inode": 13369694,
+        "size": 294473003,
+        "mtime_ns": 1793638086016430575,
+        "ctime_ns": 1793638086016430575
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/cold-buckets.pt",
+      "expected_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/cold-buckets.pt",
+        "device": 66306,
+        "inode": 9049096,
+        "size": 71538577,
+        "mtime_ns": 1793638317968319720,
+        "ctime_ns": 1793638317968319720
+      },
+      "observed_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/cold-buckets.pt",
+        "device": 66306,
+        "inode": 9049096,
+        "size": 71538577,
+        "mtime_ns": 1793638317968319720,
+        "ctime_ns": 1793638317968319720
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/real-logits-validation.json.pt",
+      "expected_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/real-logits-validation.json.pt",
+        "device": 66306,
+        "inode": 9049082,
+        "size": 31791817,
+        "mtime_ns": 1793638166430656665,
+        "ctime_ns": 1793638166430656665
+      },
+      "observed_identity": {
+        "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-split-corrected-full-v4/real-logits-validation.json.pt",
+        "device": 66306,
+        "inode": 9049082,
+        "size": 31791817,
+        "mtime_ns": 1793638166430656665,
+        "ctime_ns": 1793638166430656665
+      },
+      "all_identity_fields_match": true,
+      "contents_opened": false
+    }
+  ],
+  "all_eight_large_stat_identities_match": true,
+  "historical_full_payload_stat_metadata": {
+    "real-logits-validation.json.pt": {
+      "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/real-logits-validation.json.pt",
+      "device": 66306,
+      "inode": 9054458,
+      "size": 31791817,
+      "mtime_ns": 1793670793640049879,
+      "ctime_ns": 1793670793640049879
+    },
+    "cold-buckets.pt": {
+      "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/cold-buckets.pt",
+      "device": 66306,
+      "inode": 9054475,
+      "size": 83461609,
+      "mtime_ns": 1793670858483621186,
+      "ctime_ns": 1793670858483621186
+    },
+    "long-decode-validation.pt": {
+      "realpath": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/long-decode-validation.pt",
+      "device": 66306,
+      "inode": 9054481,
+      "size": 287083673,
+      "mtime_ns": 1793671043488541261,
+      "ctime_ns": 1793671043488541261
+    }
+  },
+  "resource_observation": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031": {
+      "free_available_bytes": 30713470976,
+      "free_available_gib": 28.604148864746094,
+      "read_only_observation": true,
+      "future_admission": false
+    },
+    "/mnt/nvme": {
+      "free_available_bytes": 47271698432,
+      "free_available_gib": 44.02519989013672,
+      "read_only_observation": true,
+      "future_admission": false
+    }
+  },
+  "resource_accounting": {
+    "root_floor_gib_preserved": 28,
+    "nvme_floor_gib_preserved": 30,
+    "new_runtime_outputs_required_on_nvme": true,
+    "actual_new_runtime_outputs_created": false,
+    "raw_model_vector_bytes_per_arm": 201635840,
+    "raw_model_vector_bytes_two_arms": 403271680,
+    "max_capture_packet_bytes_two_arms": 536870912,
+    "raw_vectors_plus_max_capture_packets_two_arms": 940142592,
+    "historical_serialized_payload_bytes_per_arm": 402337099,
+    "not_included_in_raw_count": [
+      "serialization envelopes",
+      "state-copy/model metadata",
+      "HTTP texts and saved prompts",
+      "writer owner and aggregate receipts",
+      "filesystem allocation overhead",
+      "server logs",
+      "root audit/control receipts",
+      "temporary memory and files"
+    ],
+    "remaining_admission": "Root must bind and pin the guarded runtime adapter, enforce finite total output/log/temporary/peak-memory/swap/deadline budgets and freshly check28/30GiB floors after current native owner stops. These observations are not admission."
+  },
+  "source_test_receipt": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-pair-source-tests-20261111-v1.json",
+    "sha256": "4f3f9a09d8aebb42ec5178f3fff31f45dcb14194573799641b5d8c37472c1cb5",
+    "tests_passed": 20,
+    "native_tests": false,
+    "fresh_python_worker_resolution_uses_stubs": true,
+    "driver_uses_synthetic_ports_only": true
+  },
+  "worker_loading": {
+    "entrypoint_unchanged": "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py",
+    "worker_classes": [
+      "qwen35_sampler_worker_v1.BaselineMeasuredWorker",
+      "qwen35_sampler_worker_v1.CandidateMeasuredWorker",
+      "qwen35_sampler_worker_v1.BaselineCaptureWorker",
+      "qwen35_sampler_worker_v1.CandidateCaptureWorker"
+    ],
+    "cli": "--worker-cls with the corresponding stable module attribute",
+    "platform_source_respects_non_auto_worker_cls": true,
+    "same_research_pythonpath_required_both_arms": true,
+    "actual_worker_load_requires_future_root_verified_attachment": true
+  },
+  "remaining_runtime_bindings": [
+    "Bind GuardedPorts to the current root owner/resource policy; model/vector/replay/control leaves must run as separate owned processes with authentic completed receipts.",
+    "Bind owned server contexts using server_arguments, identical old settings and unchanged entry; set host identity/receipt environment and capture/packets directory only for the capture arm.",
+    "Bind independent root server_audit to actual systemd/proc/cgroup identities. Live readiness has exit_observed=false and no exit code. Query actual terminal/cleanup only after context exit, including exceptions.",
+    "Pin the runtime adapter/auditor source in host source identity, not in the frozen graph fingerprint.",
+    "Execute native capture/replay/14controls and all original model/quality/HTTP gates; a native worker import/pickle check and actual packet serializer roundtrip remain unrun.",
+    "Independent final audit before any qualification or speedup publication."
+  ],
+  "historical_failures_preserved": [
+    "Old GDN candidate43 changed quality texts and57 changed greedy workloads remain disqualified.",
+    "Missing historical effective penalties/RNG are not inferred; new selected captures are fresh observations only.",
+    "Smol2048 evidence is not upgraded to4096.",
+    "No automatic best-known promotion or family-complete claim."
+  ]
+}
