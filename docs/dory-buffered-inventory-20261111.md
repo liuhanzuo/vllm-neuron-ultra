@@ -55,7 +55,9 @@ Dory 的第五轮环境清单检查在接入分块写入后实际退出 0，独�
 
 ## MiniCPM5 同期进度
 
-MiniCPM5 原生验证的生命周期核心已通过 17 项模拟测试及 4 项追加检查，补齐持久化进程身份、启动前确认和只执行一次的清理流程。它使用原始恢复记录中的两个 SDK rank 结果，保留原驱动输出，不将原外层失败改成成功。实际进程适配器和启动入口仍在整合，原生对照尚未执行。
+MiniCPM5 原生验证的生命周期核心已通过 17 项模拟测试及 4 项追加检查，补齐持久化进程身份、启动前确认和只执行一次的清理流程。它使用原始恢复记录中的两个 SDK rank 结果，保留原驱动输出，不将原外层失败改成成功。实际进程适配器与 coordinator/native 入口已完成源码和 15 项模拟检查，原生对照尚未执行。
+
+独立复核进一步发现整体启动问题：子入口复用了只适用于启动前的队列最新性检查，会拒绝本次正常运行后写下的状态。模拟已重现这一拒绝，当前入口尚未整体接受。后继将分别验证外层启动前状态及子进程所属的本次已准入运行，继续保留完整前驱排空、串行锁和并发活动检查。不能靠保留过时空闲状态来绕过此问题。详见[独立复核](evidence/dory-buffered-inventory-20261111/minicpm5-native-process-adapter-independent-review-20261111-v1.json)及[接口说明](evidence/dory-buffered-inventory-20261111/minicpm5-native-process-adapter-interface-20261111-v2.md)。Dory 的[30 项有限补证方案](evidence/dory-buffered-inventory-20261111/dory-inventory-r5-minimal-evidence-plan-20261111-v1.md)也已独立复核，尚未关闭其中项目。
 
 所有模型仍保留原权重、精度、冷缓存 4096、长解码、请求槽位复用、质量 96 和匹配 HTTP 要求。已有模型倍数见[提速总表](multi-model.md#existing-results-and-provenance)。
 
