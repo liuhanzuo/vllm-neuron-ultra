@@ -46,7 +46,7 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 ## MiniCPM5 观测驱动
 
-两侧的可调用源码和精确事件清单已准备；SDK 侧新一轮已实际准入并启动，结果尚待完成和退出后审计。官方原生侧仍待接入：
+两侧的可调用源码和精确事件清单已准备；SDK 侧新一轮两个 rank 已完成，但汇总文件超过上限导致整体失败，独立数据恢复审计尚待完成。官方原生侧仍待接入：
 
 | 阶段 | 固定范围 | 原始保存量 |
 | --- | --- | ---: |
@@ -64,11 +64,15 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 [实际准备失败](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-preparation-failed-actual-exit-20261111-v1.json)、[状态衔接修正独立复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-freshness-correction-independent-review-20261111-v1.json)、[新版准备实际完成](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-root-preparation-complete-20261111-v2.json)、[执行程序实际失败与退出](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-failed-terminal-20261111-v1.json)、[完整失败证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-model-failed-evidence-20261111-v1.json)。
 
-诊断后继通过独立源码审查及 13 项针对性检查；原锁检查、失败传播及清理流程保持不变。它只在原检查失败时保存当刻证据，不重试或改用宽松条件。新一轮 r2 配置实际生成成功，主任务确认原科学输入、624 份采集文件范围、资源与验收条件均保留；生成配置后的完整读取检查也通过。实际执行随后通过加载前检查，启动了服务和两个 rank。此处记录的是实际准入，采集结果、实际退出及独立完整原始数据复核仍待完成；不能据此宣布锁异常已修复或模型合格。
+诊断后继通过独立源码审查及 13 项针对性检查；原锁检查、失败传播及清理流程保持不变。它只在原检查失败时保存当刻证据，不重试或改用宽松条件。新一轮 r2 配置实际生成成功，主任务确认原科学输入、624 份采集文件范围、资源与验收条件均保留；生成配置后的完整读取检查也通过。实际执行随后通过加载前检查，启动了服务和两个 rank。两个 rank 随后各完成 6 个锚点调用、30 次注意力调用，并均以 0 退出。coordinator 在写入嵌套的两份 rank 结果和完整校验证明时触发原 8 MiB `Evidence cap`；coordinator 与外层程序实际退出 1。全部 624 份原始文件（63,876,480 字节）及 12 份日志保留，独立失败证据确认进程退出和服务清空。这里的数量来自完整文件清单与大小检查，尚未完成退出后的独立原始字节复核。下一步以无损引用替代重复嵌套，单独审计已保存数据；保留原 exit 1，不补造成功记录，也不为修复汇总而重跑模型。本次未产生锁失败诊断，不能宣布原锁异常已修复。
 
 为保存新配置，在原串行锁内整理已发布仓库的 Git 对象，回收 34,603,008 字节；没有裁剪 Git 历史、删除实验文件或扩容磁盘。
 
 [诊断后继独立审查](evidence/dory-provenance-20261111/minicpm5-operator-sdk-original-lock-diagnostic-independent-source-review-20261111-v1.json)、[r2 配置实际生成与主任务复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r2-root-preparation-complete-20261111-v1.json)、[r2 实际启动身份](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-live-20261111-v1.json)、[r2 实际准入观察](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-actual-admission-20261111-v1.json)。
+
+Dory 的有界分阶段启动器已通过 17 项独立检查和新增最终文件预算检查。清单阶段统一由独立工作进程执行，父进程持锁至工作进程及其子进程组退出；最终结果文件计入占用预算。绑定上述 MiniCPM5 真实失败与完整历史服务范围后，清单检查已实际启动，结果尚待完成。它复用已完成的 163 包比较，不重做下载或整包对比。原生 ABI 与 Stage A 仍需随后分别验证。
+
+[MiniCPM5 汇总失败实际终态](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-failed-terminal-20261111-v1.json)、[完整失败与文件保留证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-model-failed-evidence-20261111-v1.json)、[Dory 启动器独立审查](evidence/dory-provenance-20261111/dory-serial-stage-independent-source-review-20261111-v3.json)、[Dory 清单实际启动](evidence/dory-provenance-20261111/dory-serial-inventory-r1-actual-live-20261111-v1.json)。
 
 ## 证据
 

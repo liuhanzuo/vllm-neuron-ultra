@@ -1,0 +1,81 @@
+{
+  "schema": "dory_serial_stage_independent_source_review_v3",
+  "reviewer": "/root/dory_resolver_final_review",
+  "scope": "Frozen launcher v3 with worker/contract/journal v2, scoped to inventory source readiness; source and bounded synthetic only",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-stage-source-delivery-20261111-v3.json",
+    "bytes": 9336,
+    "sha256": "b942535f3332b9c4d83ae8ec531a1cac1b0b34ee54d1828a91b4df551ec60020"
+  },
+  "source_catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-stage-source-catalog-20261111-v3.json",
+    "bytes": 4736,
+    "sha256": "e6154b494e64fd2cb79143c55149ec810255d61083a3c87d2f757fc772d991d7"
+  },
+  "verdict": "accepted_inventory_source_ready_for_root_concrete_plan_binding",
+  "remaining_source_blockers": [],
+  "source_closure": {
+    "files": 25,
+    "bytes": 305433,
+    "exact_local_literal_import_closure_verified": true,
+    "all_final_artifact_hashes_verified": true,
+    "v1_and_v2_frozen_catalog_pins_preserved": true
+  },
+  "findings_resolved": [
+    {
+      "id": "inventory_command_ownership",
+      "resolution": "Inventory now runs only inside system-Python owned worker/session. Helper command errors remain recorded; parent controls that process group and retains original serial lock until actual child wait and group drain."
+    },
+    {
+      "id": "final_result_budget_order",
+      "resolution": "Launcher v3 writes result.json, then rechecks allocated file bytes before printing a successful result reference. An over-cap saved result is retained failed evidence, not accepted completion."
+    }
+  ],
+  "reviewed_behavior": {
+    "minimum_inventory_integration": "/usr/bin/python3 -B -s worker dispatches inventory before prepare_source_inputs or native authority; runs frozen inventory_finish_v2 with exact guard and bounded journal. Native/environment payload preparation is not a prerequisite to this inventory branch.",
+    "parent_child_binding": "Exact parent-owned admission, child live argv/PID/start/ppid and pipe ACK; original lock proof remains unchanged. Child command descendants inherit the new worker process group.",
+    "cleanup": "Normal and exceptional paths wait and verify group empty before release. Repeated cleanup failure retains lock and records cleanup-pending; reused leader is not signaled. Python cleanup does not guarantee handling SIGKILL/OOM; root actual post-exit physical checks remain necessary.",
+    "error_evidence": "Worker helper cleanup errors and durable journal prefix retained; parent records its own failure and observed child exit. Partial artifacts do not imply stage success or external launcher exit.",
+    "journal": "64 KiB raw blocks, 256 MiB raw/64 MiB gzip bounds, per-event flush/fsync, full raw/compressed hashes and roundtrip. Failed event is not promoted to durable count.",
+    "output_chain": "Parent result -> worker result -> inventory/result.json and exported files; events retained beside them. No automatic successor launch.",
+    "budget": "Inventory AS 2 GiB and CPU 600 s are per process; wall 900 s, CPU 5/nice19, 128 MiB allocated FILE bytes including final result, 8 MiB log, 64 MiB single file, original root/NVMe 28/30 GiB floors. Directory blocks are not summed; aggregate theoretical helper/journal/log maxima can fail the total cap.",
+    "source_authority_boundary": "Default external_authorities=None leaves missing source authority explicit. Supplied source_evidence bytes and meaning remain an independent root review precondition, not authenticated by formatting checks."
+  },
+  "verification": [
+    {
+      "kind": "v2 narrow synthetic suite independently run",
+      "terminal_chunk": "37c7b4",
+      "exit_code": 0,
+      "tests": 17
+    },
+    {
+      "kind": "v2 complete closure and old frozen pins",
+      "terminal_chunk": "56f0a0",
+      "exit_code": 0
+    },
+    {
+      "kind": "v3 only new final-result budget regression",
+      "terminal_chunk": "2fae77",
+      "exit_code": 0,
+      "tests": 1
+    },
+    {
+      "kind": "final artifact SHA, source-catalog pins, unchanged AST/test logic and unbound templates",
+      "terminal_chunk": "a87873",
+      "exit_code": 0
+    }
+  ],
+  "root_next_step": "Bind the exact final inventory template/catalog to current actually exited/drained predecessor and a fresh output path, then independently review that concrete plan. Source acceptance is not actual runtime admission.",
+  "future_native_stages": "ABI/Stage A/saved-byte review are not admitted here; their concrete authority/resource refs remain unfilled templates. No additional all-environment certification or old-suite repeat requested.",
+  "original_prebuild_without_serial_lock_deviation": "unchanged; later source/provenance work does not erase it",
+  "real_locks_or_process_probes": false,
+  "real_worker_or_model_started": false,
+  "native_imports": false,
+  "environment_or_archive_payload_reads": false,
+  "old_suite_rerun": false,
+  "frozen_sources_modified": false,
+  "mini_or_handoff_modified": false,
+  "actual_runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
