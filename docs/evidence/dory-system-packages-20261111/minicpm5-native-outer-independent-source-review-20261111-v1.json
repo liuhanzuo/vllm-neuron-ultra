@@ -1,0 +1,159 @@
+{
+  "schema": "minicpm5_native_outer_independent_source_review_v1",
+  "created_at": "2026-11-11T11:43:46.885858+00:00",
+  "reviewer": "/root/mini_outer_review_fresh_20261111",
+  "independent_review": true,
+  "source_only": true,
+  "passed": false,
+  "source_review_accepted": false,
+  "disposition": "reject_current_outer_v2_adapter_v5_for_runtime_integration_until_current_bound_full_physical_successor",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-outer-source-delivery-20261111-v1.json",
+    "sha256": "0cc6afcc60daa07aeaaf73f7c8a7d606d76c06ce8d2b0435b26874247cf327b4"
+  },
+  "delivery_source_pins_all_match": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_outer_runner_v2.py": "8a270806574f55a46a0e37258130060a4ad531915f1a006c797db09e0d941131",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_outer_support_v2.py": "fbdc8a070b23c8c69d3b9d9bf5e3b96a58d351bae55d04faee090296755f18b7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_process_adapter_v5.py": "cc6440a36f742b5ba7be979425dc8297cd66789816b44cfdc4cb3ce2ff18b8a6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v6.py": "119d70183fc0edbe4646bae42a0257b1e54033a6ff07d75fbc1ab52a343becb3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_lifecycle_core_v2.py": "db96287006355521032ac1245cad6183ff710cc001a9af6fce02bcf1726a6c21",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_output_catalog_v2.py": "73685389da802e4f4f94da6ba8b0868111dd02686e21ab8c739a1e3c0bcb0a19",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_python_trace_lifecycle_v4.py": "bf93db978700577cf91c83d1cace537a7add2f3a31ee16622a8f8f074d07c044",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_sources_v1.py": "cdc679752fdad493fd00e7f7339e700b91a65604760fcdbbc8f70f49d1f93c30",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_runtime_completion_v3.py": "43842a41221b221168c941baab223e0852a34ab5a7df05e4684c987c310f493c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_completion_v3.py": "04c4cb4c0c7b96208000248a0eb75896ba4c15f3114738a5c874178ffb37506d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_after_nemotron_r12_recovered_failure_v1.py": "ab39d035b5918330ff4ac7a768cd82fa4600bb2b842933e1c4ef7dd91aa346e4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_startup_drain_v27.py": "018581a419aafb9cbc6c6adbced5b6458809cc81976d18109358216e800f9521",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_r12_completion_v1.py": "ed82c693b72f97cf63c164949c9fe0d1178bfba8d653cc3973a902d76105c873",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_operator_native_outer_independent_20261111_v1.py": "300c5b7ccdb8602a95d2425a7a9c9ccb1f2d1ca61c7d5938a838bc20c3eb9a99"
+  },
+  "blockers": [
+    {
+      "id": "NATIVE-OUTER-B1",
+      "priority": "P1",
+      "title": "Child full physical revalidation enters historical idle/self-lock contracts incompatible with admitted current native service",
+      "entry": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_process_adapter_v5.py",
+        "line": 168
+      },
+      "trigger": "coordinator bootstrap has authenticated coordinator-owner and running handoff, then resolve_admitted calls latest.collect_pair while its own systemd service is running; native repeats the same path",
+      "effect": "coordinator cannot reach spawn_native/model; if upper idle checks alone are patched, deeper historical child-as-lock-owner proof still rejects the parent-only retained descriptor contract",
+      "actual_call_chain": [
+        "runner_v6.bootstrap:59",
+        "adapter_v5.resolve_admitted:168",
+        "operator_sdk_runtime_completion_v3.collect_pair:178",
+        "sdk_physical_evidence_v3.collect_pair:301",
+        "operator_sdk_runtime_completion_v3.physical:161",
+        "sdk_batch_layout_completion_v3.physical:180",
+        "after_nemotron_r12_recovered_failure_v1.physical:346",
+        "nemotron9b_package_startup_drain_v27.physical_drain:15,45-48",
+        "nemotron9b_r12_completion_v1.physical:114-120"
+      ],
+      "independent_evidence": [
+        "Real startup physical_drain in memory completes both historical unit/group samples, then rejects the synthetic active current native service with Only explicitly acknowledged current controller may be live.",
+        "Passing exactly the new native unit to existing allowed_units is rejected by the old nemotron-controller-only regex.",
+        "Real r12.physical and original low.lock_proof use current child PID rather than admitted outer PID; a complete synthetic /proc/locks record held only by outer is rejected before metadata().",
+        "Real upper sdk_batch_layout_completion_v3.physical still calls low.active_heavy() without exclusions and rejects current native even though low.active_heavy((current_unit,)) passes."
+      ],
+      "mock_gap": "Existing main tests replace resolve, OwnedService and terminal core; runner tests replace bootstrap; no existing control executes the nested original full physical chain under a live current service and parent-only lock.",
+      "minimal_semantic_fix": "Add a source successor for explicit authenticated current-execution observer/guard injection through the entire original physical call chain. Permit only the exact currently authenticated unit/invocation/PID-start/argv/cgroup already bound to admission and handoff, retain all original historical units/owners/groups and both complete samples, and use the accepted outer descriptor proof for child observation. Keep outer pre-launch global idle behavior. Do not globally monkeypatch historical low modules or skip the full pair."
+    }
+  ],
+  "validated_sections": {
+    "native_authentication": {
+      "complete_original_partition": true,
+      "exact_native_files": 9,
+      "exact_native_bytes": 3920408,
+      "original_authenticated_bytes_loop_and_receipt_validator": true,
+      "only_legacy_inner_lock_guard_replaced": true,
+      "historical_payload_bytes_read": 0
+    },
+    "system_properties": {
+      "query_union_includes_all_life_props": true,
+      "nice_present": true,
+      "duration_actual_fields": [
+        "RuntimeMaxUSec",
+        "TimeoutStopUSec"
+      ],
+      "observed_prior_metadata": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-r2-model-failed-evidence-20261111-v1.json",
+      "observed_json_path": "$.owned_model_drain.properties",
+      "observed_duration_values": [
+        "2h",
+        "15s"
+      ],
+      "representation_accepted_by_real_parser_and_service_identity": true,
+      "current_live_systemctl_invoked": false
+    },
+    "atomic_publication": {
+      "original_once_reused": true,
+      "full_fsync_before_rename_noreplace": true,
+      "parent_directory_fsync": true,
+      "all_existing_staging_writer_slots_compatible": true,
+      "actual_once_control_flow_executed_with_memory_io": true,
+      "old_partial_final_publication_avoided": true,
+      "no_normal_publication_successor_blocker_found": true
+    },
+    "resource_envelope": {
+      "memory_max_bytes": 17179869184,
+      "memory_high_bytes": 15032385536,
+      "runtime_max_seconds": 7200,
+      "stop_timeout_seconds": 15,
+      "native_output_bytes": 134217728,
+      "total_output_bytes": 268435456,
+      "root_floor_bytes": 30064771072,
+      "output_floor_bytes": 32212254720,
+      "unchanged": true
+    },
+    "cleanup": {
+      "exact_owned_invocation_checked_before_stop": true,
+      "latched_work_failure_does_not_prevent_independent_cleanup": true,
+      "all_acknowledged_owners_and_entire_cgroup_checked": true,
+      "retain_until_drained_reused": true,
+      "normal_cleanup_drained_published_once": true,
+      "no_release_before_physical_drain_in_reviewed_control_flow": true
+    },
+    "interface": {
+      "original_current_execution_contract_retained": true,
+      "acyclic_intent_admission_ack_running_order": true,
+      "original_sdk_model_exit_one_preserved": true,
+      "external_exit_and_independent_raw_audit_not_fabricated": true
+    }
+  },
+  "tests": [
+    {
+      "kind": "tool_session",
+      "session_id": 63412,
+      "initial_chunk": "b0c35e",
+      "terminal_chunk": "d3c7f2",
+      "exit_code": 0,
+      "tests": 46,
+      "duration_seconds": 13.863,
+      "mocked_only": true
+    },
+    {
+      "kind": "tool_call",
+      "terminal_chunk": "d401ad",
+      "exit_code": 0,
+      "tests": 5,
+      "duration_seconds": 0.447,
+      "mocked_only": true,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_operator_native_outer_independent_20261111_v1.py"
+    }
+  ],
+  "limitations": [
+    "No concrete full scientific plan/spec/review/overlay created or resolved.",
+    "No actual proc/systemd/current native library bytes/weights/raw payload read; actual lock and service/model launch not attempted.",
+    "No real full historical metadata bootstrap/physical execution performed; successful mocks do not establish native launch readiness.",
+    "External model/outer tool exit recorder and terminal handoff/catalog plus independent native raw audit entry remain outside this delivery."
+  ],
+  "old_sources_modified": false,
+  "concrete_plan_handoff_catalog_created": false,
+  "actual_lock_acquire_or_release": false,
+  "actual_service_or_model_launch": false,
+  "actual_raw_or_native_payload_read": false,
+  "runtime_admitted": false,
+  "launch_ready": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
