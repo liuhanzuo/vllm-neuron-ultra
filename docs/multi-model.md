@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+[MiniCPM5 六组保存算子比较实际完成，退出后独立复核待执行](mini-comparison-terminal-20261111.md)：完整 1,284 份 capture 已处理，六份报告及汇总已写出、工具实际退出 0；LFM3 检查器修正后重跑已启动。没有新增模型提速。
+
 [MiniCPM5 完整原生审计通过，LFM3 首例 NaN 位模式变化复现](mini-native-audit-lfm-writeback-20261111.md)：936 份原始文件及全部日志核验完成；逐算子比较入口 11 项独立检查通过并已启动真实比较。LFM3 候选组在运行前检查失败，三组对照未完成；没有新增模型提速。
 
 [MiniCPM5 原生 r3 实际退出 0，Qwen3.5 运行接口 33 项独立测试通过](mini-r3-terminal-qwen-runtime-20261111.md)：24 个检查点／72 次局部调用完成，正在执行独立结束记录，完整原始数据审计仍待完成；保存数据读取工具 9 项独立测试通过。没有新增模型提速。
