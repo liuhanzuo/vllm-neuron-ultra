@@ -1,0 +1,208 @@
+{
+  "schema": "lfm3_nki05_transport_root_actual_exit_v2",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T18:35:16.788356+00:00",
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 16107,
+    "terminal_chunk": "fcf693",
+    "exit_code": 1
+  },
+  "actual_exit_code": 1,
+  "actual_tool_exit_observed": true,
+  "outer_owner": {
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-transport-r2-20261111-spec.json",
+      "--spec-sha256",
+      "baa95d97d8560b9408c50f5fedaea83b9937f33e0096c1669e0bf34e46827092",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-transport-r2-20261111-review.json",
+      "--review-sha256",
+      "7924d3557329da5363f13ff478f885bab00ce25bbc7c5716eb44e12ac4402f26"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 1781039,
+    "ppid": 1003516,
+    "start_ticks": "420205540"
+  },
+  "worker_owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron_053_py312/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v1.py",
+      "--mode",
+      "worker",
+      "--admission",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/admission.json",
+      "--admission-sha256",
+      "062b08896356a88e7ed3bfad1c2953db2410483452dac8e075cbcf66e1a39138"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-transport-r2-20261111.service",
+    "invocation_id": "5e8583d9ebe64af791ff6e6f7b97c694",
+    "pid": 1793507,
+    "ppid": 1583,
+    "start_ticks": "420248225",
+    "unit": "trn1-lfm3-nki05-transport-r2-20261111"
+  },
+  "owners_gone": true,
+  "service": "trn1-lfm3-nki05-transport-r2-20261111",
+  "service_observations": [
+    {
+      "properties": {
+        "TimeoutStopUSec": "15s",
+        "RuntimeMaxUSec": "30min",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainPID": "1793507",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron_053_py312/bin:/usr/bin:/bin HOME=/home/ubuntu XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 TMPDIR=/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/tmp NEURON_RT_VISIBLE_CORES= NKI_PRECISE_FP=1 NEURON_PLATFORM_TARGET_OVERRIDE=trn1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 LFM3_NKI05_ATTEMPT=f96856b98c0013157627bc77297a6d7a /home/ubuntu/venvs/vllm_neuron_053_py312/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v1.py --mode worker --admission /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/admission.json --admission-sha256 062b08896356a88e7ed3bfad1c2953db2410483452dac8e075cbcf66e1a39138 ; ignore_errors=no ; start_time=[Wed 2026-11-11 18:32:53 UTC] ; stop_time=[Wed 2026-11-11 18:32:56 UTC] ; pid=1793507 ; code=exited ; status=1 }",
+        "ControlGroup": "",
+        "AllowedCPUs": "6-7",
+        "MemoryHigh": "8589934592",
+        "MemoryMax": "10737418240",
+        "MemorySwapMax": "0",
+        "TasksMax": "32",
+        "Environment": "",
+        "LimitCPU": "1800",
+        "LimitFSIZE": "262144",
+        "LimitAS": "12884901888",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+        "Nice": "19",
+        "CPUAffinity": "6-7",
+        "KillMode": "control-group",
+        "SendSIGKILL": "yes",
+        "Id": "trn1-lfm3-nki05-transport-r2-20261111.service",
+        "BindsTo": "",
+        "After": "app.slice basic.target -.mount",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "Job": "",
+        "InvocationID": "5e8583d9ebe64af791ff6e6f7b97c694",
+        "ExecStopPost": ""
+      },
+      "group": {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-transport-r2-20261111.service",
+        "absent": true
+      }
+    },
+    {
+      "properties": {
+        "TimeoutStopUSec": "15s",
+        "RuntimeMaxUSec": "30min",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "ControlPID": "0",
+        "Result": "exit-code",
+        "ExecMainPID": "1793507",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron_053_py312/bin:/usr/bin:/bin HOME=/home/ubuntu XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 TMPDIR=/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/tmp NEURON_RT_VISIBLE_CORES= NKI_PRECISE_FP=1 NEURON_PLATFORM_TARGET_OVERRIDE=trn1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 LFM3_NKI05_ATTEMPT=f96856b98c0013157627bc77297a6d7a /home/ubuntu/venvs/vllm_neuron_053_py312/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v1.py --mode worker --admission /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/admission.json --admission-sha256 062b08896356a88e7ed3bfad1c2953db2410483452dac8e075cbcf66e1a39138 ; ignore_errors=no ; start_time=[Wed 2026-11-11 18:32:53 UTC] ; stop_time=[Wed 2026-11-11 18:32:56 UTC] ; pid=1793507 ; code=exited ; status=1 }",
+        "ControlGroup": "",
+        "AllowedCPUs": "6-7",
+        "MemoryHigh": "8589934592",
+        "MemoryMax": "10737418240",
+        "MemorySwapMax": "0",
+        "TasksMax": "32",
+        "Environment": "",
+        "LimitCPU": "1800",
+        "LimitFSIZE": "262144",
+        "LimitAS": "12884901888",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+        "Nice": "19",
+        "CPUAffinity": "6-7",
+        "KillMode": "control-group",
+        "SendSIGKILL": "yes",
+        "Id": "trn1-lfm3-nki05-transport-r2-20261111.service",
+        "BindsTo": "",
+        "After": "app.slice basic.target -.mount",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "Job": "",
+        "InvocationID": "5e8583d9ebe64af791ff6e6f7b97c694",
+        "ExecStopPost": ""
+      },
+      "group": {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-transport-r2-20261111.service",
+        "absent": true
+      }
+    }
+  ],
+  "physically_drained": true,
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-transport-r2-20261111-spec.json",
+    "sha256": "baa95d97d8560b9408c50f5fedaea83b9937f33e0096c1669e0bf34e46827092"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-transport-r2-20261111-review.json",
+    "sha256": "7924d3557329da5363f13ff478f885bab00ce25bbc7c5716eb44e12ac4402f26"
+  },
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/admission.json",
+    "sha256": "062b08896356a88e7ed3bfad1c2953db2410483452dac8e075cbcf66e1a39138"
+  },
+  "receipts": {
+    "diagnostic-result.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/diagnostic-result.json",
+      "sha256": "5c252ec602649007e18f1f40519945fcb95b1dee5d884c849edf7beed06054e5"
+    },
+    "worker-failure.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/worker-failure.json",
+      "sha256": "c5415b54eaa9294978377c016371b83d559086af58cd7f4dbeb351abbd4982ef"
+    },
+    "outer-failure.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/outer-failure.json",
+      "sha256": "e5372e052f324a8e0c8d12ed9ea295319b10bf4b10a3e18d3221fb944139608a"
+    },
+    "service-exit.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/service-exit.json",
+      "sha256": "d73640d6e8990070d3f5449e38fbc287b1f770bd430f37be5e48ae7548428d4b"
+    },
+    "cleanup-drained.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/cleanup-drained.json",
+      "sha256": "e8a6e5a1cc3effa09543e04d9f60b2c6e9f033065ee90e996734053eb85d8c91"
+    },
+    "predecessor-drain.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/predecessor-drain.json",
+      "sha256": "f1d6bf88c90a4d29ff41da7ee8841837ea160a726b31b7cd1a2ae7060d9fc709"
+    },
+    "worker-owner.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/worker-owner.json",
+      "sha256": "d7510e3aeb1c46dfb1ac206442a9075f41c1eb0f8f361e672233ee8fe42178ee"
+    },
+    "runtime.log": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-r2-20261111/runtime.log",
+      "sha256": "b0cb2e57cdd5d6f29e06f6a392c866401b43817094f4475eef6f5114e043d393"
+    }
+  },
+  "historical_proof": {
+    "complete_lossless_chunks_verified": true,
+    "chunks": 3,
+    "units": 1321,
+    "owners": 1759
+  },
+  "diagnostic": {
+    "actual_simulator_executed": true,
+    "checks_attempted": 1,
+    "checks_required": 32,
+    "original_fixture_verified": true,
+    "identity_return_and_observed_boundaries_byte_exact": true,
+    "host_inputs_unchanged": false,
+    "which_input_bytes_changed_not_saved": true,
+    "remaining_movement_controls_not_run": true,
+    "simulator_writeback_cause_not_yet_proven": true
+  },
+  "self_exit_claimed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

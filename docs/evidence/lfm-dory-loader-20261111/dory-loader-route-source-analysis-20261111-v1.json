@@ -1,0 +1,909 @@
+{
+  "schema": "dory_loader_route_source_analysis_v1",
+  "created_at": "2026-11-11T18:44:52.608045+00:00",
+  "author": "/root/dory_loader_route_analysis_20261111",
+  "kind": "source_and_saved_metadata_analysis_only",
+  "inputs": {
+    "remaining": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-remaining-loader-gaps-after-cache-20261111-v1.json",
+      "sha256": "41e6d4600ec218dfc56e2555333795c68fc3a5e4e4b279142356ae6877583681",
+      "bytes": 37912
+    },
+    "source_collection": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/result.json",
+      "sha256": "5fae7953b883f17949b6c1438e78957558f7ba04604e5315339ed3580a733481",
+      "bytes": 54368
+    },
+    "source_collection_root_terminal": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-route-sources-r1-root-actual-exit-20261111-v1.json",
+      "sha256": "5cc698cc618c69a6e90f3d40da9c484a4940f38f9620b4974afa502cb0d5f1d2",
+      "bytes": 5441
+    }
+  },
+  "sources": {
+    "torch/__init__.py": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/torch/__init__.py",
+      "sha256": "bd4a10ff16357ed78f45aaf4b46ce5b771fdc0e8549402206e324d0eb792c672",
+      "bytes": 130530,
+      "line_count": 3539,
+      "full_bytes_rehashed": true,
+      "ast_parse_only": true
+    },
+    "vllm/__init__.py": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/__init__.py",
+      "sha256": "087e15875e49ba50f4969c2229d450bb8397302ea9344b3a3bd06ee400263ebd",
+      "bytes": 3662,
+      "line_count": 101,
+      "full_bytes_rehashed": true,
+      "ast_parse_only": true
+    },
+    "vllm/_custom_ops.py": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/_custom_ops.py",
+      "sha256": "6fdd0e901ab202121edcfd968d0d3d79628b67bde5e1bb0fcac30c91ec9f7d4f",
+      "bytes": 141872,
+      "line_count": 4897,
+      "full_bytes_rehashed": true,
+      "ast_parse_only": true
+    },
+    "vllm/platforms/__init__.py": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/__init__.py",
+      "sha256": "1cb18cae8c7ad58f9f8c052d5fad11ab0bec68f2fac01b6912235e9615635de5",
+      "bytes": 12349,
+      "line_count": 346,
+      "full_bytes_rehashed": true,
+      "ast_parse_only": true
+    },
+    "vllm/platforms/cpu.py": {
+      "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+      "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+      "bytes": 33077,
+      "line_count": 815,
+      "full_bytes_rehashed": true,
+      "ast_parse_only": true
+    }
+  },
+  "scope": {
+    "five_sources_bytes": 321490,
+    "vllm_edges": 13,
+    "libgomp_edges": 2,
+    "prior_system_byte_origin_gaps_closed_preserved": 11,
+    "prior_cache_derivation_gaps_closed_preserved": 4,
+    "conditional_cpu_variant_edges": 9,
+    "extension_edges_with_callers_outside_collected_sources": 4,
+    "libgomp_policy_only_edges": 2,
+    "actual_loader_gaps_closed_by_this_analysis": 0,
+    "actual_loader_gaps_remaining": 15
+  },
+  "source_claims": [
+    {
+      "id": "package_lazy_entry",
+      "fact": "vllm package initialization imports version and env_override; exported engine/model attributes are lazy. These five sources do not establish the original Dory caller or a complete package-to-native route.",
+      "evidence": [
+        {
+          "source": "vllm/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/__init__.py",
+          "sha256": "087e15875e49ba50f4969c2229d450bb8397302ea9344b3a3bd06ee400263ebd",
+          "start_line": 7,
+          "end_line": 14,
+          "excerpt": "from .version import __version__, __version_tuple__  # isort:skip\n\nimport typing\n\n# The environment variables override should be imported before any other\n# modules to ensure that the environment variables are set before any\n# other modules are imported.\nimport vllm.env_override  # noqa: F401"
+        },
+        {
+          "source": "vllm/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/__init__.py",
+          "sha256": "087e15875e49ba50f4969c2229d450bb8397302ea9344b3a3bd06ee400263ebd",
+          "start_line": 16,
+          "end_line": 27,
+          "excerpt": "MODULE_ATTRS = {\n    \"AsyncEngineArgs\": \".engine.arg_utils:AsyncEngineArgs\",\n    \"EngineArgs\": \".engine.arg_utils:EngineArgs\",\n    \"AsyncLLMEngine\": \".engine.async_llm_engine:AsyncLLMEngine\",\n    \"LLMEngine\": \".engine.llm_engine:LLMEngine\",\n    \"LLM\": \".entrypoints.llm:LLM\",\n    \"initialize_ray_cluster\": \".v1.executor.ray_utils:initialize_ray_cluster\",\n    \"PromptType\": \".inputs:PromptType\",\n    \"TextPrompt\": \".inputs:TextPrompt\",\n    \"TokensPrompt\": \".inputs:TokensPrompt\",\n    \"ModelRegistry\": \".model_executor.models:ModelRegistry\",\n    \"SamplingParams\": \".sampling_params:SamplingParams\","
+        },
+        {
+          "source": "vllm/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/__init__.py",
+          "sha256": "087e15875e49ba50f4969c2229d450bb8397302ea9344b3a3bd06ee400263ebd",
+          "start_line": 63,
+          "end_line": 73,
+          "excerpt": "else:\n\n    def __getattr__(name: str) -> typing.Any:\n        from importlib import import_module\n\n        if name in MODULE_ATTRS:\n            module_name, attr_name = MODULE_ATTRS[name].split(\":\")\n            module = import_module(module_name, __package__)\n            return getattr(module, attr_name)\n        else:\n            raise AttributeError(f\"module {__package__} has no attribute {name}\")"
+        }
+      ]
+    },
+    {
+      "id": "cpu_selection_conditional",
+      "fact": "An explicit CPU target bypasses broad plugin probing, but cpu_platform_plugin can still return ZenCpuPlatform when AMD Zen and zentorch import succeed; otherwise it returns CpuPlatform. The actual platform and environment were not observed here.",
+      "evidence": [
+        {
+          "source": "vllm/platforms/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/__init__.py",
+          "sha256": "1cb18cae8c7ad58f9f8c052d5fad11ab0bec68f2fac01b6912235e9615635de5",
+          "start_line": 174,
+          "end_line": 184,
+          "excerpt": "def cpu_platform_plugin() -> str | None:\n    logger.debug(\"Checking if CPU platform is available.\")\n    is_cpu = envs.VLLM_TARGET_DEVICE == \"cpu\"\n    if is_cpu:\n        logger.debug(\n            \"Confirmed CPU platform is available because \"\n            \"VLLM_TARGET_DEVICE is set to CPU.\"\n        )\n    else:\n        try:\n            is_cpu = vllm_version_matches_substr(\"cpu\")"
+        },
+        {
+          "source": "vllm/platforms/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/__init__.py",
+          "sha256": "1cb18cae8c7ad58f9f8c052d5fad11ab0bec68f2fac01b6912235e9615635de5",
+          "start_line": 202,
+          "end_line": 228,
+          "excerpt": "    if not is_cpu:\n        return None\n\n    if _is_amd_zen_cpu():\n        try:\n            import zentorch  # noqa: F401\n\n            logger.info(\n                \"AMD Zen CPU detected with zentorch installed, using ZenCpuPlatform.\"\n            )\n            return \"vllm.platforms.zen_cpu.ZenCpuPlatform\"\n        except ImportError:\n            logger.debug(\n                \"AMD Zen CPU detected but zentorch not installed, \"\n                \"falling back to CpuPlatform.\"\n            )\n        except OSError:\n            # An ABI-mismatched build fails here with an undefined-symbol\n            # error; other failures are not known to be safe to recover from.\n            logger.warning(\n                \"AMD Zen CPU detected but zentorch failed to import, falling \"\n                \"back to CpuPlatform. This usually means the zentorch build \"\n                \"does not match the installed torch version.\",\n                exc_info=True,\n            )\n\n    return \"vllm.platforms.cpu.CpuPlatform\""
+        },
+        {
+          "source": "vllm/platforms/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/__init__.py",
+          "sha256": "1cb18cae8c7ad58f9f8c052d5fad11ab0bec68f2fac01b6912235e9615635de5",
+          "start_line": 240,
+          "end_line": 250,
+          "excerpt": "def resolve_current_platform_cls_qualname() -> str:\n    # An explicit CPU target is authoritative. Native CPU-only CI jobs reuse\n    # an accelerator wheel and can run on accelerator hosts, so probing every\n    # plugin would otherwise activate both CPU and the host accelerator.\n    if envs.VLLM_TARGET_DEVICE == \"cpu\":\n        cpu_platform_cls_qualname = cpu_platform_plugin()\n        assert cpu_platform_cls_qualname is not None\n        logger.debug(\"Explicitly selected CPU platform.\")\n        return cpu_platform_cls_qualname\n\n    platform_plugins = load_plugins_by_group(PLATFORM_PLUGINS_GROUP)"
+        },
+        {
+          "source": "vllm/platforms/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/__init__.py",
+          "sha256": "1cb18cae8c7ad58f9f8c052d5fad11ab0bec68f2fac01b6912235e9615635de5",
+          "start_line": 303,
+          "end_line": 322,
+          "excerpt": "def __getattr__(name: str):\n    if name == \"current_platform\":\n        # lazy init current_platform.\n        # 1. out-of-tree platform plugins need `from vllm.platforms import\n        #    Platform` so that they can inherit `Platform` class. Therefore,\n        #    we cannot resolve `current_platform` during the import of\n        #    `vllm.platforms`.\n        # 2. when users use out-of-tree platform plugins, they might run\n        #    `import vllm`, some vllm internal code might access\n        #    `current_platform` during the import, and we need to make sure\n        #    `current_platform` is only resolved after the plugins are loaded\n        #    (we have tests for this, if any developer violate this, they will\n        #    see the test failures).\n        global _current_platform\n        if _current_platform is None:\n            platform_cls_qualname = resolve_current_platform_cls_qualname()\n            _current_platform = resolve_obj_by_qualname(platform_cls_qualname)()\n            global _init_trace\n            _init_trace = \"\".join(traceback.format_stack())\n        return _current_platform"
+        }
+      ]
+    },
+    {
+      "id": "torch_before_cpu_kernels",
+      "fact": "Within the saved _custom_ops module body, import torch precedes current_platform resolution and import_kernels. CpuPlatform itself imports torch before defining its kernel loader. This proves source order on that route, not first-process load order, import success, platform choice, or the bytes selected by the ELF loader.",
+      "evidence": [
+        {
+          "source": "vllm/_custom_ops.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/_custom_ops.py",
+          "sha256": "6fdd0e901ab202121edcfd968d0d3d79628b67bde5e1bb0fcac30c91ec9f7d4f",
+          "start_line": 8,
+          "end_line": 21,
+          "excerpt": "import torch\n\nimport vllm.envs as envs\nfrom vllm.logger import init_logger\nfrom vllm.platforms import current_platform\nfrom vllm.scalar_type import ScalarType\nfrom vllm.utils.flashinfer import (\n    flashinfer_quant_nvfp4_8x4_sf_layout,\n)\nfrom vllm.utils.math_utils import cdiv\n\nlogger = init_logger(__name__)\n\ncurrent_platform.import_kernels()"
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 11,
+          "end_line": 13,
+          "excerpt": "import torch\n\nfrom vllm import envs"
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 656,
+          "end_line": 693,
+          "excerpt": "    @classmethod\n    def import_kernels(cls) -> None:\n        if Platform.get_cpu_architecture() in (CpuArchEnum.X86,):\n            # Note: The lib name is _C_AVX2/AVX512, but the module name is _C.\n            # This will cause a exception \"dynamic module does define\n            # module export function\". But the library is imported\n            # successfully. So ignore the exception for now, until we find\n            # a solution.\n            ignored_msg = \"dynamic module does not define module export function\"\n            if torch.cpu._is_avx512_supported():\n                if torch.cpu._is_avx512_bf16_supported():\n                    try:\n                        import vllm._C  # noqa: F401\n                    except ImportError as e:\n                        logger.warning_once(\n                            \"Failed to import from vllm._C: %s\", repr(e)\n                        )\n                else:\n                    try:\n                        import vllm._C_AVX512  # noqa: F401\n                    except ImportError as e:\n                        if ignored_msg not in e.msg:\n                            logger.warning_once(\n                                \"Failed to import from vllm._C_AVX512: %s\", repr(e)\n                            )\n            else:\n                try:\n                    import vllm._C_AVX2  # noqa: F401\n                except ImportError as e:\n                    if ignored_msg not in e.msg:\n                        logger.warning_once(\n                            \"Failed to import from vllm._C_AVX2: %s\", repr(e)\n                        )\n        else:\n            try:\n                import vllm._C  # noqa: F401\n            except ImportError as e:\n                logger.warning_once(\"Failed to import from vllm._C: %s\", repr(e))"
+        }
+      ]
+    },
+    {
+      "id": "torch_native_routes",
+      "fact": "Torch imports USE_GLOBAL_DEPS and USE_RTLD_GLOBAL_WITH_LIBTORCH from _utils_internal. A truthy TORCH_USE_RTLD_GLOBAL or flag chooses RTLD_GLOBAL|RTLD_LAZY around torch._C; otherwise the optional global-deps CDLL precedes torch._C. Global deps use a path beside __file__, with a distribution-location fallback. These flags and native transitive object selection are not established by the five sources. No direct Python selection of libc10.so/libtorch_cpu.so/libtorch.so/libgomp.so.1 occurs in this file.",
+      "evidence": [
+        {
+          "source": "torch/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/torch/__init__.py",
+          "sha256": "bd4a10ff16357ed78f45aaf4b46ce5b771fdc0e8549402206e324d0eb792c672",
+          "start_line": 59,
+          "end_line": 65,
+          "excerpt": "from torch._utils_internal import (\n    get_file_path,\n    prepare_multiprocessing_environment,\n    profiler_allow_cudagraph_cupti_lazy_reinit_cuda12,\n    USE_GLOBAL_DEPS,\n    USE_RTLD_GLOBAL_WITH_LIBTORCH,\n)"
+        },
+        {
+          "source": "torch/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/torch/__init__.py",
+          "sha256": "bd4a10ff16357ed78f45aaf4b46ce5b771fdc0e8549402206e324d0eb792c672",
+          "start_line": 392,
+          "end_line": 424,
+          "excerpt": "# See Note [Global dependencies]\ndef _load_global_deps() -> None:\n    if platform.system() == \"Windows\":\n        return\n\n    # Determine the file extension based on the platform\n    lib_ext = \".dylib\" if platform.system() == \"Darwin\" else \".so\"\n    lib_name = f\"libtorch_global_deps{lib_ext}\"\n    here = os.path.abspath(__file__)\n    global_deps_lib_path = os.path.join(os.path.dirname(here), \"lib\", lib_name)\n\n    # In scikit-build-core editable installs with redirect mode, native libs are\n    # installed to the dist package location rather than relative to __file__.\n    if not os.path.exists(global_deps_lib_path):\n        try:\n            from importlib.metadata import distribution\n\n            installed = distribution(\"torch\").locate_file(\n                os.path.join(\"torch\", \"lib\", lib_name)\n            )\n            # The importlib metadata SimplePath protocol was missing the exists\n            # method in older versions; however, the actual Path implementation\n            # has it and newer versions of importlib metadata have added it to\n            # the protocol, making the following ignore unnecessary from\n            # importlib_metadata 7.0.1 and Python 3.13 onwards.\n            # pyrefly: ignore[missing-attribute]\n            if installed.exists():\n                global_deps_lib_path = str(installed)\n        except Exception:\n            pass\n\n    try:\n        ctypes.CDLL(global_deps_lib_path, mode=ctypes.RTLD_GLOBAL)"
+        },
+        {
+          "source": "torch/__init__.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/torch/__init__.py",
+          "sha256": "bd4a10ff16357ed78f45aaf4b46ce5b771fdc0e8549402206e324d0eb792c672",
+          "start_line": 450,
+          "end_line": 496,
+          "excerpt": "    except OSError as err:\n        # Can happen for wheel with cuda libs as PYPI deps\n        # As PyTorch is not purelib, but nvidia-*-cu12 is\n        _preload_cuda_deps(err)\n        ctypes.CDLL(global_deps_lib_path, mode=ctypes.RTLD_GLOBAL)\n\n\nif (USE_RTLD_GLOBAL_WITH_LIBTORCH or os.getenv(\"TORCH_USE_RTLD_GLOBAL\")) and (\n    platform.system() != \"Windows\"\n):\n    # Do it the hard way.  You might want to load libtorch with RTLD_GLOBAL in a\n    # few circumstances:\n    #\n    #   1. You're in a build environment (e.g., fbcode) where\n    #      libtorch_global_deps is not available, but you still need\n    #      to get mkl to link in with RTLD_GLOBAL or it will just\n    #      not work.\n    #\n    #   2. You're trying to run PyTorch under UBSAN and you need\n    #      to ensure that only one copy of libtorch is loaded, so\n    #      vptr checks work properly\n    #\n    # If you're using this setting, you must verify that all the libraries\n    # you load consistently use the same libstdc++, or you may have\n    # mysterious segfaults.\n    #\n    old_flags = sys.getdlopenflags()\n    sys.setdlopenflags(os.RTLD_GLOBAL | os.RTLD_LAZY)\n\n    from torch._C import *  # noqa: F403\n\n    sys.setdlopenflags(old_flags)\n    del old_flags\n\nelse:\n    # Easy way.  You want this most of the time, because it will prevent\n    # C++ symbols from libtorch clobbering C++ symbols from other\n    # libraries, leading to mysterious segfaults.\n    #\n    # If building in an environment where libtorch_global_deps isn't available\n    # like parts of fbsource, but where RTLD_GLOBAL causes segfaults, you will\n    # want USE_RTLD_GLOBAL_WITH_LIBTORCH = False and USE_GLOBAL_DEPS = False\n    #\n    # See Note [Global dependencies]\n    if USE_GLOBAL_DEPS:\n        _load_global_deps()\n    from torch._C import *  # noqa: F403"
+        }
+      ]
+    },
+    {
+      "id": "variant_c",
+      "fact": "CpuPlatform attempts vllm._C on x86 with both AVX512 and AVX512-BF16 support, or on non-x86. ImportError is caught and warned. No actual CPU capability or load attempt was observed.",
+      "evidence": [
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 657,
+          "end_line": 672,
+          "excerpt": "    def import_kernels(cls) -> None:\n        if Platform.get_cpu_architecture() in (CpuArchEnum.X86,):\n            # Note: The lib name is _C_AVX2/AVX512, but the module name is _C.\n            # This will cause a exception \"dynamic module does define\n            # module export function\". But the library is imported\n            # successfully. So ignore the exception for now, until we find\n            # a solution.\n            ignored_msg = \"dynamic module does not define module export function\"\n            if torch.cpu._is_avx512_supported():\n                if torch.cpu._is_avx512_bf16_supported():\n                    try:\n                        import vllm._C  # noqa: F401\n                    except ImportError as e:\n                        logger.warning_once(\n                            \"Failed to import from vllm._C: %s\", repr(e)\n                        )"
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 689,
+          "end_line": 693,
+          "excerpt": "        else:\n            try:\n                import vllm._C  # noqa: F401\n            except ImportError as e:\n                logger.warning_once(\"Failed to import from vllm._C: %s\", repr(e))"
+        }
+      ]
+    },
+    {
+      "id": "variant_avx512",
+      "fact": "CpuPlatform attempts vllm._C_AVX512 on x86 with AVX512 but without AVX512-BF16 support. It suppresses the specific missing module export function ImportError and warns for other ImportErrors. The source comment that the library was imported is not a runtime observation or ABI qualification.",
+      "evidence": [
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 657,
+          "end_line": 680,
+          "excerpt": "    def import_kernels(cls) -> None:\n        if Platform.get_cpu_architecture() in (CpuArchEnum.X86,):\n            # Note: The lib name is _C_AVX2/AVX512, but the module name is _C.\n            # This will cause a exception \"dynamic module does define\n            # module export function\". But the library is imported\n            # successfully. So ignore the exception for now, until we find\n            # a solution.\n            ignored_msg = \"dynamic module does not define module export function\"\n            if torch.cpu._is_avx512_supported():\n                if torch.cpu._is_avx512_bf16_supported():\n                    try:\n                        import vllm._C  # noqa: F401\n                    except ImportError as e:\n                        logger.warning_once(\n                            \"Failed to import from vllm._C: %s\", repr(e)\n                        )\n                else:\n                    try:\n                        import vllm._C_AVX512  # noqa: F401\n                    except ImportError as e:\n                        if ignored_msg not in e.msg:\n                            logger.warning_once(\n                                \"Failed to import from vllm._C_AVX512: %s\", repr(e)\n                            )"
+        }
+      ]
+    },
+    {
+      "id": "variant_avx2",
+      "fact": "CpuPlatform attempts vllm._C_AVX2 on x86 without AVX512 support. It suppresses the same missing module export function ImportError and warns for other ImportErrors. A normal return cannot establish Python-module success, retained ELF mapping, registrations, or ABI.",
+      "evidence": [
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 657,
+          "end_line": 665,
+          "excerpt": "    def import_kernels(cls) -> None:\n        if Platform.get_cpu_architecture() in (CpuArchEnum.X86,):\n            # Note: The lib name is _C_AVX2/AVX512, but the module name is _C.\n            # This will cause a exception \"dynamic module does define\n            # module export function\". But the library is imported\n            # successfully. So ignore the exception for now, until we find\n            # a solution.\n            ignored_msg = \"dynamic module does not define module export function\"\n            if torch.cpu._is_avx512_supported():"
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 681,
+          "end_line": 688,
+          "excerpt": "            else:\n                try:\n                    import vllm._C_AVX2  # noqa: F401\n                except ImportError as e:\n                    if ignored_msg not in e.msg:\n                        logger.warning_once(\n                            \"Failed to import from vllm._C_AVX2: %s\", repr(e)\n                        )"
+        }
+      ]
+    },
+    {
+      "id": "other_extension_callers_absent",
+      "fact": "A complete textual scan of exactly the five authenticated Python sources finds zero fs_io_C and zero spinloop references. Their callers, activation conditions, and original reachability remain outside this source set. This is not proof the extensions are unused.",
+      "evidence": [],
+      "whole_source_scan": {
+        "sources": [
+          "torch/__init__.py",
+          "vllm/__init__.py",
+          "vllm/_custom_ops.py",
+          "vllm/platforms/__init__.py",
+          "vllm/platforms/cpu.py"
+        ],
+        "tokens": [
+          "fs_io_C",
+          "spinloop"
+        ],
+        "matches": {
+          "fs_io_C": 0,
+          "spinloop": 0
+        }
+      }
+    },
+    {
+      "id": "libgomp_preload_policy",
+      "fact": "CpuPlatform.check_and_update_config sets the worker method to spawn and, on supported Linux architectures with no libomp/libgomp/libiomp substring in existing LD_PRELOAD, searches torch.libs before torch/lib, takes the first glob candidate, and appends it to LD_PRELOAD. Glob order within each directory is not explicitly sorted. Torch is already imported in this module. Updating os.environ does not retroactively apply startup LD_PRELOAD to the current process; future exec inheritance and actual binding still need observation. Reaching this method is unproven here.",
+      "evidence": [
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 233,
+          "end_line": 239,
+          "excerpt": "    @classmethod\n    def check_and_update_config(cls, vllm_config: VllmConfig) -> None:\n        model_config = vllm_config.model_config\n\n        # Import lazily: vllm.triton_utils imports vllm.platforms.current_platform,\n        # which is still being resolved while this platform class is loading.\n        from vllm.triton_utils import HAS_TRITON"
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 426,
+          "end_line": 426,
+          "excerpt": "        os.environ[\"VLLM_WORKER_MULTIPROC_METHOD\"] = \"spawn\""
+        },
+        {
+          "source": "vllm/platforms/cpu.py",
+          "path": "/mnt/nvme/dory-loader-route-sources-r1-20261111/sources/vllm/platforms/cpu.py",
+          "sha256": "bfa74a5c08f4186b57a3bb83cf1c08fbe1bf35b5522c02020fc1d602dca12f50",
+          "start_line": 459,
+          "end_line": 502,
+          "excerpt": "        ld_preload_str = os.getenv(\"LD_PRELOAD\", \"\")\n        cpu_architecture = Platform.get_cpu_architecture()\n\n        if (\n            platform.system() == \"Linux\"\n            and cpu_architecture\n            in (\n                CpuArchEnum.ARM,\n                CpuArchEnum.POWERPC,\n                CpuArchEnum.X86,\n                CpuArchEnum.S390X,\n            )\n            and not (\n                \"libomp\" in ld_preload_str\n                or \"libgomp\" in ld_preload_str\n                or \"libiomp\" in ld_preload_str\n            )\n        ):\n            # We need to LD_PRELOAD PyTorch's libgomp, otherwise only\n            # one core will be properly utilized when we thread-bind\n            # See: https://github.com/vllm-project/vllm/issues/27369\n            # TODO: Remove once:\n            # https://github.com/pytorch/pytorch/issues/166087 is fixed\n\n            # We need to find the location of PyTorch's libgomp\n            torch_pkg = os.path.dirname(torch.__file__)\n            site_root = os.path.dirname(torch_pkg)\n            # Search both torch.libs and torch/lib - See:\n            # https://github.com/vllm-project/vllm/issues/30470\n            torch_libs_paths = [\n                os.path.join(site_root, \"torch.libs\"),\n                os.path.join(torch_pkg, \"lib\"),\n            ]\n            pytorch_libgomp_so_candidates = []\n            for torch_libs in torch_libs_paths:\n                pytorch_libgomp_so_candidates.extend(\n                    glob.glob(os.path.join(torch_libs, \"libgomp*.so*\"))\n                )\n            if pytorch_libgomp_so_candidates:\n                pytorch_libgomp_so = pytorch_libgomp_so_candidates[0]\n                if ld_preload_str:\n                    ld_preload_str += \":\"\n                ld_preload_str += pytorch_libgomp_so\n                os.environ[\"LD_PRELOAD\"] = ld_preload_str"
+        }
+      ]
+    }
+  ],
+  "mapping": [
+    {
+      "id": "V01",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_c"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V02",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_c"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V03",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_c"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V04",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx2"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V05",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx2"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V06",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx2"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V07",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx512"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V08",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx512"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V09",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "cpu_selection_conditional",
+        "torch_before_cpu_kernels",
+        "torch_native_routes",
+        "variant_avx512"
+      ],
+      "static_result": "Conditional CpuPlatform native import attempt and torch-before-kernel source order established; DT_NEEDED object choice remains unresolved.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D2: retain original entrypoint and CPU dispatch; identify whether this extension is actually attempted and resolve this exact needed object from loader evidence. Unselected variants remain unobserved, not failures or closed edges.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V10",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "torch_native_routes",
+        "other_extension_callers_absent"
+      ],
+      "static_result": "No direct extension caller in the five sources; its torch load order and activation remain unestablished.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D1: identify authenticated Python caller and activation condition; D2: observe only if reached by the original entrypoint. Do not force-import as original-run evidence.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V11",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "torch_native_routes",
+        "other_extension_callers_absent"
+      ],
+      "static_result": "No direct extension caller in the five sources; its torch load order and activation remain unestablished.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D1: identify authenticated Python caller and activation condition; D2: observe only if reached by the original entrypoint. Do not force-import as original-run evidence.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V12",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "torch_native_routes",
+        "other_extension_callers_absent"
+      ],
+      "static_result": "No direct extension caller in the five sources; its torch load order and activation remain unestablished.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D1: identify authenticated Python caller and activation condition; D2: observe only if reached by the original entrypoint. Do not force-import as original-run evidence.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "V13",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      "source_claims": [
+        "package_lazy_entry",
+        "torch_native_routes",
+        "other_extension_callers_absent"
+      ],
+      "static_result": "No direct extension caller in the five sources; its torch load order and activation remain unestablished.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "next_observation": "D1: identify authenticated Python caller and activation condition; D2: observe only if reached by the original entrypoint. Do not force-import as original-run evidence.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "G01",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libshm.so",
+        "needed": "libgomp.so.1",
+        "actual_selected_path": null,
+        "saved_search_tags": [
+          {
+            "tag": "RUNPATH",
+            "value": "$ORIGIN"
+          }
+        ],
+        "saved_candidates": [
+          "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+          "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+        ],
+        "candidate_payload_references_present": [],
+        "next": "Authenticate both finite candidates or justify exclusion, then establish actual selected object under original environment/load order."
+      },
+      "source_claims": [
+        "torch_native_routes",
+        "libgomp_preload_policy"
+      ],
+      "static_result": "A conditional future-worker preload policy is established, not the original selected libgomp. Saved RUNPATH=$ORIGIN and two candidate paths do not decide actual loading in the presence of environment/search-order and already-loaded objects.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "candidate_evidence": {
+        "torch_candidate": {
+          "event": "SITE_inventory",
+          "reference": {
+            "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+            "sha256": "dcb9bd5cc517b0a23cf5923864abeee11ee00ba11abe9b3089388f50f7ba4628",
+            "bytes": 2115417
+          },
+          "identity": {
+            "st_dev": 66304,
+            "st_ino": 6970585,
+            "st_mode": 33277,
+            "st_nlink": 1,
+            "st_size": 2115417,
+            "st_mtime_ns": 1794168509963375044,
+            "st_ctime_ns": 1794168509963375044
+          },
+          "provenance": {
+            "kind": "upstream_wheel_member",
+            "evidence": {
+              "package": "torch",
+              "member": "torch/lib/libgomp.so.1",
+              "archive_sha256": "dcb9bd5cc517b0a23cf5923864abeee11ee00ba11abe9b3089388f50f7ba4628"
+            }
+          }
+        },
+        "system_candidate": {
+          "target": {
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "archive_member": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "original_observed_reference": null,
+            "original_full_payload_hash_present": false
+          },
+          "member": {
+            "bytes": 298776,
+            "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+            "terminal": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+          },
+          "original_matches": null,
+          "current": {
+            "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "bytes": 298776,
+            "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc"
+          },
+          "current_identity": {
+            "dev": 66306,
+            "ino": 75924,
+            "mode": 33188,
+            "nlink": 1,
+            "size": 298776,
+            "mtime_ns": 1766181126000000000,
+            "ctime_ns": 1772166641706819124
+          },
+          "current_matches": true,
+          "new_observation_only": true
+        },
+        "interpretation": "Torch candidate has an original authenticated inventory/wheel-member reference. System candidate has authenticated current bytes only, with no original full payload hash. Neither establishes actual selection for libshm or libtorch_cpu."
+      },
+      "next_observation": "D2: record startup environment, load order, loader-resolved libgomp identity for this requesting DSO, and changes across any genuine worker exec. Observe selected bytes in the new run and keep that distinct from historical selection.",
+      "native_ABI_qualified": false
+    },
+    {
+      "id": "G02",
+      "original_gap": {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+        "needed": "libgomp.so.1",
+        "actual_selected_path": null,
+        "saved_search_tags": [
+          {
+            "tag": "RUNPATH",
+            "value": "$ORIGIN"
+          }
+        ],
+        "saved_candidates": [
+          "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+          "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+        ],
+        "candidate_payload_references_present": [],
+        "next": "Authenticate both finite candidates or justify exclusion, then establish actual selected object under original environment/load order."
+      },
+      "source_claims": [
+        "torch_native_routes",
+        "libgomp_preload_policy"
+      ],
+      "static_result": "A conditional future-worker preload policy is established, not the original selected libgomp. Saved RUNPATH=$ORIGIN and two candidate paths do not decide actual loading in the presence of environment/search-order and already-loaded objects.",
+      "status": "open_actual_loader_selection",
+      "actual_selected_path": null,
+      "candidate_evidence": {
+        "torch_candidate": {
+          "event": "SITE_inventory",
+          "reference": {
+            "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+            "sha256": "dcb9bd5cc517b0a23cf5923864abeee11ee00ba11abe9b3089388f50f7ba4628",
+            "bytes": 2115417
+          },
+          "identity": {
+            "st_dev": 66304,
+            "st_ino": 6970585,
+            "st_mode": 33277,
+            "st_nlink": 1,
+            "st_size": 2115417,
+            "st_mtime_ns": 1794168509963375044,
+            "st_ctime_ns": 1794168509963375044
+          },
+          "provenance": {
+            "kind": "upstream_wheel_member",
+            "evidence": {
+              "package": "torch",
+              "member": "torch/lib/libgomp.so.1",
+              "archive_sha256": "dcb9bd5cc517b0a23cf5923864abeee11ee00ba11abe9b3089388f50f7ba4628"
+            }
+          }
+        },
+        "system_candidate": {
+          "target": {
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "archive_member": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "original_observed_reference": null,
+            "original_full_payload_hash_present": false
+          },
+          "member": {
+            "bytes": 298776,
+            "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+            "terminal": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+          },
+          "original_matches": null,
+          "current": {
+            "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "bytes": 298776,
+            "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc"
+          },
+          "current_identity": {
+            "dev": 66306,
+            "ino": 75924,
+            "mode": 33188,
+            "nlink": 1,
+            "size": 298776,
+            "mtime_ns": 1766181126000000000,
+            "ctime_ns": 1772166641706819124
+          },
+          "current_matches": true,
+          "new_observation_only": true
+        },
+        "interpretation": "Torch candidate has an original authenticated inventory/wheel-member reference. System candidate has authenticated current bytes only, with no original full payload hash. Neither establishes actual selection for libshm or libtorch_cpu."
+      },
+      "next_observation": "D2: record startup environment, load order, loader-resolved libgomp identity for this requesting DSO, and changes across any genuine worker exec. Observe selected bytes in the new run and keep that distinct from historical selection.",
+      "native_ABI_qualified": false
+    }
+  ],
+  "next_diagnostic": [
+    {
+      "id": "D1",
+      "kind": "finite_source_followup_proposal_only",
+      "purpose": "Fill the few caller/flag holes before a native diagnostic.",
+      "scope": [
+        "Authenticate and read torch/_utils_internal.py, vllm/env_override.py, and relevant vllm/envs.py definitions without imports; use the existing original entrypoint/launch metadata to identify the real import chain.",
+        "Locate fs_io_C and spinloop callers within the already authenticated finite vLLM wheel Python-member list; source-only search with explicit file/byte bounds, then collect only matching source files. Do not scan model/raw/archive payloads.",
+        "Only if the original selection can choose ZenCpuPlatform, authenticate its source before applying CpuPlatform dispatch conclusions."
+      ],
+      "stop_condition": "Produce exact caller lines, package flags, and original-entrypoint stage list, or report unresolved source membership without guessing."
+    },
+    {
+      "id": "D2",
+      "kind": "finite_native_observation_proposal_only",
+      "purpose": "Observe actual dependency selection along the original entrypoint, with no model run or performance claim.",
+      "bounds_proposed": {
+        "fresh_interpreter_runs": 1,
+        "timeout_seconds": 120,
+        "loader_trace_cap_bytes": 33554432,
+        "model_weights_loaded": false,
+        "generation_requests": 0,
+        "forced_alternative_cpu_variants": false
+      },
+      "method": [
+        "Parent designs and admits a separate serial diagnostic after source review; this report does not authorize or launch it.",
+        "Reuse the original interpreter, package identities, entrypoint/import order, and environment. Record relevant values at process startup, including LD_PRELOAD, LD_LIBRARY_PATH, TORCH_USE_RTLD_GLOBAL, VLLM_TARGET_DEVICE, and actual PyTorch flags; redact unrelated secrets.",
+        "Record a bounded native loader files/libs trace from startup and module/native-object identities at import milestones. Changing loader tracing is diagnostic instrumentation and must be recorded; do not alter lookup paths, preload a chosen candidate, or force CPU feature flags.",
+        "Record actual selected platform and CPU capability branch, extension import outcomes (including swallowed errors), requester-to-provider dependency resolution, and any genuine worker exec inherited preload state. Absence from sys.modules or mere mapped-library co-presence alone cannot establish the edge.",
+        "Bind newly observed selected objects to path/device/inode and complete payload hashes under parent review. The library existence/hash references already saved are candidates, not original load-selection evidence.",
+        "Stop on the first bounded import failure or once applicable imports are complete. Do not repair a failing environment in place. If exact original reachability requires model initialization, stop and return a separate finite follow-up proposal."
+      ],
+      "interpretation": [
+        "Only actually reached requesting objects can gain new-run dependency-selection evidence. Do not force-import the other AVX variants merely to fill inventory rows.",
+        "An unselected variant is not a failure, and lack of a load event is not proof of original-run absence. Mark not observed in this diagnostic, retaining its static edge.",
+        "New diagnostic selection cannot retroactively prove historical original selection without an original runtime trace.",
+        "Successful ELF selection or Python import does not qualify native ABI behavior, model numerical correctness, full serving behavior, cold-cache/long-decode/slot-reuse checks, or speedup."
+      ]
+    }
+  ],
+  "validation": {
+    "all_five_saved_sources_sha256_verified": true,
+    "all_five_ast_parsed_without_import": true,
+    "all_input_metadata_sha256_verified": true,
+    "all_15_original_rows_preserved_exactly": true,
+    "all_citations_bounded_to_saved_source": true
+  },
+  "actions": {
+    "target_packages_imported": false,
+    "target_source_executed": false,
+    "native_or_model_payload_read": false,
+    "raw_gzip_archive_payload_read": false,
+    "process_lock_service_inspection": false,
+    "installed_or_frozen_source_changed": false,
+    "runtime_spec_admission_terminal_handoff_created": false
+  },
+  "loader_selection_established": false,
+  "native_ABI_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

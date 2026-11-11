@@ -1,0 +1,867 @@
+{
+  "schema": "dory_remaining_gaps_after_package_and_cache_v1",
+  "created_at": "2026-11-11T16:01:35.662174+00:00",
+  "original_classification": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r5-gap-classification-20261111-v1.json",
+    "sha256": "e902d47f1e0e580025480a0e32da7e75db3b603548e1915167722e113e9b1d03"
+  },
+  "actual_replay_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-actual-exit-20261111-v1.json",
+    "sha256": "f9c26af51376ec7d652e12f4cede239e5c1aa05b6065e55de412e9a67ebe361a"
+  },
+  "recorder_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-recorder-actual-exit-20261111-v1.json",
+    "sha256": "94423c9a7d83f9619163268fce12f83f134b1f7330ea0485ab69f908649728ac"
+  },
+  "package_result": {
+    "path": "/mnt/nvme/dory-serial-inventory-deb-replay-r1-20261111/packages/sources-result.json",
+    "bytes": 31097,
+    "sha256": "594f9c3fa05579fa1da9af0a486ca252d988ff16e05041bd05b1b18237574a14"
+  },
+  "closed_system_byte_origins": [
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+          "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5",
+          "bytes": 163240
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9"
+          ],
+          "returncode": 0,
+          "stdout": "libtcmalloc-minimal4:amd64: /usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9\n"
+        },
+        "saved_package": "libtcmalloc-minimal4",
+        "saved_version": {
+          "version": "2.9.1-0ubuntu3",
+          "architecture": "amd64"
+        },
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libtcmalloc-minimal4",
+      "version": "2.9.1-0ubuntu3",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libtcmalloc-minimal4.deb",
+        "bytes": 98202,
+        "sha256": "f0953cb215ed943429951920f5b88b4c29a6ef0503207ddc4c724772538f06af"
+      },
+      "member": {
+        "bytes": 163240,
+        "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5",
+        "terminal": "usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "bytes": 163240,
+        "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+          "bytes": 240936
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 240936,
+        "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+        "terminal": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "bytes": 240936,
+        "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+          "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+          "bytes": 21448
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libpthread.so.0"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libpthread.so.0\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 21448,
+        "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+        "terminal": "lib/x86_64-linux-gnu/libpthread.so.0"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+        "bytes": 21448,
+        "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+          "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499",
+          "bytes": 14432
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libdl.so.2"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libdl.so.2\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 14432,
+        "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499",
+        "terminal": "lib/x86_64-linux-gnu/libdl.so.2"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+        "bytes": 14432,
+        "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+          "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc",
+          "bytes": 14432
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libutil.so.1"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libutil.so.1\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 14432,
+        "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc",
+        "terminal": "lib/x86_64-linux-gnu/libutil.so.1"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+        "bytes": 14432,
+        "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+          "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+          "bytes": 940560
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libm.so.6"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libm.so.6\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 940560,
+        "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+        "terminal": "lib/x86_64-linux-gnu/libm.so.6"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "bytes": 940560,
+        "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+          "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb",
+          "bytes": 14664
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/librt.so.1"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/librt.so.1\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 14664,
+        "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb",
+        "terminal": "lib/x86_64-linux-gnu/librt.so.1"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+        "bytes": 14664,
+        "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+          "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+          "bytes": 2220400
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libc.so.6"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libc.so.6\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "bytes": 3234380,
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "member": {
+        "bytes": 2220400,
+        "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+        "terminal": "lib/x86_64-linux-gnu/libc.so.6"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "bytes": 2220400,
+        "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+          "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+          "bytes": 2260296
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30"
+          ],
+          "returncode": 0,
+          "stdout": "libstdc++6:amd64: /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30\n"
+        },
+        "saved_package": "libstdc++6",
+        "saved_version": {
+          "version": "12.3.0-1ubuntu1~22.04.3",
+          "architecture": "amd64"
+        },
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libstdc++6",
+      "version": "12.3.0-1ubuntu1~22.04.3",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libstdc++6.deb",
+        "bytes": 698608,
+        "sha256": "29ef3d289b272704b75141906c8f683db0f2bdb0942061366691333bfb289bdc"
+      },
+      "member": {
+        "bytes": 2260296,
+        "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+        "terminal": "usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "bytes": 2260296,
+        "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+          "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+          "bytes": 125488
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1"
+          ],
+          "returncode": 1,
+          "stdout": "dpkg-query: no path found matching pattern /usr/lib/x86_64-linux-gnu/libgcc_s.so.1\n"
+        },
+        "saved_package": null,
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libgcc-s1",
+      "version": "12.3.0-1ubuntu1~22.04.3",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libgcc-s1.deb",
+        "bytes": 53896,
+        "sha256": "d383e642d83263147f7b4b69fb92cf1036e5246c6be3accf10b77f986684589a"
+      },
+      "member": {
+        "bytes": 125488,
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+        "terminal": "lib/x86_64-linux-gnu/libgcc_s.so.1"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "bytes": 125488,
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    },
+    {
+      "original_gap": {
+        "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "observed_reference": {
+          "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+          "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c",
+          "bytes": 48152
+        },
+        "ownership_query": {
+          "argv": [
+            "/usr/bin/dpkg-query",
+            "-S",
+            "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0"
+          ],
+          "returncode": 0,
+          "stdout": "libnuma1:amd64: /usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0\n"
+        },
+        "saved_package": "libnuma1",
+        "saved_version": null,
+        "source_authority_bound": false,
+        "next": "Authenticate exact package archive and selected member; canonical ownership failures need bounded alias/package metadata check first."
+      },
+      "package": "libnuma1",
+      "version": "2.0.14-3ubuntu2",
+      "archive": {
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libnuma1.deb",
+        "bytes": 22478,
+        "sha256": "0721c89001fbbd1ada23e89da5d60e762763c1a7b3dc814a2e9a518480a8043d"
+      },
+      "member": {
+        "bytes": 48152,
+        "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c",
+        "terminal": "usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0"
+      },
+      "current": {
+        "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "bytes": 48152,
+        "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c"
+      },
+      "byte_origin_closed": true,
+      "loader_selection_established": false
+    }
+  ],
+  "remaining": {
+    "vllm_missing_loader_edges": [
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libc10.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libc10.so",
+          "sha256": "9c142dbe5f1c5291e57605586bf22eaa07cd27da720825b1cf02fc2f6eb8047e",
+          "bytes": 1553824
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so",
+        "needed": "libtorch_cpu.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+          "sha256": "cc3d0101c16504ba021abe6794c98122f744ec8cf077bd0178f630f320b24aeb",
+          "bytes": 438232064
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so",
+        "needed": "libtorch.so",
+        "actual_selected_path": null,
+        "saved_search_tags": [],
+        "saved_candidates": [],
+        "existing_authenticated_reference": {
+          "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch.so",
+          "sha256": "28b3d3926e0674eda7dcdf26c27dfd05cb455d681d11cb84fdbf7e0df72f3f7b",
+          "bytes": 8032
+        },
+        "next": "Establish exact original torch-before-vllm load order and actual loader binding; file existence is insufficient."
+      }
+    ],
+    "torch_ambiguous_libgomp_edges": [
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libshm.so",
+        "needed": "libgomp.so.1",
+        "actual_selected_path": null,
+        "saved_search_tags": [
+          {
+            "tag": "RUNPATH",
+            "value": "$ORIGIN"
+          }
+        ],
+        "saved_candidates": [
+          "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+          "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+        ],
+        "candidate_payload_references_present": [],
+        "next": "Authenticate both finite candidates or justify exclusion, then establish actual selected object under original environment/load order."
+      },
+      {
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so",
+        "needed": "libgomp.so.1",
+        "actual_selected_path": null,
+        "saved_search_tags": [
+          {
+            "tag": "RUNPATH",
+            "value": "$ORIGIN"
+          }
+        ],
+        "saved_candidates": [
+          "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+          "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+        ],
+        "candidate_payload_references_present": [],
+        "next": "Authenticate both finite candidates or justify exclusion, then establish actual selected object under original environment/load order."
+      }
+    ]
+  },
+  "original_gaps": 30,
+  "byte_origin_gaps_closed": 11,
+  "remaining_loader_and_cache_gaps": 15,
+  "libgomp_new_observation_only": {
+    "target": {
+      "observed_path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "archive_member": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "original_observed_reference": null,
+      "original_full_payload_hash_present": false
+    },
+    "member": {
+      "bytes": 298776,
+      "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+      "terminal": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+    },
+    "original_matches": null,
+    "current": {
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "bytes": 298776,
+      "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc"
+    },
+    "current_identity": {
+      "dev": 66306,
+      "ino": 75924,
+      "mode": 33188,
+      "nlink": 1,
+      "size": 298776,
+      "mtime_ns": 1766181126000000000,
+      "ctime_ns": 1772166641706819124
+    },
+    "current_matches": true,
+    "new_observation_only": true
+  },
+  "native_ABI_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "previous": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-remaining-gaps-after-package-replay-20261111-v1.json",
+    "sha256": "fdea581b6127e48774ce235cc5a3969eb922c99ee6581a49a0cabc177dea8bb0"
+  },
+  "closed_current_timestamp_caches": [
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc",
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+        "sha256": "78c4744d407690f321565488710b5aaf6486b5afa8d185637aa1e7633ab59cd8",
+        "bytes": 5884
+      },
+      "cache_identity": {
+        "st_dev": 66306,
+        "st_ino": 8546489,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 5839,
+        "st_mtime_ns": 1793420286419702787,
+        "st_ctime_ns": 1793420286419702787
+      },
+      "header_hex": "cb0d0d0a00000000f46be56afc160000",
+      "bytes_read": 16,
+      "full_payload_authenticated": false,
+      "prior_archive_comparison": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc",
+        "status": "size_mismatch",
+        "expected_bytes": 5796,
+        "actual_bytes": 5839,
+        "member": "python/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc",
+        "archive_bytes": 5796,
+        "archive_sha256": "47a484d676edf61b5c6f387352fa62dff592c29d13349ea39c620f2e182f175a"
+      },
+      "prior_size_difference": 43,
+      "next": "Before target startup, compare complete cache bytes with deterministic compile of verified source using authenticated matching interpreter in a separate cache-isolated verifier."
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc",
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+        "sha256": "6fdcc49ba23a0203ae6cf28e608f8e6297d7c4d77d52e651db3cb49b9564c6d2",
+        "bytes": 15677
+      },
+      "cache_identity": {
+        "st_dev": 66306,
+        "st_ino": 8542148,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 12472,
+        "st_mtime_ns": 1793420286421702743,
+        "st_ctime_ns": 1793420286421702743
+      },
+      "header_hex": "cb0d0d0a00000000f46be56a3d3d0000",
+      "bytes_read": 16,
+      "full_payload_authenticated": false,
+      "prior_archive_comparison": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc",
+        "status": "size_mismatch",
+        "expected_bytes": 12429,
+        "actual_bytes": 12472,
+        "member": "python/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc",
+        "archive_bytes": 12429,
+        "archive_sha256": "7d1fed0a9392afe36579775908828c504e09d021d60bc436fcd6490d72220b3c"
+      },
+      "prior_size_difference": 43,
+      "next": "Before target startup, compare complete cache bytes with deterministic compile of verified source using authenticated matching interpreter in a separate cache-isolated verifier."
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc",
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+        "sha256": "ba0cac060269583523ca9506473a755203037c57d466a11aa89a30a5f6756f3d",
+        "bytes": 1005
+      },
+      "cache_identity": {
+        "st_dev": 66306,
+        "st_ino": 8542149,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2211,
+        "st_mtime_ns": 1793420286421702743,
+        "st_ctime_ns": 1793420286421702743
+      },
+      "header_hex": "cb0d0d0a00000000f46be56aed030000",
+      "bytes_read": 16,
+      "full_payload_authenticated": false,
+      "prior_archive_comparison": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc",
+        "status": "size_mismatch",
+        "expected_bytes": 2168,
+        "actual_bytes": 2211,
+        "member": "python/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc",
+        "archive_bytes": 2168,
+        "archive_sha256": "2094aa5de2b07798f347559cccad11d13c5beedadf3670eb2cd68ea1c379bdfd"
+      },
+      "prior_size_difference": 43,
+      "next": "Before target startup, compare complete cache bytes with deterministic compile of verified source using authenticated matching interpreter in a separate cache-isolated verifier."
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/__pycache__/_sysconfigdata__linux_x86_64-linux-gnu.cpython-312.pyc",
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py",
+        "sha256": "cc3e58175aff8e0b034e55acbbf277613cfab33913cf904bb6c2daff2d985d5f",
+        "bytes": 51256
+      },
+      "cache_identity": {
+        "st_dev": 66306,
+        "st_ino": 8808443,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 63633,
+        "st_mtime_ns": 1793420289251640459,
+        "st_ctime_ns": 1793420289251640459
+      },
+      "header_hex": "cb0d0d0a00000000f46be56a38c80000",
+      "bytes_read": 16,
+      "full_payload_authenticated": false,
+      "prior_archive_comparison": null,
+      "prior_size_difference": null,
+      "next": "Before target startup, compare complete cache bytes with deterministic compile of verified source using authenticated matching interpreter in a separate cache-isolated verifier."
+    }
+  ],
+  "timestamp_cache_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-four-timestamp-caches-r2-saved-audit-20261111-v1.json",
+    "sha256": "c3b1c6d0b42c60e5b0c4159b3758d167411bd313c2c3f30c775e43558d328910"
+  },
+  "timestamp_cache_audit_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-four-timestamp-caches-r2-audit-actual-exit-20261111-v1.json",
+    "sha256": "a68d9b86610a2cdbae212b58119ed1c6561fc9c79168b7f2d8ef1eb6fc59c8ed"
+  },
+  "cache_derivation_gaps_closed": 4
+}
