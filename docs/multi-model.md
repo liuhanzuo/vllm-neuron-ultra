@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+[MiniCPM5 原生依赖清单与重复校验修正：28 项独立检查通过，真实运行待完成](minicpm5-native-source-fix-20261111.md)
+
 [2026-11-11 MiniCPM5 收尾失败与 LFM3、DeepSeek 诊断接入](model-diagnostics-20261111.md)：MiniCPM5 写出 24 个检查点的 72 份结果后，因已加载源码漏项退出 1，原进程已排空，严格数据审核与比较尚未通过。LFM3 串行诊断入口及 DeepSeek 独立观测、原始数据一致性检查已完成源码验证；实际运行仍待执行，没有新增推理提速。
 
 [2026-11-11 小模型候选复查](recent-small-models-20261111.md)：19 个官方发布者、293 个仓库的有限复查完成。保留全部 15 个模型家族；新增观察 MiniCPM-OCR 1.0 的 OCR 专项与低热度 ZoomGain 视觉变体，区分独立生成模型、草稿头、评分模型和机器人策略。本轮没有新增本机推理提速。
