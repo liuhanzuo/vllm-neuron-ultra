@@ -27,7 +27,7 @@ of the merged branch is pending. Use the recorded source commits for reproducing
 the existing measured comparisons; new merged source identities need new
 artifacts and a new full comparison.
 
-[2026-11-11 MiniCPM5 启动开销与逐层比较准备](minicpm5-startup-and-comparison-20261111.md)：启动校验存在重复完整计划摘要与目录构建；独立只读快照原型通过 9 项复核，尚未接入实际运行。逐层比较器修复了长度 128 与头维度 128 的歧义，11 项合成测试及 6 项独立控制通过；完整合成报告已无损封装到 627,301 字节，7 项测试及 4 项独立控制通过，保持原 2 MiB 上限；真实数据接入仍待完成。当前原生采集继续，未增加模型提速结论。
+[2026-11-11 MiniCPM5 启动开销与逐层比较准备](minicpm5-startup-and-comparison-20261111.md)：启动校验存在重复完整计划摘要与目录构建；独立只读快照原型通过 9 项复核，后继运行器源码接入又通过 7 项独立集成复核，尚未实际启动。逐层比较器修复了长度 128 与头维度 128 的歧义，11 项合成测试及 6 项独立控制通过；完整合成报告已无损封装到 627,301 字节，7 项测试及 4 项独立控制通过，保持原 2 MiB 上限；真实数据接入仍待完成。当前原生采集继续，未增加模型提速结论。
 
 ## Install and select a model
 
