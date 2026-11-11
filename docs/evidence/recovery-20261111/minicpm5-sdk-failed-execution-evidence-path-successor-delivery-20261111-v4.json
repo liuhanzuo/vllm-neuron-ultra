@@ -1,0 +1,87 @@
+{
+  "schema": "minicpm5_sdk_failed_execution_evidence_path_successor_delivery_v4",
+  "author": "/root/dory_probe_mini_failure_review",
+  "created_at": "2026-11-11T03:13:13.320211+00:00",
+  "source_only": true,
+  "status": "complete_path_only_source_successor_pending_root_review",
+  "predecessor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_failed_execution_evidence_v3.py",
+    "sha256": "c91b747bc61aba68cfb54f2ccbd74bc874d952a1b3937bd01212456057f5ffc0",
+    "bytes": 17491
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_failed_execution_evidence_v4.py",
+    "sha256": "c93b8f01725d773a40ae0d1ed7dcc60578a575db6f7ec5b506e4044ec7dac494",
+    "bytes": 17491
+  },
+  "tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_failed_execution_evidence_v4.py",
+    "sha256": "59f8461e29524c789b0506d5ed910454581f3bea5f40ed77f6667adf92aa899d",
+    "bytes": 18569
+  },
+  "preservation_tests": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_failed_execution_evidence_path_upgrade_v4.py",
+    "sha256": "b62632d80bf66d2fee2adc658ee98b52597b6515515de7befda1012d00f153c7",
+    "bytes": 3361
+  },
+  "changes": [
+    "Only RUNNER/WORKER/AUDITOR paths and runner version docstring updated from v3 to v4.",
+    "All39 semantic test bodies are exact copies; only helper import targets v4.",
+    "Three preservation tests remain: exact path-only helper diff; exact test-copy/import change and39 count; AST parsing and expected integration import/constant paths.",
+    "Integration AST check uses existing runner_v4/worker_v4/auditor_v4/core_v3 directly; it does not depend on an unfinished delivery or import these runtime modules."
+  ],
+  "integration_source_observation": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py",
+      "sha256": "ec750658ead10d4f4c1a4013ef1d86c9d0788c92fb9347d236773e3c3722cfa1",
+      "bytes": 35511
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py",
+      "sha256": "9d9d50944c19383f0bbf29bd633b70746193c112bd0e16b444c11c4fd8c2becb",
+      "bytes": 8007
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_sdk_batch_layout_result_v4.py",
+      "sha256": "3f590b83c7b8c334b9d76bcabb95d5d53d3b27301b1feede11d6c8da5f8b9fe7",
+      "bytes": 14405
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v3.py",
+      "sha256": "4818c97fdd98dbe997fe9b1ccef444c92105cf7676840eca784e1cb18bf4a7fd",
+      "bytes": 9482
+    }
+  ],
+  "integration_observation_is_not_source_admission": true,
+  "exact_source_diff": "--- minicpm5_sdk_failed_execution_evidence_v3.py\n+++ minicpm5_sdk_failed_execution_evidence_v4.py\n@@ -12,9 +12,9 @@\n \n ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')\n Q = ROOT/'research'\n-RUNNER = ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py'\n-WORKER = ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py'\n-AUDITOR = Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v3.py'\n+RUNNER = ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py'\n+WORKER = ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py'\n+AUDITOR = Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v4.py'\n PYTHON = '/home/ubuntu/venvs/vllm_neuron/bin/python'\n GROUP = '/user.slice/user-1000.slice/user@1000.service/app.slice/'\n SCHEMA = 'minicpm5_sdk_actual_failed_execution_evidence_v1'\n@@ -145,7 +145,7 @@\n def record_failure(runner, phase, live_ref, session, chunk, exit_code, recorder, lock):\n     \"\"\"Return failed-execution evidence or reject while caller retains its lock.\n \n-    runner is the original pinned sdk cpu runner_v3 module. recorder and lock\n+    runner is the original pinned sdk cpu runner_v4 module. recorder and lock\n     come from the caller's actual original serial-lock acquisition. This helper\n     never acquires/releases that lock or terminates a process. It writes nothing.\n     \"\"\"\n",
+  "actual_test_result": {
+    "semantic_tests": 39,
+    "preservation_tests": 3,
+    "total": 42,
+    "passed": 42,
+    "actual_tool_chunk": "54c68c",
+    "actual_exit_code": 0,
+    "reported_elapsed_seconds": 0.107,
+    "native_and_runtime_modules_absent": true
+  },
+  "unchanged_semantics": [
+    "Failure-only output with existing v1 result schema.",
+    "Original v2 spec/review/admission schemas retained.",
+    "Null and incomplete child identities rejected; legitimate partial owner evidence retained.",
+    "No service launch/stop/kill, lock acquire/release, model/native import, success promotion or successor admission.",
+    "Same metadata caps, same exact interpreter spelling, same mandatory original drain verification."
+  ],
+  "rerun": {
+    "cwd": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "command": "python3 -B - <<'PY'\nimport os,resource,sys,unittest\nos.sched_setaffinity(0,{6});os.nice(19)\nresource.setrlimit(resource.RLIMIT_AS,(1024**3,)*2);resource.setrlimit(resource.RLIMIT_CPU,(45,50))\nsys.path.insert(0,'research')\nimport check_minicpm5_sdk_failed_execution_evidence_v4 as semantic\nimport check_minicpm5_sdk_failed_execution_evidence_path_upgrade_v4 as preservation\nsuite=unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromModule(semantic),unittest.defaultTestLoader.loadTestsFromModule(preservation)])\nresult=unittest.TextTestRunner(verbosity=2).run(suite)\nassert not {'torch','numpy','torch_neuronx','neuronxcc','vllm'}&set(sys.modules)\nassert 'minicpm5_layer1_sdk_batch_layout_cpu_runner_v4' not in sys.modules\nraise SystemExit(0 if result.wasSuccessful() else 1)\nPY"
+  },
+  "old_frozen_files_unchanged": true,
+  "builder_edited": false,
+  "production_state_changed": false,
+  "native_imported": false,
+  "model_payload_bytes_read": 0,
+  "actual_services_or_lock_operations": false,
+  "automatic_successor_release": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

@@ -1,0 +1,238 @@
+--- research/minicpm5_layer1_sdk_batch_layout_completion_v2.py
++++ research/minicpm5_layer1_sdk_batch_layout_completion_v3.py
+@@ -88,6 +88,41 @@
+     return owners
+ 
+ 
++def original88_bound(cs,load):
++    """Read the real original88 input_plan and validate its accepted transform.
++
++    JSON metadata only; no bundle, physical drain, source/payload or runtime IO.
++    input_plan carries a canonical hash in addition to its path/file hash, so
++    only its path/file hash is sent to the existing exact JSON reader.
++    """
++    from research import prepare_minicpm5_original88_python_trace_20261107_v3 as science_source
++    final=load(cs['finalization']);final_exit=load(cs['finalizer_exit'])
++    bound_spec=load(final['references']['execution_spec']);catalog=load(cs['catalog'])
++    require(bound_spec['schema']=='minicpm5_original88_python_trace_execution_spec_v1'
++        and bound_spec['root_finalized']is True
++        and bound_spec['science_handoff']==science_source.SCIENCE
++        and bound_spec['scientific_review']==science_source.ACCEPT,
++        'Actual finalized original88 execution and accepted scientific transform')
++    input_ref=bound_spec['input_plan']
++    require(type(input_ref)is dict and set(input_ref)=={'path','sha256','canonical_sha256'}
++        and type(input_ref['canonical_sha256'])is str
++        and re.fullmatch('[a-f0-9]{64}',input_ref['canonical_sha256']),
++        'Exact original88 input_plan reference and canonical digest')
++    bound_plan=load({key:input_ref[key]for key in ('path','sha256')})
++    require(science_source.digest(bound_plan)==input_ref['canonical_sha256']
++        and bound_plan['output_root']==bound_spec['output_root'],
++        'Original88 input values and actual execution namespace')
++    original=load(science_source.ORIGINAL)
++    science=load(bound_spec['science_handoff']);accepted=load(bound_spec['scientific_review'])
++    require(science_source.validate_namespace_equivalence(original,bound_plan,science,accepted)is True,
++        'Exact accepted namespace/source transform retains all7357 inputs,88 contexts and scientific gates')
++    require(final['passed']is True and final['all_planned_launches_accounted_for']is True
++        and final['all_groups_drained']is True and final['finalizer_owner']==final_exit['owner']
++        and final_exit['actual_exit_observed']is True and final_exit['actual_exit_code']==0,
++        'Original finalizer metadata remains complete and actually exited')
++    return dict(spec=bound_spec,catalog=catalog,plan=bound_plan,finalizer_owner=final_exit['owner'])
++
++
+ def completed(binding,read,guard):
+     require_complete_binding(binding)
+     require(callable(read)and callable(guard),'Authenticated reader and explicit serial/preparation guard')
+@@ -122,15 +157,9 @@
+         'Actual r12 was admitted after these exact model and audit exits')
+     for source_map in (n_done['source_sha256'],current['spec']['source_sha256'],collector['saved_audit_spec']['source_sha256'],native['spec']['source_sha256']):
+         merge_sources(pins,source_map)
+-    cs=collector['collector_spec'];final=load(cs['finalization']);final_exit=load(cs['finalizer_exit'])
+-    bound_spec=load(final['references']['execution_spec']);catalog=load(cs['catalog']);bound_plan=load(bound_spec['plan'])
+-    require(final['passed']is True and final['all_planned_launches_accounted_for']is True
+-        and final['all_groups_drained']is True and final['finalizer_owner']==final_exit['owner']
+-        and final_exit['actual_exit_observed']is True and final_exit['actual_exit_code']==0,
+-        'Original finalizer metadata remains complete and actually exited')
+-    bound=dict(spec=bound_spec,catalog=catalog,plan=bound_plan,finalizer_owner=final_exit['owner'])
++    bound=original88_bound(collector['collector_spec'],load)
+     co=[*collector['collector_chain']['owners'],collector['saved_audit_owner'],*collector.get('additional_owners',[])]
+-    owners=exact_owners(n_done['owners'],current['owners'],native['owners'],co,[final_exit['owner']])
++    owners=exact_owners(n_done['owners'],current['owners'],native['owners'],co,[bound['finalizer_owner']])
+     guard()
+     return dict(binding=copy.deepcopy(binding),terminal_handoff=terminal,nemotron=n_done,
+         collector=collector,native=native,current_history=current,bound=bound,owners=owners,
+--- minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py
++++ minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py
+@@ -29,7 +29,7 @@
+ from research import minicpm5_layer1_after_native_cache_v1 as official
+ from research import minicpm5_layer1_after_official_history_v1 as latest_completed
+ from research.minicpm5_layer1_current_source_view_v1 import current_source_view
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v3 as latest
+ from research.minicpm5_layer1_drain_hold_v1 import retain_until_drained
+ OBSERVED_EXIT=dict(path='/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json',
+  sha256='727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff')
+@@ -77,7 +77,7 @@
+         'Final concrete runtime source review')
+     same(review['spec'],spec_ref,'Exact reviewed runtime spec')
+     same(review['source_sha256'],spec['source_sha256'],'Complete reviewed source closure')
+-    same([spec['runner'],spec['worker']],[SELF,str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py')],
++    same([spec['runner'],spec['worker']],[SELF,str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py')],
+          'Only new collector runner and worker')
+     partition=source_auth.classify(spec['source_sha256'],spec['source_contract'])
+     source_auth.verify_text_sources(partition,guard)
+@@ -395,7 +395,7 @@
+     context=RuntimeContext(plan,digest(plan),permit,guard);context.sdk_guard=guard
+     context.verify_loaded_sources=lambda:verify_loaded_sources(plan,guard)
+     context.verify_sources();guard.mark_sources_verified(context);guard.full('after_source_verification')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_worker_v3 as worker
++    import minicpm5_layer1_sdk_batch_layout_cpu_worker_v4 as worker
+     try:
+         verify_loaded_sources(plan,guard)
+         result=worker.run(context,root/('cpu-rank'+str(rank_id)))
+--- minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py
++++ minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py
+@@ -1,7 +1,7 @@
+ """Partition-aware TP2 SDK batch/layout v2 worker; exact outer native receipt inherited."""
+ import importlib
+ from pathlib import Path
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v3 as latest
+ from research import minicpm5_layer1_sdk_batch_layout_cpu_driver_v1 as driver
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ from minicpm5_original88_decode_mask_analysis_v1 import p
+--- research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v2.py
++++ research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v3.py
+@@ -6,12 +6,12 @@
+ """
+ from pathlib import Path
+ import re
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v3 as latest
+ from research.nemotron9b_r12_current_history_completion_v1 import handle,same_owner
+ require=latest.require
+ ROOT=latest.ROOT
+-RUNNER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py')
+-WORKER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py')
++RUNNER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py')
++WORKER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py')
+ PYTHON='/home/ubuntu/venvs/vllm_neuron/bin/python'
+ SCHEMA='minicpm5_layer1_sdk_batch_layout'
+ GROUP='/user.slice/user-1000.slice/user@1000.service/app.slice/'
+--- research/prepare_minicpm5_layer1_sdk_batch_layout_v6.py
++++ research/prepare_minicpm5_layer1_sdk_batch_layout_v7.py
+@@ -14,7 +14,7 @@
+ import re
+ import sys
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path[:0]=[str(ROOT),str(Q)]
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v3 as latest
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ require=latest.require
+@@ -64,8 +64,8 @@
+     plan.update(output_root=str(locations['output']),latest_completion=copy.deepcopy(done['binding']),
+         layer1_sdk_batch_layout=copy.deepcopy(current['binding']),source_contract=copy.deepcopy(contract_ref))
+     spec.update(schema='minicpm5_layer1_sdk_batch_layout_cpu_execution_spec_v2',
+-        runner=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py'),
+-        worker=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py'),
++        runner=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py'),
++        worker=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py'),
+         output_root=plan['output_root'],source_sha256=copy.deepcopy(plan['source_sha256']),source_contract=copy.deepcopy(contract_ref),
+         unit=locations['unit'],master_port=master_port,latest_completion=copy.deepcopy(done['binding']),
+         completed_current_history=copy.deepcopy(current['binding']))
+@@ -119,14 +119,21 @@
+         Q/'record_minicpm5_layer1_sdk_batch_layout_audit_exit_v3.py',
+         Q/'prepare_minicpm5_layer1_sdk_batch_layout_v5.py',
+         Q/'check_minicpm5_after_nemotron_r12_recovered_failure_v1.py',
+-        Q/'check_minicpm5_layer1_sdk_batch_layout_recovered_closure_v1.py']
++        Q/'check_minicpm5_layer1_sdk_batch_layout_recovered_closure_v1.py',
++        Q/'prepare_minicpm5_layer1_sdk_batch_layout_v6.py',
++        ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v4.py',
++        ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v4.py',
++        Q/'record_minicpm5_layer1_sdk_batch_layout_exit_v3.py',
++        Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v4.py',
++        Q/'record_minicpm5_layer1_sdk_batch_layout_audit_exit_v4.py',
++        Q/'check_minicpm5_layer1_sdk_batch_layout_original88_completion_v1.py']
+ 
+ 
+ def build(binding,run_id,master_port):
+     latest.require_complete_binding(binding);latest.require_latest_terminal(binding)
+     locations=paths(run_id)
+     require(all(not locations[k].exists()for k in ('plan','spec','review','contract','output')),'Every output must be fresh')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v4 as runner
+     from research.prepare_dory_residual_spec_v3 import local_imports
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,owner,lock=runner.post.external.acquire_lock()
+--- research/record_minicpm5_layer1_sdk_batch_layout_exit_v2.py
++++ research/record_minicpm5_layer1_sdk_batch_layout_exit_v3.py
+@@ -11,9 +11,9 @@
+ import re
+ import sys
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path.insert(0,str(ROOT))
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v3 as core
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+-from research.audit_minicpm5_layer1_sdk_batch_layout_result_v3 import verify_outer_drain
++from research.audit_minicpm5_layer1_sdk_batch_layout_result_v4 import verify_outer_drain
+ require=core.require
+ 
+ 
+@@ -59,7 +59,7 @@
+     target=Path(target)
+     require(target.parent==Q and re.fullmatch(r'minicpm5-layer1-sdk-batch-layout-[a-z0-9-]+-actual-exit-[a-z0-9-]+\.json',target.name)
+         and not target.exists(),'Fresh actual model terminal receipt namespace')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v4 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,recorder,lock=runner.post.external.acquire_lock()
+     try:
+--- research/audit_minicpm5_layer1_sdk_batch_layout_result_v3.py
++++ research/audit_minicpm5_layer1_sdk_batch_layout_result_v4.py
+@@ -20,7 +20,7 @@
+ import zlib
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research'
+ sys.path.insert(0,str(ROOT))
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v3 as core
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ from research import minicpm5_sdk_physical_evidence_v2 as physical_evidence
+@@ -208,7 +208,7 @@
+ def run(exit_ref,target):
+     sources.reference(exit_ref);require(Path(exit_ref['path']).suffix=='.json','Actual model JSON exit reference')
+     target=output_path(target)
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v4 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B required')
+     runner.p.user_bus();fd,owner,lock=runner.post.external.acquire_lock()
+     try:
+--- research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v3.py
++++ research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v4.py
+@@ -16,13 +16,13 @@
+ import zlib
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path[:0]=[str(ROOT),str(Q)]
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
+-from research import audit_minicpm5_layer1_sdk_batch_layout_result_v3 as auditor
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v3 as core
++from research import audit_minicpm5_layer1_sdk_batch_layout_result_v4 as auditor
+ from research import minicpm5_sdk_physical_evidence_v2 as physical
+-from research.record_minicpm5_layer1_sdk_batch_layout_exit_v2 import actual_tool
++from research.record_minicpm5_layer1_sdk_batch_layout_exit_v3 import actual_tool
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ require=core.require
+-AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v3.py'
++AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v4.py'
+ 
+ 
+ def unpack(proof):
+@@ -140,7 +140,7 @@
+     actual_tool(session,chunk,exit_code);sources.reference(live_ref);sources.reference(result_ref);target=Path(target)
+     require(target.parent==Q and re.fullmatch(r'minicpm5-layer1-sdk-batch-layout-[a-z0-9-]+-audit-actual-exit-[a-z0-9-]+\.json',target.name)
+         and not target.exists(),'Fresh independent auditor actual-exit receipt')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v4 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,recorder,lock=runner.post.external.acquire_lock()
+     try:
