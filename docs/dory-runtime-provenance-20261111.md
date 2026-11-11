@@ -60,7 +60,7 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 下一轮实际准备首先暴露了历史状态检查的接线错误：新任务把上一轮完成状态误当成当前串行终态，准备程序实际退出 1，尚未写配置。修正保留历史完成链，在三个新启动入口校验当前串行目录；69 项作者检查、68 项独立检查通过（独立检查未重复一项完整历史元数据组装）。新版准备程序实际退出 0，生成的完整配置与源码清单经主任务复核。
 
-随后 SDK 采集执行程序实际启动，但在模型加载前再次触发 `Controller does not hold whole serial flock`，实际退出 1。失败证据核对确认进程已退出、服务从未启动、输出目录不存在，没有注意力调用或新数值结果。这次已经通过修正后的状态衔接检查，不能混为同一故障。原串行锁保护未放宽。后续 300,000 次单独原锁检查未复现；此结果不能证明间歇异常已经消失，也不能说明失败瞬间真的丢失了锁。
+随后 SDK 采集执行程序实际启动，但在模型加载前再次触发 `Controller does not hold whole serial flock`，实际退出 1。失败证据核对确认进程已退出、服务从未启动、输出目录不存在，没有注意力调用或新数值结果。这次已经通过修正后的状态衔接检查，不能混为同一故障。原串行锁保护未放宽。后续 300,000 次单独原锁检查未复现；此结果不能证明间歇异常已经消失，也不能说明失败瞬间真的丢失了锁。另一次 50 秒有界对照中，独立子进程在独立临时文件上切换锁 36,535,040 次，原检查通过 342,143 次，仍未复现；子进程正常退出并回收。因此锁表变化这一假说目前也未得到验证，下一次实际启动应在原检查失败当刻保留原始锁表与描述符证据，继续保持原保护条件。
 
 [实际准备失败](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-preparation-failed-actual-exit-20261111-v1.json)、[状态衔接修正独立复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-freshness-correction-independent-review-20261111-v1.json)、[新版准备实际完成](evidence/dory-provenance-20261111/minicpm5-operator-sdk-r1-root-preparation-complete-20261111-v2.json)、[执行程序实际失败与退出](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-failed-terminal-20261111-v1.json)、[完整失败证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r1-model-failed-evidence-20261111-v1.json)。
 
@@ -69,3 +69,5 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 [来源清单](evidence/dory-provenance-20261111/dory-upstream-provenance-discovery-delivery-20261111-v1.json)、[归档比较实际退出与完整记录复核](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r2-post-exit-root-review-20261111-v1.json)、[完整元数据差异](evidence/dory-provenance-20261111/dory-archive-metadata-differences.json)、[首次失败保留](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r1-failed-terminal-20261111-v1.json)、[MiniCPM5 驱动源码检查](evidence/dory-provenance-20261111/minicpm5-operator-driver-root-source-confirmation-20261111-v1.json)、[完整证据哈希清单](evidence/dory-provenance-20261111/manifest.json)。
 
 [官方 uv 安装变换完整重放](evidence/dory-provenance-20261111/dory-uv-sysconfig-source-replay-20261111-v2.json)、[主任务完整复核](evidence/dory-provenance-20261111/dory-uv-sysconfig-root-confirmation-20261111-v1.json)。
+
+[独立锁变化对照实际退出](evidence/dory-provenance-20261111/original-serial-lock-churn-actual-exit-20261111-v1.json)。

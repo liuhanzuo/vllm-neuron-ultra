@@ -1,0 +1,59 @@
+{
+  "schema": "original_serial_lock_churn_actual_exit_v1",
+  "observed_at": "2026-11-11T05:41:19.951910+00:00",
+  "actual_tool": {
+    "session": 74188,
+    "terminal_chunk": "a2987a",
+    "exit_code": 0
+  },
+  "result": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/original-serial-lock-churn-observation-20261111-v1.json",
+    "sha256": "1cd40795cd357f48c753a5ae1283a7e11f296e278ea8a4cf1ac48144a36333e5"
+  },
+  "owner": {
+    "pid": 1238230,
+    "start_ticks": "415609847",
+    "ppid": 1003516,
+    "argv": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/diagnose_original_serial_lock_churn_root_v1.py",
+      "--mode",
+      "observe",
+      "--output",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/original-serial-lock-churn-observation-20261111-v1.json"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_owner": {
+    "pid": 1238241,
+    "start_ticks": "415609855",
+    "ppid": 1238230,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/diagnose_original_serial_lock_churn_root_v1.py",
+      "--mode",
+      "churn",
+      "--directory",
+      "/tmp/mini-lock-churn-2ybv7n5w",
+      "--stop-fd",
+      "4",
+      "--parent-pid",
+      "1238230"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "both_owners_gone": true,
+  "original_lock_reacquired": true,
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "samples": 342143,
+  "seconds": 50.02024978026748,
+  "independent_lock_cycles": 36535040,
+  "no_failures": true,
+  "cause_known": false,
+  "model_or_native_started": false
+}
