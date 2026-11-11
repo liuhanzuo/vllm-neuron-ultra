@@ -1,0 +1,2239 @@
+{
+  "schema": "dory_four_timestamp_cache_comparison_v1",
+  "owner": {
+    "pid": 1657358,
+    "start_ticks": "419416159",
+    "ppid": 1003516,
+    "argv": [
+      "python3",
+      "-B",
+      "research/verify_dory_four_timestamp_caches_v3.py"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/verify_dory_four_timestamp_caches_v3.py",
+    "sha256": "a11555cb91f0ea5253229323f2c2adc85066ffc9e9b4b0c69e91a8ef6d7c51e4"
+  },
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-four-timestamp-caches-r2-20261111-plan-v3.json",
+    "sha256": "df40c754109405b8cc6bfef4a1d1374ace618cc41d5eceb6d5cbb61ca1fb2817"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-four-timestamp-caches-r2-20261111-review-v3.json",
+    "sha256": "971ba8257ca4af04638fb332fc96218f50e513f99fe1b7237b7e1579bd09ec03"
+  },
+  "self_exit_claimed": false,
+  "native_ABI_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "argv": [
+    "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+    "-I",
+    "-S",
+    "-B",
+    "-X",
+    "pycache_prefix=/mnt/nvme/dory-four-timestamp-caches-r2-20261111/empty-pycache",
+    "-c",
+    "\nimport sys, marshal\nassert sys.version_info[:3] == (3, 12, 16)\nassert sys.flags.isolated == 1 and sys.flags.no_site == 1\nassert sys.dont_write_bytecode and sys.flags.optimize == 0 and marshal.version == 4\nassert sys.pycache_prefix == sys.argv[1]\nassert len(sys.argv) == 6\ncompiled = []\nfor filename in sys.argv[2:]:\n    with open(filename, 'rb') as f:\n        source = f.read(1048577)\n    assert len(source) <= 1048576\n    code = compile(source, filename, 'exec', dont_inherit=True, optimize=0)\n    compiled.append((filename, code.co_filename, marshal.dumps(code, 4).hex()))\norigins = [(name, getattr(getattr(module, '__spec__', None), 'origin', None),\n            getattr(module, '__file__', None)) for name, module in sorted(sys.modules.items())]\nprint(repr(dict(version=sys.version, executable=sys.executable,\n               cache_prefix=sys.pycache_prefix, magic=sys.modules['_frozen_importlib_external'].MAGIC_NUMBER.hex(),\n               marshal_version=marshal.version, compiled=compiled, module_origins=origins)))\n",
+    "/mnt/nvme/dory-four-timestamp-caches-r2-20261111/empty-pycache",
+    "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+    "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+    "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+    "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py"
+  ],
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "OMP_NUM_THREADS": "1"
+  },
+  "started_at": "2026-11-11T16:14:24.141304+00:00",
+  "child_owner": {
+    "pid": 1660151,
+    "start_ticks": "419417244",
+    "ppid": 1657358,
+    "argv": [
+      "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "-I",
+      "-S",
+      "-B",
+      "-X",
+      "pycache_prefix=/mnt/nvme/dory-four-timestamp-caches-r2-20261111/empty-pycache",
+      "-c",
+      "\nimport sys, marshal\nassert sys.version_info[:3] == (3, 12, 16)\nassert sys.flags.isolated == 1 and sys.flags.no_site == 1\nassert sys.dont_write_bytecode and sys.flags.optimize == 0 and marshal.version == 4\nassert sys.pycache_prefix == sys.argv[1]\nassert len(sys.argv) == 6\ncompiled = []\nfor filename in sys.argv[2:]:\n    with open(filename, 'rb') as f:\n        source = f.read(1048577)\n    assert len(source) <= 1048576\n    code = compile(source, filename, 'exec', dont_inherit=True, optimize=0)\n    compiled.append((filename, code.co_filename, marshal.dumps(code, 4).hex()))\norigins = [(name, getattr(getattr(module, '__spec__', None), 'origin', None),\n            getattr(module, '__file__', None)) for name, module in sorted(sys.modules.items())]\nprint(repr(dict(version=sys.version, executable=sys.executable,\n               cache_prefix=sys.pycache_prefix, magic=sys.modules['_frozen_importlib_external'].MAGIC_NUMBER.hex(),\n               marshal_version=marshal.version, compiled=compiled, module_origins=origins)))\n",
+      "/mnt/nvme/dory-four-timestamp-caches-r2-20261111/empty-pycache",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "child_exit_code": 0,
+  "stdout": {
+    "path": "/mnt/nvme/dory-four-timestamp-caches-r2-20261111/stdout.txt",
+    "bytes": 171167,
+    "sha256": "3b327225dd106c869ff819c33740675ec368e54b575f7c289173184158ebefdc",
+    "identity": {
+      "st_dev": 66304,
+      "st_ino": 29,
+      "st_mode": 33204,
+      "st_nlink": 1,
+      "st_size": 171167,
+      "st_mtime_ns": 1794413664156264266,
+      "st_ctime_ns": 1794413664156264266
+    }
+  },
+  "stderr": {
+    "path": "/mnt/nvme/dory-four-timestamp-caches-r2-20261111/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "identity": {
+      "st_dev": 66304,
+      "st_ino": 30,
+      "st_mode": 33204,
+      "st_nlink": 1,
+      "st_size": 0,
+      "st_mtime_ns": 1794413664140264619,
+      "st_ctime_ns": 1794413664140264619
+    }
+  },
+  "complete": true,
+  "comparisons": [
+    {
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+        "bytes": 5884,
+        "sha256": "78c4744d407690f321565488710b5aaf6486b5afa8d185637aa1e7633ab59cd8",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8542146,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 5884,
+          "st_mtime_ns": 1793420276401923268,
+          "st_ctime_ns": 1793420276401923268
+        }
+      },
+      "cache": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc",
+        "bytes": 5839,
+        "sha256": "d194804483e7b4eeb5883867a30a51266edcf3c6620675ccd08b784574d251e5",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8546489,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 5839,
+          "st_mtime_ns": 1793420286419702787,
+          "st_ctime_ns": 1793420286419702787
+        }
+      },
+      "compile_filename": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+      "regenerated_bytes": 5839,
+      "regenerated_sha256": "d194804483e7b4eeb5883867a30a51266edcf3c6620675ccd08b784574d251e5",
+      "complete_bytes_equal": true
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+        "bytes": 15677,
+        "sha256": "6fdcc49ba23a0203ae6cf28e608f8e6297d7c4d77d52e651db3cb49b9564c6d2",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8542151,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 15677,
+          "st_mtime_ns": 1793420276402923246,
+          "st_ctime_ns": 1793420276402923246
+        }
+      },
+      "cache": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc",
+        "bytes": 12472,
+        "sha256": "83ddd996fa296303a7ec96aa0eb938f82d139b4f1814cc71fe7d0eaee118f799",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8542148,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 12472,
+          "st_mtime_ns": 1793420286421702743,
+          "st_ctime_ns": 1793420286421702743
+        }
+      },
+      "compile_filename": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+      "regenerated_bytes": 12472,
+      "regenerated_sha256": "83ddd996fa296303a7ec96aa0eb938f82d139b4f1814cc71fe7d0eaee118f799",
+      "complete_bytes_equal": true
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+        "bytes": 1005,
+        "sha256": "ba0cac060269583523ca9506473a755203037c57d466a11aa89a30a5f6756f3d",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8542268,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 1005,
+          "st_mtime_ns": 1793420276404923202,
+          "st_ctime_ns": 1793420276404923202
+        }
+      },
+      "cache": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc",
+        "bytes": 2211,
+        "sha256": "a863cd92c9943a03498a2b831adde7a834fa91d332dcf146783c6ad410084ccd",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8542149,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 2211,
+          "st_mtime_ns": 1793420286421702743,
+          "st_ctime_ns": 1793420286421702743
+        }
+      },
+      "compile_filename": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+      "regenerated_bytes": 2211,
+      "regenerated_sha256": "a863cd92c9943a03498a2b831adde7a834fa91d332dcf146783c6ad410084ccd",
+      "complete_bytes_equal": true
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py",
+        "bytes": 51256,
+        "sha256": "cc3e58175aff8e0b034e55acbbf277613cfab33913cf904bb6c2daff2d985d5f",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8546464,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 51256,
+          "st_mtime_ns": 1793420276601918867,
+          "st_ctime_ns": 1793420276601918867
+        }
+      },
+      "cache": {
+        "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/__pycache__/_sysconfigdata__linux_x86_64-linux-gnu.cpython-312.pyc",
+        "bytes": 63633,
+        "sha256": "7d7b40263b60dc4fe5c1c43106a2c3b88a5e18be48962bc065d220af83b6cfd1",
+        "identity": {
+          "st_dev": 66306,
+          "st_ino": 8808443,
+          "st_mode": 33204,
+          "st_nlink": 1,
+          "st_size": 63633,
+          "st_mtime_ns": 1793420289251640459,
+          "st_ctime_ns": 1793420289251640459
+        }
+      },
+      "compile_filename": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py",
+      "regenerated_bytes": 63633,
+      "regenerated_sha256": "7d7b40263b60dc4fe5c1c43106a2c3b88a5e18be48962bc065d220af83b6cfd1",
+      "complete_bytes_equal": true
+    }
+  ],
+  "matched": 4,
+  "module_origins": [
+    [
+      "__main__",
+      null,
+      null
+    ],
+    [
+      "_abc",
+      "built-in",
+      null
+    ],
+    [
+      "_codecs",
+      "built-in",
+      null
+    ],
+    [
+      "_frozen_importlib",
+      "frozen",
+      null
+    ],
+    [
+      "_frozen_importlib_external",
+      "frozen",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/importlib/_bootstrap_external.py"
+    ],
+    [
+      "_imp",
+      "built-in",
+      null
+    ],
+    [
+      "_io",
+      "built-in",
+      null
+    ],
+    [
+      "_signal",
+      "built-in",
+      null
+    ],
+    [
+      "_thread",
+      "built-in",
+      null
+    ],
+    [
+      "_warnings",
+      "built-in",
+      null
+    ],
+    [
+      "_weakref",
+      "built-in",
+      null
+    ],
+    [
+      "abc",
+      "frozen",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/abc.py"
+    ],
+    [
+      "builtins",
+      "built-in",
+      null
+    ],
+    [
+      "codecs",
+      "frozen",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/codecs.py"
+    ],
+    [
+      "encodings",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py"
+    ],
+    [
+      "encodings.aliases",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py"
+    ],
+    [
+      "encodings.utf_8",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py"
+    ],
+    [
+      "io",
+      "frozen",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/io.py"
+    ],
+    [
+      "marshal",
+      "built-in",
+      null
+    ],
+    [
+      "posix",
+      "built-in",
+      null
+    ],
+    [
+      "sys",
+      "built-in",
+      null
+    ],
+    [
+      "time",
+      "built-in",
+      null
+    ],
+    [
+      "zipimport",
+      "frozen",
+      "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu/lib/python3.12/zipimport.py"
+    ]
+  ],
+  "interpreter": {
+    "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+    "status": "exact",
+    "bytes": 31028464,
+    "sha256": "23bc148d2b48964b621c5561ff2b81c1d9c7b717967a7491efbf12f4304882b5",
+    "expected_sha256": "23bc148d2b48964b621c5561ff2b81c1d9c7b717967a7491efbf12f4304882b5"
+  },
+  "startup_alias": {
+    "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12-linux-x86_64-gnu",
+    "target": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu",
+    "identity": {
+      "st_dev": 66306,
+      "st_ino": 8546465,
+      "st_mode": 41471,
+      "st_nlink": 1,
+      "st_size": 68,
+      "st_mtime_ns": 1793420276601918867,
+      "st_ctime_ns": 1793420276601918867
+    }
+  },
+  "all_inputs": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/verify_dory_four_timestamp_caches_v3.py",
+      "bytes": 16560,
+      "sha256": "a11555cb91f0ea5253229323f2c2adc85066ffc9e9b4b0c69e91a8ef6d7c51e4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344660,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 16560,
+        "st_mtime_ns": 1794413646952643911,
+        "st_ctime_ns": 1794413646952643911
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_dory_serial_stage_root_v5.py",
+      "bytes": 12439,
+      "sha256": "3589c286b78e7196105fa9d76c45a14c6a47535fb48b6a9604ffdb11c2c3d2f7",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297870,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 12439,
+        "st_mtime_ns": 1794378704215421720,
+        "st_ctime_ns": 1794378704215421720
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+      "bytes": 26992,
+      "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343286,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 26992,
+        "st_mtime_ns": 1794365728115713653,
+        "st_ctime_ns": 1794365728115713653
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_dory_stage_a_source_inputs_v1.py",
+      "bytes": 9774,
+      "sha256": "d4c41ef45b2d6c978c2f41ec07f6136e341595f21cc32795a6745f27119e2736",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343164,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 9774,
+        "st_mtime_ns": 1794327831242916512,
+        "st_ctime_ns": 1794327831242916512
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_saved_files_v1.py",
+      "bytes": 5283,
+      "sha256": "d35623ed655c76e1b2f883b9c1577e0b946ffbcbb34aa3d77fe7556a8ba82423",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8342965,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 5283,
+        "st_mtime_ns": 1794319042431790243,
+        "st_ctime_ns": 1794319042431790243
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_saved_core_v1.py",
+      "bytes": 8573,
+      "sha256": "2a5fa88df4a54d9ab9868e86e3b58ff01ca2c7e40720bcf2a35d938c62044cbd",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8342928,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 8573,
+        "st_mtime_ns": 1794317047529771503,
+        "st_ctime_ns": 1794317047529771503
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_capture_core_v1.py",
+      "bytes": 19802,
+      "sha256": "9341ac49a187638a6c5eec2eb989238bb04cfcf37accd481c38a3c4f6555cd17",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8342923,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 19802,
+        "st_mtime_ns": 1794317141983688287,
+        "st_ctime_ns": 1794317141983688287
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_residual_visit_capture_v1.py",
+      "bytes": 6492,
+      "sha256": "b9ac25acf75522bf8dcd75d5198b127f6b7657c169b908bc45d3df1480ee61a1",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8340734,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 6492,
+        "st_mtime_ns": 1794229087656183828,
+        "st_ctime_ns": 1794229087656183828
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_artifact_transaction_v2.py",
+      "bytes": 22417,
+      "sha256": "c32cdf485a664dc09fc4e7e348d29db3411f78ada852a2b497e7740d34f2d5e5",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343146,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 22417,
+        "st_mtime_ns": 1794326964076052919,
+        "st_ctime_ns": 1794326964076052919
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_archive_core_v1.py",
+      "bytes": 4875,
+      "sha256": "750bd30ea804dc28a56902dcb9762fe854c0b1952570796e508011c28c4e4933",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8342927,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 4875,
+        "st_mtime_ns": 1794317047529771503,
+        "st_ctime_ns": 1794317047529771503
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_serial_stage_contract_v2.py",
+      "bytes": 10269,
+      "sha256": "bb3ed6e61632574f32a5a98b7cee8183394b416225193f9e8f080054f98ecc34",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343708,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 10269,
+        "st_mtime_ns": 1794376903673144940,
+        "st_ctime_ns": 1794376903673144940
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_native_inventory_finish_v2.py",
+      "bytes": 36627,
+      "sha256": "e346433bef365ebc4b2e0010af0c4de0bd0f717786b96727aa488d381ffd6ead",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343654,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 36627,
+        "st_mtime_ns": 1794375371576942200,
+        "st_ctime_ns": 1794375371576942200
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_external_supervisor_v4.py",
+      "bytes": 21047,
+      "sha256": "43e2b6bac8216b0017c90f503c61a11fb30c66193e3354b13d23db8b2c434068",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335908,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 21047,
+        "st_mtime_ns": 1794020993189954252,
+        "st_ctime_ns": 1794020993189954252
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_tree_monitor_v1.py",
+      "bytes": 8891,
+      "sha256": "7165c15bd39a20a17f10cd41dfb182d518edb1f694a02cbf3daf71583d3dd758",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335773,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 8891,
+        "st_mtime_ns": 1794017093017009193,
+        "st_ctime_ns": 1794017093017009193
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_writer_factory_v1.py",
+      "bytes": 4328,
+      "sha256": "963e7eef736a1e03aef9903e886f4411903b0abdba0be7a1e91b547d1a326506",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335755,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 4328,
+        "st_mtime_ns": 1794015920698876775,
+        "st_ctime_ns": 1794015920698876775
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py",
+      "bytes": 8169,
+      "sha256": "92e6f2e7cf1009e94ce548474ea5cd455b7cc1ea00813fb44f5790ae85fb1a27",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335751,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 8169,
+        "st_mtime_ns": 1794016195411827669,
+        "st_ctime_ns": 1794016195411827669
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_history_environment_v1.py",
+      "bytes": 4440,
+      "sha256": "9f151ebd5ad4c6cfeea5b9008361bc2c3aa945d274714a9d8ca76047879f01bc",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8294701,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 4440,
+        "st_mtime_ns": 1793936091948523279,
+        "st_ctime_ns": 1793936091948523279
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_capture_io_v2.py",
+      "bytes": 9906,
+      "sha256": "922632645d65e9d92b8163b9ced861094704fca61b305af601dcbc6aab4a21d4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335725,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 9906,
+        "st_mtime_ns": 1794013575116612007,
+        "st_ctime_ns": 1794013575116612007
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py",
+      "bytes": 22969,
+      "sha256": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8335907,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 22969,
+        "st_mtime_ns": 1794020993189954252,
+        "st_ctime_ns": 1794020993189954252
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_descriptor_inventory_runtime_v2.py",
+      "bytes": 14769,
+      "sha256": "758b075dc7d1dfa10b12e5b4dee445b11691dcfebf7996853fb4b6d4479df556",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343920,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 14769,
+        "st_mtime_ns": 1794384656720143243,
+        "st_ctime_ns": 1794384656720143243
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/descriptor_serial_lock_proof_v1.py",
+      "bytes": 9917,
+      "sha256": "f3faa10356e16dce6b689298ceebf11441f3821ce391f54896cbffed1c82b003",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343891,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 9917,
+        "st_mtime_ns": 1794383795662117971,
+        "st_ctime_ns": 1794383795662117971
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261111-v43.json",
+      "bytes": 745444,
+      "sha256": "3dbcd2086448889dae699d544e1562ed6a02ca86a0157e11084d2500f8ef1439",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344659,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 745444,
+        "st_mtime_ns": 1794413620642224693,
+        "st_ctime_ns": 1794413620642224693
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-metadata-census-r1-post-exit-root-review-20261111-v1.json",
+      "bytes": 5545,
+      "sha256": "b1963177b4e38497630e89f6ce9471778247acc1cc274d4a5f6e1c30ff918f8c",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343450,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5545,
+        "st_mtime_ns": 1794370102255212307,
+        "st_ctime_ns": 1794370102260212197
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-census-source-map-r1-actual-exit-20261111-v1.json",
+      "bytes": 779,
+      "sha256": "46d761d3c6eb86a74c33c6ec7c579d3cfc541a250c421f69c1f1fdf0e49b5a25",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343464,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 779,
+        "st_mtime_ns": 1794370668906695298,
+        "st_ctime_ns": 1794370668910695210
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-torch-cpython-archive-r1-failed-terminal-20261111-v1.json",
+      "bytes": 1434,
+      "sha256": "744d6b93749891e9d662f06ef2d84c04cbdd59827ae432be44da25825d6bc8ab",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343493,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1434,
+        "st_mtime_ns": 1794371276194292271,
+        "st_ctime_ns": 1794371276197292205
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-torch-cpython-archive-r2-post-exit-root-review-20261111-v1.json",
+      "bytes": 5237,
+      "sha256": "26456bac52441bd98c201e43ac8481076286cfd43f43e0ac0f47bd645b4a7e04",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343506,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5237,
+        "st_mtime_ns": 1794371576201678697,
+        "st_ctime_ns": 1794371576206678587
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-archive-differences-r1-actual-exit-20261111-v1.json",
+      "bytes": 934,
+      "sha256": "846746f71de3e5e4b244ec879613359c82cd0403604152b74d5defcf6a191c0f",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343512,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 934,
+        "st_mtime_ns": 1794371650334038167,
+        "st_ctime_ns": 1794371650337038100
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-full-wheel-comparison-r1-post-exit-root-review-20261111-v1.json",
+      "bytes": 860064,
+      "sha256": "96c6dcd6e4d16a05c7865c7db0feaa4670880c7e0191f63f49b10fb1e338d523",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343583,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 860064,
+        "st_mtime_ns": 1794373285838942478,
+        "st_ctime_ns": 1794373285844942346
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-full-wheel-metadata-r1-actual-exit-20261111-v1.json",
+      "bytes": 815,
+      "sha256": "34a32a602ba38fef1c885474aa217e6764b7830415f6aec033b4f33f6ca8afb2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343589,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 815,
+        "st_mtime_ns": 1794373433898669669,
+        "st_ctime_ns": 1794373433898669669
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-full-wheel-relocations-r1-actual-exit-20261111-v1.json",
+      "bytes": 823,
+      "sha256": "7f1209dc781d69cfaaaec94abed7d8d3233ca65ba9101f7066ebf8dc9f8739a0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343590,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 823,
+        "st_mtime_ns": 1794373433900669625,
+        "st_ctime_ns": 1794373433900669625
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-r1-preparation-failed-actual-exit-20261111-v1.json",
+      "bytes": 1733,
+      "sha256": "421917be28a78bcedab0e5056e07d5a108eb3d1ecd730fa34948097599d39a22",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343612,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1733,
+        "st_mtime_ns": 1794374154035793811,
+        "st_ctime_ns": 1794374154038793744
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-r1-root-preparation-complete-20261111-v2.json",
+      "bytes": 1933,
+      "sha256": "c7f7bce308ff0da242073f9d4e95c1b975aed6abbbcb37d5174261c878f608b0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343637,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1933,
+        "st_mtime_ns": 1794374855359312092,
+        "st_ctime_ns": 1794374855364311982
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-r1-failed-terminal-20261111-v1.json",
+      "bytes": 1804,
+      "sha256": "595e81c8066f72c402e2592220a2b2b32d4fe8f9a5df2b6fe467434b016ccfc2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343642,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1804,
+        "st_mtime_ns": 1794375123473404113,
+        "st_ctime_ns": 1794375123473404113
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-r1-failure-helper-actual-exit-20261111-v1.json",
+      "bytes": 855,
+      "sha256": "580983d0bc6fb026ad29222123d04daa1c08fa9bfe696767f0ec711cd66347f0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343663,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 855,
+        "st_mtime_ns": 1794375755147482685,
+        "st_ctime_ns": 1794375755147482685
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/original-serial-lock-observation-actual-exit-20261111-v2.json",
+      "bytes": 826,
+      "sha256": "957aad0b2a08e05ef7cc6ae2c69b170ef0e99594c6a0c9594e55172e99cb9ac4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343645,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 826,
+        "st_mtime_ns": 1794375258135437781,
+        "st_ctime_ns": 1794375258135437781
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/original-serial-lock-churn-actual-exit-20261111-v1.json",
+      "bytes": 1747,
+      "sha256": "60abfe6efbdb08a1f9524f4f9b59df0205fe0a639026fcde247905c1d02250e8",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343662,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1747,
+        "st_mtime_ns": 1794375679951140356,
+        "st_ctime_ns": 1794375679951140356
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/published-git-storage-compaction-actual-exit-20261111-v1.json",
+      "bytes": 864,
+      "sha256": "0d8b79bb40f91324a8846c7deaf3de923319f0c9cfd31c6cd805952b06083cca",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343686,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 864,
+        "st_mtime_ns": 1794376008196899243,
+        "st_ctime_ns": 1794376008196899243
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-r2-root-preparation-complete-20261111-v1.json",
+      "bytes": 1391,
+      "sha256": "eddd291f6b1b52baeff7d93748ff55de141dc7158d1dec21d175359a2f43edd7",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343701,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1391,
+        "st_mtime_ns": 1794376569329517231,
+        "st_ctime_ns": 1794376569329517231
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-r2-failed-terminal-20261111-v1.json",
+      "bytes": 1209,
+      "sha256": "35ce6a0482f56e4c110a5a3835ed880bb6c4531dba47435406766171c96fd16b",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343732,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1209,
+        "st_mtime_ns": 1794377437691350008,
+        "st_ctime_ns": 1794377437691350008
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-r2-model-failed-evidence-20261111-v1.json",
+      "bytes": 419931,
+      "sha256": "06e34b8f9a1fd2ca54ee3d0df9fd9bd9e2c83681c98d3e7e535806356b7b7270",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343730,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 419931,
+        "st_mtime_ns": 1794377384017535824,
+        "st_ctime_ns": 1794377384023535691
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r1-actual-exit-20261111-v1.json",
+      "bytes": 2880,
+      "sha256": "05bebe50b652244b2cef093e7a284639c36312240ef83b8718ed1f17e6f6842a",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343749,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 2880,
+        "st_mtime_ns": 1794377807027204321,
+        "st_ctime_ns": 1794377807027204321
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r1-post-exit-recorder-actual-exit-20261111-v1.json",
+      "bytes": 644,
+      "sha256": "374760e5063a4923fbc64d75a3d11a54cc63545203b57ce181950ecf07d718cb",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343755,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 644,
+        "st_mtime_ns": 1794377927700538839,
+        "st_ctime_ns": 1794377927700538839
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r1-failed-saved-events-review-20261111-v1.json",
+      "bytes": 26341,
+      "sha256": "348437b073d9ae719a0899d68b0dd3ec5fe5d19b4ae24e07f79261a5f8fac020",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343750,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 26341,
+        "st_mtime_ns": 1794377841155449514,
+        "st_ctime_ns": 1794377841155449514
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r1-external-queue-metadata-20261111-v1.json",
+      "bytes": 30486,
+      "sha256": "40f67847c8a893a1aeb7e2ea75f8cfd5bded62f68717f9cc97dec044ad6464b7",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343759,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 30486,
+        "st_mtime_ns": 1794377945949136312,
+        "st_ctime_ns": 1794377945949136312
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/published-git-storage-compaction-actual-exit-20261111-v2.json",
+      "bytes": 785,
+      "sha256": "aa521448c5e493683a0acbc8c868205a60431ee77a125c9f7830b540091224bb",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297045,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 785,
+        "st_mtime_ns": 1794378190764738863,
+        "st_ctime_ns": 1794378190764738863
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r2-prelock-cli-failure-20261111-v1.json",
+      "bytes": 665,
+      "sha256": "493ba9bdbdde1de940632748c8d170ffc6172b7aa226762df6a23b1b7a12773e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297861,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 665,
+        "st_mtime_ns": 1794378472445537441,
+        "st_ctime_ns": 1794378472445537441
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r2-actual-exit-20261111-v1.json",
+      "bytes": 2880,
+      "sha256": "b3d9b694a8b060190f2defd35b84e812e1df5b3764aad059736c7bafcc749530",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297863,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 2880,
+        "st_mtime_ns": 1794378564414505899,
+        "st_ctime_ns": 1794378564414505899
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r2-post-exit-recorder-actual-exit-20261111-v1.json",
+      "bytes": 644,
+      "sha256": "c2d0ebdd240ce56aee5357cdbe24d5232c75770966b7595620bbc90181607c38",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297865,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 644,
+        "st_mtime_ns": 1794378602762660403,
+        "st_ctime_ns": 1794378602762660403
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/installed-apt-archive-reclaim-actual-exit-20261111-v1.json",
+      "bytes": 789,
+      "sha256": "759150566b5eb554b172ce1bf8fa64e98a49dcb63f392322736f954ee5b39b6b",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297881,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 789,
+        "st_mtime_ns": 1794379205660356479,
+        "st_ctime_ns": 1794379205660356479
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-recovery-r2-actual-exit-20261111-v1.json",
+      "bytes": 7213,
+      "sha256": "4523c343d1293e9c8eee8edc01c12ab2a43d17a5d896f46e97cb0fce85422123",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297887,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 7213,
+        "st_mtime_ns": 1794379413948765421,
+        "st_ctime_ns": 1794379413948765421
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-recovery-r2-recorder-actual-exit-20261111-v1.json",
+      "bytes": 644,
+      "sha256": "0fad45351fad95fccc9cf177a0c0f895b2bd4613ab5dc2d77d8d8f9f4f2052ed",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297888,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 644,
+        "st_mtime_ns": 1794379442592138011,
+        "st_ctime_ns": 1794379442592138011
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-recovery-r3-actual-exit-20261111-v1.json",
+      "bytes": 9533,
+      "sha256": "b312e9d2bceb4c2af867446666ce2949cd789c2d7a43e15c8f23b11fa9115325",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343781,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 9533,
+        "st_mtime_ns": 1794380461793673507,
+        "st_ctime_ns": 1794380461797673418
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-sdk-recovery-r3-recorder-actual-exit-20261111-v1.json",
+      "bytes": 672,
+      "sha256": "491abf36836b296b1ac6f7dbceaf8b98ae562af4644fd03d99159f84be81f4f0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343782,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 672,
+        "st_mtime_ns": 1794380482069225690,
+        "st_ctime_ns": 1794380482069225690
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r3-prelock-review-shape-failure-20261111-v1.json",
+      "bytes": 850,
+      "sha256": "ad107b2f85b9dfed6e151db3ac38c570afab9049c333f47525e1a5cd60513ada",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343790,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 850,
+        "st_mtime_ns": 1794380770406867743,
+        "st_ctime_ns": 1794380770406867743
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r3-prelock-cli-hash-failure-20261111-v1.json",
+      "bytes": 415,
+      "sha256": "f2f6ddc7eff4d1decac5bfd253be5ec4deb7a247b1189f8a30596cc73eb0fa81",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343794,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 415,
+        "st_mtime_ns": 1794380801069191247,
+        "st_ctime_ns": 1794380801069191247
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r3-actual-exit-20261111-v1.json",
+      "bytes": 4999,
+      "sha256": "cf72417e9ba40dc551f0b1def1cf206bfa691aaac80a24d6fa17b7849aad14a2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343800,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 4999,
+        "st_mtime_ns": 1794380913100710893,
+        "st_ctime_ns": 1794380913100710893
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r3-first-post-exit-recorder-failure-20261111-v1.json",
+      "bytes": 334,
+      "sha256": "6e131c0188c075c0ac31513882c3a12b479c8223a4e5ef3abc347807e2c703c3",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343806,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 334,
+        "st_mtime_ns": 1794381000645777941,
+        "st_ctime_ns": 1794381000645777941
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-inventory-r3-post-exit-recorder-actual-exit-20261111-v1.json",
+      "bytes": 622,
+      "sha256": "5b5133050f8b524792273600af957adbb2374e9886ed29911e3a963be52cbee6",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343805,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 622,
+        "st_mtime_ns": 1794381000640778051,
+        "st_ctime_ns": 1794381000640778051
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/regenerated-apt-index-reclaim-actual-exit-20261111-v1.json",
+      "bytes": 715,
+      "sha256": "75f86d72b7a09c7a72269235701c51e875a8fd7859b56b168e77e957b70f2848",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343823,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 715,
+        "st_mtime_ns": 1794381355459955918,
+        "st_ctime_ns": 1794381355459955918
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-actual-exit-20261111-v1.json",
+      "bytes": 7986,
+      "sha256": "64736f5dff92d3f788fcc85414d155a20c1fa40bd3da20d65bc6cec1c50a6458",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343860,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 7986,
+        "st_mtime_ns": 1794382346820070900,
+        "st_ctime_ns": 1794382346820070900
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-recorder-actual-exit-20261111-v1.json",
+      "bytes": 627,
+      "sha256": "7fd0a1d6a32a66dcf9c81205e7812b9dd12d88f6d59afb3ce4c12884aeb6e425",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343861,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 627,
+        "st_mtime_ns": 1794382379757343755,
+        "st_ctime_ns": 1794382379757343755
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r4-actual-exit-20261111-v1.json",
+      "bytes": 7172,
+      "sha256": "f0940685adb35de7dd75d3bdb84b27d9aa4e5b299f696d3f3bad40424712a994",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343969,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 7172,
+        "st_mtime_ns": 1794386303289791751,
+        "st_ctime_ns": 1794386303289791751
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r4-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1146,
+      "sha256": "0c5ac35517f01be7f2edf284857684a7b888184d0e999677687870d49c654d02",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343970,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1146,
+        "st_mtime_ns": 1794386393355800244,
+        "st_ctime_ns": 1794386393355800244
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r5-actual-exit-20261111-v1.json",
+      "bytes": 8157,
+      "sha256": "e6cff0181f6a1d95c7f816c6d906e9bf170dd4768a5cc52a56f94f26b170ec89",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344010,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 8157,
+        "st_mtime_ns": 1794387157570956954,
+        "st_ctime_ns": 1794387157570956954
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-serial-inventory-r5-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1146,
+      "sha256": "e66da87fabb152052a4b6a18059a0faa9576c00cef463217128fef62d54a7eb4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344011,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1146,
+        "st_mtime_ns": 1794387197164083032,
+        "st_ctime_ns": 1794387197164083032
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-system-package-metadata-r1-actual-exit-20261111-v1.json",
+      "bytes": 8424,
+      "sha256": "934f2d0b9da075cf0d927557fcb302518d32a0ce99376e2ef6a18d245e21efe1",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344142,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 8424,
+        "st_mtime_ns": 1794397301293227792,
+        "st_ctime_ns": 1794397301293227792
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/apt-translation-cache-reclaim-actual-exit-20261111-v1.json",
+      "bytes": 662,
+      "sha256": "81f36f215e331119cc4e1d13e289b1317b34e9c6b80d6c1210730b7f7ec09632",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344117,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 662,
+        "st_mtime_ns": 1794396827468666229,
+        "st_ctime_ns": 1794396827468666229
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-system-package-metadata-r1-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2132,
+      "sha256": "91acd20ae8b661ec664713be3abaa708fe0129c7edfda1e2e0e5bfa8e873ded7",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344144,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 2132,
+        "st_mtime_ns": 1794397332068546555,
+        "st_ctime_ns": 1794397332068546555
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-archive-key-authority-actual-exit-20261111-v1.json",
+      "bytes": 702,
+      "sha256": "79ddf4a25f904f174885650f5df7fecb2b5643001df0f943e24077b4b9b1dc7e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344198,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 702,
+        "st_mtime_ns": 1794398876186508373,
+        "st_ctime_ns": 1794398876186508373
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-preparation-actual-exit-20261111-v1.json",
+      "bytes": 1839,
+      "sha256": "970f4037c247a1d4861ecb26096a3bab7deaba544bfd98ee7539ce31b581a540",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344243,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 1839,
+        "st_mtime_ns": 1794400158459200193,
+        "st_ctime_ns": 1794400158464200081
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-external-fifo-actual-exit-20261111-v1.json",
+      "bytes": 2199,
+      "sha256": "bcd45c2138c121f6cd1c3521ddc68398c7f8ccbdd1146f9f70fd403f3af0ebce",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344261,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 2199,
+        "st_mtime_ns": 1794400455202651978,
+        "st_ctime_ns": 1794400455206651890
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-model-actual-exit-20261111-v1.json",
+      "bytes": 615106,
+      "sha256": "3599cd98904b570fa9a48188321a766ccb2f01eefbb113497de0eab42354a2e0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344393,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 615106,
+        "st_mtime_ns": 1794408272731243756,
+        "st_ctime_ns": 1794408272738243602
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/obsolete-tool-version-reclaim-v1-actual-exit-20261111.json",
+      "bytes": 1114,
+      "sha256": "468ad04fab8b77db5e5a7d3547f183ad59680c0a4b74814dbcb484e5f1e893f6",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344371,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1114,
+        "st_mtime_ns": 1794407633360320141,
+        "st_ctime_ns": 1794407633360320141
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/obsolete-tool-version-reclaim-v2-actual-exit-20261111.json",
+      "bytes": 1221,
+      "sha256": "04a6505a9c92adaee91bfc0c7a6dec1c4bf11f4688be198e0b5bb14ba430f94c",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344374,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1221,
+        "st_mtime_ns": 1794407664016645092,
+        "st_ctime_ns": 1794407664016645092
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-actual-exit-20261111-v1.json",
+      "bytes": 3025,
+      "sha256": "facdbe36e8c057bc1edd5d3ad66ce5199d803a64b7f9e0a06da164aa8eaace4d",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344398,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 3025,
+        "st_mtime_ns": 1794408433390708876,
+        "st_ctime_ns": 1794408433390708876
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r1-actual-exit-20261111-v1.json",
+      "bytes": 9718,
+      "sha256": "0e846ed14b04905c34322e703a00f6b362528a30a1955c287de3075bfd31af3e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344407,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 9718,
+        "st_mtime_ns": 1794408624218491080,
+        "st_ctime_ns": 1794408624218491080
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r1-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2621,
+      "sha256": "f947a28a47d4b9e6de1d3b8e182b1e304bb269bb33f854211b7397f8b2acf7f1",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344408,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2621,
+        "st_mtime_ns": 1794408673352403809,
+        "st_ctime_ns": 1794408673352403809
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r2-actual-exit-20261111-v1.json",
+      "bytes": 9665,
+      "sha256": "eeadac4bf0dd9725b2989ac3fd018a75957a0fdf63639771f112093d487a79d6",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344442,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 9665,
+        "st_mtime_ns": 1794409458507056347,
+        "st_ctime_ns": 1794409458507056347
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r2-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2621,
+      "sha256": "1d64137ba0d09523556d316ec9bbd5f7b3b120ca5141ba88a7c8549ce9cef681",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344443,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2621,
+        "st_mtime_ns": 1794409480900560907,
+        "st_ctime_ns": 1794409480900560907
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-release-r2-path-diagnostic-actual-exit-20261111-v1.json",
+      "bytes": 873,
+      "sha256": "cc69f9291f2d57e2318be6531ea1c13bccafc16ce0c32f3994e772081161d573",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344447,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 873,
+        "st_mtime_ns": 1794409542614197761,
+        "st_ctime_ns": 1794409542614197761
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r3-actual-exit-20261111-v1.json",
+      "bytes": 9969,
+      "sha256": "e66e0a25feb591e2a8b1d8ac233a5a02fd6a0f7b37b4d5723c01936297122d99",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344480,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 9969,
+        "st_mtime_ns": 1794409966527868608,
+        "st_ctime_ns": 1794409966527868608
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r3-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2621,
+      "sha256": "ff5a42e890048a5a46a0ed42b6602c198e11935262608d2da0b33e6faf0b9312",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344481,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2621,
+        "st_mtime_ns": 1794409992778288897,
+        "st_ctime_ns": 1794409992778288897
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-release-r3-raw-index-diagnostic-actual-exit-20261111-v1.json",
+      "bytes": 788,
+      "sha256": "7c8928aa64dc4fbd0efff546c486c5f366ec945d7fb726bec38a3814a8cebe45",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344484,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 788,
+        "st_mtime_ns": 1794410112056650439,
+        "st_ctime_ns": 1794410112056650439
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-release-r3-xz-tail-diagnostic-actual-exit-20261111-v1.json",
+      "bytes": 786,
+      "sha256": "6225861f95ca0e4c9193ee28039bcfda6e296f357c9c2641a2216518dbb57d24",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344485,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 786,
+        "st_mtime_ns": 1794410112057650417,
+        "st_ctime_ns": 1794410112057650417
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r4-actual-exit-20261111-v1.json",
+      "bytes": 10222,
+      "sha256": "942d3b590f3c0a0a8263efbdca703e742b3feeb46a8f93cdbba325c8f5dab2b2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344512,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 10222,
+        "st_mtime_ns": 1794410391302488622,
+        "st_ctime_ns": 1794410391302488622
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r4-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2621,
+      "sha256": "5bc9b60fa731bdd5aacff552f519d47d7b3576c7488d3be4cfd296546972c927",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344513,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2621,
+        "st_mtime_ns": 1794410419212871611,
+        "st_ctime_ns": 1794410419212871611
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-release-r4-line-diagnostic-actual-exit-20261111-v1.json",
+      "bytes": 783,
+      "sha256": "c22a9e3bedadec3a1b368c9e7cde23afbb11b2809f56a26c988e9f49ab9186c2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344515,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 783,
+        "st_mtime_ns": 1794410451942149618,
+        "st_ctime_ns": 1794410451942149618
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r5-actual-exit-20261111-v1.json",
+      "bytes": 15187,
+      "sha256": "46b910d3674f92c109b869a860d1701cd6e340ad36d130b4b48fd501e76c432e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344542,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 15187,
+        "st_mtime_ns": 1794410662806492686,
+        "st_ctime_ns": 1794410662806492686
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-metadata-r5-recorder-actual-exit-20261111-v1.json",
+      "bytes": 2649,
+      "sha256": "16ae371eccb20c325b4bbaeea5670727e361e621bb02ff02f1bafd91f3c5a397",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344543,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2649,
+        "st_mtime_ns": 1794410684654010257,
+        "st_ctime_ns": 1794410684654010257
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-dpkg-deb-tool-authority-actual-exit-20261111-v1.json",
+      "bytes": 818,
+      "sha256": "7d2172b419d22d3dabff6b5657077a674d0c94ea1d1c6dcc397dfd1386f27afd",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344566,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 818,
+        "st_mtime_ns": 1794411287689695514,
+        "st_ctime_ns": 1794411287689695514
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r1-actual-exit-20261111-v1.json",
+      "bytes": 5056,
+      "sha256": "341c40e345d1c27ae1fcfafcc61c70c142faa88da5b1300a98aec0b4ef0acd4e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344582,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5056,
+        "st_mtime_ns": 1794411653290666203,
+        "st_ctime_ns": 1794411653290666203
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r1-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1535,
+      "sha256": "274ea9951c736727a86f2099b4da79688df6e1d61e3b14026d161469f4ee79f0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344590,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1535,
+        "st_mtime_ns": 1794411761670281092,
+        "st_ctime_ns": 1794411761670281092
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-deb-r1-gnu-header-diagnostic-actual-exit-20261111-v1.json",
+      "bytes": 753,
+      "sha256": "b01b36028366413965d1c558740fe2d8aeb6b051b4a83a9430a6337f51d2e2e2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344591,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 753,
+        "st_mtime_ns": 1794411761670281092,
+        "st_ctime_ns": 1794411761670281092
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r2-actual-exit-20261111-v1.json",
+      "bytes": 5036,
+      "sha256": "bab9c3f27a41ad48d55ccaeaece463aa5e9b5d3bfb1141851375847a18515fb5",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344607,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5036,
+        "st_mtime_ns": 1794411880430656655,
+        "st_ctime_ns": 1794411880430656655
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r2-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1529,
+      "sha256": "70b679a2b11527b430affde6284ec7f7a525de3ade3f162e61cd230cdd23b119",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344614,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1529,
+        "st_mtime_ns": 1794411935882433709,
+        "st_ctime_ns": 1794411935882433709
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r3-actual-exit-20261111-v1.json",
+      "bytes": 6676,
+      "sha256": "df6e32b0f737a8fa466cfdb34ec3e26292e8a6dc10a1998e5b61c68d2bf0dbb4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344626,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 6676,
+        "st_mtime_ns": 1794412040682112239,
+        "st_ctime_ns": 1794412040682112239
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-r3-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1529,
+      "sha256": "9e0c1ce50731d431c37807953397144869d8dae6fe2fa5c242dcd2d01fbfc09e",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344627,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1529,
+        "st_mtime_ns": 1794412065263568624,
+        "st_ctime_ns": 1794412065263568624
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-actual-exit-20261111-v1.json",
+      "bytes": 5470,
+      "sha256": "f9c26af51376ec7d652e12f4cede239e5c1aa05b6065e55de412e9a67ebe361a",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344633,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5470,
+        "st_mtime_ns": 1794412243175645465,
+        "st_ctime_ns": 1794412243175645465
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1557,
+      "sha256": "94423c9a7d83f9619163268fce12f83f134b1f7330ea0485ab69f908649728ac",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344635,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1557,
+        "st_mtime_ns": 1794412295461491816,
+        "st_ctime_ns": 1794412295461491816
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/root-storage-headroom-inventory-20261111-v1-actual-exit.json",
+      "bytes": 795,
+      "sha256": "06e07af91c555d16de1b139e551c133dda63c91f6badd07108aae5c1bc3afd36",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8297990,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 795,
+        "st_mtime_ns": 1794412670113214512,
+        "st_ctime_ns": 1794412670113214512
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/root-storage-headroom-detail-20261111-v1-actual-exit.json",
+      "bytes": 764,
+      "sha256": "6226f3573788d5ac13d7335ba19e84a04827ca871179edec499e2a742cf469e4",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8303964,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 764,
+        "st_mtime_ns": 1794412670114214490,
+        "st_ctime_ns": 1794412670114214490
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vscode-retirement-candidate-inventory-20261111-v1-actual-exit.json",
+      "bytes": 773,
+      "sha256": "da9dfca2bd07da1dac832315c014052899b3c3583439ca9877d7a894c69dc38c",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8303965,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 773,
+        "st_mtime_ns": 1794412670114214490,
+        "st_ctime_ns": 1794412670114214490
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/inactive-editor-and-snap-reclaim-20261111-v1-actual-exit.json",
+      "bytes": 861,
+      "sha256": "d1e9665ecd8c66601c5cc619653ce36fc0dbd048db407ba5a214fc03589a78a2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8308375,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 861,
+        "st_mtime_ns": 1794412670126214225,
+        "st_ctime_ns": 1794412670126214225
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-four-timestamp-caches-r1-actual-exit-20261111-v1.json",
+      "bytes": 3250,
+      "sha256": "97aef520e0d3fedafac636606d9f6f0100520c5786dae2e19984095a2351dfaf",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344657,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 3250,
+        "st_mtime_ns": 1794413620624225090,
+        "st_ctime_ns": 1794413620624225090
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-remaining-gaps-after-package-replay-20261111-v1.json",
+      "bytes": 37344,
+      "sha256": "fdea581b6127e48774ce235cc5a3969eb922c99ee6581a49a0cabc177dea8bb0",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344648,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 37344,
+        "st_mtime_ns": 1794412895662232917,
+        "st_ctime_ns": 1794412895662232917
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-torch-cpython-archive-r2-post-exit-root-review-20261111-v1.json",
+      "bytes": 5237,
+      "sha256": "26456bac52441bd98c201e43ac8481076286cfd43f43e0ac0f47bd645b4a7e04",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343506,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5237,
+        "st_mtime_ns": 1794371576201678697,
+        "st_ctime_ns": 1794371576206678587
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-uv-sysconfig-root-confirmation-20261111-v1.json",
+      "bytes": 754,
+      "sha256": "0868d594a99a83330fe7719561e0d869f36a5d5f2ae0ccad8f6d1f07bf8475c8",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8343531,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 754,
+        "st_mtime_ns": 1794372104329011234,
+        "st_ctime_ns": 1794372104329011234
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-actual-exit-20261111-v1.json",
+      "bytes": 5470,
+      "sha256": "f9c26af51376ec7d652e12f4cede239e5c1aa05b6065e55de412e9a67ebe361a",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344633,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 5470,
+        "st_mtime_ns": 1794412243175645465,
+        "st_ctime_ns": 1794412243175645465
+      }
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-replay-r1-recorder-actual-exit-20261111-v1.json",
+      "bytes": 1557,
+      "sha256": "94423c9a7d83f9619163268fce12f83f134b1f7330ea0485ab69f908649728ac",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8344635,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1557,
+        "st_mtime_ns": 1794412295461491816,
+        "st_ctime_ns": 1794412295461491816
+      }
+    },
+    {
+      "path": "/mnt/nvme/dory-serial-inventory-deb-replay-r1-20261111/packages/sources-result.json",
+      "bytes": 31097,
+      "sha256": "594f9c3fa05579fa1da9af0a486ca252d988ff16e05041bd05b1b18237574a14",
+      "identity": {
+        "st_dev": 66304,
+        "st_ino": 19136546,
+        "st_mode": 33152,
+        "st_nlink": 1,
+        "st_size": 31097,
+        "st_mtime_ns": 1794412086641096948,
+        "st_ctime_ns": 1794412086641096948
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "bytes": 240936,
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7011,
+        "st_mode": 33261,
+        "st_nlink": 1,
+        "st_size": 240936,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "bytes": 2220400,
+      "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7014,
+        "st_mode": 33261,
+        "st_nlink": 2,
+        "st_size": 2220400,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1793481818489299425
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+      "bytes": 14432,
+      "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7017,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 14432,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "bytes": 940560,
+      "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7021,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 940560,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+      "bytes": 21448,
+      "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7031,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 21448,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+      "bytes": 14664,
+      "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7033,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 14664,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+      "bytes": 14432,
+      "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 7035,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 14432,
+        "st_mtime_ns": 1788445204000000000,
+        "st_ctime_ns": 1790232161361972444
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "bytes": 125488,
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 35303,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 125488,
+        "st_mtime_ns": 1766181126000000000,
+        "st_ctime_ns": 1772166640531813313
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "bytes": 298776,
+      "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 75924,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 298776,
+        "st_mtime_ns": 1766181126000000000,
+        "st_ctime_ns": 1772166641706819124
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+      "bytes": 48152,
+      "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 4962,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 48152,
+        "st_mtime_ns": 1648138892000000000,
+        "st_ctime_ns": 1771394810300839366
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "bytes": 2260296,
+      "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 72869,
+        "st_mode": 33188,
+        "st_nlink": 2,
+        "st_size": 2260296,
+        "st_mtime_ns": 1766181126000000000,
+        "st_ctime_ns": 1793481818490299403
+      }
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+      "bytes": 163240,
+      "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 33638,
+        "st_mode": 33188,
+        "st_nlink": 1,
+        "st_size": 163240,
+        "st_mtime_ns": 1648043755000000000,
+        "st_ctime_ns": 1794168456786548560
+      }
+    },
+    {
+      "path": "/mnt/nvme/dory-torch-cpython-archive-verification-r2-20261111/full-comparison.json.gz",
+      "bytes": 1094180,
+      "sha256": "7e61203920e5b2e7f9e32d56900c42ebedf9f9a4eae6e5757b59a6edb35c2180",
+      "identity": {
+        "st_dev": 66304,
+        "st_ino": 1966083,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1094180,
+        "st_mtime_ns": 1794371518232956375,
+        "st_ctime_ns": 1794371518232956375
+      }
+    },
+    {
+      "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "bytes": 31028464,
+      "sha256": "23bc148d2b48964b621c5561ff2b81c1d9c7b717967a7491efbf12f4304882b5",
+      "identity": {
+        "st_dev": 66304,
+        "st_ino": 6946833,
+        "st_mode": 33261,
+        "st_nlink": 1,
+        "st_size": 31028464,
+        "st_mtime_ns": 1794168480917015157,
+        "st_ctime_ns": 1794168480917015157
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py",
+      "bytes": 5884,
+      "sha256": "78c4744d407690f321565488710b5aaf6486b5afa8d185637aa1e7633ab59cd8",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8542146,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 5884,
+        "st_mtime_ns": 1793420276401923268,
+        "st_ctime_ns": 1793420276401923268
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc",
+      "bytes": 5839,
+      "sha256": "d194804483e7b4eeb5883867a30a51266edcf3c6620675ccd08b784574d251e5",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8546489,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 5839,
+        "st_mtime_ns": 1793420286419702787,
+        "st_ctime_ns": 1793420286419702787
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py",
+      "bytes": 15677,
+      "sha256": "6fdcc49ba23a0203ae6cf28e608f8e6297d7c4d77d52e651db3cb49b9564c6d2",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8542151,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 15677,
+        "st_mtime_ns": 1793420276402923246,
+        "st_ctime_ns": 1793420276402923246
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc",
+      "bytes": 12472,
+      "sha256": "83ddd996fa296303a7ec96aa0eb938f82d139b4f1814cc71fe7d0eaee118f799",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8542148,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 12472,
+        "st_mtime_ns": 1793420286421702743,
+        "st_ctime_ns": 1793420286421702743
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py",
+      "bytes": 1005,
+      "sha256": "ba0cac060269583523ca9506473a755203037c57d466a11aa89a30a5f6756f3d",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8542268,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 1005,
+        "st_mtime_ns": 1793420276404923202,
+        "st_ctime_ns": 1793420276404923202
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc",
+      "bytes": 2211,
+      "sha256": "a863cd92c9943a03498a2b831adde7a834fa91d332dcf146783c6ad410084ccd",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8542149,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 2211,
+        "st_mtime_ns": 1793420286421702743,
+        "st_ctime_ns": 1793420286421702743
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py",
+      "bytes": 51256,
+      "sha256": "cc3e58175aff8e0b034e55acbbf277613cfab33913cf904bb6c2daff2d985d5f",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8546464,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 51256,
+        "st_mtime_ns": 1793420276601918867,
+        "st_ctime_ns": 1793420276601918867
+      }
+    },
+    {
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/__pycache__/_sysconfigdata__linux_x86_64-linux-gnu.cpython-312.pyc",
+      "bytes": 63633,
+      "sha256": "7d7b40263b60dc4fe5c1c43106a2c3b88a5e18be48962bc065d220af83b6cfd1",
+      "identity": {
+        "st_dev": 66306,
+        "st_ino": 8808443,
+        "st_mode": 33204,
+        "st_nlink": 1,
+        "st_size": 63633,
+        "st_mtime_ns": 1793420289251640459,
+        "st_ctime_ns": 1793420289251640459
+      }
+    }
+  ],
+  "regenerated_code_objects_executed": false,
+  "authenticated_startup_sources_executed": true,
+  "child_group_empty": true,
+  "target_caches_imported": false,
+  "original_environment_modified": false,
+  "elapsed_seconds": 10.870693549048156
+}
