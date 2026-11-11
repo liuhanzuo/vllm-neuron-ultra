@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "after": {
+        "bytes": 34752,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py",
+        "sha256": "01a39c067f41b2a32e70f23e78019c9524892267fcd6f7a7d9c992279551d0aa"
+      },
+      "before": {
+        "bytes": 34134,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v1.py",
+        "sha256": "0d40699c4d70f0c8287730dcd1b8c56f7e550ba210e7a5147ba37c51b4eeed8d"
+      },
+      "changed_existing_definitions": [
+        "environment"
+      ],
+      "new_definitions": [
+        "bytecode_guard",
+        "pycache_prefix"
+      ],
+      "normalized_unified_diff": "--- /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v1.py\n+++ /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py (science import version normalized)\n@@ -27,6 +27,7 @@\n import lfm3_nki05_transport_diagnostic_v3 as diagnostic\n import lfm3_nki05_torch_namespace_sources_v1 as namespace_sources\n import lfm3_nki05_full_cpu_leaf_v1 as science\n+import smollm3_record_bytecode_v1 as bytecode\n \n ROOT = Path(__file__).resolve().parent\n SELF = str(Path(__file__).resolve())\n@@ -278,10 +279,24 @@\n     return spec\n \n \n+def pycache_prefix(root):\n+    prefix = Path(root) / 'tmp' / 'empty-pycache'\n+    p.require(prefix.is_absolute() and not prefix.exists() and not prefix.is_symlink(),\n+              'Original bytecode isolation prefix must remain absent and not a symlink')\n+    return prefix\n+\n+\n+def bytecode_guard(root):\n+    # Original predicate checks startup environment, sys prefix and both -B flags.\n+    # This destination is never created or exempted from original output limits.\n+    bytecode.isolated(pycache_prefix(root))\n+\n+\n def environment(root, attempt):\n     return dict(PATH=diagnostic.PREFIX + '/bin:/usr/bin:/bin', HOME='/home/ubuntu',\n                 XDG_RUNTIME_DIR='/run/user/1000', DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus',\n                 PYTHONNOUSERSITE='1', PYTHONDONTWRITEBYTECODE='1', PYTHONOPTIMIZE='0',\n+                PYTHONPYCACHEPREFIX=str(pycache_prefix(root)),\n                 TMPDIR=str(Path(root) / 'tmp'), NEURON_RT_VISIBLE_CORES='',\n                 NKI_PRECISE_FP='1', NEURON_PLATFORM_TARGET_OVERRIDE='trn1',\n                 OMP_NUM_THREADS='1', MKL_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1', NUMEXPR_NUM_THREADS='1',\n",
+      "unchanged_existing_definition_count": 30
+    },
+    {
+      "after": {
+        "bytes": 31131,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v2.py",
+        "sha256": "cee465642e4cc7101b2e216c5cd71f727e5820c3485977c1dbed897e3fe82b16"
+      },
+      "before": {
+        "bytes": 31067,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v1.py",
+        "sha256": "6489f9262fba72c223f2f4d96b1d95659fe98d2b6bc3d1f267ac417d565c08c9"
+      },
+      "changed_existing_definitions": [
+        "execute_batch_science",
+        "execute_full_cpu"
+      ],
+      "new_definitions": [],
+      "normalized_unified_diff": "--- /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v1.py\n+++ /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v2.py (science import version normalized)\n@@ -192,6 +192,7 @@\n def execute_batch_science(host, root, stage, phase, begin, end, admission_ref, admit, result):\n     \"\"\"Called only after exact owner/source/environment gates and original IO audit.\"\"\"\n     admit()\n+    host.bytecode_guard(root)\n     import numpy as np\n     import ml_dtypes\n     wanted = {'numpy': '1.26.4', 'ml_dtypes': '0.5.4'} if stage == 'original_fixture' else {\n@@ -444,6 +445,7 @@\n                 full_model_qualified=False,new_speedup_claim=False,automatic_successor_launch=False)\n     try:\n         admit()\n+        host.bytecode_guard(root)\n         # Existing original seven-distribution RECORD verifier, unchanged. It\n         # reads native runtime files only here, after actual owned admission.\n         import lfm3_movement_device_protocol_v3 as runtime\n",
+      "unchanged_existing_definition_count": 16
+    }
+  ],
+  "normalization": "Only the scientific leaf module import name is mapped v2 to v1 for diff; all behavior changes remain shown. Test20 reverses only the declared additions and proves full-file AST equality.",
+  "patch": {
+    "bytes": 2751,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-v2-normalized-diff-20261111-v1.patch",
+    "sha256": "fb24305ae8e1fb4ec637d6fea4822099809ece066f56348581bdfb901855a3af"
+  },
+  "schema": "lfm3_full_cpu_v2_normalized_diff_v1",
+  "source_only": true
+}
