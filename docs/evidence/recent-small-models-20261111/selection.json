@@ -1,0 +1,412 @@
+{
+  "schema": "official_small_delta_selection_20261111_v1",
+  "reviewer": "/root/recent_small_refresh_20261111",
+  "observed_at": "2026-11-11T17:10:13.026610+00:00",
+  "authors_scanned": 19,
+  "latest_repositories_scanned": 293,
+  "changed_revisions_or_new_repositories": 13,
+  "newly_created_repositories": [
+    {
+      "id": "inclusionAI/SingVL_S1_4B",
+      "sha": "93f15cd61c1cf417d9cb2631f6be2df13510829e",
+      "createdAt": "2026-11-11T03:58:51.000Z",
+      "lastModified": "2026-11-11T05:38:33.000Z",
+      "downloads": 17,
+      "likes": 3,
+      "pipeline_tag": "image-text-to-text",
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    },
+    {
+      "id": "inclusionAI/ZoomGain-9B-GGUF",
+      "sha": "3c25485839f778c068f8813fd6284a994b8ff6f6",
+      "createdAt": "2026-11-11T03:16:31.000Z",
+      "lastModified": "2026-11-11T03:23:57.000Z",
+      "downloads": 13,
+      "likes": 0,
+      "pipeline_tag": "image-text-to-text",
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    },
+    {
+      "id": "inclusionAI/ZoomGain-4B-GGUF",
+      "sha": "851a0074adb9b89f2c043a1c55dbf155b9e0acb2",
+      "createdAt": "2026-11-11T03:09:43.000Z",
+      "lastModified": "2026-11-11T03:13:11.000Z",
+      "downloads": 0,
+      "likes": 0,
+      "pipeline_tag": "image-text-to-text",
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    },
+    {
+      "id": "inclusionAI/ZoomGain-9B",
+      "sha": "b4550ef2e5a30b33c5133278036a682197489145",
+      "createdAt": "2026-11-10T11:42:55.000Z",
+      "lastModified": "2026-11-11T07:59:15.000Z",
+      "downloads": 6,
+      "likes": 3,
+      "pipeline_tag": null,
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    },
+    {
+      "id": "inclusionAI/ZoomGain-4B",
+      "sha": "2ac9e28f1de993b4d7b6ebeda1368ff2e6982a71",
+      "createdAt": "2026-11-10T11:38:15.000Z",
+      "lastModified": "2026-11-11T07:58:12.000Z",
+      "downloads": 13,
+      "likes": 2,
+      "pipeline_tag": null,
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    },
+    {
+      "id": "nvidia/Kimi-K3.1-Pro-NVFP4",
+      "sha": "a0b0283f0f4f91f09b37a6e5fe45a62de269cbd0",
+      "createdAt": "2026-11-11T00:57:46.000Z",
+      "lastModified": "2026-11-11T06:16:27.000Z",
+      "downloads": 0,
+      "likes": 0,
+      "pipeline_tag": "image-text-to-text",
+      "not_in_previous_latest16": true,
+      "created_since_previous_retrieval": true,
+      "previous_sha": null
+    }
+  ],
+  "successful_requests": 45,
+  "metadata_bytes": 1096284,
+  "decisions": [
+    {
+      "model": "inclusionAI/SingVL_S1_4B",
+      "revision": "93f15cd61c1cf417d9cb2631f6be2df13510829e",
+      "decision": "exclude_from_autoregressive_generation_queue",
+      "reason": "Official decision-model API scores supplied options in one forward pass per question; inherited Qwen3.5 architecture does not make that task equivalent to long token generation.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__SingVL_S1_4B.metadata.json",
+        "bytes": 10208,
+        "sha256": "6f82687ddf39cc61414eb15fd550784cee3234f1c95827da1f2b22c85999f870"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__SingVL_S1_4B.README.md",
+        "bytes": 9561,
+        "sha256": "1d0394f8c83dea50ec57873c9d2e5dd9802c4485d7aa3aae454dad5fae29b20f"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__SingVL_S1_4B.config.json",
+        "bytes": 8222,
+        "sha256": "715626f7bd7cf9f90ffd4f23a235eafe676394b654edb57e3e8d335b8bc543ca"
+      },
+      "model_card_url": "https://huggingface.co/inclusionAI/SingVL_S1_4B/blob/93f15cd61c1cf417d9cb2631f6be2df13510829e/README.md"
+    },
+    {
+      "model": "inclusionAI/ZoomGain-4B",
+      "revision": "2ac9e28f1de993b4d7b6ebeda1368ff2e6982a71",
+      "decision": "watch_existing_qwen35_family_visual_variant",
+      "reason": "Official Nov11 checkpoint release and4.539B BF16 metadata, but13 downloads/2likes and fine-grained vision focus. Preserve fixed Qwen3.5 experiments; do not substitute this finetune.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-4B.metadata.json",
+        "bytes": 9192,
+        "sha256": "46a9240239a886e634247cbe8432db7cde086224851dc2e02e86a03e4a18b54c"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-4B.README.md",
+        "bytes": 9154,
+        "sha256": "0c22c67fba32b002c9629d8c32bc2c446ea929da75acf9af4f61f6debf38665f"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-4B.config.json",
+        "bytes": 2904,
+        "sha256": "755b11f4496928c6dd84d2a34ef200a0d7cba6bdffe5cc4e7c5fe1ff8a093945"
+      },
+      "model_card_url": "https://huggingface.co/inclusionAI/ZoomGain-4B/blob/2ac9e28f1de993b4d7b6ebeda1368ff2e6982a71/README.md"
+    },
+    {
+      "model": "inclusionAI/ZoomGain-9B",
+      "revision": "b4550ef2e5a30b33c5133278036a682197489145",
+      "decision": "watch_existing_qwen35_family_visual_variant",
+      "reason": "Official Nov11 checkpoint release and9.410B BF16 metadata including repository tensors, but6 downloads/3likes and fine-grained vision focus; low current priority.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-9B.metadata.json",
+        "bytes": 9192,
+        "sha256": "7d40b36d4944b4bd25b4b3f35e580022f757b8101ea196675ee69f800d2d3218"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-9B.README.md",
+        "bytes": 9154,
+        "sha256": "590ccff4a1e3efc8067703c37f3a0ec7451d364eedfaf0ec3a42270c20e4c42b"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/inclusionAI__ZoomGain-9B.config.json",
+        "bytes": 2907,
+        "sha256": "5deeb5b69fd7f4e88d3854ddc8784c82de15757c3254d65d8610e10620eb3008"
+      },
+      "model_card_url": "https://huggingface.co/inclusionAI/ZoomGain-9B/blob/b4550ef2e5a30b33c5133278036a682197489145/README.md"
+    },
+    {
+      "model": "openbmb/MiniCPM-OCR-1.0",
+      "revision": "883ca368d17335b9ce5aa6fef4d000ef0684fcaa",
+      "decision": "retain_popular_specialized_optional_candidate",
+      "reason": "1.300B original-BF16 metadata;114431 downloads/455likes. SigLIP vision encoder plus Qwen3.5 decoder; OCR/document generation needs its own task/reference/Neuron baseline. No evidence yet that general-text quality gates are an appropriate task substitute.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0.metadata.json",
+        "bytes": 9958,
+        "sha256": "cbc3bb3666d8a391e9378371db65663db7a229e21070cfe9554cab2eddcf03fc"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0.README.md",
+        "bytes": 19162,
+        "sha256": "41397755907ff633bc4aa689c3660a1ef8e1e62b642e0944c0abccc97004ad27"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0.config.json",
+        "bytes": 2275,
+        "sha256": "762025491b206967a3c29c3e36ff2cccd8af6a8c750360b61dc91882b573f759"
+      },
+      "model_card_url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0/blob/883ca368d17335b9ce5aa6fef4d000ef0684fcaa/README.md"
+    },
+    {
+      "model": "openbmb/MiniCPM-OCR-1.0-DSpark",
+      "revision": "cb24ab4f593389832024a688216e05bf3803950e",
+      "decision": "retain_draft_optimization_lead_not_independent_model",
+      "reason": "Official card states paired draft head for MiniCPM-OCR1.0; BF16 parameter count296837889 plus114688 I64 token-map entries. Main+draft BF16 metadata sums1597272049, still<10B, but exact verification/cache rollback/token remapping need implementation and paired validation.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0-DSpark.metadata.json",
+        "bytes": 1696,
+        "sha256": "203a4de2ea07fc5626efcee4ad9ffcff8abff512e32d07d03de5025393eeca3d"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0-DSpark.README.md",
+        "bytes": 7919,
+        "sha256": "281d255aaaf9b3f9b24c8723f22aa7582034d6eaeb544659bef7541eb326bc90"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/openbmb__MiniCPM-OCR-1.0-DSpark.config.json",
+        "bytes": 1409,
+        "sha256": "ba0a9ed774ca1e5e4d7d97517379e477c7e8b6c151154e4b0556b0abd449d2e3"
+      },
+      "model_card_url": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0-DSpark/blob/cb24ab4f593389832024a688216e05bf3803950e/README.md"
+    },
+    {
+      "model": "tencent/Qwen3.8-27B-DSpine-b16",
+      "revision": "5f54174d301dbca65d9aa4448dc47e56732d9a12",
+      "decision": "exclude_as_independent_under10b_target",
+      "reason": "2.026B draft must load Qwen3.8-27B; unchanged dependency on>10B main target. External GPU/SGLang speedups are not Trn1 measurements.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/tencent__Qwen3.8-27B-DSpine-b16.metadata.json",
+        "bytes": 1390,
+        "sha256": "babfc57d6de1c1b16935e7919bdc5cb1bc305264e6209fb77a938b2325ab4c0a"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/tencent__Qwen3.8-27B-DSpine-b16.README.md",
+        "bytes": 10731,
+        "sha256": "f81e53db946c55ca6787a3fefd479ebc5852540dd86db69ef340f2b108bfb14b"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/tencent__Qwen3.8-27B-DSpine-b16.config.json",
+        "bytes": 2302,
+        "sha256": "c2aa9e3ff22766ea7df0fa5b5f5f7d2035ae722671c6b7eb58b65578705e6815"
+      },
+      "model_card_url": "https://huggingface.co/tencent/Qwen3.8-27B-DSpine-b16/blob/5f54174d301dbca65d9aa4448dc47e56732d9a12/README.md"
+    },
+    {
+      "model": "nvidia/Kimi-K3.1-Pro-NVFP4",
+      "revision": "a0b0283f0f4f91f09b37a6e5fe45a62de269cbd0",
+      "decision": "exclude_size_and_precision",
+      "reason": "Official card states2.8T total/104B active. NVFP4 packing does not turn this into a<10B original-precision model; even declared BF16 tensor subset exceeds10B.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/nvidia__Kimi-K3.1-Pro-NVFP4.metadata.json",
+        "bytes": 29556,
+        "sha256": "2951f7db9eee63bffa1b1e5baf299292af54bb9d14d7999e7c897ef9acde1dc5"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/nvidia__Kimi-K3.1-Pro-NVFP4.README.md",
+        "bytes": 10204,
+        "sha256": "dcae5a0e8fed01a8346c8b0675f9491183493f88186c7b4079ba857781e83d0c"
+      },
+      "config": null,
+      "model_card_url": "https://huggingface.co/nvidia/Kimi-K3.1-Pro-NVFP4/blob/a0b0283f0f4f91f09b37a6e5fe45a62de269cbd0/README.md"
+    },
+    {
+      "model": "ibm-granite/granite-speech-5.0-2b",
+      "revision": "ec49ca6b1a5e7e9176127e09cb303ab78cbacdf7",
+      "decision": "retain_speech_specific_backlog_not_text_baseline_replacement",
+      "reason": "2.313B BF16 metadata and card releaseOct20; unchanged revision since prior scan. ASR/AST task with audio encoder and projector requires speech evaluation; not a newly released general-text model.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/ibm-granite__granite-speech-5.0-2b.metadata.json",
+        "bytes": 2808,
+        "sha256": "f17a91d16ce8eca140858201bd96e2bb54f60fc12794a199991840ce8c764f33"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/ibm-granite__granite-speech-5.0-2b.README.md",
+        "bytes": 27627,
+        "sha256": "bb523b9bf96f87adceae66d75d7a77052e151604425c1de31d016b960b303c13"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/ibm-granite__granite-speech-5.0-2b.config.json",
+        "bytes": 2281,
+        "sha256": "14e35a6daa1b4bdd38b3fc0b62eaf519e8993a2fbbbc2b527432c684376d62a3"
+      },
+      "model_card_url": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b/blob/ec49ca6b1a5e7e9176127e09cb303ab78cbacdf7/README.md"
+    },
+    {
+      "model": "nvidia/Metatron-v1",
+      "revision": "b19cb13f1953ea4c1345faa82912b80e34679da6",
+      "decision": "exclude_non_language_model",
+      "reason": "Official model card describes a Unitree G1 humanoid motion/control policy with ONNX/native artifacts; no language token generation baseline.",
+      "metadata": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/nvidia__Metatron-v1.metadata.json",
+        "bytes": 1451,
+        "sha256": "3f1f26d6433e158ddb7a2e84bcf7d9146ba1fbef62f2f79871b226bf2b10b7a5"
+      },
+      "model_card": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/nvidia__Metatron-v1.README.md",
+        "bytes": 7926,
+        "sha256": "587b7f62b5549c13114208cbd713a0d07801134e7a4737940a2e1447249cdb8a"
+      },
+      "config": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/official-small-delta-20261111-v1/nvidia__Metatron-v1.config.json",
+        "bytes": 2347,
+        "sha256": "a144c4bd505b9bc215ce628e18a2149a11b5788479a9d2e32c2d4641b540557f"
+      },
+      "model_card_url": "https://huggingface.co/nvidia/Metatron-v1/blob/b19cb13f1953ea4c1345faa82912b80e34679da6/README.md"
+    }
+  ],
+  "quantized_derivative_updates_not_original_precision_candidates": [
+    "inclusionAI/ZoomGain-9B-GGUF",
+    "inclusionAI/ZoomGain-4B-GGUF",
+    "openbmb/MiniCPM-OCR-1.0-DSpark-gguf",
+    "openbmb/MiniCPM-OCR-1.0-GPTQ",
+    "openbmb/MiniCPM-OCR-1.0-AWQ",
+    "openbmb/MiniCPM-OCR-1.0-gguf"
+  ],
+  "prior_families": [
+    {
+      "family": "Granite 4.2",
+      "models": [
+        "ibm-granite/granite-4.2-3b",
+        "ibm-granite/granite-4.2-8b"
+      ]
+    },
+    {
+      "family": "Qwen3.5",
+      "models": [
+        "Qwen/Qwen3.5-2B",
+        "Qwen/Qwen3.5-4B",
+        "Qwen/Qwen3.5-9B"
+      ]
+    },
+    {
+      "family": "Gemma 4",
+      "models": [
+        "google/gemma-4-E2B-it",
+        "google/gemma-4-E4B-it"
+      ]
+    },
+    {
+      "family": "LFM3",
+      "models": [
+        "LiquidAI/LFM3-1.7B"
+      ]
+    },
+    {
+      "family": "Ministral 3",
+      "models": [
+        "mistralai/Ministral-3-3B-Instruct-2512",
+        "mistralai/Ministral-3-8B-Instruct-2512",
+        "mistralai/Ministral-3-3B-Instruct-2512-BF16",
+        "mistralai/Ministral-3-8B-Instruct-2512-BF16"
+      ]
+    },
+    {
+      "family": "Phi-4-mini",
+      "models": [
+        "microsoft/Phi-4-mini-instruct",
+        "microsoft/Phi-4-mini-reasoning"
+      ]
+    },
+    {
+      "family": "SmolLM3",
+      "models": [
+        "HuggingFaceTB/SmolLM3-3B"
+      ]
+    },
+    {
+      "family": "Qwen3 / DeepSeek controls",
+      "models": [
+        "Qwen/Qwen3-4B-Instruct-2507",
+        "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B"
+      ]
+    },
+    {
+      "family": "Nanbeige 4.2",
+      "models": [
+        "Nanbeige/Nanbeige4.2-3B"
+      ]
+    },
+    {
+      "family": "Nemotron",
+      "models": [
+        "nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+        "nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+      ]
+    },
+    {
+      "family": "OLMo 3",
+      "models": [
+        "allenai/Olmo-3-7B-Instruct"
+      ]
+    },
+    {
+      "family": "rnj",
+      "models": [
+        "EssentialAI/rnj-1.5-instruct"
+      ]
+    },
+    {
+      "family": "MiniCPM5",
+      "models": [
+        "openbmb/MiniCPM5-2B"
+      ]
+    },
+    {
+      "family": "NVIDIA Dory",
+      "models": [
+        "nvidia/NVIDIA-Nemotron-Labs-Dory1.0-4B-BF16"
+      ]
+    },
+    {
+      "family": "Spark-X2.6",
+      "models": [
+        "XHToken/Spark-X2.6-4B"
+      ]
+    }
+  ],
+  "prior_families_preserved": 15,
+  "canonical_sha256": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d"
+  },
+  "existing_model_selection_replaced": false,
+  "new_model_qualification": false,
+  "new_baseline": false,
+  "new_speedup_claim": false,
+  "scan_exhaustive": false,
+  "scope": "Newest16 repositories per same19 official publishers, finite comparison against Nov8; not exhaustive.",
+  "parameter_policy": "All-repository original-BF16 Hub safetensors metadata is a screening signal; full downloaded weight headers/bytes have not been checked. Include vision/audio components; MoE active count and quantized storage elements do not define total original parameters.",
+  "release_date_policy": "ZoomGain model card explicitly announces Nov11 checkpoint release. Repository createdAt/lastModified are not general model release dates. MiniCPM-OCR repository was createdOct21 and this scan only shows a later revision.",
+  "priority_recommendation": [
+    "Preserve current15-family original-model correctness and matched-Neuron work; no newly observed popular general-text replacement was established in this limited scan.",
+    "Keep MiniCPM-OCR1.0 as the strongest additional popular specialized candidate; perform task suitability and original reference/adapter assessment before any weight download or new baseline.",
+    "Keep its under10B combined target+DSpark as a future speculative decoding lead; validate all target outputs, token remapping, rejection/cache rollback and device baseline before timing.",
+    "Watch ZoomGain4B/9B as Qwen3.5 visual finetunes after original-family correctness; current popularity does not justify displacing active work."
+  ],
+  "external_model_card_performance_not_our_speedup": true,
+  "no_weight_payload_or_native_execution": true
+}
