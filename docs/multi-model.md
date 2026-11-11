@@ -1,3 +1,5 @@
+最新进展：[LFM3 BF16 写回完整对照：32 项与全部编码通过](lfm-writeback-characterization-20261111.md)。原实现失败保留，暂无新增整模型提速。
+
 # Unified Trn1 experimental branch
 
 [MiniCPM5 保存算子报告全量独立复核通过，LFM3 显式控制后继已启动](mini-independent-audit-lfm-selector-20261111.md)：1,284 份采集数据重新读取，六份报告和汇总精确重现；47 组相同 P/V 输入仍有 context 差异，固定输入重放待执行。LFM3 r4 三项通过后遇到槽位类型错误，r5 修正通过 12 项独立检查并已进入串行运行。没有新增模型提速。
