@@ -1,0 +1,75 @@
+{
+  "schema": "minicpm5_native_sdk_report_transport_root_review_v1",
+  "created_at": "2026-11-11T13:47:59.892956+00:00",
+  "reviewer": "/root",
+  "source_only": true,
+  "passed": true,
+  "accepted_scope": "Pure complete lossless bounded comparison-report representation; no runtime admission or actual tensor comparison",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-sdk-report-transport-source-delivery-20261111-v1.json",
+    "sha256": "d8f8e4fa8e13a869f920612e46a86d24d7e49d8a441ee23cb613418bbf12bad7"
+  },
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_sdk_report_transport_v1.py",
+    "sha256": "b5bb07f85663379de2712ec1546698fbeb260964ae6f8c0dbe2bbe142b06068f"
+  },
+  "metrics": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-sdk-report-transport-synthetic-metrics-20261111-v1.json",
+    "sha256": "73b50f5c734f6d49f37cabf391735ec44548d2b1fd2f1aa8a0f9ee48556b5572"
+  },
+  "original_codec_ast_comparison": {
+    "actual_tool": {
+      "kind": "tool_call",
+      "terminal_chunk": "579443",
+      "exit_code": 0
+    },
+    "both_function_bodies_exact": true
+  },
+  "independent_tests": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_sdk_transport_root_v1.py",
+      "sha256": "5e788deec6fbfc648d696fbc9e07b69d83309aa4637b798dadd91c83ea4fe0b3"
+    },
+    "actual_tool": {
+      "kind": "tool_call",
+      "terminal_chunk": "99d7ed",
+      "exit_code": 0
+    },
+    "tests_passed": 4,
+    "duration_seconds": 0.011,
+    "synthetic_only": true
+  },
+  "author_full_synthetic": {
+    "actual_tool": {
+      "kind": "tool_session",
+      "session_id": 64230,
+      "terminal_chunk": "60395f",
+      "exit_code": 0
+    },
+    "tests_passed": 7,
+    "generations": 1,
+    "reads": 1632,
+    "canonical_bytes": 8161901,
+    "compressed_bytes": 470304,
+    "base64_bytes": 627072,
+    "complete_stored_bytes": 627301,
+    "complete_file_cap_bytes": 2097152,
+    "full_roundtrip_equal": true
+  },
+  "checks": [
+    "Exact original codec function bodies with unchanged32MiB expanded and2MiB stored bounds",
+    "Full report preserved, including all1632 references, every comparison/unknown/padding/coverage/alignment",
+    "One zlib stream only; truncated, excess, second-stream, false length and false hash reject",
+    "Canonical complete decoded JSON must reproduce original digest; duplicate envelope and noncanonical inner report reject",
+    "Final JSON overhead and newline included in original strict2MiB cap"
+  ],
+  "limits": [
+    "Real report values may compress differently and must pass the same size cap; no evidence truncation or cap increase.",
+    "Existing comparator source review and actual completed/audited captures required. This helper is not an evidence authenticator.",
+    "No actual source data, raw tensor, native library, model, process, serial lock or service operations performed by transport tests."
+  ],
+  "runtime_admitted": false,
+  "launch_ready": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
