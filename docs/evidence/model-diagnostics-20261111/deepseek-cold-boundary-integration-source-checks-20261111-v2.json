@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "scope": "source plus inert stdlib metadata fixtures only",
+  "checks": [
+    "all_previously_reviewed_v1_sources_and_evidence_preserved",
+    "v2_driver_preserves_original_loops_and_binds_relocated_lifecycle_plus_raw_logit_hash",
+    "relocated_lifecycle_retains_original_validators_and_never_uses_old_destination",
+    "full_raw_cache_comparator_pairs_all42_84_and_rejects_omission_reordering_incomplete_capture",
+    "total_payload_budget_includes_full_KV_fallback_lifecycle_logits_weights_and_unknown_compile_costs"
+  ],
+  "predecessor_check_sha256": "aeaa57976a32dbe6ccd335adaf8bb16aee294aed5f8b999f99b7193ba2ccd9a5",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_deepseek_cold_boundary_v2.py": "ee7df0faddd0d9e571b6036104e67e1a6b03c012da434fa70b3f409f157e149d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_boundary_lifecycle_v1.py": "2bb7d67f502697efb93896164aebd076e50ed16ac60b33f0d44188d08c6bab0e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/verify_deepseek_cold_boundary_neutrality_v1.py": "547c99c41fe4475d72f51dbf76f3b6c21a9dd367a18d0b7736a277fe0e1f0466",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/check_deepseek_cold_boundary_integration_v2.py": "d7107ff49aaf083dc8552b3ff6c14633022415e6b91841c3265ab8c7138a346d"
+  },
+  "execution_storage_budget": {
+    "calculation_source_sha256": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_kv_contract_v2.py": "2bea0aa5f027b52c4ececee90cfee53065ecaf633263262dea1a8df3468d7d07",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek-cold-kv-diagnostic-v2/plan.json": "ae8a6c8a2acc32313e656350bec4602b3c9752c0c7561007c2574b75f2d3860c"
+    },
+    "boundary_tensor_bytes": 572866560,
+    "native_and_device_raw_logits_bytes": 76575744,
+    "all144_state_before_after_warmup_snapshots_bytes": 4982833152,
+    "full_history_KV_append_only_bytes": 5366808576,
+    "full_history_KV_all_replacements_worst_case_bytes": 16081846272,
+    "serialization_and_json_reserved_bytes": 2147483648,
+    "output_bytes_if_all_old_prefixes_remain_identical": 13146567680,
+    "output_bytes_worst_case": 23861605376,
+    "native_KV_worst_case_bytes": 5360615424,
+    "device_KV_worst_case_bytes": 10721230848,
+    "two_historical_TP_shard_weight_files_bytes": 16382184072,
+    "additional_weight_copy_required": "Unknown: immutable sharing of unchanged weight entries must first be verified; reserve full copy otherwise.",
+    "new_compiler_scratch_bytes": null,
+    "new_NEFF_and_serialized_graph_bytes": null,
+    "old_model_pt_bytes": 176072171,
+    "old_model_pt_is_not_new_artifact_bound": true,
+    "original_existing_artifacts_and_raw_evidence_preserved": true,
+    "proposed_placement": "Root: native payload and lifecycle snapshots; NVMe: device payload. New compile weights/scratch/artifact require separate fresh bounds.",
+    "root_reported_free_gib": 28.67,
+    "nvme_reported_free_gib": 44,
+    "nvme_required_free_floor_gib": 30,
+    "free_space_source": "Parent status message, not independently remeasured by this source-only task.",
+    "launch_admitted": false,
+    "reason": "No total execution admission until new compile scratch/artifact bounds and weight sharing/copy are established and all free-space floors rechecked."
+  },
+  "runtime_launched": false,
+  "raw_payloads_read": false,
+  "actual_capture_neutrality_proven": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

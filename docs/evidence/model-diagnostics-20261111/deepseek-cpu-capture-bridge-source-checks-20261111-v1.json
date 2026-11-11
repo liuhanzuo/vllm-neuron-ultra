@@ -1,0 +1,76 @@
+{
+  "passed": true,
+  "kind": "actual-source AST plus inert stdlib fixtures; no numerical or native execution",
+  "checks": [
+    "three_original_SDK_capture_CPU_sampler_failures_reproduced_from_actual_AST",
+    "config_roundtrip_preserves_CPU_sampler_BF16_TP2_and_rejects_second_logits_head",
+    "all_seven_CTE_prediction_indices_use_actual_padding_value_1_and_TKG_column_0",
+    "all_468_named_boundaries_keep_every_feature_and_Q_K_V_then_gather_both_TP_ranks",
+    "successor_constructed_outputs_and_all72_CPU_cache_destinations_use_exact_one_head_offset",
+    "actual_frozen_DecoderModelInstance_alias_header_matches_successor_ABI",
+    "original_cold_loops_AST_equal_native42_device84_all14_failure_indices_retained"
+  ],
+  "original_failure_reproductions": {
+    "config": {
+      "error": "Tensor capture requires on device sampling config to be set even if it's just defaults",
+      "output_logits_mutated": true
+    },
+    "capture_list_misparsed_as_logits": true,
+    "forced_second_logits_head_misaligns_KV": true
+  },
+  "source_sha256": {
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/config.py": "6380d0671130b519642509bf4de76412a7ab0f6d092c3676197cd1610185314e",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/qwen3/modeling_qwen3.py": "fe57b70f6f50d4ee32f7e5a7602f0a98e4ed854e18699d0ee8b60b8b53a0d6d2",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/attention_base.py": "c436c003161c9fd8d8d8a2a258284026b727aabca64d596c845d54ca776de5e8",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/utils.py": "282142ea4a2a761e4287d8d6962f7e11d8ca8e57261feb74c038535d13319016",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/transformers-reference/src/transformers/models/qwen3/modeling_qwen3.py": "64fec98db8cd0edaa740baf026be6adb1d5011e38bfa050ccdf6693b1da9f95d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_deepseek_cold_kv_v2.py": "77ffad13d0acf7d6bade39fe2f1aa5f6e9524db265c1373efe8d8b00b29b8677",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_qwen3_neuron_adapter.py": "6a220d8128a8a1ace024a224372ebf3811d3547c30705c4e4671e8002b8cfdfe",
+    "/mnt/nvme/neuron-artifacts/latest-20261031-deepseek-r1-qwen3-8b-bf16-cpu-tp2-b4-ctx4096/neuron_config.json": "26b0382de78b251aaa45fcd2c70e632140bba9f1120579e3888fed5685860a18"
+  },
+  "successor_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cpu_capture_bridge_v1.py": "33d1cbbc2059281b09684f6146b3803d661a0db0427baecba7e3a15308b833d9",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_qwen3_capture_adapter_v1.py": "93dadffa302dc0752ed8e1075fed436e1f2db717502b9ff3346552bf5c54dc80",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_boundary_capture_v1.py": "186b011b9cb1d733d00fb619e25114db0b1c09b7d522511c657ec5861a3dea7d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_deepseek_cold_boundary_v1.py": "ca53571d37e8378bddf583520810626a395d062f5ce956c584482cf5fe8eabd4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/check_deepseek_cpu_capture_bridge_v1.py": "7151bacf86e55180c1e2799eb59a226e24bf990c693a36326c79e30e7c5454b1"
+  },
+  "metadata_neutrality_control": {
+    "frames": 84,
+    "original_metrics_exact": true,
+    "original14_failed_indices": [
+      33,
+      35,
+      36,
+      38,
+      40,
+      42,
+      45,
+      47,
+      48,
+      50,
+      60,
+      62,
+      68,
+      70
+    ],
+    "full_model_qualified": false
+  },
+  "boundary_byte_budget": {
+    "device_bytes_per_prediction": 5234688,
+    "native_bytes_per_prediction": 3170304,
+    "device84_tensor_bytes": 439713792,
+    "native42_tensor_bytes": 133152768,
+    "combined_boundary_tensor_bytes": 572866560,
+    "boundary_payload_admission_floor_bytes": 1073741824,
+    "excludes": "KV journals, lifecycle snapshots, logits, compilation and serialization overhead"
+  },
+  "capture_graph_compiled": false,
+  "native42_executed": false,
+  "device84_executed": false,
+  "raw_logits_KV_neutrality_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

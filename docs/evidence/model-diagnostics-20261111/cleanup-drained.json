@@ -1,0 +1,80 @@
+{
+  "physically_drained": true,
+  "properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "2h",
+    "RemainAfterExit": "yes",
+    "MainPID": "0",
+    "ControlPID": "0",
+    "Result": "exit-code",
+    "ExecMainPID": "1680415",
+    "ExecMainCode": "1",
+    "ExecMainStatus": "1",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=1b03679646fb08be6a6ab9bdf296d0a8 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v10.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-operator-native-r2-catalog256-20261111/admission.json --admission-sha256 18f01a071b588bb6ca4e51730dca8ef386532c59d9db19c74640e4d45348eea4 ; ignore_errors=no ; start_time=[Wed 2026-11-11 16:35:22 UTC] ; stop_time=[Wed 2026-11-11 17:54:45 UTC] ; pid=1680415 ; code=exited ; status=1 }",
+    "ControlGroup": "",
+    "AllowedCPUs": "6-7",
+    "MemoryHigh": "15032385536",
+    "MemoryMax": "17179869184",
+    "MemorySwapMax": "0",
+    "TasksMax": "128",
+    "Environment": "",
+    "LimitFSIZE": "16777216",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "Nice": "19",
+    "CPUAffinity": "6-7",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-mini-layer1-operator-native-r2-catalog256-20261111.service",
+    "BindsTo": "",
+    "After": "app.slice basic.target -.mount",
+    "LoadState": "loaded",
+    "ActiveState": "failed",
+    "SubState": "failed",
+    "Job": "",
+    "InvocationID": "483931c5a1c04771a41107351bcf9fc8",
+    "ExecStopPost": ""
+  },
+  "group": {
+    "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r2-catalog256-20261111.service",
+    "absent": true
+  },
+  "owners_checked": [
+    {
+      "pid": 1680415,
+      "start_ticks": "419543059",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v10.py",
+        "--mode",
+        "coordinator",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r2-catalog256-20261111/admission.json",
+        "--admission-sha256",
+        "18f01a071b588bb6ca4e51730dca8ef386532c59d9db19c74640e4d45348eea4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r2-catalog256-20261111.service",
+      "unit": "trn1-mini-layer1-operator-native-r2-catalog256-20261111",
+      "invocation_id": "483931c5a1c04771a41107351bcf9fc8"
+    },
+    {
+      "pid": 1696542,
+      "start_ticks": "419601594",
+      "ppid": 1680415,
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v10.py",
+        "--mode",
+        "native",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r2-catalog256-20261111/admission.json",
+        "--admission-sha256",
+        "18f01a071b588bb6ca4e51730dca8ef386532c59d9db19c74640e4d45348eea4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r2-catalog256-20261111.service"
+    }
+  ],
+  "self_exit_claimed": false
+}

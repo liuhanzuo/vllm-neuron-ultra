@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LFM3 NKI0.5 serial source interfaces; schemas only, no execution instance",
+  "description": "Root must bind an actual post-Mini terminal/catalog and independently review a fresh concrete spec. This file contains no future admission or terminal outcome. Runtime source validation remains authoritative.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/spec"
+    },
+    {
+      "$ref": "#/$defs/review"
+    }
+  ],
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^/.*\\.json$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "sourcePins": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 1024,
+      "propertyNames": {
+        "pattern": "^/.*\\.py$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "spec": {
+      "type": "object",
+      "required": [
+        "schema",
+        "root_finalized",
+        "runner",
+        "diagnostic",
+        "source_sha256",
+        "serial_catalog",
+        "terminal_handoff",
+        "output_root",
+        "unit",
+        "resources",
+        "lock_identity",
+        "canonical_sha256",
+        "root_floor_bytes",
+        "output_cap_bytes",
+        "model_qualification_claim",
+        "automatic_successor_launch"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema": {
+          "const": "lfm3_nki05_serial_spec_v1"
+        },
+        "root_finalized": {
+          "const": true
+        },
+        "runner": {
+          "const": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_transport_serial_v1.py"
+        },
+        "diagnostic": {
+          "const": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_transport_diagnostic_v1.py"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sourcePins"
+        },
+        "serial_catalog": {
+          "$ref": "#/$defs/reference"
+        },
+        "terminal_handoff": {
+          "$ref": "#/$defs/reference"
+        },
+        "output_root": {
+          "type": "string",
+          "pattern": "^/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki05-transport-[a-z0-9-]{1,80}$"
+        },
+        "unit": {
+          "type": "string",
+          "pattern": "^trn1-lfm3-nki05-transport-[a-z0-9-]{1,80}$"
+        },
+        "resources": {
+          "const": {
+            "MemoryMax": "10737418240",
+            "MemoryHigh": "8589934592",
+            "MemorySwapMax": "0",
+            "TasksMax": "32",
+            "AllowedCPUs": "6-7",
+            "CPUAffinity": "6-7",
+            "Nice": "19",
+            "KillMode": "control-group",
+            "RemainAfterExit": "yes",
+            "SendSIGKILL": "yes",
+            "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+            "LimitFSIZE": "262144",
+            "LimitAS": "12884901888",
+            "LimitCPU": "1800",
+            "RuntimeMaxSec": "1800",
+            "TimeoutStopSec": "15"
+          }
+        },
+        "lock_identity": {
+          "const": {
+            "device": 66306,
+            "inode": 8294421
+          }
+        },
+        "canonical_sha256": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "pattern": "^/home/ubuntu/experiments/trn1-latest-models-20261031/[^/]+\\.json$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "root_floor_bytes": {
+          "const": 30064771072
+        },
+        "output_cap_bytes": {
+          "const": 4194304
+        },
+        "model_qualification_claim": {
+          "const": false
+        },
+        "automatic_successor_launch": {
+          "const": false
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "schema",
+        "reviewer",
+        "source_author",
+        "source_only",
+        "passed",
+        "blockers",
+        "spec",
+        "source_sha256",
+        "runtime_admitted"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "schema": {
+          "const": "lfm3_nki05_serial_source_review_v1"
+        },
+        "reviewer": {
+          "const": "/root"
+        },
+        "source_author": {
+          "const": "/root/lfm3_next_optimization_20261111"
+        },
+        "source_only": {
+          "const": true
+        },
+        "passed": {
+          "const": true
+        },
+        "blockers": {
+          "const": []
+        },
+        "spec": {
+          "$ref": "#/$defs/reference"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sourcePins"
+        },
+        "runtime_admitted": {
+          "const": false
+        }
+      }
+    }
+  }
+}
