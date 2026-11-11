@@ -1,0 +1,106 @@
+--- run_dory_descriptor_inventory_root_v3.py
++++ run_dory_system_package_metadata_root_v1.py
+@@ -1,4 +1,4 @@
+-"""Inventory-only successor; new descriptor policy, unchanged original lifecycle helpers.
++"""System package metadata-only successor; unchanged descriptor/lifecycle helpers.
+ 
+ No native/ABI/stage-A branches or automatic successor. Fresh runtime admission
+ and actual external exit verification remain root responsibilities.
+@@ -15,6 +15,7 @@
+ Q=Path(__file__).resolve().parent;ROOT=Q.parent;sys.path[:0]=[str(Q),str(ROOT)]
+ import dory_serial_stage_contract_v2 as c
+ import dory_descriptor_inventory_runtime_v2 as runtime
++import dory_system_package_input_binding_v1 as inputs
+ from run_dory_serial_stage_root_v5 import free,memory_free,drain,release_after_drain,storage_usage,save_final_result,preflight_history
+ 
+ 
+@@ -23,7 +24,7 @@
+     for name in ('plan','plan-sha256','review','review-sha256'):parser.add_argument('--'+name,required=True)
+     a=parser.parse_args();c.require(sys.dont_write_bytecode and __debug__,'Original python -B assertions')
+     plan_ref=dict(path=a.plan,sha256=a.plan_sha256);review_ref=dict(path=a.review,sha256=a.review_sha256)
+-    plan=runtime.validate(c.load(plan_ref),c.load(review_ref),plan_ref);c.verify_sources(plan['source_sha256'])
++    plan=inputs.validate(c.load(plan_ref),c.load(review_ref),plan_ref);c.verify_sources(plan['source_sha256'])
+     c.require(str(Path(__file__).resolve())in plan['source_sha256'],'Launcher itself reviewed')
+     import minicpm5_layer0_execution_protocol_v4 as p
+     import minicpm5_layer0_external_supervisor_v4 as external
+@@ -47,6 +48,7 @@
+         initial=free('/mnt/nvme')
+         for sig in (signal.SIGTERM,signal.SIGINT):handlers[sig]=signal.signal(sig,interrupted)
+         guard();history=preflight_history(plan,p)
++        metadata_binding=inputs.authenticate(guard)
+         c.require(initial>=30*c.GIB+budget['output_bytes'],'Full fresh output reservation above original floor')
+         os.sched_setaffinity(0,{5});os.nice(19)
+         # Parent never loads a model. Child has independently reviewed limits.
+@@ -56,11 +58,12 @@
+         out.mkdir(mode=0o700);created=True
+         first_ref=c.save(out/'initial-lock-proof.json',runtime.initial_record(first_proof,owner,lock,fd,plan_ref,review_ref),runtime.CAP)
+         proof.initial_persisted(first_ref)
+-        c.save(out/'owner.json',dict(owner=owner,lock=lock,retained_fd=fd,lock_policy=runtime.POLICY,first_lock_proof=first_ref,plan=plan_ref,review=review_ref,history=history))
+-        worker=str(Q/'dory_descriptor_inventory_worker_v3.py');c.require(worker in plan['source_sha256'],'Worker source reviewed')
++        c.save(out/'owner.json',dict(owner=owner,lock=lock,retained_fd=fd,lock_policy=runtime.POLICY,first_lock_proof=first_ref,plan=plan_ref,review=review_ref,history=history,work_kind=inputs.WORK_KIND,metadata_input_binding=metadata_binding))
++        worker=str(Q/'dory_system_package_metadata_worker_v1.py');c.require(worker in plan['source_sha256'],'Worker source reviewed')
+         readfd,writefd=os.pipe();python='/usr/bin/python3'
+         argv=[python,'-B','-s',worker,'--plan',a.plan,'--plan-sha256',a.plan_sha256,'--admission',str(out/'admission.json'),'--ready-fd',str(readfd)]
+         admission=runtime.admission(plan,plan_ref,review_ref,owner,lock,fd,argv,started,first_ref,proof.duplicate_reference)
++        admission.update(work_kind=inputs.WORK_KIND,metadata_input_binding=metadata_binding)
+         admission_ref=c.save(out/'admission.json',admission)
+         proof.admission_ref=admission_ref
+         argv.extend(['--admission-sha256',admission_ref['sha256']]);admission_command=argv[:]
+@@ -83,7 +86,7 @@
+             child=None;c.require(code==0,'Successful actual child exit')
+         worker_result=c.reference(out/'worker-result.json')[0]
+         result=dict(stage=plan['stage'],worker_result=worker_result,child_started=True,child_actual_exit_code=code,child_group_empty=True,lock_policy=runtime.POLICY,retained_fd=fd,first_lock_proof=first_ref)
+-        guard();c.require(storage_usage(out)<=budget['output_bytes'],'Final allocated stage output cap');c.verify_loaded(plan['source_sha256']);result.update(schema='dory_descriptor_inventory_result_v2',owner=owner,lock=lock,plan=plan_ref,complete=True,actual_process_exit_claimed=False,full_model_qualified=False,new_speedup_claim=False)
++        guard();c.require(storage_usage(out)<=budget['output_bytes'],'Final allocated stage output cap');c.verify_loaded(plan['source_sha256']);result.update(schema='dory_system_package_metadata_parent_result_v1',work_kind=inputs.WORK_KIND,metadata_input_binding=metadata_binding,native_ABI_qualified=False,owner=owner,lock=lock,plan=plan_ref,complete=True,actual_process_exit_claimed=False,full_model_qualified=False,new_speedup_claim=False)
+         result['descriptor_guard']=proof.summary()
+         result_ref=save_final_result(out,result,budget);print(json.dumps(result_ref),flush=True)
+     except BaseException as error:
+--- dory_descriptor_inventory_worker_v3.py
++++ dory_system_package_metadata_worker_v1.py
+@@ -1,4 +1,4 @@
+-"""Inventory-only worker; original parent fd is metadata-bound and never inherited."""
++"""System package metadata-only worker; original parent fd is never inherited."""
+ import argparse
+ import json
+ import os
+@@ -10,6 +10,7 @@
+ Q=Path(__file__).resolve().parent;ROOT=Q.parent;sys.path[:0]=[str(Q),str(ROOT)]
+ import dory_serial_stage_contract_v2 as c
+ import dory_descriptor_inventory_runtime_v2 as runtime
++import dory_system_package_input_binding_v1 as inputs
+ 
+ 
+ def main():
+@@ -19,7 +20,7 @@
+     c.require(sys.dont_write_bytecode and sys.flags.no_user_site and __debug__,'Fresh child -B -s with assertions')
+     plan_ref=dict(path=a.plan,sha256=a.plan_sha256);plan=c.load(plan_ref)
+     admission=c.load(dict(path=a.admission,sha256=a.admission_sha256))
+-    review=c.load(admission['review']);runtime.validate(plan,review,plan_ref)
++    review=c.load(admission['review']);inputs.validate(plan,review,plan_ref)
+     c.require(admission['first_lock_proof']['path']==str(Path(plan['output_root'])/'initial-lock-proof.json'),'Owned first proof metadata')
+     duplicate_ref=admission['parent_first_duplicate'];parent_duplicate=None
+     if duplicate_ref is not None and duplicate_ref!=admission['first_lock_proof']:
+@@ -50,16 +51,17 @@
+     try:
+         guard()
+         c.require(sys.executable=='/usr/bin/python3','Inventory system interpreter only')
+-        from dory_native_inventory_finish_v4 import run
++        from dory_system_package_metadata_v1 import run
+         from dory_serial_stage_journal_v2 import Journal
+-        c.verify_loaded(plan['source_sha256']);work=out/'inventory';work.mkdir()
++        c.verify_loaded(plan['source_sha256'])
++        metadata_binding=inputs.authenticate(guard);inputs.validate_admission(admission,metadata_binding)
+         journal=Journal(out/'events.jsonl.gz',guard)
+-        authorities=c.load(plan['external_authorities'])if plan.get('external_authorities')else None
+-        result_ref=run(work,guard,journal.emit,external_authorities=authorities)
++        value=run(guard,journal.emit)
++        result_ref=inputs.save_collected(out,value,metadata_binding,plan_ref,dict(path=a.admission,sha256=a.admission_sha256),guard)
+         journal.close();events=journal.verify()
+-        summary=dict(stage='inventory',inventory_result=result_ref,events=events)
++        summary=dict(stage='inventory',work_kind=inputs.WORK_KIND,metadata_result=result_ref,input_binding=metadata_binding,events=events)
+         guard();c.verify_loaded(plan['source_sha256'])
+-        summary.update(schema='dory_descriptor_inventory_worker_result_v2',complete=True,actual_process_exit_claimed=False,full_model_qualified=False,new_speedup_claim=False)
++        summary.update(schema='dory_system_package_metadata_worker_result_v1',native_ABI_qualified=False,complete=True,actual_process_exit_claimed=False,full_model_qualified=False,new_speedup_claim=False)
+         summary.update(lock_policy=runtime.POLICY,retained_fd=admission['retained_fd'],descriptor_guard=proof.summary())
+         c.save(out/'worker-result.json',summary)
+     except BaseException as error:
