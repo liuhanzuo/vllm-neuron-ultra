@@ -23,7 +23,7 @@ Torch 与 Python 两份归档合计 230,759,432 字节，其完整下载内容�
 
 Torch RECORD 的后续完整元数据比较：上游 12,396 条全部存在，哈希与大小字段全部不变；本机增加 2,437 条 `.pyc` 记录，以及 `torchrun`、`torchfrtrace`、INSTALLER、REQUESTED 四项。这个差异不意味着 Torch 执行源码被改动；新增项目仍分别记录来源，不直接当作上游归档原件。
 
-Python `_sysconfigdata` 中 70 个配置字段不同，包括安装目录替换、编译器名称及编译参数整理。完整差异已保存，正在核对安装工具的对应变换；本轮不将其自动豁免，也不据此认定环境损坏。三份 `.pyc` 保留为字节码差异，未执行。其余依赖、安装后新增文件、系统库及预加载库的完整来源和真实 ABI 检查仍待完成。
+Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的上游 50,137 字节源码哈希与归档记录一致；按固定官方 uv 提交 `acee8d938b52225be3e90ccfcbe69fa4eb8ed215` 的安装算法重放，生成的全部 51,256 字节与本机完全一致，涵盖 70 个原字段变更及新增 `PYTHON_BUILD_STANDALONE=1`。主任务复核源码、重跑完整重建和 14 项检查通过。这证明内容符合官方安装变换，不能追溯证明历史执行的是哪个 uv 二进制或进程。三份 `.pyc` 保留为字节码差异，未执行。其余依赖、安装后新增文件、系统库及预加载库的完整来源和真实 ABI 检查仍待完成。
 
 第二次核对未再次触发锁异常；第一次失败的根因仍未知，不能把一次成功解释成故障已修复。
 
@@ -43,3 +43,5 @@ Python `_sysconfigdata` 中 70 个配置字段不同，包括安装目录替换�
 ## 证据
 
 [来源清单](evidence/dory-provenance-20261111/dory-upstream-provenance-discovery-delivery-20261111-v1.json)、[归档比较实际退出与完整记录复核](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r2-post-exit-root-review-20261111-v1.json)、[完整元数据差异](evidence/dory-provenance-20261111/dory-archive-metadata-differences.json)、[首次失败保留](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r1-failed-terminal-20261111-v1.json)、[MiniCPM5 驱动源码检查](evidence/dory-provenance-20261111/minicpm5-operator-driver-root-source-confirmation-20261111-v1.json)、[完整证据哈希清单](evidence/dory-provenance-20261111/manifest.json)。
+
+[官方 uv 安装变换完整重放](evidence/dory-provenance-20261111/dory-uv-sysconfig-source-replay-20261111-v2.json)、[主任务完整复核](evidence/dory-provenance-20261111/dory-uv-sysconfig-root-confirmation-20261111-v1.json)。

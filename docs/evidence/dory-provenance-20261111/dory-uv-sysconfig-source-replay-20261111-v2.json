@@ -1,0 +1,209 @@
+{
+  "result": "pass",
+  "scope": "bounded source and text metadata only; no archive or native payload reads, no imports from installed sysconfig",
+  "official_commit": "acee8d938b52225be3e90ccfcbe69fa4eb8ed215",
+  "official_target_build": "20261026",
+  "source_sha256": {
+    "mod.rs": "8dd1793ccdbcda9ed6c1bd0f41403995376dd7ce1ac5b9ce5e4ffc5c797d034a",
+    "replacements.rs": "1f83d7f03a275a33896e3a7b636fd09c14e49d3ecf19d992bcca7287a5721bab",
+    "parser.rs": "03740345be213330bed185d73eb615911c2ca56e32e51c7357ae6492837bad6f",
+    "managed.rs": "008c7c4b9728dd0d5a51638668f6890aed428527f49b6556972dd4484351399a",
+    "generated_mappings.rs": "5d7dab4359b449a14d40ec7919a6dec095ff962ec21bdc2a5b73b11415559df7",
+    "install.rs": "00cfd4f6742f1dc07c851170684fd8561063d2fa501525837942ed3930473741"
+  },
+  "helper_sha256": "c635b249b15ddb95c40ae912cc716bf6b6a632ec8fc3d68e5c002dce1e46c22f",
+  "input_metadata_path": "/mnt/nvme/dory-archive-differences-r1-20261111/result.json",
+  "input_metadata_sha256": "2e451ad1621a1c9db413a97e81aafc5d02b6130ff2a9ccf9b5e6fa63fffcd41b",
+  "installed_metadata_path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/_sysconfigdata__linux_x86_64-linux-gnu.py",
+  "real_prefix": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu",
+  "reconstructed_upstream": {
+    "bytes": 50137,
+    "sha256": "ea81f7710731753c3834d981e320bec5262f184f240cec4aa8e6658a68e02902",
+    "hash_matches_archive_report": true
+  },
+  "predicted_complete_output": {
+    "bytes": 51256,
+    "sha256": "cc3e58175aff8e0b034e55acbbf277613cfab33913cf904bb6c2daff2d985d5f",
+    "byte_identical_to_installed": true
+  },
+  "complete_dictionaries_equal": true,
+  "original_variable_count": 1032,
+  "installed_variable_count": 1033,
+  "changed_existing_key_count": 70,
+  "added_keys": [
+    "PYTHON_BUILD_STANDALONE"
+  ],
+  "removed_keys": [],
+  "changed_keys": [
+    "AR",
+    "BINDIR",
+    "BINLIBDEST",
+    "BLDSHARED",
+    "CC",
+    "CFLAGS",
+    "CONFIGURE_CFLAGS",
+    "CONFIGURE_CPPFLAGS",
+    "CONFIGURE_LDFLAGS",
+    "CONFIG_ARGS",
+    "CONFINCLUDEDIR",
+    "CONFINCLUDEPY",
+    "CPPFLAGS",
+    "CXX",
+    "DESTDIRS",
+    "DESTLIB",
+    "DESTSHARED",
+    "EXENAME",
+    "INCLDIRSTOMAKE",
+    "INCLUDEDIR",
+    "INCLUDEPY",
+    "LDCXXSHARED",
+    "LDFLAGS",
+    "LDSHARED",
+    "LIBDEST",
+    "LIBDIR",
+    "LIBEXPAT_CFLAGS",
+    "LIBHACL_CFLAGS",
+    "LIBMPDEC_CFLAGS",
+    "LIBPC",
+    "LIBPL",
+    "LIBS",
+    "LINKCC",
+    "LOCALMODLIBS",
+    "MACHDESTLIB",
+    "MANDIR",
+    "MODBUILT_NAMES",
+    "MODDISABLED_NAMES",
+    "MODLIBS",
+    "MODOBJS",
+    "MODULE_BINASCII_CFLAGS",
+    "MODULE_BINASCII_LDFLAGS",
+    "MODULE_READLINE_CFLAGS",
+    "MODULE_READLINE_LDFLAGS",
+    "MODULE_ZLIB_LDFLAGS",
+    "MODULE__CODECS_HK_DEPS",
+    "MODULE__CTYPES_CFLAGS",
+    "MODULE__CTYPES_LDFLAGS",
+    "MODULE__HASHLIB_LDFLAGS",
+    "MODULE__LZMA_CFLAGS",
+    "MODULE__LZMA_LDFLAGS",
+    "MODULE__SQLITE3_CFLAGS",
+    "MODULE__SQLITE3_LDFLAGS",
+    "MODULE__SSL_LDFLAGS",
+    "MODULE__TKINTER_CFLAGS",
+    "MODULE__TKINTER_LDFLAGS",
+    "PY_BUILTIN_MODULE_CFLAGS",
+    "PY_CFLAGS",
+    "PY_CORE_CFLAGS",
+    "PY_CORE_LDFLAGS",
+    "PY_CPPFLAGS",
+    "PY_LDFLAGS",
+    "PY_LDFLAGS_NOLTO",
+    "PY_STDMODULE_CFLAGS",
+    "SCRIPTDIR",
+    "SHLIBS",
+    "SRCDIRS",
+    "datarootdir",
+    "exec_prefix",
+    "prefix"
+  ],
+  "mapping_entry_count": 77,
+  "synthetic_checks_passed": [
+    "prefix token and boundary",
+    "whitespace normalization",
+    "isysroot pair and trailing token removal",
+    "exact compiler replacement",
+    "cxx compiler replacement",
+    "full ar replacement",
+    "integer retained",
+    "reverse diff case 0",
+    "reverse diff case 1",
+    "reverse diff case 2",
+    "reverse diff case 3",
+    "reverse diff detects corruption",
+    "reverse diff rejects count mismatch",
+    "literal parser rejects executable statement"
+  ],
+  "official_source_references": [
+    {
+      "file": "install.rs",
+      "lines": [
+        665,
+        673
+      ],
+      "meaning": "installation finalization calls ensure_sysconfig_patched"
+    },
+    {
+      "file": "managed.rs",
+      "lines": [
+        600,
+        617
+      ],
+      "meaning": "Unix CPython invokes update_sysconfig"
+    },
+    {
+      "file": "mod.rs",
+      "lines": [
+        46,
+        74
+      ],
+      "meaning": "read, parse, transform, format and atomically write"
+    },
+    {
+      "file": "mod.rs",
+      "lines": [
+        130,
+        207
+      ],
+      "meaning": "prefix, whitespace, sysroot, compiler updates, standalone marker"
+    },
+    {
+      "file": "parser.rs",
+      "lines": [
+        34,
+        49
+      ],
+      "meaning": "ordered mapping, four-space JSON and exact source wrapper"
+    },
+    {
+      "file": "replacements.rs",
+      "lines": [
+        15,
+        27
+      ],
+      "meaning": "exact-token or full replacements"
+    },
+    {
+      "file": "generated_mappings.rs",
+      "lines": [
+        1,
+        110
+      ],
+      "meaning": "build 20261026 compiler and archiver mapping"
+    }
+  ],
+  "conclusion": "Installed sysconfig is byte-identical to the pinned official uv transformation replayed on SHA-verified upstream sysconfig reconstructed from the recorded diff.",
+  "saved_diff_terminal_missing_newline_handled": true,
+  "prior_attempt": {
+    "source": "dory_uv_sysconfig_source_replay_v1.py",
+    "tool_chunk": "837a5c",
+    "exit_code": 1,
+    "reason": "saved difflib terminal brace records joined because upstream has no final newline"
+  },
+  "historical_writer_or_invocation_proven": false,
+  "historical_uv_executable_version_proven": false,
+  "other_differences_explained": false,
+  "limitations": [
+    "Reimplements the inspected Rust algorithm in Python; does not execute the historical uv binary.",
+    "Does not establish which historical process wrote the installed file.",
+    "Does not explain the three pyc differences or Torch RECORD difference.",
+    "Does not retroactively change the original prebuild installation without the serial lock.",
+    "No ABI, full-model correctness, performance, or speedup claim."
+  ],
+  "execution": {
+    "cpu_affinity": [
+      5
+    ],
+    "address_space_limit_bytes": 805306368,
+    "cpu_seconds_limit": 30
+  }
+}
