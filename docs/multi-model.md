@@ -1,3 +1,5 @@
+最新进展：[Qwen3.5 启动失败、Dory 102 份源码补充与 LFM3 完整测试准备](qwen-bootstrap-dory-followup-20261111.md)。Dory 采集与独立复核完成，Qwen3.5 本地启动检查待修复；暂无新增整模型提速。
+
 最新进展：[LFM3 BF16 写回完整对照：32 项与全部编码通过](lfm-writeback-characterization-20261111.md)。原实现失败保留，暂无新增整模型提速。
 
 # Unified Trn1 experimental branch

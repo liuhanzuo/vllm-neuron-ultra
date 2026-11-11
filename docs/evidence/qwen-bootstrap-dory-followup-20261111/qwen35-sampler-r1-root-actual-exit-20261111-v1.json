@@ -1,0 +1,1146 @@
+{
+  "schema": "qwen35_sampler_root_actual_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T22:08:21.561779+00:00",
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 46709,
+    "terminal_chunk": "cf9666",
+    "exit_code": 1
+  },
+  "actual_tool_exit_observed": true,
+  "actual_exit_code": 1,
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r1-20261111-spec.json",
+    "sha256": "1ade15450f95fee37ca176e8b7f4da9b24cc2bbdea723c0bc7636386baf161dc"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r1-20261111-review.json",
+    "sha256": "5e06caa34a3c2af49799539390d609f45dbe9e15ef6eddeb276fddfe4bfbf2ae"
+  },
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r1-root-live-20261111-v1.json",
+    "sha256": "8b14eec0d0218163a284006e7b214a9db5c44c30f86034829c044da9e158ec95"
+  },
+  "running_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261111-v511-qwen35-sampler-r1-running.json",
+    "sha256": "66ce2cbaf22f703efc7f0437f67f529999047e0632fadd39393d45bb8e03b3f2"
+  },
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/admission.json",
+    "sha256": "a307949c762f389ad6f264a0f6336f5d9b1bb748438778db596b664500ed5187"
+  },
+  "owners": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v1.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r1-20261111-spec.json",
+        "--spec-sha256",
+        "1ade15450f95fee37ca176e8b7f4da9b24cc2bbdea723c0bc7636386baf161dc",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r1-20261111-review.json",
+        "--review-sha256",
+        "5e06caa34a3c2af49799539390d609f45dbe9e15ef6eddeb276fddfe4bfbf2ae"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 2003459,
+      "ppid": 1003516,
+      "start_ticks": "421417292"
+    },
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v1.py",
+        "--mode",
+        "coordinator",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/admission.json",
+        "--binding-sha256",
+        "a307949c762f389ad6f264a0f6336f5d9b1bb748438778db596b664500ed5187"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-coordinator.service",
+      "pid": 2011079,
+      "ppid": 1583,
+      "start_ticks": "421449800"
+    },
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v1.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/shared-native_preflight/phase-spec.json",
+        "--binding-sha256",
+        "acccae487ba909195fce40510092b1586daaf784fa7877861b56f5370a052e92"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-shared-native-preflight.service",
+      "pid": 2144254,
+      "ppid": 1583,
+      "start_ticks": "421527868"
+    }
+  ],
+  "owners_gone": true,
+  "all_declared_units": [
+    "trn1-qwen35-sampler-r1-20261111-baseline-capture",
+    "trn1-qwen35-sampler-r1-20261111-baseline-cold",
+    "trn1-qwen35-sampler-r1-20261111-baseline-http",
+    "trn1-qwen35-sampler-r1-20261111-baseline-long",
+    "trn1-qwen35-sampler-r1-20261111-baseline-numeric",
+    "trn1-qwen35-sampler-r1-20261111-baseline-quality",
+    "trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay",
+    "trn1-qwen35-sampler-r1-20261111-baseline-state-copy",
+    "trn1-qwen35-sampler-r1-20261111-baseline-vectors203",
+    "trn1-qwen35-sampler-r1-20261111-candidate-capture",
+    "trn1-qwen35-sampler-r1-20261111-candidate-cold",
+    "trn1-qwen35-sampler-r1-20261111-candidate-http",
+    "trn1-qwen35-sampler-r1-20261111-candidate-long",
+    "trn1-qwen35-sampler-r1-20261111-candidate-numeric",
+    "trn1-qwen35-sampler-r1-20261111-candidate-quality",
+    "trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay",
+    "trn1-qwen35-sampler-r1-20261111-candidate-state-copy",
+    "trn1-qwen35-sampler-r1-20261111-candidate-vectors203",
+    "trn1-qwen35-sampler-r1-20261111-coordinator",
+    "trn1-qwen35-sampler-r1-20261111-shared-native-preflight",
+    "trn1-qwen35-sampler-r1-20261111-shared-sampler-controls"
+  ],
+  "started_units": [
+    "trn1-qwen35-sampler-r1-20261111-coordinator",
+    "trn1-qwen35-sampler-r1-20261111-shared-native-preflight"
+  ],
+  "unit_observations": [
+    [
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-capture",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-capture.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-capture.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-cold",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-cold.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-cold.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-http",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-http.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-http.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-long",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-long.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-long.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-numeric",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-numeric.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-numeric.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-quality",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-quality.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-quality.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-state-copy",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-state-copy.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-state-copy.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-vectors203",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-vectors203.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-vectors203.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-capture",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-capture.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-capture.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-cold",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-cold.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-cold.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-http",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-http.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-http.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-long",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-long.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-long.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-numeric",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-numeric.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-numeric.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-quality",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-quality.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-quality.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-state-copy",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-state-copy.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-state-copy.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-vectors203",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-vectors203.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-vectors203.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-coordinator",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "2011079",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-coordinator.service",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "bb43f92413084dafa94f42304839cb73"
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-coordinator.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-shared-native-preflight",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "2144254",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-shared-native-preflight.service",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "d9ba4abb524f4359b6195e6a0ae0fcc7"
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-shared-native-preflight.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-shared-sampler-controls",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-shared-sampler-controls.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-shared-sampler-controls.service",
+          "absent": true
+        }
+      }
+    ],
+    [
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-capture",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-capture.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-capture.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-cold",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-cold.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-cold.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-http",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-http.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-http.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-long",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-long.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-long.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-numeric",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-numeric.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-numeric.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-quality",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-quality.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-quality.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-sampler-replay.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-state-copy",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-state-copy.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-state-copy.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-baseline-vectors203",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-baseline-vectors203.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-baseline-vectors203.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-capture",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-capture.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-capture.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-cold",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-cold.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-cold.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-http",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-http.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-http.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-long",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-long.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-long.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-numeric",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-numeric.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-numeric.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-quality",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-quality.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-quality.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-sampler-replay.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-state-copy",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-state-copy.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-state-copy.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-candidate-vectors203",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-candidate-vectors203.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-candidate-vectors203.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-coordinator",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "2011079",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-coordinator.service",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "bb43f92413084dafa94f42304839cb73"
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-coordinator.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-shared-native-preflight",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "exit-code",
+          "ExecMainPID": "2144254",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-shared-native-preflight.service",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "Job": "",
+          "InvocationID": "d9ba4abb524f4359b6195e6a0ae0fcc7"
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-shared-native-preflight.service",
+          "absent": true
+        }
+      },
+      {
+        "unit": "trn1-qwen35-sampler-r1-20261111-shared-sampler-controls",
+        "properties": {
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "Id": "trn1-qwen35-sampler-r1-20261111-shared-sampler-controls.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261111-shared-sampler-controls.service",
+          "absent": true
+        }
+      }
+    ]
+  ],
+  "physically_drained": true,
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "receipts": {
+    "outer-terminal.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/outer-terminal.json",
+      "sha256": "bdfb29f8a95919dce2a8bfbb9490e5382c174b4fcaf945a97326063babb9fc71"
+    },
+    "coordinator-owner.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/coordinator-owner.json",
+      "sha256": "ff3ec0419be884abaadaf1eabddcfafbe11a6a2b747fbd3e2fca3ff8cdbbe5ef"
+    },
+    "running-ack.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/running-ack.json",
+      "sha256": "2894d18d74bb30e4c374740e23a5905cd854d14c46cd015a7b963a118c464a3b"
+    },
+    "outer-history-pair.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/outer-history-pair.json",
+      "sha256": "4145681955ff10dcc86ace5bec1af8d1700d996309e7a3d0f22244603fbf7005"
+    },
+    "coordinator-history-pair.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/coordinator-history-pair.json",
+      "sha256": "4145681955ff10dcc86ace5bec1af8d1700d996309e7a3d0f22244603fbf7005"
+    },
+    "coordinator.log": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/coordinator.log",
+      "sha256": "20186005729dfc6b60010db0a191bd4b8ef901861d589b3ce81602056011b71f"
+    },
+    "shared-native_preflight/phase-spec.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/shared-native_preflight/phase-spec.json",
+      "sha256": "acccae487ba909195fce40510092b1586daaf784fa7877861b56f5370a052e92"
+    },
+    "shared-native_preflight/phase.log": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/shared-native_preflight/phase.log",
+      "sha256": "c5443006763e3aea5d9a8b6cf6ef73ed4d310bdae067622ff47a9f9e5e8b1425"
+    },
+    "shared-native_preflight/root-terminal.json": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r1-20261111-runtime/shared-native_preflight/root-terminal.json",
+      "sha256": "f5d8f4ae30088bcf59f099b5bf366c3446a8aa1a75a27f9ba7668631f5172848"
+    }
+  },
+  "phase_owner_from_coordinator_terminal": true,
+  "outer_phase_receipt_lacked_owner": true,
+  "complete_outer_and_coordinator_history_and_physical_checks": true,
+  "actual_native_child_started": false,
+  "actual_native_preflight_completed": false,
+  "actual_model_executed": false,
+  "actual_captures_written": false,
+  "failure": "Supervisor bootstrap own active service omitted from active-heavy exclusions before supervisor-owner publication; local runtime wiring failure, not model or sampler quality failure.",
+  "source_binding": {
+    "inherited_catalog": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261111-v58.json",
+      "sha256": "745d15d632945b588be9e6b29e29892e5e431e0b5596494117e30d9626e3f6c1"
+    },
+    "inherited_source_count": 47842,
+    "complete_source_count": 47872,
+    "new_source_count": 30,
+    "source_extension": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_full_checks_v1.py": "0337a9cefb12d82f189c71bbf4c5913fbf19cfe7ad97be4b30d3fa35e1773e5c",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_capture_v1.py": "76a88edea1613d7847550a744f054f21b21a0ecdfc4d16217c8154b847ef39ec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_leaves_v1.py": "7c4aca1a47627d35c5f43ae64144763c24a5b69a3e8683a8794bdbcc051cfe4b",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_replay_v1.py": "6eae6c039f851dd84ddf86c34e6e27c3b4a985dbd0167c3c955056f27fa70413",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v1.py": "b391033b4726ac715d6bc4ff1eb3fab511f3de5fb8037f624098dd987b10bd3f",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py": "c46775d7a046a6351db7576e86c64456ea8e8bc5edf22b119977e44462430b13",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_worker_v1.py": "2b0efa44a66078c49e358b3975299db4cbe6c7e0d4d66503cd4d3834b5a08ee2",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_qwen35_sampler_pair_source_v1.py": "2eebb7dffa6414b7334b09b26b66fd55feff12ce01cb6bb340e733f704514224",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_gdn_serving_checks_v2.py": "8c52905e303c180e2eb87fc5a6d97b90afcfc6bf12a32e4314fcb411a385b916",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/probe_qwen35_state_copy_v1.py": "99a6c46cfd98a99e17540937143713288cf1c6a166ae8d18104470e8df081051",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/diagnose_qwen35_state_reset_cold_v1.py": "339cc077ae3235522e0454a187df09f4600139d8dcec9b2e52444f895b38ad8f",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_state_inplace_reset_v1.py": "6a3f45eb63b3b1251334da56dc6d7520e9eec01240f43e2258751e2c36d148ce",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_contract_v1.py": "6bb0dc31ecd7d4052d00fb67fe731895146890e58cd965b0e9d4d56138f9ec1c",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_preflight_v1.py": "a946b3acf25266aedb6e7c9a98d1c4bac23d3e85af82bb3ea3af23fa1d89eb1d",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_io_v1.py": "f71a4eaa4574d3b3d45b6232c3ac3aac4d090e38324e330e0ad32cdd26916e57",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v1.py": "9a9e29b8205d718c7b4b03eb3691ba89a1396b0eee59d18ce0e7bee0c1c000e9",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_service_v1.py": "ded3c49d8b916dfef90567fcd655ed55a0e01890b9f6afeaf9bab354e70b6d3c",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v1.py": "a03d9365e061b107a0dde67b2693a4acbd17832d03cd8b74722b09493c00dea0",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v1.py": "13756fe4b6cd7f9a12473437e40ac7d9f3afff697849225840fddbd1c49aced1",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_qwen35_sampler_runtime_source_v1.py": "56b4d92829bd8b8bbd955f3f8d981ab819b57ba6417a2ecb31f7e70c2b0860fb",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_split_runtime_v4.py": "423677588248dcab659a582a88026ae1da889d28bd89e3008d452a04aa5a0082",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend_split_correction_v2.py": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_nki_mamba_cache.py": "3d16b7f154fb2f656fbdeafca0cb982d30953be511efa6085e488bacd873ae89",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_split_state_checks_v4.py": "1fd61279c3eba7e65d9cf8146ead0be0b61cdaa0bc49d7439bbf6b2cbf463adf",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_state_reset_full_protocol_v1.py": "eb4fa6c86ee1e6424abd78961cd14941c5ea7cd36a1f45440e108b80e548d9f4",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/clone_qwen35_state_reset_full_v1.py": "26642670d18e976819219af9fda51dd5907c7e994835415f1522a4d0ef767289",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend-split-correction-v2/plan.json": "59d5ae3a822079113a07670ac5200e04efcab2ff4f42e9653de0b1f4b4487960"
+    },
+    "complete_map_equals_inherited_catalog_union_plus_extension": true,
+    "original_sources_unchanged": true
+  },
+  "original_failure_preserved": true,
+  "self_exit_claimed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

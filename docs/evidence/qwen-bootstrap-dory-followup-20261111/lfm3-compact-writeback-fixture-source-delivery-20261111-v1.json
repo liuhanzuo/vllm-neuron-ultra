@@ -1,0 +1,109 @@
+{
+  "schema": "lfm3_compact_writeback_fixture_source_delivery_v1",
+  "author": "/root/lfm_after_writeback_design_20261111",
+  "source_only": true,
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_compact_writeback_v1.py",
+      "sha256": "c0285b2f3922f6d26b2f9b486b3f9b70299d8b4bbf6bf23b9a4b821d3000fa4e",
+      "bytes": 12907
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_typed_fixture_ledger_leaf_v1.py",
+      "sha256": "7896a2471bfe592c033e3b9703f3fdffc1f42fb1af5cf4fe3daa984f3b529dd7",
+      "bytes": 13154
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/check_lfm3_compact_writeback_and_fixture_leaf_v1.py",
+      "sha256": "691e7b7580e1b083d2b0a7b4fe711039a600463fc0ca2d88c95bbb0b126ff19a",
+      "bytes": 23581
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-compact-writeback-fixture-integration-20261111-v1.md",
+      "sha256": "a544929edb6bb5593939711589f7a5ba856dcbfa26955ddf855997e8e492451b",
+      "bytes": 10628
+    }
+  ],
+  "verification": {
+    "command": "python3 -B /home/ubuntu/experiments/trn1-latest-models-20261031/check_lfm3_compact_writeback_and_fixture_leaf_v1.py",
+    "actual_tool": {"kind": "tool_call", "terminal_chunk": "883ad4", "exit_code": 0},
+    "tests": 20,
+    "reported_test_seconds": 0.671,
+    "scope": "Pure Python source authentication, original metadata enumeration and synthetic array/receipt mutation checks only",
+    "prior_success": {"terminal_chunk": "346cb4", "exit_code": 0, "tests": 20, "reported_test_seconds": 0.538},
+    "reason_for_final_rerun": "Added failed-case bounded metadata retention and per-batch matrix revalidation after initial success",
+    "numpy_torch_nki_neuronxcc_ml_dtypes_loaded": false,
+    "mock_receipts_are_runtime_evidence": false
+  },
+  "compact_shim_contract": {
+    "simulator_source": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/nki/_simulator.py",
+    "simulator_sha256": "3c28f10492ef8c6c5413acbd811c059586f7ff16d3ef795430e794c57ed8f119",
+    "source_callable_globals_defaults_kwdefaults_closure_authenticated": true,
+    "ordered_input_writeback_calls": 3,
+    "precise_return_calls": 1,
+    "metadata_events_per_complete_case": 4,
+    "bf16_candidate_substitutions_per_case": 2,
+    "fp32_candidate_substitutions_per_case": 0,
+    "maximum_cases_per_scope": 16,
+    "maximum_single_operand_bytes": 134217728,
+    "unknown_callsite_or_extra_call_rejected": true,
+    "host_identity_tensor_identity_dtype_shape_storage_guards": true,
+    "counterfactual_clones_or_per_tile_raw_payloads": false,
+    "tobytes_in_shim": false,
+    "restore_attempted_on_failure": true,
+    "incomplete_case_metadata_bounded_to_four_events": true,
+    "simulator_only_never_compile_or_serving": true
+  },
+  "fixture_ledger_contract": {
+    "original_generator": "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_typed_writer_cpu_pilot_v3.py:numpy_inputs",
+    "original_generator_source_sha256": "f34462be2e8286db80e2dadf5915debfb14bf0af5dd285a4457e66241c03176a",
+    "extended_generator_source_sha256": "fdd5396b9309335800fda28fe529daaea6b70af39316bfbbd6fbc152fee4b4e8",
+    "original_generator_code_and_bindings_authenticated": true,
+    "regression_cases_batches": [1648, 123],
+    "extended_cases_batches": [2068, 168],
+    "full_cases_batches": [3716, 291],
+    "original_batch_algorithm_compared_exactly_in_pure_tests": true,
+    "original_matrix_rechecked_each_batch": true,
+    "per_case_complete_sha256_operands": ["cache", "updates", "slots", "expected"],
+    "per_operand_dtype_shape_and_bytes": true,
+    "original_seed_special_bits_input_function_and_last_valid_writer_oracle": true,
+    "row_metadata_cap_bytes": 8192,
+    "batch_metadata_cap_bytes": 262144,
+    "single_fixture_yield_no_payload_accumulation": true,
+    "caller_owns_actual_version_binary_runtime_admission_and_persistence": true,
+    "original_vs_new_fixture_exact_match_required_before_simulation": true,
+    "original_candidate_restored_control_receipt_gate_implemented": true,
+    "caller_must_bind_gate_to_actual_independent_runtime_evidence": true,
+    "actual_fixture_ledger_generated": false,
+    "actual_three_arm_controls_run": false,
+    "actual_full3716_cpu_run": false
+  },
+  "original_budget_requirements_for_existing_caller": {
+    "batch_seconds": 1800,
+    "phase_seconds": 14400,
+    "worker_seconds": 30000,
+    "memory_max_bytes": 10737418240,
+    "memory_high_bytes": 8589934592,
+    "memory_swap_max_bytes": 0,
+    "tasks_max": 32,
+    "address_space_limit_bytes": 12884901888,
+    "batch_report_cap_bytes": 262144,
+    "root_floor_bytes": 30064771072,
+    "nvme_floor_bytes": 32212254720,
+    "stop_first_failure": true,
+    "leaf_does_not_create_lifecycle_or_set_limits": true
+  },
+  "actual_native_imports": false,
+  "actual_model_or_raw_tensor_capture_bytes_read": 0,
+  "actual_history_resolved": false,
+  "actual_serial_process_service_or_lock_operations": false,
+  "installed_sources_modified": false,
+  "old_executed_sources_modified": false,
+  "previous_observer_free_selector_source_modified": false,
+  "current_spec_review_catalog_handoff_or_terminal_created": false,
+  "publication_performed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "all_downstream_device_alias_cold4096_longdecode_slots_quality96_matched_http_gates_preserved": true,
+  "root_independent_source_review_and_existing_serial_admission_required_before_native_use": true
+}
