@@ -6,7 +6,7 @@ plugins are installed, and each remains disabled until explicitly selected.
 Their artifact loaders run before generic artifact deletion or recompilation,
 so an invalid saved artifact continues to fail instead of being silently rebuilt.
 
-[Nemotron 42 阶段与 MiniCPM5／Dory 最新准备](multi-model-progress-20261110-compile.md)：Nemotron 已完成前 42/52 阶段并进入整模型编译；16 组拆分候选的 96 次完整输出对照全部一致，最终原始数据审核仍待完成。MiniCPM5 当前 v5 的 44,021 条来源检查通过；Dory 归档事务 52 项检查由根代理独立复查通过。官方小模型复查保留原 15 家族，没有新增合格模型提速。
+[2026-11-11 恢复状态与工具修正](recovery-20261111.md)：Nemotron r12 在前 42/52 阶段后因根盘空间不足失败，53 个单元已独立清理并释放。两份日志无损归档，未扩容 EBS。Dory／MiniCPM5 检查工具的 102 项独立测试通过；MiniCPM5 恢复衔接通过，实际准备暴露旧元数据字段问题，正在修正。没有新增合格模型提速。此前的[编译中进度](multi-model-progress-20261110-compile.md)保留为历史记录。
 
 [MiniCPM5 完整来源实测与审核修正](minicpm5-source-verification-20261110.md)：44,007 条真实来源记录完整保留，文本认证 71.38 秒、峰值约 304 MiB；没有读取模型或历史张量。独立审阅发现历史退出证据遗漏，后继严格审核与记录程序通过 99 项针对性检查，实际准入仍待完成。Nemotron 已独立核实 37/52 阶段，完整运行继续，无新增模型提速。
 

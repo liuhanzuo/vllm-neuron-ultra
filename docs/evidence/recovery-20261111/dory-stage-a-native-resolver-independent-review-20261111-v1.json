@@ -1,0 +1,123 @@
+{
+  "schema": "dory_stage_a_native_resolver_independent_source_review_v1",
+  "reviewer": "/root/dory_resolver_final_review",
+  "created_at": "2026-11-11T02:57:05.328103+00:00",
+  "reviewed_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-native-resolver-source-delivery-20261110-v3.json",
+    "sha256": "db5b64ab89f169534cd295af9615d657adb4cc29d262d56a4e6e2b3360c90018",
+    "bytes": 9578
+  },
+  "source_only": true,
+  "original_candidate": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v3.py",
+    "sha256": "fcb96faf7e3d2dd9f6d04edf28142fb6e99831edb20f8834a45430dbe89da734",
+    "bytes": 26847
+  },
+  "original_candidate_passed": false,
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P1",
+      "source_lines": [
+        66,
+        161
+      ],
+      "title": "Required empty package sources cannot be authenticated",
+      "details": "Both stable_file and NativeFileAuthority require strictly positive bytes. The installed vllm/distributed/device_communicators/__init__.py is zero bytes, and the explicitly requested vllm.distributed.parallel_state imports its base_device_communicator child. A complete inventory cannot admit the required empty package source; omitting it causes the active open audit to reject the import.",
+      "evidence": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-native-resolver-independent-progress-20261111-v1.json",
+        "sha256": "7455c6990f5bf986384e9bbdf6f17f0e39bb5a8018ddcea7c7f49666f27b8a26",
+        "bytes": 1819
+      },
+      "resolved_by": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+        "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9",
+        "bytes": 26992
+      },
+      "minimal_change": "Allow exact nonnegative byte sizes, preserving complete hash, EOF, ownership, regular-file, no-symlink, stable-identity and inventory checks."
+    }
+  ],
+  "original_tests": {
+    "count": 41,
+    "failures": 0,
+    "errors": 0,
+    "session": 15378,
+    "initial_chunk": "918a61",
+    "final_chunk": "48e45a",
+    "exit_code": 0,
+    "seconds": 1.8369065220467746,
+    "audit_denied": [],
+    "native_modules_loaded": [],
+    "source_metadata_unique_reads": 77,
+    "coverage_limit": "Original tests all passed despite R1; they contain no empty-source case."
+  },
+  "successor_tests": {
+    "count": 49,
+    "added": 8,
+    "failures": 0,
+    "errors": 0,
+    "session": 72196,
+    "initial_chunk": "9b00ec",
+    "final_chunk": "ff0f74",
+    "exit_code": 0,
+    "seconds": 1.830716921016574,
+    "audit_denied": [],
+    "native_modules_loaded": [],
+    "source_metadata_unique_reads": 78
+  },
+  "actual_empty_source_check": {
+    "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/distributed/device_communicators/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "identity": {
+      "st_dev": 66304,
+      "st_ino": 7106425,
+      "st_size": 0,
+      "st_mtime_ns": 1794170863588432796,
+      "st_ctime_ns": 1794170863588432796
+    },
+    "source_read_and_eof_verified": true,
+    "imported": false
+  },
+  "independent_review_scope": [
+    "Reviewed entire v3 resolver, all v3 tests, delivery guide and source API interfaces",
+    "Verified active source/checks/guide, four worker interface hashes and ten metadata/source reference hashes",
+    "Stat-only search identified original empty .py package files; no native library contents read",
+    "Read original parallel_state.py and upstream test_dory.py source without importing them",
+    "New v4 only changes two byte-size lower bounds, corresponding explanatory comment, and evidence schema version",
+    "No additional concrete source defect established; future runtime gates remain mandatory"
+  ],
+  "limits": {
+    "worker_cpu_affinity": [
+      5
+    ],
+    "rlimit_as_bytes": 805306368,
+    "rlimit_cpu_seconds": [
+      25,
+      30
+    ],
+    "native_imports_denied": true,
+    "payload_reads_denied": true,
+    "process_operations_denied": true,
+    "test_filesystem_writes_denied": true,
+    "allowed_reads": [
+      ".py",
+      ".json",
+      ".jinja"
+    ],
+    "pyc_reads_denied_with_source_fallback": true
+  },
+  "frozen_v3_unchanged": true,
+  "existing_worker_sources_unchanged": true,
+  "future_native_inventory_created": false,
+  "runtime_binding_created": false,
+  "systemctl_mutated": false,
+  "checkpoint_or_native_binary_bytes_read": 0,
+  "actual_tokenizer_executed": false,
+  "actual_native_ABI_executed": false,
+  "actual_model_executed": false,
+  "production_ready": false,
+  "root_independent_successor_review_pending": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

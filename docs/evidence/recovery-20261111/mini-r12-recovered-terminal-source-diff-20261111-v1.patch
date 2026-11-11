@@ -1,0 +1,513 @@
+--- research/minicpm5_after_nemotron_r12_v1.py
++++ research/minicpm5_after_nemotron_r12_recovered_failure_v1.py
+@@ -1,4 +1,4 @@
+-"""Future r12 terminal enrollment; metadata and physical drain are separate.
++"""Recovered failed r12 terminal enrollment; old external exit remains unknown.
+ 
+ No entrypoint or model/service operations. The original protocol import reads
+ bounded historical JSON constants. The independently admitted caller supplies
+@@ -18,7 +18,7 @@
+ from dory_after_nemotron_r9_v2 import captured_processes, extend_observed
+ from dory_nemotron_r8_retained_failure_v1 import retained_stage
+ require = p.require
+-SCHEMA = 'minicpm5_after_nemotron_r12_binding_v1'
++SCHEMA = 'minicpm5_after_nemotron_r12_recovered_failure_binding_v1'
+ SPEC = dict(path=str(Q/'nemotron9b-package-runtime-v27-r12-20261110-spec.json'),
+     sha256='4186c9a29921b96fc3a55fb04040cf70977ca921130df288466c8d27e65feaaa')
+ REVIEW = dict(path=str(Q/'nemotron9b-package-runtime-v27-r12-20261110-source-review.json'),
+@@ -32,6 +32,18 @@
+         '--review', REVIEW['path'], '--review-sha256', REVIEW['sha256']],
+     cgroup='0::/user.slice/user-1000.slice/session-56.scope')
+ 
++RECOVERY_RETRY = dict(path=str(Q/'nemotron9b-r12-supported-cleanup-retry-20261111-v1.json'),
++    sha256='aa09112e7595967134d2e1392a3de3db395b54ac5951ed0be9d1ddcac4047b91')
++ROOT_OBSERVATION = dict(path=str(Q/'nemotron9b-r12-root-observed-failed-terminal-20261111-v1.json'),
++    sha256='522ac7f6af5cc69ba3c0b8bf5904d69c2aca3d860d1e959e806720146e3fb2dc')
++CONTROLLER_OWNER = dict(pid=727516, start_ticks='409785848', ppid=1583,
++    argv=['/usr/bin/python3', '-B', str(ROOT/'nemotron9b_package_controller_v27.py'), '--execute',
++        '--spec', SPEC['path'], '--spec-sha256', SPEC['sha256'],
++        '--review', REVIEW['path'], '--review-sha256', REVIEW['sha256']],
++    cgroup='0::/user.slice/user-1000.slice/user@1000.service/app.slice/'
++        'trn1-latest-verify-nemotron9b-package-r12-20261110-controller.service',
++    invocation_id='1eaac4fd6907434688e74b4a9cd91bd2')
++
+ 
+ def reference(ref):
+     require(type(ref) is dict and set(ref) == {'path', 'sha256'}
+@@ -42,14 +54,68 @@
+ 
+ 
+ def binding_check(binding):
+-    require(type(binding) is dict
+-        and set(binding) == {'schema', 'actual_exit', 'failed_release_exit'}
+-        and binding['schema'] == SCHEMA, 'Exact completed-r12 binding schema')
+-    reference(binding['actual_exit'])
+-    if binding['failed_release_exit'] is not None:
+-        reference(binding['failed_release_exit'])
+-        require(binding['failed_release_exit'] != binding['actual_exit'],
+-            'Actual launch and separate failed-release receipts differ')
++    require(type(binding) is dict and set(binding) == {'schema', 'recovered_terminal', 'failed_release_exit'}
++        and binding['schema'] == SCHEMA, 'Explicit recovered-failure binding; never a fabricated actual exit')
++    reference(binding['recovered_terminal']); reference(binding['failed_release_exit'])
++    require(binding['recovered_terminal'] == ROOT_OBSERVATION, 'Exact root-observed failed terminal')
++    require(binding['recovered_terminal'] != binding['failed_release_exit'],
++        'Recovered unknown original exit and actual supported release are distinct')
++
++
++def recovered_terminal(value, retry=None):
++    """Pure checks of the exact immutable real root observation; no receipt is made."""
++    require(type(value) is dict and set(value) == {
++        'schema', 'reviewer', 'observed_at', 'actual_observer', 'controller', 'terminal',
++        'old_external_exit_code_known', 'old_external_exit_code'}, 'Exact real root terminal observation fields')
++    require(value['schema'] == 'nemotron9b_r12_root_observed_failed_terminal_v1'
++        and value['reviewer'] == '/root' and type(value['observed_at']) is str and value['observed_at'],
++        'Original independently root-observed failed terminal')
++    observer = value['actual_observer']
++    require(type(observer['pid']) is int and observer['pid'] > 0
++        and type(observer['start_ticks']) is str and observer['start_ticks'].isdigit()
++        and int(observer['start_ticks']) > 0 and observer['argv'] == ['python3', '-B', '-']
++        and observer['cgroup'] == LIVE_OWNER['cgroup'], 'Retained actual independent observer identity')
++    observation = value['terminal']
++    require(value['old_external_exit_code_known'] is False and value['old_external_exit_code'] is None
++        and observation['old_external_exit_code'] is None and observation['old_external_exit_observed'] is False,
++        'Original external exit remains explicitly unknown')
++    require(set(observation) == {'rows', 'failed_terminal', 'old_external_exit_code', 'old_external_exit_observed'}
++        and set(observation['rows']) == {'controller', *p.STAGES}
++        and value['controller'] == observation['rows']['controller'], 'All53 original root-observed terminal rows')
++    props = value['controller']['properties']
++    require(type(props) is dict and all(props.get(key) == wanted for key, wanted in {
++        'LoadState': 'loaded', 'ActiveState': 'failed', 'SubState': 'failed',
++        'MainPID': '0', 'ControlPID': '0', 'Job': '', 'ExecMainPID': str(CONTROLLER_OWNER['pid']),
++        'Result': 'exit-code', 'ExecMainCode': '1', 'ExecMainStatus': '1',
++        'InvocationID': CONTROLLER_OWNER['invocation_id']}.items()),
++        'Retained actual original controller failed exit; never external tool exit inference')
++    for stage, row in observation['rows'].items():
++        unit = 'trn1-latest-verify-nemotron9b-package-r12-20261110-'+stage.replace('_', '-')+'.service'
++        expected_group = '/user.slice/user-1000.slice/user@1000.service/app.slice/'+unit
++        x = row['properties']
++        require(x['Id'] == unit and x['MainPID'] == x['ControlPID'] == '0' and not x['Job']
++            and x['ActiveState'] in ('inactive', 'failed')
++            and row['group'] == dict(group=expected_group, absent=True),
++            'Every observed original unit terminated with empty original group')
++        require(x['LoadState'] == 'loaded' or (x['LoadState'] == 'not-found'
++            and not x['InvocationID'] and x['SubState'] == 'dead'), 'Only retained loaded exit or absent original unit')
++    reference(observation['failed_terminal'])
++    if retry is not None:
++        require(retry['schema'] == 'nemotron9b_r12_supported_cleanup_retry_v1'
++            and retry['reviewer'] == '/root' and retry['old_tool_session'] == LIVE_SESSION
++            and retry['old_tool_poll'] == 'Unknown process id 28398'
++            and retry['old_external_owner_observed_gone'] is True
++            and retry['old_external_exit_code_known'] is False
++            and retry['controller'] == CONTROLLER_OWNER and retry['signal'] == 'SIGUSR1',
++            'Retained supported cleanup retry and unchanged unknown original exit')
++        before = retry['controller_properties']
++        require(before['InvocationID'] == props['InvocationID']
++            and before['MainPID'] == before['ExecMainPID'] == props['ExecMainPID']
++            and before['ActiveState'] == 'active' and before['SubState'] == 'running'
++            and retry['controller_lock']['owner'] == {k:v for k,v in CONTROLLER_OWNER.items() if k != 'invocation_id'}
++            and retry['controller_lock']['whole_file_write'] is True,
++            'Exact originally live controller/lock before supported cleanup retry')
++    return value
+ 
+ 
+ class TrackedRead:
+@@ -116,42 +182,59 @@
+         'Original canonical history and disjoint r12 services')
+ 
+ 
+-def terminal_chain(spec, receipt, records, refs, failed_release=None):
++def terminal_chain(spec, recovery, records, refs, failed_release, retry):
++    """Failure-only metadata classification, without inventing a launcher code."""
++    recovered_terminal(recovery, retry)
+     intent, pre, admission, release, audit = (records[k] for k in ('intent', 'pre', 'admission', 'release', 'audit'))
+-    require(intent['external_owner'] == receipt['owner'] == LIVE_OWNER, 'Exactly the actually observed live r12 owner')
+-    code = terminal.validate_actual_exit(receipt, dict(owner=LIVE_OWNER), SPEC, REVIEW, LIVE_SESSION)
++    require(intent['external_owner'] == LIVE_OWNER, 'Exactly the originally observed r12 launcher')
+     require(intent['execution_spec'] == admission['execution_spec'] == SPEC
+         and intent['source_review'] == admission['source_review'] == REVIEW
+         and intent['canonical_sha256'] == admission['canonical_sha256']
+-        and intent['lock_identity'] == admission['lock_identity'], 'Actual original admission and serial lock')
++        and intent['lock_identity'] == admission['lock_identity'] == retry['controller_lock']['lock'],
++        'Actual original admission and authenticated supported-retry serial lock')
+     require(pre['launch_intent'] == refs['intent'] and set(pre['rows']) == set(spec['units'])
+-        and pre['rows']['controller']['owner'] == admission['controller'], 'All53 retained owners, including controller')
+-    auditors = [LIVE_OWNER]
+-    if release['successful']:
+-        require(code == 0 and failed_release is None, 'Success has actual exit0 and no failed-release receipt')
+-    else:
+-        require(code != 0 and failed_release is not None, 'Failed launch requires separate actual failed release')
+-        owner, tool = failed_release['owner'], failed_release['actual_exit']
+-        command = [p.PYTHON, '-B', spec['controller'], '--audit', '--release-failed',
+-            '--spec', SPEC['path'], '--spec-sha256', SPEC['sha256'],
+-            '--review', REVIEW['path'], '--review-sha256', REVIEW['sha256']]
+-        require(owner['argv'] == command and type(tool['session_id']) is int and tool['session_id'] > 0
+-            and tool['session_id'] != LIVE_SESSION
+-            and (owner['pid'], owner['start_ticks']) != (LIVE_OWNER['pid'], LIVE_OWNER['start_ticks']),
+-            'Distinct actual supported v27 audit/release-failed owner and session')
+-        require(terminal.validate_actual_exit(failed_release, dict(owner=owner), SPEC, REVIEW, tool['session_id']) == 0,
+-            'Separate failed-release tool really exited0')
+-        auditors.append(owner)
+-        if audit.get('recovery_only'):
+-            require(audit['original_audit'] == refs['original_audit']
+-                and records['original_audit']['pre_stop'] == refs['pre']
+-                and audit['success_not_promoted'] is True, 'Original failed audit preserved across recovery')
+-    require(pre['auditor'] in auditors, 'Actual retained snapshot auditor')
+-    outcome = terminal.classify(code, release, audit, records.get('terminal'), records.get('failed'),
+-        refs['pre'], refs['audit'], refs['admission'])
+-    require(outcome['producer_qualified'] is release['successful']
+-        and outcome['failed_release'] is release['failed'], 'Failed outcomes cannot become successful')
+-    return outcome
++        and pre['rows']['controller']['owner'] == admission['controller'] == CONTROLLER_OWNER,
++        'All53 retained owners and exact original controller')
++    for stage, row in recovery['terminal']['rows'].items():
++        if row['properties']['LoadState'] == 'loaded':
++            require(pre['rows'][stage]['owner'] is not None, 'Retained loaded service has original owner')
++            p._service_binding(spec, stage, SPEC, REVIEW, pre['rows'][stage]['owner'], row['properties'])
++    require(recovery['terminal']['failed_terminal'] == refs['failed'], 'Original failed terminal independently retained')
++    require(type(failed_release) is dict, 'Separate actual supported failed release required')
++    owner, tool = failed_release['owner'], failed_release['actual_exit']
++    command = [p.PYTHON, '-B', spec['controller'], '--audit', '--release-failed',
++        '--spec', SPEC['path'], '--spec-sha256', SPEC['sha256'],
++        '--review', REVIEW['path'], '--review-sha256', REVIEW['sha256']]
++    require(owner['argv'] == command and type(tool['session_id']) is int and tool['session_id'] > 0
++        and tool['session_id'] != LIVE_SESSION
++        and (owner['pid'], owner['start_ticks']) not in {
++            (LIVE_OWNER['pid'], LIVE_OWNER['start_ticks']), (CONTROLLER_OWNER['pid'], CONTROLLER_OWNER['start_ticks'])},
++        'Distinct actual supported v27 release owner and tool session')
++    require(terminal.validate_actual_exit(failed_release, dict(owner=owner), SPEC, REVIEW, tool['session_id']) == 0,
++        'Supported failed-release tool really exited0')
++    require(pre['auditor'] in (LIVE_OWNER, owner), 'Actual original or supported failed-release retained-snapshot auditor')
++    if audit.get('recovery_only'):
++        require(audit['original_audit'] == refs['original_audit']
++            and records['original_audit']['pre_stop'] == refs['pre']
++            and audit['success_not_promoted'] is True, 'Original failed audit preserved across supported recovery')
++    require(release['released'] is release['all_current_groups_recursively_drained']
++        is release['canonical_unchanged'] is True, 'Original release and all current physical groups drained')
++    require(release['successful'] is release['model_qualified'] is False
++        and release['failed'] is release['explicit_failed_release'] is True,
++        'Recovered path accepts only explicit failed release')
++    require(release['audit'] == refs['audit'] and audit['pre_stop'] == refs['pre']
++        and audit['canonical_unchanged'] is True and audit['passed'] is audit['model_qualified'] is False,
++        'Original failed audit and exact release/pre-stop chain')
++    require(release['automatic_successor_launch'] is release['new_speedup_claim']
++        is audit['automatic_successor_launch'] is audit['new_speedup_claim'] is False,
++        'No automatic successor or inferred speedup')
++    failed = records['failed']
++    require(failed['passed'] is False and failed['all_started_groups_physically_drained'] is True
++        and failed['model_qualified'] is failed['new_speedup_claim'] is False
++        and records.get('terminal') is None, 'Original failed controller retained; success record forbidden')
++    return dict(original_tool_exit_code=None, original_tool_exit_observed=False, failed_external_exit=None,
++        controller_failed=True, recovered_lost_external_session=True, external_scientific_audit_passed=False,
++        producer_qualified=False, failed_release=True, new_speedup_claim=False)
+ 
+ 
+ def terminal_records(spec, reader):
+@@ -170,23 +253,25 @@
+ 
+ 
+ def completed(binding, read, guard):
+-    """Metadata only. Actual missing/pending exit rejects before old history IO."""
++    """Metadata only. Missing/unverified recovery rejects before old history IO."""
+     require(callable(guard), 'Explicit independent serial guard'); guard()
+     binding_check(binding)
+     reader = TrackedRead(read, guard)
+-    receipt = reader(binding['actual_exit'])
+-    terminal.validate_actual_exit(receipt, dict(owner=LIVE_OWNER), SPEC, REVIEW, LIVE_SESSION)
++    recovery = reader(binding['recovered_terminal'])
++    recovered_terminal(recovery)
++    retry = reader(RECOVERY_RETRY)
++    recovered_terminal(recovery, retry)
+     live = reader(LIVE)
+     require(live['schema'] == 'nemotron9b_r12_actual_external_live_v1'
+         and live['actual_live_identity_verified'] is True and live['external_owner'] == LIVE_OWNER
+         and live['actual_execution_handle']['session_id'] == LIVE_SESSION
+         and live['execution_spec'] == SPEC and live['source_review'] == REVIEW, 'Original actually observed r12 lineage')
+-    failed_release = reader(binding['failed_release_exit']) if binding['failed_release_exit'] is not None else None
++    failed_release = reader(binding['failed_release_exit'])
+     spec = reader(SPEC); review = reader(REVIEW); catalog = reader(spec['final_predecessor_catalog'])
+     previous = p.successor.metadata(reader, guard)
+     scope(spec, review, previous)
+     refs, records = terminal_records(spec, reader)
+-    outcome = terminal_chain(spec, receipt, records, refs, failed_release)
++    outcome = terminal_chain(spec, recovery, records, refs, failed_release, retry)
+     prior = previous['previous']['history']
+     require(records['admission']['canonical_sha256'] == prior['canonical_sha256']
+         and records['admission']['lock_identity'] == previous['lock_identity'], 'Same complete original canonical and serial lock')
+@@ -224,10 +309,11 @@
+     pins = {}
+     for additions in (previous['source_sha256'], previous['previous']['source_sha256'], spec['source_sha256'], reader.pins):
+         merge(pins, additions)
+-    endpoints = dict(actual_exit=copy.deepcopy(binding['actual_exit']), failed_release_exit=copy.deepcopy(binding['failed_release_exit']),
++    endpoints = dict(recovered_terminal=copy.deepcopy(binding['recovered_terminal']),
++        original_tool_exit_code=None, recovery_retry=RECOVERY_RETRY, failed_release_exit=copy.deepcopy(binding['failed_release_exit']),
+         execution_spec=SPEC, source_review=REVIEW, control_root=spec['control_root'], **refs)
+     history = copy.deepcopy(prior)
+-    history.update(schema='minicpm5_after_nemotron_r12_history_v1', rows=prior['rows']+copy.deepcopy(rows),
++    history.update(schema='minicpm5_after_nemotron_r12_recovered_failure_history_v1', rows=prior['rows']+copy.deepcopy(rows),
+         processes=processes, complete_count=1308, predecessor_source_sha256=copy.deepcopy(pins),
+         completed_nemotron_r12=endpoints, nemotron_r12_outcome=outcome, nemotron_r12_stages=summaries,
+         nemotron_r12_owner_variants=variants, current_physical_release_verified=False,
+@@ -235,7 +321,7 @@
+     require(len(history['rows']) == len({x['unit'] for x in history['rows']}) == 1308,
+         'All1308 historical services without duplicates')
+     guard()
+-    return dict(schema='minicpm5_after_nemotron_r12_completed_v1', binding=copy.deepcopy(binding),
++    return dict(schema='minicpm5_after_nemotron_r12_recovered_failure_completed_v1', binding=copy.deepcopy(binding),
+         source_sha256=pins, spec=spec, review=review, catalog=catalog, owners=owners,
+         owner_variants=variants, history=history, outcome=outcome, pre_refs=endpoints,
+         pre=records['pre'], lock_identity=copy.deepcopy(previous['lock_identity']), previous=previous,
+@@ -249,7 +335,7 @@
+ def physical(done, guard):
+     """Future actual serial-admitted recheck; never called during preparation."""
+     require(callable(guard), 'Explicit independent serial guard'); guard()
+-    require(done['schema'] == 'minicpm5_after_nemotron_r12_completed_v1', 'Actual metadata-completed result required')
++    require(done['schema'] == 'minicpm5_after_nemotron_r12_recovered_failure_completed_v1', 'Actual metadata-completed result required')
+     binding_check(done['binding']); scope(done['spec'], done['review'], done['previous'])
+     spec, history, pre = done['spec'], done['history'], done['pre']
+     require(len(history['rows']) == 1308 and history['completed_nemotron_r12'] == done['pre_refs']
+--- research/minicpm5_layer1_sdk_batch_layout_completion_v1.py
++++ research/minicpm5_layer1_sdk_batch_layout_completion_v2.py
+@@ -1,8 +1,8 @@
+ """Metadata completion and separate serial drain for the next SDK diagnostic.
+ 
+ No native import, payload read or launch. Pending r12 receipts never qualify.
+-Actual observed future terminal/release receipts must be supplied by root after
+-its live tool exits; no such binding is manufactured by this module.
++A real root-observed recovered failure and a separately observed supported
++failed-release tool exit must be supplied by root; no such binding is manufactured by this module.
+ """
+ import copy
+ from pathlib import Path
+@@ -35,14 +35,15 @@
+ 
+ def require_complete_binding(binding):
+     require(type(binding)is dict and set(binding)=={'schema','status','nemotron_r12','current_history','terminal_handoff'}
+-        and binding['schema']=='minicpm5_layer1_sdk_batch_layout_latest_completion_v1'
++        and binding['schema']=='minicpm5_layer1_sdk_batch_layout_latest_completion_v2'
+         and binding['status']=='complete','Current Nemotron actual terminal required; pending binding rejected')
+     require(binding['current_history']==CURRENT,'Exact completed180call Mini model and independent auditor')
+     n=binding['nemotron_r12']
+-    require(type(n)is dict and set(n)=={'schema','actual_exit','failed_release_exit'}
+-        and n['schema']=='minicpm5_after_nemotron_r12_binding_v1','Explicit actual r12 completion binding')
+-    reference(n['actual_exit'])
+-    if n['failed_release_exit']is not None:reference(n['failed_release_exit'])
++    require(type(n)is dict and set(n)=={'schema','recovered_terminal','failed_release_exit'}
++        and n['schema']=='minicpm5_after_nemotron_r12_recovered_failure_binding_v1','Explicit recovered-failed r12 completion binding')
++    reference(n['recovered_terminal']);reference(n['failed_release_exit'])
++    from research import minicpm5_after_nemotron_r12_recovered_failure_v1 as nemotron
++    nemotron.binding_check(n)
+     reference(binding['terminal_handoff'])
+     require(binding['terminal_handoff']!=HANDOFF,'Pre-r12 Mini terminal cannot admit a post-r12 diagnostic')
+     return binding
+@@ -97,15 +98,16 @@
+     require(terminal['live_tool_sessions']==[] and terminal['active_heavy_units']==[],
+         'Terminal handoff cannot contain live serial execution')
+     n=terminal['nemotron_r12']
+-    require(n['actual_exit']==binding['nemotron_r12']['actual_exit']
++    require(n['recovered_terminal']==binding['nemotron_r12']['recovered_terminal']
++        and n.get('actual_exit') is None
+         and n.get('failed_release_exit')==binding['nemotron_r12']['failed_release_exit'],
+-        'Latest terminal explicitly binds actual r12 outcome/release')
++        'Latest terminal binds recovered r12 failure and actual supported release')
+     h=terminal['current_history_factorial']
+     require(h['actual_exit']==CURRENT['model_exit'] and h['independent_audit_exit']==CURRENT['audit_exit'],
+         'Terminal retains original current/history lineage')
+     # Import only after rejecting pending/missing metadata; this helper is still
+     # stdlib source and does not call its physical path from completed().
+-    from research import minicpm5_after_nemotron_r12_v1 as nemotron
++    from research import minicpm5_after_nemotron_r12_recovered_failure_v1 as nemotron
+     n_done=nemotron.completed(binding['nemotron_r12'],load,guard)
+     current=current_history(binding['current_history'],load,guard)
+     collector=collector_completion.completed(current['spec']['completed_layer1_data'],load)
+@@ -145,7 +147,7 @@
+ 
+ def physical(done,guard):
+     require_complete_binding(done['binding']);require(done['metadata_complete']is True,'Completed metadata first')
+-    from research import minicpm5_after_nemotron_r12_v1 as nemotron
++    from research import minicpm5_after_nemotron_r12_recovered_failure_v1 as nemotron
+     guard();proof=nemotron.physical(done['nemotron'],guard)
+     low=nemotron.p.low
+     for owner in done['owners']:guard();low.gone(owner)
+--- minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py
++++ minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py
+@@ -1,4 +1,4 @@
+-"""Partition-aware TP2 SDK batch/layout v2 runner; no admission without actual r12 exit."""
++"""TP2 SDK batch/layout successor; recovered failed r12 and actual release required."""
+ import argparse
+ import copy
+ import hashlib
+@@ -29,7 +29,7 @@
+ from research import minicpm5_layer1_after_native_cache_v1 as official
+ from research import minicpm5_layer1_after_official_history_v1 as latest_completed
+ from research.minicpm5_layer1_current_source_view_v1 import current_source_view
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v1 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
+ from research.minicpm5_layer1_drain_hold_v1 import retain_until_drained
+ OBSERVED_EXIT=dict(path='/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer0-full-bf16-cpu-root-exit-r1-20261108-v1.json',
+  sha256='727d92a3189bc671016701e53bfc982547c33917cb046dfd2ca29eb78f84e0ff')
+@@ -77,7 +77,7 @@
+         'Final concrete runtime source review')
+     same(review['spec'],spec_ref,'Exact reviewed runtime spec')
+     same(review['source_sha256'],spec['source_sha256'],'Complete reviewed source closure')
+-    same([spec['runner'],spec['worker']],[SELF,str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v2.py')],
++    same([spec['runner'],spec['worker']],[SELF,str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py')],
+          'Only new collector runner and worker')
+     partition=source_auth.classify(spec['source_sha256'],spec['source_contract'])
+     source_auth.verify_text_sources(partition,guard)
+@@ -395,7 +395,7 @@
+     context=RuntimeContext(plan,digest(plan),permit,guard);context.sdk_guard=guard
+     context.verify_loaded_sources=lambda:verify_loaded_sources(plan,guard)
+     context.verify_sources();guard.mark_sources_verified(context);guard.full('after_source_verification')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_worker_v2 as worker
++    import minicpm5_layer1_sdk_batch_layout_cpu_worker_v3 as worker
+     try:
+         verify_loaded_sources(plan,guard)
+         result=worker.run(context,root/('cpu-rank'+str(rank_id)))
+--- minicpm5_layer1_sdk_batch_layout_cpu_worker_v2.py
++++ minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py
+@@ -1,7 +1,7 @@
+ """Partition-aware TP2 SDK batch/layout v2 worker; exact outer native receipt inherited."""
+ import importlib
+ from pathlib import Path
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v1 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
+ from research import minicpm5_layer1_sdk_batch_layout_cpu_driver_v1 as driver
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ from minicpm5_original88_decode_mask_analysis_v1 import p
+--- research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v1.py
++++ research/minicpm5_layer1_sdk_batch_layout_post_exit_core_v2.py
+@@ -6,12 +6,12 @@
+ """
+ from pathlib import Path
+ import re
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v1 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
+ from research.nemotron9b_r12_current_history_completion_v1 import handle,same_owner
+ require=latest.require
+ ROOT=latest.ROOT
+-RUNNER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py')
+-WORKER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v2.py')
++RUNNER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py')
++WORKER=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py')
+ PYTHON='/home/ubuntu/venvs/vllm_neuron/bin/python'
+ SCHEMA='minicpm5_layer1_sdk_batch_layout'
+ GROUP='/user.slice/user-1000.slice/user@1000.service/app.slice/'
+--- research/prepare_minicpm5_layer1_sdk_batch_layout_v5.py
++++ research/prepare_minicpm5_layer1_sdk_batch_layout_v6.py
+@@ -14,7 +14,7 @@
+ import re
+ import sys
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path[:0]=[str(ROOT),str(Q)]
+-from research import minicpm5_layer1_sdk_batch_layout_completion_v1 as latest
++from research import minicpm5_layer1_sdk_batch_layout_completion_v2 as latest
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ require=latest.require
+@@ -64,8 +64,8 @@
+     plan.update(output_root=str(locations['output']),latest_completion=copy.deepcopy(done['binding']),
+         layer1_sdk_batch_layout=copy.deepcopy(current['binding']),source_contract=copy.deepcopy(contract_ref))
+     spec.update(schema='minicpm5_layer1_sdk_batch_layout_cpu_execution_spec_v2',
+-        runner=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v2.py'),
+-        worker=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v2.py'),
++        runner=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py'),
++        worker=str(ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py'),
+         output_root=plan['output_root'],source_sha256=copy.deepcopy(plan['source_sha256']),source_contract=copy.deepcopy(contract_ref),
+         unit=locations['unit'],master_port=master_port,latest_completion=copy.deepcopy(done['binding']),
+         completed_current_history=copy.deepcopy(current['binding']))
+@@ -111,14 +111,22 @@
+         Q/'check_record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py',
+         Q/'check_prepare_minicpm5_layer1_sdk_batch_layout_v4.py',
+         Q/'check_minicpm5_sdk_physical_evidence_v2.py',
+-        Q/'check_prepare_minicpm5_layer1_sdk_batch_layout_v5.py']
++        Q/'check_prepare_minicpm5_layer1_sdk_batch_layout_v5.py',
++        ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_runner_v3.py',
++        ROOT/'minicpm5_layer1_sdk_batch_layout_cpu_worker_v3.py',
++        Q/'record_minicpm5_layer1_sdk_batch_layout_exit_v2.py',
++        Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v3.py',
++        Q/'record_minicpm5_layer1_sdk_batch_layout_audit_exit_v3.py',
++        Q/'prepare_minicpm5_layer1_sdk_batch_layout_v5.py',
++        Q/'check_minicpm5_after_nemotron_r12_recovered_failure_v1.py',
++        Q/'check_minicpm5_layer1_sdk_batch_layout_recovered_closure_v1.py']
+ 
+ 
+ def build(binding,run_id,master_port):
+     latest.require_complete_binding(binding);latest.require_latest_terminal(binding)
+     locations=paths(run_id)
+     require(all(not locations[k].exists()for k in ('plan','spec','review','contract','output')),'Every output must be fresh')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v2 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
+     from research.prepare_dory_residual_spec_v3 import local_imports
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,owner,lock=runner.post.external.acquire_lock()
+--- research/record_minicpm5_layer1_sdk_batch_layout_exit_v1.py
++++ research/record_minicpm5_layer1_sdk_batch_layout_exit_v2.py
+@@ -11,9 +11,9 @@
+ import re
+ import sys
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path.insert(0,str(ROOT))
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v1 as core
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+-from research.audit_minicpm5_layer1_sdk_batch_layout_result_v1 import verify_outer_drain
++from research.audit_minicpm5_layer1_sdk_batch_layout_result_v3 import verify_outer_drain
+ require=core.require
+ 
+ 
+@@ -59,7 +59,7 @@
+     target=Path(target)
+     require(target.parent==Q and re.fullmatch(r'minicpm5-layer1-sdk-batch-layout-[a-z0-9-]+-actual-exit-[a-z0-9-]+\.json',target.name)
+         and not target.exists(),'Fresh actual model terminal receipt namespace')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v2 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,recorder,lock=runner.post.external.acquire_lock()
+     try:
+--- research/audit_minicpm5_layer1_sdk_batch_layout_result_v2.py
++++ research/audit_minicpm5_layer1_sdk_batch_layout_result_v3.py
+@@ -20,7 +20,7 @@
+ import zlib
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research'
+ sys.path.insert(0,str(ROOT))
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v1 as core
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ from research import minicpm5_sdk_physical_evidence_v2 as physical_evidence
+@@ -208,7 +208,7 @@
+ def run(exit_ref,target):
+     sources.reference(exit_ref);require(Path(exit_ref['path']).suffix=='.json','Actual model JSON exit reference')
+     target=output_path(target)
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v2 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B required')
+     runner.p.user_bus();fd,owner,lock=runner.post.external.acquire_lock()
+     try:
+--- research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v2.py
++++ research/record_minicpm5_layer1_sdk_batch_layout_audit_exit_v3.py
+@@ -16,13 +16,13 @@
+ import zlib
+ ROOT=Path(__file__).resolve().parents[1];Q=ROOT/'research';sys.path[:0]=[str(ROOT),str(Q)]
+ from research import minicpm5_layer1_sdk_batch_layout_sources_v2 as sources
+-from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v1 as core
+-from research import audit_minicpm5_layer1_sdk_batch_layout_result_v2 as auditor
++from research import minicpm5_layer1_sdk_batch_layout_post_exit_core_v2 as core
++from research import audit_minicpm5_layer1_sdk_batch_layout_result_v3 as auditor
+ from research import minicpm5_sdk_physical_evidence_v2 as physical
+-from research.record_minicpm5_layer1_sdk_batch_layout_exit_v1 import actual_tool
++from research.record_minicpm5_layer1_sdk_batch_layout_exit_v2 import actual_tool
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ require=core.require
+-AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v2.py'
++AUDITOR=Q/'audit_minicpm5_layer1_sdk_batch_layout_result_v3.py'
+ 
+ 
+ def unpack(proof):
+@@ -140,7 +140,7 @@
+     actual_tool(session,chunk,exit_code);sources.reference(live_ref);sources.reference(result_ref);target=Path(target)
+     require(target.parent==Q and re.fullmatch(r'minicpm5-layer1-sdk-batch-layout-[a-z0-9-]+-audit-actual-exit-[a-z0-9-]+\.json',target.name)
+         and not target.exists(),'Fresh independent auditor actual-exit receipt')
+-    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v2 as runner
++    import minicpm5_layer1_sdk_batch_layout_cpu_runner_v3 as runner
+     require(sys.dont_write_bytecode and __debug__,'Original python -B')
+     runner.p.user_bus();fd,recorder,lock=runner.post.external.acquire_lock()
+     try:

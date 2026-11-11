@@ -1,0 +1,34 @@
+{
+  "schema": "closed_journals_after_r12_failure_root_review_v1",
+  "reviewer": "/root",
+  "passed": true,
+  "blockers": [],
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/closed-journals-after-r12-failure-plan-20261111-v1.json",
+    "sha256": "60f61f99f9944e6efe8b7f6d91e019b09a01a0cb776fd5e772e02afa6add3a9e"
+  },
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/compact_closed_journals_after_r12_failure_v1.py": "6e218bf1f9b5967faa1b9e67e1a32e48bc276a42373aa0a6cb4fdde2b5ff7457",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/compact_closed_journals_after_r11_v3.py": "373fd87ffcb75c7fa99bec25d9ba606ec3e154a7911446257269ce027d7901d1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_execution_protocol_v4.py": "81e7d7dd913c6b85f0add7b946692d3270f80cc8f2fe980ecad543251657f185",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer0_runtime_auth_v1.py": "92e6f2e7cf1009e94ce548474ea5cd455b7cc1ea00813fb44f5790ae85fb1a27"
+  },
+  "review_scope": [
+    "Exact two archived single-link root-owned 128MiB files; identities and full SHA256 bound",
+    "Original serial lock and all 53 terminal units checked; original failed invocation preserved",
+    "Both gzip archives complete and independently decompressed before any exact allowlisted unlink",
+    "Complete original bytes retained on NVMe; originals unused and unchanged at unlink",
+    "Bounded archive/metadata writes; recovery restores original 28GiB floor plus 128MiB",
+    "No model/native/compiler launch, registry edit, gate relaxation, or fresh Nemotron admission",
+    "SIGINT/TERM before unlink retains originals or verified archives; prior evidence never overwritten"
+  ],
+  "initial_prepare_failure": {
+    "tool_chunk": "d212bb",
+    "exit_code": 1,
+    "reason": "journald mapped archived file; no archive or deletion occurred"
+  },
+  "normal_rotation_result": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/closed-journals-r12-normal-rotation-result-20261111-v1.json",
+    "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+  }
+}

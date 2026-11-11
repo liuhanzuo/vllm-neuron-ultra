@@ -1,0 +1,159 @@
+{
+  "schema": "dory_probe_mini_failure_independent_delivery_20261111_v1",
+  "author": "/root/dory_probe_mini_failure_review",
+  "created_at": "2026-11-11T02:57:28.376854+00:00",
+  "source_only": true,
+  "original_sources_unchanged": true,
+  "reviewed_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_adapter_probe_v2.py",
+      "sha256": "b619fe5ba77f7bc95c37c6fac4c28043d1f41284c9ffab9230416eec688118e4",
+      "bytes": 8455
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_stage_a_native_adapter_probe_v2.py",
+      "sha256": "2f93c4cf6bd8d40ab15e464cc88315409eb8906d0bceb30ad93547a51b3f7251",
+      "bytes": 7786
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_failed_execution_evidence_v1.py",
+      "sha256": "c501f440327f8c3580bb844b42b3345de634191d218e3d75be1dfbe776ad0d9a",
+      "bytes": 17330
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_failed_execution_evidence_v1.py",
+      "sha256": "3aee5b6c5a1adb879d2965c8f5f9d507156704a6b4129fc8d8e51dca48b62bda",
+      "bytes": 16068
+    }
+  ],
+  "prior_reviews": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-native-adapter-probe-independent-review-20261110-v2.json",
+      "sha256": "c23186cd6405aa4118ca3c90a7bf58d7db319be6b7eaeae41bc713dc1c400284",
+      "bytes": 5249
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-stage-a-native-adapter-probe-independent-mutations-20261110-v2.json",
+      "sha256": "cb46047ef20ecf1dc7432b2123365bc259b2d76f7d67724db35f3219c5bc3b2a",
+      "bytes": 1041
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-failed-execution-evidence-source-delivery-20261110-v1.json",
+      "sha256": "d26ed02cbdf0fd0a347b86b9529d6893009d9e2614fcdee46161463ecff40b3d",
+      "bytes": 7738
+    }
+  ],
+  "original_synthetic_tests": {
+    "dory_tests": 14,
+    "mini_v1_tests": 34,
+    "total": 48,
+    "passed": 48,
+    "elapsed_seconds": 4.641350913792849,
+    "session_id": 64116,
+    "initial_chunk": "14b3a4",
+    "terminal_chunk": "91b4f0",
+    "actual_exit_code": 0,
+    "native_modules_absent": true
+  },
+  "independent_mutations": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-probe-mini-failure-independent-mutations-20261111-v1.json",
+    "sha256": "ce2ab63dcbda905894829d6841379977badf34b7c380dca31161cc6570831179",
+    "bytes": 1053
+  },
+  "review_harness_initial_error": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_probe_mini_failure_independent_20261111_v1.py",
+      "sha256": "cedb135063bff668782cdea9bc8ab5674a1e2143c5983ab355442d10a4b8bd5e",
+      "bytes": 3563
+    },
+    "session_id": 88772,
+    "initial_chunk": "b6d987",
+    "terminal_chunk": "0987c4",
+    "actual_exit_code": 1,
+    "error": "Review harness called fake argmax with a positional dim, but FakeTorch requires keyword dim; target source was unaffected.",
+    "successor": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_probe_mini_failure_independent_20261111_v2.py",
+      "sha256": "539fc12decf1a87b2d71003d8ee14e621d3354092498d5f81a394ec8979bb0da",
+      "bytes": 3567
+    }
+  },
+  "dory": {
+    "status": "source_review_passed_actual_native_validation_pending",
+    "findings": [],
+    "resolved_prior_findings": [
+      "Position-dependent serialization words reject repeated, swapped and skipped full-vocabulary chunks.",
+      "Expected selection bytes captured before the operation; original backing mutation rejected after a correct output.",
+      "Argmax backing mutation rejected even if the correct top1 result was returned."
+    ],
+    "limits": [
+      "Only injected FakeTorch API executed, not actual Torch ABI.",
+      "No production singleton layout qualification; actual native cloning may retain singleton strides and must be tested.",
+      "No original model payload, model forward, compiler, quality or performance execution.",
+      "F32 full-vocabulary fixture covers serialization; ties tested on finite 3x4 inputs only.",
+      "BF16 words repeat after 65536 word positions; tested faults only, not every possible corruption."
+    ]
+  },
+  "mini": {
+    "v1_status": "concrete_critical_metadata_identity_defect_found",
+    "finding": {
+      "file": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_failed_execution_evidence_v1.py",
+      "line": 259,
+      "trigger": "Missing rank owner JSON records plus children-exits.json owners=[null].",
+      "observed": "The membership expression accepts None in [None,None] and returns a failure-only evidence object.",
+      "impact": "Malformed critical child identity is accepted. No drain bypass, successful result, successor release, or model qualification was observed.",
+      "priority": "P2",
+      "minimal_fix": "Require a list, apply existing owner() to each entry, and permit membership only in non-null recorded rank identities."
+    },
+    "v2_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_failed_execution_evidence_v2.py",
+      "sha256": "a7658f5dea95479ba23cf5c0e4b3b7cdc646ab13bd86fb1415ca2cb2fd457702",
+      "bytes": 17491
+    },
+    "v2_tests": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_failed_execution_evidence_v2.py",
+      "sha256": "edb6bbdc277494ce0a490ea940e3a6c94f0f7ab377bc39e7613dfd2b4382485b",
+      "bytes": 18569
+    },
+    "v2_diff": "--- minicpm5_sdk_failed_execution_evidence_v1.py\n+++ minicpm5_sdk_failed_execution_evidence_v2.py\n@@ -256,8 +256,11 @@\n         if value is not None: require(value.get('owner') == model_owner,'Failure/cleanup receipt belongs to actual outer')\n     value = critical('children-exits.json')\n     if value is not None:\n-        require(type(value.get('owners')) is list and all(x in ranks for x in value['owners']),\n-            'No unrelated recorded child owner')\n+        require(type(value.get('owners')) is list, 'Explicit recorded child owner list')\n+        available_ranks = [rank for rank in ranks if rank is not None]\n+        for child in value['owners']:\n+            owner(child)\n+            require(child in available_ranks, 'No unrelated recorded child owner')\n     for index in (0,1):\n         for suffix in ('result','failure'):\n             value = values['rank%d-%s.json'%(index,suffix)]\n",
+    "actual_v2_tests": {
+      "total": 39,
+      "passed": 39,
+      "original": 34,
+      "new": 5,
+      "tool_chunk": "54de18",
+      "actual_exit_code": 0,
+      "reported_elapsed_seconds": 0.082
+    },
+    "new_cases": [
+      "null child owner with missing rank receipts",
+      "each missing required identity field",
+      "complete but replaced start_ticks identity",
+      "valid partial evidence with no acknowledged ranks",
+      "valid partial evidence with exactly one acknowledged rank"
+    ],
+    "runtime_apis_or_schema_changed": false,
+    "original_schema_preserved": "minicpm5_sdk_actual_failed_execution_evidence_v1",
+    "failure_only_and_no_release_guarantees_preserved": true,
+    "production_source_binding_created": false,
+    "separate_root_v2_review_pending": true,
+    "rerun_command": "python3 -B - <<'PY'\nimport os,resource,runpy,sys\nos.sched_setaffinity(0,{6});os.nice(19)\nresource.setrlimit(resource.RLIMIT_AS,(1024**3,)*2);resource.setrlimit(resource.RLIMIT_CPU,(45,50))\nsys.path.insert(0,'research')\nrunpy.run_path('research/check_minicpm5_sdk_failed_execution_evidence_v2.py',run_name='__main__')\nPY",
+    "rerun_cwd": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+  },
+  "resource_limits": {
+    "cpu_affinity": [
+      6
+    ],
+    "nice": 19,
+    "address_space_bytes": 1073741824,
+    "cpu_soft_seconds": 45,
+    "cpu_hard_seconds": 50
+  },
+  "model_or_native_imported": false,
+  "raw_payload_bytes_read": 0,
+  "actual_proc_service_cgroup_or_lock_access": false,
+  "production_admission_created": false,
+  "handoff_created": false,
+  "frozen_files_edited": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
