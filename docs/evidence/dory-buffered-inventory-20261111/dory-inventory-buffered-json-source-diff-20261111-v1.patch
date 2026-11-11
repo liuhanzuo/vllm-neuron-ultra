@@ -1,0 +1,46 @@
+--- research/dory_native_inventory_finish_v3.py
++++ research/dory_native_inventory_finish_v4.py
+@@ -501,15 +501,29 @@
+                 system_package_versions_from_original_census=[r for r in census['commands']if r['argv'][0]=='/usr/bin/dpkg-query'])
+ 
+ 
++def json_blocks(value):
++    """Same compact ASCII JSON stream, buffered before guarded budget/write IO."""
++    buffered=bytearray()
++    # The unchanged encoder defaults to ensure_ascii=True. Slice its ASCII text
++    # before encoding so even a large string fragment adds at most64KiB at once.
++    for part in json.JSONEncoder(separators=(',',':'),allow_nan=False).iterencode(value):
++        offset=0
++        while offset<len(part):
++            take=min(65536-len(buffered),len(part)-offset)
++            buffered.extend(part[offset:offset+take].encode());offset+=take
++            if len(buffered)==65536:
++                yield buffered;buffered=bytearray()
++    if buffered:yield buffered
++
++
+ def write_json(path,value,budget):
+     """Exclusive bounded output; caller preserves partial files on any failure."""
+     path=Path(path);h=hashlib.sha256();count=0
+     with path.open('xb')as stream:
+-        for part in json.JSONEncoder(separators=(',',':'),allow_nan=False).iterencode(value):
+-            raw=part.encode()
+-            for pos in range(0,len(raw),65536):
+-                block=raw[pos:pos+65536];count+=len(block);require(count<=LIMITS['per_output_bytes'],'Single output bound')
+-                budget.add('output_bytes',len(block));require(stream.write(block)==len(block),'Complete output write');h.update(block)
++        budget.check()
++        for block in json_blocks(value):
++            count+=len(block);require(count<=LIMITS['per_output_bytes'],'Single output bound')
++            budget.add('output_bytes',len(block));require(stream.write(block)==len(block),'Complete output write');h.update(block)
+         stream.flush();os.fsync(stream.fileno())
+     directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+     try:os.fsync(directory)
+@@ -555,7 +569,7 @@
+               external=write_json(output_root/'external-closure.json',external,budget),
+               site_excluded=write_json(output_root/'site-excluded.json',site['excluded'],budget))
+     unresolved=site['unresolved']+external['unresolved']
+-    result=dict(schema='dory_native_inventory_finishing_v2',source_successor='dory_native_inventory_finish_v3.py',inputs=PINS,outputs=refs,
++    result=dict(schema='dory_native_inventory_finishing_v2',source_successor='dory_native_inventory_finish_v4.py',inputs=PINS,outputs=refs,
+                 file_count=len(files),file_bytes=sum(r['bytes']for r in files),site_files=len(site['files']),official_files=len(official),
+                 unresolved=unresolved,site_named_coverage_complete=not site['unresolved'],budget_used=dict(budget.used),
+                 generated_metadata_is_observational_not_upstream=True,actual_loaded_maps_pending=True,

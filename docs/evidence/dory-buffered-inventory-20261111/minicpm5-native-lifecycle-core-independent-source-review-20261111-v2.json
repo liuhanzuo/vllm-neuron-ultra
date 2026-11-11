@@ -1,0 +1,51 @@
+{
+  "schema": "minicpm5_native_lifecycle_core_independent_source_review_v1",
+  "reviewer": "/root",
+  "created_at": "2026-11-11T08:30:37.461334+00:00",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-lifecycle-core-source-delivery-20261111-v2.json",
+    "sha256": "74b918372292fcf7c3c310557d83c9ee39796182fe45a4bb1c5d100b48fdce9f"
+  },
+  "passed": true,
+  "blockers": [],
+  "pins_verified": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_lifecycle_core_v2.py": "db96287006355521032ac1245cad6183ff710cc001a9af6fce02bcf1726a6c21",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_layer1_operator_native_lifecycle_core_v2.py": "edfc01aa57a452798acc50093ecfd1827f3b9cc95490057a310e8c8b807d125b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-lifecycle-core-interface-20261111-v2.md": "108783a3ce9aa8955103c313ebdca39efe283e4cc52a282ea7ac9d32a6c91650"
+  },
+  "tests": [
+    {
+      "session": 16118,
+      "terminal_chunk": "9dc2c4",
+      "exit_code": 0,
+      "count": 17
+    },
+    {
+      "session": 64710,
+      "terminal_chunk": "d02fe9",
+      "exit_code": 0,
+      "count": 4,
+      "negative_cases": [
+        "child-receipt-failure",
+        "owner-receipt-failure",
+        "release-lease-rejection",
+        "malformed-native-wrapper"
+      ]
+    }
+  ],
+  "accepted_scope": "Injected lifecycle core only, no actual adapters or launch authority.",
+  "review_findings": [
+    "Original driver object preserved under separate native wrapper; accepted verifier compatibility1176 synthetic reads demonstrated.",
+    "Explicit release callback after durable owner binding and lease recheck; future worker must independently verify gate.",
+    "One finally cleanup retains lease requirement on uncertain drain and prevents duplicate exclusive children receipts.",
+    "Full output catalog and root allocation within original caps; actual source and physical guards remain external.",
+    "Outer service callback must supply correct service identity/no-job/resources and complete drain; this core alone cannot enforce adapter implementation."
+  ],
+  "actual_process_ports_bound": false,
+  "actual_lease_adapter_bound": false,
+  "actual_process_or_lock_operations": false,
+  "actual_raw_io": false,
+  "launch_ready": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

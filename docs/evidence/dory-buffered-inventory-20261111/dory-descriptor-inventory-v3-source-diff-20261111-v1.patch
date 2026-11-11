@@ -1,0 +1,22 @@
+--- run_dory_descriptor_inventory_root_v2.py
++++ run_dory_descriptor_inventory_root_v3.py
+@@ -57,7 +57,7 @@
+         first_ref=c.save(out/'initial-lock-proof.json',runtime.initial_record(first_proof,owner,lock,fd,plan_ref,review_ref),runtime.CAP)
+         proof.initial_persisted(first_ref)
+         c.save(out/'owner.json',dict(owner=owner,lock=lock,retained_fd=fd,lock_policy=runtime.POLICY,first_lock_proof=first_ref,plan=plan_ref,review=review_ref,history=history))
+-        worker=str(Q/'dory_descriptor_inventory_worker_v2.py');c.require(worker in plan['source_sha256'],'Worker source reviewed')
++        worker=str(Q/'dory_descriptor_inventory_worker_v3.py');c.require(worker in plan['source_sha256'],'Worker source reviewed')
+         readfd,writefd=os.pipe();python='/usr/bin/python3'
+         argv=[python,'-B','-s',worker,'--plan',a.plan,'--plan-sha256',a.plan_sha256,'--admission',str(out/'admission.json'),'--ready-fd',str(readfd)]
+         admission=runtime.admission(plan,plan_ref,review_ref,owner,lock,fd,argv,started,first_ref,proof.duplicate_reference)
+--- dory_descriptor_inventory_worker_v2.py
++++ dory_descriptor_inventory_worker_v3.py
+@@ -50,7 +50,7 @@
+     try:
+         guard()
+         c.require(sys.executable=='/usr/bin/python3','Inventory system interpreter only')
+-        from dory_native_inventory_finish_v3 import run
++        from dory_native_inventory_finish_v4 import run
+         from dory_serial_stage_journal_v2 import Journal
+         c.verify_loaded(plan['source_sha256']);work=out/'inventory';work.mkdir()
+         journal=Journal(out/'events.jsonl.gz',guard)
