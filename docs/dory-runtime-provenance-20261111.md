@@ -74,9 +74,21 @@ Dory 的有界分阶段启动器已通过 17 项独立检查和新增最终文�
 
 [MiniCPM5 汇总失败实际终态](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-failed-terminal-20261111-v1.json)、[完整失败与文件保留证据](evidence/dory-provenance-20261111/minicpm5-layer1-operator-sdk-r2-model-failed-evidence-20261111-v1.json)、[Dory 启动器独立审查](evidence/dory-provenance-20261111/dory-serial-stage-independent-source-review-20261111-v3.json)、[Dory 清单实际启动](evidence/dory-provenance-20261111/dory-serial-inventory-r1-actual-live-20261111-v1.json)。
 
-MiniCPM5 汇总超限已用实际两份 rank 元数据复现：旧嵌套序列化约 8,740,236 字节，引用两份原文件并保留校验证明的示例为 2,377 字节。用于这次尺寸复现的校验证明是固定结构模板，不能当作原始字节审计结果。紧凑格式与失败恢复纯验证模块的 10 项独立检查通过；实际恢复审计程序仍在接入。
+MiniCPM5 汇总超限已用实际两份 rank 元数据复现：旧嵌套序列化约 8,740,236 字节，引用两份原文件并保留校验证明的示例为 2,377 字节。用于这次尺寸复现的校验证明是固定结构模板，不能当作原始字节审计结果。紧凑格式与失败恢复纯验证模块的 10 项独立检查通过；可执行恢复审计程序随后完成接入，实际运行情况见下一节。
 
 [Dory 清单实际失败与退出](evidence/dory-provenance-20261111/dory-serial-inventory-r1-actual-exit-20261111-v1.json)、[完整保存事件复读](evidence/dory-provenance-20261111/dory-inventory-r1-failed-saved-events-review-20261111-v1.json)、[失败位置的队列推导](evidence/dory-provenance-20261111/dory-inventory-r1-external-failure-fifo-derivation-20261111-v1.json)、[MiniCPM5 紧凑汇总与失败恢复核心复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-compact-recovery-independent-source-review-20261111-v1.json)。
+
+## 恢复审计实际运行与共用锁异常
+
+Dory 两个系统库路径的读取修正通过 12 项检查及独立源码复核。第二轮清单检查实际退出 1，发生在子进程第一次原串行锁核验，尚未记录清单事件。因此这轮没有验证硬链接读取修正，也没有新的环境或模型通过结论。退出后重新取得原锁，确认父、子进程退出及子进程组清空。子进程失败现场记录后继已通过 10 项独立检查：下次仅在原错误出现时保存原锁表及匹配信息，明确子进程没有父进程的锁描述符；不重试，不改变原判定。
+
+MiniCPM5 的独立恢复审计程序通过 9 项源码与合成检查。主任务将它绑定最新串行记录，复核原 44,503 项源码清单未改变、25 项新增源码单独列出、425 文件静态依赖闭包完整。恢复审计实际启动，但在 `read_bundle.verify_text_sources` 阶段再次触发 `Controller does not hold whole serial flock`，实际退出 1，尚未进入 624 份原始文件的数值核验。失败记录完整保留，退出后独立重新取得原锁并确认审计进程退出、原模型服务与计算进程清空。原模型 exit 1 与本次审计 exit 1 分别保留；缺失的 coordinator/outer 成功记录没有补造。
+
+这说明锁检查异常也会出现在不加载模型的源码审计路径，尚不能据此认定内核、模型、Neuron SDK 或其他仓库的实现有错。下一步为审计程序补充原异常瞬间的锁表与实际持有描述符记录，再定位原因。已保存的实验数据保留，官方原生对照仍需等待恢复审计通过。本轮没有新增合格模型或提速倍数。
+
+根盘空间一度低于原 28 GiB 实验余量门槛。确认四个系统软件包已经安装、下载缓存没有进程使用后，在原串行锁内删除这四份下载包，回收 20,721,664 字节；安装内容、模型权重与实验文件均保留，没有扩容磁盘。
+
+[Dory 第二轮真实退出](evidence/dory-provenance-20261111/dory-serial-inventory-r2-actual-exit-20261111-v1.json)、[子进程失败现场记录独立审查](evidence/dory-provenance-20261111/dory-worker-parent-lock-diagnostic-independent-source-review-20261111-v1.json)、[Mini 恢复审计源码复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-failed-recovery-runtime-independent-source-review-20261111-v1.json)、[Mini 恢复审计真实退出与清理](evidence/dory-provenance-20261111/minicpm5-operator-sdk-recovery-r2-actual-exit-20261111-v1.json)。
 
 ## 证据
 
