@@ -1,0 +1,144 @@
+{
+  "schema": "minicpm5_native_r1_root_readonly_live_observation_v1",
+  "observed_at": "2026-11-11T13:32:02.005302+00:00",
+  "reviewer": "/root",
+  "actual_session_poll": {
+    "session_id": 88265,
+    "chunk": "e62465",
+    "session_still_running": true
+  },
+  "owners": [
+    {
+      "pid": 1471058,
+      "start_ticks": "418093092",
+      "ppid": 1003516,
+      "state": "S",
+      "argv": [
+        "python3",
+        "-B",
+        "minicpm5_layer1_operator_native_outer_runner_v3.py",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-spec.json",
+        "--spec-sha256",
+        "c4a56036bbe3976c70e9cdca35a7ba2db78236a9fb838d3bf83a7d4a1a1dd74f",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-source-review.json",
+        "--review-sha256",
+        "ff44861da1fa976b20697c1ba49b3b260973919795c817061364c804f1736b2d"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "cpu_seconds": 1211.39,
+      "io": {
+        "rchar": 25931887889,
+        "wchar": 13285339,
+        "syscr": 4296079,
+        "syscw": 11755,
+        "read_bytes": 12288,
+        "write_bytes": 700416,
+        "cancelled_write_bytes": 0
+      }
+    },
+    {
+      "pid": 1478958,
+      "start_ticks": "418123278",
+      "ppid": 1583,
+      "state": "S",
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+        "--mode",
+        "coordinator",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+        "--admission-sha256",
+        "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+      "cpu_seconds": 1051.51,
+      "io": {
+        "rchar": 26249367220,
+        "wchar": 13890961,
+        "syscr": 5664575,
+        "syscw": 12511,
+        "read_bytes": 5455872,
+        "write_bytes": 8192,
+        "cancelled_write_bytes": 0
+      }
+    },
+    {
+      "pid": 1494935,
+      "start_ticks": "418180432",
+      "ppid": 1478958,
+      "state": "D",
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+        "--mode",
+        "native",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+        "--admission-sha256",
+        "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+      "cpu_seconds": 2382.77,
+      "io": {
+        "rchar": 28392893889,
+        "wchar": 13802197,
+        "syscr": 7409009,
+        "syscw": 12433,
+        "read_bytes": 294912,
+        "write_bytes": 4096,
+        "cancelled_write_bytes": 0
+      }
+    }
+  ],
+  "native_memory_map_observation": {
+    "lines": 103,
+    "raw_sha256": "ded3bded811d829fb398a9baa3a3eb0bc58cc2fe5ca47cf3deb9c6ea94c00323",
+    "searched_terms": [
+      "libtorch",
+      "torch/_c",
+      "numpy/",
+      "neuron",
+      "safetensors",
+      "libmkl"
+    ],
+    "matching_paths": [],
+    "scope": "instantaneous proc maps observation; no Python stack location inferred"
+  },
+  "native_fd_targets": {
+    "0": "pipe:[169092002]",
+    "1": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/runtime.log",
+    "2": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/runtime.log",
+    "3": "/proc/locks"
+  },
+  "runtime_files": {
+    "launch-intent.json": 2507,
+    "predecessor-drain.json": 604443,
+    "coordinator-owner.json": 722,
+    "native-owner.json": 607,
+    "source-authentication.json": 5655,
+    "runtime.log": 2256,
+    "admission.json": 17082
+  },
+  "native_operator_directory_exists": false,
+  "disk_available_bytes": {
+    "/": 30165397504,
+    "/mnt/nvme": 47406141440
+  },
+  "original_pins_unchanged": {
+    "continuation-state.json": "485c474a08af353657d39636ee0ca03a557d8b97ac975ec496f90ab2061839d8",
+    "roadmap.json": "2cb348a3ad0323132d768567af9737f37bfb1b0c9041dbffef56eb7fa5c9286c",
+    "best-known-configurations.json": "1e3406f522ed2c66ca8827f0e4b65a59ef637d097dce73079e27b038aa72c43d",
+    "research/continuation-handoff-20261111-v477-mini-native-r1-running.json": "58ffe7056e2edc4621636b5fd8abe6a0d328fb0dad1cbfc12bd7ac8870bda2e5"
+  },
+  "original_7200s_service_limit_unchanged": true,
+  "no_handoff_written": true,
+  "raw_payload_bytes_read": 0,
+  "no_process_interrupt_or_restart": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

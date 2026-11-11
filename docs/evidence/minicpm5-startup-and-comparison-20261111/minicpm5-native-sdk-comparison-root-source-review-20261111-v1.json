@@ -1,0 +1,65 @@
+{
+  "schema": "minicpm5_native_sdk_comparison_root_source_review_v1",
+  "created_at": "2026-11-11T13:28:13.457424+00:00",
+  "reviewer": "/root",
+  "source_only": true,
+  "independent_review": true,
+  "passed": true,
+  "accepted_scope": "Pure saved-byte comparison semantics only; no runtime admission or output-transport approval",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-sdk-comparison-source-delivery-20261111-v3.json",
+    "sha256": "dced64f27ddf80ad619c72fa823ff7fe4f405ae0a3cc0db24c67224b4867bfec"
+  },
+  "source_closure": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-sdk-comparison-static-source-closure-20261111-v3.json",
+    "sha256": "ced17214e8a2e7bc6fe9be518c0ba6be2b69de8cdeaefcf88467095730964f78"
+  },
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/compare_minicpm5_layer1_native_sdk_v3.py": "1320ef74f18d4150dbec90c4cc5f0cf82e5024a5a432b4fb5312bf626c7d5438",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_alignment_v1.py": "08643ebbe0c95d79c603d3baa921fc7d1d633622beef0b3a023a87e6f9d389e5",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_manifest_v1.py": "4ea1b9244a8e020a18d7ab30e579b5405ae7b9809b539be053716f6c6ebad7c6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_capture_observer_v1.py": "09a7f466f31919af2567eb2770fbf00dba1fea1b985490374066eeb5f27485e2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_manifest_v1.py": "5bd76826bf3b2264e8db2ba7c1e2d784dc4d167834fab589916c559f28ba0054"
+  },
+  "full_closure_verified": true,
+  "root_tests": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_sdk_comparison_root_v1.py",
+      "sha256": "481b5a061bbd4e6f21d9070e1a7cdd0c348f8bc10a8dd8b2a304c2fd0cf2cad5"
+    },
+    "actual_tool": {
+      "kind": "tool_call",
+      "terminal_chunk": "d5e8c6",
+      "exit_code": 0
+    },
+    "tests_passed": 6,
+    "duration_seconds": 0.083,
+    "synthetic_only": true
+  },
+  "review_findings_fixed": [
+    "Source semantic padding axes replace shape equality, preventing head_dim128 from being mislabeled as padding at bucket128.",
+    "Nested logical selections retain original physical row and head/prefix ranges.",
+    "Nonzero KV head and every prior position plus active values exercise actual mapping.",
+    "Declared comparison coverage is separate from full authentication-only duplicate snapshots."
+  ],
+  "independent_checks": [
+    "80 deterministic coordinate-oracle selections including empty ranges",
+    "Every-axis prior/active concatenation round trip",
+    "Nested original slot preservation",
+    "BF16 signed-zero byte difference and FP32 cross-dtype numerical difference",
+    "128/2048 semantic prior axes; unknown event no guessed axis",
+    "One last-valid-key mismatch retained at physical slot2 with exact flat index"
+  ],
+  "limits": [
+    "Native capture and independent full audit still pending. No real tensor or native library read in this review.",
+    "Comparator requires caller-authenticated actual completed audits and original guarded reader; schemas alone do not authenticate reports.",
+    "Complete synthetic report is 8161902 compact bytes / 21857712 indented bytes, exceeding original2MiB receipt cap. Output transport remains unresolved; no cap increase or truncation approved.",
+    "Missing native PV split and rank-local output evidence remain unknown; first difference does not prove causality."
+  ],
+  "actual_raw_payload_bytes_read": 0,
+  "actual_model_operations": false,
+  "runtime_admitted": false,
+  "launch_ready": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

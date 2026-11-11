@@ -27,6 +27,8 @@ of the merged branch is pending. Use the recorded source commits for reproducing
 the existing measured comparisons; new merged source identities need new
 artifacts and a new full comparison.
 
+[2026-11-11 MiniCPM5 启动开销与逐层比较准备](minicpm5-startup-and-comparison-20261111.md)：启动校验存在重复完整计划摘要与目录构建；独立只读快照原型通过 9 项复核，尚未接入实际运行。逐层比较器修复了长度 128 与头维度 128 的歧义，11 项合成测试及 6 项独立控制通过；完整报告超过原 2 MiB 上限，无损保存接入仍待验证。当前原生采集继续，未增加模型提速结论。
+
 ## Install and select a model
 
 Use a separate environment matching Neuron SDK 2.27, vLLM 0.11.0 and the exact
