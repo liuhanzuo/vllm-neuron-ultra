@@ -114,6 +114,16 @@ MiniCPM5 的独立恢复审计程序通过 9 项源码与合成检查。主任�
 
 [Dory 第三轮实际退出与原始条件](evidence/dory-provenance-20261111/dory-serial-inventory-r3-actual-exit-20261111-v1.json)、[完整失败现场](evidence/dory-provenance-20261111/dory-inventory-r3-original-lock-failure.json)、[原生持久记录独立审查](evidence/dory-provenance-20261111/minicpm5-operator-native-durable-journal-independent-source-review-20261111-v2.json)。
 
+## 父进程持锁、子进程检查的短时对照
+
+为复现 Dory 的实际持锁关系，单独运行一次固定窗口诊断：父进程持有原串行锁，观察子进程调用原锁检查，另一个子进程只在独立临时文件上切换锁。运行前源码审查修正了 CPU 硬限制继承和扰动子进程提前退出检查；没有改变原锁解析或去重放行。
+
+实际程序退出 0（session 10353，终态 b3b5c0）。10.000064 秒内原检查通过 67,449 次，独立锁切换 7,200,000 次，两子进程均真实退出 0；父进程前后描述符身份及 fdinfo 完全一致，均显示原文件上的 0 到 EOF 独占锁。退出后主任务重新取得原锁，确认父子进程消失和两个子进程组清空。本窗口未复现，不能解释或抹去此前的重复记录。下一步核对运行内核对应的锁表迭代源码，不自动延长或重复诊断。
+
+为保持实验磁盘余量，另在原串行锁及软件包管理锁内清理六份重新生成的软件包索引缓存，回收 193,343,488 字节；系统安装内容、模型、实验数据和合成测试资料均保留。MiniCPM5 恢复结果接入与小配置解析代码通过 11 项作者测试及额外独立检查，完整原生启动器、输出清单和独立原始数据校验仍待接线，尚未启动原生实验。
+
+[短时对照实际结果与独立退出核验](evidence/dory-provenance-20261111/dory-original-lock-topology-r2-actual-exit-20261111-v1.json)、[诊断源码独立复核](evidence/dory-provenance-20261111/original-lock-topology-independent-source-review-20261111-v3.json)、[恢复结果接入代码复核](evidence/dory-provenance-20261111/minicpm5-native-recovered-adapter-independent-source-review-20261111-v1.json)。
+
 ## 证据
 
 [来源清单](evidence/dory-provenance-20261111/dory-upstream-provenance-discovery-delivery-20261111-v1.json)、[归档比较实际退出与完整记录复核](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r2-post-exit-root-review-20261111-v1.json)、[完整元数据差异](evidence/dory-provenance-20261111/dory-archive-metadata-differences.json)、[首次失败保留](evidence/dory-provenance-20261111/dory-torch-cpython-archive-r1-failed-terminal-20261111-v1.json)、[MiniCPM5 驱动源码检查](evidence/dory-provenance-20261111/minicpm5-operator-driver-root-source-confirmation-20261111-v1.json)、[完整证据哈希清单](evidence/dory-provenance-20261111/manifest.json)。

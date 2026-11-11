@@ -1,0 +1,215 @@
+{
+  "schema": "dory_original_lock_topology_actual_exit_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T07:32:26.820081+00:00",
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 10353,
+    "terminal_chunk": "b3b5c0",
+    "exit_code": 0
+  },
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-actual-live-20261111-v1.json",
+    "sha256": "193a2c189bb7b46ceb88758dff2165264e55d93372815033c2ca9100ec681990"
+  },
+  "owner": {
+    "pid": 1314547,
+    "start_ticks": "416280051",
+    "ppid": 1003516,
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-s",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/diagnose_original_lock_parent_child_topology_v3.py",
+      "--role",
+      "parent",
+      "--plan",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-20261111-plan.json",
+      "--plan-sha256",
+      "75391dfc0550c1f541cb082ca7f776e077528b481daa8e8cd36169cd7ec63ed0",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-20261111-source-review.json",
+      "--review-sha256",
+      "e88b80239c86253b701e0cae20581a1a3a6f0db622a40ff6b03b118ee77f48f4"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "owner_gone": true,
+  "children": [
+    {
+      "pid": 1317244,
+      "start_ticks": "416280959",
+      "ppid": 1314547,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-s",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/diagnose_original_lock_parent_child_topology_v3.py",
+        "--role",
+        "observer",
+        "--plan",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-20261111-plan.json",
+        "--plan-sha256",
+        "75391dfc0550c1f541cb082ca7f776e077528b481daa8e8cd36169cd7ec63ed0",
+        "--admission",
+        "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer-admission.json",
+        "--control-fd",
+        "4",
+        "--notify-fd",
+        "7",
+        "--admission-sha256",
+        "bfcadb01b70208c44be7fd5f7a391125df4fc3e6646598c5323bb3e091e073d0"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 1317245,
+      "start_ticks": "416280959",
+      "ppid": 1314547,
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-s",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/diagnose_original_lock_parent_child_topology_v3.py",
+        "--role",
+        "churn",
+        "--plan",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-original-lock-topology-r2-20261111-plan.json",
+        "--plan-sha256",
+        "75391dfc0550c1f541cb082ca7f776e077528b481daa8e8cd36169cd7ec63ed0",
+        "--admission",
+        "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-admission.json",
+        "--control-fd",
+        "4",
+        "--notify-fd",
+        "10",
+        "--admission-sha256",
+        "a466e75b9d71dc88f45a0f74696e18c412d10af8ce9dc96b0e0cd6e7c6e96c02"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    }
+  ],
+  "all_children_gone": true,
+  "all_child_groups_empty": true,
+  "original_lock_reacquired": true,
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "recorder": {
+    "pid": 1317616,
+    "start_ticks": "416285505",
+    "ppid": 1317599,
+    "argv": [
+      "python3",
+      "-B",
+      "-"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+  },
+  "evidence": {
+    "observer-owner.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer-owner.json",
+      "bytes": 1317,
+      "sha256": "fab74912bbbfee467b52ecc3d84ae337c9159e8616cc935cbd8ee12ea87ba30c"
+    },
+    "churn-owner.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-owner.json",
+      "bytes": 1307,
+      "sha256": "bdcc794163e7b6a002ecaec254fa0599e0013eb175236b82adb856c9a584d60d"
+    },
+    "observer-result.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer-result.json",
+      "bytes": 291,
+      "sha256": "2dbbb072784b11e2b42899c6c08563e2308f71d7750311f11abb0df9ad348d65"
+    },
+    "independent-churn.lock": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/independent-churn.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "result.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/result.json",
+      "bytes": 1829,
+      "sha256": "b066890ff0b40297683d2dbacf9a1668943f828ccfb21985483e7fab9d2e8a44"
+    },
+    "churn-actual-child-exit.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-actual-child-exit.json",
+      "bytes": 784,
+      "sha256": "a21d58bbd1cd6d0f280fee6e4f570d6c26209bbe47406c82936158002a404d77"
+    },
+    "parent-fd-after.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/parent-fd-after.json",
+      "bytes": 418,
+      "sha256": "c7f519074e49815b35be48d65cbbb0bc117d161691a5b54c9e1ab057e8c68ee9"
+    },
+    "observer.log": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "churn-result.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-result.json",
+      "bytes": 113,
+      "sha256": "7ada0b4cb952b44181bfae359822ac0426b109d5471aae558766e4fb51243057"
+    },
+    "churn.log": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "churn-inode.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-inode.json",
+      "bytes": 190,
+      "sha256": "15386e0d211cd5c943b314ad8ecb7f6f9b9e056e9bb9f23addd80459e2e7672e"
+    },
+    "parent-fd-before.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/parent-fd-before.json",
+      "bytes": 418,
+      "sha256": "545c6a253c18cc640de1282f46d5eefa7de40dd70c2d6417af6f57177a9ae2c7"
+    },
+    "owner.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/owner.json",
+      "bytes": 2976232,
+      "sha256": "8fe8f523af36e1339249186ca1115d269b88f68de89c04e793bcb0e7d461d4f2"
+    },
+    "observer-actual-child-exit.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer-actual-child-exit.json",
+      "bytes": 789,
+      "sha256": "3b91f6c5f150b977731b03286e9344fd7e660accd63ef8c57d84f1a5a5374e7c"
+    },
+    "churn-admission.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/churn-admission.json",
+      "bytes": 1739,
+      "sha256": "a466e75b9d71dc88f45a0f74696e18c412d10af8ce9dc96b0e0cd6e7c6e96c02"
+    },
+    "observer-admission.json": {
+      "path": "/mnt/nvme/dory-original-lock-topology-r2-20261111/observer-admission.json",
+      "bytes": 1747,
+      "sha256": "bfcadb01b70208c44be7fd5f7a391125df4fc3e6646598c5323bb3e091e073d0"
+    }
+  },
+  "observer": {
+    "schema": "dory_original_lock_observer_result_v1",
+    "samples_passed": 67449,
+    "seconds": 10.000064358115196,
+    "completed_without_reproduction": true,
+    "finite_window_only": true,
+    "original_proof_unchanged": true,
+    "original_proof_retried": false,
+    "own_actual_exit_claimed": false,
+    "full_model_qualified": false
+  },
+  "churn": {
+    "iterations": 7200000,
+    "seconds": 10.002131096087396,
+    "original_lock_opened": false,
+    "own_actual_exit_claimed": false
+  },
+  "parent_descriptor_before_after_exact": true,
+  "reproduced": false,
+  "no_general_correctness_claim": true,
+  "original_guard_unchanged": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
