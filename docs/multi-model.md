@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+[2026-11-11 MiniCPM5 原生采集失败与后继修正](minicpm5-native-r1-storage-and-successor-20261111.md)：原生 r1 因根盘跌破原 28 GiB 保留线退出 1，未产生张量；已确认进程清理，独立失败记录正在执行。删除未使用旧工具版本和可再生成缓存释放 1.18 GB。后继避免重复复制完整历史，12 项主任务与 4 项独立测试通过；准备程序切换新版运行器并保留已执行审计来源，10 项测试独立复跑通过。保存数据比较入口的 12 项测试通过，尚未运行。没有新增模型提速。
+
 `trn1-multi-model-experimental-20261107` combines the LFM3, SmolLM3 and
 Nemotron Nano 9B v2 packages in one vLLM-Neuron checkout. All three general
 plugins are installed, and each remains disabled until explicitly selected.

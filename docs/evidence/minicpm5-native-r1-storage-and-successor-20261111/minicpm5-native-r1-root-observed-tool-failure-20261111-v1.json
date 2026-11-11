@@ -1,0 +1,106 @@
+{
+  "schema": "minicpm5_native_r1_root_observed_tool_failure_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-11T14:25:48.058301+00:00",
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 88265,
+    "terminal_chunk": "0f7129",
+    "exit_code": 1
+  },
+  "actual_tool_exit_observed": true,
+  "exact_owners_gone": true,
+  "owners": [
+    {
+      "pid": 1471058,
+      "start_ticks": "418093092",
+      "ppid": 1003516,
+      "state": "S",
+      "argv": [
+        "python3",
+        "-B",
+        "minicpm5_layer1_operator_native_outer_runner_v3.py",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-spec.json",
+        "--spec-sha256",
+        "c4a56036bbe3976c70e9cdca35a7ba2db78236a9fb838d3bf83a7d4a1a1dd74f",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-source-review.json",
+        "--review-sha256",
+        "ff44861da1fa976b20697c1ba49b3b260973919795c817061364c804f1736b2d"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 1478958,
+      "start_ticks": "418123278",
+      "ppid": 1583,
+      "state": "D",
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+        "--mode",
+        "coordinator",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+        "--admission-sha256",
+        "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+    },
+    {
+      "pid": 1494935,
+      "start_ticks": "418180432",
+      "ppid": 1478958,
+      "state": "R",
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+        "--mode",
+        "native",
+        "--admission",
+        "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+        "--admission-sha256",
+        "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+    }
+  ],
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-actual-live-20261111-v1.json",
+    "sha256": "344d7444cba739622a8754c95d9a10d6cf9bd540d45f6d230303491760f1f675"
+  },
+  "failure": {
+    "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/outer-failure.json",
+    "sha256": "e07f3196049cbb6a73fa1a415182556795946072b02d8e4bd0f6dd9d615421e6"
+  },
+  "cleanup": {
+    "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/cleanup-drained.json",
+    "sha256": "c56ada2cfcba17ebbcbc5fe3b8346050eef0119f0c7c93ca7ca6c4cef48d2add"
+  },
+  "running_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261111-v477-mini-native-r1-running.json",
+    "sha256": "58ffe7056e2edc4621636b5fd8abe6a0d328fb0dad1cbfc12bd7ac8870bda2e5"
+  },
+  "runtime_files": [
+    "admission.json",
+    "cleanup-drained.json",
+    "coordinator-owner.json",
+    "launch-intent.json",
+    "native-owner.json",
+    "outer-failure.json",
+    "predecessor-drain.json",
+    "runtime.log",
+    "source-authentication.json"
+  ],
+  "disk_available_bytes": {
+    "/": 29438337024,
+    "/mnt/nvme": 47406129152
+  },
+  "independent_metadata_recorder_pending": true,
+  "reason": "Original root28GiB and output30GiB floors remain live",
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
