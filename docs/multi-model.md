@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+[MiniCPM5 原生 r3 实际退出 0，Qwen3.5 运行接口 33 项独立测试通过](mini-r3-terminal-qwen-runtime-20261111.md)：24 个检查点／72 次局部调用完成，正在执行独立结束记录，完整原始数据审计仍待完成；保存数据读取工具 9 项独立测试通过。没有新增模型提速。
+
 最新审阅：[MiniCPM5 保存算子比较与 Qwen3.5 采样补充](mini-comparison-qwen-review-20261111.md)。比较工具 9 项、后续准备工具 29 项独立检查通过；说明采集布局／启动结论边界，并将采样控制数量更正为原清单的 13 项。真实比较待原生退出和审计，无新增提速。
 
 最新准备记录：[Qwen3.5-2B 采样优化与 MiniCPM5 后续核验修正](qwen35-sampler-preparation-20261111.md)。源码检查已通过，实机结果与提速仍待验收。
