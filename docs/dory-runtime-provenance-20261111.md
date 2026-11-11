@@ -46,7 +46,7 @@ Python `_sysconfigdata` 的差异现已完整解释：从保存差异恢复的�
 
 ## MiniCPM5 观测驱动
 
-两侧的可调用源码和精确事件清单已准备；SDK 侧新一轮两个 rank 已完成，但汇总文件超过上限导致整体失败，独立数据恢复审计尚待完成。官方原生侧仍待接入：
+两侧的可调用源码和精确事件清单已准备；SDK 侧新一轮两个 rank 已完成；汇总超限导致原运行失败，随后独立恢复审计已完整复核保存的数据。官方原生侧仍待接入：
 
 | 阶段 | 固定范围 | 原始保存量 |
 | --- | --- | ---: |
@@ -89,6 +89,30 @@ MiniCPM5 的独立恢复审计程序通过 9 项源码与合成检查。主任�
 根盘空间一度低于原 28 GiB 实验余量门槛。确认四个系统软件包已经安装、下载缓存没有进程使用后，在原串行锁内删除这四份下载包，回收 20,721,664 字节；安装内容、模型权重与实验文件均保留，没有扩容磁盘。
 
 [Dory 第二轮真实退出](evidence/dory-provenance-20261111/dory-serial-inventory-r2-actual-exit-20261111-v1.json)、[子进程失败现场记录独立审查](evidence/dory-provenance-20261111/dory-worker-parent-lock-diagnostic-independent-source-review-20261111-v1.json)、[Mini 恢复审计源码复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-failed-recovery-runtime-independent-source-review-20261111-v1.json)、[Mini 恢复审计真实退出与清理](evidence/dory-provenance-20261111/minicpm5-operator-sdk-recovery-r2-actual-exit-20261111-v1.json)。
+
+## MiniCPM5 保存数据恢复已完成
+
+增加原异常现场记录的审计后继通过 8 项独立检查后，实际执行成功退出 0（session 26895，终态 fc2d85）。这次没有触发锁异常，也没有生成锁失败诊断；这一次成功不能证明间歇故障已经消失。原模型运行仍是 exit 1，先前恢复审计失败也完整保留。
+
+审计在原锁内完整重读了 624 份原始文件，共 63,876,480 字节，核验 12 份逐步日志，覆盖两个 rank、24 个检查点及 60 次注意力调用。全部端点控制逐字节一致，两个 rank 的归约后完整输出逐字节一致；RoPE 等内部采集数据现已通过独立保存数据复核。没有重跑原模型，也没有补造 coordinator/outer 成功记录。
+
+主任务在审计实际退出后重新取得原锁，确认审计进程退出和原模型服务、计算进程清空；核对实际命令、配置、审查、报告和失败链，完整解码两轮历史状态观察，覆盖 1,318 个服务和 1,681 条进程身份记录，并核验全部 273 个实际加载的本地源码哈希。外部复核程序实际退出 0（session 82846，终态 f76193）；它核验了报告及关联元数据，没有再次重复读取原始张量。
+
+这一步使保存的 SDK 算子数据可继续用于与官方原生参考逐边界比较，尚未完成这项跨实现比较，也没有新增整模型质量通过或硬件提速结论。下一步先完成官方参考的逐步持久记录及运行接入，再依次检查 Q/K/V、RoPE、QK、softmax、context 和输出投影；按原请求槽位、头分片与有效 token 位置对齐。原有冷缓存、长解码、槽位复用、质量和匹配 HTTP 验收继续保留。
+
+[完整恢复审计报告](evidence/dory-provenance-20261111/minicpm5-operator-sdk-recovery-r3-result.json)、[真实退出与独立复核](evidence/dory-provenance-20261111/minicpm5-operator-sdk-recovery-r3-actual-exit-20261111-v1.json)、[外部复核程序实际退出](evidence/dory-provenance-20261111/minicpm5-operator-sdk-recovery-r3-recorder-actual-exit-20261111-v1.json)。
+
+## Dory 捕获到重复锁记录的原始现场
+
+第三轮清单检查实际退出 1（session 39161，终态 5440d0），仍未产生清单事件或触及硬链接读取修正。这次新诊断保存了原错误当刻的完整锁表：31 行、1,761 个字符。第 28 和第 30 行都表示父进程 1298998 对同一设备、同一 inode 持有从 0 到 EOF 的独占 flock，仅行号不同；`matches` 因而有两项，触发原 `len(matches)==1` 要求。第 29 和第 31 行也重复了另一个无关锁。
+
+原检查所见的预期与实际进程身份一致，锁文件设备和 inode 一致。由此能确定本次失败的直接判定条件是重复匹配；不能把它描述为未找到锁或进程身份变化。行号不能单独证明存在两个文件打开实例，保存的锁表也不足以判断重复的底层原因。子进程没有父进程的锁描述符，这份诊断如实记录为 null，没有把稍后观察冒充失败现场。后续计划用父进程描述符和子进程原检查的联合观测进一步区分原因，当前不去重、不重试或放宽检查。
+
+实际退出后已重新取得原锁，确认父子进程退出及子进程组清空，完整保留诊断、失败与日志。启动前的两次配置引用错误均在取得锁前拒绝，分别保留记录；它们没有启动清单工作。外部记录程序第一次因将 gzip 当 UTF-8 文本计算哈希而失败，随后改用字节哈希完成核验，没有修改实验输出。
+
+官方 MiniCPM5 原生侧的持久记录后继也已通过 24 项独立源码与合成检查：补齐文件及目录项刷盘，仍保持 72 次调用、936 份原始文件和原 8 MiB 元数据预算。尚未执行该原生实验。
+
+[Dory 第三轮实际退出与原始条件](evidence/dory-provenance-20261111/dory-serial-inventory-r3-actual-exit-20261111-v1.json)、[完整失败现场](evidence/dory-provenance-20261111/dory-inventory-r3-original-lock-failure.json)、[原生持久记录独立审查](evidence/dory-provenance-20261111/minicpm5-operator-native-durable-journal-independent-source-review-20261111-v2.json)。
 
 ## 证据
 
