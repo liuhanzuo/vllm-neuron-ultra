@@ -1,5 +1,7 @@
 # Unified Trn1 experimental branch
 
+[2026-11-11 MiniCPM5 修正后重跑准入与 LFM3 写回对照准备](mini-r3-and-lfm-writeback-preparation-20261111.md)：新 MiniCPM5 任务已通过实际准入；LFM3 三组对照通过 17 项独立源码检查，Dory 有限补充采集通过 34 项检查，后两项实际运行待串行槽位。没有新增模型提速。
+
 [2026-11-11 LFM3 输入写回差异与 Dory 加载路径分析](lfm-input-writeback-and-dory-loader-20261111.md)：LFM3 真实模拟器首例返回的 4,096 字节完全一致，但调用后主机输入改变，因此退出 1；剩余 31 例未执行。Dory 完成五份源码认证和 15 项条件路径映射，实际库选择与 ABI 仍待验证。本轮没有新增推理提速。
 
 [MiniCPM5 原生依赖清单与重复校验修正：28 项独立检查通过，真实运行待完成](minicpm5-native-source-fix-20261111.md)

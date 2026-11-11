@@ -1,0 +1,261 @@
+{
+  "schema": "dory_loader_route_source_followup_design_v2",
+  "created_at": "2026-11-11T18:55:53.025912+00:00",
+  "author": "/root/dory_loader_route_analysis_20261111",
+  "status": "source_implementation_and_synthetic_checks_complete; parent_review_and_serial_collection_not_performed",
+  "runtime_bound": false,
+  "runtime_admitted": false,
+  "automatic_successor_launch": false,
+  "sources": {
+    "collect_dory_loader_route_sources_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/collect_dory_loader_route_sources_v1.py",
+      "bytes": 20809,
+      "sha256": "b108089d91b3f84f9cbda86a096d96093436db127740e5002980c9937d27b5c5"
+    },
+    "collect_dory_loader_route_sources_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/collect_dory_loader_route_sources_v2.py",
+      "bytes": 22795,
+      "sha256": "8deaeb800a6e53d0faa232905b5cc22c4ef00374ad7ab29a38e8bcfd7d920faa"
+    },
+    "dory_loader_route_selection_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_loader_route_selection_v2.py",
+      "bytes": 7559,
+      "sha256": "26cb2d1107d39cef8aa45af93c5b7a7119e01b26e4b9e05c4d5bc05d229d8b18"
+    },
+    "check_dory_loader_route_sources_synthetic_v2.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_loader_route_sources_synthetic_v2.py",
+      "bytes": 10772,
+      "sha256": "c57382ae571642bc295d2fb184f23d706b90af4a0d7aa05cdafc11771925d813"
+    }
+  },
+  "original_entrypoint_sources": {
+    "dory_stage_a_native_resolver_v4.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+      "bytes": 26992,
+      "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9"
+    },
+    "dory_serial_stage_worker_v4.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_serial_stage_worker_v4.py",
+      "bytes": 8197,
+      "sha256": "ef56bb3049fd352a576c380e45094b0248882407b7532484c3b87952b97fe614"
+    },
+    "dory_stage_a_capture_core_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_capture_core_v1.py",
+      "bytes": 19802,
+      "sha256": "9341ac49a187638a6c5eec2eb989238bb04cfcf37accd481c38a3c4f6555cd17"
+    },
+    "dory_stage_a_worker_preparation_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_worker_preparation_v1.py",
+      "bytes": 17055,
+      "sha256": "aae622346332916fddd3ec84e9da3bad1241f0ad64a5129d797f60f7b01a2ddd"
+    }
+  },
+  "prior_analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-route-source-analysis-20261111-v1.json",
+    "bytes": 61047,
+    "sha256": "09ad23359556f5e91d680dfd7527f21649373cd8e7f3b1fd50d42fedeafd1723"
+  },
+  "selection_policy": {
+    "schema": "dory_loader_route_source_selection_v2",
+    "site": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages",
+    "required_sources": [
+      "torch/_utils_internal.py",
+      "vllm/env_override.py",
+      "vllm/envs.py",
+      "vllm/distributed/__init__.py",
+      "vllm/distributed/parallel_state.py"
+    ],
+    "candidate_prefixes": [
+      "vllm/distributed/device_communicators/",
+      "vllm/v1/kv_offload/",
+      "vllm/distributed/kv_transfer/kv_connector/v1/offloading/"
+    ],
+    "candidate_path_substrings": [
+      "fs_io",
+      "spinloop",
+      "filesystem",
+      "file_system",
+      "offload"
+    ],
+    "source_file_cap": 192,
+    "per_source_bytes": 524288,
+    "total_source_bytes": 8388608,
+    "per_source_finding_cap": 512,
+    "total_findings_cap": 2048,
+    "total_findings_bytes": 2097152,
+    "finding_text_char_cap": 2048,
+    "source_only": true,
+    "filesystem_enumeration": false,
+    "whole_package_search": false,
+    "missing_match_proves_absence": false,
+    "automatic_scope_expansion": false
+  },
+  "selection_justification": {
+    "torch/_utils_internal.py": "The already-collected torch/__init__.py imports both global-dependency flags from this module; their definitions are missing.",
+    "vllm/env_override.py": "The already-collected vllm/__init__.py imports this module before other vLLM modules; it may affect the original environment before CPU/native dispatch.",
+    "vllm/envs.py": "The already-collected platform dispatcher consults VLLM_TARGET_DEVICE and plugins; collect exact definitions and defaults.",
+    "vllm/distributed/__init__.py": "The original MODULES list explicitly imports a distributed submodule; inspect package side effects without executing them.",
+    "vllm/distributed/parallel_state.py": "Exact original MODULES entry; inspect its import chain toward communicators.",
+    "communicator_candidates": "Hypothesis for spinloop/shm-broadcast import sites; only existing wheel-member events under the explicit prefix are selected.",
+    "kv_offload_and_name_candidates": "Hypotheses for filesystem/offload native extension import sites; exact source names are selected from authenticated events, never guessed as actual callers."
+  },
+  "unsearched_scope_and_limitations": [
+    "This is not a whole-package content search. Python files outside the listed prefixes and path-substring candidates are not read, except five explicit required sources.",
+    "A caller in an unrelated filename/directory, or a dynamically assembled import that lacks the literal tokens, can be missed. Native-side imports and symbol loading cannot be established by this Python scan.",
+    "AST import statements may be inside functions, branches, exception handlers or TYPE_CHECKING. The report records source syntax and lines, not observed execution or unconditional reachability.",
+    "No matches means not located within this finite collection. It never means fs_io_C/spinloop is globally unused or cannot be imported.",
+    "If a size/count/findings cap is exceeded, fail before further reading or a success result. Do not silently truncate source selection or expand the search automatically.",
+    "Original event-stream completion and SHA256 must be verified through EOF before installed source reads. Every selected file must retain its original wheel-member digest and saved file identity."
+  ],
+  "original_entrypoint": {
+    "module_import_sequence": [
+      "torch",
+      "pytest",
+      "transformers",
+      "tokenizers",
+      "vllm",
+      "vllm.config",
+      "vllm.distributed.parallel_state",
+      "vllm.model_executor.models.dory",
+      "vllm.model_executor.models.utils",
+      "vllm.transformers_utils.configs.dory",
+      "vllm._custom_ops"
+    ],
+    "module_sequence_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+      "bytes": 26992,
+      "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9",
+      "start_line": 42,
+      "end_line": 44,
+      "excerpt": "MODULES = ('torch','pytest','transformers','tokenizers','vllm','vllm.config',\n    'vllm.distributed.parallel_state','vllm.model_executor.models.dory',\n    'vllm.model_executor.models.utils','vllm.transformers_utils.configs.dory','vllm._custom_ops')"
+    },
+    "actual_import_loop_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+      "bytes": 26992,
+      "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9",
+      "start_line": 350,
+      "end_line": 364,
+      "excerpt": "    _,upstream_bytes=stable_file(upstream_ref,cap=65536,guard=guard,retain=True)\n    sys.addaudithook(authority.audit);authority.active=True\n    try:\n        guard();modules={name:importlib.import_module(name) for name in MODULES}\n        for name,version in context['versions'].items():\n            require(str(modules[name].__version__)==version,'Original actual native package version: '+name)\n        for name in ('torch','pytest','transformers','tokenizers','vllm'):\n            require(Path(modules[name].__file__)==SITE/name/'__init__.py','Exact original installed package root: '+name)\n        require(Path(modules['vllm.model_executor.models.dory'].__file__)==SITE/'vllm/model_executor/models/dory.py',\n                'Actual original installed official Dory module')\n        upstream=ModuleType(UPSTREAM_NAME);upstream.__file__=upstream_path;sys.modules[UPSTREAM_NAME]=upstream\n        exec(compile(upstream_bytes,upstream_path,'exec',dont_inherit=True),upstream.__dict__)\n        cfg=modules['vllm.config']\n        api=SimpleNamespace(torch=modules['torch'],monkeypatch_factory=modules['pytest'].MonkeyPatch,\n            upstream=upstream,official_source=modules['vllm.model_executor.models.dory'],ops=modules['vllm._custom_ops'],"
+    },
+    "worker_entry_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_serial_stage_worker_v4.py",
+      "bytes": 8197,
+      "sha256": "ef56bb3049fd352a576c380e45094b0248882407b7532484c3b87952b97fe614",
+      "start_line": 70,
+      "end_line": 88,
+      "excerpt": "            else:\n                c.require(sys.executable==str(c.ENV/'bin/python'),'Original native interpreter only')\n                decision=c.native_authority(plan,guard);files=c.load(plan['native_files']);inventory=c.load(plan['inventory_result'])\n                c.require(len(files)==inventory['file_count']and sum(r['bytes']for r in files)==inventory['file_bytes'],'Complete exact resolver inventory')\n                from dory_stage_a_native_resolver_v4 import resolve_native_api\n                from dory_stage_a_native_adapter_probe_v2 import run_probe\n                c.verify_loaded(plan['source_sha256'])\n                with resolve_native_api(prepared,files,byte_limit=inventory['file_bytes'],guard=guard)as (api,resolution):\n                    maps_before=c.check_maps(decision,guard);c.save(out/'loaded-maps-before.json',maps_before)\n                    c.require(maps_before['complete'],'Only independently admitted actually loaded native files')\n                    if plan['stage']=='abi':\n                        probe=run_probe(api.torch,guard=guard)\n                        # Persist genuine case failures; do not require passed until\n                        # the original resolver exits normally and provenance is saved.\n                        probe_ref=c.save(out/'abi-probe.json',probe)\n                    else:\n                        from dory_stage_a_worker_preparation_v1 import run_worker\n                        c.verify_loaded(plan['source_sha256']);archive=out/'stage-a';archive.mkdir()\n                        producer_ref=run_worker(api,prepared,plan['checkpoint_identity'],archive,guard=guard)"
+    },
+    "fresh_process_requirements_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_native_resolver_v4.py",
+      "bytes": 26992,
+      "sha256": "e872f26fafd78e72b77847353a782a526e4093d6575ee033b94c4d4298bd1eb9",
+      "start_line": 209,
+      "end_line": 220,
+      "excerpt": "\ndef _check_process(context):\n    require(sys.executable==str(ENV/'bin/python') and sys.prefix==str(ENV)\n            and sys.flags.optimize==0 and sys.dont_write_bytecode and sys.flags.no_user_site,\n            'Fresh original CPU interpreter with assertions/no bytecode/no user site')\n    require(all(os.environ.get(k)==v for k,v in context['environment'].items())\n            and not os.environ.get('PYTHONPATH') and not os.environ.get('PYTHONHOME'),\n            'Exact original CPU/offline/thread/preload environment without path overrides')\n    require(not any(name.split('.')[0] in ('torch','numpy','vllm','transformers','tokenizers','pytest','_pytest')\n                    for name in sys.modules), 'Authenticate before any native/test package import')\n    require(UPSTREAM_NAME not in sys.modules,'No prior upstream module in this fresh worker')\n"
+    },
+    "original_import_metadata": {
+      "path": "/mnt/nvme/dory-official-cpu-20261108-v1/qualify-r2/qualification/imports.json",
+      "bytes": 2470,
+      "sha256": "8daae2c286aeabd38dbcfc8c614c4d4039a124b2cb5ad573ae85f8be26ec50ea"
+    },
+    "original_import_fields": {
+      "platform": "CpuPlatform",
+      "cpu_name": "Intel Xeon Platinum 8375C",
+      "architecture": "x86_64",
+      "avx512_f": true,
+      "avx512_bf16": false,
+      "ld_preload": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4:/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/libiomp5.so"
+    },
+    "minimal_future_native_diagnostic": "After separate parent review and authenticated native authority, replay only the ordered MODULES import prefix in one fresh original interpreter/environment, then stop before upstream test execution, tokenizer construction, model construction or forward. This is a new diagnostic, not a replacement for the full original Stage A resolver.",
+    "expected_route_only": "Saved CpuPlatform/x86 AVX512-without-BF16 metadata is consistent with the _C_AVX512 source route. Existing libiomp5 in LD_PRELOAD makes the saved CpuPlatform auto-libgomp condition false if no earlier code changes the environment. Neither establishes loader binding; env_override/envs remain to be collected.",
+    "full_resolver_must_not_be_used_as_unreviewed_smoke": "resolve_native_api authenticates complete inventory and tokenizer data before yielding. Do not call it to bypass unresolved loader authority or count mere prefix imports as its successful completion.",
+    "no_forced_alternative_cpu_modules": true,
+    "historical_selection_established": false
+  },
+  "model_constraint_clarification": {
+    "num_loops": 2,
+    "total_independent_attention_histories": 56,
+    "cache_semantics": "per_loop",
+    "tensor_parallel_size": 1,
+    "arithmetic": "8 prefix attention histories + 20 first-loop histories + 20 second-loop histories + 8 suffix histories = 56 total; not 56 per loop and not 112 histories.",
+    "cache_ids_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_capture_core_v1.py",
+      "bytes": 19802,
+      "sha256": "9341ac49a187638a6c5eec2eb989238bb04cfcf37accd481c38a3c4f6555cd17",
+      "start_line": 18,
+      "end_line": 22,
+      "excerpt": "CACHE_IDS = tuple(sorted((*range(0, 16, 2), *range(16, 56, 2),\n                          *range(88, 128, 2), *range(56, 72, 2))))\nVISITS = (tuple((i, 0) for i in range(16))\n          + tuple((i, loop) for loop in range(2) for i in range(16, 56))\n          + tuple((i, 0) for i in range(56, 72)))"
+    },
+    "loop_and_unique_cache_assertions": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_capture_core_v1.py",
+      "bytes": 19802,
+      "sha256": "9341ac49a187638a6c5eec2eb989238bb04cfcf37accd481c38a3c4f6555cd17",
+      "start_line": 137,
+      "end_line": 150,
+      "excerpt": "        self._structure()\n\n    def _structure(self):\n        require(visits(self.official.backbone.config) == VISITS\n                and self.official.backbone.num_loops == 2\n                and tuple(self.official.backbone.layers) == self.layers\n                and len(self.layers) == len({id(x) for x in self.layers}) == 72,\n                'Same complete original 72-layer, 112-visit model')\n        require(set(self.caches) == set(CACHE_IDS)\n                and len({id(x) for x in self.caches.values()}) == 56,\n                'All56 independent per-loop caches')\n        cfg = self.official.backbone.config\n        require((cfg.hidden_size, cfg.num_attention_heads, cfg.num_key_value_heads, cfg.head_dim,\n                 cfg.sliding_window, cfg.recurrent_kv_cache_mode) == (2560, 16, 4, 256, 1024, 'per_loop')"
+    },
+    "worker_tp1_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_worker_preparation_v1.py",
+      "bytes": 17055,
+      "sha256": "aae622346332916fddd3ec84e9da3bad1241f0ad64a5129d797f60f7b01a2ddd",
+      "start_line": 117,
+      "end_line": 124,
+      "excerpt": "        return original_op(*args,**kwargs)\n    patches = api.monkeypatch_factory()\n    try:\n        patches.setattr(api.ops,'onednn_mm',counted_op)\n        patches.setattr(api.parallel_state,'_TP',SimpleNamespace(world_size=1,rank_in_group=0))\n        patches.setattr(api.official_source,'Attention',api.upstream.ReferenceAttention)\n        vc = api.VllmConfig(device_config=api.DeviceConfig(device='cpu'),\n            compilation_config=api.CompilationConfig(mode=0,custom_ops=['none']))"
+    },
+    "worker_cache_count_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory_stage_a_worker_preparation_v1.py",
+      "bytes": 17055,
+      "sha256": "aae622346332916fddd3ec84e9da3bad1241f0ad64a5129d797f60f7b01a2ddd",
+      "start_line": 185,
+      "end_line": 190,
+      "excerpt": "            require(backends == expected['backends'] and len(backends) == 182\n                    and all('onednn_mm' in names for names in backends.values()), 'Exact original182 oneDNN modules')\n            cache_list = [m for m in official.modules() if isinstance(m,api.upstream.ReferenceAttention)]\n            caches = {api.extract_layer_index(m.prefix):m for m in cache_list}\n            require(len(cache_list) == len(caches) == 56 and sorted(caches) == expected['cache_ids']\n                    and set(caches) == set(CACHE_IDS), 'Original56 distinct per-loop ReferenceAttention caches')"
+    },
+    "model_or_configuration_changed": false
+  },
+  "future_collection_binding_requirements": {
+    "collector": "collect_dory_loader_route_sources_v2.py",
+    "plan_schema": "dory_loader_route_source_plan_v2",
+    "review_schema": "dory_loader_route_source_review_v2",
+    "extra_plan_and_review_field": "source_selection_policy must exactly equal selection_policy in this design; no configurable broadening",
+    "source_closure": "Include collector v2, selector v2, the unchanged v1 lifecycle dependencies and all four fixed original_entrypoint_sources. Root supplies fresh source hashes, actual predecessor, current serial catalog and current handoff.",
+    "protected_lifecycle": "The source reuses the v1 descriptor guard, full serial-history checks, pinned-file reads, resource floors, final identity checks, failure recording and release-after-drain logic.",
+    "original_resource_budget_preserved": true,
+    "output_file_count_cap": 192,
+    "source_byte_cap": 8388608,
+    "source_collection_only": true,
+    "target_packages_imported": false,
+    "model_weights_requested": false,
+    "no_concrete_plan_review_admission_or_handoff_written_here": true
+  },
+  "pure_validation": {
+    "passed": true,
+    "check_count": 34,
+    "tool_terminal_chunk": "59e7de",
+    "observed_exit_code": 0,
+    "test_source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_dory_loader_route_sources_synthetic_v2.py",
+      "bytes": 10772,
+      "sha256": "c57382ae571642bc295d2fb184f23d706b90af4a0d7aa05cdafc11771925d813"
+    },
+    "coverage": [
+      "authenticated EOF failure after final match",
+      "missing/duplicate membership and provenance mutation",
+      "path traversal and identity/reference mutation",
+      "file/count/aggregate caps before payload reads",
+      "empty Python sources",
+      "exclusion of native/unrelated paths",
+      "known possibility of out-of-scope callers",
+      "AST reference detection without source execution",
+      "source-finding limits",
+      "unchanged v1 lifecycle helper and finally AST",
+      "review scope pinning and original entrypoint pins"
+    ],
+    "collector_main_called": false,
+    "real_event_or_installed_source_or_native_payload_read": false,
+    "process_lock_service_inspection": false
+  },
+  "loader_selection_established": false,
+  "native_ABI_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
