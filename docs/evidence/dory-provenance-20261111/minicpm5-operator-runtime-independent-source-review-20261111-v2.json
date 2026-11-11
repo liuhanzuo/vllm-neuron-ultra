@@ -1,0 +1,77 @@
+{
+  "schema": "minicpm5_operator_runtime_independent_source_review_v2",
+  "reviewer": "/root/dory_resolver_final_review",
+  "observed_at": "2026-11-11T04:56:53.410211+00:00",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-runtime-correction-delivery-20261111-v2.json",
+    "sha256": "db3557a55246da51e11801fed7d35932c7302a259bc84719ef0f26aa37d5dcae"
+  },
+  "prior_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-runtime-independent-source-review-20261111-v1.json",
+    "sha256": "5adff5f121eb7ecb5a1cb5a624c5161cc51f9f8cd0aff520ff87d56442be854a"
+  },
+  "source_components_passed": true,
+  "blocking_findings": [],
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_results_v2.py": "71dbac0f2778cf79e70d93bd245640ecef26c67e08af9dd4409ac65a8f438a7f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_output_catalog_v2.py": "39e4474974629bdfc879d77769bc0acb1611879b6c3bfdc574f400a3f0650be3",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_runtime_completion_v2.py": "e7a17382c940610f8890daa5ae814ce2842190b73adf37e8f9b2ecd150ada3cd",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_sdk_cpu_worker_v2.py": "9578f6096519730237a4d1ad14e26ea4fd7bf4ebfa12ae3d671c0783852566df",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_sdk_cpu_runner_v2.py": "baafe380939065187508358fc73d00378a8872be21ffaefacceadbf4c6eee08c"
+  },
+  "previous_11_frozen_sources_reverified_unchanged": true,
+  "author_suite_independent_run": {
+    "tests": 18,
+    "session_id": 68244,
+    "initial_chunk": "3c5e31",
+    "terminal_chunk": "79d80e",
+    "actual_exit_code": 0
+  },
+  "additional_independent_tests": {
+    "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_operator_runtime_independent_v2.py",
+    "sha256": "f262f96d9b8cb2c766f2045f76276392eadf6c8d177e9f23768170fc2a0cac37",
+    "tests": 6,
+    "terminal_chunk": "545eb3",
+    "actual_exit_code": 0,
+    "scope": "Real output_writers logic over bounded injected synthetic JSON readers; no production receipts/guards. Synthetic file writes and both atomic-rename observation orders."
+  },
+  "accepted_corrections": [
+    "Original 655 final paths plus exactly18 immutable JSON staging slots mapped to outer/coordinator/rank0/rank1 writer roles; maximum673 files.",
+    "Staging filenames require exact original p.once basename, destination allowlist and the actual acknowledged writer PID; unknown/unacknowledged PID, command, parent/group mismatch or duplicate process roles rejected.",
+    "Current caller supplies original outer identity at all usage sites. Registry uses published admission and acknowledged coordinator/rank metadata; the existing lock/process guards remain active.",
+    "Pending files contribute actual max(st_size,st_blocks*512) to existing total and metadata caps; existing byte/resource caps remain unchanged.",
+    "Known pending-to-final disappearance follows its exact final path; device/inode de-duplication prevents counting the same atomic rename twice. Both before-lstat and after-observed orderings tested.",
+    "Snapshot reconstruction walks explicit manifest paths and validates exact complete leaf path set, preserving event ordering and rejecting extras or equal-shape K/V swaps.",
+    "Journal cross-linking follows manifest event/path order and passes sorted JSON roundtrip without weakening full payload/source/shape/layout checks."
+  ],
+  "catalog": {
+    "raw_payload_paths": 624,
+    "call_journals": 12,
+    "runtime_final_paths": 19,
+    "staging_slots": 18,
+    "maximum_file_count": 673,
+    "raw_payload_bytes": 63876480,
+    "raw_allocated_4k_model_bytes": 64806912,
+    "total_byte_cap": 268435456,
+    "rank_byte_cap": 134217728,
+    "metadata_allocated_cap": 100663296
+  },
+  "source_review_limits": [
+    "Acceptance applies to frozen components, not a concrete launch spec or an actual runtime.",
+    "Synthetic transports test owner-registry logic; production metadata authentication continues through inherited source-authenticated readers and has not been exercised by a new model launch.",
+    "No new full-model correctness, performance or causal conclusion."
+  ],
+  "runtime_admitted": false,
+  "actual_launch": false,
+  "remaining_integration": [
+    "Concrete source-pinned preparation/builder/spec/plan with all old inputs, actual later catalog and new source closure",
+    "Independent final runtime source review of concrete spec and full closure",
+    "Actual external model live/exit recorder with new argv/schema/output catalog",
+    "Independent post-exit auditor invoking new full payload/journal verifier after actual model exit and real complete v3 drain",
+    "Auditor actual-live/exit recorder and explicit failure/partial-evidence readback successors",
+    "Complete synthetic final assembly/admission/post-exit/cleanup tests before runtime launch"
+  ],
+  "no_native_payload_archive_lock_or_launch_operations": true,
+  "new_scientific_gates": false,
+  "model_or_speedup_claim": false
+}
