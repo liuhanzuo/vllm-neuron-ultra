@@ -1,0 +1,109 @@
+{
+  "schema": "minicpm5_native_catalog256_post_exit_source_delivery_v1",
+  "source_only": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v4.py": "12898b2ca035723cdd0995880d53ec7ed6e27594ee39fe00d2a47daa2bd07804",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v5.py": "0b7d19f0b53fd09cc55716b451eee89c90e765e02ea42c43d53c8ff7989ba189",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v3.py": "3df92c9b4c0a5a9c88a8defa66fc0f5f54413ed08839fe42547e52697ae8b15a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v2.py": "bc9069fd858916017f7c42fbc7e3638111ee77411830801d394e5f39d22f8f1d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_native_sdk_saved_comparison_v2.py": "c1cde2e1eaa44841a19c1c5f74318c55790a0d4a99fc4e1fca8faf05095bb280",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v4.py": "14e9e1d3492d2b4a1d78b9ede81860f2cad7e6529f25e303b8c9603438513072",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_catalog256_post_exit_v1.py": "31b55c8b09cbd7199a0c30fab9f30e8dd32f2a5989176664a8d090cf5126c9af"
+  },
+  "actual_catalog": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261111-v45.json",
+    "sha256": "bda6d214cf0a77e379f1aeba68c669d89f6977049bcea4e04bb79c0dfe91a426"
+  },
+  "actual_catalog_rows": 85,
+  "nonzero_exit_rows_retained": 22,
+  "maximum_serial_runs": 256,
+  "actual_binding": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r2-catalog256-20261111-binding-result.json",
+    "sha256": "f538a813abe84dd3c320c93ab5b4b97d51b3c7ca87d50a481635c20df4653438"
+  },
+  "actual_runner": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v10.py",
+    "sha256": "b5c861fd693095ecf0255f706d76e4c808d7fcfa4dbd06d94ed20c2459e1008f"
+  },
+  "exact_new_recorder_and_auditor_source_pins": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v4.py": "12898b2ca035723cdd0995880d53ec7ed6e27594ee39fe00d2a47daa2bd07804",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_post_exit_core_v5.py": "0b7d19f0b53fd09cc55716b451eee89c90e765e02ea42c43d53c8ff7989ba189",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_layer1_operator_native_result_v3.py": "3df92c9b4c0a5a9c88a8defa66fc0f5f54413ed08839fe42547e52697ae8b15a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v2.py": "bc9069fd858916017f7c42fbc7e3638111ee77411830801d394e5f39d22f8f1d"
+  },
+  "recorder_extension_rule": "Add these four genuinely new sources to the original model plan. Existing audit v2/core v2/core v3/audit_io v1 remain inherited and must not be duplicated in the disjoint extension.",
+  "auditor_extension_rule": "Auditor v3 reconstructs the original model plan, not the recorder extended plan. Its extension must again retain all four new recorder/auditor/core sources plus any genuinely new completed-catalog sources. Core v5 exports the unchanged full validator from v4. No original source pin may overlap.",
+  "comparison_candidate_source_pins": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_native_sdk_saved_comparison_v2.py": "c1cde2e1eaa44841a19c1c5f74318c55790a0d4a99fc4e1fca8faf05095bb280",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/compare_minicpm5_layer1_native_sdk_v3.py": "1320ef74f18d4150dbec90c4cc5f0cf82e5024a5a432b4fb5312bf626c7d5438",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_sdk_report_transport_v1.py": "b5bb07f85663379de2712ec1546698fbeb260964ae6f8c0dbe2bbe142b06068f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_alignment_v1.py": "08643ebbe0c95d79c603d3baa921fc7d1d633622beef0b3a023a87e6f9d389e5"
+  },
+  "comparison_extension_rule": "Comparison v2 first reconstructs model plan plus executed auditor extension. Add the entry/comparator/transport/alignment paths only when absent from that exact union; preserve all current catalog sources. Comparator and transport must remain explicitly new under the unchanged comparison validator.",
+  "future_prepare_source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_layer1_operator_native_v4.py",
+  "witness_rules": {
+    "old_recorder": "record_minicpm5_layer1_operator_native_model_exit_v1.py",
+    "old_auditor": "audit_minicpm5_layer1_operator_native_result_v2.py",
+    "new_recorder": "record_minicpm5_layer1_operator_native_model_exit_v2.py",
+    "new_auditor": "audit_minicpm5_layer1_operator_native_result_v3.py",
+    "new_auditor_core_chain": [
+      "audit_minicpm5_layer1_operator_native_result_v3.py",
+      "minicpm5_layer1_operator_native_post_exit_core_v4.py",
+      "minicpm5_layer1_operator_native_post_exit_core_v5.py"
+    ],
+    "exact_root_tool_exit_owner_and_argv_required": true,
+    "exact_result_spec_review_and_source_hashes_required": true,
+    "full_catalog_row_source_pins_required": true,
+    "no_future_version_by_name_or_old_producer_witness": true,
+    "new_sources_not_yet_completed_or_enrolled": true
+  },
+  "tests": {
+    "command": [
+      "python3",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_native_catalog256_post_exit_v1.py"
+    ],
+    "passed": 12,
+    "failed": 0,
+    "actual85_catalog_and_v10_binding_checked": true,
+    "unchanged_runtime_function_and_schema_ast_checked": true,
+    "unchanged_post_exit_full_validator_bytes_checked": true,
+    "overlapping_identical_and_changed_sources_rejected": true,
+    "historical_old_and_new_exact_witnesses_checked": true,
+    "failed_recorder_outcomes_retained": true,
+    "failed_audit_or_comparison_rejected": true
+  },
+  "static_source_graphs": {
+    "recorder": {
+      "files": 584,
+      "bytes_read": 7130924
+    },
+    "auditor": {
+      "files": 583,
+      "bytes_read": 7113315
+    },
+    "comparison": {
+      "files": 587,
+      "bytes_read": 7174469
+    },
+    "dynamic_import_resolution_verified": false,
+    "runtime_import_identity_verified": false
+  },
+  "original_schemas_retained": true,
+  "original_bf16_and_88_scientific_gates_unchanged": true,
+  "original_base_source_count": 44503,
+  "original_base_input_count": 8791,
+  "actual_admitted_run_receipts_still_required": true,
+  "source_review_created": false,
+  "concrete_future_specs_created": false,
+  "frozen_running_plan_and_sources_edited": false,
+  "native_imports": false,
+  "model_executed": false,
+  "raw_audit_executed": false,
+  "comparison_executed": false,
+  "raw_payload_bytes_read": 0,
+  "native_binary_bytes_read": 0,
+  "lock_acquired": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
