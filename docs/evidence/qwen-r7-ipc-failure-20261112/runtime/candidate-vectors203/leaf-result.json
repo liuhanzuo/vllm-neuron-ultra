@@ -1,0 +1,48 @@
+{
+  "actual_process": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+      "--mode",
+      "leaf",
+      "--binding",
+      "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/candidate-vectors203/phase-spec.json",
+      "--binding-sha256",
+      "a575af4d784275fb1abd6848db4e9d7edab89a30313bddd776827214ff466c37"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-candidate-vectors203.service",
+    "pid": 3425196,
+    "ppid": 3425061,
+    "start_ticks": "425300768"
+  },
+  "phase_spec": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/candidate-vectors203/phase-spec.json",
+    "sha256": "a575af4d784275fb1abd6848db4e9d7edab89a30313bddd776827214ff466c37"
+  },
+  "result": {
+    "complete": true,
+    "frames": 203,
+    "full_model_qualified": false,
+    "identical_vectors": 203,
+    "phases": [
+      {
+        "frames": 32,
+        "identical_vectors": 32,
+        "phase": "numeric"
+      },
+      {
+        "frames": 84,
+        "identical_vectors": 84,
+        "phase": "cold"
+      },
+      {
+        "frames": 87,
+        "identical_vectors": 87,
+        "phase": "long"
+      }
+    ]
+  },
+  "schema": "qwen35_sampler_actual_leaf_result_v1",
+  "self_exit_claimed": false
+}

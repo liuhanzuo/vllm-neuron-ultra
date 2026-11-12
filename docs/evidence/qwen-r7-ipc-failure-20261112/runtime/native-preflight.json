@@ -1,0 +1,827 @@
+{
+  "actual_child_exit": {
+    "actual_popen_wait_observed": true,
+    "child_bootstrap_owner": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+        "--mode",
+        "leaf",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/shared-native_preflight/phase-spec.json",
+        "--binding-sha256",
+        "0c35ed9ae3544e4bfc6c63d6c455cbb68482bcafdfba0ef01c0f401c0b38df3b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service",
+      "pid": 3354535,
+      "ppid": 3354406,
+      "start_ticks": "425231670"
+    },
+    "child_returncode": 0,
+    "observed_unix_ns": 1794471816206780008,
+    "phase_spec": {
+      "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/shared-native_preflight/phase-spec.json",
+      "sha256": "0c35ed9ae3544e4bfc6c63d6c455cbb68482bcafdfba0ef01c0f401c0b38df3b"
+    },
+    "schema": "qwen35_sampler_actual_child_exit_v1",
+    "self_exit_claimed": false,
+    "stop_requested": false,
+    "supervisor": {
+      "process": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/shared-native_preflight/phase-spec.json",
+          "--binding-sha256",
+          "0c35ed9ae3544e4bfc6c63d6c455cbb68482bcafdfba0ef01c0f401c0b38df3b"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service",
+        "pid": 3354406,
+        "ppid": 1583,
+        "start_ticks": "425231517"
+      },
+      "service_owner": {
+        "invocation_id": "9687375cb76743a3b55fa400437bf704",
+        "pid": 3354406,
+        "start_ticks": 425231517,
+        "unit": "trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight"
+      }
+    }
+  },
+  "actual_native_serialization_cases": [
+    {
+      "case": "torch.float32:contiguous",
+      "packet_bytes": 426,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.float32:slice",
+      "packet_bytes": 378,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.float32:singleton_stride",
+      "packet_bytes": 338,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.float32:singleton_stride0",
+      "packet_bytes": 329,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.float32:empty",
+      "packet_bytes": 329,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.float64:contiguous",
+      "packet_bytes": 523,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.float64:slice",
+      "packet_bytes": 426,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.float64:singleton_stride",
+      "packet_bytes": 347,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.float64:singleton_stride0",
+      "packet_bytes": 333,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.float64:empty",
+      "packet_bytes": 329,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.bfloat16:contiguous",
+      "packet_bytes": 379,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.bfloat16:slice",
+      "packet_bytes": 355,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.bfloat16:singleton_stride",
+      "packet_bytes": 335,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.bfloat16:singleton_stride0",
+      "packet_bytes": 328,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.bfloat16:empty",
+      "packet_bytes": 330,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.float16:contiguous",
+      "packet_bytes": 378,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.float16:slice",
+      "packet_bytes": 354,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.float16:singleton_stride",
+      "packet_bytes": 334,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.float16:singleton_stride0",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.float16:empty",
+      "packet_bytes": 329,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.int64:contiguous",
+      "packet_bytes": 521,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.int64:slice",
+      "packet_bytes": 424,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.int64:singleton_stride",
+      "packet_bytes": 345,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.int64:singleton_stride0",
+      "packet_bytes": 331,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.int64:empty",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.int32:contiguous",
+      "packet_bytes": 424,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.int32:slice",
+      "packet_bytes": 376,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.int32:singleton_stride",
+      "packet_bytes": 336,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.int32:singleton_stride0",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.int32:empty",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.uint8:contiguous",
+      "packet_bytes": 352,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.uint8:slice",
+      "packet_bytes": 340,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.uint8:singleton_stride",
+      "packet_bytes": 330,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.uint8:singleton_stride0",
+      "packet_bytes": 324,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.uint8:empty",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.bool:contiguous",
+      "packet_bytes": 351,
+      "passed": true,
+      "shape": [
+        4,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "torch.bool:slice",
+      "packet_bytes": 339,
+      "passed": true,
+      "shape": [
+        4,
+        3
+      ],
+      "stride": [
+        6,
+        2
+      ]
+    },
+    {
+      "case": "torch.bool:singleton_stride",
+      "packet_bytes": 329,
+      "passed": true,
+      "shape": [
+        2,
+        1
+      ],
+      "stride": [
+        18,
+        1
+      ]
+    },
+    {
+      "case": "torch.bool:singleton_stride0",
+      "packet_bytes": 323,
+      "passed": true,
+      "shape": [
+        1
+      ],
+      "stride": [
+        0
+      ]
+    },
+    {
+      "case": "torch.bool:empty",
+      "packet_bytes": 326,
+      "passed": true,
+      "shape": [
+        0,
+        6
+      ],
+      "stride": [
+        6,
+        1
+      ]
+    },
+    {
+      "case": "fp32:scalar",
+      "packet_bytes": 327,
+      "passed": true,
+      "shape": [],
+      "stride": []
+    },
+    {
+      "case": "fp32:masked",
+      "packet_bytes": 342,
+      "passed": true,
+      "shape": [
+        1,
+        3
+      ],
+      "stride": [
+        3,
+        1
+      ]
+    }
+  ],
+  "actual_process_exit_pending_root_observation": true,
+  "actual_rng_unchanged_by_serialization": true,
+  "actual_service_terminal": {
+    "cleanup_complete": true,
+    "exit_observed": true,
+    "group_observations": [
+      {
+        "absent": true,
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service"
+      },
+      {
+        "absent": true,
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service"
+      }
+    ],
+    "observed_unix_ns": 1794471816336268911,
+    "process_owner": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/shared-native_preflight/phase-spec.json",
+        "--binding-sha256",
+        "0c35ed9ae3544e4bfc6c63d6c455cbb68482bcafdfba0ef01c0f401c0b38df3b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service",
+      "pid": 3354406,
+      "ppid": 1583,
+      "start_ticks": "425231517"
+    },
+    "properties": {
+      "ActiveState": "active",
+      "After": "app.slice -.mount basic.target trn1-qwen35-sampler-r7-v9-20261112-coordinator.service",
+      "BindsTo": "trn1-qwen35-sampler-r7-v9-20261112-coordinator.service",
+      "ControlGroup": "",
+      "ControlPID": "0",
+      "Environment": "",
+      "ExecMainCode": "1",
+      "ExecMainPID": "3354406",
+      "ExecMainStatus": "0",
+      "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/hf HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILED_ARTIFACTS=/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-cache NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031 TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_COMPILE_THREADS=1 TRN1_COMPILE_WORKERS=1 TRN1_QWEN35_SPLIT_SHA256=1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d TRN1_QWEN35_TEXT_ADAPTER=1 XDG_RUNTIME_DIR=/run/user/1000 XLA_DISABLE_FUNCTIONALIZATION=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/shared-native_preflight/phase-spec.json --binding-sha256 0c35ed9ae3544e4bfc6c63d6c455cbb68482bcafdfba0ef01c0f401c0b38df3b ; ignore_errors=no ; start_time=[Thu 2026-11-12 08:23:26 UTC] ; stop_time=[Thu 2026-11-12 08:23:36 UTC] ; pid=3354406 ; code=exited ; status=0 }",
+      "ExecStopPost": "",
+      "Id": "trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight.service",
+      "InvocationID": "9687375cb76743a3b55fa400437bf704",
+      "Job": "",
+      "KillMode": "control-group",
+      "LimitFSIZE": "134217728",
+      "LoadState": "loaded",
+      "MainPID": "0",
+      "MemoryHigh": "3221225472",
+      "MemoryMax": "4294967296",
+      "MemorySwapMax": "1073741824",
+      "RemainAfterExit": "yes",
+      "Result": "success",
+      "RuntimeMaxUSec": "30min",
+      "SendSIGKILL": "yes",
+      "StandardError": "inherit",
+      "StandardOutput": "append",
+      "SubState": "exited",
+      "TasksMax": "256",
+      "TimeoutStopUSec": "15s",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+    },
+    "remaining_processes": [],
+    "server_owner": {
+      "invocation_id": "9687375cb76743a3b55fa400437bf704",
+      "pid": 3354406,
+      "start_ticks": 425231517,
+      "unit": "trn1-qwen35-sampler-r7-v9-20261112-shared-native-preflight"
+    },
+    "systemd_exit_status": {
+      "ExecMainCode": 1,
+      "ExecMainStatus": 0,
+      "Result": "success"
+    },
+    "unacknowledged_terminal": null
+  },
+  "arm": "shared",
+  "device_execution": false,
+  "fresh_execution": true,
+  "full_model_qualified": false,
+  "general_overlapping_layout_support_claimed": false,
+  "model_loaded": false,
+  "overlapping_layout_negative_control": {
+    "control": "nonempty_expanded_stride0_rejected",
+    "error": "unsupported operation: more than one element of the written-to tensor refers to a single memory location. Please clone() the tensor before performing the operation.",
+    "error_type": "RuntimeError",
+    "passed": true,
+    "shape": [
+      4
+    ],
+    "stride": [
+      0
+    ]
+  },
+  "passed": true,
+  "phase": "native_preflight",
+  "rejection_controls": {
+    "controls": [
+      {
+        "control": "partial_explicit_generators",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "all_explicit_generators",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "k_absent",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "k_zero",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": [
+          "RuntimeError",
+          "index 256 is out of bounds for dimension 1 with size 256"
+        ],
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "k_above64",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "non_float32",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "invalid_p",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "processed_logits",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "processed_logprobs",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": true
+      },
+      {
+        "control": "excessive_kth_ties",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": false
+      },
+      {
+        "control": "nonfinite_max_or_kth",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": false
+      },
+      {
+        "control": "cdf_near_boundary",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": false
+      },
+      {
+        "control": "cdf_boundary_tie",
+        "passed": true,
+        "reference_calls": 1,
+        "reference_exception": null,
+        "token_and_rng_equal": true,
+        "whole_call": false
+      }
+    ],
+    "full_model_qualified": false,
+    "passed": true,
+    "timing_eligible": false
+  },
+  "returncode": 0,
+  "run_id": "2fece370-cb1b-43d4-8d11-f3a7736f4c3a",
+  "schema": "qwen35_sampler_native_preflight_v1",
+  "self_exit_claimed": false,
+  "timing_eligible": false,
+  "worker_import_pickle": [
+    {
+      "class": "qwen35_sampler_worker_v1.BaselineMeasuredWorker",
+      "passed": true,
+      "pickle_bytes": 66,
+      "sha256": "81302845eb2916165a338f1ee02daaaf8490296e09d803c73dd06f1fca14d6f3"
+    },
+    {
+      "class": "qwen35_sampler_worker_v1.CandidateMeasuredWorker",
+      "passed": true,
+      "pickle_bytes": 67,
+      "sha256": "c0f4aae2d3dce8503fdf67c6e1482c070f2c8f7c5b5ecf3862871f18e66389c6"
+    },
+    {
+      "class": "qwen35_sampler_worker_v1.BaselineCaptureWorker",
+      "passed": true,
+      "pickle_bytes": 65,
+      "sha256": "18527161f8d1fc3f1d8b8b6b30a7089c8a878b07dceb1ea7448617030766eb19"
+    },
+    {
+      "class": "qwen35_sampler_worker_v1.CandidateCaptureWorker",
+      "passed": true,
+      "pickle_bytes": 66,
+      "sha256": "b923b373fcdd61b428001da1d4352435d6fea9158bea987164ad3f764e1736c9"
+    }
+  ]
+}
