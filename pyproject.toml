@@ -28,6 +28,9 @@ neuron = "vllm_neuron:register"
 dependencies = {file = ["requirements/core.txt"]}
 optional-dependencies = {test = {file = ["requirements/test.txt"]}}
 
+[tool.setuptools.package-data]
+"vllm_neuron.models.lfm3" = ["tokenizer_fixtures.json", "licenses/*"]
+
 [tool.setuptools.packages.find]
 exclude = ["docs", "examples", "tests*", "csrc"]
 
@@ -102,3 +105,6 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 ignore_errors = true
+
+[project.entry-points."vllm.general_plugins"]
+lfm3 = "vllm_neuron.models.lfm3:register"

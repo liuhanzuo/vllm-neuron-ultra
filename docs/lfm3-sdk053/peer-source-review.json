@@ -1,0 +1,60 @@
+{
+  "schema": "lfm3_sdk053_isolated_plugin_peer_source_review_v1",
+  "reviewer": "/root/lfm_v3_binding_source",
+  "checkout": "/home/ubuntu/src/vllm-neuron-ultra-sdk053-lfm3-20261112",
+  "branch": "trn1-sdk053-lfm3-20261112",
+  "base": "f9ba933e9591e3cef163740516b1977aa1100493",
+  "source_manifest": {
+    "path": "/home/ubuntu/src/vllm-neuron-ultra-sdk053-lfm3-20261112/docs/lfm3-sdk053/source-manifest.json",
+    "sha256": "d71d49ad0d4023a3aeb89d14fda3f0ce0040a3b709ee280aa695c0731ef3c0b9"
+  },
+  "all_29_manifest_files_verified": true,
+  "confirmed_correctness_blockers": [],
+  "source_only_candidate_publication_objection": false,
+  "runtime_admitted": false,
+  "review_scope": [
+    "Registration/identity and fixed original model/TP/35-state-per-rank design",
+    "Strict LFM artifact branch before generic delete/recompile fallback and config/body/byte rejection",
+    "New execute/sample ordering and per-instance bounded sampler hook",
+    "Single-group B+1 scheduler proxy versus B real slots and 70-state ledger",
+    "Actual vLLM0.16 CachedRequestData generation and no-prefix coordinator semantics",
+    "Request lifecycle preflight and actual runner state/slot methods"
+  ],
+  "additional_mock_integration": {
+    "actual_tool_chunk": "f5e714",
+    "actual_exit_code": 0,
+    "full_runner_execute_steps": 7,
+    "actual_update_states": true,
+    "actual_new_and_cached_slot_methods": true,
+    "covered": [
+      "prefill",
+      "decode",
+      "held-back live request",
+      "reordered cached request IDs",
+      "finish/new same request ID",
+      "mixed prompt lengths",
+      "final complete slot release"
+    ],
+    "tensor_forward_mocked": true,
+    "sampling_token_payload_mocked": true,
+    "native_imports_blocked": true,
+    "source_only_not_device_proof": true
+  },
+  "limits": [
+    "No native ABI/compiler or actual model correctness qualification",
+    "Compiled CTE/TKG state names, alias identities and full BF16 numerical behavior require actual device verification",
+    "Cold-cache, 1529-step long decode, request-slot isolation/reuse, quality96 and matched HTTP remain pending for all six new-stack candidates",
+    "4096 primitive and full model gates remain distinct; source tests do not qualify either",
+    "No new speedup claimed or inherited from old stack"
+  ],
+  "review_resources": {
+    "cpu": 7,
+    "nice": 19,
+    "address_space_bytes": 536870912,
+    "cpu_seconds": 60
+  },
+  "checkout_modified": false,
+  "installation": false,
+  "model_or_native_execution": false,
+  "locks_services_handoffs": false
+}

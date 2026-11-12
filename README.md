@@ -1,3 +1,5 @@
+> 此分支包含 LFM3 的 vLLM-Neuron 0.5.3 实验性迁移源码。已通过源码/mock 检查，设备与整模型验证仍待完成；没有新增提速结论。见 [实现范围与验证门槛](docs/lfm3-sdk053/README.md)。
+
 # vLLM User Guide for AWS Neuron
 
 [vLLM](https://docs.vllm.ai/en/latest/) is a popular library for LLM inference and serving utilizing advanced inference features such as continuous batching.

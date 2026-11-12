@@ -183,6 +183,14 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin, KVConnectorModelRunner
 
         # Initialize CPU sampler for when on-device sampling is not available
         self.cpu_sampler = Sampler()
+        if os.environ.get("NEURON_CPU_SAMPLER_FAST", "0") == "1":
+            from vllm_neuron.worker.cpu_sampler import maybe_enable_cpu_sampler
+            maybe_enable_cpu_sampler(self.cpu_sampler)
+
+        self._lfm3_scope = None
+        if "Lfm3ForCausalLM" in (getattr(model_config.hf_config, "architectures", None) or ()):
+            from vllm_neuron.models.lfm3.serving import validate_serving_config
+            self._lfm3_scope = validate_serving_config(vllm_config)
 
         # Vocabulary size for bitmask operations
         self._vocab_size = self.model_config.get_vocab_size()
@@ -418,6 +426,10 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin, KVConnectorModelRunner
         # For Neuron, we don't need to initialize kv cache memory space here as it is done
         # under the hood in NxD-I library. But we do need to register the kv cache space
         # for kv connector when has_kv_transfer_group() returns True.
+
+        if self._lfm3_scope is not None:
+            from vllm_neuron.models.lfm3.serving import validate_proxy_cache
+            validate_proxy_cache(self, kv_cache_config)
 
         if has_kv_transfer_group():
             nxdi_kv_cache_state = (
@@ -705,6 +717,9 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin, KVConnectorModelRunner
 
         Always returns None to defer sampling to sample_tokens().
         """
+        if self._lfm3_scope is not None:
+            from vllm_neuron.models.lfm3.serving import preflight_step
+            preflight_step(self, scheduler_output)
         execute_start = time.perf_counter()
         batch_size = len(scheduler_output.scheduled_new_reqs) + len(
             scheduler_output.scheduled_cached_reqs.req_ids
@@ -927,7 +942,10 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin, KVConnectorModelRunner
                 num_kv_heads=self.parallel_config.tensor_parallel_size,
                 head_size=self.model.head_dim,
                 dtype=self.model_config.dtype,
-                sliding_window=self.model_config.get_sliding_window(),
+                # LFM3 uses a single contiguous scheduler proxy group; the
+                # actual full/sliding/conv state remains inside NxDI.
+                sliding_window=(None if self._lfm3_scope is not None
+                                else self.model_config.get_sliding_window()),
             )
 
         return kv_cache_spec
@@ -1321,6 +1339,10 @@ class NeuronxDistributedModelRunner(LoRAModelRunnerMixin, KVConnectorModelRunner
     def _process_new_request_for_continuous_batching(
         self, request_data: NewRequestData, data: IntermediateInputData
     ) -> None:
+        if self._lfm3_scope is not None:
+            from vllm_neuron.models.lfm3.serving import validate_new_request
+            validate_new_request(request_data, min(self.max_model_len, self.max_prompt_length),
+                                 self.max_num_reqs)
         # Assign a free sequence id to the new request.
         assert request_data.req_id not in self.vllm_req_to_neuron_seq_id_mapping, (
             "Encountered an existing request ID while prefilling a new request"

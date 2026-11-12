@@ -51,7 +51,7 @@ from vllm.config import (
 )
 from vllm.model_executor.layers.logits_processor import LogitsProcessor
 from vllm.v1.outputs import SamplerOutput
-from vllm.v1.sample import sampler as Sampler
+from vllm.v1.sample.sampler import Sampler
 
 from vllm_neuron.worker.constants import (
     NEURON_MULTI_MODAL_MODELS,
@@ -189,6 +189,13 @@ class NeuronModelBase(nn.Module):
         config = kwargs.get("config") or neuronx_model_cls.get_config_cls()(
             neuron_config, load_config=load_pretrained_config(model_name_or_path)
         )
+
+        # LFM3 admission is deliberately before generic hashes, path deletion,
+        # and the ValueError/FileNotFoundError recompilation fallback.
+        if (getattr(config, "model_type", None) == "lfm3" or
+                getattr(neuronx_model_cls, "__module__", "").startswith("vllm_neuron.models.lfm3.")):
+            from vllm_neuron.models.lfm3.artifacts import load_or_compile
+            return load_or_compile(self, model_name_or_path, neuronx_model_cls, config, kwargs)
 
         # If fused speculation is enabled, attach the draft model config.
         if getattr(neuron_config, "enable_fused_speculation", False):
@@ -1046,6 +1053,11 @@ def get_neuron_model(
         lora_serving_config,
         speculative_config,
     )
+
+    if architecture == "Lfm3ForCausalLM":
+        from vllm_neuron.models.lfm3.serving import configure_neuron_defaults
+        configure_neuron_defaults(default_neuron_config_args, model_config, cache_config,
+                                  parallel_config, scheduler_config)
 
     override_neuron_config = additional_config.get("override_neuron_config", None)
     if override_neuron_config is not None:

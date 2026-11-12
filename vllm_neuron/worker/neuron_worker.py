@@ -93,6 +93,10 @@ class NeuronWorker(WorkerBase):
         Returns memory corresponding to max_num_seqs + 1 blocks,
         where +1 accounts for vLLM's null_block reservation.
         """
+        if getattr(self.model_runner, "_lfm3_scope", None) is not None:
+            from vllm_neuron.models.lfm3.serving import proxy_memory_bytes
+            return proxy_memory_bytes(self.vllm_config)
+
         from vllm.utils.torch_utils import get_dtype_size
         from vllm_neuron.worker.utils import get_num_layers_from_hf_config
 

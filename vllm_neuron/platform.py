@@ -346,6 +346,13 @@ class NeuronPlatform(Platform):
         if model_config is None:
             return
 
+        if (getattr(model_config.hf_config, "model_type", None) == "lfm3" or
+                "Lfm3ForCausalLM" in (getattr(model_config.hf_config, "architectures", None) or ())):
+            from vllm_neuron.models.lfm3.serving import validate_serving_config
+            # Reject unsupported caller intent before generic platform defaults
+            # can silently turn chunking off or replace the block size.
+            validate_serving_config(vllm_config, before_platform=True)
+
         disable_scheduler_override = bool(
             int(os.getenv("DISABLE_NEURON_CUSTOM_SCHEDULER", "0"))
         )

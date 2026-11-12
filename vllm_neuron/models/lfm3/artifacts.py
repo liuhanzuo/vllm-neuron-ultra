@@ -1,0 +1,147 @@
+# SPDX-License-Identifier: Apache-2.0
+"""LFM3-only artifact admission, outside the generic recompilation fallback."""
+import json
+import logging
+import os
+import concurrent.futures
+from contextlib import contextmanager
+from pathlib import Path
+from types import SimpleNamespace
+
+from .identity import (ARTIFACT_MANIFEST, AdmissionError, build_identity,
+                       canonical_configuration, digest_file, read_json, require)
+
+logger = logging.getLogger(__name__)
+
+
+def artifact_files(directory):
+    result = {}
+    for path in sorted(Path(directory).rglob("*")):
+        require(not path.is_symlink(), f"Compiled artifact symlink unsupported: {path}")
+        if path.is_file() and path != Path(directory) / ARTIFACT_MANIFEST:
+            result[str(path.relative_to(directory))] = digest_file(path)
+    require("model.pt" in result and "neuron_config.json" in result,
+            "LFM3 artifact lacks its compiled model or config")
+    return result
+
+
+def admit_saved_configuration(directory, identity):
+    """Compare the complete saved body; only replace our embedded metadata.
+
+    NxDI InferenceConfig.save uses the same to_json_string serialization as
+    the pre-build identity. Per-stage bucket/batch changes occur on deep copies
+    of that config. No other saved field is normalized or ignored here.
+    """
+    saved = read_json(Path(directory) / "neuron_config.json")
+    require(saved.get("metadata") == {"lfm3_sdk053": identity},
+            "Compiled config does not bind the admitted LFM3 identity")
+    expected = identity.get("configuration")
+    require(isinstance(expected, dict) and "metadata" in expected
+            and expected["metadata"] is None,
+            "Admitted LFM3 configuration must have original null metadata")
+    saved_body = dict(saved)
+    saved_body["metadata"] = None
+    # Type-tagged comparison deliberately preserves the SDK's one documented
+    # positive-Infinity default, rejects other nonfinites, and has no sentinel
+    # collision with user-supplied strings/arrays/objects.
+    require(canonical_configuration(saved_body) == canonical_configuration(expected),
+            "Saved LFM3 configuration body differs from the admitted configuration")
+
+
+def admit_existing(directory, identity):
+    directory = Path(directory)
+    require(directory.is_dir() and not directory.is_symlink(),
+            "LFM3 artifacts must be an explicit ordinary directory")
+    manifest = read_json(directory / ARTIFACT_MANIFEST)
+    require(set(manifest) == {"complete", "identity", "files"}
+            and manifest["complete"] is True,
+            "LFM3 artifact manifest is incomplete")
+    require(manifest["identity"] == identity,
+            "LFM3 source, variant, model, scope or SDK identity mismatch")
+    require(manifest["files"] == artifact_files(directory),
+            "LFM3 compiled artifact bytes changed")
+    admit_saved_configuration(directory, identity)
+
+
+@contextmanager
+def serial_compiler():
+    """Limit only the SDK builder's submission pool during this model build."""
+    import neuronx_distributed.trace.model_builder as builder
+    original = builder.concurrent
+    class OneCompiler(concurrent.futures.ThreadPoolExecutor):
+        def __init__(self, max_workers=None, *args, **kwargs):
+            super().__init__(1, *args, **kwargs)
+    class FuturesProxy:
+        ThreadPoolExecutor = OneCompiler
+        def __getattr__(self, name):
+            return getattr(concurrent.futures, name)
+    builder.concurrent = SimpleNamespace(futures=FuturesProxy())
+    try:
+        yield
+    finally:
+        builder.concurrent = original
+
+
+def compile_directories(directory, *, fresh):
+    """Each artifact gets its own work/cache siblings; never reuse failed builds."""
+    directory = Path(directory).absolute()
+    require(directory.parent.resolve() == directory.parent,
+            "LFM3 artifact parent cannot contain symlinks")
+    work = directory.with_name(directory.name + ".work")
+    cache = directory.with_name(directory.name + ".cache")
+    require(os.environ.get("BASE_COMPILE_WORK_DIR") == str(work),
+            "BASE_COMPILE_WORK_DIR must be the artifact's unique .work sibling")
+    require(os.environ.get("NEURON_COMPILE_CACHE_URL") == str(cache),
+            "NEURON_COMPILE_CACHE_URL must be the artifact's unique .cache sibling")
+    require("cache_dir" not in os.environ.get("NEURON_CC_FLAGS", ""),
+            "A compiler flag cannot override the isolated LFM3 compile cache")
+    for path in (work, cache):
+        require(not path.is_symlink(), "LFM3 compile work/cache symlink unsupported")
+        if fresh:
+            require(not path.exists(), "Fresh LFM3 build requires unused work/cache directories")
+    return work, cache
+
+
+def load_or_compile(owner, model_path, model_class, config, kwargs):
+    """Strict explicit artifact branch, without delete, repair or fallback."""
+    raw = os.environ.get("NEURON_COMPILED_ARTIFACTS")
+    require(bool(raw), "LFM3 requires a separate NEURON_COMPILED_ARTIFACTS directory")
+    directory = Path(raw).absolute()
+    require(not directory.is_symlink(), "Artifact directory cannot be a symlink")
+    fresh = not directory.exists()
+    work, cache = compile_directories(directory, fresh=fresh)
+    configuration = json.loads(config.to_json_string())
+    identity = build_identity(model_path, configuration)
+    config.metadata = {"lfm3_sdk053": identity}
+    from .runtime import admission
+    with admission(identity):
+        if not fresh:
+            admit_existing(directory, identity)
+            owner._load_compiled_model(str(directory), model_class, kwargs)
+        else:
+            require(os.environ.get("NEURON_LFM3_ALLOW_COMPILE", "0") == "1",
+                    "Artifact missing; use a fresh path and NEURON_LFM3_ALLOW_COMPILE=1 to build")
+            require(directory.parent.is_dir(), "Create the artifact parent directory explicitly")
+            try:
+                directory.mkdir(exist_ok=False)
+                work.mkdir(exist_ok=False)
+                cache.mkdir(exist_ok=False)
+            except OSError as exc:
+                raise AdmissionError("Cannot exclusively create new LFM3 artifact/work/cache") from exc
+            owner.model = model_class(model_path, config)
+            with serial_compiler():
+                owner.model.compile(str(directory))
+            admit_saved_configuration(directory, identity)
+            owner.model.load(str(directory))
+            files = artifact_files(directory)
+            manifest = {"complete": True, "identity": identity, "files": files}
+            temporary = directory / (ARTIFACT_MANIFEST + ".tmp")
+            with temporary.open("x") as stream:
+                json.dump(manifest, stream, indent=2, sort_keys=True)
+                stream.write("\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, directory / ARTIFACT_MANIFEST)
+    logger.info("Unqualified LFM3 SDK053 variant=%s scope=%s artifact=%s",
+                identity["variant"], identity["scope"], directory)
+    return True, str(directory), config
