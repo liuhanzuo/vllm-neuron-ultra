@@ -1,0 +1,27 @@
+# Qwen v8 future binding helper, final builder v2
+
+This is a source-only preparation API. It does not select the current handoff, write a spec/review/overlay, launch a process, import native libraries, inspect services, or acquire a lock. No real future binding was created. Final helper: `prepare_qwen35_sampler_v8_candidate_v2.py`; explicit tests: `check_prepare_qwen35_sampler_v8_candidate_v2.py`.
+
+The input predecessor is the actually executed r6 spec-v3 and overlay-v3. All 47,959 source pins remain byte-for-byte equal, including all historical v6 pins and original scientific delivery/leaf v2. The six independently reviewed v8 runtime sources and every future catalog source are added by a conflict-rejecting union. The original 44,532 recovered sources remain outside the overlay, whose r6 source extension contains 3,427 pins. All source payload authentication, recovered completion and recorder/auditor witness reconstruction remain root `Bundle.resolve` work; the helper does not claim to have performed them.
+
+The original 36 spec inputs and 137 overlay inputs are checked against the immutable r5 records. The corrected r6 sets of 150 spec inputs and 159 overlay inputs are retained in full. Original SDK base-plan inputs (8,791 entries) are loaded as saved JSON metadata and compared before partitioning. Historical terminal identities already in base inputs are omitted from *new* overlay additions. Any digest or stat-identity conflict fails instead of refreshing evidence. This prevents the exact duplicate-base-input error found during r6 preparation.
+
+The old 8,691,419-byte r5 spec and 8,759,821-byte r6 spec are preparation evidence only. They cannot enter new ordinary runtime `input_extension` entries. The original accepted 12,803,326-byte SDK base-plan special transport already present in the old overlay is preserved unchanged; this is not treated as a newly accepted generic large input. Only exact fixed preparation references can use the existing 64 MiB envelope; future ordinary inputs and the resulting overlay are limited to the original 8 MiB metadata envelope. No cap was increased. This prevents the exact oversized-old-Qwen-spec error found during r6 preparation.
+
+The helper preserves the full v75 120-row catalog and v76 121-row catalog as identical ordered prefixes. v76 includes the observed failed Qwen r6 exit, and its exit code remains 1. It accepts only explicitly supplied future `terminal`, `prerequisite_exit`, and `catalog` references, plus new output/run names. The future catalog must add the actual LFM r2 exit bound to fixed LFM r2 spec SHA `955c2267d1ac27bb1af5f680b4e0acefa4355c05bdfa874cf4f46f4381116630`, its complete 595-source map, actual tool fields, lifecycle owners, original output root/unit, drained state and original-lock-free observation. The future idle handoff must have no live sessions or active units, `running=false`, and retain that exact LFM actual-exit reference. Both successful and failed actual LFM exits remain possible; no success is invented or required for a separate Qwen diagnostic.
+
+Future API after the actual exit and root idle/catalog publication:
+
+```python
+import prepare_qwen35_sampler_v8_candidate_v2 as candidate
+reader = candidate.JsonMetadata(root_metadata_guard)
+result = candidate.prepare(explicit_future_fields, reader.read, root_metadata_guard)
+```
+
+`explicit_future_fields` requires exactly: `terminal`, `prerequisite_exit`, `catalog`, `run_name`, `output_root`, `overlay_output_root`, `running_handoff_path`, `overlay_path`, `spec_path`, and `review_candidate_path`. No current/future hashes or paths are fabricated by this delivery. Each reference must include an absolute path and SHA-256. The returned artifact objects and references use `candidate.encode()` bytes. The returned review has `reviewer=/root/candidate-preparation`, `passed=false`, `launch_authorized=false`, and explicit blockers; original v8 `validate_spec` rejects it. Output freshness is not observed by this helper.
+
+Root must independently check all text/source partitions, recover/witness closure, complete serial freshness, output freshness and physical/lock state before creating an accepted runtime review. Use a clean namespace for root `Bundle` resolution: importing a preparation helper into the runtime audit process adds an unlisted loaded source, the exact cause of the earlier r6 independent-verification retry. Do not bypass the runtime loaded-source check or add this preparation helper to the scientific execution closure just to suppress that check.
+
+Validation: final v2 explicit suite passed 30 tests, session 55910, terminal ce042e, exit 0, 43.631 seconds. A meta-path blocker rejects torch, NumPy, ctypes, Transformers, vLLM, torch-neuronx, Neuron distributed and NKI imports. Tests read immutable predecessor JSON and use synthetic future metadata with in-memory candidate artifacts; temporary reader tests use only local JSON files. No process/service/lock or native/model execution occurs. The original v1 helper and its 27-test passing suite are preserved, session 13155, terminal 84dce2, exit 0, 42.799 seconds. Builder v2 additionally checks catalog order, complete LFM row pins, and the ordinary overlay envelope.
+
+This delivery does not alter the frozen six-file runtime v8 delivery or its accepted 128-test result. It adds no model qualification or speedup claim. The original Qwen API root exception remains unknown; the runtime v8 change only improves bounded failure-log collection and failed-client-result rejection.
