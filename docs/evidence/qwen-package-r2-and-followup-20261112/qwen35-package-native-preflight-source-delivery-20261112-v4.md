@@ -1,0 +1,26 @@
+# Package native preflight v4 and serial v3 source delivery
+
+The actual package r1 attempt exited 1 before spawn or model work because NumPy's optional `check_support_sve` called `subprocess.run('lscpu', capture_output=True, text=True)` and the existing audit policy raised RuntimeError. The supplied actual outer tool was session 32453, terminal ce28a2, exit 1. Those failed results and frozen v3 worker/v2 serial sources are unchanged.
+
+The installed NumPy source at `numpy/testing/_private/utils.py:1239` catches OSError and returns False. This machine reports x86_64, where the Arm SVE feature cannot apply. v4 keeps the command forbidden and changes only the refusal exception for that exact optional probe to FileNotFoundError. NumPy's original code catches it and assigns its own `_SUPPORTS_SVE=False`. No lscpu output is fabricated and no executable is launched.
+
+The narrow match requires actual `os.uname().machine == 'x86_64'`, exact audit executable/argv `lscpu`/`['lscpu']`, cwd/env both None, the original function name, module name/file path, that frame's actual code object matching the module function, and the pinned entire source SHA-256 `dc5ad24cc8b439da43383043a27720883433768e4d280e9855f437b8a4524277`. Only one matching refusal is allowed per fresh process. Any other subprocess event, command, argument, architecture, source or caller stays on the original hard-denial path; os.system and socket.connect remain forbidden. The source is checked in the v4 bundle and again at the exact refusal. A bounded stack inspection only identifies the caller; it does not execute any alternate probe.
+
+Each parent/spawn native result retains the refusal event plus an observation that the actual imported NumPy module set `_SUPPORTS_SVE` to False. The refusal is also printed into the existing bounded native log. A missing event, repeated event or missing/true fallback fails the result. Fresh multiprocessing spawn remains the existing required path and is not replaced by a mock in runtime code.
+
+The v4 bundle retains byte-identical package source inventory, original config/view transformation, SDK source map, versions, Neuron kwargs and complete tokenizer contract from v3. The v3 tokenizer checker is reused unchanged, including all exact-ID comparisons and read-only prepared aliases. Registration, configuration save/load, invalid-scope negatives, synthetic transposed BF16 split, sampler isolation and actual fresh spawn checks are unchanged. Worker limits remain 12 GiB/no swap, 256 pids, up to eight CPUs, wall 600 s/CPU 480 s and 16 MiB per file. No model construction, weight loading, accelerator work or compilation is admitted.
+
+Serial v3 only selects the frozen native v4 source/bundle and versions its spec/admission/terminal identifiers. All serial functions otherwise match serial v2 after those labels are normalized; the source tests compare their complete ASTs. It imports the same `qwen35_package_preflight_history_v2.History`, original RetainedLock/Service, complete history transport, real root running ACK, actual child wait, cleanup hold and same-session external terminal reconciliation. Resource limits, floors, tokenizer output symlink rules and result ownership checks are unchanged. It creates no current spec, catalog, handoff or admission.
+
+Validation completed without native imports, process execution, service startup or lock acquisition:
+
+- 38 native source/mock tests passed, tool chunk `7ad517`, exit 0. The original 31 tests remain, plus exact optional-probe matching, original OSError fallback, wrong source/caller/command/architecture negatives, repeated/missing event negatives, unchanged-function AST checks and actual CPython subprocess audit-shape simulation. For the last test the real stdlib `subprocess.run`/Popen path reaches a captured audit callback; both underlying fork_exec and posix_spawn are replaced with failing mocks and remain uncalled. Thus it checks actual audit arguments without launching a command.
+- 18 serial source/mock tests passed, chunk `27826d` (suite completion) / `aa751c` (same tool session completion), exit 0. They retain original Service fake-port installation/failure/drain cases, real Popen-wait simulations, root ACK/delayed drain/lease retention and external same-session reconciliation.
+- The frozen v4 bundle was validated with the actual source-only validator; all retained contract sections equal v3 and no native modules were loaded.
+
+Frozen delivery references:
+
+- `qwen35-package-native-preflight-source-bundle-20261112-v4.json`: 19,854 bytes, SHA-256 `217320a7ce35d119601c95a6b38299de909bce64f4fb9543331a52968ae9b82e`.
+- `qwen35-package-preflight-serial-source-delivery-20261112-v3.json`: 107,571 bytes, SHA-256 `bca51b074419914fab114ade7f29806171be5e1d9288ed3dfb5e10b91095121e`.
+
+Independent source review is pending. Root later chooses a new run/output and complete then-current catalog, adds all v4/serial-v3 source pins plus the exact optional-probe source pin, and preserves every prior row/input/witness including r1's actual failure. Use the existing large-envelope 64 MiB transport for future complete specs/reviews. Skip only empty map arguments to `merge_sources`, never their catalog rows. This delivery performs no current binding or native retry and does not turn r1 into a passed run.

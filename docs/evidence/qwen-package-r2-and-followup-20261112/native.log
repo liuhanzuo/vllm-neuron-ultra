@@ -1,0 +1,55 @@
+INFO 11-12 16:01:25 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 16:01:25 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 16:01:25 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 16:01:25 [__init__.py:207] Platform plugin neuron is activated
+INFO 11-12 16:01:26 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 16:01:26 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 16:01:26 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 16:01:26 [__init__.py:207] Platform plugin neuron is activated
+Could not import vLLM config module for overrides: cannot import name 'ModelConfig' from partially initialized module 'vllm.config' (most likely due to a circular import) (/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/__init__.py)
+{"event": "qwen35_optional_numpy_probe_denied", "source": {"path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/testing/_private/utils.py", "sha256": "dc5ad24cc8b439da43383043a27720883433768e4d280e9855f437b8a4524277"}, "function": "check_support_sve", "machine": "x86_64", "command": "lscpu", "subprocess_started": false, "denied_before_exec": true, "exception": "FileNotFoundError", "reason": "Optional SVE discovery denied by the existing no-subprocess policy"}
+Could not import required modules for chat completion stream override: No module named 'vllm_neuron.patches'
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 496, in <module>
+    main()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 492, in main
+    execute(json.loads(raw))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 455, in execute
+    parent = native_checks(spec, bundle, 'parent')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 391, in native_checks
+    package.register(); package.register()
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/__init__.py", line 11, in register
+    from .registration import install
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/registration.py", line 6, in <module>
+    from vllm_neuron.worker.neuronx_distributed_model_loader import NeuronCausalLM
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_loader.py", line 34, in <module>
+    from neuronx_distributed_inference.models.config import (  # yapf: disable
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/config.py", line 10, in <module>
+    from neuronx_distributed.quantization.quantization_config import (
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/__init__.py", line 1, in <module>
+    from . import kernels, parallel_layers, pipeline, trace, utils
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/kernels/__init__.py", line 1, in <module>
+    from .flash_attn import nki_flash_attn_func
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/kernels/flash_attn.py", line 4, in <module>
+    import torch_xla.core.xla_model as xm
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py", line 211, in <module>
+    _found_libneuronxla = _aws_ec2_inf_trn_init()
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py", line 152, in _aws_ec2_inf_trn_init
+    xla.init()
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py", line 95, in init
+    initialize()
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/__init__.py", line 13, in initialize
+    _initializer = Initializer()
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py", line 88, in __init__
+    subprocess.run(["libneuronpjrt-path"], stdout=subprocess.PIPE)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1735, in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 265, in guard
+    require(event not in ('subprocess.Popen', 'os.system', 'socket.connect'), 'Subprocess/network forbidden: ' + event)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v4.py", line 49, in require
+    raise RuntimeError(message)
+RuntimeError: Subprocess/network forbidden: subprocess.Popen
