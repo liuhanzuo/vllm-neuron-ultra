@@ -1,0 +1,146 @@
+{
+  "schema": "qwen35_predicated_slot_writer_source_candidate_v1",
+  "candidate": "Decode-only reuse of original predicated NKI slot writer; unchanged prefill, reads and arithmetic",
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_text_port.py": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_primitives.py": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/frontend_split_correction_v2.py": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_split_full_protocol_v4.py": "6ba3e04c39469c3d4b4acb3f3ed9f1bc611050bcb781b952aac7115c666cf2c2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated.py": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated_torch.py": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki_predicated_slot_update.py": "5dc4fd5483083589d402de104ad208fa2d6cc5cb43b52a0e3bd5479ee7846394",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3_nki_kv_cache.py": "8d4f531a30a48aa882b5083b4e059b64d929b5be76483e3263ffb1ebdb76a0bb"
+  },
+  "evidence": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/qualified-baseline-record-v1.json",
+      "sha256": "ac86ea6cacc40a75bffe39c5ed2d344a978687591d16f975a73bd4e2cbccd034"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot-cache-nki-predicated-device/validation.json",
+      "sha256": "228d93d19dd433a13337cab201e78d84366a38d56277710421748af0deeddf8a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot-cache-nki-predicated-alias/validation.json",
+      "sha256": "f8baead3473b33d382d9e51660e632c56c27f1d1d785a52121f12b65cef5ef12"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki-predicated-slot-full/paired-comparison.json",
+      "sha256": "acdefa95261cc9c92d20e5246d7a665cc7dccbef99ab0bfc40afdaffeb02d212"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/smollm3-nki-cache-full-long-v4/paired-comparison.json",
+      "sha256": "e03e9e440c45420267fd2cb277d4a6e2287d500a00992457000d689a2d0e90fc"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki-runtime-profile/completion-audit.json",
+      "sha256": "21391bd567a46377c654b8e71a98dbedf3edccdc984d48c32567b2df9091caf2"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-nki-runtime-profile/bucket2048-core0.summary.json",
+      "sha256": "ca68f26593f34f122053c84d0279ff279619fcb668b6b93b82b6e2346e872d34"
+    }
+  ],
+  "layouts": [
+    {
+      "kind": "conv",
+      "count_per_rank": 18,
+      "shape": [
+        4,
+        3072,
+        4
+      ],
+      "dtype": "bfloat16",
+      "width": 12288,
+      "bytes_per_tensor": 98304
+    },
+    {
+      "kind": "recurrent",
+      "count_per_rank": 18,
+      "shape": [
+        4,
+        8,
+        128,
+        128
+      ],
+      "dtype": "float32",
+      "width": 131072,
+      "bytes_per_tensor": 2097152
+    },
+    {
+      "kind": "kv_full_allocation",
+      "count_per_rank": 12,
+      "shape": [
+        4,
+        1,
+        4096,
+        256
+      ],
+      "dtype": "bfloat16",
+      "width": 1048576,
+      "bytes_per_tensor": 8388608
+    }
+  ],
+  "logical_result_volumes": [
+    {
+      "bucket": 128,
+      "one_result_per_rank_bytes": 42663936,
+      "original_four_select_results_tp2_bytes": 341311488,
+      "candidate_one_result_tp2_bytes": 85327872,
+      "logical_result_volume_difference_tp2_bytes": 255983616
+    },
+    {
+      "bucket": 256,
+      "one_result_per_rank_bytes": 45809664,
+      "original_four_select_results_tp2_bytes": 366477312,
+      "candidate_one_result_tp2_bytes": 91619328,
+      "logical_result_volume_difference_tp2_bytes": 274857984
+    },
+    {
+      "bucket": 512,
+      "one_result_per_rank_bytes": 52101120,
+      "original_four_select_results_tp2_bytes": 416808960,
+      "candidate_one_result_tp2_bytes": 104202240,
+      "logical_result_volume_difference_tp2_bytes": 312606720
+    },
+    {
+      "bucket": 1024,
+      "one_result_per_rank_bytes": 64684032,
+      "original_four_select_results_tp2_bytes": 517472256,
+      "candidate_one_result_tp2_bytes": 129368064,
+      "logical_result_volume_difference_tp2_bytes": 388104192
+    },
+    {
+      "bucket": 2048,
+      "one_result_per_rank_bytes": 89849856,
+      "original_four_select_results_tp2_bytes": 718798848,
+      "candidate_one_result_tp2_bytes": 179699712,
+      "logical_result_volume_difference_tp2_bytes": 539099136
+    },
+    {
+      "bucket": 4096,
+      "one_result_per_rank_bytes": 140181504,
+      "original_four_select_results_tp2_bytes": 1121452032,
+      "candidate_one_result_tp2_bytes": 280363008,
+      "logical_result_volume_difference_tp2_bytes": 841089024
+    }
+  ],
+  "measured_qwen_cache_bottleneck_established": false,
+  "actual_qwen_dma_bytes_measured": false,
+  "estimated_model_speedup": null,
+  "zero_copy": false,
+  "existing_kernel_still_reads_old_and_update_tiles_and_writes_full_output": true,
+  "original_alias_and_bucket_tail_concat_unchanged": true,
+  "actual_kernel_exists": true,
+  "new_kernel_required": false,
+  "qwen_exact_shape_and_fp32_persistent_alias_qualification_pending": true,
+  "source_only": true,
+  "source_mutated": false,
+  "native_imports": false,
+  "payload_reads": false,
+  "large_hlo_reads": false,
+  "compiler_or_benchmark_run": false,
+  "model_qualified": false,
+  "new_speedup_claim": false
+}

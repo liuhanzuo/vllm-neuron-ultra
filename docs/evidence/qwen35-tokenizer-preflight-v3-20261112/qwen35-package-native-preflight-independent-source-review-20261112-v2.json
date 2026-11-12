@@ -1,0 +1,170 @@
+{
+  "blockers": [
+    {
+      "classification": "Source blocker for the claimed original-tokenizer read-only guarantee; no actual tokenizer corruption observed.",
+      "finding": "The audit hook applies read-only flags only to lexical original/historical roots. The helper creates five shared-hf-config tokenizer symlinks to the originals, but a write open through these prepared aliases is accepted by the same callback.",
+      "id": "prepared_tokenizer_alias_writes_not_rejected",
+      "lineage": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_tokenizer_checks_v2.py",
+      "lineage_line": 64,
+      "reproduction": "Capture callback via mocked sys.addaudithook after install_runtime_guard(tokenizer_paths('/work')); invoke callback('open', ('/work/shared-hf-config/tokenizer.json', 'w', os.O_WRONLY)); v2 returns normally.",
+      "required_correction": "Immutable v3 must reject write flags through all five prepared tokenizer aliases while preserving fresh generated shared config creation, read access and all original native/resource/binding checks. Do not modify v1/v2.",
+      "worker": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v2.py",
+      "worker_line": 203
+    }
+  ],
+  "boundaries": [
+    "No native tokenizer execution or equality is established by fake IDs.",
+    "Source projections do not execute HTTP clients or long HF oracle.",
+    "No independent saved original HF quality96/workload/initial/diagnostic reference is invented.",
+    "Original root history reconstruction, serial admission, descendant drain and runtime isolation remain external responsibilities.",
+    "Python audit hooks are not a sandbox for native-library internals."
+  ],
+  "compiler_launched": false,
+  "coverage_review": {
+    "complete_original_functions": [
+      "evaluate_quality.prepare_inputs",
+      "benchmark_workloads.inputs",
+      "orchestrate.prompt_ids"
+    ],
+    "historical_quality96_rows": 96,
+    "historical_quality96_total_ids": 13353,
+    "historical_quality_is_served_view_not_independent_original_hf": true,
+    "no_mistral_fix_or_warning_suppression_added": true,
+    "quality96_full_ids_and_order_compared": true,
+    "same_length_changed_token_rejected": true,
+    "saved_hf_lengths": [
+      23,
+      30,
+      28,
+      26,
+      28,
+      1614
+    ],
+    "saved_long_lengths": [
+      2060,
+      2060
+    ],
+    "saved_reference_gaps_disclosed": true,
+    "source_projections": [
+      "NativeClients.initial prompt assignment",
+      "NativeClients.diagnostic prompt assignment",
+      "orchestrate.quality literal checklist",
+      "validate_qwen35_long_decode.reference pre-tensor tokenizer statements"
+    ],
+    "tokenizer_warning_does_not_prove_bad_token_ids": true,
+    "workload_lengths": [
+      32,
+      128,
+      512,
+      1536
+    ]
+  },
+  "current_qwen_r10_session_untouched": 38957,
+  "frozen_sources_modified": false,
+  "full_model_qualified": false,
+  "lock_acquired": false,
+  "model_weights_read": false,
+  "native_imports_performed_in_review": false,
+  "new_speedup_claim": false,
+  "preserved_v1": {
+    "bundle_fields_equal": [
+      "source_commit",
+      "checkout",
+      "python",
+      "site_packages",
+      "source_delivery",
+      "package_sources",
+      "sdk_sources",
+      "software",
+      "official_config",
+      "view_config",
+      "view_config_sha256",
+      "neuron_kwargs"
+    ],
+    "limits_neuron_kwargs_compiler_env_native_roots_ast_equal": true,
+    "only_changed_worker_functions": [
+      "execute",
+      "install_runtime_guard",
+      "native_checks",
+      "validate_bundle"
+    ],
+    "unchanged_functions_ast_equal": true
+  },
+  "previous_review": {
+    "bytes": 17357,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-native-preflight-independent-source-review-20261112-v1.json",
+    "sha256": "c2e1cd1146e96ff03fe0f82c1e05e2daa6ae36e08868e3b6a15b4658dd55e7a1"
+  },
+  "production_input_created": false,
+  "real_process_spawned_in_review": false,
+  "reviewed_at": "2026-11-12T13:43:28.367970+00:00",
+  "reviewer": "/root/mini_formal_native_review_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_native_preflight_independent_source_review_v2",
+  "services_launched": false,
+  "source_accepted": false,
+  "source_bundle": {
+    "bytes": 19612,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-native-preflight-source-bundle-20261112-v2.json",
+    "sha256": "1337e32ad65a8aae802a487a155c51d2738e41da88cdcd23adea8d6f7eba203a"
+  },
+  "source_delivery": {
+    "bytes": 8608,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-native-preflight-source-delivery-20261112-v2.md",
+    "sha256": "566e57529846b5e3524fab6f64bac13ac7f1d619e157352bbf5d2cef29451db6"
+  },
+  "tests": [
+    {
+      "count": 28,
+      "exit_code": 0,
+      "kind": "author_stdlib_source_mock_suite",
+      "terminal_chunk": "bcc07c"
+    },
+    {
+      "cases": [
+        "accepted identical complete evidence",
+        "changed final token rejected",
+        "missing tokenizer receipt rejected",
+        "changed tokenizer scope rejected",
+        "changed origins rejected",
+        "changed config rejected",
+        "wrong child PID rejected",
+        "nonzero child exit rejected"
+      ],
+      "count": 8,
+      "exit_code": 0,
+      "failed_cases_publish_no_result": true,
+      "kind": "independent_fake_parent_spawn",
+      "terminal_chunk": "f31af3"
+    },
+    {
+      "callback_only_no_real_open": true,
+      "direct_original_and_historical_write_negatives": 20,
+      "exit_code": 0,
+      "kind": "independent_guard_callback",
+      "prepared_alias_write_rejected": false,
+      "terminal_chunk": "f31af3"
+    },
+    {
+      "exit_code": 0,
+      "kind": "source_reference_and_provenance_authentication",
+      "references": 107,
+      "terminal_chunk": "f6ef47"
+    },
+    {
+      "exit_code": 0,
+      "kind": "v1_resource_source_preservation_and_saved_reference_shape",
+      "terminal_chunk": "36cff4"
+    }
+  ],
+  "tokenizer_descriptors_match_pinned_package_provenance": true,
+  "tokenizer_payloads_read": false,
+  "verified_counts": {
+    "official_config_and_package_delivery": 2,
+    "package_python_sources": 70,
+    "sdk_python_sources": 20,
+    "tokenizer_protocol_source_and_metadata": 11,
+    "total_verified_references": 107,
+    "worker_checker_preparer_helper": 4
+  }
+}
