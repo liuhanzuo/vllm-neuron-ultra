@@ -1,0 +1,179 @@
+{
+  "schema": "minicpm5_bootstrap_observation_independent_source_review_v1",
+  "reviewer": "/root/lfm_v3_binding_source",
+  "date_utc": "2026-11-12",
+  "scope": "Frozen source, mocked ports, and authenticated saved JSON only",
+  "passed": true,
+  "blockers": [],
+  "source_only": true,
+  "runtime_admitted": false,
+  "accepted_native_authority_created": false,
+  "native_ABI_qualified": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "source_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-bootstrap-observation-source-delivery-20261112-v1.json",
+    "sha256": "4bd93211f502f9dd0ecad8adc6057d012d3326d25c5dcb07db3719b9a938a8b8"
+  },
+  "effective_source_manifest": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-bootstrap-observation-source-manifest-20261112-v2.json",
+    "sha256": "05bbd33755eb64e37c16cb5b7c66ec0d890fea0217fe8f1af9287c93b65f7466"
+  },
+  "command_notes": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-bootstrap-observation-source-command-notes-20261112-v1.md",
+    "sha256": "3c8928238d619c2c9714a355374f44b39cb3992922840c6cce366e21ca545650"
+  },
+  "implementation_sources": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_bootstrap_observation_v1.py",
+      "sha256": "e72777fa01e072fea71da9298bec0be3784eac072b779db72f8cf1d28105995c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_bootstrap_observation_child_v1.py",
+      "sha256": "77ef2f6a17ee55562e65a799abafccf258014104c30a2a0ce27b11984e6e63de"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_bootstrap_observation_v1.py",
+      "sha256": "6d62290dd82f73d8cbb0cff14131b791162de2de46970506825c978cc3fc6ce0"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_bootstrap_observation_v1.py",
+      "sha256": "52b013d27a0541e1bcaa4f23e12fc557c7d6dbb901ce27edfdf2a15322aa6e46"
+    }
+  ],
+  "independent_verification": {
+    "source_authentication": {
+      "actual_tool": {"kind": "tool_call", "terminal_chunk": "ad1ca8", "exit_code": 0},
+      "source_files_rehashed": 133,
+      "source_bytes_rehashed": 1491486,
+      "source_asts_parsed": 133,
+      "implementation_modules_imported_for_this_check": false
+    },
+    "new_independent_mock_tests": {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_bootstrap_observation_independent_v1.py",
+        "sha256": "b0aa866b6b9dcbb8d01a6a4400db45bf97fdd23e114efc08ecdcc976479554b8",
+        "bytes": 12568
+      },
+      "actual_tool": {"kind": "tool_call", "terminal_chunk": "087365", "exit_code": 0},
+      "count": 4,
+      "seconds": 0.152,
+      "all_passed": true,
+      "checks": [
+        "Execute complete child.main success with mocked OS, imports and native ports for both sdk310 and outer312; all three maps have exact saved-byte hashes; formal entry import follows ACK; original parent and lock proof precede mock libc",
+        "Wrong SDK extension provider and missing outer builtin provider reject before libc, retain failed/partial maps and produce no completed observation",
+        "Wrong inherited resource limit rejects before ctypes and before recording pre_ctypes completion",
+        "All 1455 saved historical rows round-trip exactly through four bounded history shards using an in-memory save callback"
+      ],
+      "native_import_fence": ["torch", "numpy", "ctypes", "_ctypes", "transformers", "vllm", "Neuron", "NKI"],
+      "review_execution_limits": {
+        "interpreter": "system Python -B -s",
+        "cpu": 7,
+        "nice": 19,
+        "address_space_bytes": 536870912,
+        "cpu_seconds": 60
+      }
+    },
+    "saved_json_and_retained_pins": {
+      "actual_tool": {"kind": "tool_call", "terminal_chunk": "588438", "exit_code": 0},
+      "saved_json_files_authenticated": 7,
+      "retained_old_pins_unchanged": 106,
+      "candidate_origins_reconstructed_with_pure_core_candidates": true,
+      "distinct_declared_native_candidates": 18,
+      "declared_candidate_bytes": 46364152,
+      "native_or_payload_files_read": 0
+    },
+    "author_tests": {
+      "reported_count": 13,
+      "reported_tool": {"kind": "tool_call", "terminal_chunk": "ce690a", "exit_code": 0},
+      "rerun_by_independent_reviewer": false
+    }
+  },
+  "constraints_reviewed": {
+    "original_lock": {
+      "device": 66306,
+      "inode": 8294421,
+      "parent_retains_cloexec_descriptor": true,
+      "children_reprove_original_parent_pid_start_and_retained_lock": true
+    },
+    "shared_deadline": {
+      "wall_seconds": 900,
+      "one_parent_monotonic_start": true,
+      "same_absolute_deadline_for_both_children": true,
+      "ack_deadline_seconds": 20,
+      "ack_deadline_bounded_by_shared_deadline": true
+    },
+    "resource_limits": {
+      "address_space_bytes": 2147483648,
+      "cpu_seconds": 600,
+      "hard_cpu_seconds": 605,
+      "output_file_bytes": 2097152,
+      "cpu": 6,
+      "nice": 19
+    },
+    "artifact_limits": {
+      "allocated_bytes": 33554432,
+      "metadata_bytes": 8388608,
+      "one_file_bytes": 2097152,
+      "raw_bytes": 12288000,
+      "raw_files": 4392
+    },
+    "children": {
+      "order": ["sdk310", "outer312"],
+      "sequential_with_complete_prior_group_drain": true,
+      "exact_interpreter_command_and_source_pins": true,
+      "parent_records_actual_owner_before_ack_R": true,
+      "sdk_failure_prevents_outer_start": true,
+      "actual_child_returncode_recorded": true
+    },
+    "bootstrap_and_maps": {
+      "stages": ["earliest", "pre_ctypes", "post_ctypes"],
+      "full_maps_capped_without_truncation": true,
+      "actual_formal_module_imports_present_in_source": true,
+      "formal_module_source_entry_not_called": true,
+      "sdk_ctypes_exact_extension_provider_checked": true,
+      "outer_ctypes_builtin_provider_checked": true,
+      "pinned_pure_loader_receipts_required": true,
+      "unknown_or_mismatched_providers_remain_gaps": true,
+      "absent_stdlib_providers_not_invented": true,
+      "candidate_ffi_definitions_not_promoted_to_selected_provider_authority": true
+    },
+    "historical_checks": {
+      "original_prepare_minicpm5_sdk310_deb_plan_v4_build_reused": true,
+      "original_retirement_preflight_history_reused": true,
+      "complete_owners_services_retirements_lock_and_science_compared": true,
+      "existing_runtime_physical_guards_preserved": true,
+      "root_disk_floor_bytes": 30064771072,
+      "nvme_floor_bytes": 32212254720,
+      "memory_floor_bytes": 1073741824,
+      "history_rows_saved": 1455,
+      "history_shards": 4,
+      "maximum_shard_bytes": 1048576,
+      "lossless_row_roundtrip_independently_verified": true
+    },
+    "failure_and_exit": {
+      "partial_failure_evidence_retained": true,
+      "existing_exact_group_drain_and_pid_reuse_defense_reused": true,
+      "lock_not_released_if_physical_drain_fails": true,
+      "parent_does_not_claim_its_own_exit": true,
+      "external_actual_parent_exit_recording_owned_by_root": true
+    },
+    "scientific_constraints_unchanged": {
+      "native_checks": 9,
+      "scientific_descriptor_rows": 1284
+    }
+  },
+  "not_performed": [
+    "Actual bootstrap observation or native import/execution",
+    "Native binary or model payload reads",
+    "Actual prepare, plan admission or serial execution",
+    "Current process, service, lock, disk, memory or other physical observations"
+  ],
+  "runtime_obligations_owned_by_root": [
+    "Bind the exact frozen sources to the latest complete ended/drained catalog and fresh handoff; this review does not prepare or approve an actual plan",
+    "Complete independently accepted actual plan and all original fresh physical admission checks",
+    "Bind and retain an external actual parent terminal/exit record and fresh final handoff",
+    "Treat completed observation with unresolved provider gaps solely as discovery; no accepted native authority, ABI qualification, model qualification or speedup follows from this review"
+  ],
+  "conclusion": "No blocking defect found in the reviewed frozen source or additional independent mocks. This is source-review approval only; actual native/bootstrap success and original scientific checks remain unestablished."
+}
