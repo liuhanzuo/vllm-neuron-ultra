@@ -1,0 +1,122 @@
+{
+  "actual_external_tool_exit_pending": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/admission.json",
+    "sha256": "33cb6bd6b2481c5eb84e7b0019ad56c0782371c7f36a88de782da983c160e6f4"
+  },
+  "automatic_successor": false,
+  "complete_owned_unit_terminals": [
+    {
+      "cleanup_complete": true,
+      "exit_observed": true,
+      "group_observations": [
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-package-r4-v5-20261112-package-native-preflight.service"
+        },
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-package-r4-v5-20261112-package-native-preflight.service"
+        }
+      ],
+      "observed_unix_ns": 1794503068094281320,
+      "process_owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-I",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_serial_v5.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/admission.json",
+          "--binding-sha256",
+          "33cb6bd6b2481c5eb84e7b0019ad56c0782371c7f36a88de782da983c160e6f4"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-package-r4-v5-20261112-package-native-preflight.service",
+        "pid": 881946,
+        "ppid": 1583,
+        "start_ticks": "428349127"
+      },
+      "properties": {
+        "ActiveState": "active",
+        "After": "app.slice basic.target -.mount",
+        "BindsTo": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "1",
+        "ExecMainPID": "881946",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/native/hf-cache HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_CPU_SAMPLER_FAST=0 NEURON_ON_DEVICE_SAMPLING_DISABLED=1 NEURON_QWEN35=1 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 TMPDIR=/mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/native/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 VLLM_WORKER_MULTIPROC_METHOD=spawn XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/native/cache XDG_RUNTIME_DIR=/run/user/1000 XLA_DISABLE_FUNCTIONALIZATION=1 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_serial_v5.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-package-preflight-package-r4-v5-20261112/admission.json --binding-sha256 33cb6bd6b2481c5eb84e7b0019ad56c0782371c7f36a88de782da983c160e6f4 ; ignore_errors=no ; start_time=[Thu 2026-11-12 17:03:02 UTC] ; stop_time=[Thu 2026-11-12 17:04:27 UTC] ; pid=881946 ; code=exited ; status=0 }",
+        "ExecStopPost": "",
+        "Id": "trn1-qwen35-sampler-package-r4-v5-20261112-package-native-preflight.service",
+        "InvocationID": "119b34f4fcad49268865b3fe03ecfad7",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "16777216",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryHigh": "10737418240",
+        "MemoryMax": "12884901888",
+        "MemorySwapMax": "0",
+        "RemainAfterExit": "yes",
+        "Result": "success",
+        "RuntimeMaxUSec": "15min",
+        "SendSIGKILL": "yes",
+        "StandardError": "inherit",
+        "StandardOutput": "append",
+        "SubState": "exited",
+        "TasksMax": "256",
+        "TimeoutStopUSec": "15s",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "remaining_processes": [],
+      "server_owner": {
+        "invocation_id": "119b34f4fcad49268865b3fe03ecfad7",
+        "pid": 881946,
+        "start_ticks": 428349127,
+        "unit": "trn1-qwen35-sampler-package-r4-v5-20261112-package-native-preflight"
+      },
+      "systemd_exit_status": {
+        "ExecMainCode": 1,
+        "ExecMainStatus": 0,
+        "Result": "success"
+      },
+      "unacknowledged_terminal": null
+    }
+  ],
+  "failed": false,
+  "failure": null,
+  "full_model_qualified": false,
+  "outer_owner": {
+    "argv": [
+      "python3",
+      "-B",
+      "research/qwen35_package_preflight_serial_v5.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-preflight-r4-20261112-spec-v5.json",
+      "--spec-sha256",
+      "5d11ef9a549cebf16c8434dc0dbf297d4a3ccb97c8826ad882aa67c0cf597ecf",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-preflight-r4-20261112-review-v5.json",
+      "--review-sha256",
+      "7cce54029c113c1828785cf12434ae8acfc70a23e28244c93cab99e8fecf12d1"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 873443,
+    "ppid": 2480035,
+    "start_ticks": "428314591"
+  },
+  "result_present": true,
+  "schema": "qwen35_package_preflight_outer_terminal_v5",
+  "self_exit_claimed": false,
+  "storage": {
+    "allocated_bytes": 11362304,
+    "entries": 43,
+    "logical_bytes": 11253772
+  },
+  "whole_owned_scope_drained": true
+}
