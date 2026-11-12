@@ -1,0 +1,146 @@
+{
+  "run_id": "650a2f45-d687-4c08-8e61-87ad221bf43f",
+  "root_owner": {
+    "unit": "trn1-qwen35-sampler-r9-v11-20261112-coordinator",
+    "pid": 3647606,
+    "start_ticks": 425915130,
+    "invocation_id": "8a3e8232496e48dc9078016d20996b3f"
+  },
+  "observer_role": "root_owner_auditor",
+  "observer_source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v11.py",
+  "observer_source_sha256": "461ed0b75c3d53d3b64e2a9fa03a2c948aac6cff09020e6295539dcf7a339cb5",
+  "observed_unix_ns": 1794483031158576959,
+  "server_owner": {
+    "unit": "trn1-qwen35-sampler-r9-v11-20261112-baseline-http",
+    "pid": 3994731,
+    "start_ticks": 426189536,
+    "invocation_id": "7c693bf094a94412a71886f448bcf42b"
+  },
+  "process_owner": {
+    "pid": 3994731,
+    "start_ticks": "426189536",
+    "ppid": 1583,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v11.py",
+      "--mode",
+      "supervisor",
+      "--binding",
+      "/mnt/nvme/neuron-work/qw-r9-v11-20261112/baseline-http/phase-spec.json",
+      "--binding-sha256",
+      "75f8908544b4e885933495e74465a258bb67865d62b28535ff6a6ee970180ba5"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service"
+  },
+  "unacknowledged_terminal": null,
+  "exit_observed": true,
+  "systemd_exit_status": {
+    "ExecMainCode": 1,
+    "ExecMainStatus": 0,
+    "Result": "success"
+  },
+  "properties": {
+    "TimeoutStopUSec": "15s",
+    "RuntimeMaxUSec": "4h",
+    "RemainAfterExit": "yes",
+    "MainPID": "0",
+    "ControlPID": "0",
+    "Result": "success",
+    "ExecMainPID": "3994731",
+    "ExecMainCode": "1",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/hf HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILED_ARTIFACTS=/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-cache NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031 TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_COMPILE_THREADS=1 TRN1_COMPILE_WORKERS=1 TRN1_QWEN35_SPLIT_SHA256=1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d TRN1_QWEN35_TEXT_ADAPTER=1 XDG_RUNTIME_DIR=/run/user/1000 XLA_DISABLE_FUNCTIONALIZATION=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v11.py --mode supervisor --binding /mnt/nvme/neuron-work/qw-r9-v11-20261112/baseline-http/phase-spec.json --binding-sha256 75f8908544b4e885933495e74465a258bb67865d62b28535ff6a6ee970180ba5 ; ignore_errors=no ; start_time=[Thu 2026-11-12 11:03:07 UTC] ; stop_time=[Thu 2026-11-12 11:30:31 UTC] ; pid=3994731 ; code=exited ; status=0 }",
+    "ControlGroup": "",
+    "MemoryHigh": "26843545600",
+    "MemoryMax": "27917287424",
+    "MemorySwapMax": "12884901888",
+    "TasksMax": "256",
+    "Environment": "",
+    "LimitFSIZE": "134217728",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+    "StandardOutput": "append",
+    "StandardError": "inherit",
+    "KillMode": "control-group",
+    "SendSIGKILL": "yes",
+    "Id": "trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service",
+    "BindsTo": "trn1-qwen35-sampler-r9-v11-20261112-coordinator.service",
+    "After": "basic.target app.slice trn1-qwen35-sampler-r9-v11-20261112-coordinator.service -.mount",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "exited",
+    "Job": "",
+    "InvocationID": "7c693bf094a94412a71886f448bcf42b",
+    "ExecStopPost": ""
+  },
+  "group_observations": [
+    {
+      "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service",
+      "absent": true
+    },
+    {
+      "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service",
+      "absent": true
+    }
+  ],
+  "remaining_processes": [],
+  "cleanup_complete": true,
+  "observation_kind": "terminal_cleanup",
+  "server_active": false,
+  "stop_requested": true,
+  "stop_outcome_accepted": true,
+  "actual_child_exit": {
+    "actual_popen_wait_observed": true,
+    "child_bootstrap_owner": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v11.py",
+        "--mode",
+        "api_bootstrap",
+        "--binding",
+        "/mnt/nvme/neuron-work/qw-r9-v11-20261112/baseline-http/phase-spec.json",
+        "--binding-sha256",
+        "75f8908544b4e885933495e74465a258bb67865d62b28535ff6a6ee970180ba5"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service",
+      "pid": 3994880,
+      "ppid": 3994731,
+      "start_ticks": "426189696"
+    },
+    "child_returncode": 0,
+    "observed_unix_ns": 1794483031068175464,
+    "phase_spec": {
+      "path": "/mnt/nvme/neuron-work/qw-r9-v11-20261112/baseline-http/phase-spec.json",
+      "sha256": "75f8908544b4e885933495e74465a258bb67865d62b28535ff6a6ee970180ba5"
+    },
+    "schema": "qwen35_sampler_actual_child_exit_v1",
+    "self_exit_claimed": false,
+    "stop_requested": true,
+    "supervisor": {
+      "process": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v11.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qw-r9-v11-20261112/baseline-http/phase-spec.json",
+          "--binding-sha256",
+          "75f8908544b4e885933495e74465a258bb67865d62b28535ff6a6ee970180ba5"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-http.service",
+        "pid": 3994731,
+        "ppid": 1583,
+        "start_ticks": "426189536"
+      },
+      "service_owner": {
+        "invocation_id": "7c693bf094a94412a71886f448bcf42b",
+        "pid": 3994731,
+        "start_ticks": 426189536,
+        "unit": "trn1-qwen35-sampler-r9-v11-20261112-baseline-http"
+      }
+    }
+  }
+}

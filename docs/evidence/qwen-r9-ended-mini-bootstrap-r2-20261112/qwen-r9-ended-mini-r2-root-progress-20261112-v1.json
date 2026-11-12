@@ -1,0 +1,80 @@
+{
+  "schema": "qwen_r9_summary_failure_and_mini_r2_progress_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T12:06:39.077896+00:00",
+  "qwen_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r9-root-actual-exit-20261112-v1.json",
+    "sha256": "bec84cd8758f18215b452dd606816faac021a1fa846270991865e4ed0cfb9975"
+  },
+  "qwen_saved_output_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r9-saved-output-root-audit-20261112-v1.json",
+    "sha256": "ce052296aabb188bb992d1b03fe573b633f8826443d52fb7eee90e1e9cfe271c"
+  },
+  "qwen_terminal_auditor_tool": {
+    "terminal_chunk": "544875",
+    "exit_code": 0
+  },
+  "qwen_saved_auditor_tool": {
+    "terminal_chunk": "b4a748",
+    "exit_code": 0
+  },
+  "qwen_failure": "Original check_initial_pair compares whole usage dict against only three expected keys; real nonstream usage has optional prompt_tokens_details:null.",
+  "additional_discovered_gap": "Both saved host.json files omit effective_host_settings required by check_host_pair. No host settings evidence is synthesized.",
+  "qwen_initial_usage_fix": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v2.py",
+    "sha256": "b4c8a4451acfd12ee2a8d0254f1e3c94f32199c18b76ed502a1b62e08c74052f"
+  },
+  "regression_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_initial_usage_v2_20261112.py",
+    "sha256": "c8c88e8cf654f2b73892fa259e054c7e6deba1a20d9b456451f41d921c05923b"
+  },
+  "regression": {
+    "terminal_chunk": "919220",
+    "exit_code": 0,
+    "checks": 26
+  },
+  "saved_auditor_initial_failures": [
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r9_saved_outputs_20261112_v1.py",
+        "sha256": "96655dee448498ed4d4f6367ba2efa01d41437d1def35a0eb7bdfcc5dd01e9f1"
+      },
+      "terminal_chunk": "06b069",
+      "exit_code": 1,
+      "error": "Missing imported SUCCESS constant"
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r9_saved_outputs_20261112_v2.py",
+        "sha256": "d4b1509ba4b73d9a1d20afe3bc1db83b9b601f67617d655f3c039778c48833d2"
+      },
+      "terminal_chunk": "6bcde9",
+      "exit_code": 1,
+      "error": "Missing hashlib import"
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r9_saved_outputs_20261112_v3.py",
+        "sha256": "2f6d8596a3387092d72294dfbf9001284c7071d05652c18f2501e7cd2ca2040d"
+      },
+      "terminal_chunk": "305fd6",
+      "exit_code": 1,
+      "error": "Original host comparison refuses missing effective_host_settings"
+    }
+  ],
+  "mini_actual_exit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-bootstrap-observation-r2-root-actual-exit-20261112-v1.json",
+    "sha256": "33ee19570567fe19ba3abf63c533dccb956857f5e9ce5679ddef627ecfa4fba5"
+  },
+  "mini_terminal_auditor_tool": {
+    "terminal_chunk": "ca329e",
+    "exit_code": 0
+  },
+  "mini_native_maps_have_no_content_gaps": true,
+  "mini_source_execution_gaps": [],
+  "mini_formal_native_checks_pending": 9,
+  "mini_formal_scientific_rows_pending": 1284,
+  "full_model_qualified": false,
+  "new_qualified_speedup": false,
+  "original_15_families_retained": true
+}
