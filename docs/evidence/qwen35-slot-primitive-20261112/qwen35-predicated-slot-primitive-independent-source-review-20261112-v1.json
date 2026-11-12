@@ -1,0 +1,362 @@
+{
+  "acceptance_scope": "Frozen primitive experiment source only. Compatible existing-owner dispatch remains to be implemented; no runtime, compiler, device, model or performance qualification is granted.",
+  "authenticated_references": {
+    "delivery_source_note_controls_and_historical_references": 14,
+    "exit_code": 0,
+    "frozen_original_sources": 6,
+    "manifest": 1,
+    "some_reference_paths_overlap": true,
+    "terminal_chunk": "adba08"
+  },
+  "blockers": [],
+  "boundaries": [
+    "No actual native module, compiler, device, model, payload or production input work occurred in this review.",
+    "The 32 graphs and 46,368 calls are planned workload totals and stdlib simulated schedule counts, not completed device experiments.",
+    "Historical smaller device probes do not prove this workload fits its proposed caps.",
+    "Existing-owner integration is pending and was explicitly disclosed before review; source acceptance is not runtime admission.",
+    "No TP2/full-model correctness, cold-cache, long-decode, request-slot-reuse, quality or HTTP gate is replaced or relaxed.",
+    "No new model speedup, device-only latency, zero-copy/HBM saving or compiler-fusion conclusion is established.",
+    "Frozen delivery sources remain unchanged; any source correction requires a successor version."
+  ],
+  "compiler_launched": false,
+  "current_qwen_r10_session_untouched": 38957,
+  "delivery_note": {
+    "bytes": 9480,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-source-delivery-20261112-v1.md",
+    "sha256": "88cd1a4d32fc733b677423ed1bfc6195785af7ba86deb54501ed722827237a93"
+  },
+  "device_invoked": false,
+  "findings": {
+    "byte_validation": {
+      "full_buffer_equality": true,
+      "hashes_not_used_as_equality_gate": true,
+      "passed": true,
+      "shape_and_dtype_required": true,
+      "signed_zero_and_nan_payload_negative_controls_retained": true,
+      "tail_shape_dtype_length_negative_controls_passed": true
+    },
+    "exact_geometry": {
+      "basis": "Original qwen35_neuron_adapter.py cache geometry and saved official Qwen3.5-2B text config at TP2. B4, six KV buckets and FP32 recurrent state preserved. K/V share the tested primitive layout; this is not all model cache tensors or TP2 execution.",
+      "layouts": [
+        {
+          "dtype": "bfloat16",
+          "name": "conv",
+          "per_slot_width": 12288,
+          "rows": 4,
+          "shape": [
+            4,
+            3072,
+            4
+          ],
+          "tensor_bytes": 98304
+        },
+        {
+          "dtype": "float32",
+          "name": "recurrent",
+          "per_slot_width": 131072,
+          "rows": 4,
+          "shape": [
+            4,
+            8,
+            128,
+            128
+          ],
+          "tensor_bytes": 2097152
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv128",
+          "per_slot_width": 32768,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            128,
+            256
+          ],
+          "tensor_bytes": 262144
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv256",
+          "per_slot_width": 65536,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            256,
+            256
+          ],
+          "tensor_bytes": 524288
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv512",
+          "per_slot_width": 131072,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            512,
+            256
+          ],
+          "tensor_bytes": 1048576
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv1024",
+          "per_slot_width": 262144,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            1024,
+            256
+          ],
+          "tensor_bytes": 2097152
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv2048",
+          "per_slot_width": 524288,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            2048,
+            256
+          ],
+          "tensor_bytes": 4194304
+        },
+        {
+          "dtype": "bfloat16",
+          "name": "kv4096",
+          "per_slot_width": 1048576,
+          "rows": 4,
+          "shape": [
+            4,
+            1,
+            4096,
+            256
+          ],
+          "tensor_bytes": 8388608
+        }
+      ],
+      "passed": true
+    },
+    "invocation_and_callbacks": {
+      "callbacks": [
+        "guard",
+        "save_report",
+        "record_artifact"
+      ],
+      "callbacks_alone_do_not_prove_owner_or_resource_enforcement": true,
+      "compatible_dispatcher_exists": false,
+      "compiled_artifact_size_hash_recorded": true,
+      "complete_report_size_cap_before_save": true,
+      "external_monitor_required_during_trace": true,
+      "fresh_output_required": true,
+      "frozen_original_sources_verified_before_and_after": true,
+      "guard_before_source_reads_and_native_imports": true,
+      "known_integration_gap": "Obsolete fixed legacy queues cannot be reused unchanged; LFM105 NKI0.5 dispatcher cannot execute legacy Qwen leaf unchanged. Existing owner must add explicit Qwen dispatch and retain its history, descriptor lock, source/dependency checks, isolation, continuous resource monitoring and terminal descendant/result checks.",
+      "new_source_and_dependency_and_invocation_pins_must_be_bound_by_existing_owner": true,
+      "no_new_approval_or_lifecycle_framework_requested": true,
+      "passed_for_source_only_delivery": true,
+      "stdlib_top_level_no_cli_or_self_launch": true
+    },
+    "mapping_and_oracle": {
+      "correctness_mappings": 625,
+      "nki_kernel_and_wrapper_unchanged": true,
+      "original_torch_store_slots_retained": true,
+      "passed": true,
+      "profiles": [
+        "raw",
+        "finite"
+      ],
+      "semantics": "All {-1,0,1,2,3}^4 mappings in Cartesian order for each mode/variant/profile. Later update rows win duplicate destinations; -1 is inactive. Frozen raw/finite generator used through integer views. No arithmetic on payload in unchanged predicated kernel."
+    },
+    "persistent_alias": {
+      "actual_compiled_state_inspected": true,
+      "alias_output_index": 1,
+      "continuous_state_trajectory": true,
+      "exact_parameter_set_checked": true,
+      "expected_host_state_advances_only_after_all_checks_pass": true,
+      "independent_faults_rejected": [
+        "correct outputs with stale persistent state",
+        "new-state read instead of old-state snapshot",
+        "updates mutation",
+        "slots mutation",
+        "standalone cache input mutation",
+        "incorrect updated output",
+        "wrong output arity",
+        "persistent state not on required device",
+        "changed persistent parameter set"
+      ],
+      "limit": "Trace request specifies MUST_ALIAS semantics; actual compiler aliasing and BF16/FP32 device correctness remain unexecuted.",
+      "old_read_output_index": 0,
+      "passed": true,
+      "required_state_device": "privateuseone",
+      "reset_via_checked_actual_all_slot_call": true
+    },
+    "resources": {
+      "budget_fit_unmeasured": true,
+      "lfm_separate_54GiB_and_105_tasks_preserved": true,
+      "limits_cannot_be_relaxed_after_failure": true,
+      "own_40GiB_startup_requirement": "30 GiB reserve + 8 GiB total output budget + 2 GiB headroom; actual filesystem mapping remains owner responsibility.",
+      "passed": true,
+      "required_resources": {
+        "additional_headroom_bytes": 2147483648,
+        "cpus": 2,
+        "fresh_processes": 8,
+        "full_workload_initial_free_bytes": 42949672960,
+        "individual_model_artifact_cap_bytes": 134217728,
+        "interpreter": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "legacy_namespace": "neuronxcc.nki",
+        "lfm_separate_required_free_bytes_unchanged": 57982058496,
+        "max_graph_artifacts": 32,
+        "max_live_graphs": 2,
+        "memory_high_bytes": 5368709120,
+        "memory_max_bytes": 6442450944,
+        "nvme_floor_bytes": 32212254720,
+        "output_cap_bytes_per_layout": 1073741824,
+        "output_cap_bytes_total": 8589934592,
+        "output_volume_existing_free_reserve_bytes": 32212254720,
+        "report_cap_bytes_per_layout": 16777216,
+        "root_floor_bytes": 30064771072,
+        "swap_max_bytes": 0,
+        "timeout_seconds_per_layout": 900,
+        "timeout_seconds_total": 7200,
+        "torch_threads": 1,
+        "visible_core": "0"
+      },
+      "root_28GiB_and_nvme_30GiB_floors_unchanged": true
+    },
+    "schedule": {
+      "actual_loop_ast_projected": true,
+      "all_625_maps_verified_each_profile_mode_variant": true,
+      "both_profiles_complete_before_timing_per_mode": true,
+      "counts": {
+        "per_layout": {
+          "correctness_calls": 5000,
+          "graphs": 4,
+          "measured_calls": 640,
+          "reset_calls": 28,
+          "total_runtime_calls": 5796,
+          "warmup_calls": 128
+        },
+        "total": {
+          "correctness_calls": 40000,
+          "graphs": 32,
+          "measured_calls": 5120,
+          "reset_calls": 224,
+          "total_runtime_calls": 46368,
+          "warmup_calls": 1024
+        }
+      },
+      "max_live_graphs_source_schedule": 2,
+      "no_case_shrinking_or_failure_retry": true,
+      "passed": true,
+      "reference_candidate_input_descriptors_equal": true
+    },
+    "timing": {
+      "actual_ratio_measured": null,
+      "five_rounds_each_arm_first": true,
+      "measured_cycles_per_arm_mode": 10,
+      "passed": true,
+      "representative_mappings_per_cycle": 16,
+      "reset_and_transfer_boundaries_equal_within_each_mode": true,
+      "scope": "Synchronous host-call wall time: perf_counter_ns immediately before compiled invocation through detach().cpu().clone() for every returned tensor. Includes dispatch, input transfer, execution, output transfer and host copies. Guard, oracle, input construction, checks, persistent-state inspection, resets, compilation and report IO are outside the timer. A cycle is the sum of 16 separately timed calls with verification between calls. This is not device-only latency, uninterrupted throughput, TP2 or model speedup. A neutral wall-time result does not establish that the compiler already fuses the writer.",
+      "separate_mode_summaries": true,
+      "summary": "Median of ten paired cycle reference/candidate sums. Each cycle has sixteen separately timed calls with verification between them.",
+      "timer_excludes_guard_oracle_construction_checks_state_inspection_reset_compile_report": true,
+      "timer_includes_compiled_invocation_and_all_returned_output_host_materialization": true,
+      "warmup_cycles_per_arm_mode": 2
+    }
+  },
+  "frozen_original_sources": {
+    "probe_slot_cache_nki_read.py": "10756354372e6479c762c89e8c1e37007a613fca27e00246819aa4f7f97f5ddc",
+    "qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "qwen35_primitives.py": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf",
+    "qwen35_text_port.py": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34",
+    "slot_cache_nki_predicated.py": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e",
+    "slot_cache_nki_predicated_torch.py": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67"
+  },
+  "frozen_sources_modified": false,
+  "full_model_qualified": false,
+  "lock_acquired": false,
+  "manifest": {
+    "bytes": 50031,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-source-manifest-20261112-v1.json",
+    "sha256": "ceffd45b5b164b0cf129f546f60ab446a2f8d4782be24470b9dbb4b8570c1db9"
+  },
+  "model_weights_read": false,
+  "native_imports_performed_in_review": false,
+  "new_speedup_claim": false,
+  "reviewed_at": "2026-11-12T14:11:37.776003+00:00",
+  "reviewer": "/root/mini_formal_native_review_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_predicated_slot_primitive_independent_source_review_v1",
+  "serial_dispatcher_modified": false,
+  "services_launched": false,
+  "source_accepted": true,
+  "source_files": [
+    {
+      "bytes": 9103,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py",
+      "sha256": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4"
+    },
+    {
+      "bytes": 14270,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_device_leaf_v1.py",
+      "sha256": "fbee83e19a4aea6f3e69a7702afafda5a29e8390a64425e49b0a03db81007137"
+    },
+    {
+      "bytes": 10846,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/test_qwen35_predicated_slot_source_v1.py",
+      "sha256": "541f7521c3fb93cc4c5bf9fc7841c88a13a0ed8db3932f64bcf9938f0bd3c24e"
+    }
+  ],
+  "tests": [
+    {
+      "exit_code": 0,
+      "kind": "author_stdlib_source_and_mock_suite",
+      "passed": true,
+      "previously_completed_in_this_review": true,
+      "rerun_unnecessary_sources_unchanged": true,
+      "terminal_chunk": "abf8c2",
+      "tests": 16
+    },
+    {
+      "exit_code": 0,
+      "kind": "independent_actual_leaf_schedule_ast_projection",
+      "layouts_projected": 1,
+      "mock_calls": 5796,
+      "mock_graphs": 4,
+      "previously_completed_in_this_review": true,
+      "terminal_chunk": "3cc716"
+    },
+    {
+      "call_cases": 34,
+      "exit_code": 0,
+      "fault_rejections": 26,
+      "kind": "independent_actual_leaf_call_state_materialize_and_schedule_ast_projections",
+      "limits": "Tiny stdlib tensor/graph/oracle mocks and input descriptors only. Dtype labels exercise both validation paths but do not establish actual BF16/FP32 tensor, compiler or device behavior.",
+      "mock_explicit_calls": 46368,
+      "mock_graphs": 32,
+      "native_modules_loaded": [],
+      "result": {
+        "bytes": 9862,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-independent-source-check-results-20261112-v1.json",
+        "sha256": "2fda4fbab11774fa44a9ca7a53bd7db24b33643f63da5055c8a45e282c578eee"
+      },
+      "schedule_layouts": 8,
+      "script": {
+        "bytes": 10240,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_independent_source_checks_20261112_v1.py",
+        "sha256": "ada003bdb23a12619a38dfda328f0bfb3fb4cec84e7eb9bda92c6fe7d84d0c50"
+      },
+      "terminal_chunk": "c9efe3"
+    }
+  ],
+  "tokenizer_payloads_read": false
+}

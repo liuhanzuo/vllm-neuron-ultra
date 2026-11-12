@@ -1,0 +1,251 @@
+{
+  "controls": [
+    {
+      "control": "partial_explicit_generators",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "all_explicit_generators",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "k_absent",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "k_zero",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": [
+        "RuntimeError",
+        "index 256 is out of bounds for dimension 1 with size 256"
+      ],
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "k_above64",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "non_float32",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "invalid_p",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "processed_logits",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "processed_logprobs",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": true
+    },
+    {
+      "control": "excessive_kth_ties",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": false
+    },
+    {
+      "control": "nonfinite_max_or_kth",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": false
+    },
+    {
+      "control": "cdf_near_boundary",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": false
+    },
+    {
+      "control": "cdf_boundary_tie",
+      "passed": true,
+      "reference_calls": 1,
+      "reference_exception": null,
+      "token_and_rng_equal": true,
+      "whole_call": false
+    }
+  ],
+  "full_model_qualified": false,
+  "passed": true,
+  "timing_eligible": false,
+  "run_id": "f5e5b921-b793-4e1b-8431-e444c5e86dd0",
+  "arm": "shared",
+  "phase": "sampler_controls",
+  "returncode": 0,
+  "fresh_execution": true,
+  "actual_child_exit": {
+    "actual_popen_wait_observed": true,
+    "child_bootstrap_owner": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v12.py",
+        "--mode",
+        "leaf",
+        "--binding",
+        "/mnt/nvme/neuron-work/qw-r10-v12-20261112/shared-sampler_controls/phase-spec.json",
+        "--binding-sha256",
+        "7c2f16a5373ba833354a5c0637abf7f15bbff370492fa5058a2ed1b315a0cba2"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service",
+      "pid": 376534,
+      "ppid": 376367,
+      "start_ticks": "426975204"
+    },
+    "child_returncode": 0,
+    "observed_unix_ns": 1794489249885984874,
+    "phase_spec": {
+      "path": "/mnt/nvme/neuron-work/qw-r10-v12-20261112/shared-sampler_controls/phase-spec.json",
+      "sha256": "7c2f16a5373ba833354a5c0637abf7f15bbff370492fa5058a2ed1b315a0cba2"
+    },
+    "schema": "qwen35_sampler_actual_child_exit_v1",
+    "self_exit_claimed": false,
+    "stop_requested": false,
+    "supervisor": {
+      "process": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v12.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qw-r10-v12-20261112/shared-sampler_controls/phase-spec.json",
+          "--binding-sha256",
+          "7c2f16a5373ba833354a5c0637abf7f15bbff370492fa5058a2ed1b315a0cba2"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service",
+        "pid": 376367,
+        "ppid": 1583,
+        "start_ticks": "426975053"
+      },
+      "service_owner": {
+        "invocation_id": "34b96290e849432fad9b55ae61c195a2",
+        "pid": 376367,
+        "start_ticks": 426975053,
+        "unit": "trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls"
+      }
+    }
+  },
+  "actual_service_terminal": {
+    "server_owner": {
+      "unit": "trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls",
+      "pid": 376367,
+      "start_ticks": 426975053,
+      "invocation_id": "34b96290e849432fad9b55ae61c195a2"
+    },
+    "process_owner": {
+      "pid": 376367,
+      "start_ticks": "426975053",
+      "ppid": 1583,
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v12.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qw-r10-v12-20261112/shared-sampler_controls/phase-spec.json",
+        "--binding-sha256",
+        "7c2f16a5373ba833354a5c0637abf7f15bbff370492fa5058a2ed1b315a0cba2"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service"
+    },
+    "unacknowledged_terminal": null,
+    "exit_observed": true,
+    "systemd_exit_status": {
+      "ExecMainCode": 1,
+      "ExecMainStatus": 0,
+      "Result": "success"
+    },
+    "properties": {
+      "TimeoutStopUSec": "15s",
+      "RuntimeMaxUSec": "10min",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "ControlPID": "0",
+      "Result": "success",
+      "ExecMainPID": "376367",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0",
+      "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/hf HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILED_ARTIFACTS=/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-cache NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031 TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_COMPILE_THREADS=1 TRN1_COMPILE_WORKERS=1 TRN1_QWEN35_SPLIT_SHA256=1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d TRN1_QWEN35_TEXT_ADAPTER=1 XDG_RUNTIME_DIR=/run/user/1000 XLA_DISABLE_FUNCTIONALIZATION=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v12.py --mode supervisor --binding /mnt/nvme/neuron-work/qw-r10-v12-20261112/shared-sampler_controls/phase-spec.json --binding-sha256 7c2f16a5373ba833354a5c0637abf7f15bbff370492fa5058a2ed1b315a0cba2 ; ignore_errors=no ; start_time=[Thu 2026-11-12 13:14:02 UTC] ; stop_time=[Thu 2026-11-12 13:14:09 UTC] ; pid=376367 ; code=exited ; status=0 }",
+      "ControlGroup": "",
+      "MemoryHigh": "3221225472",
+      "MemoryMax": "4294967296",
+      "MemorySwapMax": "1073741824",
+      "TasksMax": "256",
+      "Environment": "",
+      "LimitFSIZE": "134217728",
+      "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "StandardOutput": "append",
+      "StandardError": "inherit",
+      "KillMode": "control-group",
+      "SendSIGKILL": "yes",
+      "Id": "trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service",
+      "BindsTo": "trn1-qwen35-sampler-r10-v12-20261112-coordinator.service",
+      "After": "app.slice basic.target trn1-qwen35-sampler-r10-v12-20261112-coordinator.service -.mount",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "exited",
+      "Job": "",
+      "InvocationID": "34b96290e849432fad9b55ae61c195a2",
+      "ExecStopPost": ""
+    },
+    "group_observations": [
+      {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service",
+        "absent": true
+      },
+      {
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r10-v12-20261112-shared-sampler-controls.service",
+        "absent": true
+      }
+    ],
+    "remaining_processes": [],
+    "cleanup_complete": true,
+    "observed_unix_ns": 1794489250093519542
+  }
+}

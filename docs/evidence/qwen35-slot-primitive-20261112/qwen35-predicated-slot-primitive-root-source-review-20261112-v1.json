@@ -1,0 +1,85 @@
+{
+  "schema": "qwen35_predicated_slot_primitive_root_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T14:14:30.970421+00:00",
+  "source_accepted": true,
+  "blockers": [],
+  "independent_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-independent-source-review-20261112-v1.json",
+    "sha256": "596bba286bab17d8f2ebd4294408f63ca82345fb161cde2a8d124fe0872f6abe"
+  },
+  "manifest": {
+    "bytes": 50031,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-source-manifest-20261112-v1.json",
+    "sha256": "ceffd45b5b164b0cf129f546f60ab446a2f8d4782be24470b9dbb4b8570c1db9"
+  },
+  "delivery": {
+    "bytes": 9480,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-primitive-source-delivery-20261112-v1.md",
+    "sha256": "88cd1a4d32fc733b677423ed1bfc6195785af7ba86deb54501ed722827237a93"
+  },
+  "source_files": [
+    {
+      "bytes": 9103,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py",
+      "sha256": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4"
+    },
+    {
+      "bytes": 14270,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_device_leaf_v1.py",
+      "sha256": "fbee83e19a4aea6f3e69a7702afafda5a29e8390a64425e49b0a03db81007137"
+    },
+    {
+      "bytes": 10846,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/test_qwen35_predicated_slot_source_v1.py",
+      "sha256": "541f7521c3fb93cc4c5bf9fc7841c88a13a0ed8db3932f64bcf9938f0bd3c24e"
+    }
+  ],
+  "frozen_original_sources": {
+    "probe_slot_cache_nki_read.py": "10756354372e6479c762c89e8c1e37007a613fca27e00246819aa4f7f97f5ddc",
+    "qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "qwen35_primitives.py": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf",
+    "qwen35_text_port.py": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34",
+    "slot_cache_nki_predicated.py": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e",
+    "slot_cache_nki_predicated_torch.py": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67"
+  },
+  "review_basis": "Root source inspection of primitive protocol, leaf, original store_slots and frozen array/kernel/wrapper plus independent final source review; all referenced source fingerprints reverified. Independent tests accepted without unnecessary repetition.",
+  "independent_fault_cases": 34,
+  "independent_fault_rejections": 26,
+  "author_source_mock_tests": 16,
+  "planned_layouts": 8,
+  "planned_graphs": 32,
+  "planned_runtime_calls": 46368,
+  "compatible_serial_dispatcher_ready": false,
+  "runtime_admitted": false,
+  "native_or_device_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "resource_requirements": {
+    "additional_headroom_bytes": 2147483648,
+    "cpus": 2,
+    "fresh_processes": 8,
+    "full_workload_initial_free_bytes": 42949672960,
+    "individual_model_artifact_cap_bytes": 134217728,
+    "interpreter": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+    "legacy_namespace": "neuronxcc.nki",
+    "lfm_separate_required_free_bytes_unchanged": 57982058496,
+    "max_graph_artifacts": 32,
+    "max_live_graphs": 2,
+    "memory_high_bytes": 5368709120,
+    "memory_max_bytes": 6442450944,
+    "nvme_floor_bytes": 32212254720,
+    "output_cap_bytes_per_layout": 1073741824,
+    "output_cap_bytes_total": 8589934592,
+    "output_volume_existing_free_reserve_bytes": 32212254720,
+    "report_cap_bytes_per_layout": 16777216,
+    "root_floor_bytes": 30064771072,
+    "swap_max_bytes": 0,
+    "timeout_seconds_per_layout": 900,
+    "timeout_seconds_total": 7200,
+    "torch_threads": 1,
+    "visible_core": "0"
+  },
+  "timing_scope": "Synchronous host-call wall time: perf_counter_ns immediately before compiled invocation through detach().cpu().clone() for every returned tensor. Includes dispatch, input transfer, execution, output transfer and host copies. Guard, oracle, input construction, checks, persistent-state inspection, resets, compilation and report IO are outside the timer. A cycle is the sum of 16 separately timed calls with verification between calls. This is not device-only latency, uninterrupted throughput, TP2 or model speedup. A neutral wall-time result does not establish that the compiler already fuses the writer.",
+  "remaining": "Integrate unchanged leaf with existing complete-history serial owner and real resource enforcement, then execute original complete primitive workload. Full-model gates remain separate and unchanged."
+}
