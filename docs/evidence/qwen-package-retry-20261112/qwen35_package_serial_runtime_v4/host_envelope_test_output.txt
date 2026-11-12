@@ -1,0 +1,43 @@
+test_every_other_production_source_is_byte_identical_and_run_only_relocated (__main__.HostCallSitePreservation) ... ok
+test_old_io_functions_including_raw_loaded_sources_and_storage_are_exact_ast (__main__.HostCallSitePreservation) ... ok
+test_only_three_host_reads_are_substituted_and_all_other_bodies_unchanged (__main__.HostCallSitePreservation) ... ok
+test_before_and_after_identity_difference_is_rejected (__main__.HostEnvelope) ... ok
+test_complete_envelope_read_and_hash_use_original_stable_reader (__main__.HostEnvelope) ... ok
+test_default_metadata_eight_mib_is_not_widened_even_for_special_path (__main__.HostEnvelope) ... ok
+test_exact_real_pin_is_literal_and_original_limits_stay_unchanged (__main__.HostEnvelope) ... ok
+test_ordinary_host_source_four_mib_limit_remains (__main__.HostEnvelope) ... ok
+test_path_alias_or_other_large_json_never_gets_envelope_cap (__main__.HostEnvelope) ... ok
+test_reader_changes_during_read_still_fail_original_raw (__main__.HostEnvelope) ... ok
+test_reader_returns_no_truncated_payload (__main__.HostEnvelope) ... ok
+test_same_size_changed_body_is_rejected_by_complete_digest (__main__.HostEnvelope) ... ok
+test_short_or_long_envelope_stat_rejected_before_reading (__main__.HostEnvelope) ... ok
+test_symlink_and_hardlink_still_rejected_by_original_identity (__main__.HostEnvelope) ... FAIL
+test_wrong_selected_sha_rejected_before_reading (__main__.HostEnvelope) ... ok
+
+======================================================================
+FAIL: test_symlink_and_hardlink_still_rejected_by_original_identity (__main__.HostEnvelope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/io.py", line 209, in observed_stat
+    try: other = peer.lstat()
+  File "/usr/lib/python3.10/pathlib.py", line 1222, in lstat
+    return self.stat(follow_symlinks=False)
+  File "/usr/lib/python3.10/pathlib.py", line 1097, in stat
+    return self._accessor.stat(self, follow_symlinks=follow_symlinks)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/tmplzrtht14/exact-inherited-envelope.json.publishing'
+
+During handling of the above exception, another exception occurred:
+
+ValueError: unexplained hardlink after publication
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/test_host_envelope.py", line 90, in test_symlink_and_hardlink_still_rejected_by_original_identity
+    with self.assertRaisesRegex(ValueError, 'singleton regular'): io.host_source_bytes(str(path), sha)
+AssertionError: "singleton regular" does not match "unexplained hardlink after publication"
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.375s
+
+FAILED (failures=1)

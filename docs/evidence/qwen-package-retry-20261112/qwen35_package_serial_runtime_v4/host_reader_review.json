@@ -1,0 +1,72 @@
+{
+  "actual_prepare_or_history_executed": false,
+  "binary_payloads_read": false,
+  "callsites": {
+    "adapter.py": {
+      "line": 149,
+      "source": {
+        "bytes": 48531,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/adapter.py",
+        "sha256": "aeb143472405ddcc3c1643a3c301da891e0f865c710a61154345aa0d9a687877"
+      }
+    },
+    "final_audit.py": {
+      "line": 106,
+      "source": {
+        "bytes": 8701,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/final_audit.py",
+        "sha256": "5eea09ef4608f499d7054090dbab11d45dc72c03fa88e3ab1e5a9108f696fcff"
+      }
+    },
+    "history.py": {
+      "line": 75,
+      "source": {
+        "bytes": 11618,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/history.py",
+        "sha256": "d6149377168a469b78c0c5ec9f0c9220fd2fee33ef12cfde53a0ee6c94fa721d"
+      }
+    }
+  },
+  "exact_host_envelope": {
+    "bytes": 8804235,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-20261112-spec-v12.json",
+    "sha256": "86a4c46dafcd3c16c74101caef26604af8e4b4041bcc3c6406faeab60d8d433f"
+  },
+  "helper_line": 68,
+  "helper_source": {
+    "bytes": 24539,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/io.py",
+    "sha256": "030e87c5ceb08a26616297333e0755a72c5c1441c5e59f3cc58e972f6f3210f6"
+  },
+  "identity_guarantees": [
+    "Exact expected SHA rejected before reading if mismatched",
+    "Original canonical singleton identity and exact stat size before raw read",
+    "Original raw O_NOFOLLOW open/fstat and full before/after identity retained",
+    "Complete byte count exactly 8,804,235 and final identity equality required",
+    "Full SHA256 over all returned bytes, no prefix/truncation or source projection"
+  ],
+  "lock_acquired": false,
+  "native_executed": false,
+  "ordinary_metadata_cap_bytes": 8388608,
+  "ordinary_source_cap_bytes": 4194304,
+  "original_envelope_cap_bytes": 67108864,
+  "reviewer": "/root/qwen_package_budget_review_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_exact_host_envelope_source_review_v1",
+  "source_only": true,
+  "trigger_reported_by_parent": {
+    "actual_history_reexecuted_by_this_author": false,
+    "exit_code": 1,
+    "location": "history.py:75 Bundle.resolve",
+    "reason": "4 MiB host source reader rejects exact inherited 8,804,235-byte r10 JSON",
+    "runtime": "v3",
+    "terminal_chunk": "05496f",
+    "tool_session": 14595
+  },
+  "unchanged_readers": {
+    "history_metadata_partition": "existing Metadata/sources classification unchanged",
+    "loaded_python_sources_and_torch_namespace": "io.loaded_local_sources retains original raw 4 MiB, no JSON exception",
+    "ordinary_host_source": "raw(path, 4 MiB), full SHA preserved",
+    "ordinary_metadata": "raw default 8 MiB unchanged"
+  }
+}

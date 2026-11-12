@@ -1,0 +1,110 @@
+{
+  "actual_history_executed": false,
+  "actual_preparation_invoked": false,
+  "all_frozen_predecessor_files_unchanged": true,
+  "author_helper_review": {
+    "bytes": 3023,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/host_reader_review.json",
+    "sha256": "ee85623edad809f9767296da0f8d88215bad904b6b6f5c0a44c164ec396b6119"
+  },
+  "author_validation_only": {
+    "actual_tool": {
+      "exit_code": 0,
+      "kind": "tool_call",
+      "terminal_chunk": "cc998e"
+    },
+    "classes": [
+      "LifecyclePreservation",
+      "FullSequenceMock"
+    ],
+    "note": "Author executed these17 unchanged lifecycle tests; reviewer independently ran the15 targeted helper/AST preservation tests. Do not conflate receipts.",
+    "tests": 17
+  },
+  "blockers": [],
+  "compiler_executed": false,
+  "current_binding_selected": false,
+  "device_executed": false,
+  "exact_exception": {
+    "bytes": 8804235,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-20261112-spec-v12.json",
+    "reader_cap": 67108864,
+    "sha256": "86a4c46dafcd3c16c74101caef26604af8e4b4041bcc3c6406faeab60d8d433f"
+  },
+  "findings": [
+    "The exception is bound to exactly one literal absolute path, expected SHA256 and exact8804235-byte size; wrong expected hash or size fails before raw reading.",
+    "Complete stable read uses unchanged raw and canonical singleton identity, O_NOFOLLOW/fstat, complete byte count, before/after identity and full SHA256; truncation, same-size byte changes, alias/symlink/hardlink and identity drift are rejected.",
+    "Other host sources still use4MiB. raw/read default8MiB and loaded-Python reader4MiB remain unchanged, including when called directly on the special path.",
+    "History.resolve, adapter.worker_bootstrap and external final_audit each replace only the host source reader with host_source_bytes(path,sha); their surrounding expected hashes, metadata and full-source checks remain.",
+    "Every original io function/class remains exact AST; contract/budget/service/readiness/wiring/init/source_files/example remain byte-identical; run.py changes only v3-to-v4 namespace.",
+    "Original complete History,25-stage scientific order, native-before-ACK barriers, resources, retained lock and descendant drain are unchanged; none was executed in this review.",
+    "The initial real metadata precheck failure remains failed in its original receipt; this source review establishes no successful actual retry."
+  ],
+  "full_model_qualified": false,
+  "independent_validation": [
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "2f2ee3"
+      },
+      "command": "python3 -I -B (stdlib unittest loader for qwen35_package_serial_runtime_v4/test_host_envelope.py)",
+      "name": "Exact helper and all production preservation checks",
+      "native_import_blocker": true,
+      "passed": true,
+      "synthetic_payloads_only": true,
+      "tests": 15
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "aec1dc"
+      },
+      "name": "Original saved metadata failure and exact envelope pin",
+      "result": "Read-only failure receipt and original historical JSON hash/size equal the new literal exception; no Bundle or actual History invoked."
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "4bf64c"
+      },
+      "name": "Frozen v4 delivery and25 member byte/hash verification"
+    }
+  ],
+  "launch_authorized": false,
+  "limits": [
+    "Passed applies only to this exact frozen source delivery. Root still performs its own source acceptance, exact new candidate binding, full actual History/physical precheck and original runtime stages.",
+    "This review only used source files, synthetic temporary JSON bytes and the explicitly named immutable historical JSON metadata; no current-state lookup or binary payload read.",
+    "No existing runtime or preparer source was modified by this reviewer.",
+    "Only source checks needed for the exact reader delta were rerun; no native execution or full-model performance is implied."
+  ],
+  "lock_acquired": false,
+  "model_tensor_packet_payload_read": false,
+  "native_executed": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T20:39:13.939791+00:00",
+  "ordinary_metadata_cap_bytes": 8388608,
+  "ordinary_source_cap_bytes": 4194304,
+  "passed": true,
+  "predecessor_files_independently_rechecked": {
+    "v1": 19,
+    "v2": 19,
+    "v3": 23
+  },
+  "reviewer": "/root/qwen_integer_matrix_successor_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_serial_runtime_independent_source_review_v4",
+  "services_launched": false,
+  "source_delivery": {
+    "bytes": 10696,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v4/source_delivery.json",
+    "sha256": "58e8c65df2c38f8e3b83632f2a1e09dd3477dfef9d726e9530d3a6efb73b92b0"
+  },
+  "source_only": true,
+  "trigger_failure": {
+    "bytes": 4115,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r1-root-precheck-failure-20261112-v1.json",
+    "sha256": "a032d87d58597e0c2f917d3e18c92982682f0b3c5ad5cdd4b88ed5fb7f398fbb"
+  }
+}

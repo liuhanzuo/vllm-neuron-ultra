@@ -1,0 +1,74 @@
+{
+  "binary_payload_read": false,
+  "complete_targeted_reader_results": [
+    {
+      "bytes": 10469465,
+      "full_sha_matches": true,
+      "passed": true,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-r1-pre-admission-complete-catalog-20261108-v1.json",
+      "sha256": "0d24c4eece03483119161b1566579afe63e659408bce329104c3d59438526e4d"
+    },
+    {
+      "bytes": 10480142,
+      "full_sha_matches": true,
+      "passed": true,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-r2-complete-catalog-20261108-v1.json",
+      "sha256": "d3941454ea1c95f4b79d96887ec9203b4a8261f0f14503d5a3e5a6f1e3842993"
+    },
+    {
+      "bytes": 10499861,
+      "full_sha_matches": true,
+      "passed": true,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-frame1-r3-complete-catalog-20261108-v1.json",
+      "sha256": "acc5534fb0ae86c73633ae159fd638fa3b6119c8782f551119c320ff877eebc1"
+    },
+    {
+      "bytes": 8804235,
+      "failure": {
+        "message": "Ordinary bounded metadata",
+        "type": "RuntimeError"
+      },
+      "passed": false,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-20261112-spec-v12.json",
+      "sha256": "86a4c46dafcd3c16c74101caef26604af8e4b4041bcc3c6406faeab60d8d433f"
+    }
+  ],
+  "diagnostic_false_assumptions": [
+    {
+      "actual_tool": {
+        "exit_code": 1,
+        "terminal_chunk": "031683"
+      },
+      "reason": "Stat-only scan did not account for exact old mini_history.CURRENT chain dispatch."
+    },
+    {
+      "actual_tool": {
+        "exit_code": 1,
+        "kind": "tool_session",
+        "session_id": 76590,
+        "terminal_chunk": "2f42f1"
+      },
+      "reason": "Classifier correctly retains three historical catalog text sources; they use literal mini_history dispatch, not metadata aliases. Actual original readers now exercised directly."
+    }
+  ],
+  "full_history_resolution_passed": false,
+  "host_reader_v4_passed": true,
+  "host_source": {
+    "bytes": 8804235,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-20261112-spec-v12.json",
+    "sha256": "86a4c46dafcd3c16c74101caef26604af8e4b4041bcc3c6406faeab60d8d433f"
+  },
+  "inherited_partition_reader_failure": {
+    "message": "Ordinary bounded metadata",
+    "type": "RuntimeError"
+  },
+  "native_executed": false,
+  "observed_at": "2026-11-12T20:55:22.823997+00:00",
+  "ordinary_partition_limit_bytes": 8388608,
+  "reviewer": "/root",
+  "schema": "qwen35_package_full_r2_exact_reader_diagnostic_v1",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r2-20261112-spec.json",
+    "sha256": "9f9b6f438c469c5bf4d3e28896f9f9c6f0f68549fc2d9d383047985ae49637d2"
+  }
+}
