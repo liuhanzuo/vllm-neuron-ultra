@@ -1,0 +1,484 @@
+--- minicpm5_formal_literal_budget_v1.py
++++ minicpm5_formal_literal_budget_v2.py
+@@ -4,8 +4,8 @@
+ original budget results are retained. No IO, runtime/native authority or guard
+ is supplied to the original two pure budget calculators; none is removed here.
+ """
+-from research import minicpm5_formal_literal_codec_v1 as codec
+-from research import minicpm5_formal_literal_result_v1 as result
++from research import minicpm5_formal_literal_codec_v2 as codec
++from research import minicpm5_formal_literal_result_v2 as result
+ 
+ 
+ def combined_budget(admission_wire, argv, literal, output_root):
+--- minicpm5_formal_literal_codec_v1.py
++++ minicpm5_formal_literal_codec_v2.py
+@@ -1,15 +1,15 @@
+ """Versioned, lossless references at fixed formal-import argv positions only.
+ 
+ No IO, native import, process action, authority or source substitution. The
+-literal is the unchanged, independently pinned v6 -c payload. In-memory owners
++literal is the unchanged, independently pinned v7 -c payload. In-memory owners
+ remain full owners. Wire hashes authenticate file bytes; expanded hashes bind
+ the complete original JSON object. This module never follows a file pointer.
+ """
+ import json
+-from research.minicpm5_sdk_mapping_nocache_entry_v6 import digest
+-
+-LITERAL = dict(path='/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v6.py',
+-               sha256='bbf5affece28e3d6356ce27d48ccdb7f4d707fbf6717808a69ca1f61222763d0', bytes=37178)
++from research.minicpm5_sdk_mapping_nocache_entry_v7 import digest
++
++LITERAL = dict(path='/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v7.py',
++               sha256='25eb3657d8d490b28ae605a0b65d6f5a4e12db29ec8f5b422642f01225c5b512', bytes=38218)
+ WIRE = '_minicpm5_literal_wire_v1'
+ NODE = '_minicpm5_literal_source_v1'
+ SCHEMA = 'minicpm5_formal_literal_boundary_v1'
+@@ -55,7 +55,7 @@
+     require(type(literal) is str, 'Actual complete -c literal string')
+     raw = literal.encode()
+     require(len(raw) == LITERAL['bytes'] and digest(raw, check) == LITERAL['sha256'],
+-            'Only unchanged pinned v6 bytes may replace argv[7]')
++            'Only unchanged pinned v7 bytes may replace argv[7]')
+     return raw
+ 
+ 
+@@ -120,7 +120,7 @@
+         require(value['lease']['outer_owner'] == value['lease']['initial_descriptor_proof']['owner'],
+                 'Original descriptor proof retains identical whole outer owner')
+         require(type(value['source_entry_plan']) is dict and value['source_entry_plan']['role'] == 'sdk310',
+-                'Unchanged inline SDK plan remains visible to frozen v6 stage0')
++                'Unchanged inline SDK plan remains visible to frozen v7 stage0')
+         return (('lease', 'outer_owner', 'argv'), ('lease', 'initial_descriptor_proof', 'owner', 'argv'))
+     if kind == 'owner':
+         _owner(value)
+@@ -160,7 +160,7 @@
+     python = '/home/ubuntu/venvs/model_reference_2026/bin/python' if role == 'outer312' else '/home/ubuntu/venvs/vllm_neuron/bin/python'
+     require(argv[0] == python and all(type(x) is str and '\0' not in x for i, x in enumerate(argv) if i != 7),
+             'Original role/interpreter and every actual nonliteral argument preserved')
+-    require(argv[7] == ({NODE: LITERAL} if packed else literal), 'Exact complete v6 literal at argv[7]')
++    require(argv[7] == ({NODE: LITERAL} if packed else literal), 'Exact complete v7 literal at argv[7]')
+ 
+ 
+ def encode(kind, value, literal, check=lambda: None):
+@@ -205,7 +205,7 @@
+ def adopt_entry_admission(entry):
+     """First SDK successor action, before guard construction or native history.
+ 
+-    Frozen v6 already authenticated the wire reference and selected the full
++    Frozen v7 already authenticated the wire reference and selected the full
+     inline SDK plan. Keep that actual file reference and replace only the
+     in-memory envelope with its fully verified original representation.
+     """
+--- minicpm5_formal_literal_result_v1.py
++++ minicpm5_formal_literal_result_v2.py
+@@ -4,7 +4,7 @@
+ explicitly distinguish an unavailable complete observer payload from a saved
+ one; they never manufacture a reference to a missing receipt.
+ """
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ SCHEMA = 'minicpm5_formal_literal_result_references_v1'
+ FAILED = 'minicpm5_formal_literal_result_unavailable_v1'
+--- minicpm5_sdk_mapping_nocache_launch_v3.py
++++ minicpm5_sdk_mapping_nocache_launch_v4.py
+@@ -1,6 +1,6 @@
+-"""Same actual complete v6 argv; admission hash names its versioned wire bytes."""
++"""Same actual complete v7 argv; admission hash names its versioned wire bytes."""
+ from research import minicpm5_sdk_mapping_nocache_launch_v1 as previous
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ require = previous.require
+ encoded = previous.encoded
+@@ -11,7 +11,7 @@
+ 
+ def admitted_sdk(entry_bytes, entry_ref, admission, admission_ref, outer_deadline):
+     reference(admission_ref)
+-    require(entry_ref == {key: codec.LITERAL[key] for key in ('path', 'sha256')}, 'Unchanged pinned v6 entry reference')
++    require(entry_ref == {key: codec.LITERAL[key] for key in ('path', 'sha256')}, 'Unchanged pinned v7 entry reference')
+     literal = entry_bytes.decode('utf-8')
+     raw = codec.encode('admission', admission, literal)
+     require(codec.digest(raw) == admission_ref['sha256'], 'Actual canonical wire admission SHA256')
+--- minicpm5_sdk_mapping_observed_adapter_v6.py
++++ minicpm5_sdk_mapping_observed_adapter_v7.py
+@@ -12,8 +12,8 @@
+ import signal
+ import time
+ import types
+-from research import minicpm5_sdk_mapping_observer_backend_v5 as backend
+-from research import minicpm5_sdk_mapping_observer_logic_v2 as logic
++from research import minicpm5_sdk_mapping_observer_backend_v6 as backend
++from research import minicpm5_sdk_mapping_observer_logic_v3 as logic
+ 
+ require = logic.require
+ FILES = backend.ORIGINAL_NAMES | backend.OBSERVER_NAMES
+--- minicpm5_sdk_mapping_observer_backend_v3.py
++++ minicpm5_sdk_mapping_observer_backend_v6.py
+@@ -1,15 +1,18 @@
+ """Original observer ports and Store semantics with three explicit wire encodings.
+ 
+-All native/wait operations are the frozen v2 implementations. Only persisted
+-admission, owner and exit representations change; full in-memory values do not.
++Native factory/wait operations retain the reviewed v4/v2 bodies. Persisted
++admission, owner and exit and full owner validation use the pinned v7 codec;
++full in-memory values do not change.
+ """
++import copy
+ from research import minicpm5_sdk_mapping_observer_backend_v2 as previous
+-from research import minicpm5_formal_literal_codec_v1 as codec
+-from research import minicpm5_formal_literal_result_v1 as literal_result
++from research import minicpm5_formal_literal_codec_v2 as codec
++from research import minicpm5_formal_literal_result_v2 as literal_result
++from research import minicpm5_formal_literal_budget_v2 as prepared
++from research import minicpm5_sdk_mapping_observer_logic_v3 as owner_logic
+ 
+ ORIGINAL_NAMES = previous.ORIGINAL_NAMES
+ OBSERVER_NAMES = previous.OBSERVER_NAMES
+-make_ports = previous.make_ports
+ logic = previous.logic
+ require = previous.require
+ 
+@@ -36,8 +39,7 @@
+             require(inventory['names'] == [], 'Reserve all original runtime artifacts before admission write')
+             raw, expected = self.prospective_admission(value)
+             require(reference == expected, 'Reservation binds actual proposed wire reference')
+-            budget = codec.future_runtime_budget(raw, argv, self.literal)
+-            budget.update(literal_result.future_stdout_budget(raw, argv, self.literal, str(self.root)))
++            budget = prepared.combined_budget(raw, argv, self.literal, str(self.root))
+             require(self.logical_metadata + budget['total_runtime_bound'] + logic.TRACE_CAP + logic.SUMMARY_CAP
+                     <= original.serial.CAPS['metadata_bytes'], 'Original complete metadata reservation')
+             # Preserve the original conservative 64KiB per-file allocation margin.
+@@ -78,3 +80,62 @@
+             return value, reference
+ 
+     return LiteralObserverStore
++
++
++# The native factory is the unchanged v4 body; only identity uses the v7 codec.
++original = previous
++CTYPES_ROOT, LIBC = original.CTYPES_ROOT, original.LIBC
++_load_ctypes, _load_os = original._load_ctypes, original._load_os
++_load_time, _load_signal = original._load_time, original._load_signal
++validate_authority_receipt = original.validate_authority_receipt
++
++
++def make_ports(child, owner, authority, guard, *, authenticate, verify_loaded_native,
++               inspect_owner, owned_group_members, ctypes_loader=_load_ctypes,
++               os_loader=_load_os, time_loader=_load_time, signal_loader=_load_signal):
++    """Future explicit entry, never called by preparation with real loaders.
++
++authenticate(authority, guard) must complete before ctypes (including ctypes'
++own PyDLL(None)) loads. verify_loaded_native must revalidate actual imported
++module origins/provider identities after import/CDLL and before any ptrace call.
++No CDLL(None), find_library, external command or native probing fallback exists.
++This factory never acquires the Popen wait lock. Before any ownership transfer,
++the caller must persistently bind the returned object and then explicitly call
++begin_wait_handoff(). All factory failure/return/assignment windows therefore
++remain before handoff and SEIZE, with ordinary original cleanup still available.
++"""
++    require(authority is not None and callable(authenticate) and callable(verify_loaded_native),
++            'explicit_native_authority_and_verifiers_required')
++    guard(); receipt = authenticate(copy.deepcopy(authority), guard)
++    validate_authority_receipt(receipt, authority)
++    guard(); ctypes = ctypes_loader()
++    require(ctypes.__file__ == CTYPES_ROOT+'/__init__.py', 'exact_ctypes_origin')
++    require(ctypes.sizeof(ctypes.c_int) == 4 and ctypes.sizeof(ctypes.c_long) == 8
++            and ctypes.sizeof(ctypes.c_ulong) == 8 and ctypes.sizeof(ctypes.c_void_p) == 8,
++            'exact_linux_x86_64_lp64_ffi_sizes')
++    libc = ctypes.CDLL(receipt['libc_path'], use_errno=True)
++    require(libc._name == LIBC, 'exact_libc_handle_request')
++    require(verify_loaded_native(ctypes, libc, copy.deepcopy(receipt), guard) is True,
++            'loaded_native_provider_verification_required')
++    guard()
++    ptrace = libc.ptrace
++    ptrace.restype = ctypes.c_long
++    ptrace.argtypes = [ctypes.c_int, ctypes.c_int, ctypes.c_void_p, ctypes.c_void_p]
++    os_api, time_api = os_loader(), time_loader()
++    require(child.pid == owner['pid'] and child.returncode is None
++            and inspect_owner(child.pid) == owner, 'exact_original_direct_child_before_handoff')
++    require(child.stdin is not None and not child.stdin.closed, 'original_open_stdin_gate')
++    fd = child.stdin.fileno()
++    os_api.set_blocking(fd, False)
++    return NativePorts(child, owner, authority, receipt, ctypes, libc, ptrace,
++                       os_api, time_api, inspect_owner, owned_group_members, fd,
++                       signal_loader())
++
++
++class NativePorts(original.NativePorts):
++    def identity(self, tid):
++        self._known(tid)
++        actual = self.inspect_owner(tid)
++        if self.known[tid] is None and actual is not None:
++            self.known[tid] = owner_logic.valid_owner(actual, tid)
++        return copy.deepcopy(actual)
+--- minicpm5_sdk_mapping_observer_logic_v2.py
++++ minicpm5_sdk_mapping_observer_logic_v3.py
+@@ -6,7 +6,7 @@
+ """
+ import copy
+ from research import minicpm5_sdk_mapping_observer_logic_v1 as previous
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ require, encoded, ObservationError = previous.require, previous.encoded, previous.ObservationError
+ LIMITS, CAPS = previous.LIMITS, previous.CAPS
+--- minicpm5_sdk_mapping_outer_source_entry_v10.py
++++ minicpm5_sdk_mapping_outer_source_entry_v11.py
+@@ -12,10 +12,10 @@
+ from research import minicpm5_sdk_mapping_bootstrap_descriptor_v4 as descriptor
+ from research import minicpm5_sdk_mapping_history_gate_v1 as history
+ from research import minicpm5_sdk_mapping_native_authenticator_v3 as native
+-from research import minicpm5_sdk_mapping_source_adapter_v4 as adapter
+-from research import minicpm5_sdk_mapping_nocache_launch_v3 as launch
+-from research import minicpm5_formal_literal_result_v1 as literal_result
+-from research import minicpm5_formal_literal_codec_v1 as literal_codec
++from research import minicpm5_sdk_mapping_source_adapter_v5 as adapter
++from research import minicpm5_sdk_mapping_nocache_launch_v4 as launch
++from research import minicpm5_formal_literal_result_v2 as literal_result
++from research import minicpm5_formal_literal_codec_v2 as literal_codec
+ from research import minicpm5_fixed_input_pv_catalog_auth_v2 as catalog_auth
+ 
+ require=descriptor.require
+@@ -152,8 +152,8 @@
+             worker_plan=metadata.read(spec['sdk_entry_template'])
+             launch.separate_authorities(entry.plan,worker_plan)
+             require(worker_plan['successor_input']=='admission:self'
+-                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v6'
+-                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v6.py')
++                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v7'
++                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v7.py')
+                 and all(pins.get(path)==sha for path,sha in worker_plan['bootstrap_sources'].items()),
+                 'Exact separately reviewed SDK310 worker source closure')
+             entry_raw,_=authenticator.reader.read(spec['sdk_entry_source'],65535)
+--- minicpm5_sdk_mapping_source_adapter_v4.py
++++ minicpm5_sdk_mapping_source_adapter_v5.py
+@@ -8,9 +8,9 @@
+ import sys
+ from pathlib import Path
+ import time
+-from research import minicpm5_sdk_mapping_observed_adapter_v6 as observed
+-from research import minicpm5_sdk_mapping_nocache_launch_v3 as launch
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_sdk_mapping_observed_adapter_v7 as observed
++from research import minicpm5_sdk_mapping_nocache_launch_v4 as launch
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ 
+ def make_adapter_class(original):
+--- minicpm5_sdk_mapping_worker_source_entry_v6.py
++++ minicpm5_sdk_mapping_worker_source_entry_v7.py
+@@ -12,8 +12,8 @@
+ import stat
+ from research import minicpm5_sdk_mapping_worker_guard_v2 as startup
+ from research import minicpm5_sdk_mapping_worker_native_v4 as native
+-from research import minicpm5_sdk_mapping_nocache_launch_v3 as launch
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_sdk_mapping_nocache_launch_v4 as launch
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ require=startup.require
+ 
+--- minicpm5_sdk_mapping_nocache_entry_v6.py
++++ minicpm5_sdk_mapping_nocache_entry_v7.py
+@@ -74,6 +74,20 @@
+     return ''.join('%08x' % value for value in h)
+ 
+ 
++def repeated_digest_checks(raw, check):
++    """Retain every guard checkpoint of the removed same-bytes receipt hash.
++
++    Only the immediate SourceLoader call uses this after _read_source_verified
++    completed the full original SHA256. There is no cross-read state or cache.
++    SHA padding determines the same offset-zero, every-4096 and final checks.
++    """
++    require(type(raw) is bytes and len(raw) <= 2 * SOURCE_TOTAL_CAP, 'Bounded digest bytes')
++    padded_bytes = len(raw) + 1 + ((55 - len(raw)) % 64) + 8
++    for offset in range(0, padded_bytes, 4096):
++        check()
++    check()
++
++
+ class SystemPorts:
+     """Concrete operations, never called by the source-only test suite."""
+     def now(self): return time.monotonic()
+@@ -269,6 +283,12 @@
+         return (dev.st_dev, dev.st_ino, dev.st_mode, null.st_dev, null.st_ino, null.st_mode, null.st_rdev)
+ 
+     def read_source(self, path, sha, cap=SOURCE_CAP):
++        """Preserve the original two-value API for every other caller."""
++        raw, fields, verified_sha = self._read_source_verified(path, sha, cap)
++        return raw, fields
++
++    def _read_source_verified(self, path, sha, cap=SOURCE_CAP):
++        """Fresh full read, identity/EOF checks and first complete digest."""
+         self.check()
+         require(canonical(path) and type(sha) is str and len(sha)==64
+                 and all(c in '0123456789abcdef' for c in sha), 'Exact source/plan path and SHA256')
+@@ -300,8 +320,9 @@
+         finally:
+             self.ports.close(fd)
+         raw = bytes(data)
+-        require(digest(raw, self.check)==sha, 'Executed source bytes match reviewed SHA256')
+-        return raw, fields
++        verified_sha = digest(raw, self.check)
++        require(verified_sha==sha, 'Executed source bytes match reviewed SHA256')
++        return raw, fields, verified_sha
+ 
+     def startup(self, source_literal):
+         """Validate actual -c argv before decoding any external JSON/module."""
+@@ -360,11 +381,12 @@
+             def get_code(self, name):
+                 try:
+                     entry.check()
+-                    raw, fields=entry.read_source(self.path,entry.plan['bootstrap_sources'][self.path])
++                    raw, fields, verified_sha=entry._read_source_verified(self.path,entry.plan['bootstrap_sources'][self.path])
+                     entry.source_bytes+=len(raw)
+                     require(entry.source_bytes<=SOURCE_TOTAL_CAP, 'Bounded total bootstrap source bytes')
+                     code=compile(raw,self.path,'exec',dont_inherit=True,optimize=0)
+-                    entry.sources[self.path]=dict(sha256=digest(raw,entry.check),bytes=len(raw),identity=fields)
++                    repeated_digest_checks(raw,entry.check)
++                    entry.sources[self.path]=dict(sha256=verified_sha,bytes=len(raw),identity=fields)
+                     return code
+                 except BaseException as error:
+                     entry.fail(error)
+--- prepare_minicpm5_literal_formal_binding_v1.py
++++ prepare_minicpm5_literal_formal_binding_v2.py
+@@ -10,20 +10,23 @@
+ from pathlib import Path
+ 
+ from research import prepare_minicpm5_observed_formal_binding_v1 as previous
+-from research import minicpm5_sdk_mapping_nocache_launch_v3 as launch
+-from research import minicpm5_formal_literal_codec_v1 as codec
++from research import minicpm5_sdk_mapping_nocache_launch_v4 as launch
++from research import minicpm5_formal_literal_codec_v2 as codec
+ 
+ Q, require = previous.Q, previous.require
+-SELF = str(Q / 'prepare_minicpm5_literal_formal_binding_v1.py')
++SELF = str(Q / 'prepare_minicpm5_literal_formal_binding_v2.py')
+ RUNTIME = (
+-    'minicpm5_formal_literal_codec_v1.py',
+-    'minicpm5_formal_literal_result_v1.py',
+-    'minicpm5_sdk_mapping_observer_backend_v3.py',
+-    'minicpm5_sdk_mapping_observed_adapter_v4.py',
+-    'minicpm5_sdk_mapping_source_adapter_v2.py',
+-    'minicpm5_sdk_mapping_nocache_launch_v3.py',
+-    'minicpm5_sdk_mapping_outer_source_entry_v6.py',
+-    'minicpm5_sdk_mapping_worker_source_entry_v6.py',
++    'minicpm5_sdk_mapping_nocache_entry_v7.py',
++    'minicpm5_formal_literal_codec_v2.py',
++    'minicpm5_formal_literal_result_v2.py',
++    'minicpm5_formal_literal_budget_v2.py',
++    'minicpm5_sdk_mapping_observer_backend_v6.py',
++    'minicpm5_sdk_mapping_observer_logic_v3.py',
++    'minicpm5_sdk_mapping_observed_adapter_v7.py',
++    'minicpm5_sdk_mapping_source_adapter_v5.py',
++    'minicpm5_sdk_mapping_nocache_launch_v4.py',
++    'minicpm5_sdk_mapping_outer_source_entry_v11.py',
++    'minicpm5_sdk_mapping_worker_source_entry_v7.py',
+ )
+ 
+ 
+@@ -34,24 +37,46 @@
+     require(hashlib.sha256(text(SELF, preparation_source['sha256'])).hexdigest() == preparation_source['sha256'],
+             'Current entire new preparer equals caller source pin')
+     delivery = read(literal_source_manifest)
+-    require(delivery['schema'] == 'minicpm5_formal_literal_source_delivery_v1', 'Exact frozen literal source delivery')
++    require(delivery['schema'] == 'minicpm5_formal_literal_source_delivery_v2', 'Exact frozen literal source delivery')
+     rows = delivery['runtime_source_files']
+     require(type(rows) is list and len(rows) == len(RUNTIME)
+             and {row['path'] for row in rows} == {str(Q / name) for name in RUNTIME},
+-            'Exactly eight explicitly delivered runtime sources')
+-    runtime = {}
++            'Exactly eleven explicitly delivered runtime sources')
++    # Preserve the complete paired predecessor closure, including later root
++    # additions absent from the old assembler's original source manifest.
++    plans = delivery['retained_bootstrap_plans']
++    require(type(plans) is dict and set(plans) == {'outer312', 'sdk310'},
++            'Exact saved complete paired bootstrap references')
++    retained = None
++    for role in ('outer312', 'sdk310'):
++        launch.reference(plans[role])
++        plan = read(plans[role])
++        require(plan['schema'] == 'minicpm5_source_entry_plan_v1' and plan['role'] == role,
++                'Original role-specific source plan')
++        pins = plan['bootstrap_sources']
++        require(type(pins) is dict and len(pins) == 172,
++                'Complete original r5 bootstrap domain, never an import subset')
++        require(retained is None or retained == pins, 'Both original complete bootstrap maps agree')
++        retained = dict(pins)
++    for path, sha in retained.items():
++        codec.reference(dict(path=path, sha256=sha))
++        require(path.startswith(str(Q.parent) + '/') and path.endswith('.py'),
++                'Only original pinned local Python bootstrap sources')
++        require(hashlib.sha256(text(path, sha)).hexdigest() == sha,
++                'Every retained bootstrap source matches its original complete pin')
++    runtime = dict(retained)
+     for row in rows:
+         codec.reference(row)
+         require(row in delivery['source_files'], 'Runtime file is also in complete delivered source list')
+         raw = text(row['path'], row['sha256'])
+         require(type(raw) is bytes and len(raw) == row['bytes'] and hashlib.sha256(raw).hexdigest() == row['sha256'],
+                 'Each complete frozen runtime source remains unchanged')
+-        runtime[row['path']] = row['sha256']
++        runtime = previous.merge(runtime, {row['path']: row['sha256']})
+     return runtime, previous.merge(runtime, {SELF: preparation_source['sha256']})
+ 
+ 
+ def prepare(request, *, literal_source_manifest, preparation_source, read, text, guard, original):
+-    """Reuse original prepare/reconstruct/merged_plan unchanged, then wire v6.
++    """Reuse original prepare/reconstruct/merged_plan unchanged, then wire v7.
+ 
+     No accepted inputs are generated here. The caller retains the original
+     responsibility for importing the ordinary historical preparer correctly.
+@@ -86,11 +111,12 @@
+     runtime, extra = source_additions(literal_source_manifest, preparation_source, read=read, text=text)
+     pins = full['source_sha256']
+     require(all(pins.get(path) == sha and candidate['pv_spec_candidate']['source_extension'].get(path) == sha
+-                for path, sha in extra.items()), 'Original preparation must already include all nine source additions')
+-    require(pins.get(codec.LITERAL['path']) == codec.LITERAL['sha256'], 'Same unchanged complete v6 literal source pin')
++                for path, sha in extra.items()), 'Original preparation must already include all retained and new source additions')
++    require(pins.get(codec.LITERAL['path']) == codec.LITERAL['sha256'], 'Exact independently reviewed v7 literal source pin')
+     literal = text(codec.LITERAL['path'], codec.LITERAL['sha256'])
+     codec.literal_bytes(literal.decode('utf-8'))
+     result = previous.assemble(request, candidate, full, read=read, text=text)
++    result['entry_source'] = {key: codec.LITERAL[key] for key in ('path', 'sha256')}
+     artifacts = result['artifacts']
+     old_bootstrap = artifacts['outer-entry-plan']['value']['bootstrap_sources']
+     require(old_bootstrap == artifacts['sdk-entry-template']['value']['bootstrap_sources']
+@@ -108,25 +134,26 @@
+         return copy.deepcopy(row['reference'])
+ 
+     sdk = copy.deepcopy(artifacts['sdk-entry-template']['value'])
+-    sdk.update(bootstrap_sources=copy.deepcopy(bootstrap),
+-        entry_module='research.minicpm5_sdk_mapping_worker_source_entry_v6',
+-        entry_path=str(Q / 'minicpm5_sdk_mapping_worker_source_entry_v6.py'))
++    sdk.update(bootstrap_sources=copy.deepcopy(bootstrap), entry_sha256=codec.LITERAL['sha256'],
++        entry_module='research.minicpm5_sdk_mapping_worker_source_entry_v7',
++        entry_path=str(Q / 'minicpm5_sdk_mapping_worker_source_entry_v7.py'))
+     sdk_ref = replace('sdk-entry-template', sdk)
+     spec = copy.deepcopy(artifacts['outer-spec']['value'])
+-    spec.update(sdk_entry_template=sdk_ref, source_extension=copy.deepcopy(bootstrap))
++    spec.update(sdk_entry_template=sdk_ref, sdk_entry_source=copy.deepcopy(result['entry_source']),
++        source_extension=copy.deepcopy(bootstrap))
+     spec_ref = replace('outer-spec', spec)
+     review = copy.deepcopy(artifacts['outer-review-draft']['value'])
+     review.update(spec=spec_ref, source_extension=copy.deepcopy(bootstrap))
+     review_ref = replace('outer-review-draft', review)
+     outer = copy.deepcopy(artifacts['outer-entry-plan']['value'])
+-    outer.update(bootstrap_sources=copy.deepcopy(bootstrap),
+-        entry_module='research.minicpm5_sdk_mapping_outer_source_entry_v6',
+-        entry_path=str(Q / 'minicpm5_sdk_mapping_outer_source_entry_v6.py'),
++    outer.update(bootstrap_sources=copy.deepcopy(bootstrap), entry_sha256=codec.LITERAL['sha256'],
++        entry_module='research.minicpm5_sdk_mapping_outer_source_entry_v11',
++        entry_path=str(Q / 'minicpm5_sdk_mapping_outer_source_entry_v11.py'),
+         successor_input=json.dumps(dict(spec=spec_ref, review=review_ref), sort_keys=True, separators=(',', ':')))
+     result['outer_entry_plan'] = replace('outer-entry-plan', outer)
+     launch.separate_authorities(outer, sdk)
+     argv = launch.launch(literal, result['entry_source'], outer, result['outer_entry_plan'])
+-    require(argv[7] == literal.decode('utf-8') and argv[13] == codec.LITERAL['sha256'], 'Actual complete original literal argv')
++    require(argv[7] == literal.decode('utf-8') and argv[13] == codec.LITERAL['sha256'], 'Actual complete reviewed v7 literal argv')
+     result.update(literal_boundary_source_manifest=copy.deepcopy(literal_source_manifest),
+         literal_boundary_preparation_source=copy.deepcopy(preparation_source),
+         literal_boundary_runtime_source_sha256=runtime)

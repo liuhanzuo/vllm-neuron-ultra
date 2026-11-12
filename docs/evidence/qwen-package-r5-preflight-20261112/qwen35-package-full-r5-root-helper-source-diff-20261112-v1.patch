@@ -1,0 +1,285 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/accept_qwen35_package_full_root_r4_20261112_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/accept_qwen35_package_full_root_r5_20261112_v1.py
+@@ -1,4 +1,4 @@
+-"""Root r4 exact package acceptance; original complete History and 874-child verification retained.
++"""Root r5 exact package acceptance; original complete History and 874-child verification retained.
+ 
+ Import and --help perform no preparation, History, lock or native work.
+ """
+@@ -7,7 +7,7 @@
+ import re
+ 
+ R = Path('/home/ubuntu/experiments/trn1-latest-models-20261031'); Q = R / 'research'
+-EXACT_REFS = {'catalog': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v114.json', '003ec06ce8bc145e3325a4e2685110bb9a6c4a1d4d4568b3bc4ff2bc2e3e6e84'), 'idle': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v587-qwen-package-prepare-import-failed.json', '0449a5e637641a8f5839ea21240aa331ed1a49bd2962b5ff5410776ba8426c40'), 'runtime-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v6-root-source-review-20261112-v1.json', None), 'preparer-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v5-root-source-review-20261112-v1.json', None), 'budget': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-resource-budget.json', None), 'candidate': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-binding-candidate.json', None)}
++EXACT_REFS = {'catalog': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v115.json', '5250dce2109a6e420c91d358cd0b52ec9386604f16c7e4e85e0e3c86f2a768f2'), 'idle': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v589-qwen-package-compiler-link-failed.json', '6f4087a133ae962d4cd9fbd761edfc8ff23cad91df28d03605de4200f4761556'), 'runtime-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v7-root-source-review-20261112-v1.json', None), 'preparer-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v6-root-source-review-20261112-v1.json', None), 'budget': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-resource-budget.json', None), 'candidate': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-binding-candidate.json', None)}
+ 
+ def parser():
+     value = argparse.ArgumentParser(description=__doc__)
+@@ -23,9 +23,9 @@
+         path = getattr(args, name.replace('-', '_'))
+         sha = getattr(args, name.replace('-', '_') + '_sha256')
+         if path != expected_path or type(sha) is not str or re.fullmatch('[a-f0-9]{64}', sha) is None:
+-            raise ValueError('exact r4 reference required: ' + name)
++            raise ValueError('exact r5 reference required: ' + name)
+         if fixed_sha is not None and sha != fixed_sha:
+-            raise ValueError('frozen r4 prerequisite digest changed: ' + name)
++            raise ValueError('frozen r5 prerequisite digest changed: ' + name)
+         result[name] = dict(path=path, sha256=sha)
+     return result
+ 
+@@ -45,8 +45,8 @@
+     assert sys.dont_write_bytecode and __debug__
+     resource.setrlimit(resource.RLIMIT_AS, (2 * 2**30, 2 * 2**30))
+     resource.setrlimit(resource.RLIMIT_CPU, (600, 605)); signal.alarm(600)
+-    from qwen35_package_serial_runtime_v6 import contract, io, budget
+-    from qwen35_package_serial_runtime_v6.history import Bundle
++    from qwen35_package_serial_runtime_v7 import contract, io, budget
++    from qwen35_package_serial_runtime_v7.history import Bundle
+     from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+ 
+     candidate_ref = refs['candidate']
+@@ -54,15 +54,15 @@
+     assert not candidate['passed'] and not candidate['launch_authorized']
+     assert candidate['catalog'] == refs['catalog'] and candidate['idle_handoff'] == refs['idle']
+     assert candidate['runtime_source_review'] == refs['runtime-review'] and candidate['preparer_source_review'] == refs['preparer-review']
+-    assert candidate['review_path'] == str(Q / 'qwen35-package-full-r4-20261112-review.json')
+-    assert candidate['spec_ref']['path'] == str(Q / 'qwen35-package-full-r4-20261112-spec.json')
+-    assert candidate['review_draft_ref']['path'] == str(Q / 'qwen35-package-full-r4-20261112-review-draft.json')
++    assert candidate['review_path'] == str(Q / 'qwen35-package-full-r5-20261112-review.json')
++    assert candidate['spec_ref']['path'] == str(Q / 'qwen35-package-full-r5-20261112-spec.json')
++    assert candidate['review_draft_ref']['path'] == str(Q / 'qwen35-package-full-r5-20261112-review-draft.json')
+     assert io.read(candidate['runtime_source_review'])['passed']
+     assert io.read(candidate['preparer_source_review'])['source_accepted']
+     spec_ref = candidate['spec_ref']; spec = io.read(spec_ref, 64 * 2**20)
+-    assert spec['run_name'] == 'pkg-r4-20261112' and spec['output_root'] == '/mnt/nvme/neuron-work/qwp-pkg-r4-20261112'
++    assert spec['run_name'] == 'pkg-r5-20261112' and spec['output_root'] == '/mnt/nvme/neuron-work/qwp-pkg-r5-20261112'
+     assert spec['resource_budget'] == refs['budget']
+-    assert spec['running_handoff_path'] == str(Q / 'continuation-handoff-20261112-v588-qwen35-package-full-r4-running.json')
++    assert spec['running_handoff_path'] == str(Q / 'continuation-handoff-20261112-v590-qwen35-package-full-r5-running.json')
+     catalog = io.read(spec['current_serial_catalog']); idle = io.read(catalog['current_handoff'])
+     assert spec['current_serial_catalog'] == candidate['catalog'] and catalog['current_handoff'] == candidate['idle_handoff']
+     assert not idle['running'] and idle['active_serial'] is None and idle['active_heavy_units'] == idle['live_tool_sessions'] == []
+@@ -97,7 +97,7 @@
+         assert len(bound.supplement['scope']['children']) == 874
+         io.loaded_local_sources(spec['source_sha256']); resources = io.resources(spec, reserve=True)
+         assert latest.latest_handoff() == tip
+-        result = io.once(Q / 'qwen35-package-full-r4-root-binding-20261112-v1.json', dict(
++        result = io.once(Q / 'qwen35-package-full-r5-root-binding-20261112-v1.json', dict(
+             schema='qwen35_package_full_root_concrete_binding_v1', reviewer='/root', passed=True,
+             observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(), candidate=candidate_ref,
+             spec=spec_ref, review=review_ref, history_overlay=spec['history_overlay'],
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/ack_qwen35_package_full_r4_root_20261112_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/ack_qwen35_package_full_r5_root_20261112_v1.py
+@@ -7,7 +7,7 @@
+ 
+ R=Path('/home/ubuntu/experiments/trn1-latest-models-20261031'); Q=R/'research'
+ sys.path[:0]=[str(Q),str(R)]
+-from qwen35_package_serial_runtime_v6 import io, contract, adapter, history
++from qwen35_package_serial_runtime_v7 import io, contract, adapter, history
+ from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+ 
+ def main():
+@@ -16,7 +16,7 @@
+     parser.add_argument('--session-id',type=int,required=True)
+     parser.add_argument('--binding-sha256',required=True)
+     args=parser.parse_args(); assert args.session_id>0
+-    binding_ref=dict(path=str(Q/'qwen35-package-full-r4-root-binding-20261112-v1.json'),sha256=args.binding_sha256)
++    binding_ref=dict(path=str(Q/'qwen35-package-full-r5-root-binding-20261112-v1.json'),sha256=args.binding_sha256)
+     binding=io.read(binding_ref)
+     assert binding['passed'] and binding['full_source_history_resolution_passed']
+     spec=io.read(binding['spec'],64*2**20)
+@@ -36,7 +36,7 @@
+     now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+     running=history.expected_running(previous,now,tool,admission_ref,admission,owner_ref,owner)
+     running_ref=io.once(spec['running_handoff_path'],running)
+-    live_ref=io.once(Q/'qwen35-package-full-r4-root-live-20261112-v1.json',dict(
++    live_ref=io.once(Q/'qwen35-package-full-r5-root-live-20261112-v1.json',dict(
+         schema='qwen35_package_full_root_live_v1',reviewer='/root',observed_at=now,
+         actual_tool=tool,root_binding=binding_ref,outer_owner=admission['outer_owner'],
+         coordinator_owner=owner_ref,running_handoff=running_ref,descriptor_proof=descriptor,
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_full_root_r4_20261112_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_full_root_r5_20261112_v1.py
+@@ -1,4 +1,4 @@
+-"""Root r4 metadata-only publication using frozen runtime v6 and preparer v5.
++"""Root r5 metadata-only publication using frozen runtime v7 and preparer v6.
+ 
+ Import and --help perform no preparation, History, lock or native work.
+ """
+@@ -7,7 +7,7 @@
+ import re
+ 
+ R = Path('/home/ubuntu/experiments/trn1-latest-models-20261031'); Q = R / 'research'
+-EXACT_REFS = {'catalog': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v114.json', '003ec06ce8bc145e3325a4e2685110bb9a6c4a1d4d4568b3bc4ff2bc2e3e6e84'), 'idle': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v587-qwen-package-prepare-import-failed.json', '0449a5e637641a8f5839ea21240aa331ed1a49bd2962b5ff5410776ba8426c40'), 'runtime-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v6-root-source-review-20261112-v1.json', None), 'preparer-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v5-root-source-review-20261112-v1.json', None), 'stat-inputs': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-stat-inputs.json', None), 'budget': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-resource-budget.json', None)}
++EXACT_REFS = {'catalog': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v115.json', '5250dce2109a6e420c91d358cd0b52ec9386604f16c7e4e85e0e3c86f2a768f2'), 'idle': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v589-qwen-package-compiler-link-failed.json', '6f4087a133ae962d4cd9fbd761edfc8ff23cad91df28d03605de4200f4761556'), 'runtime-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v7-root-source-review-20261112-v1.json', None), 'preparer-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v6-root-source-review-20261112-v1.json', None), 'stat-inputs': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-stat-inputs.json', None), 'budget': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-resource-budget.json', None)}
+ 
+ def parser():
+     value = argparse.ArgumentParser(description=__doc__)
+@@ -23,9 +23,9 @@
+         path = getattr(args, name.replace('-', '_'))
+         sha = getattr(args, name.replace('-', '_') + '_sha256')
+         if path != expected_path or type(sha) is not str or re.fullmatch('[a-f0-9]{64}', sha) is None:
+-            raise ValueError('exact r4 reference required: ' + name)
++            raise ValueError('exact r5 reference required: ' + name)
+         if fixed_sha is not None and sha != fixed_sha:
+-            raise ValueError('frozen r4 prerequisite digest changed: ' + name)
++            raise ValueError('frozen r5 prerequisite digest changed: ' + name)
+         result[name] = dict(path=path, sha256=sha)
+     return result
+ 
+@@ -40,8 +40,8 @@
+ 
+     sys.path[:0] = [str(Q), str(R)]
+     assert sys.dont_write_bytecode and __debug__
+-    import prepare_qwen35_package_serial_candidate_v5 as prep
+-    from qwen35_package_serial_runtime_v6 import contract, io, budget
++    import prepare_qwen35_package_serial_candidate_v6 as prep
++    from qwen35_package_serial_runtime_v7 import contract, io, budget
+     from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+ 
+     cat_ref = refs['catalog']; idle_ref = refs['idle']
+@@ -56,15 +56,15 @@
+     root_review_ref = refs['preparer-review']
+     root_review = read(root_review_ref)
+     assert root_review['source_accepted'] and root_review['passed'] and not root_review['blockers']
+-    assert root_review['schema'] == 'qwen35_package_serial_preparer_v5_root_source_review_v1'
++    assert root_review['schema'] == 'qwen35_package_serial_preparer_v6_root_source_review_v1'
+     assert root_review['reviewer'] == '/root' and root_review['source_only'] is True and root_review['runtime_admitted'] is False
+     preparer_delivery_ref = root_review['delivery']; preparer_delivery = read(preparer_delivery_ref)
+-    assert preparer_delivery_ref == dict(path=str(Q / 'qwen35-package-serial-preparer-v5-source-delivery-20261112.json'), sha256='845a9b02f90a560a2de489048a8a908f4d4b882e8c044110104e9b1372fecd77')
++    assert preparer_delivery_ref == dict(path=str(Q / 'qwen35-package-serial-preparer-v6-source-delivery-20261112.json'), sha256='4fc890f9286787dd60c5c74be519e94adff9b9c9074777dd20092d99e04785ea')
+     stat_ref = refs['stat-inputs']; stat_inputs = read(stat_ref)
+     assert stat_inputs['resource_budget'] == refs['budget']
+-    assert stat_inputs['run_name'] == 'pkg-r4-20261112' and stat_inputs['output_root'] == '/mnt/nvme/neuron-work/qwp-pkg-r4-20261112'
++    assert stat_inputs['run_name'] == 'pkg-r5-20261112' and stat_inputs['output_root'] == '/mnt/nvme/neuron-work/qwp-pkg-r5-20261112'
+     seed_exit_ref = at('qwen35-sampler-r10-root-actual-exit-20261112-v1.json'); seed_exit = read(seed_exit_ref)
+-    helpers = [Path(__file__).resolve(), Q / 'accept_qwen35_package_full_root_r4_20261112_v1.py']
++    helpers = [Path(__file__).resolve(), Q / 'accept_qwen35_package_full_root_r5_20261112_v1.py']
+     sources = {str(path): io.ref(path)['sha256'] for path in helpers}
+     sources.update({path: row['sha256'] for path, row in preparer_delivery['files'].items()})
+     for name in ('qwen35_package_serial_runtime_v2/__init__.py', 'qwen35_package_serial_runtime_v2/contract.py',
+@@ -75,15 +75,15 @@
+         sources[str(Q / name)] = expected['sha256']
+     runtime_review_ref = refs['runtime-review']
+     runtime_review = read(runtime_review_ref)
+-    assert runtime_review['source_delivery'] == dict(path=str(Q / 'qwen35_package_serial_runtime_v6/source_delivery.json'), sha256='88e33af02bc236fed6b0232ba4977df4aedb674c5c4740e967602490c7309b5f')
+-    prefix = 'qwen35-package-full-r4-20261112'
++    assert runtime_review['source_delivery'] == dict(path=str(Q / 'qwen35_package_serial_runtime_v7/source_delivery.json'), sha256='29ecb016b48cf3e6431a62c81510cd5877bc14816b9863fa0805da7b429997ee')
++    prefix = 'qwen35-package-full-r5-20261112'
+     future = dict(run_name=stat_inputs['run_name'], output_root=stat_inputs['output_root'],
+-        overlay_output_root='/mnt/nvme/minicpm5-layer1-operator-native-package-full-r4-20261112',
+-        running_handoff_path=str(Q / 'continuation-handoff-20261112-v588-qwen35-package-full-r4-running.json'),
++        overlay_output_root='/mnt/nvme/minicpm5-layer1-operator-native-package-full-r5-20261112',
++        running_handoff_path=str(Q / 'continuation-handoff-20261112-v590-qwen35-package-full-r5-running.json'),
+         overlay_path=str(Q / (prefix + '-history-overlay.json')), spec_path=str(Q / (prefix + '-spec.json')),
+         review_candidate_path=str(Q / (prefix + '-review-draft.json')))
+     request = dict(seed_spec=seed_exit['spec'], seed_review=seed_exit['review'], seed_actual_exit=seed_exit_ref,
+-        current_catalog=cat_ref, idle_handoff=idle_ref, runtime_directory=str(Q / 'qwen35_package_serial_runtime_v6'),
++        current_catalog=cat_ref, idle_handoff=idle_ref, runtime_directory=str(Q / 'qwen35_package_serial_runtime_v7'),
+         runtime_delivery=runtime_review['source_delivery'], runtime_review=runtime_review_ref,
+         resource_budget=stat_inputs['resource_budget'], case=stat_inputs['case'], binary_inputs=stat_inputs['binary_inputs'],
+         preparation_sources=sources, required_helpers=[str(p) for p in helpers],
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-root-helpers-invocation-20261112-v1.json
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-root-helpers-invocation-20261112-v1.json
+@@ -2,29 +2,29 @@
+   "accept_argv_before_required_candidate_digest": [
+     "/home/ubuntu/venvs/vllm_neuron/bin/python",
+     "-B",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/accept_qwen35_package_full_root_r4_20261112_v1.py",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/accept_qwen35_package_full_root_r5_20261112_v1.py",
+     "--catalog",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v114.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v115.json",
+     "--catalog-sha256",
+-    "003ec06ce8bc145e3325a4e2685110bb9a6c4a1d4d4568b3bc4ff2bc2e3e6e84",
++    "5250dce2109a6e420c91d358cd0b52ec9386604f16c7e4e85e0e3c86f2a768f2",
+     "--idle",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v587-qwen-package-prepare-import-failed.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v589-qwen-package-compiler-link-failed.json",
+     "--idle-sha256",
+-    "0449a5e637641a8f5839ea21240aa331ed1a49bd2962b5ff5410776ba8426c40",
++    "6f4087a133ae962d4cd9fbd761edfc8ff23cad91df28d03605de4200f4761556",
+     "--runtime-review",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v6-root-source-review-20261112-v1.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v7-root-source-review-20261112-v1.json",
+     "--runtime-review-sha256",
+-    "ee47d452f1021e87ee62d30e9bbc73111a7475549b2cfee9a585eb2f091416ed",
++    "afd8573118668c0e61cba129a2faa74ba07879151e6b2c59c4be0596d5e0f615",
+     "--preparer-review",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v5-root-source-review-20261112-v1.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v6-root-source-review-20261112-v1.json",
+     "--preparer-review-sha256",
+-    "d81fb86253a97473f009e9408a3b168061128a46f398919244afb5fe1b9f13f3",
++    "7adf81199d0487abfa847ee3be252879d24e311fd63d9b6f1d75cf6701dbf7c0",
+     "--budget",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-resource-budget.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-resource-budget.json",
+     "--budget-sha256",
+-    "5717745a4851ea7a7732fa47d136ff802e50a8551c430205c03b9d3d9a3593d3",
++    "904ef9e38a32758896f5c5d8016d4ab7270327c1eb531ce0397516f2ab9b3510",
+     "--candidate",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-binding-candidate.json"
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-binding-candidate.json"
+   ],
+   "accept_required_remaining_arguments": [
+     "--candidate-sha256",
+@@ -32,44 +32,44 @@
+   ],
+   "candidate_digest_not_invented": true,
+   "commands_executed": false,
+-  "future_running_handoff": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v588-qwen35-package-full-r4-running.json",
++  "future_running_handoff": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v590-qwen35-package-full-r5-running.json",
+   "launch_still_requires_actual_successful_root_binding": true,
+   "metadata_reference_hashes_read_verified_only": true,
+   "prepare_argv": [
+     "/home/ubuntu/venvs/vllm_neuron/bin/python",
+     "-B",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_full_root_r4_20261112_v1.py",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_full_root_r5_20261112_v1.py",
+     "--catalog",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v114.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v115.json",
+     "--catalog-sha256",
+-    "003ec06ce8bc145e3325a4e2685110bb9a6c4a1d4d4568b3bc4ff2bc2e3e6e84",
++    "5250dce2109a6e420c91d358cd0b52ec9386604f16c7e4e85e0e3c86f2a768f2",
+     "--idle",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v587-qwen-package-prepare-import-failed.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v589-qwen-package-compiler-link-failed.json",
+     "--idle-sha256",
+-    "0449a5e637641a8f5839ea21240aa331ed1a49bd2962b5ff5410776ba8426c40",
++    "6f4087a133ae962d4cd9fbd761edfc8ff23cad91df28d03605de4200f4761556",
+     "--runtime-review",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v6-root-source-review-20261112-v1.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v7-root-source-review-20261112-v1.json",
+     "--runtime-review-sha256",
+-    "ee47d452f1021e87ee62d30e9bbc73111a7475549b2cfee9a585eb2f091416ed",
++    "afd8573118668c0e61cba129a2faa74ba07879151e6b2c59c4be0596d5e0f615",
+     "--preparer-review",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v5-root-source-review-20261112-v1.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v6-root-source-review-20261112-v1.json",
+     "--preparer-review-sha256",
+-    "d81fb86253a97473f009e9408a3b168061128a46f398919244afb5fe1b9f13f3",
++    "7adf81199d0487abfa847ee3be252879d24e311fd63d9b6f1d75cf6701dbf7c0",
+     "--stat-inputs",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-stat-inputs.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-stat-inputs.json",
+     "--stat-inputs-sha256",
+-    "7bd9fb5551280e699d47661c653b858c173cc7065aef92fea3c3f392216bfa2f",
++    "f4d77cfdc00c754bb9639e7720e21e1f802222dca25a7d5c5a0fc32b24e43d6b",
+     "--budget",
+-    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r4-20261112-resource-budget.json",
++    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-resource-budget.json",
+     "--budget-sha256",
+-    "5717745a4851ea7a7732fa47d136ff802e50a8551c430205c03b9d3d9a3593d3"
++    "904ef9e38a32758896f5c5d8016d4ab7270327c1eb531ce0397516f2ab9b3510"
+   ],
+-  "run_name": "pkg-r4-20261112",
++  "run_name": "pkg-r5-20261112",
+   "run_name_derived_from": {
+     "bytes": 4442,
+     "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r1-20261112-stat-inputs.json",
+     "sha256": "94b8ec74b02406fca5980c183d8423b36b1703879ebdca5056ca5fcb657a63be"
+   },
+-  "schema": "qwen35_package_full_root_r4_future_invocation_v1",
++  "schema": "qwen35_package_full_root_r5_future_invocation_v1",
+   "source_only": true
+ }

@@ -1,0 +1,56 @@
+--- /home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v2.py
++++ /home/ubuntu/qwen35_package_full_r5_post_exit_20261112_v1.py
+@@ -17,7 +17,7 @@
+ 
+ ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ Q = ROOT / 'research'
+-SELF = Path('/home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v2.py')
++SELF = Path('/home/ubuntu/qwen35_package_full_r5_post_exit_20261112_v1.py')
+ CAP = 8 * 2**20
+ 
+ 
+@@ -166,7 +166,7 @@
+ 
+ 
+ def append_catalog(old, idle_ref, terminal_ref, tool, owners, units, delta, catalog_shape):
+-    require(len(old['runs']) == 161, 'exact retained r4 predecessor has 161 rows')
++    require(len(old['runs']) == 162, 'exact retained r5 predecessor has 162 rows')
+     catalog_shape(old)
+     result = copy.deepcopy(old)
+     result.update(current_handoff=idle_ref, runs=copy.deepcopy(old['runs']) + [dict(
+@@ -185,14 +185,14 @@
+     request_raw, request_identity = stable_source(request_ref, CAP); request = json.loads(request_raw)
+     require(set(request) == {'schema', 'binding', 'root_live', 'admission', 'running_handoff',
+         'external_tool_result', 'observer_source', 'ack_source', 'outputs'}
+-        and request['schema'] == 'qwen35_package_r4_post_exit_request_v2', 'exact explicit request required')
++        and request['schema'] == 'qwen35_package_r5_post_exit_request_v1', 'exact explicit request required')
+     require(request['observer_source']['path'] == str(SELF) == str(Path(__file__).resolve())
+             and ROOT not in SELF.parents, 'separately reviewed external observer path required')
+     source_refs = [request['observer_source'], request['ack_source']]
+     source_before = {r['path']: stable_source(r)[1] for r in source_refs}
+     sys.path[:0] = [str(Q), str(ROOT)]
+-    from qwen35_package_serial_runtime_v6 import io, contract, adapter, history, wiring, final_audit
+-    from prepare_qwen35_package_serial_candidate_v5 import catalog_shape
++    from qwen35_package_serial_runtime_v7 import io, contract, adapter, history, wiring, final_audit
++    from prepare_qwen35_package_serial_candidate_v6 import catalog_shape
+     from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+     observed_metadata = {}
+     def read(r, cap=CAP):
+@@ -207,7 +207,7 @@
+     require(binding['passed'] is True and binding['full_source_history_resolution_passed'] is True,
+             'successful exact root binding required')
+     spec = read(spec_ref, 64 * 2**20); contract.validate_spec(spec, read(review_ref, 64 * 2**20), spec_ref)
+-    require(spec['run_name'] == 'pkg-r4-20261112', 'explicit r4 run required')
++    require(spec['run_name'] == 'pkg-r5-20261112', 'explicit r5 run required')
+     control = contract.control_root(spec); admission = read(request['admission'])
+     require(io.ref(control / 'admission.json') == request['admission'], 'exact owned admission path')
+     adapter.admit_shape(admission, spec, spec_ref, review_ref)
+@@ -353,7 +353,7 @@
+             live_tool_sessions=[], active_heavy_units=[], goal_status='active', this_turn_classification='progress',
+             complete_current_serial_catalog=spec['current_serial_catalog'], complete_current_serial_catalog_next=outputs['catalog'],
+             publication_current_status_stale=True, new_speedup_claim=False)
+-        idle['qwen35_package_r4_current'] = dict(actual_exit=terminal_out, status=outcome['status'],
++        idle['qwen35_package_r5_current'] = dict(actual_exit=terminal_out, status=outcome['status'],
+             completed_stages=len(prefix), all25_stages_audited=outcome['all25_stages_audited'],
+             full_model_qualified=False, new_speedup_claim=False)
+         idle_ref = predicted(outputs['idle_handoff'], idle)

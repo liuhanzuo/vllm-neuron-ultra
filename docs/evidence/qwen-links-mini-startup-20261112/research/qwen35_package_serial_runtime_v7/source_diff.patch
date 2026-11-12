@@ -1,0 +1,181 @@
+--- v6/adapter.py
++++ v7/adapter.py
+@@ -625,6 +625,14 @@
+             time.sleep(1)
+ 
+ 
++def terminal_storage(spec, failure):
++    """Storage proof failure cannot erase actual drain/exit/failure evidence."""
++    try:
++        return storage(spec, terminal=True), None, failure
++    except Exception as error:
++        return None, {"type": type(error).__name__, "message": str(error)[:2048]}, failure if failure is not None else error
++
++
+ def outer(spec_ref, review_ref):
+     """Future explicit entry only. Never invoked by import or --help."""
+     prelock(spec_ref, review_ref)  # Missing reviewed capacity fails before the original lock.
+@@ -724,6 +732,7 @@
+             drained = True
+         if drained:
+             if control is not None and control.exists() and admission_ref is not None:
++                terminal_usage, storage_error, failed = terminal_storage(bundle.spec, failed)
+                 terminal = {"schema": "qwen35_sampler_outer_observed_terminal_v1", "admission": admission_ref,
+                     "outer_owner": lock.owner, "original_lock_identity": LOCK_IDENTITY,
+                     "complete_owned_unit_terminals": [s.terminal for s in all_services if s.started],
+@@ -732,7 +741,7 @@
+                     "whole_owned_scope_drained": True, "result_present": result is not None,
+                     "failed": failed is not None, "failure": None if failed is None else {"type": type(failed).__name__, "message": str(failed)[:2048]},
+                     "active_scope_failure": scope_failure_ref,
+-                    "storage": storage(bundle.spec, terminal=True), "full_model_qualified": False,
++                    "storage": terminal_usage, "storage_error": storage_error, "full_model_qualified": False,
+                     "self_exit_claimed": False, "actual_external_tool_exit_pending": True,
+                     "independent_final_audit_required": True, "automatic_successor": False}
+                 once(control / "outer-terminal.json", terminal)
+--- v6/io.py
++++ v7/io.py
+@@ -313,12 +313,81 @@
+     return stable
+ 
+ 
++def compiler_constant_link(path, spec, cap, observed=None):
++    """Only the observed sgNN/constant.N.npy -> ../constant.N.npy form.
++
++    Metadata only. No-follow directory handles bind both names to the same
++    owned compiler unit. The caller requires the target's ordinary-file row
++    in the complete inventory, so link allocation and target allocation are
++    each charged exactly once under the existing compiler-workdir budget.
++    """
++    path = Path(path); root = Path(spec['case']['compiler_workdir'])
++    require(path.is_absolute() and root.is_absolute() and root in path.parents
++            and '..' not in path.parts, 'exact compiler constant link scope')
++    parts = path.relative_to(root).parts
++    require(len(parts) == 5 and parts[0] in ('context_encoding_model', 'token_generation_model')
++            and re.fullmatch(r'_tp0_bk[0-5]', parts[1])
++            and re.fullmatch(r'neuronxcc-[A-Za-z0-9_-]{1,64}', parts[2])
++            and re.fullmatch(r'sg[0-9]{2}', parts[3])
++            and re.fullmatch(r'constant\.[0-9]{1,10}\.npy', parts[4]),
++            'only observed bucket/unit/subgraph constant link form')
++    require(root.resolve() == root and not any(p.is_symlink() for p in (root, *root.parents)),
++            'canonical compiler root ancestry')
++    def attrs(s):
++        return tuple(getattr(s, key) for key in ('st_dev', 'st_ino', 'st_mode', 'st_nlink',
++            'st_size', 'st_blocks', 'st_mtime_ns', 'st_ctime_ns', 'st_uid', 'st_gid'))
++    def directory(s):
++        require(stat.S_ISDIR(s.st_mode) and s.st_uid == os.getuid(), 'owned ordinary compiler parent')
++        return s.st_dev, s.st_ino, s.st_mode, s.st_uid, s.st_gid
++    fds, edges = [], []
++    try:
++        fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC)
++        fds.append(fd); root_id = directory(os.fstat(fd))
++        for component in parts[:-1]:
++            child = os.open(component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC, dir_fd=fd)
++            fds.append(child); edge_id = directory(os.fstat(child))
++            require(edge_id[0] == root_id[0], 'compiler link parent stays on owned filesystem')
++            edges.append((fd, component, child, edge_id)); fd = child
++        before = os.stat(parts[-1], dir_fd=fd, follow_symlinks=False)
++        require(stat.S_ISLNK(before.st_mode) and before.st_uid == os.getuid() and before.st_nlink == 1
++                and max(before.st_size, before.st_blocks * 512) <= cap, 'bounded owned singleton compiler link')
++        if observed is not None and attrs(before) != attrs(observed):
++            raise CompilerTreeRace('compiler link changed after inventory stat')
++        raw_target = os.readlink(parts[-1], dir_fd=fd)
++        require(raw_target == '../' + parts[-1], 'exact relative same-unit constant target')
++        unit_fd = fds[-2]; target = path.parent.parent / parts[-1]
++        target_info = os.stat(parts[-1], dir_fd=unit_fd, follow_symlinks=False)
++        require(stat.S_ISREG(target_info.st_mode) and target_info.st_uid == os.getuid()
++                and target_info.st_nlink == 1 and target_info.st_dev == before.st_dev == root_id[0]
++                and max(target_info.st_size, target_info.st_blocks * 512) <= cap,
++                'bounded owned singleton regular compiler target')
++        if (attrs(os.stat(parts[-1], dir_fd=unit_fd, follow_symlinks=False)) != attrs(target_info)
++                or attrs(os.stat(parts[-1], dir_fd=fd, follow_symlinks=False)) != attrs(before)
++                or os.readlink(parts[-1], dir_fd=fd) != raw_target):
++            raise CompilerTreeRace('compiler constant link/target changed during observation')
++        require(root.resolve() == root and not any(p.is_symlink() for p in (root, *root.parents))
++                and directory(root.lstat()) == root_id == directory(os.fstat(fds[0])),
++                'compiler link root identity changed')
++        for parent, name, child, expected in edges:
++            require(directory(os.stat(name, dir_fd=parent, follow_symlinks=False)) == expected
++                    == directory(os.fstat(child)), 'compiler link directory edge changed')
++        return dict(path=str(path), symlink=raw_target, identity=attrs(before),
++            target=str(target), target_identity=attrs(target_info),
++            target_inventory=(str(target), *attrs(target_info)[:8]), payload_bytes_read=0)
++    except FileNotFoundError:
++        if compiler_mutation(path, spec):
++            raise CompilerTreeRace('observed compiler constant link/target disappeared')
++        raise
++    finally:
++        for fd in reversed(fds): os.close(fd)
++
++
+ def storage_scan(spec):
+     from .budget import roots as all_roots, reviewed_budget, unchanged_inputs, check_view_link, CLASSES
+     reviewed = unchanged_inputs(spec, reviewed_budget(spec))
+     caps = {**budget(), **{key: row["allocated_bytes"] for key, row in reviewed["classes"].items()}}
+     usage = dict.fromkeys(caps, 0); counts = dict.fromkeys(caps, 0); entries = 0
+-    roots = all_roots(spec); inventory = []; links = []
++    roots = all_roots(spec); inventory = []; links = []; compiler_links = []
+     science_roots = roots[:2]
+     tree_classes = (None, None, "view", "artifact", "compiler_cache", "compiler_workdir")
+     for root, tree_class in zip(roots, tree_classes):
+@@ -346,6 +415,9 @@
+                 else: kind = storage_class(path, science_roots)
+             usage[kind] += s.st_blocks * 512; counts[kind] += 1
+             if stat.S_ISLNK(s.st_mode):
++                if tree_class == "compiler_workdir":
++                    compiler_links.append(compiler_constant_link(path, spec,
++                        reviewed["classes"]["compiler_workdir"]["single_file_bytes"], s)); continue
+                 require(tree_class == "view", "symlinks forbidden outside exact prepared view")
+                 require(s.st_nlink == 1 and s.st_size <= reviewed["classes"]["view"]["single_file_bytes"]
+                         and s.st_blocks * 512 <= reviewed["classes"]["view"]["single_file_bytes"], "bounded singleton view link")
+@@ -372,13 +444,21 @@
+                 log_cap = (LIMITS["coordinator_log_bytes"] if path.name == "coordinator.log" else
+                     LIMITS["server_log_bytes"] if path.name.endswith("-server.log") else LIMITS["leaf_log_bytes"])
+                 require(s.st_size <= log_cap, "original finite log cap exceeded")
++    indexed = {row[0]: row for row in inventory}
++    for link in compiler_links:
++        if indexed.get(link['target']) != link['target_inventory']:
++            raise CompilerTreeRace('compiler link target missing/changed in complete accounted inventory')
++        if compiler_constant_link(link['path'], spec,
++                reviewed['classes']['compiler_workdir']['single_file_bytes']) != link:
++            raise CompilerTreeRace('compiler link changed across complete accounted inventory')
+     require(sum(counts[k] for k in budget()) <= LIMITS["max_output_entries"], "original science entry cap")
+     require(all(counts[k] <= reviewed["classes"][k]["entries"] for k in CLASSES), "per-class entry cap exceeded")
+     require(all(usage[k] <= cap for k, cap in caps.items()), "per-class allocated storage cap exceeded")
+     require(sum(usage[k] for k in budget()) <= LIMITS["total_allocated_output_bytes"], "original science 2 GiB cap")
+     require(sum(usage.values()) <= sum(caps.values()), "global allocated storage cap")
+     return {"classes": usage, "allocated_bytes": sum(usage.values()), "entries": entries,
+-            "view_links": sorted(links, key=lambda row: row["path"])}, sorted(inventory)
++            "view_links": sorted(links, key=lambda row: row["path"]),
++            "compiler_links": sorted(compiler_links, key=lambda row: row["path"])}, sorted(inventory)
+ 
+ 
+ def storage(spec, *, terminal=False):
+--- v6/run.py
++++ v7/run.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parents[1], Path(__file__).resolve().parents[2]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_package_serial_runtime_v6.contract import reference, require
++    from qwen35_package_serial_runtime_v7.contract import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_package_serial_runtime_v6.adapter import outer
++        from qwen35_package_serial_runtime_v7.adapter import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_package_serial_runtime_v6.adapter import coordinator, native_leaf, worker_bootstrap
++    from qwen35_package_serial_runtime_v7.adapter import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_package_serial_runtime_v6.service import supervise
++        from qwen35_package_serial_runtime_v7.service import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 

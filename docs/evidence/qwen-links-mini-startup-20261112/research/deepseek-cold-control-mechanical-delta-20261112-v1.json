@@ -1,0 +1,139 @@
+{
+  "schema": "deepseek_cold_control_mechanical_delta_v1",
+  "source_only": true,
+  "files": [
+    {
+      "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_kv_capture_v2.py",
+      "source_sha256": "d489ef0ebbb3f0aec6ba026f147f82a59575448ee0c92c644b002dd05b890c04",
+      "result": "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_capture_v1.py",
+      "result_sha256": "1a7170ca3993b711573f8bd8357cbfa0eeba8ed82edd82ad6f753ae7dc282a92",
+      "replacements": [
+        [
+          "def __init__(self,backend):",
+          "def __init__(self,backend,destination,data_root):"
+        ],
+        [
+          "        self.directory=c.DEST/'cache-captures'/backend\n        assert self.directory.is_dir() and not (self.directory/'manifest.json').exists()\n        self.raw_directory=c.DATA_ROOT/backend\n        assert self.raw_directory.is_dir()",
+          "        self.directory=Path(destination)/'cache-captures'/backend\n        self.raw_directory=Path(data_root)/backend\n        for path in (self.directory,self.raw_directory):\n            assert path.is_absolute() and path.resolve()==path\n            assert 'deepseek-cold-kv-diagnostic-v2' not in path.parts\n            assert not path.exists() and not path.is_symlink()\n        self.directory.mkdir(parents=True)\n        self.raw_directory.mkdir(parents=True)"
+        ]
+      ]
+    },
+    {
+      "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_kv_lifecycle_v2.py",
+      "source_sha256": "e5c0d039bae11d4bc1eea05fedd64c2cf64fc423d6a921f3467dcb479bec666f",
+      "result": "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_lifecycle_v1.py",
+      "result_sha256": "a3e081a8877766d3eb31b88015757fdd277b5b8e40f4ee0174a8956f2c628359",
+      "replacements": [
+        [
+          "import logging\n",
+          "import logging\nfrom pathlib import Path\n"
+        ],
+        [
+          "def snapshot(model, label, dump=False):",
+          "def snapshot(model, label, destination, dump=False):"
+        ],
+        [
+          "p.DEST/'lifecycle-states'",
+          "destination/'lifecycle-states'"
+        ],
+        [
+          "path.relative_to(p.DEST)",
+          "path.relative_to(destination)"
+        ],
+        [
+          "def observe(model, output):",
+          "def observe(model, output, execution_guard):\n    assert callable(execution_guard)\n    execution_guard()\n    output=Path(output); destination=output.parent\n    assert destination.is_absolute() and destination.resolve()==destination\n    assert 'deepseek-cold-kv-diagnostic-v2' not in destination.parts"
+        ],
+        [
+          "    p.guard('device'); assert not output.exists()",
+          "    assert not output.exists()"
+        ],
+        [
+          "p.read(p.DEST/'state-copy.json')",
+          "p.read(destination/'state-copy.json')"
+        ],
+        [
+          "snapshot(model, 'before_warmup', dump=True)",
+          "snapshot(model, 'before_warmup', destination, dump=True)"
+        ],
+        [
+          "snapshot(model, 'after_warmup', dump=True)",
+          "snapshot(model, 'after_warmup', destination, dump=True)"
+        ],
+        [
+          "snapshot(model, 'after_reset')",
+          "snapshot(model, 'after_reset', destination)"
+        ],
+        [
+          "snapshot(model, 'after_clear')",
+          "snapshot(model, 'after_clear', destination)"
+        ]
+      ]
+    },
+    {
+      "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_deepseek_cold_kv_v2.py",
+      "source_sha256": "77ffad13d0acf7d6bade39fe2f1aa5f6e9524db265c1373efe8d8b00b29b8677",
+      "source_prefix_before_function": "reference_entry",
+      "result": "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_deepseek_cold_control_v1.py",
+      "result_sha256": "dae4e897d87d003144f31841231a4cfa57e1917db31ccf53251bf155ff3140f4",
+      "replacements": [
+        [
+          "DEST = ROOT / 'deepseek-cold-kv-diagnostic-v2'\nREFERENCE=ROOT/'deepseek-cold-kv-diagnostic-v2/cold-reference'",
+          "DEST = None  # explicit owning-worker destination only\nREFERENCE = None"
+        ],
+        [
+          "def main():",
+          "def main(model,case,destination,reference_directory,execution_guard):\n    assert callable(execution_guard)\n    execution_guard()\n    DEST=Path(destination); REFERENCE=Path(reference_directory)"
+        ],
+        [
+          "    import orchestrate as runner\n",
+          ""
+        ],
+        [
+          "    case = json.loads((DEST/'case.json').read_text());assert runner.validate_cache(case)",
+          "    assert type(model) is cls, 'Original uncaptured model class required'\n    assert model.neuron_config.tensor_capture_config is None\n    assert model.neuron_config.on_device_sampling_config is None"
+        ],
+        [
+          "    cfg = cls.get_config_cls().load(case['artifact'])",
+          "    cfg = model.config"
+        ],
+        [
+          "    model = cls(case['model_path'], config=cfg)\n    model.load(case['artifact'],skip_warmup=True)\n",
+          ""
+        ],
+        [
+          "from deepseek_cold_kv_capture_v2 import Capture",
+          "from deepseek_cold_control_capture_v1 import Capture"
+        ],
+        [
+          "    capture = Capture('device')",
+          "    capture = Capture('device',DEST,DATA_ROOT)"
+        ],
+        [
+          "def main(model,case,destination,reference_directory,execution_guard):",
+          "def main(model,case,destination,reference_directory,data_root,execution_guard):"
+        ],
+        [
+          "    DEST=Path(destination); REFERENCE=Path(reference_directory)",
+          "    DEST=Path(destination); REFERENCE=Path(reference_directory); DATA_ROOT=Path(data_root)"
+        ],
+        [
+          "from deepseek_cold_kv_lifecycle_v2 import observe",
+          "from deepseek_cold_control_lifecycle_v1 import observe"
+        ],
+        [
+          "observe(model,DEST/'state-lifecycle.json')",
+          "observe(model,DEST/'state-lifecycle.json',execution_guard)"
+        ],
+        [
+          "def reference(model,protocol,source_hash):",
+          "def reference(model,protocol,source_hash,reference_directory,destination,data_root,execution_guard):\n    assert callable(execution_guard)\n    execution_guard()\n    REFERENCE=Path(reference_directory)"
+        ],
+        [
+          "    capture = Capture('native')",
+          "    capture = Capture('native',destination,data_root)"
+        ]
+      ]
+    }
+  ]
+}
