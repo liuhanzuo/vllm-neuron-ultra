@@ -1,0 +1,87 @@
+{
+  "actual_runtime_admission": true,
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 77795
+  },
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r6-20261112-runtime/admission.json",
+    "sha256": "29a118ff3fae79d73dab860c0258fae7c7037b702f4e1cd701b9d788cd9e77bb"
+  },
+  "coordinator": {
+    "process": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v6.py",
+        "--mode",
+        "coordinator",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r6-20261112-runtime/admission.json",
+        "--binding-sha256",
+        "29a118ff3fae79d73dab860c0258fae7c7037b702f4e1cd701b9d788cd9e77bb"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r6-20261112-coordinator.service",
+      "pid": 2741869,
+      "ppid": 1583,
+      "start_ticks": "423236972"
+    },
+    "service_owner": {
+      "invocation_id": "8cb00ead2d7a49a09ffab27123dd01d2",
+      "pid": 2741869,
+      "start_ticks": 423236972,
+      "unit": "trn1-qwen35-sampler-r6-20261112-coordinator"
+    }
+  },
+  "coordinator_owner": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r6-20261112-runtime/coordinator-owner.json",
+    "sha256": "feb014031a78edff318f44eca678880666dc78934d716cd2b2bab1dc1cd9e54e"
+  },
+  "exact_owners_live": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T02:52:36.111392+00:00",
+  "original_lock_held": true,
+  "outer_owner": {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-s",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v6.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r6-20261112-spec-v3.json",
+      "--spec-sha256",
+      "fccff37e79995b084dcf7929a2ea1b0967bf945b037f39332f4934e63850761e",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r6-20261112-review.json",
+      "--review-sha256",
+      "f78e8882589f183940b58097e6011fdb29cfb86044879c9950cd61f1372e5cdc"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 2733667,
+    "ppid": 2480035,
+    "start_ticks": "423204264"
+  },
+  "phase_results_present": false,
+  "reviewer": "/root",
+  "running_ack": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r6-20261112-runtime/running-ack.json",
+    "sha256": "d72e1e80b177f3659def6398d1c63969f00a0c4539cc7aea97507f90e1a36062"
+  },
+  "running_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v532-qwen35-sampler-r6-running.json",
+    "sha256": "2d3da27e63d9756e304e690c4fe14d9d43a5e1e509fd07113f092fbd65203547"
+  },
+  "schema": "qwen35_sampler_r6_root_running_confirmation_v1",
+  "status_correction": {
+    "field": "status",
+    "old_label": "outer_active_before_actual_admission_receipt",
+    "previous": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r6-root-outer-start-20261112-v1.json",
+      "sha256": "1363873a6ae05bc405f863e25be86e7242584a71c2400ebc55159be0d4b8d00a"
+    },
+    "reason": "Admission appeared during the earlier outer observation. Its admission_present=true was correct; pre-admission label was stale. This confirmation authenticates both actual owners and running ACK."
+  }
+}
