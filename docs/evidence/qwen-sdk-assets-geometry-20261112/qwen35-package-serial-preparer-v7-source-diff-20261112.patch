@@ -1,0 +1,90 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v6.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v7.py
+@@ -1,4 +1,4 @@
+-"""Explicit package candidate preparation v6; stdlib/source only, never admission.
++"""Explicit package candidate preparation v7; stdlib/source only, never admission.
+ 
+ No latest lookup, file writes, History, lock, payload reads or native import.
+ The caller selects every binding and supplies guarded authenticated readers.
+@@ -19,6 +19,7 @@
+ MIB = 1024**2
+ ORDINARY_CAP, ENVELOPE_CAP = 8*MIB, 64*MIB
+ SELF = str(Path(__file__).resolve())
++PWP_MANIFEST_SHA256 = 'd743a0dbc46b06f7f4041748619325cf7def987fd56992e87000a2131799d698'
+ TEXT_SUFFIXES = {'.py', '.json', '.md', '.txt', '.patch', '.sh', '.toml', '.cfg', '.ini', '.jinja'}
+ REQUEST_KEYS = {'seed_spec', 'seed_review', 'seed_actual_exit', 'current_catalog',
+     'idle_handoff', 'runtime_directory', 'runtime_delivery', 'runtime_review', 'resource_budget', 'case', 'binary_inputs',
+@@ -229,6 +230,31 @@
+         paths.append(str(path))
+     require(len(set(paths)) == len(paths) and not set(paths) & forbidden
+             and seed['running_handoff_path'] not in paths, 'future paths cannot overwrite retained metadata')
++
++
++def sdk_asset_identities(manifest, identity_only, guard, observed):
++    """Exact fixed16 SDK manifest, stat only; native binary bytes are never read."""
++    root = c.SDK/'neuronxcc/pwp/pwp_bin_trainium'
++    groups = ('derivative_silu_and_others', 'natural_log_exp_and_others',
++              'sigmoid_and_others', 'silu_and_others', 'softplus_and_others')
++    names = ('act_info.json',) + tuple(g+s for g in groups for s in ('.json', '_bkt.bin', '_ctrl.bin'))
++    require(manifest.get('schema') == 'qwen35_exact_sdk_pwp_assets_v1' and
++            manifest.get('sdk_version') == '2.23.6484.0+3b612583' and
++            set(manifest.get('assets', {})) == {str(root/name) for name in names} and
++            manifest.get('logical_bytes') == 370753 and manifest.get('allocated_bytes') == 393216,
++            'fixed sixteen observed installed SDK assets only')
++    for path, row in manifest['assets'].items():
++        reference(dict(path=path, sha256=row['sha256']))
++        actual = row['identity']
++        require(actual['st_nlink'] == 1 and stat.S_ISREG(actual['st_mode']) and
++                row['bytes'] == actual['st_size'] == row['record_bytes'] and 0 < row['bytes'] < 45000,
++                'fixed bounded singleton SDK asset metadata')
++        expected = dict(realpath=path, device=actual['st_dev'], inode=actual['st_ino'], size=actual['st_size'],
++                        mtime_ns=actual['st_mtime_ns'], ctime_ns=actual['st_ctime_ns'])
++        identity_shape(path, expected); guard()
++        require(identity_only(path) == expected, 'fixed SDK asset stat identity changed')
++        require(path not in observed, 'SDK asset stat entry duplicated')
++        observed[path] = expected
+ 
+ 
+ def prepare(request, read_metadata, read_source, identity_only, guard):
+@@ -331,8 +357,8 @@
+     runtime_directory = Path(request['runtime_directory'])
+     require(str(runtime_directory) == request['runtime_directory']
+             and runtime_directory in (c.Q/'qwen35_package_serial_runtime_v2', c.Q/'qwen35_package_serial_runtime_v3',
+-                                      c.Q/'qwen35_package_serial_runtime_v4', c.Q/'qwen35_package_serial_runtime_v5', c.Q/'qwen35_package_serial_runtime_v6', c.Q/'qwen35_package_serial_runtime_v7'),
+-            'only explicit reviewed package runtime v2, v3, v4, v5, v6 or v7 directory')
++                                      c.Q/'qwen35_package_serial_runtime_v4', c.Q/'qwen35_package_serial_runtime_v5', c.Q/'qwen35_package_serial_runtime_v6', c.Q/'qwen35_package_serial_runtime_v7', c.Q/'qwen35_package_serial_runtime_v8'),
++            'only explicit reviewed package runtime v2, v3, v4, v5, v6, v7 or v8 directory')
+     runtime_version = runtime_directory.name.rsplit('_', 1)[1]
+     runtime_review = read(request['runtime_review'])
+     require(runtime_review.get('schema') == 'qwen35_package_serial_runtime_'+runtime_version+'_root_source_review_v1'
+@@ -348,7 +374,8 @@
+             and runtime.get('runtime_admitted') is False and runtime.get('frozen_science_delivery') == c.SCIENCE_DELIVERY,
+             'runtime delivery is source only and retains frozen full science')
+     runtime_pins = manifest_pins(runtime['files'])
+-    runtime_files = (*c.RUNTIME_FILES, 'input_pins.json', *(('source_text.py',) if runtime_version in ('v5', 'v6', 'v7') else ()))
++    runtime_files = (*c.RUNTIME_FILES, 'input_pins.json', *(('source_text.py',) if runtime_version in ('v5', 'v6', 'v7', 'v8') else ()))
++    if runtime_version == 'v8': runtime_files += ('compiler_assets.py', 'compiler_assets.json')
+     require(all(str(runtime_directory/name) in runtime_pins for name in runtime_files), 'complete runtime file closure')
+     for path, sha in runtime_pins.items():
+         source(dict(path=path, sha256=sha))
+@@ -391,6 +418,11 @@
+     _future(future, seed, overlay, set(observed) | set(all_inputs) | set(pins) | retained_paths)
+     require(set(request['binary_inputs']) == set(c.BINARY_PATHS), 'all six exact binary paths required')
+     stat_observed = {}
++    if runtime_version == 'v8':
++        assets_path = str(runtime_directory/'compiler_assets.json')
++        require(runtime_pins[assets_path] == PWP_MANIFEST_SHA256, 'exact frozen SDK asset manifest pin required')
++        assets = read(dict(path=assets_path, sha256=PWP_MANIFEST_SHA256))
++        sdk_asset_identities(assets, identity_only, guard, stat_observed)
+     for path, row in request['binary_inputs'].items():
+         require(type(row) is dict and set(row) == {'kind', 'identity'} and row['kind'] == 'binary_payload', 'separate typed binary identity')
+         identity_shape(path, row['identity'])
+@@ -446,7 +478,7 @@
+         guard()
+         require(identity_only(path) == expected, 'stat-only payload identity changed before return')
+     guard()
+-    return dict(schema='qwen35_package_serial_candidate_v6', passed=False, launch_authorized=False,
++    return dict(schema='qwen35_package_serial_candidate_v7', passed=False, launch_authorized=False,
+         source_only=True, history_resolved=False, physical_checks_passed=False, native_executed=False,
+         overlay=new_overlay, overlay_bytes=overlay_bytes, overlay_ref=overlay_ref,
+         spec=spec, spec_bytes=spec_bytes, spec_ref=spec_ref,

@@ -1,0 +1,57 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_history_v2.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_history_v3.py
+@@ -1,4 +1,9 @@
+-"""One-stage use of the existing Qwen complete-history/physical collectors."""
++"""Original complete History with the accepted v7 exact source-envelope dispatcher.
++
++Only the final full text-verification call changes. All original completion,
++source partition, input identity, freshness, physical scope and failed states
++remain intact. Import does not execute History or any IO/lock/native work.
++"""
+ import copy
+ import hashlib
+ from pathlib import Path
+@@ -6,6 +11,7 @@
+ from qwen35_sampler_runtime_history_v12 import Bundle as OriginalHistory, Authority
+ from qwen35_sampler_runtime_io_v12 import Metadata, identity, loaded_local_sources, raw
+ from qwen35_sampler_runtime_contract_v12 import LOCK_IDENTITY, require
++from qwen35_package_serial_runtime_v7 import source_text
+ 
+ 
+ class History(OriginalHistory):
+@@ -50,7 +56,7 @@
+             require(identity(path) == row['identity'], 'Exact current metadata input identity changed')
+             self.meta.read({'path': path, 'sha256': row['sha256']})
+         partition = sources.classify(pins, resolved['plan']['source_contract'], self.meta.read)
+-        sources.verify_text_sources(partition, self.guard)
++        source_text.verify_text_sources(partition, self.guard)
+         self.resolved = resolved
+         self.guard(); loaded_local_sources(pins)
+         return self
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/run.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py
+@@ -36,7 +36,7 @@
+     process_api, raw, read, ref, service_owner, wait_until, descriptor)
+ from qwen35_sampler_runtime_service_v12 import Service, properties, verify_properties
+ from qwen35_sampler_runtime_history_v12 import check_running
+-from qwen35_package_preflight_history_v2 import History, Authority
++from qwen35_package_preflight_history_v3 import History, Authority
+ from qwen35_package_preflight_serial_v2 import save_history, check_ack, owned_terminal, bound_ref, join_history
+ from research.minicpm5_layer1_drain_hold_v1 import retain_until_drained
+ 
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/audit.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/audit.py
+@@ -14,11 +14,11 @@
+ 
+ Q = Path(__file__).resolve().parents[1]
+ sys.path[:0] = [str(Q), str(Q.parent)]
+-from qwen35_writer_geometry_serial_v1 import run as stage
++from qwen35_writer_geometry_serial_v2 import run as stage
+ from qwen35_writer_geometry_serial_v1 import protocol, geometry
+ from qwen35_sampler_runtime_io_v12 import read, ref, once, process_api, RetainedLock
+ from qwen35_sampler_runtime_history_v12 import expected_running
+-from qwen35_package_preflight_history_v2 import History, Authority
++from qwen35_package_preflight_history_v3 import History, Authority
+ from audit_qwen35_sampler_r10_terminal_root_20261112_v2 import verify_current_terminal, terminal_unit
+ 
+ require = stage.require

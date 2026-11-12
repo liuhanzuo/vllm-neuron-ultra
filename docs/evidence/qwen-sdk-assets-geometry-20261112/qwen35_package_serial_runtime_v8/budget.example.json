@@ -1,0 +1,87 @@
+{
+  "blockers": [
+    "Illustrative finite trial ceilings only; not reviewed or bound to a run",
+    "All actual parent/source identities and available-space admission remain unbound"
+  ],
+  "build_file_limit_bytes": 1073741824,
+  "case": {
+    "adapter": "qwen35_text",
+    "artifact": "/mnt/nvme/neuron-artifacts/qwen35-package-full-v2-20261112-r1",
+    "batch": 4,
+    "compiler_cache": "/mnt/nvme/neuron-work/qwen35-package-full-v2-cache-20261112-r1",
+    "compiler_workdir": "/mnt/nvme/neuron-work/qwen35-package-full-v2-compiler-20261112-r1",
+    "cpu": true,
+    "max_model_len": 4096,
+    "model_path": "/mnt/nvme/models/qwen35-package-full-v2-view-20261112-r1",
+    "name": "qwen35-package-full-v2-20261112",
+    "neuron_configuration": {
+      "apply_seq_ids_mask": true,
+      "batch_size": 4,
+      "context_encoding_buckets": [
+        128,
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "ctx_batch_size": 1,
+      "enable_bucketing": true,
+      "is_block_kv_layout": false,
+      "is_continuous_batching": true,
+      "is_prefix_caching": false,
+      "lora_config": null,
+      "max_context_length": 4096,
+      "on_device_sampling_config": null,
+      "pa_block_size": 4096,
+      "pa_num_blocks": 4,
+      "padding_side": "right",
+      "quantized": false,
+      "seq_len": 4096,
+      "token_generation_buckets": null,
+      "torch_dtype": "bfloat16",
+      "tp_degree": 2
+    },
+    "package_schema": "vllm-neuron-ultra-qwen35-split-v1",
+    "served_name": "qwen3.5-2b-text",
+    "tp": 2
+  },
+  "classes": {
+    "artifact": {
+      "allocated_bytes": 1073741824,
+      "entries": 256,
+      "single_file_bytes": 1073741824
+    },
+    "build_auxiliary": {
+      "allocated_bytes": 268435456,
+      "entries": 2048,
+      "single_file_bytes": 134217728
+    },
+    "compiler_cache": {
+      "allocated_bytes": 2147483648,
+      "entries": 4096,
+      "single_file_bytes": 1073741824
+    },
+    "compiler_workdir": {
+      "allocated_bytes": 3221225472,
+      "entries": 8192,
+      "single_file_bytes": 1073741824
+    },
+    "view": {
+      "allocated_bytes": 33554432,
+      "entries": 64,
+      "single_file_bytes": 16777216
+    }
+  },
+  "control_root": "/mnt/nvme/neuron-work/qw-review-example",
+  "headroom_bytes": {
+    "nvme": 1073741824,
+    "root": 1073741824
+  },
+  "output_root": "/mnt/nvme/neuron-work/qwp-review-example",
+  "parent_identities": {},
+  "passed": false,
+  "reviewer": "/root",
+  "schema": "qwen35_package_reviewed_budget_v1",
+  "source_files": {}
+}
