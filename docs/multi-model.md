@@ -1,8 +1,6 @@
-最新进展：[Qwen3.5 原生预检与 MiniCPM5 固定输入对照](qwen-native-preflight-and-mini-pv-20261111.md)。Qwen3.5 虚拟模块修复通过 44 项检查，第四轮已通过外层准入并完成运行交接；MiniCPM5 的 24 份原生输出逐字节重放及独立复核通过，后续 SDK 导入失败；LFM3 启动环境的最小 v2 后继通过 26 项独立检查，完整 CPU 运行待执行；Dory 候选 ELF 工具通过 21 项检查，实际采集待执行。暂无新增整模型提速，既有提速表及条件完整保留。
+最新进展：[Qwen 冷缓存修复与 Dory 依赖检查实测](qwen-cold-fix-dory-elf-20261112.md)。Qwen r4 的预检、状态复制及 32/32 数值对齐通过，冷缓存前失败并完成独立清理；最小修复通过 76 项独立检查。Dory 三份 ELF 实际采集完成，27 个候选元数据齐全，15 条真实加载关系仍待验证。Mini 退出竞态修复已接入，SDK 映射失败仍待诊断；LFM 完整 CPU v2 待运行。暂无新增合格提速，原结果表与测试条件保留。
 
-此前进展：[Qwen3.5 启动失败、Dory 102 份源码补充与 LFM3 完整测试准备](qwen-bootstrap-dory-followup-20261111.md)。
-
-最新进展：[LFM3 BF16 写回完整对照：32 项与全部编码通过](lfm-writeback-characterization-20261111.md)。原实现失败保留，暂无新增整模型提速。
+此前记录：[Qwen 原生预检与 MiniCPM5 固定输入对照](qwen-native-preflight-and-mini-pv-20261111.md)。
 
 # Unified Trn1 experimental branch
 

@@ -1,0 +1,555 @@
+{
+  "M2_current_conclusion": {
+    "LD_AUDIT_requester_to_returned_provider_contract_established": false,
+    "LD_DEBUG_requester_to_returned_provider_contract_established": false,
+    "all_original15_edges_remain_unresolved": true,
+    "exact_loader_semantics_established": false,
+    "new_loader_edges_closed": 0,
+    "next_action_changed": "Obtain exact distro source linkage/patches and, only if needed for a direct observer, loader BuildID and matching debug/address evidence before implementing any semantic mapper."
+  },
+  "created_at": "2026-11-11T23:49:54.438668+00:00",
+  "exact_deployed_loader_from_saved_evidence": {
+    "actual_build_id_value_in_inspected_metadata": null,
+    "current_bytes_rechecked_here": false,
+    "note_section_name_is_not_BuildID_value": true,
+    "original_and_later_saved_bytes_match_package_member": true,
+    "package_member": {
+      "bytes": 240936,
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "terminal": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+    },
+    "private_symbol_addresses_or_debug_info_present_in_inspected_metadata": false,
+    "recorded_binary_package": {
+      "architecture": "amd64",
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "authenticated_indexes": [
+        {
+          "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+        },
+        {
+          "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+        }
+      ],
+      "package": "libc6",
+      "version": "2.35-0ubuntu3.15"
+    },
+    "reference": {
+      "bytes": 240936,
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+    },
+    "saved_readelf_scope": [
+      "program_headers",
+      "dynamic_table"
+    ],
+    "source_package_name_authority": "pool/main/g/glibc path is present; reduced saved binary package record has no Source field, so fetch authoritative full record/source linkage before claiming exact source correspondence.",
+    "source_package_name_candidate": "glibc"
+  },
+  "finite_source_acquisition_design": {
+    "source_review_targets": [
+      {
+        "candidate_path": "elf/dl-load.c",
+        "candidate_symbols": [
+          "_dl_map_object",
+          "_dl_map_object_from_fd"
+        ],
+        "review_question": "Locate all new-map and existing-object/name/inode alias return paths, failures, debug messages, and audit callbacks; these are search targets, not established local semantics."
+      },
+      {
+        "candidate_path": "elf/dl-deps.c",
+        "candidate_symbols": [
+          "_dl_map_object_deps"
+        ],
+        "review_question": "Identify each DT_NEEDED item and the exact requester/namespace passed to the resolver, and the successful returned object at the call site. Determine filters/auxiliaries and dedup paths separately."
+      },
+      {
+        "candidate_path": "elf/dl-open.c",
+        "candidate_symbols": [
+          "_dl_open"
+        ],
+        "review_question": "Separate top-level dlopen requests, caller lookup, mode/namespace and transaction completion from recursive DT_NEEDED resolution."
+      },
+      {
+        "candidate_path": "elf/rtld.c",
+        "candidate_symbols": [],
+        "review_question": "Prove when startup interpreter/preload/dependency observations start, including paths before any Python hook."
+      },
+      {
+        "candidate_path": "elf/dl-close.c",
+        "candidate_symbols": [],
+        "review_question": "Establish unload/lifetime events so a reused link_map address or namespace number is not treated as an earlier object."
+      },
+      {
+        "candidate_path": "elf/dl-audit.c",
+        "candidate_symbols": [],
+        "review_question": "Establish what search/open/binding callbacks actually promise, especially bypass when reusing objects; no name alone implies a successful dependency edge."
+      },
+      {
+        "candidate_path": "elf/dl-debug.c",
+        "candidate_symbols": [],
+        "review_question": "Locate namespace/link_map debug behavior and the scope/limits of stable mapping snapshots."
+      },
+      {
+        "candidate_path": "include/link.h and elf/link.h",
+        "candidate_symbols": [],
+        "review_question": "Confirm exact build layouts and namespace/object identifiers needed by a proposed observer."
+      }
+    ],
+    "stage1_metadata_only": [
+      "At most the already identified jammy-updates/main and jammy-security/main pockets; authenticate Release and source/binary index declarations with the existing reviewed Ubuntu trust anchor. Do not assume old signed binary indexes establish Sources indexes.",
+      "Reacquire full exact libc6 2.35-0ubuntu3.15 amd64 binary record or authenticated package control to establish its Source field; select exactly the matching source package/version. A different upstream2.35 snapshot is insufficient.",
+      "Select exact source DSC and every Checksums-Sha256 member, lengths, Directory and patch series from the authenticated Sources record; write a finite root-reviewed download table before source payload transfer. If exact version is absent, stop and choose an authenticated retained snapshot; never substitute newer code."
+    ],
+    "stage2_exact_source_payload": [
+      "Authenticate all declared source archives/DSC by full digest, extract only explicit target source/debian patch members after complete validation, and reconstruct the distro-patched source using the exact series and build configuration. No install or system mutation.",
+      "Archive/member bytes and counts must be bound from acquired signed metadata into a separately reviewed finite plan; no unbounded fetch/extraction, guessed hashes, or automatic budget enlargement. This stage is not admitted by this report."
+    ],
+    "stage3_optional_debug_identity": [
+      "Existing saved readelf metadata does not record actual BuildID. A separate finite serialized ELF-note collection from the already authenticated240936-byte loader, or an authenticated matching package member, is needed.",
+      "Select exact matching libc6 debug package/version/architecture through authenticated metadata; match the loader BuildID/debuglink and code identity, then establish private symbol/call-site addresses and build layouts before probes. Package-version string alone is insufficient.",
+      "If source/debug correspondence or probe location cannot be demonstrated, retain unresolved edges; do not use guessed offsets or generic glibc symbols."
+    ],
+    "status": "design_only_no_network_or_payload_work",
+    "trust_anchor_from_existing_signed_metadata": {
+      "authority_ref": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-archive-key-authority-20261111-v1.json",
+        "sha256": "b729344d76014db061a946e2568e3f00219e759c4fa2cf7d535111e01742fad0"
+      },
+      "keyring_sha256": "1a4dd63e5c76728960a2edddae22e2e0fc53df8e8b87806deb971030ac704eb0",
+      "primary_fingerprints": [
+        "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "790BC7277767219C42C86F933B4FE6ACC0B21F32"
+      ]
+    }
+  },
+  "full_model_qualified": false,
+  "future_runtime_prerequisites": [
+    "M1 finite candidate/startup content/search authority independently accepted.",
+    "Exact observer source/debug/tool authority and finite trace schema separately accepted.",
+    "Fresh parent-reviewed serial history/admission and original retained-lock/cleanup protocol; not supplied by this source task.",
+    "Actual controls then original eleven-import controlled environment; no claim of historical environment replay.",
+    "Original native ABI/model tests and all numerical/cold/long/slot/quality/HTTP gates remain required."
+  ],
+  "future_validation_matrix": [
+    {
+      "case": "fresh successful dependency",
+      "required_outcome": "Return-object identity tied to exact request, requester instance and namespace; file content independently accepted."
+    },
+    {
+      "case": "already-loaded SONAME reuse",
+      "required_outcome": "Successful edge remains explicit when search/open events are absent."
+    },
+    {
+      "case": "same inode via different aliases",
+      "required_outcome": "Returned object identity retained; path spelling alone never creates a new object."
+    },
+    {
+      "case": "same SONAME in different namespaces",
+      "required_outcome": "No cross-namespace association; correct instance/generation required."
+    },
+    {
+      "case": "nested/concurrent dlopen",
+      "required_outcome": "Match call/return stack or token and thread; temporal adjacency is insufficient."
+    },
+    {
+      "case": "failed candidate then successful candidate",
+      "required_outcome": "Only actual successful return supplies edge; all failed tries remain attempts."
+    },
+    {
+      "case": "mapping succeeds then version/relocation fails",
+      "required_outcome": "Resolution edge may be recorded but enclosing import/ABI status remains failed."
+    },
+    {
+      "case": "interposed symbol",
+      "required_outcome": "Symbol provider may differ; dependency edge is not rewritten."
+    },
+    {
+      "case": "unload/reload reusing object address",
+      "required_outcome": "New generation required; stale edge cannot attach to new object."
+    },
+    {
+      "case": "untriggered optional/CPU alternative module",
+      "required_outcome": "Row remains unobserved; no forced scope change or inferred completion."
+    },
+    {
+      "case": "trace missing return/drop/overflow/truncation",
+      "required_outcome": "Incomplete verdict, never reconstruct from nearby mappings."
+    },
+    {
+      "case": "pre-exec/preload events before Python hook",
+      "required_outcome": "Startup window proven externally or scope explicitly incomplete."
+    },
+    {
+      "case": "secure-mode/env suppression or unsupported trace facility",
+      "required_outcome": "Record absent observation and fail completeness; no silent fallback."
+    }
+  ],
+  "gap_denominator": {
+    "all_original_requests": [
+      {
+        "actual_selected_path": null,
+        "needed": "libc10.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch_cpu.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libc10.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch_cpu.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX2.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libc10.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch_cpu.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/_C_AVX512.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch_cpu.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/fs_io_C.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch_cpu.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libtorch.so",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/vllm/spinloop.abi3.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libgomp.so.1",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libshm.so"
+      },
+      {
+        "actual_selected_path": null,
+        "needed": "libgomp.so.1",
+        "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so"
+      }
+    ],
+    "by_requester_filename": {
+      "_C.abi3.so": [
+        "libc10.so",
+        "libtorch_cpu.so",
+        "libtorch.so"
+      ],
+      "_C_AVX2.abi3.so": [
+        "libc10.so",
+        "libtorch_cpu.so",
+        "libtorch.so"
+      ],
+      "_C_AVX512.abi3.so": [
+        "libc10.so",
+        "libtorch_cpu.so",
+        "libtorch.so"
+      ],
+      "fs_io_C.abi3.so": [
+        "libtorch_cpu.so",
+        "libtorch.so"
+      ],
+      "libshm.so": [
+        "libgomp.so.1"
+      ],
+      "libtorch_cpu.so": [
+        "libgomp.so.1"
+      ],
+      "spinloop.abi3.so": [
+        "libtorch_cpu.so",
+        "libtorch.so"
+      ]
+    },
+    "import_scope_caveat": "One successful eleven-import prefix cannot establish all fifteen edges if requester variants or lazy/optional imports never execute. Preserve every row; use distinct observed-success, observed-failure, and not-triggered states. Never force _C/_C_AVX2/fs/spinloop into the same controlled prefix to manufacture closure.",
+    "original_import_prefix": [
+      "torch",
+      "pytest",
+      "transformers",
+      "tokenizers",
+      "vllm",
+      "vllm.config",
+      "vllm.distributed.parallel_state",
+      "vllm.model_executor.models.dory",
+      "vllm.model_executor.models.utils",
+      "vllm.transformers_utils.configs.dory",
+      "vllm._custom_ops"
+    ],
+    "source_path_caveats": [
+      {
+        "citations": [
+          {
+            "line_end": 2249,
+            "line_start": 2247,
+            "source": "vllm/envs.py"
+          },
+          {
+            "line_end": 23,
+            "line_start": 20,
+            "source": "vllm/distributed/device_communicators/shm_broadcast.py"
+          },
+          {
+            "line_end": 58,
+            "line_start": 48,
+            "source": "vllm/distributed/device_communicators/shm_broadcast.py"
+          },
+          {
+            "line_end": 743,
+            "line_start": 742,
+            "source": "vllm/distributed/device_communicators/shm_broadcast.py"
+          },
+          {
+            "line_end": 859,
+            "line_start": 854,
+            "source": "vllm/distributed/device_communicators/shm_broadcast.py"
+          }
+        ],
+        "finding": "shm_broadcast imports torch before conditionally importing vllm.spinloop. VLLM_USE_SPINLOOP_EXT defaults to bool(int(\"0\")); successful import enables the extension, ImportError leaves it disabled. The original saved metadata does not record this flag. Calls additionally require the enabled flag and a queue condition; importing and invoking are distinct events.",
+        "id": "spinloop_import_and_fallback"
+      },
+      {
+        "citations": [
+          {
+            "line_end": 568,
+            "line_start": 550,
+            "source": "vllm/distributed/parallel_state.py"
+          },
+          {
+            "line_end": 47,
+            "line_start": 41,
+            "source": "vllm/distributed/device_communicators/shm_tensor_arena.py"
+          },
+          {
+            "line_end": 18,
+            "line_start": 13,
+            "source": "vllm/v1/kv_offload/cpu/shared_offload_region.py"
+          },
+          {
+            "line_end": 6,
+            "line_start": 4,
+            "source": "vllm/distributed/__init__.py"
+          }
+        ],
+        "finding": "Inside GroupCoordinator.__init__, the import of shm_broadcast.MessageQueue is outside and before the world_size>1 broadcaster-allocation gate. TP1 therefore does not itself exclude this import if the constructor is called. Importing parallel_state alone does not establish construction. Two other collected modules import shm_broadcast at module scope. The distributed package also imports communication_op and utils, whose sources were not collected in this followup.",
+        "id": "tp1_does_not_exclude_shm_module"
+      },
+      {
+        "citations": [
+          {
+            "line_end": 59,
+            "line_start": 50,
+            "source": "vllm/v1/kv_offload/tiering/factory.py"
+          },
+          {
+            "line_end": 122,
+            "line_start": 118,
+            "source": "vllm/v1/kv_offload/tiering/factory.py"
+          },
+          {
+            "line_end": 156,
+            "line_start": 152,
+            "source": "vllm/v1/kv_offload/tiering/factory.py"
+          }
+        ],
+        "finding": "Registering the fs tier stores a loader closure. import_module runs when that closure is invoked by get_tier_class. Registration alone does not eagerly import fs.manager or fs_io_C. The original explicit import prefix contains no fs module, but the finite source set cannot prove transitive absence.",
+        "id": "fs_registration_is_lazy"
+      },
+      {
+        "citations": [],
+        "finding": "Embedded original metadata reports CpuPlatform, x86_64 Intel Xeon Platinum 8375C, avx512_f=True and avx512_bf16=False. With those conditions unchanged, the inherited CPU dispatch source predicts _C_AVX512. It does not establish module import success, actual selected dependency providers, or the status of alternative _C / _C_AVX2 branches.",
+        "id": "expected_cpu_dispatch",
+        "inherited_r1_citations": [
+          "vllm/platforms/cpu.py:657-693",
+          "vllm/_custom_ops.py:8,21"
+        ],
+        "metadata_evidence": "original_import_metadata.platform and cpu_capabilities"
+      }
+    ],
+    "total": 15
+  },
+  "inputs": [
+    {
+      "bytes": 65717,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-original-prefix-observation-design-20261111-v1.json",
+      "sha256": "d3176a9bf4f86faed7543eb557d726c40b054ac4dfb33bee7110a07aa4f4bbba"
+    },
+    {
+      "bytes": 5825,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-original-prefix-observation-root-review-20261111-v1.json",
+      "sha256": "a9eb041950dd12ab45317ac9be40916c76e34f84247ad86f5d5c7b81c6663444"
+    },
+    {
+      "bytes": 15319,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-candidate-elf-source-delivery-20261111-v1.json",
+      "sha256": "cc5171debe4126a5d2847827c6e2b3852977bc5b8160f7c6d5dd0c7b21de4724"
+    },
+    {
+      "bytes": 44354,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-candidate-elf-root-source-size-review-20261111-v1.json",
+      "sha256": "9d14ab52e385ab98d49b340e4b574689cf3594a90451dafa161527b71efb992c"
+    },
+    {
+      "bytes": 11149,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-member-verification-next-inputs-20261111-v1.json",
+      "sha256": "ea62d3a13088728d477d041bb3f3676324d3c7c0ec082e2140ad2000d249c98c"
+    },
+    {
+      "bytes": 137884,
+      "path": "/mnt/nvme/dory-serial-inventory-r5-20261111/inventory/external-closure.json",
+      "sha256": "8e97c912e0cbcd75ee4eead45565a05d727c5bc043ef5bf0ea2eeb51002ffd6e"
+    },
+    {
+      "bytes": 31097,
+      "path": "/mnt/nvme/dory-serial-inventory-deb-replay-r1-20261111/packages/sources-result.json",
+      "sha256": "594f9c3fa05579fa1da9af0a486ca252d988ff16e05041bd05b1b18237574a14"
+    },
+    {
+      "bytes": 37912,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-remaining-loader-gaps-after-cache-20261111-v1.json",
+      "sha256": "41e6d4600ec218dfc56e2555333795c68fc3a5e4e4b279142356ae6877583681"
+    },
+    {
+      "bytes": 31674,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-loader-route-source-analysis-20261111-v2.json",
+      "sha256": "fd963fa2d075f8f82f0e8933efff6b5ab1caf0418d4f97aafc7214f166f78345"
+    },
+    {
+      "bytes": 25154,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+      "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+    }
+  ],
+  "local_source_search": {
+    "content_file_types": [
+      "*.c",
+      "*.h",
+      "*.cc"
+    ],
+    "content_patterns": [
+      "_dl_map_object",
+      "la_objsearch",
+      "_dl_map_object_deps",
+      "LA_SER_ORIG"
+    ],
+    "file_name_patterns": [
+      "*dl-load*",
+      "*dl-deps*",
+      "*glibc*",
+      "*rtld*"
+    ],
+    "name_search_actual_tool": {
+      "exit_code": 1,
+      "terminal_chunk": "eae543"
+    },
+    "results_in_successfully_searched_scope": [],
+    "roots": [
+      "/usr/src",
+      "/home/ubuntu/src",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research"
+    ],
+    "scope_limitation": "rg exit1/no stdout with stderr redirected; this is a bounded negative search, not proof of filesystem-wide absence or readable coverage of every path. No source implementation or debug contract was supplied by the authenticated saved metadata.",
+    "symbol_search_actual_tool": {
+      "exit_code": 1,
+      "terminal_chunk": "b48677"
+    }
+  },
+  "model_constraints": {
+    "cold_cache_long_decode_slot_reuse_required": true,
+    "num_loops": 2,
+    "tensor_parallel_size": 1,
+    "total_independent_attention_histories": 56
+  },
+  "new_speedup_claim": false,
+  "observer_design": {
+    "minimum_edge_record": [
+      "process_PID_and_start_identity",
+      "thread_or_nested_request_token",
+      "monotonic_sequence_and_loss_indicator",
+      "request_kind_DT_NEEDED_distinct_from_dlopen/filter/auxiliary",
+      "requester_object_lifetime_ID_namespace_and_authenticated_content",
+      "DT_NEEDED_index_or_authenticated_requested_string",
+      "resolver_call_success_status_and_returned_object_lifetime_ID",
+      "provider_namespace_and_authenticated_content/file_identity",
+      "new_mapping_or_reuse_classification",
+      "outer_load_transaction_success_or_failure_when_separate_from_resolution",
+      "observation_window_and_import_prefix_checkpoint"
+    ],
+    "preferred_review_order": [
+      "Review exact LD_DEBUG statements first, including every successful reuse branch and the precise requester/namespace/request-type meaning. If it omits return-object identity or reuse events, raw logs remain supporting evidence only.",
+      "For missing success edges, separately review a finite direct observation at the source-confirmed DT_NEEDED resolution call site after resolver return. Candidate internal names are source-search targets; no particular ABI, source line or binary address is currently accepted.",
+      "An external observer that starts before the target exec would avoid adding a target audit DSO but adds tool/kernel/trace authority. An LD_AUDIT-based observer changes the target environment and may itself load dependencies. Neither is approved or known feasible here."
+    ],
+    "raw_LD_DEBUG_policy": "May retain authenticated bounded raw trace after separate M1 and serial admission, with no provider closure claim when semantic requirements are unmet.",
+    "scope_semantics": [
+      "Successful resolver return is distinct from successfully completing the enclosing dlopen/import/relocation transaction. Record both; mapping then rollback must not become ABI success.",
+      "Already-loaded SONAME or inode reuse must produce an explicit resolver return relation, even when no file search/open/objopen event occurs.",
+      "Namespace ID plus a path is not unique across unload/reload or namespace destruction/reuse; use object generations bounded by creation/removal events.",
+      "dlopen top-level caller and a recursively loaded DT_NEEDED requester are different roles; retain nested request stack/thread identities and exact request kind.",
+      "Symbol provider can be interposed and does not establish the object selected for DT_NEEDED.",
+      "A request not triggered by the original eleven imports remains not-triggered/unresolved; do not extrapolate from another extension or optional path.",
+      "Any dropped/truncated/overflowed or unmatched event makes affected observation incomplete; no adjacency heuristic or last-seen candidate recovery.",
+      "Start before executable/preload/dependency resolution if claiming startup coverage. Python audit hooks begin too late for earlier loads; partial windows must be labelled partial."
+    ],
+    "status": "requirements_only_no_address_or_parser_implemented"
+  },
+  "operations": {
+    "RECORD_raw_tensor_or_archive_payload_read": false,
+    "downloads": false,
+    "frozen_files_modified": false,
+    "native_payload_bytes_read": 0,
+    "new_provider_mapper_implemented": false,
+    "process_service_lock_or_current_catalog_handoff_inspected": false,
+    "publication": false,
+    "target_packages_imported": false
+  },
+  "reviewer": "/root/dory_loader_semantics_source_20261111",
+  "runtime_admitted": false,
+  "schema": "dory_loader_M2_exact_source_prerequisite_review_v1",
+  "source_only": true
+}
