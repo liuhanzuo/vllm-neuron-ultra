@@ -1,0 +1,54 @@
+{
+  "schema": "minicpm5_observer_source_test_scope_deviation_v1",
+  "author": "/root/mini_mapping_authority_source",
+  "recorded_at": "2026-11-12T03:21:02.400208+00:00",
+  "source_only_no_native_import_requirement_satisfied": false,
+  "incident": "Initial v1 coordination module imported the original diagnostic at top level; inherited history transitively imported ctypes before mocked tests. No original serial enrollment was performed, so these are not admitted native diagnostics.",
+  "actual_terminal_records": [
+    {
+      "terminal_chunk": "1224cb",
+      "exit_code": 1,
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_observed_adapter_v1.py",
+      "result": "21 tests attempted; Python3.10 enterContext fixture error; inherited import preceded failures"
+    },
+    {
+      "terminal_chunk": "cae836",
+      "exit_code": 0,
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_observed_adapter_v2.py",
+      "result": "21 mock tests pass, 0.074s, but inherited ctypes import occurred"
+    },
+    {
+      "terminal_chunk": "8c1ad0",
+      "exit_code": 1,
+      "command": "python3 -B -s stdin interface check",
+      "result": "Interface binds ran; final absence-of-ctypes assertion failed"
+    },
+    {
+      "terminal_chunk": "442b86",
+      "exit_code": 1,
+      "command": "python3 -B -s stdin blocked-import trace",
+      "result": "Finder rejected ctypes before loading and printed inherited import chain"
+    }
+  ],
+  "all_reported_tool_processes_terminal": true,
+  "process_pid_start_ticks_not_recorded": true,
+  "actual_ctypes_module_file_identity_not_recorded": true,
+  "exact_incident_timestamps_not_recorded": true,
+  "no_retrospective_native_import_to_fill_missing_evidence": true,
+  "inherited_import_site": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_python_trace_lifecycle_v4.py",
+    "line": 7
+  },
+  "evidence_scope": "Mock tests replace make_ports and actual process/storage operations on exercised paths; no test called ptrace or started an SDK child. No whole-process syscall audit was recorded, so this is source/test-path evidence, not an independent syscall proof. ctypes import itself loads native support and cannot be labelled pure-source compliant.",
+  "resolution": "New lazy factory v2 does not import the old diagnostic. v4 checks compile only selected old class AST with explicit fake dependencies, block ctypes/_ctypes/Torch/NumPy/Neuron imports throughout and assert absent modules at end.",
+  "corrected_checks": {
+    "terminal_chunk": "2a0b48",
+    "exit_code": 0,
+    "tests": 21,
+    "seconds": 0.035,
+    "native_related_imports_blocked": true
+  },
+  "actual_runtime_admitted": false,
+  "model_qualified": false,
+  "new_speedup_claim": false
+}
