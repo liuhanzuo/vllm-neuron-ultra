@@ -56,4 +56,8 @@ python3 -B -s test/qwen35/run_source_tests.py
 
 后续仍需新包的真实导入和 spawn、12 图编译及 HLO 检查、tokenizer、32 帧数值／84 帧冷缓存／1,541 步长解码与槽位复用、真实采样重放和 13 项控制、quality96、配对 HTTP 及实际退出核验。这里没有新增合格提速倍数。
 
+独立包的原生预检程序现已准备并通过源码复核。18 项源码／模拟检查、7 种父子进程模拟情形和 10 项访问限制负控通过；70 个插件源码文件与 20 个 SDK 源码文件均绑定哈希。未来真实运行将检查主进程与 spawn 子进程的实际导入来源、三处模型注册、完整 SDK 配置保存／加载、错误配置拒绝、12 KiB CPU BF16 split 和两种采样器的独立实例接线。当前没有执行原生预检。
+
+预检复用当前串行调度与锁，由外层监督器处理完整历史核对和全部子进程清理；它不加载模型权重或编译图。即使预检通过，也只证明导入与配置接线，仍需上述独立模型验证。[预检源码、执行约定及独立复核](evidence/qwen35-package-native-preflight-20261112/manifest.json)已保存。
+
 完整证据见[固定源码清单](../test/qwen35/source_delivery_v2.json)、[依赖清单](../test/qwen35/dependency_inventory.json)与[独立源码复核](evidence/qwen35-package-source-20261112/manifest.json)。既有实测结果继续见[提速表](model-speedups-20261112.md)。
