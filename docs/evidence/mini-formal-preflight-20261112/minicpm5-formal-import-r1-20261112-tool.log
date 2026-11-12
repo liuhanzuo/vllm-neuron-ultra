@@ -1,0 +1,23 @@
+{"event": "root_exec_exact_reviewed_entry", "pid": 774918, "argv_file": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r1-20261112-launch-argv.json", "argv_sha256": "192c3f81fae794d8906b4b343b38afa52f5d3c1135ddef010117dfb11b205e7a"}
+Traceback (most recent call last):
+  File "<string>", line 661, in <module>
+  File "<string>", line 657, in main
+  File "<string>", line 115, in fail
+  File "<string>", line 652, in main
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v5.py", line 108, in source_entry
+    original,gate,authenticator=load_history(entry,bootstrap,pins)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v5.py", line 89, in load_history
+    original=gate.load()
+             ^^^^^^^^^^^
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_history_gate_v1.py", line 151, in load
+    receipt = self.authenticate_bootstrap(copy.deepcopy(self.bootstrap),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v5.py", line 79, in authenticate_before_import
+    receipt=authenticator.authenticate_bootstrap(current,review,guard)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_authenticator_v3.py", line 208, in authenticate_bootstrap
+    require(not any(environment.get(k) for k in ('LD_PRELOAD','LD_AUDIT','LD_LIBRARY_PATH')),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_observer_logic_v1.py", line 51, in require
+    raise ObservationError(reason)
+research.minicpm5_sdk_mapping_observer_logic_v1.ObservationError: No additional dynamic-loader interposition/search environment

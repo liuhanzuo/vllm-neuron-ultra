@@ -1,0 +1,101 @@
+{
+  "blockers": [
+    {
+      "failure": "The new outer verification ignores that receipt and unconditionally invokes Service.drained for started services. drained calls observe and verify_properties, which require LoadState=loaded. With the unit absent this always fails, so retain_until_drained retries indefinitely while retaining the original serial lock.",
+      "id": "never_loaded_service_forced_through_loaded_only_drained",
+      "independent_reproduction": {
+        "actual_original_Service_cleanup_drained_observe_and_verify_properties_AST": true,
+        "cleanup_result_cleanup_complete": true,
+        "cleanup_result_never_loaded": true,
+        "cleanup_result_remaining_processes": [],
+        "drained_error": "actual loaded service invocation",
+        "exit_code": 0,
+        "native_or_real_system_actions": false,
+        "system_ports_mocked": true,
+        "terminal_chunk": "37d179"
+      },
+      "location": "qwen35_package_preflight_serial_v1.outer finally verify",
+      "required_correction": "Versioned narrow adapter correction must reuse the original never-loaded cleanup proof with a second independent absent/empty-group observation; installed/observed services must retain original drained behavior and reject unexpected disappearance. Do not modify frozen v1 or v12.",
+      "severity": "runtime_failure_cleanup",
+      "test_gap": "Existing partial-launch test replaces the whole Service with a fake whose drained accepts the scenario; it misses the actual reused API incompatibility.",
+      "trigger": "The actual reused Service.start sets started=True before the systemd-run command. If installation fails before any unit/invocation exists, cleanup returns its legitimate never_loaded empty-group receipt."
+    }
+  ],
+  "current_history_bindings_created_or_modified": false,
+  "delivery": {
+    "bytes": 107571,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-preflight-serial-source-delivery-20261112-v1.json",
+    "sha256": "18f02cd7d6b90667a6c894189715be4c3c8d350b1a2328eba68c8f9c5c8988aa"
+  },
+  "frozen_sources_modified": false,
+  "full_model_qualified": false,
+  "native_framework_execution": false,
+  "new_sources": [
+    {
+      "bytes": 27786,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_serial_v1.py",
+      "sha256": "99d787abe498380f47606e2acc862aa30f5ab9c04cc8577f0d9b93c8e6aa1809"
+    },
+    {
+      "bytes": 3883,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_history_v1.py",
+      "sha256": "b5f9ccf148982dc28349701d2d167aa5d8f0034d40c99b26245b06a93669186a"
+    },
+    {
+      "bytes": 20524,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_preflight_serial_v1.py",
+      "sha256": "24e2d06099801ef8a445e7ea379edfc35bdcbd79884b4da62ed11dead1e8d4b0"
+    },
+    {
+      "bytes": 4130,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_preflight_serial_v1.py",
+      "sha256": "a2e18a04e6f00f3ecb59b5fb69430d7b6a851cf5bffbd8381719165f9fd8c074"
+    }
+  ],
+  "new_speedup_claim": false,
+  "note": {
+    "bytes": 9803,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-preflight-serial-integration-20261112-v1.md",
+    "sha256": "48f8568e8ed6122e78acaa343b08ee6a4e88fae5acae6c9e7dc7460953ae72c1"
+  },
+  "other_reviewed_paths": {
+    "Service_constructor_command_environment_namespace_compatible": true,
+    "clean_environment_constructed_from_explicit_minimal_dictionary": true,
+    "external_terminal_requires_same_tool_session_and_actual_post_exit_drain": true,
+    "full_original_history_collectors_and_874_LFM_supplement_retained": true,
+    "native_v3_bundle_and_input_bound": true,
+    "no_other_source_blocker_identified": true,
+    "original_retained_lock_reused": true,
+    "output_monitor_allows_only_five_exact_tokenizer_aliases_without_reading_targets": true,
+    "real_Popen_owner_wait_result_parent_spawn_edges_checked": true,
+    "root_28_nvme_30GiB_limits_and_64MiB_reservation_retained": true,
+    "root_owner_lock_history_cgroup_refs_bound": true,
+    "root_running_ACK_precedes_native_launch": true
+  },
+  "payload_reads": false,
+  "real_lock_service_proc_cgroup_actions": false,
+  "reviewed_at": "2026-11-12T14:39:26.010235+00:00",
+  "reviewer": "/root/mini_formal_native_review_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_preflight_serial_independent_source_review_v1",
+  "source_accepted": false,
+  "tests": [
+    {
+      "existing_historical_DeprecationWarning_unchanged": true,
+      "exit_code": 0,
+      "kind": "existing_author_stdlib_source_mock_suite",
+      "passed": true,
+      "terminal_chunk": "448770",
+      "tests": 14
+    },
+    {
+      "direct_reused_sources": 12,
+      "exit_code": 0,
+      "kind": "exact_source_inventory_hash_verification",
+      "native_v3_bundle_hash_verified": true,
+      "new_sources": 4,
+      "static_local_python_sources": 605,
+      "terminal_chunk": "d5c7b4"
+    }
+  ]
+}

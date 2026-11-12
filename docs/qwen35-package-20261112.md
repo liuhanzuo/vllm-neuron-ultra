@@ -63,3 +63,5 @@ python3 -B -s test/qwen35/run_source_tests.py
 预检复用当前串行调度与锁，由外层监督器处理完整历史核对和全部子进程清理；它不加载模型权重或编译图。即使预检通过，也只证明导入、配置接线及指定输入的分词行为，仍需上述独立模型验证。[当前 v3 源码及独立复核](evidence/qwen35-tokenizer-preflight-v3-20261112/manifest.json)与[此前 v1 接入证据](evidence/qwen35-package-native-preflight-20261112/manifest.json)均保留。下一项设备端候选为[合并解码槽位写入](qwen35-slot-writer-candidate-20261112.md)，尚无实测提速。
 
 完整证据见[固定源码清单](../test/qwen35/source_delivery_v2.json)、[依赖清单](../test/qwen35/dependency_inventory.json)与[独立源码复核](evidence/qwen35-package-source-20261112/manifest.json)。既有实测结果继续见[提速表](model-speedups-20261112.md)。
+
+串行执行接入 v2 已通过 18 项源码／模拟检查及 6 项独立检查，修复了服务未安装时可能持锁循环的问题。真实 package 预检仍待执行，见[接入修复及验证范围](mini-formal-import-and-preflight-20261112.md)。
