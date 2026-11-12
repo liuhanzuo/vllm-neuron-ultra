@@ -1,0 +1,715 @@
+{
+  "actual_process": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v10.py",
+      "--mode",
+      "leaf",
+      "--binding",
+      "/mnt/nvme/neuron-work/qw-r8-v10-20261112/shared-native_preflight/phase-spec.json",
+      "--binding-sha256",
+      "1dfc74174a08df03fe09e25c9c6698ceb110bb147043291cb4f92a2cf4b9a1ce"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r8-v10-20261112-shared-native-preflight.service",
+    "pid": 3615091,
+    "ppid": 3614972,
+    "start_ticks": "425655224"
+  },
+  "phase_spec": {
+    "path": "/mnt/nvme/neuron-work/qw-r8-v10-20261112/shared-native_preflight/phase-spec.json",
+    "sha256": "1dfc74174a08df03fe09e25c9c6698ceb110bb147043291cb4f92a2cf4b9a1ce"
+  },
+  "result": {
+    "actual_native_serialization_cases": [
+      {
+        "case": "torch.float32:contiguous",
+        "packet_bytes": 426,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.float32:slice",
+        "packet_bytes": 378,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.float32:singleton_stride",
+        "packet_bytes": 338,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.float32:singleton_stride0",
+        "packet_bytes": 329,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.float32:empty",
+        "packet_bytes": 329,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.float64:contiguous",
+        "packet_bytes": 523,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.float64:slice",
+        "packet_bytes": 426,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.float64:singleton_stride",
+        "packet_bytes": 347,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.float64:singleton_stride0",
+        "packet_bytes": 333,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.float64:empty",
+        "packet_bytes": 329,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.bfloat16:contiguous",
+        "packet_bytes": 379,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.bfloat16:slice",
+        "packet_bytes": 355,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.bfloat16:singleton_stride",
+        "packet_bytes": 335,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.bfloat16:singleton_stride0",
+        "packet_bytes": 328,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.bfloat16:empty",
+        "packet_bytes": 330,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.float16:contiguous",
+        "packet_bytes": 378,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.float16:slice",
+        "packet_bytes": 354,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.float16:singleton_stride",
+        "packet_bytes": 334,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.float16:singleton_stride0",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.float16:empty",
+        "packet_bytes": 329,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.int64:contiguous",
+        "packet_bytes": 521,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.int64:slice",
+        "packet_bytes": 424,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.int64:singleton_stride",
+        "packet_bytes": 345,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.int64:singleton_stride0",
+        "packet_bytes": 331,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.int64:empty",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.int32:contiguous",
+        "packet_bytes": 424,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.int32:slice",
+        "packet_bytes": 376,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.int32:singleton_stride",
+        "packet_bytes": 336,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.int32:singleton_stride0",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.int32:empty",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.uint8:contiguous",
+        "packet_bytes": 352,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.uint8:slice",
+        "packet_bytes": 340,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.uint8:singleton_stride",
+        "packet_bytes": 330,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.uint8:singleton_stride0",
+        "packet_bytes": 324,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.uint8:empty",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.bool:contiguous",
+        "packet_bytes": 351,
+        "passed": true,
+        "shape": [
+          4,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "torch.bool:slice",
+        "packet_bytes": 339,
+        "passed": true,
+        "shape": [
+          4,
+          3
+        ],
+        "stride": [
+          6,
+          2
+        ]
+      },
+      {
+        "case": "torch.bool:singleton_stride",
+        "packet_bytes": 329,
+        "passed": true,
+        "shape": [
+          2,
+          1
+        ],
+        "stride": [
+          18,
+          1
+        ]
+      },
+      {
+        "case": "torch.bool:singleton_stride0",
+        "packet_bytes": 323,
+        "passed": true,
+        "shape": [
+          1
+        ],
+        "stride": [
+          0
+        ]
+      },
+      {
+        "case": "torch.bool:empty",
+        "packet_bytes": 326,
+        "passed": true,
+        "shape": [
+          0,
+          6
+        ],
+        "stride": [
+          6,
+          1
+        ]
+      },
+      {
+        "case": "fp32:scalar",
+        "packet_bytes": 327,
+        "passed": true,
+        "shape": [],
+        "stride": []
+      },
+      {
+        "case": "fp32:masked",
+        "packet_bytes": 342,
+        "passed": true,
+        "shape": [
+          1,
+          3
+        ],
+        "stride": [
+          3,
+          1
+        ]
+      }
+    ],
+    "actual_process_exit_pending_root_observation": true,
+    "actual_rng_unchanged_by_serialization": true,
+    "device_execution": false,
+    "full_model_qualified": false,
+    "general_overlapping_layout_support_claimed": false,
+    "model_loaded": false,
+    "overlapping_layout_negative_control": {
+      "control": "nonempty_expanded_stride0_rejected",
+      "error": "unsupported operation: more than one element of the written-to tensor refers to a single memory location. Please clone() the tensor before performing the operation.",
+      "error_type": "RuntimeError",
+      "passed": true,
+      "shape": [
+        4
+      ],
+      "stride": [
+        0
+      ]
+    },
+    "passed": true,
+    "rejection_controls": {
+      "controls": [
+        {
+          "control": "partial_explicit_generators",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "all_explicit_generators",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "k_absent",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "k_zero",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": [
+            "RuntimeError",
+            "index 256 is out of bounds for dimension 1 with size 256"
+          ],
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "k_above64",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "non_float32",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "invalid_p",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "processed_logits",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "processed_logprobs",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": true
+        },
+        {
+          "control": "excessive_kth_ties",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": false
+        },
+        {
+          "control": "nonfinite_max_or_kth",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": false
+        },
+        {
+          "control": "cdf_near_boundary",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": false
+        },
+        {
+          "control": "cdf_boundary_tie",
+          "passed": true,
+          "reference_calls": 1,
+          "reference_exception": null,
+          "token_and_rng_equal": true,
+          "whole_call": false
+        }
+      ],
+      "full_model_qualified": false,
+      "passed": true,
+      "timing_eligible": false
+    },
+    "schema": "qwen35_sampler_native_preflight_v1",
+    "self_exit_claimed": false,
+    "timing_eligible": false,
+    "worker_import_pickle": [
+      {
+        "class": "qwen35_sampler_worker_v1.BaselineMeasuredWorker",
+        "passed": true,
+        "pickle_bytes": 66,
+        "sha256": "81302845eb2916165a338f1ee02daaaf8490296e09d803c73dd06f1fca14d6f3"
+      },
+      {
+        "class": "qwen35_sampler_worker_v1.CandidateMeasuredWorker",
+        "passed": true,
+        "pickle_bytes": 67,
+        "sha256": "c0f4aae2d3dce8503fdf67c6e1482c070f2c8f7c5b5ecf3862871f18e66389c6"
+      },
+      {
+        "class": "qwen35_sampler_worker_v1.BaselineCaptureWorker",
+        "passed": true,
+        "pickle_bytes": 65,
+        "sha256": "18527161f8d1fc3f1d8b8b6b30a7089c8a878b07dceb1ea7448617030766eb19"
+      },
+      {
+        "class": "qwen35_sampler_worker_v1.CandidateCaptureWorker",
+        "passed": true,
+        "pickle_bytes": 66,
+        "sha256": "b923b373fcdd61b428001da1d4352435d6fea9158bea987164ad3f764e1736c9"
+      }
+    ]
+  },
+  "schema": "qwen35_sampler_actual_leaf_result_v1",
+  "self_exit_claimed": false
+}

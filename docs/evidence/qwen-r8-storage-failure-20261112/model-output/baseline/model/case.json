@@ -1,0 +1,35 @@
+{
+  "name": "latest-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4",
+  "model_path": "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031",
+  "served_name": "qwen3.5-2b-text",
+  "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-qwen35-2b-text-bf16-cpu-tp2-b4-ctx4096-split-v4",
+  "batch": 4,
+  "tp": 2,
+  "max_model_len": 4096,
+  "cpu": true,
+  "adapter": "qwen35_text",
+  "compile_workers": 1,
+  "skip_sampling_probe": true,
+  "extra_overrides": {
+    "apply_seq_ids_mask": true,
+    "context_encoding_buckets": [
+      128,
+      256,
+      512,
+      1024,
+      2048,
+      4096
+    ]
+  },
+  "note": "Fresh experimental Qwen3.5 text baseline: only the last-axis Q/K/V split changes to tensor_split. Original BF16 weights, FP32 recurrent state, TP2/B4/context4096, standard CPU sampler, six context and six decode buckets. Explicit context buckets equal the original SDK defaults. Compilation and all correctness/serving gates pending. Vision and MTP excluded; no speedup claimed against the failed old baseline.",
+  "qwen35_tensor_split": true,
+  "split_correction_sha256": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+  "startup_runtime_limit_s": 14400,
+  "startup_wait_limit_s": 14100,
+  "host_limits": {
+    "memory_max_gib": 26,
+    "memory_high_gib": 25,
+    "swap_gib": 12
+  },
+  "no_retry": true
+}

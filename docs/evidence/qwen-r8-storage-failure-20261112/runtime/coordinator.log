@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v10.py", line 44, in <module>
+    raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v10.py", line 36, in main
+    if args.mode == "coordinator": return coordinator(binding)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v10.py", line 548, in coordinator
+    result = run(adapter.ports(), spec["output_root"], bundle.host, clients=FailureCheckedClients(adapter, NativeClients()))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v1.py", line 251, in run
+    receipt = ports.model(arm, phase, root / "model", run_id)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v10.py", line 426, in model
+    def model(self, arm, name, directory, run_id): return Phase(self, arm, name, directory, run_id).leaf()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v10.py", line 300, in leaf
+    require(code["phase_spec"] == self.phase_ref and code["supervisor"] == self.service.owner
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: actual native child failed
