@@ -1,0 +1,62 @@
+{
+  "schema": "qwen35_sampler_r10_terminal_auditor_source_delivery_v1",
+  "author": "/root/qwen35_host_receipt_successor_20261112",
+  "created_at": "2026-11-12T12:44:01.713672+00:00",
+  "source_only": true,
+  "actual_audit_run": false,
+  "actual_scientific_result": false,
+  "root_independent_review_and_acceptance_required": true,
+  "predecessor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r10_terminal_root_20261112_v1.py",
+    "sha256": "dddd28fd1a5601d5c02fc04e155190bead8d9ddfa40d241c7016af8bbeac20f2"
+  },
+  "auditor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r10_terminal_root_20261112_v2.py",
+    "sha256": "1e3b8ac82edbaf666c45c4a72d0d8ad3a2e1a8f7a4d54bf6b6363c2b2a10375c"
+  },
+  "diff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-terminal-auditor-v2-20261112.diff",
+    "sha256": "efddc4184aa75eb85302b85c6255bdea6369ad42c857387242f7f01b21aa075f"
+  },
+  "notes": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-terminal-auditor-v2-notes-20261112-v1.md",
+    "sha256": "f0762e089ddd59122d41c57c26fb630895f0cc2a2d5d5de26abc4ed1d4106177"
+  },
+  "tests": [
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_r10_terminal_auditor_v3.py",
+        "sha256": "715fcb9f2c6b1230da4b4b8841ae0fa28a100547ee83e50849191fed0a544fb9"
+      },
+      "tool_chunk": "b03901",
+      "exit_code": 0,
+      "tests": 9,
+      "scope": "in-memory mocked science and session binding"
+    },
+    {
+      "source": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_r10_terminal_auditor_ast_v1.py",
+        "sha256": "be4ccb74e062f84dfed84c985f41d1c85e539f2349a4f1b5dc8b31cb5d9e835d"
+      },
+      "tool_chunk": "3c196a",
+      "exit_code": 0,
+      "scope": "AST original successful science, preflight, 20 phases, 21 services, lock and two drain passes"
+    }
+  ],
+  "preserved_initial_failure": {
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_r10_terminal_auditor_v2.py",
+      "sha256": "75444e3e4dec3818c814500ebc17c076cd5db5d2fb5f84cb6f25997c8240630a"
+    },
+    "tool_chunk": "066e2d",
+    "exit_code": 1,
+    "reason": "Test harness bound-method descriptor replacement for Path.exists; corrected only in successor v3 test"
+  },
+  "limitations": [
+    "No actual terminal audit",
+    "No actual native/model/packet execution",
+    "No live service/process probes",
+    "Root must supply actual external tool terminal evidence",
+    "Missing running handoff permitted on failure only and records explicitly unbound tool session"
+  ]
+}

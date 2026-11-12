@@ -1,0 +1,824 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_authenticator_v2.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_authenticator_v3.py
+@@ -17,7 +17,7 @@
+ import stat
+ import sys
+ from research import minicpm5_sdk_mapping_history_gate_v1 as gate
+-from research import minicpm5_sdk_mapping_native_closure_v1 as closure
++from research import minicpm5_sdk_mapping_native_closure_v2 as closure
+ 
+ require=gate.require
+ ROOT=gate.ROOT
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_native_v3.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_native_v4.py
+@@ -11,9 +11,9 @@
+ import os
+ from pathlib import Path
+ import sys
+-from research import minicpm5_sdk_mapping_native_authenticator_v2 as shared
++from research import minicpm5_sdk_mapping_native_authenticator_v3 as shared
+ from research import minicpm5_sdk_mapping_history_gate_v1 as history
+-from research import minicpm5_sdk310_composite_origins_v1 as origins
++from research import minicpm5_sdk310_composite_origins_v2 as origins
+ 
+ require=shared.require
+ ROOT=shared.ROOT
+@@ -78,7 +78,7 @@
+         try:
+             self._check()
+             d=self.reader.json(self.authority);self.decision=d
+-            require(d['schema']=='minicpm5_sdk310_native_source_review_v2' and d['reviewer']=='/root'
++            require(d['schema']=='minicpm5_sdk310_native_source_review_v3' and d['reviewer']=='/root'
+                 and d['accepted'] is True and d['role']=='sdk310' and d['python']==SDK
+                 and d['executable']==EXE and d['ctypes_root']==CTYPES_ROOT
+                 and d['ctypes_extension']==CTYPES_EXTENSION
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_source_entry_v4.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_source_entry_v5.py
+@@ -11,7 +11,7 @@
+ import signal
+ import stat
+ from research import minicpm5_sdk_mapping_worker_guard_v2 as startup
+-from research import minicpm5_sdk_mapping_worker_native_v3 as native
++from research import minicpm5_sdk_mapping_worker_native_v4 as native
+ from research import minicpm5_sdk_mapping_nocache_launch_v2 as launch
+ 
+ require=startup.require
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v4.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v5.py
+@@ -11,7 +11,7 @@
+ import time
+ from research import minicpm5_sdk_mapping_bootstrap_descriptor_v4 as descriptor
+ from research import minicpm5_sdk_mapping_history_gate_v1 as history
+-from research import minicpm5_sdk_mapping_native_authenticator_v2 as native
++from research import minicpm5_sdk_mapping_native_authenticator_v3 as native
+ from research import minicpm5_sdk_mapping_source_adapter_v1 as adapter
+ from research import minicpm5_sdk_mapping_nocache_launch_v2 as launch
+ 
+@@ -27,6 +27,19 @@
+     _reference(ref)
+     raw,_=entry.read_source(ref['path'],ref['sha256'])
+     return native.decode(raw)
++
++
++def _complete_source_map(reader,reference,original,metadata):
++    """Only this full map uses the original pipe cap; retain metadata identity."""
++    metadata.guard();original.r.sources.reference(reference)
++    require(original.PIPE_CAP==16*2**20,'Unchanged original complete source pipe ceiling')
++    path=reference['path'];before=original.r.identity(path)
++    value=reader.json(reference,original.PIPE_CAP)
++    require(original.r.identity(path)==before,'Stable complete authenticated source-map metadata')
++    require(path not in metadata.identities or metadata.identities[path]==before,
++            'No complete source-map metadata identity rebound')
++    metadata.identities[path]=before;metadata.guard()
++    return value
+ 
+ 
+ def validate_inputs(entry,text):
+@@ -86,7 +99,10 @@
+         bootstrap.acquire()
+         bootstrap.impose_original_limits()
+         reader=native.StableReader(bootstrap)
+-        pins=reader.json(spec['complete_source_map'])
++        # The original complete source release already approaches8MiB. This
++        # one input uses the original16MiB pipe ceiling, with the unchanged
++        # full packet plus65536-byte reservation checked again before spawn.
++        pins=reader.json(spec['complete_source_map'],16*2**20)
+         require(type(pins) is dict and all(pins.get(path)==sha
+             for path,sha in spec['source_extension'].items()),'Complete original map includes every new executed source')
+         original,gate,authenticator=load_history(entry,bootstrap,pins)
+@@ -100,13 +116,13 @@
+             context=authenticated['context']
+             require(metadata.read(refs['spec'])==spec and metadata.read(refs['review'])==review,
+                     'Supplemental entry review remains bound after full original authentication')
+-            require(metadata.read(spec['complete_source_map'])==context['pins_plan']['source_sha256']==pins,
++            require(_complete_source_map(reader,spec['complete_source_map'],original,metadata)==context['pins_plan']['source_sha256']==pins,
+                     'No bootstrap subset replaces whole frozen historical reconstruction')
+             worker_plan=metadata.read(spec['sdk_entry_template'])
+             launch.separate_authorities(entry.plan,worker_plan)
+             require(worker_plan['successor_input']=='admission:self'
+-                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v4'
+-                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v4.py')
++                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v5'
++                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v5.py')
+                 and all(pins.get(path)==sha for path,sha in worker_plan['bootstrap_sources'].items()),
+                 'Exact separately reviewed SDK310 worker source closure')
+             entry_raw,_=authenticator.reader.read(spec['sdk_entry_source'],65535)
+@@ -128,6 +144,7 @@
+                     outer_spec=refs['spec'],outer_review=refs['review'],
+                     outer_entry_plan=copy.deepcopy(entry.plan_reference),
+                     outer_started=entry.started,outer_deadline=entry.deadline,
++                    outer_types_source_observation=copy.deepcopy(entry.types_observation),
+                     original_worker=authenticated['spec']['worker'],
+                     sdk_entry_source=copy.deepcopy(spec['sdk_entry_source'])))
+             admission_ref=original.original.short(store.json('admission.json',admission))
+@@ -139,6 +156,7 @@
+             child_owner,argv=ports.start()
+             ports.finish(child_owner,argv)
+             result=ports.result()
++            reader.unchanged({spec['complete_source_map']['path']})
+             raw=original.serial.encoded(result)
+             require(len(raw)<=original.SUMMARY_CAP,'Whole explicit observed result fits original summary budget')
+             print(raw.decode(),flush=True)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v5.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v6.py
+@@ -107,6 +107,7 @@
+         self.history_owner = None
+         self.plan_reference = None
+         self.admission_envelope = None
++        self.types_tracker = self.types_observation = None
+ 
+     def fail(self, error):
+         if self.failure is None:
+@@ -162,7 +163,7 @@
+         require(self.role=='outer312' and self.history_owner is None and not self.native_authority_verified,
+                 'One outer-only source ownership handoff')
+         gate_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_history_gate_v1')
+-        auth_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_native_authenticator_v2')
++        auth_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_native_authenticator_v3')
+         guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_bootstrap_descriptor_v4')
+         require(gate_module is not None and auth_module is not None and guard_module is not None
+             and type(gate) is gate_module.HistoricalImportGate
+@@ -198,12 +199,26 @@
+         require(gate.state=='authenticating' and gate.receipt is None
+             and auth.bootstrap==gate.bootstrap and auth.authority==gate.authority,
+             'Same original preimport gate still owns transition')
++        if self.role == 'outer312':
++            require(self.types_tracker is not None and self.types_observation is None,
++                    'Actual early outer types observation retained once')
++            observed = self.types_tracker.finish(PIN)
++            require(observed['executed_through_pinned_loader'] is True
++                    and observed['original_execution_provenance_gap'] is False,
++                    'Formal source ownership requires actual pinned types execution; never reload preexisting module')
++            self.types_observation = observed
+         pins=auth.bootstrap['source_sha256']
+         for path,sha in self.plan['bootstrap_sources'].items():
+             require(pins.get(path)==sha,'Every bootstrap pin retained in full original source map')
+         for path,row in self.sources.items():
+             current=auth.reader.verified.get(path)
+-            require(current is not None and pins.get(path)==row['sha256']==current['sha256']
++            source_sha=pins.get(path)
++            if self.role=='outer312' and path==PIN['path']:
++                require(auth.source_pins.get(path)==PIN['sha256']
++                    and (source_sha is None or source_sha==PIN['sha256']),
++                    'Exact nonlocal types source authenticated by original archive origins, no PV domain expansion')
++                source_sha=auth.source_pins[path]
++            require(current is not None and source_sha==row['sha256']==current['sha256']
+                 and row['bytes']==current['bytes']
+                 and row['identity']==tuple(current['identity'][name] for name in FIELDS),
+                 'Actual executed bootstrap bytes and current full-auth source identities match')
+@@ -214,7 +229,7 @@
+         self.check()
+         require(self.role=='sdk310' and self.history_owner is None and not self.native_authority_verified,
+                 'Separate once-only SDK310 concrete source ownership')
+-        module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_native_v2')
++        module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_native_v4')
+         guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_guard_v2')
+         require(module is not None and guard_module is not None
+             and type(gate) is module.SDKHistoryGate and type(auth) is module.SDKNativeAuthenticator
+@@ -455,18 +470,181 @@
+             native_authority=dict(self.plan['native_authority']),native_authority_verified=False)
+ 
+ 
++"""One outer312 source pin and honest pre-JSON execution observation.
++
++Inert, import-free source for a future exact frozen literal. No filesystem or
++process operations of its own. Source reads use the existing bounded Entry.
++Do not import this local module before Entry.plan is available; embed its exact
++reviewed source alongside the existing helper, before child.main is called.
++"""
++
++PIN = {
++    'path': '/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/types.py',
++    'sha256': '345474ef027a1273f353da9bdc1f7c18f65335e72e681bcc0376774cc51f2405',
++    'bytes': 10993,
++}
++
++
++def require(ok, message):
++    if not ok:
++        raise ValueError(message)
++
++
++def provider_snapshot(runtime):
++    module = runtime.modules.get('types')
++    spec = getattr(module, '__spec__', None)
++    return dict(present=module is not None,
++                module_file=getattr(module, '__file__', None),
++                spec_name=getattr(spec, 'name', None),
++                spec_origin=getattr(spec, 'origin', None),
++                loader_type=type(getattr(module, '__loader__', None)).__name__,
++                loader_is_spec_loader=getattr(module, '__loader__', None) is getattr(spec, 'loader', None))
++
++
++class TypesSourceObservation:
++    """Keep loaded-at-entry evidence separate from execution through our loader."""
++
++    def __init__(self, runtime):
++        self.runtime = runtime
++        self.initial_module = runtime.modules.get('types')
++        self.initial_snapshot = provider_snapshot(runtime)
++        self.entry = self.external = self.finder = self.loader_type = None
++        self.executed_module = self.execution_receipt = None
++        self.after_json_snapshot = None
++        self.finished = False
++
++    def _source(self):
++        raw, identity = self.entry.read_source(PIN['path'], PIN['sha256'], PIN['bytes'])
++        require(len(raw) == PIN['bytes'], 'Exact reviewed outer types source size')
++        self.entry.source_bytes += len(raw)
++        require(self.entry.source_bytes <= self.source_total_cap, 'Original whole-source byte cap')
++        return raw, dict(sha256=PIN['sha256'], bytes=len(raw), identity=identity)
++
++    def _provider(self, module, loader):
++        spec = getattr(module, '__spec__', None)
++        require(module is not None and getattr(module, '__name__', None) == 'types'
++                and getattr(module, '__file__', None) == PIN['path']
++                and getattr(spec, 'name', None) == 'types'
++                and getattr(spec, 'origin', None) == PIN['path']
++                and getattr(module, '__loader__', None) is loader
++                and getattr(spec, 'loader', None) is loader,
++                'Exact loaded types module/source/spec/loader correspondence')
++
++    def install_before_json(self, entry, external, source_total_cap):
++        require(self.entry is None and self.runtime.modules.get('types') is self.initial_module,
++                'One installation; preserve earliest types module identity')
++        require(source_total_cap == 16 * 2**20, 'Unchanged original whole-source byte cap')
++        require(self.runtime.meta_path and self.runtime.meta_path[0] is entry.finder,
++                'Wrap the original first source finder')
++        self.entry, self.external = entry, external
++        self.source_total_cap = source_total_cap
++        tracker, previous = self, entry.finder
++
++        class TypesLoader(external.SourceFileLoader):
++            def get_code(self, name):
++                require(name == 'types' and self.path == PIN['path'], 'Only the exact types source')
++                raw, row = tracker._source()
++                code = compile(raw, PIN['path'], 'exec', dont_inherit=True, optimize=0)
++                self.pending_receipt = row
++                return code
++
++            def exec_module(self, module):
++                require(tracker.initial_module is None and tracker.executed_module is None,
++                        'Never reload or replace an already loaded types module')
++                tracker._provider(module, self)
++                entry.check()
++                super().exec_module(module)
++                require(tracker.runtime.modules.get('types') is module,
++                        'Same module remains registered after complete execution')
++                tracker._provider(module, self)
++                entry.check()
++                # get_code alone is not an execution receipt. Record only after
++                # SourceFileLoader.exec_module returns successfully.
++                entry.sources[PIN['path']] = dict(self.pending_receipt)
++                tracker.execution_receipt = dict(self.pending_receipt)
++                tracker.executed_module = module
++
++        class TypesFinder:
++            def find_spec(self, name, path=None, target=None):
++                found = previous.find_spec(name, path, target)
++                if name != 'types':
++                    return found
++                require(found is None, 'No different earlier types provider')
++                spec = external.PathFinder.find_spec(name, path, target)
++                require(spec is not None and spec.origin == PIN['path']
++                        and type(spec.loader) is external.SourceFileLoader,
++                        'Only the reviewed ordinary types source provider')
++                spec.loader = TypesLoader(name, PIN['path'])
++                return spec
++
++        self.loader_type = TypesLoader
++        self.finder = TypesFinder()
++        self.runtime.meta_path[0] = self.finder
++        entry.finder = self.finder
++        entry.check()
++
++    def after_json(self):
++        require(self.entry is not None and self.after_json_snapshot is None,
++                'One explicit checkpoint after successful JSON import')
++        self.after_json_snapshot = provider_snapshot(self.runtime)
++
++    def finish(self, candidate_row):
++        require(not self.finished and self.after_json_snapshot is not None,
++                'Complete observation only after JSON checkpoint')
++        require({key: candidate_row[key] for key in PIN} == PIN,
++                'Early literal pin equals the later authenticated candidate table')
++        module = self.runtime.modules.get('types')
++        if self.executed_module is not None:
++            require(module is self.executed_module
++                    and type(getattr(module, '__loader__', None)) is self.loader_type
++                    and self.entry.sources.get(PIN['path']) == self.execution_receipt,
++                    'Same completed pinned types execution and retained receipt')
++        else:
++            require(self.initial_module is not None and module is self.initial_module
++                    and type(getattr(module, '__loader__', None)) is self.external.SourceFileLoader
++                    and PIN['path'] not in self.entry.sources,
++                    'Preexisting module stays preexisting; never fabricate its execution receipt')
++        self._provider(module, module.__loader__)
++        _, current_source = self._source()
++        self.entry.check()
++        self.finished = True
++        executed = self.executed_module is not None
++        return dict(schema='minicpm5_outer_types_source_observation_v1',
++                    first_checkpoint=self.initial_snapshot,
++                    after_json=self.after_json_snapshot,
++                    final_provider=provider_snapshot(self.runtime),
++                    initial_load_timing='before_first_checkpoint' if self.initial_module is not None else 'after_first_checkpoint',
++                    current_source_reference=dict(PIN), current_source_identity=current_source['identity'],
++                    current_source_bytes_verified=True, loaded_provider_metadata_matches=True,
++                    executed_through_pinned_loader=executed,
++                    execution_receipt=dict(self.execution_receipt) if executed else None,
++                    original_execution_provenance_gap=not executed,
++                    interpreter_startup_cause_established=False,
++                    preexisting_module_reloaded=False,
++                    accepted_native_authority_created=False,
++                    full_model_qualified=False, new_speedup_claim=False)
++
+ def main():
+     """Future literal invocation only. No CLI fallback to historical worker."""
+     entry=Entry()
+     source=sys.orig_argv[7] if len(sys.orig_argv)>7 else ''
+     plan_path,plan_sha,successor_input=entry.startup(source)
++    if entry.role == 'outer312':
++        entry.types_tracker = TypesSourceObservation(sys)
+     external=sys.modules['_frozen_importlib_external']
+     require(external.__spec__.origin=='frozen','Interpreter frozen import machinery')
+     entry.install(external)
++    if entry.types_tracker is not None:
++        entry.types_tracker.install_before_json(entry, external, SOURCE_TOTAL_CAP)
+     import json  # After the non-directory prefix and bytecode audit fence.
++    if entry.types_tracker is not None:
++        entry.types_tracker.after_json()
+     plan=entry.load_plan(dict(path=plan_path,sha256=plan_sha),json)
+     require(plan['successor_input']==successor_input,'Exact future original input reference')
+-    sys.path.insert(0,ROOT)
++    # Both trusted source roots are explicit; the installed finder still
++    # requires every selected local file in the complete reviewed source map.
++    # The actual dual-bootstrap discovery used this same ROOT/Q order.
++    sys.path[:0]=[ROOT,ROOT+'/research']
+     try:
+         module=__import__(plan['entry_module'],fromlist=['source_entry'])
+         require(module.__file__==plan['entry_path'] and module.__file__ in entry.sources,
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk310_composite_origins_v2.py
+@@ -0,0 +1,59 @@
++"""Original signed origins plus the two actually replayed stdlib members.
++
++This is a saved-metadata verifier. Current ELF bytes, providers, maps and ABI
++remain the separate SDK authenticator's job. No observation is promoted here.
++"""
++import copy
++from research import minicpm5_sdk310_composite_origins_v1 as previous
++from research import minicpm5_bootstrap_observation_v2 as discovery
++
++require = previous.require
++EXTRA_PATHS = frozenset((
++    '/usr/lib/python3.10/lib-dynload/_contextvars.cpython-310-x86_64-linux-gnu.so',
++    '/usr/lib/python3.10/lib-dynload/resource.cpython-310-x86_64-linux-gnu.so',
++))
++
++
++def replay_package_origins(reader, decision, pins):
++    require(decision['schema'] == 'minicpm5_sdk310_native_source_review_v3',
++            'Explicit supplemental member origin successor')
++    origins = decision['package_origins']
++    require(set(origins) == {'schema', 'old_libc6', 'new_eight', 'sdk310_supplemental_stdlib'}
++            and origins['schema'] == 'minicpm5_sdk310_composite_package_origins_v1',
++            'All original independent origins plus exact supplemental result')
++    require(EXTRA_PATHS <= set(decision['native_files'])
++            and not EXTRA_PATHS.intersection(decision['pure_sources']),
++            'Both actually observed additional SDK extensions remain native')
++    original = copy.deepcopy(decision)
++    original['schema'] = 'minicpm5_sdk310_native_source_review_v2'
++    original['package_origins'].pop('sdk310_supplemental_stdlib')
++    for path in EXTRA_PATHS:
++        original['native_files'].pop(path)
++    expected = previous.replay_package_origins(reader, original, pins)
++    ended, result = discovery.supplemental(reader.json)
++    supplied = origins['sdk310_supplemental_stdlib']
++    require(set(supplied) == {'result', 'actual_exit', 'recorder_actual_exit'}
++            and previous.same(supplied['result'], ended['result'])
++            and previous.same(supplied['actual_exit'], discovery.SUPPLEMENTAL_RECEIPTS['actual_exit'])
++            and previous.same(supplied['recorder_actual_exit'], discovery.SUPPLEMENTAL_RECEIPTS['recorder_actual_exit']),
++            'Exact actual producer and independent successful recorder')
++    plan = reader.json(ended['plan'])
++    review = reader.json(ended['review'])
++    require(review['reviewer'] == '/root' and review['passed'] is True
++            and review['blockers'] == [] and previous.same(review['plan'], ended['plan'])
++            and review['source_sha256'] == plan['source_sha256']
++            and all(pins.get(path) == sha for path, sha in plan['source_sha256'].items()),
++            'All original supplemental executed source pins are retained')
++    require({row['path'] for row in result['comparisons']} == EXTRA_PATHS,
++            'Only the exact two completed additional members')
++    for row in result['comparisons']:
++        path = row['path']
++        selected = decision['native_files'][path]
++        required = dict(path=path, bytes=row['member']['bytes'], sha256=row['member']['sha256'],
++                        package=row['package'], version=row['version'])
++        require(selected == required and path not in expected,
++                'Selected native member exactly matches independently audited complete replay')
++        expected[path] = copy.deepcopy(selected)
++    require(expected == {**decision['native_files'], **decision['pure_sources']},
++            'Complete selected native and pure-source origin domains retained')
++    return expected
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_observed_native_policies_v1.py
+@@ -0,0 +1,187 @@
++"""Prepare unaccepted native policy inputs from the real completed r2 run.
++
++JSON/source metadata only. Never sets reviewer=/root or accepted=True, launches
++an entry, claims current library bytes, or replaces full diagnostic binding.
++"""
++import argparse
++import copy
++import hashlib
++import json
++from pathlib import Path
++import sys
++
++Q = Path(__file__).resolve().parent
++ROOT = Q.parent
++sys.path[:0] = [str(ROOT), str(Q)]
++from research import minicpm5_bootstrap_observation_v2 as discovery
++from research import minicpm5_sdk_mapping_history_gate_v1 as history
++
++ACTUAL_EXIT = dict(path=str(Q / 'minicpm5-bootstrap-observation-r2-root-actual-exit-20261112-v1.json'),
++    sha256='33ee19570567fe19ba3abf63c533dccb956857f5e9ce5679ddef627ecfa4fba5')
++NEW_SOURCES = (
++    'minicpm5_sdk310_composite_origins_v2.py',
++    'minicpm5_sdk_mapping_native_authenticator_v3.py',
++    'minicpm5_sdk_mapping_worker_native_v4.py',
++    'minicpm5_sdk_mapping_worker_source_entry_v5.py',
++    'minicpm5_sdk_mapping_outer_source_entry_v5.py',
++    'minicpm5_sdk_mapping_nocache_entry_v6.py',
++    'prepare_minicpm5_observed_native_policies_v1.py',
++)
++require = discovery.require
++
++
++def build(read, complete_pins, source_manifest_ref):
++    """Return input drafts; later original runtime reconstructs full pins again."""
++    ended = read(ACTUAL_EXIT)
++    require(ended['schema'] == 'minicpm5_bootstrap_observation_root_actual_exit_v2'
++            and ended['reviewer'] == '/root'
++            and ended['actual_tool'] == dict(kind='tool_session', session_id=50185,
++                                            terminal_chunk='bf14fc', exit_code=0)
++            and ended['actual_tool_exit_observed'] is True and ended['physically_drained'] is True
++            and ended['owners_gone'] is True and ended['lock_reacquired_and_released'] is True
++            and ended['lock_identity'] == dict(device=66306, inode=8294421)
++            and ended['full_six_raw_maps_replayed'] is True
++            and ended['source_execution_gaps_recomputed'] is True,
++            'Exact completed original dual-bootstrap and independent drain/map audit')
++    require(all(ended[k] is False for k in ('accepted_native_authority_created',
++            'native_ABI_qualified', 'full_model_qualified', 'new_speedup_claim')),
++            'Completed discovery cannot become native ABI or model qualification')
++    result = read(ended['result'])
++    require(result['complete'] is True and result['schema'] == 'minicpm5_bootstrap_observation_result_v2'
++            and result['role_order'] == ['sdk310', 'outer312']
++            and result['plan'] == ended['plan'] and result['review'] == ended['review'],
++            'Actual result and reviewed plan remain exact')
++    require(all(result[k] is False for k in ('accepted_native_authority_created',
++            'native_ABI_qualified', 'full_model_qualified', 'new_speedup_claim')),
++            'Actual result still makes no native ABI or model qualification claim')
++    plan, review = read(result['plan']), read(result['review'])
++    discovery.validate(plan, review, result['plan'])
++    table = discovery.candidates(read)
++    manifest = read(source_manifest_ref)
++    require(manifest['schema'] == 'minicpm5_observed_formal_entry_source_manifest_v1'
++            and set(manifest['new_runtime_source_sha256']) == {str(Q / name) for name in NEW_SOURCES},
++            'Exact local integration sources, with no implicit runtime admission')
++    for source_map in (plan['source_sha256'], manifest['retained_source_sha256'],
++                       manifest['new_runtime_source_sha256']):
++        require(all(complete_pins.get(path) == sha for path, sha in source_map.items()),
++                'Every original and new selected source retained in complete prospective map')
++    require(type(complete_pins) is dict and len(complete_pins) > len(plan['source_sha256']),
++            'Bootstrap source subset is not the full original diagnostic source map')
++    for role in ('sdk310', 'outer312'):
++        for path, row in table[role]['pure_source_candidates'].items():
++            require(path not in complete_pins or complete_pins[path] == row['sha256'],
++                    'Original signed nonlocal pure-source policy never replaces inherited pins')
++    policies = {}
++    for row in result['children']:
++        role = row['role']
++        observed = read(row['result'])
++        require(all(observed[k] is False for k in ('accepted_native_authority_created',
++                'native_ABI_qualified', 'full_model_qualified', 'new_speedup_claim')),
++                'Role observation cannot claim a native/model success')
++        require(observed['role'] == role and observed['complete'] is True
++                and observed['plan'] == result['plan']
++                and observed['missing_content_origins'] is False
++                and observed['source_execution_provenance_gaps'] == []
++                and row['missing_content_origins'] is False
++                and row['source_execution_provenance_gaps'] == []
++                and observed['ffi_failure'] is None and observed['ffi_definitions'] is not None,
++                'Actual completed role has no observed source/native content gap')
++        audited = ended['selected_providers_and_gaps'][role]
++        for key in ('selected_stdlib_providers', 'map_summaries', 'known_pure_source_observations',
++                    'ffi_failure', 'missing_content_origins', 'types_source_observation',
++                    'source_execution_provenance_gaps'):
++            require(audited[key] == observed[key], 'Full saved role equals root independent audit')
++        mappings = observed['map_summaries']
++        require(set(mappings) == {'earliest', 'pre_ctypes', 'post_ctypes'}
++                and all(item['gaps'] == [] and item['accepted_native_authority_created'] is False
++                        for item in mappings.values()), 'All three stages remain complete discovery evidence')
++        before = mappings['pre_ctypes']['known_selected_closure']['paths']
++        after = mappings['post_ctypes']['known_selected_closure']['paths']
++        require(len(before) == len(set(before)) and len(after) == len(set(after)),
++                'Unique observed native provider sets')
++        selected = table[role]
++        require(set(after) <= set(selected['native_candidates']),
++                'Only actual mapped known original candidates may become prospective policy inputs')
++        if role == 'sdk310':
++            def member(row):
++                return {k: row[k] for k in ('path', 'bytes', 'sha256', 'package', 'version')}
++            require(set(before) < set(after) and selected['ctypes_extension'] in set(after) - set(before),
++                    'Actual separate dynamic ctypes transition')
++            policies[role] = dict(schema='minicpm5_sdk310_native_source_review_v3',
++                role=role, python=selected['python'], executable=selected['executable'],
++                ctypes_root='/usr/lib/python3.10/ctypes', ctypes_extension=selected['ctypes_extension'],
++                ffi_provider=selected['ffi_candidate'], package_origins=copy.deepcopy(table['package_origins']),
++                native_files={path: member(selected['native_candidates'][path]) for path in after},
++                pure_sources={path: member(value) for path, value in selected['pure_source_candidates'].items()},
++                mapped_before_ctypes=list(before), mapped_after_ctypes=list(after))
++        else:
++            types = observed['types_source_observation']
++            require(set(before) == set(after) == set(selected['native_candidates'])
++                    and types['executed_through_pinned_loader'] is True
++                    and types['original_execution_provenance_gap'] is False
++                    and types['preexisting_module_reloaded'] is False,
++                    'Actual original outer closure and completed pinned types execution')
++            policies[role] = dict(schema='minicpm5_sdk_mapping_native_source_review_v1',
++                origin_evidence=copy.deepcopy(table['input_refs']['outer_saved_origin']),
++                native_files=copy.deepcopy(selected['native_candidates']))
++            # Original authority contract pins the path/hash pair exactly.
++            policies[role]['origin_evidence'] = {k: policies[role]['origin_evidence'][k]
++                                               for k in ('path', 'bytes', 'sha256')}
++        policies[role].update(reviewer=None, accepted=False,
++            source_map_sha256=history.digest(complete_pins),
++            observed_bootstrap_result=copy.deepcopy(row['result']),
++            observed_bootstrap_actual_exit=copy.deepcopy(ACTUAL_EXIT))
++    require(set(policies) == {'sdk310', 'outer312'}, 'Both distinct native policies prepared')
++    return dict(schema='minicpm5_observed_native_policy_inputs_v1', actual_bootstrap_exit=copy.deepcopy(ACTUAL_EXIT),
++        nonlocal_pure_source_sha256={role: {path: row['sha256'] for path, row in
++            table[role]['pure_source_candidates'].items()} for role in ('sdk310', 'outer312')},
++        nonlocal_sources_authenticated_by_original_origin_policy=True,
++        source_manifest=copy.deepcopy(source_manifest_ref), prospective_source_map_sha256=history.digest(complete_pins),
++        policies=policies, source_metadata_only=True, runtime_admitted=False,
++        complete_original_runtime_source_map_authenticated_here=False,
++        current_native_bytes_read_here=False, actual_current_maps_observed_here=False,
++        accepted_native_authority_created=False, native_ABI_qualified=False,
++        full_model_qualified=False, new_speedup_claim=False,
++        pending=['Root binds/reviews complete original diagnostic source map and current serial history.',
++                 'Root reviews separate native policies and explicit outer/SDK entry plans.',
++                 'Actual run rehashes current whole files, full signed indexes, ELF and maps, checks ABI and original nine.',
++                 'Original fixed-input 1284-row scientific plan, model cold/long/slot/quality/HTTP gates remain unchanged.'])
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    for name in ('complete-source-map', 'source-manifest'):
++        parser.add_argument('--' + name, required=True)
++        parser.add_argument('--' + name + '-sha256', required=True)
++    parser.add_argument('--destination', required=True)
++    args = parser.parse_args()
++    def read(reference):
++        path = Path(reference['path'])
++        require(path.suffix == '.json' and path.is_absolute() and path.resolve() == path,
++                'Only canonical saved JSON metadata')
++        before = path.stat()
++        require(0 < before.st_size <= 16 * 2**20, 'Bounded complete JSON metadata')
++        data = path.read_bytes()
++        after = path.stat()
++        identity = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
++        require(identity(before) == identity(after) and len(data) == before.st_size
++                and hashlib.sha256(data).hexdigest() == reference['sha256']
++                and reference.get('bytes', len(data)) == len(data), 'Entire exact stable metadata')
++        return json.loads(data)
++    source_map = dict(path=args.complete_source_map, sha256=args.complete_source_map_sha256)
++    manifest = dict(path=args.source_manifest, sha256=args.source_manifest_sha256)
++    value = build(read, read(source_map), manifest)
++    value['prospective_source_map'] = source_map
++    destination = Path(args.destination)
++    require(destination.parent == Q and destination.suffix == '.json'
++            and destination.name.startswith('minicpm5-observed-native-policy-inputs-'),
++            'One new unaccepted policy input package only')
++    raw = (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
++    require(len(raw) <= 2**20, 'Small policy preparation metadata')
++    with destination.open('xb') as stream:
++        stream.write(raw)
++    print(json.dumps(dict(path=str(destination), bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())))
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_observed_formal_binding_v1.py
+@@ -0,0 +1,209 @@
++"""Complete unapproved formal-entry candidate assembly, with no IO or launch.
++
++prepare() reuses the frozen original metadata reconstruction through an
++explicitly supplied original module. Root must import that historical module
++only in its separately reviewed serial preparation context; this module never
++imports it, acquires a lock, reads native/archive bytes, or approves a review.
++assemble() is also callable with already reconstructed original metadata.
++All returned artifact bytes are canonical and references are fully bound.
++"""
++import copy
++import hashlib
++import json
++from pathlib import Path
++import re
++
++from research import prepare_minicpm5_observed_native_policies_v1 as policies
++from research import minicpm5_sdk_mapping_nocache_launch_v2 as launch
++from research import minicpm5_sdk_mapping_observer_logic_v1 as logic
++
++ROOT,Q,require=policies.ROOT,policies.Q,policies.require
++SELF=str(Q/'prepare_minicpm5_observed_formal_binding_v1.py')
++ORIGINAL=str(Q/'prepare_minicpm5_pv_sdk_import_diagnostic_v1.py')
++REQUEST_SCHEMA='minicpm5_observed_formal_binding_request_v1'
++SOURCE_CAP=16*2**20
++PENDING=['Independent root review of these exact bytes is pending']
++
++
++def merge(first,second):
++    result=copy.deepcopy(first)
++    for path,sha in second.items():
++        require(path not in result or result[path]==sha,'An original source pin cannot be replaced')
++        result[path]=sha
++    return result
++
++
++def validate_request(request,read):
++    require(type(request) is dict and set(request)=={'schema','original_request','current_handoff',
++        'handoff_catalog_field','expected_predecessor_exit','source_manifest','artifact_prefix','attempt_id','unit'}
++        and request['schema']==REQUEST_SCHEMA,'Explicit complete original history and candidate destinations')
++    for name in ('original_request','current_handoff','expected_predecessor_exit','source_manifest'):
++        launch.reference(request[name])
++    old=read(request['original_request']);handoff=read(request['current_handoff'])
++    require(old['schema']=='minicpm5_sdk_import_future_binding_request_v1','Unchanged original request schema')
++    field=request['handoff_catalog_field']
++    require(field in ('complete_current_serial_catalog','complete_current_serial_catalog_next'),
++        'Explicit saved handoff catalog field; no discovery of a newer input')
++    bound=handoff[field]
++    require(bound==old['current_serial_catalog'] or
++        (field.endswith('_next') and bound==old['current_serial_catalog']['path']),
++        'Exact caller-selected saved handoff catalog')
++    catalog=read(old['current_serial_catalog'])
++    require(type(catalog['runs']) is list and catalog['runs'] and
++        catalog['runs'][-1]['terminal']==request['expected_predecessor_exit'],
++        'Explicit last ended catalog predecessor, no implicit queue advancement')
++    # This is saved metadata only. Original runtime still checks every actual
++    # owner, service, supplemental child, physical artifact and lock identity.
++    read(request['expected_predecessor_exit'])
++    prefix=Path(request['artifact_prefix'])
++    require(prefix.parent==Q and str(prefix)==request['artifact_prefix'] and
++        re.fullmatch('minicpm5-formal-import-[a-z0-9][a-z0-9-]{0,39}',prefix.name),
++        'Fresh bounded explicit candidate artifact prefix')
++    require(type(request['attempt_id']) is str and re.fullmatch('[a-f0-9]{32}',request['attempt_id'])
++        and type(request['unit']) is str and re.fullmatch('trn1-mini-[a-z0-9-]{1,150}',request['unit']),
++        'Explicit original descriptor attempt and unit')
++    manifest=read(request['source_manifest'])
++    require(manifest['schema']=='minicpm5_observed_formal_entry_source_manifest_v1'
++        and set(manifest['new_runtime_source_sha256'])=={str(Q/name) for name in policies.NEW_SOURCES}
++        and set(manifest['preparation_source_sha256'])=={SELF},'Exact reviewed integration and preparation sources')
++    additions=merge(manifest['retained_source_sha256'],manifest['new_runtime_source_sha256'])
++    additions=merge(additions,manifest['preparation_source_sha256'])
++    require(all(path.startswith(str(ROOT)+'/') and Path(path).suffix=='.py' for path in additions),
++        'Local Python bootstrap additions preserve original PV extension domain')
++    return old,manifest,additions,catalog
++
++
++def prepare(request,*,read,text,guard,original):
++    """Root-supplied ordinary historical module; no import/admission here.
++
++The canonical original prepare/reconstruct/merged_plan functions are used
++unchanged. The caller owns any necessary serial/native import context. No AST
++extraction, replacement historical module, fake lease, or authenticate call.
++"""
++    old,manifest,additions,_=validate_request(request,read)
++    require(str(Path(original.__file__).resolve())==ORIGINAL,
++        'Only the ordinary original preparation module supplied by root')
++    expected=manifest['retained_source_sha256'].get(ORIGINAL)
++    require(expected is not None and hashlib.sha256(text(ORIGINAL,expected)).hexdigest()==expected,
++        'Immutable original preparation source retained')
++    old=copy.deepcopy(old)
++    extra={row['path']:row['sha256'] for row in old['additional_source_refs']}
++    require(len(extra)==len(old['additional_source_refs']),'No duplicate caller additions')
++    extra=merge(extra,additions)
++    old['additional_source_refs']=[dict(path=path,sha256=sha) for path,sha in sorted(extra.items())]
++    candidate=original.prepare(old,read=read,text=text,guard=guard)
++    base=original.reconstruct_audit_base(old['independent_audit_exit'],old['recovery_binding'],read,text,guard)
++    full=original.audited.merged_plan(base['plan'],candidate['pv_spec_candidate']['source_extension'])
++    require(policies.history.digest(full['source_sha256'])==candidate['complete_source_map_sha256']
++        and len(full['source_sha256'])==candidate['complete_source_files'],
++        'Whole original reconstruction agrees with already checked preparation')
++    guard()
++    result=assemble(request,candidate,full,read=read,text=text)
++    guard()
++    return result
++
++
++def assemble(request,candidate,full,*,read,text):
++    """Pure complete candidate graph. Accepted reviews are never generated."""
++    old,manifest,additions,catalog=validate_request(request,read)
++    require(candidate['schema']=='minicpm5_sdk_import_future_binding_candidate_v1'
++        and candidate['source_metadata_only'] is True
++        and candidate['original_runtime_reconstruction_routes_agree'] is True
++        and candidate['all_original_catalog_rows_retained'] is True
++        and candidate['all_current_catalog_sources_retained'] is True
++        and candidate['actual_freshness_or_physical_checks_performed'] is False
++        and candidate['runtime_admitted'] is candidate['launch_authorized'] is False,
++        'Original complete source-only reconstruction with unchanged physical obligations')
++    require(type(full) is dict and {'source_sha256','source_contract'}<=set(full),
++        'Complete original source plan and source contract are both retained')
++    pins=full['source_sha256'];pv=copy.deepcopy(candidate['pv_spec_candidate'])
++    require(policies.history.digest(pins)==candidate['complete_source_map_sha256']
++        and len(pins)==candidate['complete_source_files']
++        and pv['current_serial_catalog']==old['current_serial_catalog']
++        and pv['independent_audit_exit']==old['independent_audit_exit']
++        and pv['output_root']==old['output_root'] and pv['limits']==logic.LIMITS
++        and pv['artifact_limits']==logic.CAPS
++        and pv['worker']==str(Q/'minicpm5_pv_sdk_import_diagnostic_worker_v1.py'),
++        'Original source map/catalog/audit/output/resource/scientific worker binding')
++    require(all(pins.get(path)==sha for path,sha in additions.items())
++        and all(pins.get(path)==sha for path,sha in pv['source_extension'].items()),
++        'Complete original map retains every prospective source addition')
++    for path,sha in additions.items():
++        require(hashlib.sha256(text(path,sha)).hexdigest()==sha,'Current complete selected local source text')
++    source_subset={key:full[key] for key in ('source_contract','source_sha256')}
++    require(len(launch.encoded(source_subset))==candidate['complete_source_release_bytes']
++        and len(launch.encoded(source_subset))+65536<=SOURCE_CAP,
++        'Unchanged original16MiB release pipe and65536-byte reservation')
++    policy_inputs=policies.build(read,pins,request['source_manifest'])
++    artifacts={};prefix=request['artifact_prefix']
++
++    def add(name,value,cap=2**20):
++        raw=launch.encoded(value)
++        require(0<len(raw)<=cap,'Bounded candidate metadata: '+name)
++        path=prefix+'-'+name+'.json'
++        reference=dict(path=path,sha256=hashlib.sha256(raw).hexdigest())
++        artifacts[name]=dict(reference=reference,bytes=len(raw),value=copy.deepcopy(value))
++        return copy.deepcopy(reference)
++
++    def review(schema,spec,extension):
++        return dict(schema=schema,reviewer=None,passed=False,blockers=list(PENDING),
++            spec=copy.deepcopy(spec),source_extension=copy.deepcopy(extension))
++
++    map_ref=add('complete-source-map',pins,SOURCE_CAP)
++    contract_ref=add('complete-source-contract',full['source_contract'],SOURCE_CAP)
++    policy_ref=add('native-policy-inputs',policy_inputs)
++    outer_native=add('outer-native-policy-draft',policy_inputs['policies']['outer312'])
++    sdk_native=add('sdk-native-policy-draft',policy_inputs['policies']['sdk310'])
++    pv_ref=add('pv-spec',pv)
++    pv_review=add('pv-review-draft',review('minicpm5_fixed_input_pv_serial_source_review_v1',pv_ref,pv['source_extension']))
++    diagnostic=dict(schema='minicpm5_fixed_input_pv_sdk_import_diagnostic_spec_v1',
++        pv_spec=pv_ref,pv_review=pv_review,worker=pv['worker'],limits=copy.deepcopy(pv['limits']),
++        artifact_limits=copy.deepcopy(pv['artifact_limits']),source_extension=copy.deepcopy(pv['source_extension']))
++    diagnostic_ref=add('diagnostic-spec',diagnostic)
++    diagnostic_review=add('diagnostic-review-draft',review('minicpm5_fixed_input_pv_sdk_import_diagnostic_review_v1',
++        diagnostic_ref,pv['source_extension']))
++    entry_path=str(Q/'minicpm5_sdk_mapping_nocache_entry_v6.py')
++    entry_ref=dict(path=entry_path,sha256=pins[entry_path])
++    entry_bytes=text(entry_path,entry_ref['sha256'])
++    require(0<len(entry_bytes)<65536,'Original exact literal entry size bound')
++    bootstrap={path:sha for path,sha in additions.items() if path.endswith('.py')}
++    require(0<len(bootstrap)<=2048,'Original bounded local bootstrap source set')
++
++    def entry_plan(role,authority,module,successor):
++        python=launch.previous.OUTER if role=='outer312' else launch.previous.SDK
++        exe=('/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/bin/python3.12'
++            if role=='outer312' else '/usr/bin/python3.10')
++        return dict(schema='minicpm5_source_entry_plan_v1',role=role,python=python,executable=exe,
++            native_authority=dict(role=role,python=python,**authority),bootstrap_sources=copy.deepcopy(bootstrap),
++            entry_sha256=entry_ref['sha256'],entry_module='research.'+module,
++            entry_path=str(Q/(module+'.py')),successor_input=successor)
++
++    sdk=entry_plan('sdk310',sdk_native,'minicpm5_sdk_mapping_worker_source_entry_v5','admission:self')
++    sdk_ref=add('sdk-entry-template',sdk)
++    outer_spec=dict(schema='minicpm5_mapping_source_outer_spec_v1',attempt_id=request['attempt_id'],unit=request['unit'],
++        diagnostic_spec=diagnostic_ref,diagnostic_review=diagnostic_review,complete_source_map=map_ref,
++        sdk_entry_template=sdk_ref,sdk_entry_source=entry_ref,limits=copy.deepcopy(logic.LIMITS),
++        artifact_limits=copy.deepcopy(logic.CAPS),source_extension=copy.deepcopy(bootstrap),
++        sdk_import_paths=['/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages'])
++    outer_ref=add('outer-spec',outer_spec)
++    outer_review=add('outer-review-draft',review('minicpm5_mapping_source_outer_review_v1',outer_ref,bootstrap))
++    outer=entry_plan('outer312',outer_native,'minicpm5_sdk_mapping_outer_source_entry_v5',
++        json.dumps(dict(spec=outer_ref,review=outer_review),sort_keys=True,separators=(',',':')))
++    plan_ref=add('outer-entry-plan',outer)
++    launch.separate_authorities(outer,sdk)
++    # Validates canonical literal/plan and exact role metadata; no process call.
++    launch.launch(entry_bytes,entry_ref,outer,plan_ref)
++    return dict(schema='minicpm5_observed_formal_binding_candidate_v1',request=copy.deepcopy(request),
++        artifacts=artifacts,original_preparation=copy.deepcopy(candidate),
++        complete_source_map=map_ref,complete_source_contract=contract_ref,native_policy_inputs=policy_ref,
++        outer_entry_plan=plan_ref,entry_source=entry_ref,catalog_rows=len(catalog['runs']),
++        full_original_source_contract_retained=True,full_original_history_retained=True,
++        nonlocal_pure_sources_remain_in_separate_signed_policies=True,
++        review_artifacts=['pv-review-draft','diagnostic-review-draft','outer-review-draft',
++            'outer-native-policy-draft','sdk-native-policy-draft'],
++        root_must_rebind_hashes_after_independent_review=True,
++        source_metadata_only=True,source_only_assembly_is_not_original_runtime_authentication=True,
++        current_native_bytes_read_here=False,current_physical_checks_performed=False,
++        accepted_native_authority_created=False,runtime_admitted=False,launch_authorized=False,
++        native_ABI_qualified=False,full_model_qualified=False,new_speedup_claim=False,
++        original_nine_native_checks_pending=9,original_scientific_rows_still_pending=1284)

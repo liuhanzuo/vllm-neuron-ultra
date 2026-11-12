@@ -1,0 +1,292 @@
+--- qwen35_sampler_runtime_contract_v11.py
++++ qwen35_sampler_runtime_contract_v12.py
+@@ -155,12 +155,13 @@
+     return result
+ 
+ 
+-RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v11.py", "qwen35_sampler_runtime_preflight_v1.py",
+-                 "qwen35_sampler_runtime_io_v11.py", "qwen35_sampler_runtime_history_v11.py",
+-                 "qwen35_sampler_runtime_service_v11.py", "qwen35_sampler_runtime_adapter_v11.py",
+-                 "run_qwen35_sampler_runtime_v11.py", "qwen35_sampler_torch_namespace_sources_v1.py",
++RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v12.py", "qwen35_sampler_runtime_preflight_v1.py",
++                 "qwen35_sampler_runtime_io_v12.py", "qwen35_sampler_runtime_history_v12.py",
++                 "qwen35_sampler_runtime_service_v12.py", "qwen35_sampler_runtime_adapter_v12.py",
++                 "run_qwen35_sampler_runtime_v12.py", "qwen35_sampler_torch_namespace_sources_v1.py",
+                  "qwen35_sampler_native_leaves_v1.py", "qwen35_sampler_native_leaves_v2.py",
+-                 "qwen35_sampler_history_supplement_v1.py")
++                 "qwen35_sampler_history_supplement_v1.py", "qwen35_sampler_pair_driver_v3.py",
++                 "qwen35_sampler_host_settings_v1.py")
+ STARTUP_FILES = tuple("/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/" + name
+                       for name in ("config/parallel.py", "engine/arg_utils.py", "envs.py", "v1/engine/core.py"))
+ 
+--- qwen35_sampler_runtime_io_v11.py
++++ qwen35_sampler_runtime_io_v12.py
+@@ -15,7 +15,7 @@
+ import sys
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v11 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
++from qwen35_sampler_runtime_contract_v12 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
+                                                budget, control_root, digest, reference, require, server_temporary_roots)
+ 
+ 
+--- qwen35_sampler_runtime_history_v11.py
++++ qwen35_sampler_runtime_history_v12.py
+@@ -10,9 +10,9 @@
+ from pathlib import Path
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v11 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
++from qwen35_sampler_runtime_contract_v12 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
+     control_root, digest, host_sources, reference, require, units, validate_spec)
+-from qwen35_sampler_runtime_io_v11 import Metadata, identity, loaded_local_sources, process_api, raw, read
++from qwen35_sampler_runtime_io_v12 import Metadata, identity, loaded_local_sources, process_api, raw, read
+ 
+ 
+ class Bundle:
+--- qwen35_sampler_runtime_service_v11.py
++++ qwen35_sampler_runtime_service_v12.py
+@@ -15,12 +15,12 @@
+ import subprocess
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v11 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
++from qwen35_sampler_runtime_contract_v12 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v11 import (identity, once, process_api, raw, read, read_if_present, ref,
++from qwen35_sampler_runtime_io_v12 import (identity, once, process_api, raw, read, read_if_present, ref,
+                                         service_owner, wait_until)
+ 
+-CLI = str(Q / "run_qwen35_sampler_runtime_v11.py")
++CLI = str(Q / "run_qwen35_sampler_runtime_v12.py")
+ PROPERTY_KEYS = ("Id,LoadState,ActiveState,SubState,MainPID,ControlPID,Job,InvocationID,ControlGroup,Result,"
+                  "ExecMainPID,ExecMainCode,ExecMainStatus,ExecStart,ExecStopPost,Environment,BindsTo,After,"
+                  "MemoryMax,MemoryHigh,MemorySwapMax,TasksMax,KillMode,RemainAfterExit,SendSIGKILL,"
+--- qwen35_sampler_runtime_adapter_v11.py
++++ qwen35_sampler_runtime_adapter_v12.py
+@@ -16,12 +16,12 @@
+ import urllib.request
+ import uuid
+ 
+-from qwen35_sampler_runtime_contract_v11 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
++from qwen35_sampler_runtime_contract_v12 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
+     control_root, digest, native_environment, phase_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v11 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
++from qwen35_sampler_runtime_io_v12 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
+     raw, read, read_if_present, ref, resources, service_owner, storage, wait_until)
+-from qwen35_sampler_runtime_history_v11 import Authority, Bundle, check_running
+-from qwen35_sampler_runtime_service_v11 import (CLI, Service, argv, expected_phase, properties, supervise,
++from qwen35_sampler_runtime_history_v12 import Authority, Bundle, check_running
++from qwen35_sampler_runtime_service_v12 import (CLI, Service, argv, expected_phase, properties, supervise,
+                                                 validate_api_failure, API_ERROR_MESSAGE)
+ from qwen35_sampler_pair_protocol_v1 import BASE, expected_case, host_identity
+ 
+@@ -186,7 +186,7 @@
+     guard = context["guard"]; stage = Path(phase["control"])
+     guard()
+     if api:
+-        from qwen35_sampler_pair_driver_v1 import server_arguments
++        from qwen35_sampler_pair_driver_v3 import server_arguments
+         case = expected_case(); arm = phase["arm"]
+         host_phase = "correctness_capture" if phase["phase"] == "capture" else "measured"
+         args = [PYTHON, *server_arguments(case, arm, host_phase, {"on_device_sampling_config": None, **case["extra_overrides"]})]
+@@ -350,11 +350,20 @@
+         worker = process_api().proc(attachment["pid"])
+         require(worker is not None and worker["cgroup"] == "0::" + self.service.group, "actual loaded worker outside owned group")
+         self.api_owner, self.attachment = current, attachment
++        from qwen35_sampler_host_settings_v1 import observed_settings
++        from qwen35_sampler_pair_driver_v3 import server_arguments
++        case = expected_case()
++        expected_api_argv = [PYTHON, *server_arguments(case, self.arm,
++            self.phase["host_identity"]["phase"], {"on_device_sampling_config": None, **case["extra_overrides"]})]
++        settings = observed_settings(actual_environment, current["argv"], case,
++            self.phase["host_identity"], self.directory, expected_api_argv)
+         if self.startup_proof is None:
+             proof = {"dp_size_derived_from_pinned_source_clean_environment_and_argv": 1,
+                      "dp_rank_derived_from_pinned_source_clean_environment_and_argv": 0,
+                      "parallel_config_object_directly_observed": False, "observer_seen_or_call_id_directly_observed": False,
+                      "actual_api_initial_environment_sha256": digest(actual_environment),
++                     "actual_api_initial_environment": copy.deepcopy(actual_environment),
++                     "effective_host_settings": settings,
+                      "dp_environment_overrides_present": False, "actual_api_argv": current["argv"],
+                      "startup_source_sha256": {path: self.adapter.spec["source_sha256"][path] for path in STARTUP_FILES}}
+             if self.name == "capture":
+@@ -367,6 +376,11 @@
+                              zero_seen_count_claimed=False, actual_B1_B4_each16_still_required=True)
+             self.startup_proof = proof
+             once(self.stage / "startup-config-proof.json", proof)
++        else:
++            require(self.startup_proof["actual_api_initial_environment"] == actual_environment
++                    and self.startup_proof["actual_api_argv"] == current["argv"]
++                    and self.startup_proof["effective_host_settings"] == settings,
++                    "Observed API startup settings changed after first readiness")
+         self.reject_api_failure()
+         return {"attachment": attachment, "worker": worker, "api_owner": current}
+ 
+@@ -477,7 +491,7 @@
+                 "actual_child_exit": code}
+ 
+     def ports(self):
+-        from qwen35_sampler_pair_driver_v1 import GuardedPorts
++        from qwen35_sampler_pair_driver_v3 import GuardedPorts
+         return GuardedPorts(self.guard, self.validate_reuse, self.model, self.vectors, self.server,
+                             self.sampler_replay, self.controls, self.server_audit)
+ 
+@@ -543,8 +557,8 @@
+                           admission["attempt_id"]).leaf()
+         require(preflight["passed"] is True, "native preflight failed before any model gates")
+         once(control_root(spec) / "native-preflight.json", preflight)
+-        from qwen35_sampler_pair_driver_v1 import run
+-        from qwen35_sampler_pair_driver_v1 import NativeClients
++        from qwen35_sampler_pair_driver_v3 import run
++        from qwen35_sampler_pair_driver_v3 import NativeClients
+         result = run(adapter.ports(), spec["output_root"], bundle.host, clients=FailureCheckedClients(adapter, NativeClients()))
+         observer.check(full=True)
+         require(adapter.active is None, "all phase units must be terminal")
+--- run_qwen35_sampler_runtime_v11.py
++++ run_qwen35_sampler_runtime_v12.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parent, Path(__file__).resolve().parents[1]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_sampler_runtime_contract_v11 import reference, require
++    from qwen35_sampler_runtime_contract_v12 import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_sampler_runtime_adapter_v11 import outer
++        from qwen35_sampler_runtime_adapter_v12 import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_sampler_runtime_adapter_v11 import coordinator, native_leaf, worker_bootstrap
++    from qwen35_sampler_runtime_adapter_v12 import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_sampler_runtime_service_v11 import supervise
++        from qwen35_sampler_runtime_service_v12 import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 
+--- qwen35_sampler_pair_driver_v2.py
++++ qwen35_sampler_pair_driver_v3.py
+@@ -14,11 +14,13 @@
+ import uuid
+ 
+ from qwen35_sampler_pair_protocol_v1 import (
+-    ARMS, BASE, ROOT, SAMPLER_GATES, check_capture_accounting, compare_full_http,
++    ARMS, BASE, ROOT, SAMPLER_GATES, check_capture_accounting, check_host_pair, compare_full_http,
+     expected_case, finite_protocol, host_identity, read_small, require,
+ )
+ from qwen35_sampler_full_checks_v1 import check_model_metadata, check_quality_pair, original_validators
+ from qwen35_sampler_worker_v1 import nvme_destination, worker_name
++from qwen35_sampler_host_settings_v1 import from_live_observation
++from qwen35_sampler_runtime_contract_v12 import PYTHON
+ 
+ MODEL_FILES = {"state_copy": "state-copy.json", "numeric": "real-logits-validation.json",
+                "cold": "cold-buckets.json", "long": "long-decode-validation.json"}
+@@ -234,8 +236,11 @@
+                 live = ports.server_audit(manager, "live", run_id)
+                 root_observation(live, run_id, root_owner, source_sha256)
+                 attached_worker(attachment, live, identity)
++                settings = from_live_observation(live, case, identity, directory,
++                    [PYTHON, *server_arguments(case, arm, phase,
++                        {"on_device_sampling_config": None, **case["extra_overrides"]})])
+                 write_new(directory / "server-live-root-audit.json", live)
+-                yield attachment
++                yield {**attachment, "effective_host_settings": settings}
+         finally:
+             # This runs after __exit__, including exceptions from HTTP clients.
+             terminal = ports.server_audit(manager, "terminal", run_id)
+@@ -306,6 +311,8 @@
+         with serving(arm, "measured", root / "http", identity) as attached:
+             require(attached["observation_enabled"] is False and attached["debug_behavior"] == "unchanged", "timing contamination")
+             measured_hosts[arm] = {**identity, **attached, "graph_reuse_receipt_sha256": reuse["sha256"], "frozen_model_case": case}
++            if arm == "candidate":
++                check_host_pair(measured_hosts["baseline"], measured_hosts["candidate"])
+             initials[arm] = clients.initial(case, root / "http" / "initial120.json")
+             reports[arm] = clients.workloads(case, root / "http" / "workloads.json")
+         write_new(root / "http" / "host.json", measured_hosts[arm])
+--- /dev/null
++++ qwen35_sampler_host_settings_v1.py
+@@ -0,0 +1,76 @@
++"""Validate fresh API startup observations before comparing timed arms.
++
++Pure JSON helpers: no process reads, launches, native imports, or historical
++receipt repair. Callers supply real observations; mocks remain mocks.
++"""
++import copy
++from pathlib import Path
++
++from qwen35_sampler_pair_protocol_v1 import expected_case, host_identity, require
++from qwen35_sampler_runtime_contract_v12 import (
++    PYTHON, control_root, digest, native_environment, phase_environment,
++)
++from qwen35_sampler_worker_v1 import worker_name
++
++# These values intentionally identify a particular arm or fresh output tree.
++# Each is checked against its exact original binding BEFORE being omitted
++# from the comparable settings. No other environment key is ignored.
++BOUND_ENVIRONMENT_KEYS = (
++    "QWEN35_SAMPLER_HOST_IDENTITY", "QWEN35_SAMPLER_HOST_RECEIPT",
++    "TMPDIR", "VLLM_RPC_BASE_PATH", "QWEN35_SAMPLER_CAPTURE_ROOT",
++)
++
++
++def observed_settings(environment, argv, case, identity, directory, expected_argv):
++    """Return comparable settings only for the exact clean original launch."""
++    require(case == expected_case(), "Original shared model case required")
++    require(type(identity) is dict and identity == host_identity(
++        identity["arm"], identity["phase"], identity["source_sha256"]),
++        "Exact unchanged worker host identity")
++    directory = Path(directory)
++    arm, host_phase = identity["arm"], identity["phase"]
++    phase = directory.name
++    require(phase in ("capture", "quality", "http") and directory.parent.name == arm
++            and host_phase == ("correctness_capture" if phase == "capture" else "measured"),
++            "Exact arm/phase directory binding")
++    root = directory.parent.parent
++    prefix = "qwen35-sampler-pair-"
++    require(root.parent == Path("/mnt/nvme/neuron-work") and root.name.startswith(prefix)
++            and directory.is_absolute() and ".." not in directory.parts,
++            "Fresh original sampler output namespace")
++    spec = dict(run_name=root.name[len(prefix):], output_root=str(root))
++    control = control_root(spec) / (arm + "-" + phase)
++    wanted = native_environment(case, host_identity=identity,
++        host_receipt=directory / "worker-attachment.json",
++        capture_root=directory / "packets" if phase == "capture" else None)
++    wanted = phase_environment(spec, dict(arm=arm, phase=phase, control=str(control)), wanted)
++    require(type(environment) is dict and all(type(k) is str and type(v) is str
++            for k, v in environment.items()) and environment == wanted,
++            "Actual API environment differs from the complete original clean launch")
++    require(type(argv) is list and all(type(x) is str for x in argv)
++            and argv == expected_argv and argv[0] == PYTHON
++            and argv[-2:] == ["--worker-cls", worker_name(arm, host_phase)]
++            and argv.count("--worker-cls") == 1,
++            "Actual API argv differs from exact original worker launch")
++    return dict(schema="qwen35_sampler_effective_host_settings_v1",
++        environment={key: value for key, value in environment.items()
++                     if key not in BOUND_ENVIRONMENT_KEYS},
++        api_argv=copy.deepcopy(argv[:-2]),
++        excluded_environment_bindings=list(BOUND_ENVIRONMENT_KEYS),
++        excluded_argv_binding="--worker-cls", phase=host_phase)
++
++
++def from_live_observation(live, case, identity, directory, expected_argv):
++    """Recompute the producer's fields; absent, stale or invented data fails."""
++    require(live["observation_kind"] == "live_ready" and live["ready"] is True
++            and live["server_active"] is True and live["exit_observed"] is False,
++            "Effective settings require the actual live API observation")
++    proof = live["startup_config_proof"]
++    environment, argv = proof["actual_api_initial_environment"], proof["actual_api_argv"]
++    require(digest(environment) == proof["actual_api_initial_environment_sha256"]
++            and argv == live["api_process_owner"]["argv"],
++            "Observed environment hash and actual process argv must agree")
++    result = observed_settings(environment, argv, case, identity, directory, expected_argv)
++    require(proof["effective_host_settings"] == result,
++            "Recorded effective settings disagree with complete observed startup values")
++    return result
