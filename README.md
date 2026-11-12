@@ -1,3 +1,5 @@
+> 本分支含尚未设备验收的 [Qwen3.5 解码缓存写入候选](docs/qwen35-decode-writer-candidate-20261112.md)。默认原 writer，候选须显式开启；暂无整模型提速结论。
+
 # vLLM User Guide for AWS Neuron
 
 This is the `trn1-multi-model-experimental-20261107` branch for **Neuron SDK

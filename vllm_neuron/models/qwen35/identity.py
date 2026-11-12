@@ -212,12 +212,13 @@ def source_identity():
 
 
 def build_identity(model_path, configuration):
+    from .cache_writer import cache_writer_identity
     canonical_configuration(configuration)
     require(configuration.get("metadata", "missing") is None, "Caller build metadata must be null")
     variant = selected_variant()
     validate_scope(configuration, configuration.get("neuron_config", {}))
     return {"schema": SCHEMA, "variant": variant, "model": verify_view(model_path),
             "configuration": configuration, "software": software_identity(), "hardware": hardware_identity(),
-            "sources": source_identity(),
+            "sources": source_identity(), "cache_writer": cache_writer_identity(),
             "environment": {k: os.environ.get(k) for k in ("NEURON_CC_FLAGS", "NEURON_RT_STOCHASTIC_ROUNDING_EN",
                 "NEURON_LOGICAL_NC_CONFIG", "XLA_USE_BF16", "XLA_DOWNCAST_BF16", "XLA_DISABLE_FUNCTIONALIZATION")}}

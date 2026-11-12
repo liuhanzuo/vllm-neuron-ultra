@@ -58,6 +58,7 @@ def store_slots(cache, updates, slots):
 class LinearAttention(nn.Module):
     def __init__(self, c):
         super().__init__()
+        self.cache_writer = store_slots
         self.kh, self.vh = c['linear_num_key_heads'], c['linear_num_value_heads']
         self.kd, self.vd = c['linear_key_head_dim'], c['linear_value_head_dim']
         self.width = c['linear_conv_kernel_dim']
@@ -101,13 +102,14 @@ class LinearAttention(nn.Module):
         else:
             output, state = delta_decode(q, k, v, g, beta, state)
         output = self.norm(output, z).reshape(b, t, self.value_dim)
-        new_cache = store_slots(conv_cache, conv, slots), store_slots(state_cache, state, slots)
+        new_cache = self.cache_writer(conv_cache, conv, slots), self.cache_writer(state_cache, state, slots)
         return self.out_proj(output), new_cache
 
 
 class FullAttention(nn.Module):
     def __init__(self, c):
         super().__init__()
+        self.cache_writer = store_slots
         hidden = c['hidden_size']
         self.h, self.kvh, self.dim = c['num_attention_heads'], c['num_key_value_heads'], c['head_dim']
         self.q_proj = nn.Linear(hidden, 2 * self.h * self.dim, bias=False)
@@ -148,7 +150,7 @@ class FullAttention(nn.Module):
         probabilities = scores.softmax(dim=-1, dtype=torch.float32).to(q.dtype)
         output = (probabilities @ all_v).transpose(1, 2).reshape(b, t, self.h * self.dim)
         output = output * gate.reshape(b, t, -1).sigmoid()
-        new_cache = store_slots(kcache, stored_k, slots), store_slots(vcache, stored_v, slots)
+        new_cache = self.cache_writer(kcache, stored_k, slots), self.cache_writer(vcache, stored_v, slots)
         return self.o_proj(output), new_cache
 
 

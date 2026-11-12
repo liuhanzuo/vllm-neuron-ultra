@@ -14,7 +14,8 @@ from neuronx_distributed.parallel_layers.layers import (
 from neuronx_distributed.parallel_layers.utils import set_tensor_model_parallel_attributes
 from neuronx_distributed_inference.models.config import InferenceConfig, NeuronConfig
 from neuronx_distributed_inference.models.model_base import NeuronBaseModel, NeuronBaseForCausalLM
-from .text_core import Layer, RMSNorm, LinearAttention
+from .text_core import Layer, RMSNorm, LinearAttention, store_slots
+from .cache_writer import resolve_cache_writer
 
 
 class Qwen35InferenceConfig(InferenceConfig):
@@ -148,6 +149,11 @@ class NeuronQwen35Model(NeuronBaseModel):
             layer.mlp.down_proj = row(c.intermediate_size, c.hidden_size)
             self.layers.append(layer)
         self.norm = RMSNorm(c.hidden_size, c.rms_norm_eps)
+        # Resolve once after TP sharding. Prefill remains the original writer.
+        writer = resolve_cache_writer(c, self.prefill, store_slots)
+        for layer in self.layers:
+            attention = layer.linear_attn if layer.kind == 'linear_attention' else layer.self_attn
+            attention.cache_writer = writer
 
     def init_inference_optimization(self, c):
         self.kv_mgr = HybridCache(c, c.neuron_config)

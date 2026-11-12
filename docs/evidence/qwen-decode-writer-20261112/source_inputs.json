@@ -1,0 +1,349 @@
+{
+  "additional_sources": {
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/build.py": "e449f71f5759cc861cb02fd3b40d6d3186f64d8d33cf275da1f901d9641514c8",
+    "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/serve.py": "7a16b34b805075b5eef9771057cbcc3ebb0fb207814072d782fd3aa9212a9265"
+  },
+  "changes": [
+    {
+      "bytes": 5085,
+      "candidate_sha256": "7ad18c9dff829ea3649f6968bf51b7696902d19d6ac035e9a63f4752dd19b66a",
+      "original_sha256": null,
+      "path": "vllm_neuron/models/qwen35/cache_writer.py"
+    },
+    {
+      "bytes": 11913,
+      "candidate_sha256": "900e021075bb919a2966d938ea26692b304ccfc76e5fa7e9071ddce40011030c",
+      "original_sha256": "4bdf0769b1cfb577480da9bd416310baec254e6300cf41597437c488401a98b9",
+      "path": "vllm_neuron/models/qwen35/identity.py"
+    },
+    {
+      "bytes": 13516,
+      "candidate_sha256": "791e4e8fb46edd7062e7d0349f7df25dd0a8f74ee4a67d32a74d123b91e425ac",
+      "original_sha256": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad",
+      "path": "vllm_neuron/models/qwen35/modeling.py"
+    },
+    {
+      "bytes": 2052,
+      "candidate_sha256": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e",
+      "original_sha256": null,
+      "path": "vllm_neuron/models/qwen35/slot_cache_nki_predicated.py"
+    },
+    {
+      "bytes": 11405,
+      "candidate_sha256": "3f0a966af288d87c55e72f5dd41b8f11f343b43d3c1f45385fa360d774aacdfb",
+      "original_sha256": "c9ee19b8e95eae12193e292286804e660424ca5fd0ace1b64c57f4e9d37011ba",
+      "path": "vllm_neuron/models/qwen35/text_core.py"
+    }
+  ],
+  "plan": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-cache-writer-package-source-plan-20261112-v1.json",
+    "sha256": "8e0cf4fb321a301152fe9dbfc4f838407682bfaf73f4bfac1ba4e3f980a62200"
+  },
+  "schema": "qwen35_decode_writer_source_inputs_v1",
+  "sources": {
+    "integer_reference": {
+      "bytes": 2045,
+      "lines": {
+        "int64_requirement": [
+          45
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_integer_slot_reference_v1.py",
+      "sha256": "2d07a14d1e25fc6668f2df5104df9c110338a86a115b7135fb46f1fd4b5c3538"
+    },
+    "loader": {
+      "bytes": 42818,
+      "lines": {
+        "text_forward": [
+          369
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_loader.py",
+      "sha256": "c1881ab64a296bb6a98657b8a8135ee8facc954c5e684803f2624dd2e2dcbb31"
+    },
+    "nki_kernel": {
+      "bytes": 2052,
+      "lines": {
+        "copy": [
+          35
+        ],
+        "kernel": [
+          8
+        ],
+        "last_writer": [
+          25
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated.py",
+      "sha256": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e"
+    },
+    "nki_wrapper": {
+      "bytes": 387,
+      "lines": {
+        "entry": [
+          6
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated_torch.py",
+      "sha256": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67"
+    },
+    "package_artifacts": {
+      "bytes": 6482,
+      "lines": {
+        "admission": [
+          53
+        ],
+        "build": [
+          87
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/artifacts.py",
+      "sha256": "f32a7bffb8752514aa65ca7e0599b3781557bf7974e7b3bec311df473b656091"
+    },
+    "package_checks": {
+      "bytes": 8097,
+      "lines": {
+        "cold": [
+          56
+        ],
+        "long": [
+          78
+        ],
+        "quality": [
+          90
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/checks.py",
+      "sha256": "dce9068362346f91f077196b73dd08bdd31ea651cb616e0cbd5fde20057a7225"
+    },
+    "package_final_audit": {
+      "bytes": 8676,
+      "lines": {
+        "external_audit": [
+          21,
+          23
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/final_audit.py",
+      "sha256": "ab631ab0e0abbd2866be0c286406fb18a20fdea9399279dd89eb273d6d951c1b"
+    },
+    "package_identity": {
+      "bytes": 11820,
+      "lines": {
+        "build_identity": [
+          214
+        ],
+        "scope": [
+          146
+        ],
+        "source_identity": [
+          205
+        ],
+        "variant": [
+          136
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/identity.py",
+      "sha256": "4bdf0769b1cfb577480da9bd416310baec254e6300cf41597437c488401a98b9"
+    },
+    "package_modeling": {
+      "bytes": 13132,
+      "lines": {
+        "decode_bucket_slice": [
+          188
+        ],
+        "hybrid_cache": [
+          78
+        ],
+        "layer_call": [
+          189
+        ],
+        "preserve_fp32": [
+          155
+        ],
+        "tail_preservation": [
+          191
+        ],
+        "tp_sharding": [
+          129
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/modeling.py",
+      "sha256": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad"
+    },
+    "package_provenance": {
+      "bytes": 13966,
+      "lines": {},
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/provenance.py",
+      "sha256": "682313f7b2e71b6b5bbeb3a11e82190bfa3c77ddd9a209bec36ae85835e77e89"
+    },
+    "package_registration": {
+      "bytes": 3489,
+      "lines": {
+        "text_route": [
+          18
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/registration.py",
+      "sha256": "bb5a3a97efa7ea253549697c0386c7a3e98d26a76dcf9f47faa79ba259a43ff7"
+    },
+    "package_stage_order": {
+      "bytes": 7189,
+      "lines": {},
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/stage_order.json",
+      "sha256": "c0c61972814cb9acc428e4aff0a269789080c86150af7d469e42fe42032d5ffb"
+    },
+    "package_state": {
+      "bytes": 3105,
+      "lines": {
+        "all96_bindings": [
+          11
+        ],
+        "clear": [
+          31
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/state.py",
+      "sha256": "095e46f6d02dfc4b43cd77ebaa20a7a25a4879d2786b2c1a2ed5a6e73ffbabc7"
+    },
+    "package_text": {
+      "bytes": 11301,
+      "lines": {
+        "attention_writes": [
+          151
+        ],
+        "linear_writes": [
+          104
+        ],
+        "old_kv_gather": [
+          139
+        ],
+        "old_linear_gather": [
+          90
+        ],
+        "writer": [
+          49
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/text_core.py",
+      "sha256": "c9ee19b8e95eae12193e292286804e660424ca5fd0ace1b64c57f4e9d37011ba"
+    },
+    "package_validation": {
+      "bytes": 2435,
+      "lines": {
+        "long_frames": [
+          20
+        ],
+        "state_gate": [
+          34
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/validation.py",
+      "sha256": "294c81d07aee0396c960afc1d6f78a0da98d838ab05cd970cbe55a8536ab6dff"
+    },
+    "primitive_leaf": {
+      "bytes": 14509,
+      "lines": {
+        "old_read": [
+          111
+        ],
+        "slot_dtype": [
+          221
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_integer_reference_device_leaf_v1.py",
+      "sha256": "2bf42ed6640c92dec36d27f9d8fa37b7ecb218088b5dc25cb2a48b4bd20590db"
+    },
+    "primitive_protocol": {
+      "bytes": 9103,
+      "lines": {
+        "layouts": [
+          15
+        ],
+        "mappings": [
+          20
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py",
+      "sha256": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4"
+    },
+    "research_adapter": {
+      "bytes": 13100,
+      "lines": {},
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py",
+      "sha256": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2"
+    },
+    "research_text": {
+      "bytes": 11238,
+      "lines": {
+        "attention_writes": [
+          149
+        ],
+        "linear_writes": [
+          102
+        ],
+        "writer": [
+          47
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_text_port.py",
+      "sha256": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34"
+    },
+    "runner": {
+      "bytes": 66550,
+      "lines": {
+        "decode_slot": [
+          863,
+          924,
+          1089,
+          1125
+        ],
+        "free_slots": [
+          140
+        ],
+        "int64_slots": [
+          1005,
+          1037
+        ],
+        "new_slot": [
+          843
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "4484edd883d199310e1646969417e05a8162148e404f840dc66cad6c6233a77e"
+    },
+    "sdk_base": {
+      "bytes": 176537,
+      "lines": {
+        "decode_batch": [
+          3130,
+          3182
+        ],
+        "prefill_batch": [
+          3159
+        ]
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py",
+      "sha256": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63"
+    },
+    "sdk_wrapper": {
+      "bytes": 83554,
+      "lines": {
+        "convert": [
+          718
+        ],
+        "convert_called": [
+          1337
+        ],
+        "inactive_mask": [
+          621
+        ],
+        "trace_int32": [
+          254
+        ]
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py",
+      "sha256": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241"
+    }
+  }
+}
