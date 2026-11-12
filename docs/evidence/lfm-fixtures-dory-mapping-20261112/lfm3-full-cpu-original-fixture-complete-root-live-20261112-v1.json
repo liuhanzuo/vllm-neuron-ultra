@@ -1,0 +1,130 @@
+{
+  "schema": "lfm3_full_cpu_root_live_progress_v1",
+  "observed_at": "2026-11-12T01:44:35.489615+00:00",
+  "tool_session": 39484,
+  "actual_owners": [
+    {
+      "pid": 2660424,
+      "start_ticks": "422590196",
+      "ppid": 2480035,
+      "state": "S",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-s",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-r1-20261112-spec.json",
+        "--spec-sha256",
+        "5bce83965d9ce35ded1d337c4f64ede7dd26015d6836feb948b4db295c15519b",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-r1-20261112-review.json",
+        "--review-sha256",
+        "eedaa0335bdd99cdf66c0873e27ee85280f534fc433a723694fa0bfc498ab18a"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+    },
+    {
+      "pid": 2673721,
+      "start_ticks": "422637087",
+      "ppid": 1583,
+      "state": "S",
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron_053_py312/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py",
+        "--mode",
+        "worker",
+        "--admission",
+        "/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/admission.json",
+        "--admission-sha256",
+        "dad9b67a8ac407238f9ef50928f1ed006a96cce2c3c1104835ca6090ded30e8b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-full-cpu-r1-20261112.service"
+    }
+  ],
+  "actual_service_properties": {
+    "MainPID": "2673721",
+    "Result": "success",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-full-cpu-r1-20261112.service",
+    "MemoryCurrent": "4578439168",
+    "TasksCurrent": "2",
+    "ActiveState": "active",
+    "SubState": "running",
+    "InvocationID": "4d94c15db044410cb66d112650e64d30"
+  },
+  "completed_reports_by_phase": [
+    {
+      "stage": "original_fixture",
+      "phase": "regression_cpu",
+      "reports": 123,
+      "passed": 123,
+      "cases": 1648
+    },
+    {
+      "stage": "original_fixture",
+      "phase": "extended_cpu",
+      "reports": 168,
+      "passed": 168,
+      "cases": 2068
+    },
+    {
+      "stage": "new_fixture",
+      "phase": "regression_cpu",
+      "reports": 13,
+      "passed": 13,
+      "cases": 208
+    },
+    {
+      "stage": "new_fixture",
+      "phase": "extended_cpu",
+      "reports": 0,
+      "passed": 0,
+      "cases": 0
+    },
+    {
+      "stage": "controls",
+      "phase": "regression_cpu",
+      "reports": 0,
+      "passed": 0,
+      "cases": 0
+    },
+    {
+      "stage": "controls",
+      "phase": "extended_cpu",
+      "reports": 0,
+      "passed": 0,
+      "cases": 0
+    },
+    {
+      "stage": "candidate",
+      "phase": "regression_cpu",
+      "reports": 0,
+      "passed": 0,
+      "cases": 0
+    },
+    {
+      "stage": "candidate",
+      "phase": "extended_cpu",
+      "reports": 0,
+      "passed": 0,
+      "cases": 0
+    }
+  ],
+  "original_fixture_independent_audit": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-original-fixture-root-partial-audit-20261112-v1.json",
+    "sha256": "eaf36501f753981e3ab69c427eb42d89bef51825ed3de4957dda985cfa4fc04b"
+  },
+  "bound_handoff_unchanged": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v530-mini-sdk-import-r1-ended.json",
+    "sha256": "5b0bf5dc6cbc93b9c0424e5eac6f2d2139434958f278029d17a84e27e13260ed"
+  },
+  "original_full_cpu_result_pending": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "no_duplicate_launched": true
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "minicpm5_sdk_import_errno_design_root_review_v1",
+  "observed_at": "2026-11-12T01:31:29.414417+00:00",
+  "reviewer": "/root",
+  "design": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-mmap-errno-diagnostic-design-20261112-v2.md",
+    "sha256": "f99c1abdb68f239809e7dc3d7da9e0faa422eec72bb752824c4893024f435528"
+  },
+  "upstream_evidence": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-strace-d-source-boundary-20261112-v1.json",
+    "sha256": "e41a93742869129f1f08a15176389cfd64e8861ca689dec54cc0865b699eebb7"
+  },
+  "design_accepted_for_pure_mock_implementation": true,
+  "native_implementation_accepted": false,
+  "runtime_admitted": false,
+  "new_speedup_claim": false,
+  "original_import_root_cause_proven": false,
+  "findings": [
+    "strace -D upstream explicitly uses PR_SET_PTRACER_ANY and double fork; installed ELF equivalence is not claimed.",
+    "Same outer PTRACE_SEIZE avoids a tracer child and SDK environment/ppid changes, subject to actual attach/ABI support.",
+    "Only ptrace-aware waitpid may own status after attachment; Popen poll/wait cannot collect ptrace stops.",
+    "True WIFEXITED/WIFSIGNALED is required; event-exit, ECHILD, disappearance or empty group alone cannot establish success.",
+    "Original gate must be written nonblocking alongside event handling.",
+    "All original authentication, resource budgets and lock/drain/persistence requirements remain mandatory."
+  ],
+  "implementation_conditions": [
+    "Finite known-task and event budgets, no wait-any or process adoption.",
+    "At most one orphan attach EXIT before gate EOF; later missing pairs are incomplete.",
+    "Ordinary SIGTRAP forwarded; group-stop may fail and drain.",
+    "Memory syscall rows retain real entry/exit info and raw wait statuses; non-target syscall events use bounded counters.",
+    "47,925 source authentication paths after gate may create significant tracing overhead; original900s remains, completion is unproven.",
+    "Guard/persistence failure does not permit a weaker writer or fabricated receipt."
+  ],
+  "no_actual_trace_native_library_or_tensor_reads": true
+}
