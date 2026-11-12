@@ -1,0 +1,166 @@
+{
+  "schema": "lfm3_device_neuron_cache_metadata_dependency_review_v1",
+  "observed_at": "2026-11-12T06:04:47.088982+00:00",
+  "reviewer": "/root/lfm_v3_binding_source",
+  "metadata_and_stat_only": true,
+  "cache_file_contents_read": false,
+  "payload_hashing_performed": false,
+  "deletion_performed": false,
+  "runtime_admitted": false,
+  "inventory_tool": {
+    "chunk": "db0ce7",
+    "exit_code": 0
+  },
+  "reference_search_tool": {
+    "chunk": "5885c3",
+    "exit_code": 0,
+    "python_sources": 622,
+    "selected_metadata_paths": 7
+  },
+  "entries_seen": 1507,
+  "entry_limit": 20000,
+  "inventory_complete": true,
+  "regular_file_count": 1016,
+  "regular_file_nlink_counts": {
+    "1": 1016
+  },
+  "symlinks_followed": false,
+  "cache_allocated_bytes": 2923520000,
+  "cache_allocated_gib": 2.7227401733398438,
+  "largest_six_reviews": [
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_de44013117e31d35dbf8+bab5c4bb",
+      "allocated_bytes": 90611712,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.log",
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_explicit_retained_graph_input",
+      "evidence": "OLMo v4 plan and v8 cache-input-admission retain exact old_hlo/cache_flags paths, input identities and recovery graph bindings."
+    },
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_8c2b39f6325d919576a6+d8828512",
+      "allocated_bytes": 29380608,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.log",
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_incomplete_dependency_and_completion_proof",
+      "evidence": "Largest directory contains HLO protobuf/compile flags and possibly log, with no NEFF or .done marker. No exact identifier hits in selected629-source/metadata-path search; absence of hits does not prove completion/rebuildability."
+    },
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_b53203381ac3be316614+db5a952d",
+      "allocated_bytes": 17809408,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.log",
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_incomplete_dependency_and_completion_proof",
+      "evidence": "Largest directory contains HLO protobuf/compile flags and possibly log, with no NEFF or .done marker. No exact identifier hits in selected629-source/metadata-path search; absence of hits does not prove completion/rebuildability."
+    },
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_a06bcd3056dff05138a2+d8828512",
+      "allocated_bytes": 16306176,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_incomplete_dependency_and_completion_proof",
+      "evidence": "Largest directory contains HLO protobuf/compile flags and possibly log, with no NEFF or .done marker. No exact identifier hits in selected629-source/metadata-path search; absence of hits does not prove completion/rebuildability."
+    },
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_0bc8122ee3e7be21d497+fafdf935",
+      "allocated_bytes": 15368192,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.log",
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_incomplete_dependency_and_completion_proof",
+      "evidence": "Largest directory contains HLO protobuf/compile flags and possibly log, with no NEFF or .done marker. No exact identifier hits in selected629-source/metadata-path search; absence of hits does not prove completion/rebuildability."
+    },
+    {
+      "path": "/mnt/nvme/neuron-cache/neuronxcc-2.23.6484.0+3b612583/MODULE_6d60ffeb996830150b9b+db5a952d",
+      "allocated_bytes": 14364672,
+      "all_files_nlink_one": true,
+      "filenames": [
+        "model.hlo_module.pb",
+        "compile_flags.json"
+      ],
+      "completion_proven": false,
+      "rebuildability_and_future_dependency_clearance_proven": false,
+      "decision": "exclude_incomplete_dependency_and_completion_proof",
+      "evidence": "Largest directory contains HLO protobuf/compile flags and possibly log, with no NEFF or .done marker. No exact identifier hits in selected629-source/metadata-path search; absence of hits does not prove completion/rebuildability."
+    }
+  ],
+  "immediately_reclaimable_candidates": [],
+  "immediately_reclaimable_bytes": 0,
+  "conclusion": "No completed and rebuildable cache subset cleared for deletion. Largest OLMo HLO remains explicitly referenced. Other largest modules lack a demonstrated completion and reconstruction/dependency closure. Whole cache is only2.722740GiB, insufficient to close the remaining6.041336GiB budget deficit after all conditional retired archives.",
+  "combined_impossible_upper_bound": {
+    "retired_conditional_bytes": 5198655488,
+    "entire_neuron_work_bytes": 2592256000,
+    "entire_neuron_cache_bytes": 2923520000,
+    "sum_bytes": 10714431488,
+    "sum_gib": 9.978591918945312,
+    "target12gib_shortfall_bytes": 2170470400,
+    "budget54gib_shortfall_bytes": 971059200,
+    "not_a_deletion_proposal": true,
+    "includes_protected_evidence": true
+  },
+  "evidence": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-device-neuron-cache-stat-inventory-20261112-v1.json",
+      "sha256": "c53871aca8c1308968b650f6bfebeb5f37ff9a05d63e1ddd204b3c5403a9bc8c",
+      "bytes": 616677
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-device-retired-storage-candidates-20261112-v1.json",
+      "sha256": "57f4204a73e03035f75b745756050e1a34c6bf3b641bf52be69f01e6a29393f2",
+      "bytes": 79038
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-device-neuron-work-storage-review-20261112-v1.json",
+      "sha256": "cd546714963229ab112afba27af872d484852b39c0f5c4c6f6ccac9a1c8bb28c",
+      "bytes": 7720
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/olmo3-fused-cache-full-v4/plan.json",
+      "sha256": "b4e2f14cf2771dda26f43869d1d55d39645fcf3b7291af8876f654038d1e9de2",
+      "bytes": 629734
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/olmo3-fused-cache-full-v8/cache-input-admission.json",
+      "sha256": "df2f78c470caebd3557609f4df8ed16f6e62e1f96d2d7fb34ac32830ef613762",
+      "bytes": 133466
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/storage-retirement-candidate-dependency-review-20261107-v1.json",
+      "sha256": "2252f21ae90b39d611098e44578c23c10fe10d0291ff7af5f31494bea1bf294b",
+      "bytes": 125053
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-context4096-additive-source-closure-20261112-v1.json",
+      "sha256": "5d035058057067de6d3bc9762384f2ecf5f95703388c9b153c6a2ab4f9e63efa",
+      "bytes": 106987
+    }
+  ],
+  "scope_end": "No further directories surveyed. Preserve models, neuron-artifacts, current/pending cache inputs, raw comparison records and active swap. Root controls next small-output work or separate resource decisions."
+}
