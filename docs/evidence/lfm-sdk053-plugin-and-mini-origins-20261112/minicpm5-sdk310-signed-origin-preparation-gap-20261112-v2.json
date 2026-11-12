@@ -1,0 +1,2966 @@
+{
+  "AS_limit_interpretation": {
+    "conclusion": "AS2GiB could constrain virtual ELF mappings of the installed CUDA Torch stack. Saved failure reports no errno and no complete rejected-mapping/ELF evidence; this is a hypothesis, not a diagnosis or permission to increase limits.",
+    "error": "libcusparseLt.so.0: failed to map segment from shared object",
+    "root_cause_determined": false,
+    "saved_after_failure_status": {
+      "Threads": {
+        "present": true,
+        "raw": "Threads:\t1",
+        "unit": "count",
+        "value": 1
+      },
+      "VmPeak": {
+        "present": true,
+        "raw": "VmPeak:\t 1699632 kB",
+        "unit": "kB",
+        "value": 1699632
+      },
+      "VmRSS": {
+        "present": true,
+        "raw": "VmRSS:\t  201400 kB",
+        "unit": "kB",
+        "value": 201400
+      },
+      "VmSize": {
+        "present": true,
+        "raw": "VmSize:\t  362644 kB",
+        "unit": "kB",
+        "value": 362644
+      }
+    },
+    "saved_failure": {
+      "bytes": 4094,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/phase-1-summary.json",
+      "sha256": "837a686029df5ba2d3932ca2ca17ab18bcd1a6b5eda3f6deeb1834df2c7123e6"
+    },
+    "saved_limits": {
+      "AS": [
+        2147483648,
+        2147483648
+      ],
+      "CPU": [
+        600,
+        605
+      ],
+      "FSIZE": [
+        2097152,
+        2097152
+      ]
+    }
+  },
+  "actual_sdk_path_chain": [
+    {
+      "content_read": false,
+      "identity": {
+        "st_ctime_ns": 1790148560401032958,
+        "st_dev": 66306,
+        "st_ino": 8264540,
+        "st_mode": 41471,
+        "st_mtime_ns": 1772167449546421481,
+        "st_nlink": 1,
+        "st_size": 10
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "resolved": "/usr/bin/python3.10",
+      "symlink": "python3.10"
+    },
+    {
+      "content_read": false,
+      "identity": {
+        "st_ctime_ns": 1790148560401032958,
+        "st_dev": 66306,
+        "st_ino": 8264539,
+        "st_mode": 41471,
+        "st_mtime_ns": 1772167449546421481,
+        "st_nlink": 1,
+        "st_size": 19
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/bin/python3.10",
+      "resolved": "/usr/bin/python3.10",
+      "symlink": "/usr/bin/python3.10"
+    },
+    {
+      "content_read": false,
+      "identity": {
+        "st_ctime_ns": 1790232137499498335,
+        "st_dev": 66306,
+        "st_ino": 6333,
+        "st_mode": 33261,
+        "st_mtime_ns": 1788171497000000000,
+        "st_nlink": 1,
+        "st_size": 5941864
+      },
+      "path": "/usr/bin/python3.10",
+      "resolved": "/usr/bin/python3.10",
+      "symlink": null
+    }
+  ],
+  "agent": "/root/spark_native_diagnostic_source",
+  "bootstrap_extra_candidates_not_declared_actual_maps": [
+    {
+      "actual_loaded": null,
+      "actual_loader_mapping_observed_here": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137647495072,
+          "st_dev": 66306,
+          "st_ino": 6709,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 63728
+        },
+        "path": "/usr/lib/python3.10/lib-dynload/_hashlib.cpython-310-x86_64-linux-gnu.so",
+        "resolved": "/usr/lib/python3.10/lib-dynload/_hashlib.cpython-310-x86_64-linux-gnu.so",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 11107,
+        "path": "/var/lib/dpkg/info/libpython3.10-minimal:amd64.list",
+        "sha256": "aac52b6f28fcc7666ad5894475c2cb1013ecf5db4c6c7e0cbd881f7ad1e7c14a"
+      },
+      "package": "libpython3.10-minimal",
+      "path": "/usr/lib/python3.10/lib-dynload/_hashlib.cpython-310-x86_64-linux-gnu.so",
+      "reason": "Source bootstrap imports hashlib/json; possible native provider must be accounted for by actual pre-ctypes mapping, not inferred absent",
+      "version": "3.10.12-1~22.04.18"
+    },
+    {
+      "actual_loaded": null,
+      "actual_loader_mapping_observed_here": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137382500915,
+          "st_dev": 66306,
+          "st_ino": 7218,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 49160
+        },
+        "path": "/usr/lib/python3.10/lib-dynload/_json.cpython-310-x86_64-linux-gnu.so",
+        "resolved": "/usr/lib/python3.10/lib-dynload/_json.cpython-310-x86_64-linux-gnu.so",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 14761,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.list",
+        "sha256": "71a436fb2be99c93f5674022a23b8d16ab6617cacf01bfb8aa4b6e730882f2a7"
+      },
+      "package": "libpython3.10-stdlib",
+      "path": "/usr/lib/python3.10/lib-dynload/_json.cpython-310-x86_64-linux-gnu.so",
+      "reason": "Source bootstrap imports hashlib/json; possible native provider must be accounted for by actual pre-ctypes mapping, not inferred absent",
+      "version": "3.10.12-1~22.04.18"
+    }
+  ],
+  "created_at": "2026-11-12T05:32:34.526019+00:00",
+  "exact_primary_targets": [
+    {
+      "architecture": "amd64",
+      "current_content_hash_authenticated": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137499498335,
+          "st_dev": 66306,
+          "st_ino": 6333,
+          "st_mode": 33261,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 5941864
+        },
+        "path": "/usr/bin/python3.10",
+        "resolved": "/usr/bin/python3.10",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 523,
+        "path": "/var/lib/dpkg/info/python3.10-minimal.list",
+        "sha256": "96f5b3a9d546ccf8a3c0a533dace786036f4464e250f4e74aa9e77a8b629e4cd"
+      },
+      "dpkg_md5sums": {
+        "bytes": 494,
+        "path": "/var/lib/dpkg/info/python3.10-minimal.md5sums",
+        "sha256": "faef142bcd5261c41468bd90c3e1a5a94220a6c0066ad54a1d08cc0851abfb12"
+      },
+      "dpkg_status": {
+        "bytes": 1535655,
+        "path": "/var/lib/dpkg/status",
+        "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+      },
+      "metadata_md5_not_actual_hash": "884a1eea07e1a63d0b076fd260547603",
+      "missing": [
+        "full exact signed .deb hash/archive replay",
+        "exact requested member SHA256 and size",
+        "current complete file hash and ELF/provider evidence where native"
+      ],
+      "package": "python3.10-minimal",
+      "path": "/usr/bin/python3.10",
+      "saved_signed_archive_member_origin_found": false,
+      "signed_package_address": {
+        "architecture": "amd64",
+        "archive_read_here": false,
+        "bytes": 2277402,
+        "filename": "pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb",
+        "package": "python3.10-minimal",
+        "package_content_authenticated": false,
+        "sha256": "34e4c7383fdf2562d78321acfee5aa1f7b92be371dd79410496ad35cb773f326",
+        "sources": [
+          {
+            "index": {
+              "bytes": 22511228,
+              "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+              "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+            },
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+          },
+          {
+            "index": {
+              "bytes": 21028804,
+              "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+              "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+            },
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+          }
+        ],
+        "version": "3.10.12-1~22.04.18"
+      },
+      "version": "3.10.12-1~22.04.18"
+    },
+    {
+      "architecture": "amd64",
+      "current_content_hash_authenticated": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137382500915,
+          "st_dev": 66306,
+          "st_ino": 7203,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 132120
+        },
+        "path": "/usr/lib/python3.10/lib-dynload/_ctypes.cpython-310-x86_64-linux-gnu.so",
+        "resolved": "/usr/lib/python3.10/lib-dynload/_ctypes.cpython-310-x86_64-linux-gnu.so",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 14761,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.list",
+        "sha256": "71a436fb2be99c93f5674022a23b8d16ab6617cacf01bfb8aa4b6e730882f2a7"
+      },
+      "dpkg_md5sums": {
+        "bytes": 23878,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.md5sums",
+        "sha256": "3e64856a9b6513bb1bd778ebbed9c4b82dc3debb304416bb692cb9b91150c119"
+      },
+      "dpkg_status": {
+        "bytes": 1535655,
+        "path": "/var/lib/dpkg/status",
+        "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+      },
+      "metadata_md5_not_actual_hash": "6a22d1d511aa51676963d828c0f13b1b",
+      "missing": [
+        "full exact signed .deb hash/archive replay",
+        "exact requested member SHA256 and size",
+        "current complete file hash and ELF/provider evidence where native"
+      ],
+      "package": "libpython3.10-stdlib",
+      "path": "/usr/lib/python3.10/lib-dynload/_ctypes.cpython-310-x86_64-linux-gnu.so",
+      "saved_signed_archive_member_origin_found": false,
+      "signed_package_address": {
+        "architecture": "amd64",
+        "archive_read_here": false,
+        "bytes": 1850286,
+        "filename": "pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb",
+        "package": "libpython3.10-stdlib",
+        "package_content_authenticated": false,
+        "sha256": "ee09afbc981a4aaa00053f019eab6b45dcc4dbeb4ca4fcc4277eff539e09f228",
+        "sources": [
+          {
+            "index": {
+              "bytes": 22511228,
+              "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+              "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+            },
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          },
+          {
+            "index": {
+              "bytes": 21028804,
+              "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+              "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+            },
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          }
+        ],
+        "version": "3.10.12-1~22.04.18"
+      },
+      "version": "3.10.12-1~22.04.18"
+    },
+    {
+      "architecture": "amd64",
+      "current_content_hash_authenticated": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137382500915,
+          "st_dev": 66306,
+          "st_ino": 6505,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 17988
+        },
+        "path": "/usr/lib/python3.10/ctypes/__init__.py",
+        "resolved": "/usr/lib/python3.10/ctypes/__init__.py",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 14761,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.list",
+        "sha256": "71a436fb2be99c93f5674022a23b8d16ab6617cacf01bfb8aa4b6e730882f2a7"
+      },
+      "dpkg_md5sums": {
+        "bytes": 23878,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.md5sums",
+        "sha256": "3e64856a9b6513bb1bd778ebbed9c4b82dc3debb304416bb692cb9b91150c119"
+      },
+      "dpkg_status": {
+        "bytes": 1535655,
+        "path": "/var/lib/dpkg/status",
+        "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+      },
+      "metadata_md5_not_actual_hash": "942f423d04fe239ddb5ccbc6edbed7f3",
+      "missing": [
+        "full exact signed .deb hash/archive replay",
+        "exact requested member SHA256 and size",
+        "current complete file hash and ELF/provider evidence where native"
+      ],
+      "package": "libpython3.10-stdlib",
+      "path": "/usr/lib/python3.10/ctypes/__init__.py",
+      "saved_signed_archive_member_origin_found": false,
+      "signed_package_address": {
+        "architecture": "amd64",
+        "archive_read_here": false,
+        "bytes": 1850286,
+        "filename": "pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb",
+        "package": "libpython3.10-stdlib",
+        "package_content_authenticated": false,
+        "sha256": "ee09afbc981a4aaa00053f019eab6b45dcc4dbeb4ca4fcc4277eff539e09f228",
+        "sources": [
+          {
+            "index": {
+              "bytes": 22511228,
+              "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+              "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+            },
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          },
+          {
+            "index": {
+              "bytes": 21028804,
+              "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+              "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+            },
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          }
+        ],
+        "version": "3.10.12-1~22.04.18"
+      },
+      "version": "3.10.12-1~22.04.18"
+    },
+    {
+      "architecture": "amd64",
+      "current_content_hash_authenticated": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232137382500915,
+          "st_dev": 66306,
+          "st_ino": 6507,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788171497000000000,
+          "st_nlink": 1,
+          "st_size": 2000
+        },
+        "path": "/usr/lib/python3.10/ctypes/_endian.py",
+        "resolved": "/usr/lib/python3.10/ctypes/_endian.py",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 14761,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.list",
+        "sha256": "71a436fb2be99c93f5674022a23b8d16ab6617cacf01bfb8aa4b6e730882f2a7"
+      },
+      "dpkg_md5sums": {
+        "bytes": 23878,
+        "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.md5sums",
+        "sha256": "3e64856a9b6513bb1bd778ebbed9c4b82dc3debb304416bb692cb9b91150c119"
+      },
+      "dpkg_status": {
+        "bytes": 1535655,
+        "path": "/var/lib/dpkg/status",
+        "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+      },
+      "metadata_md5_not_actual_hash": "f81a1c3b57ed6e7c1f251abbe28b6d79",
+      "missing": [
+        "full exact signed .deb hash/archive replay",
+        "exact requested member SHA256 and size",
+        "current complete file hash and ELF/provider evidence where native"
+      ],
+      "package": "libpython3.10-stdlib",
+      "path": "/usr/lib/python3.10/ctypes/_endian.py",
+      "saved_signed_archive_member_origin_found": false,
+      "signed_package_address": {
+        "architecture": "amd64",
+        "archive_read_here": false,
+        "bytes": 1850286,
+        "filename": "pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb",
+        "package": "libpython3.10-stdlib",
+        "package_content_authenticated": false,
+        "sha256": "ee09afbc981a4aaa00053f019eab6b45dcc4dbeb4ca4fcc4277eff539e09f228",
+        "sources": [
+          {
+            "index": {
+              "bytes": 22511228,
+              "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+              "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+            },
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          },
+          {
+            "index": {
+              "bytes": 21028804,
+              "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+              "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+            },
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+          }
+        ],
+        "version": "3.10.12-1~22.04.18"
+      },
+      "version": "3.10.12-1~22.04.18"
+    },
+    {
+      "architecture": "amd64",
+      "current_content_hash_authenticated": false,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1771394810237838266,
+          "st_dev": 66306,
+          "st_ino": 4772,
+          "st_mode": 33188,
+          "st_mtime_ns": 1642415828000000000,
+          "st_nlink": 1,
+          "st_size": 47688
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.0",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.0",
+        "symlink": null
+      },
+      "dpkg_list": {
+        "bytes": 248,
+        "path": "/var/lib/dpkg/info/libffi8:amd64.list",
+        "sha256": "6acc8c6f2e8477b28db2b7c39d738fb64b63f48be020788913293c29470748c3"
+      },
+      "dpkg_md5sums": {
+        "bytes": 217,
+        "path": "/var/lib/dpkg/info/libffi8:amd64.md5sums",
+        "sha256": "5c27b1178e716b2fc143bb4eed6cc0cdbc527391bf28d12aee54efa4c7222e3d"
+      },
+      "dpkg_status": {
+        "bytes": 1535655,
+        "path": "/var/lib/dpkg/status",
+        "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+      },
+      "metadata_md5_not_actual_hash": "c4117571797e3b1db1fcabd834c83106",
+      "missing": [
+        "full exact signed .deb hash/archive replay",
+        "exact requested member SHA256 and size",
+        "current complete file hash and ELF/provider evidence where native"
+      ],
+      "package": "libffi8",
+      "path": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.0",
+      "saved_signed_archive_member_origin_found": false,
+      "signed_package_address": {
+        "architecture": "amd64",
+        "archive_read_here": false,
+        "bytes": 22326,
+        "filename": "pool/main/libf/libffi/libffi8_3.4.2-4_amd64.deb",
+        "package": "libffi8",
+        "package_content_authenticated": false,
+        "sha256": "b4f88c91fa6f4c942097be6abfc365fb133c5e147640168cbb7704fd855eac10",
+        "sources": [
+          {
+            "index": {
+              "bytes": 6779186,
+              "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy_main_binary-amd64_Packages",
+              "sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3"
+            },
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+            "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi8_3.4.2-4_amd64.deb"
+          }
+        ],
+        "version": "3.4.2-4"
+      },
+      "version": "3.4.2-4"
+    }
+  ],
+  "existing_complete_package_chain": {
+    "next_inputs": {
+      "bytes": 11149,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-member-verification-next-inputs-20261111-v1.json",
+      "sha256": "ea62d3a13088728d477d041bb3f3676324d3c7c0ec082e2140ad2000d249c98c"
+    },
+    "origin_evidence": {
+      "bytes": 17855,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-observer-origin-saved-evidence-20261112-v1.json",
+      "sha256": "2a47f38ea6ac4417c7feca3dc94e041a57389516b0f0066bafbef8b9dd5d5591"
+    },
+    "package_result": {
+      "bytes": 31097,
+      "path": "/mnt/nvme/dory-serial-inventory-deb-replay-r1-20261111/packages/sources-result.json",
+      "sha256": "594f9c3fa05579fa1da9af0a486ca252d988ff16e05041bd05b1b18237574a14"
+    },
+    "signed_metadata": {
+      "bytes": 25154,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+      "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+    },
+    "trust_authority": {
+      "bytes": 3842,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-archive-key-authority-20261111-v1.json",
+      "sha256": "b729344d76014db061a946e2568e3f00219e759c4fa2cf7d535111e01742fad0"
+    }
+  },
+  "ffi_symlink": {
+    "content_read": false,
+    "identity": {
+      "st_ctime_ns": 1771394810237838266,
+      "st_dev": 66306,
+      "st_ino": 4773,
+      "st_mode": 41471,
+      "st_mtime_ns": 1642415828000000000,
+      "st_nlink": 1,
+      "st_size": 15
+    },
+    "path": "/usr/lib/x86_64-linux-gnu/libffi.so.8",
+    "resolved": "/usr/lib/x86_64-linux-gnu/libffi.so.8.1.0",
+    "symlink": "libffi.so.8.1.0"
+  },
+  "full_model_qualified": false,
+  "installed_package_versions": {
+    "libc6": {
+      "architecture": "amd64",
+      "declared_depends": "libgcc-s1, libcrypt1 (>= 1:4.4.10-10ubuntu4)",
+      "status": "install ok installed",
+      "version": "2.35-0ubuntu3.15"
+    },
+    "libcrypt1": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.25)",
+      "status": "install ok installed",
+      "version": "1:4.4.27-1"
+    },
+    "libexpat1": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.25)",
+      "status": "install ok installed",
+      "version": "2.4.7-1ubuntu0.9"
+    },
+    "libffi8": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.27)",
+      "status": "install ok installed",
+      "version": "3.4.2-4"
+    },
+    "libgcc-s1": {
+      "architecture": "amd64",
+      "declared_depends": "gcc-12-base (= 12.3.0-1ubuntu1~22.04.3), libc6 (>= 2.35)",
+      "status": "install ok installed",
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    "libgomp1": {
+      "architecture": "amd64",
+      "declared_depends": "gcc-12-base (= 12.3.0-1ubuntu1~22.04.3), libc6 (>= 2.34)",
+      "status": "install ok installed",
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    "libnuma1": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.33)",
+      "status": "install ok installed",
+      "version": "2.0.14-3ubuntu2"
+    },
+    "libpython3.10-minimal": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.14), libssl3 (>= 3.0.0~~alpha1)",
+      "status": "install ok installed",
+      "version": "3.10.12-1~22.04.18"
+    },
+    "libpython3.10-stdlib": {
+      "architecture": "amd64",
+      "declared_depends": "libpython3.10-minimal (= 3.10.12-1~22.04.18), media-types | mime-support, libbz2-1.0, libc6 (>= 2.34), libcrypt1 (>= 1:4.1.0), libdb5.3, libffi8 (>= 3.4), liblzma5 (>= 5.1.1alpha+20120614), libmpdec3, libncursesw6 (>= 6.1), libnsl2 (>= 1.0), libreadline8 (>= 7.0~beta), libsqlite3-0 (>= 3.14.0), libtinfo6 (>= 6), libtirpc3 (>= 1.0.2), libuuid1 (>= 2.20.1)",
+      "status": "install ok installed",
+      "version": "3.10.12-1~22.04.18"
+    },
+    "libssl3": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.34), debconf (>= 0.5) | debconf-2.0",
+      "status": "install ok installed",
+      "version": "3.0.2-0ubuntu1.30"
+    },
+    "libstdc++6": {
+      "architecture": "amd64",
+      "declared_depends": "gcc-12-base (= 12.3.0-1ubuntu1~22.04.3), libc6 (>= 2.34), libgcc-s1 (>= 4.2)",
+      "status": "install ok installed",
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    "libtcmalloc-minimal4": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.34), libgcc-s1 (>= 3.0), libstdc++6 (>= 5.2)",
+      "status": "install ok installed",
+      "version": "2.9.1-0ubuntu3"
+    },
+    "python3.10-minimal": {
+      "architecture": "amd64",
+      "declared_depends": "libpython3.10-minimal (= 3.10.12-1~22.04.18), libexpat1 (>= 2.1~beta3), zlib1g (>= 1:1.2.0)",
+      "status": "install ok installed",
+      "version": "3.10.12-1~22.04.18"
+    },
+    "zlib1g": {
+      "architecture": "amd64",
+      "declared_depends": "libc6 (>= 2.14)",
+      "status": "install ok installed",
+      "version": "1:1.2.11.dfsg-2ubuntu9.2"
+    }
+  },
+  "metadata_inputs": [
+    {
+      "bytes": 25154,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+      "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+    },
+    {
+      "bytes": 3842,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-ubuntu-archive-key-authority-20261111-v1.json",
+      "sha256": "b729344d76014db061a946e2568e3f00219e759c4fa2cf7d535111e01742fad0"
+    },
+    {
+      "bytes": 1535655,
+      "path": "/var/lib/dpkg/status",
+      "sha256": "a2e433584eecaf16541653fa498631824f365af688fd214ab45bb5363840e317"
+    },
+    {
+      "bytes": 269219,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-Release",
+      "sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca"
+    },
+    {
+      "bytes": 427,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-1-status.txt",
+      "sha256": "f47a93ad0dd1da184a129895ecd6bb754d31b22933531846a690353e17e24fac"
+    },
+    {
+      "bytes": 6779186,
+      "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy_main_binary-amd64_Packages",
+      "sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3"
+    },
+    {
+      "bytes": 127167,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-updates-Release",
+      "sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9"
+    },
+    {
+      "bytes": 427,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-2-status.txt",
+      "sha256": "7bcd3f38ab4e2b89f7e580e384762d6e3fb797a1bea9b0ea51c42410dd928c3b"
+    },
+    {
+      "bytes": 22511228,
+      "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+      "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+    },
+    {
+      "bytes": 128045,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-security-Release",
+      "sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79"
+    },
+    {
+      "bytes": 427,
+      "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-3-status.txt",
+      "sha256": "8ecf4ef0b705b30ccd077675588c2e69b3ddce434ba9de5aab92f33631e27a95"
+    },
+    {
+      "bytes": 21028804,
+      "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+      "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+    },
+    {
+      "bytes": 17855,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-observer-origin-saved-evidence-20261112-v1.json",
+      "sha256": "2a47f38ea6ac4417c7feca3dc94e041a57389516b0f0066bafbef8b9dd5d5591"
+    },
+    {
+      "bytes": 31097,
+      "path": "/mnt/nvme/dory-serial-inventory-deb-replay-r1-20261111/packages/sources-result.json",
+      "sha256": "594f9c3fa05579fa1da9af0a486ca252d988ff16e05041bd05b1b18237574a14"
+    },
+    {
+      "bytes": 11149,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/dory-six-deb-member-verification-next-inputs-20261111-v1.json",
+      "sha256": "ea62d3a13088728d477d041bb3f3676324d3c7c0ec082e2140ad2000d249c98c"
+    },
+    {
+      "bytes": 523,
+      "path": "/var/lib/dpkg/info/python3.10-minimal.list",
+      "sha256": "96f5b3a9d546ccf8a3c0a533dace786036f4464e250f4e74aa9e77a8b629e4cd"
+    },
+    {
+      "bytes": 494,
+      "path": "/var/lib/dpkg/info/python3.10-minimal.md5sums",
+      "sha256": "faef142bcd5261c41468bd90c3e1a5a94220a6c0066ad54a1d08cc0851abfb12"
+    },
+    {
+      "bytes": 14761,
+      "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.list",
+      "sha256": "71a436fb2be99c93f5674022a23b8d16ab6617cacf01bfb8aa4b6e730882f2a7"
+    },
+    {
+      "bytes": 23878,
+      "path": "/var/lib/dpkg/info/libpython3.10-stdlib:amd64.md5sums",
+      "sha256": "3e64856a9b6513bb1bd778ebbed9c4b82dc3debb304416bb692cb9b91150c119"
+    },
+    {
+      "bytes": 248,
+      "path": "/var/lib/dpkg/info/libffi8:amd64.list",
+      "sha256": "6acc8c6f2e8477b28db2b7c39d738fb64b63f48be020788913293c29470748c3"
+    },
+    {
+      "bytes": 217,
+      "path": "/var/lib/dpkg/info/libffi8:amd64.md5sums",
+      "sha256": "5c27b1178e716b2fc143bb4eed6cc0cdbc527391bf28d12aee54efa4c7222e3d"
+    },
+    {
+      "bytes": 8122,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-entry-clock-successor-source-delivery-20261112-v1.json",
+      "sha256": "6f1fdcf7b8668c2f7fce041795223662402b97588bdd2bbcc1fdac2945bc4088"
+    },
+    {
+      "bytes": 10225,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-actual-entry-source-integration-delivery-20261112-v1.json",
+      "sha256": "ff4bf2b02e9f78ad41fa525e58a4797f6eb465a9e6c95bf8c31af667bbab53fb"
+    },
+    {
+      "bytes": 14184,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_native_v2.py",
+      "sha256": "8f5a2917d433bcdd10d142cdc8d225c83b95d9202f7e67dc018b893c9c740daa"
+    },
+    {
+      "bytes": 18584,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_authenticator_v2.py",
+      "sha256": "b9029551730a3682a0fbaea0077dd612a422beedc80a4651e722bdc7b8f982e0"
+    },
+    {
+      "bytes": 12479,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_closure_v1.py",
+      "sha256": "3d4d6a13947fb8c165ce8bdc32e0fc7ad131d69cf36f1440fc16e54683aab33f"
+    },
+    {
+      "bytes": 7321,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_source_entry_v3.py",
+      "sha256": "68ca2f949e8698ed2a6cc5350a8850f6bedfbfcbd9ab47522a39a40340bb3fdb"
+    },
+    {
+      "bytes": 8207,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_guard_v2.py",
+      "sha256": "d3d2221a6c8c80f920896b03add76c062b669aec73976e53ba388ee88ded8133"
+    },
+    {
+      "bytes": 24250,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_observer_logic_v1.py",
+      "sha256": "dbb3d9e1b5fa8ec30cbc0cf70510356b9428fbf47924263685e641f9121fb9ff"
+    },
+    {
+      "bytes": 27492,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v5.py",
+      "sha256": "6a62783a5d448d33f034e1d3ecddab8e4a07ac4408e8cca6f31cd0f6db6e7dea"
+    },
+    {
+      "bytes": 4094,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/phase-1-summary.json",
+      "sha256": "837a686029df5ba2d3932ca2ca17ab18bcd1a6b5eda3f6deeb1834df2c7123e6"
+    },
+    {
+      "bytes": 1748,
+      "path": "/var/lib/dpkg/info/libffi8:amd64.symbols",
+      "sha256": "4ceda0da7cdf53a3c45e145aa9ee216f6efe4b045c28a287d7f673e9bd27b29a"
+    },
+    {
+      "bytes": 11107,
+      "path": "/var/lib/dpkg/info/libpython3.10-minimal:amd64.list",
+      "sha256": "aac52b6f28fcc7666ad5894475c2cb1013ecf5db4c6c7e0cbd881f7ad1e7c14a"
+    }
+  ],
+  "minimal_next_serial_steps": [
+    "Root reviews this exact existing signed Release/status -> byte-identical current Packages text -> exact installed-version address chain. No fresh APT download or environment/package mutation is needed to select addresses.",
+    "Under a fresh original retained serial lease and reviewed finite bounds, authenticate the three exact package archives (4,150,014 bytes total), inspect complete archives without installation, and pin /usr/bin/python3.10, _ctypes, ctypes/__init__.py, ctypes/_endian.py and canonical libffi.so.8.1.0 members. Existing same-path libc6 signed member origins may be reused, but current files must still be fully hashed.",
+    "The same bounded preparation must inspect original Python3.10/ctypes ELF and account for every actual/bootstrap native provider. In particular hashlib/json source imports can introduce _hashlib/_json, and package Depends names libexpat/zlib/OpenSSL; additional package addresses are prepared here but none is asserted to be an actual DT_NEEDED or mapped provider. Any new provider requires exact signed member evidence before admission.",
+    "Only after the complete SDK310 decision is independently reviewed should the existing concrete worker replay signed origins, hash actual files, verify all ELF/FFI definitions, validate real pre/post-ctypes mappings and exact source map, then retain the original9 native checks and1284 descriptor plan. Keep AS2GiB, CPU600/605, FSIZE2MiB, original inherited900s and original serial drain; no retry/reset or substituted Python3.12."
+  ],
+  "new_speedup_claim": false,
+  "no_actual_native_payload_hashes": true,
+  "no_downloads": true,
+  "no_installs": true,
+  "no_live_handoff_modified": true,
+  "no_locks_services_or_process_observations": true,
+  "no_model_or_capture_reads": true,
+  "no_native_or_ctypes_imports": true,
+  "previous": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-signed-origin-preparation-gap-20261112-v1.json",
+    "reason": "Clarify unobserved loader state as null rather than false; no content or admission change",
+    "sha256": "82cedc6a6663c889621a46e670d70ac52b47fac52758e104324ccab1fc85e070"
+  },
+  "primary_missing_archives_total_bytes": 4150014,
+  "provenance_not_reusable": [
+    "Different original/copy Python3.12 executable and built-in FFI evidence do not authenticate /usr/bin/python3.10 or dynamic _ctypes/libffi.",
+    "APT/dpkg version and MD5 text identify candidates but do not authenticate actual current bytes.",
+    "Existing six-package JSON contains no python3.10-minimal, libpython3.10-stdlib or libffi8 signed member replay."
+  ],
+  "requirements_from_actual_source": {
+    "accepted_sdk_decision_schema": "minicpm5_sdk310_native_source_review_v1",
+    "all_actual_mapped_files_and_all_DT_NEEDED_providers_required": true,
+    "exact_ctypes_extension": "/usr/lib/python3.10/lib-dynload/_ctypes.cpython-310-x86_64-linux-gnu.so",
+    "exact_executable": "/usr/bin/python3.10",
+    "exact_python": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+    "external_ffi_required": true,
+    "no_LD_PRELOAD_LD_AUDIT_LD_LIBRARY_PATH": true,
+    "original_AS_bytes": 2147483648,
+    "original_absolute_wall_seconds": 900,
+    "original_nine_native_sources_still_required": true,
+    "original_scientific_descriptor_rows": 1284,
+    "package_replay_requires_complete_signed_release_archive_member_chain": true,
+    "post_maps_exactly_equal_native_files": true,
+    "pre_ctypes_maps_strict_subset_of_post_ctypes_maps": true,
+    "required_positive_ffi_functions": [
+      "ffi_call",
+      "ffi_prep_cif",
+      "ffi_prep_cif_var",
+      "ffi_closure_alloc",
+      "ffi_closure_free",
+      "ffi_prep_closure_loc"
+    ],
+    "source_map_digest_exact": true
+  },
+  "reusable_exact_system_members": [
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7011,
+          "st_mode": 33261,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 240936
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "resolved": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+            "size": 240936,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+        "size": 240936,
+        "terminal": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "required_for_SDK_bootstrap_known": true,
+      "saved_current": {
+        "bytes": 240936,
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7011,
+        "mode": 33261,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 240936
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1793481818489299425,
+          "st_dev": 66306,
+          "st_ino": 7014,
+          "st_mode": 33261,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 2,
+          "st_size": 2220400
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libc.so.6",
+            "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+            "size": 2220400,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+        "size": 2220400,
+        "terminal": "lib/x86_64-linux-gnu/libc.so.6"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "required_for_SDK_bootstrap_known": true,
+      "saved_current": {
+        "bytes": 2220400,
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1793481818489299425,
+        "dev": 66306,
+        "ino": 7014,
+        "mode": 33261,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 2,
+        "size": 2220400
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7017,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 14432
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libdl.so.2",
+            "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499",
+            "size": 14432,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libdl.so.2",
+        "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499",
+        "size": 14432,
+        "terminal": "lib/x86_64-linux-gnu/libdl.so.2"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 14432,
+        "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+        "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7017,
+        "mode": 33188,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 14432
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7021,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 940560
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libm.so.6",
+            "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+            "size": 940560,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libm.so.6",
+        "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+        "size": 940560,
+        "terminal": "lib/x86_64-linux-gnu/libm.so.6"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 940560,
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7021,
+        "mode": 33188,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 940560
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7031,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 21448
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+            "size": 21448,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libpthread.so.0",
+        "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78",
+        "size": 21448,
+        "terminal": "lib/x86_64-linux-gnu/libpthread.so.0"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 21448,
+        "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+        "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7031,
+        "mode": 33188,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 21448
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7033,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 14664
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+        "resolved": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/librt.so.1",
+            "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb",
+            "size": 14664,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/librt.so.1",
+        "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb",
+        "size": 14664,
+        "terminal": "lib/x86_64-linux-gnu/librt.so.1"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 14664,
+        "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+        "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7033,
+        "mode": 33188,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 14664
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 3234380,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libc6.deb",
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1790232161361972444,
+          "st_dev": 66306,
+          "st_ino": 7035,
+          "st_mode": 33188,
+          "st_mtime_ns": 1788445204000000000,
+          "st_nlink": 1,
+          "st_size": 14432
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libutil.so.1",
+            "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc",
+            "size": 14432,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libutil.so.1",
+        "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc",
+        "size": 14432,
+        "terminal": "lib/x86_64-linux-gnu/libutil.so.1"
+      },
+      "package": "libc6",
+      "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 14432,
+        "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+        "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1790232161361972444,
+        "dev": 66306,
+        "ino": 7035,
+        "mode": 33188,
+        "mtime_ns": 1788445204000000000,
+        "nlink": 1,
+        "size": 14432
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 3234380,
+        "filename": "pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb",
+        "package": "libc6",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "/lib/x86_64-linux-gnu/libc.so.6",
+          "/lib/x86_64-linux-gnu/libdl.so.2",
+          "/lib/x86_64-linux-gnu/libm.so.6",
+          "/lib/x86_64-linux-gnu/libpthread.so.0",
+          "/lib/x86_64-linux-gnu/librt.so.1",
+          "/lib/x86_64-linux-gnu/libutil.so.1",
+          "/lib64/ld-linux-x86-64.so.2"
+        ],
+        "sha256": "79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 240936,
+              "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+              "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libc.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2220400,
+              "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+              "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libdl.so.2",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+              "sha256": "3eaaa4aefd9c28f3867c96a427c3cbec9191cb61c4c9d0a2cb4a765d66064499"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libm.so.6",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 940560,
+              "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+              "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libpthread.so.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 21448,
+              "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+              "sha256": "fbed9505adacada2abb37c6b43be2df6de81e742712c6025694ba48de62c7e78"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/librt.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14664,
+              "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+              "sha256": "5f20d34fb3bb4d84b4edeb6ca11fa5b48c705207253741619acab7cc758185fb"
+            }
+          },
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libutil.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 14432,
+              "path": "/usr/lib/x86_64-linux-gnu/libutil.so.1",
+              "sha256": "ee98a316fe33727cf23cc81d3a7f9628350d6ef75e905c7b713e5f5e68e177dc"
+            }
+          }
+        ],
+        "version": "2.35-0ubuntu3.15"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.35-0ubuntu3.15"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 53896,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libgcc-s1.deb",
+        "sha256": "d383e642d83263147f7b4b69fb92cf1036e5246c6be3accf10b77f986684589a"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1772166640531813313,
+          "st_dev": 66306,
+          "st_ino": 35303,
+          "st_mode": 33188,
+          "st_mtime_ns": 1766181126000000000,
+          "st_nlink": 1,
+          "st_size": 125488
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+            "size": 125488,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+        "size": 125488,
+        "terminal": "lib/x86_64-linux-gnu/libgcc_s.so.1"
+      },
+      "package": "libgcc-s1",
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 125488,
+        "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+        "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1772166640531813313,
+        "dev": 66306,
+        "ino": 35303,
+        "mode": 33188,
+        "mtime_ns": 1766181126000000000,
+        "nlink": 1,
+        "size": 125488
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 53896,
+        "filename": "pool/main/g/gcc-12/libgcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+        "package": "libgcc-s1",
+        "saved_package_names": [
+          "/lib/x86_64-linux-gnu/libgcc_s.so.1"
+        ],
+        "sha256": "d383e642d83263147f7b4b69fb92cf1036e5246c6be3accf10b77f986684589a",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-12/libgcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/gcc-12/libgcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 125488,
+              "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+              "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a"
+            }
+          }
+        ],
+        "version": "12.3.0-1ubuntu1~22.04.3"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 126570,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libgomp1.deb",
+        "sha256": "870c27299185a5dd4accad3b15bf82a7409fd7073cccaa8025875307da4d0ce2"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1772166641706819124,
+          "st_dev": 66306,
+          "st_ino": 75924,
+          "st_mode": 33188,
+          "st_mtime_ns": 1766181126000000000,
+          "st_nlink": 1,
+          "st_size": 298776
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+            "size": 298776,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+        "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc",
+        "size": 298776,
+        "terminal": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+      },
+      "package": "libgomp1",
+      "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 298776,
+        "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+        "sha256": "d46f9225c1883039e8a6853e6d96ca1af11d034ce186a090952e4a7c8a7c2fdc"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1772166641706819124,
+        "dev": 66306,
+        "ino": 75924,
+        "mode": 33188,
+        "mtime_ns": 1766181126000000000,
+        "nlink": 1,
+        "size": 298776
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 126570,
+        "filename": "pool/main/g/gcc-12/libgomp1_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+        "package": "libgomp1",
+        "saved_package_names": [
+          "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0"
+        ],
+        "sha256": "870c27299185a5dd4accad3b15bf82a7409fd7073cccaa8025875307da4d0ce2",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-12/libgomp1_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/gcc-12/libgomp1_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "original_full_payload_hash_present": false,
+            "original_observed_reference": null
+          }
+        ],
+        "version": "12.3.0-1ubuntu1~22.04.3"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 22478,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libnuma1.deb",
+        "sha256": "0721c89001fbbd1ada23e89da5d60e762763c1a7b3dc814a2e9a518480a8043d"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1771394810300839366,
+          "st_dev": 66306,
+          "st_ino": 4962,
+          "st_mode": 33188,
+          "st_mtime_ns": 1648138892000000000,
+          "st_nlink": 1,
+          "st_size": 48152
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+            "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c",
+            "size": 48152,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c",
+        "size": 48152,
+        "terminal": "usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0"
+      },
+      "package": "libnuma1",
+      "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 48152,
+        "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+        "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1771394810300839366,
+        "dev": 66306,
+        "ino": 4962,
+        "mode": 33188,
+        "mtime_ns": 1648138892000000000,
+        "nlink": 1,
+        "size": 48152
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 22478,
+        "filename": "pool/main/n/numactl/libnuma1_2.0.14-3ubuntu2_amd64.deb",
+        "package": "libnuma1",
+        "saved_package_names": [
+          "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0"
+        ],
+        "sha256": "0721c89001fbbd1ada23e89da5d60e762763c1a7b3dc814a2e9a518480a8043d",
+        "sources": [
+          {
+            "compressed_index_sha256": "37cb57f1554cbfa71c5a29ee9ffee18a9a8c1782bb0568e0874b7ff4ce8f9c11",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3",
+            "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/n/numactl/libnuma1_2.0.14-3ubuntu2_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 48152,
+              "path": "/usr/lib/x86_64-linux-gnu/libnuma.so.1.0.0",
+              "sha256": "3582bce922d99959ee3eb6b7d686c0b99e14c2135616ad4d9d608b2118a7e78c"
+            }
+          }
+        ],
+        "version": "2.0.14-3ubuntu2"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.0.14-3ubuntu2"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 698608,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libstdc++6.deb",
+        "sha256": "29ef3d289b272704b75141906c8f683db0f2bdb0942061366691333bfb289bdc"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1793481818490299403,
+          "st_dev": 66306,
+          "st_ino": 72869,
+          "st_mode": 33188,
+          "st_mtime_ns": 1766181126000000000,
+          "st_nlink": 2,
+          "st_size": 2260296
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+            "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+            "size": 2260296,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+        "size": 2260296,
+        "terminal": "usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30"
+      },
+      "package": "libstdc++6",
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 2260296,
+        "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+        "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1793481818490299403,
+        "dev": 66306,
+        "ino": 72869,
+        "mode": 33188,
+        "mtime_ns": 1766181126000000000,
+        "nlink": 2,
+        "size": 2260296
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 698608,
+        "filename": "pool/main/g/gcc-12/libstdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+        "package": "libstdc++6",
+        "saved_package_names": [
+          "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30"
+        ],
+        "sha256": "29ef3d289b272704b75141906c8f683db0f2bdb0942061366691333bfb289bdc",
+        "sources": [
+          {
+            "compressed_index_sha256": "8d6519d3da44040de05306a4607d63b541e8badededc193b08e45463bbd8952e",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494",
+            "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/gcc-12/libstdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          },
+          {
+            "compressed_index_sha256": "fd67189ad0de0ceb0b71428061318c94cacc3243ee04d86b1d03ee2bd5e37d64",
+            "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510",
+            "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+            "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+            "url": "https://security.ubuntu.com/ubuntu/pool/main/g/gcc-12/libstdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 2260296,
+              "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+              "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128"
+            }
+          }
+        ],
+        "version": "12.3.0-1ubuntu1~22.04.3"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "12.3.0-1ubuntu1~22.04.3"
+    },
+    {
+      "actual_SDK_loader_selection_proven": false,
+      "archive": {
+        "bytes": 98202,
+        "path": "/mnt/nvme/dory-serial-inventory-deb-members-r3-20261111/packages/libtcmalloc-minimal4.deb",
+        "sha256": "f0953cb215ed943429951920f5b88b4c29a6ef0503207ddc4c724772538f06af"
+      },
+      "current_full_hash_performed_here": false,
+      "current_identity_matches_saved": true,
+      "current_lstat": {
+        "content_read": false,
+        "identity": {
+          "st_ctime_ns": 1794168456786548560,
+          "st_dev": 66306,
+          "st_ino": 33638,
+          "st_mode": 33188,
+          "st_mtime_ns": 1648043755000000000,
+          "st_nlink": 1,
+          "st_size": 163240
+        },
+        "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "resolved": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "symlink": null
+      },
+      "member": {
+        "chain": [
+          {
+            "name": "usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+            "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5",
+            "size": 163240,
+            "type": "file"
+          }
+        ],
+        "link_hops": 0,
+        "requested": "usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5",
+        "size": 163240,
+        "terminal": "usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9"
+      },
+      "package": "libtcmalloc-minimal4",
+      "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+      "required_for_SDK_bootstrap_known": false,
+      "saved_current": {
+        "bytes": 163240,
+        "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+        "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5"
+      },
+      "saved_current_identity": {
+        "ctime_ns": 1794168456786548560,
+        "dev": 66306,
+        "ino": 33638,
+        "mode": 33188,
+        "mtime_ns": 1648043755000000000,
+        "nlink": 1,
+        "size": 163240
+      },
+      "signed_package": {
+        "architecture": "amd64",
+        "bytes": 98202,
+        "filename": "pool/main/g/google-perftools/libtcmalloc-minimal4_2.9.1-0ubuntu3_amd64.deb",
+        "package": "libtcmalloc-minimal4",
+        "saved_package_names": [
+          "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4",
+          "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9"
+        ],
+        "sha256": "f0953cb215ed943429951920f5b88b4c29a6ef0503207ddc4c724772538f06af",
+        "sources": [
+          {
+            "compressed_index_sha256": "37cb57f1554cbfa71c5a29ee9ffee18a9a8c1782bb0568e0874b7ff4ce8f9c11",
+            "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+            "raw_index_sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3",
+            "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+            "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/Release",
+            "url": "https://archive.ubuntu.com/ubuntu/pool/main/g/google-perftools/libtcmalloc-minimal4_2.9.1-0ubuntu3_amd64.deb"
+          }
+        ],
+        "targets": [
+          {
+            "archive_member": "usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+            "observed_path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+            "original_full_payload_hash_present": true,
+            "original_observed_reference": {
+              "bytes": 163240,
+              "path": "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4.5.9",
+              "sha256": "572af05b75e2366a3e8c06c29d3a04c0a538c9635c9957f2808846730ab81da5"
+            }
+          }
+        ],
+        "version": "2.9.1-0ubuntu3"
+      },
+      "source_origin_chain_reusable": true,
+      "version": "2.9.1-0ubuntu3"
+    }
+  ],
+  "schema": "minicpm5_sdk310_signed_origin_preparation_gap_v1",
+  "signed_index_reuse": [
+    {
+      "current_uncompressed_index": {
+        "bytes": 6779186,
+        "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy_main_binary-amd64_Packages",
+        "sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3"
+      },
+      "full_text_matches_signed_Release": true,
+      "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+      "new_crypto_verification_performed": false,
+      "release": {
+        "bytes": 269219,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-Release",
+        "sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca"
+      },
+      "saved_signature_proof": {
+        "digest_algorithm": "SHA512",
+        "keyring_sha256": "1a4dd63e5c76728960a2edddae22e2e0fc53df8e8b87806deb971030ac704eb0",
+        "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "process_returncode": 0,
+        "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+        "signature_expiration": 0,
+        "signature_sha256": "f17d0a98430309f564578bbb8d7fb52b71b85a8b29c9a7734b87e7a2cd995409",
+        "signature_timestamp": 1650561399,
+        "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "status_reference": {
+          "bytes": 427,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-1-status.txt",
+          "sha256": "f47a93ad0dd1da184a129895ecd6bb754d31b22933531846a690353e17e24fac"
+        },
+        "stderr_reference": {
+          "bytes": 197,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-1-stderr.txt",
+          "sha256": "61fd4b0626d2b7e735f58e2492d05704f4f2b772b32150dd0227290d8f17d8ee"
+        },
+        "verified": true,
+        "verified_signatures": [
+          {
+            "digest_algorithm": "SHA512",
+            "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+            "signature_expiration": 0,
+            "signature_timestamp": 1650561399,
+            "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C"
+          }
+        ]
+      },
+      "source_signed_result": {
+        "bytes": 25154,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+        "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+      },
+      "status_text": {
+        "bytes": 427,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-1-status.txt",
+        "sha256": "f47a93ad0dd1da184a129895ecd6bb754d31b22933531846a690353e17e24fac"
+      },
+      "suite": "jammy"
+    },
+    {
+      "current_uncompressed_index": {
+        "bytes": 22511228,
+        "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+        "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+      },
+      "full_text_matches_signed_Release": true,
+      "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+      "new_crypto_verification_performed": false,
+      "release": {
+        "bytes": 127167,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-updates-Release",
+        "sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9"
+      },
+      "saved_signature_proof": {
+        "digest_algorithm": "SHA512",
+        "keyring_sha256": "1a4dd63e5c76728960a2edddae22e2e0fc53df8e8b87806deb971030ac704eb0",
+        "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "process_returncode": 0,
+        "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+        "signature_expiration": 0,
+        "signature_sha256": "f8234b7f0b135c1995b2c69f85d1f400ae88faef82232097e3cefe793c052fc0",
+        "signature_timestamp": 1794378964,
+        "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "status_reference": {
+          "bytes": 427,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-2-status.txt",
+          "sha256": "7bcd3f38ab4e2b89f7e580e384762d6e3fb797a1bea9b0ea51c42410dd928c3b"
+        },
+        "stderr_reference": {
+          "bytes": 221,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-2-stderr.txt",
+          "sha256": "cba0c72c77cd590783ae8d27e6285bb918c95ab31c65211e554b3efecd05ed16"
+        },
+        "verified": true,
+        "verified_signatures": [
+          {
+            "digest_algorithm": "SHA512",
+            "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+            "signature_expiration": 0,
+            "signature_timestamp": 1794378964,
+            "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C"
+          }
+        ]
+      },
+      "source_signed_result": {
+        "bytes": 25154,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+        "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+      },
+      "status_text": {
+        "bytes": 427,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-2-status.txt",
+        "sha256": "7bcd3f38ab4e2b89f7e580e384762d6e3fb797a1bea9b0ea51c42410dd928c3b"
+      },
+      "suite": "jammy-updates"
+    },
+    {
+      "current_uncompressed_index": {
+        "bytes": 21028804,
+        "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+        "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+      },
+      "full_text_matches_signed_Release": true,
+      "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+      "new_crypto_verification_performed": false,
+      "release": {
+        "bytes": 128045,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/jammy-security-Release",
+        "sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79"
+      },
+      "saved_signature_proof": {
+        "digest_algorithm": "SHA512",
+        "keyring_sha256": "1a4dd63e5c76728960a2edddae22e2e0fc53df8e8b87806deb971030ac704eb0",
+        "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "process_returncode": 0,
+        "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+        "signature_expiration": 0,
+        "signature_sha256": "22379a7f255656a9cb60f99fd7cb14a6c722021626afd67bf6328ca4db01d788",
+        "signature_timestamp": 1794374335,
+        "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+        "status_reference": {
+          "bytes": 427,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-3-status.txt",
+          "sha256": "8ecf4ef0b705b30ccd077675588c2e69b3ddce434ba9de5aab92f33631e27a95"
+        },
+        "stderr_reference": {
+          "bytes": 221,
+          "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-3-stderr.txt",
+          "sha256": "ccde1f4df21f25c0b6bac5c99bc3bde009a18cc237971dd1dcba9f10374d2b60"
+        },
+        "verified": true,
+        "verified_signatures": [
+          {
+            "digest_algorithm": "SHA512",
+            "primary_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C",
+            "signature_expiration": 0,
+            "signature_timestamp": 1794374335,
+            "signing_fingerprint": "F6ECB3762474EDA9D21B7022871920D1991BC93C"
+          }
+        ]
+      },
+      "source_signed_result": {
+        "bytes": 25154,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/sources-result.json",
+        "sha256": "59ae44799afcb4504177f2627a78177c783b40c671749a909fde3cf7b8b06409"
+      },
+      "status_text": {
+        "bytes": 427,
+        "path": "/mnt/nvme/dory-serial-inventory-ubuntu-metadata-r5-20261111/signed-metadata/verify-3-status.txt",
+        "sha256": "8ecf4ef0b705b30ccd077675588c2e69b3ddce434ba9de5aab92f33631e27a95"
+      },
+      "suite": "jammy-security"
+    }
+  ],
+  "signed_package_addresses": {
+    "libcrypt1": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 82004,
+      "filename": "pool/main/libx/libxcrypt/libcrypt1_4.4.27-1_amd64.deb",
+      "package": "libcrypt1",
+      "package_content_authenticated": false,
+      "sha256": "3fa566e9f861a08736cbc5a97562d9d6e4f0c00450fbeafcb6d7583423b04a98",
+      "sources": [
+        {
+          "index": {
+            "bytes": 6779186,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy_main_binary-amd64_Packages",
+            "sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+          "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/libx/libxcrypt/libcrypt1_4.4.27-1_amd64.deb"
+        }
+      ],
+      "version": "1:4.4.27-1"
+    },
+    "libexpat1": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 96926,
+      "filename": "pool/main/e/expat/libexpat1_2.4.7-1ubuntu0.9_amd64.deb",
+      "package": "libexpat1",
+      "package_content_authenticated": false,
+      "sha256": "0ee31596316d2275ab351d11290c63e7547fff0ecd7f431e56855cb7c5f18588",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/e/expat/libexpat1_2.4.7-1ubuntu0.9_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/e/expat/libexpat1_2.4.7-1ubuntu0.9_amd64.deb"
+        }
+      ],
+      "version": "2.4.7-1ubuntu0.9"
+    },
+    "libffi8": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 22326,
+      "filename": "pool/main/libf/libffi/libffi8_3.4.2-4_amd64.deb",
+      "package": "libffi8",
+      "package_content_authenticated": false,
+      "sha256": "b4f88c91fa6f4c942097be6abfc365fb133c5e147640168cbb7704fd855eac10",
+      "sources": [
+        {
+          "index": {
+            "bytes": 6779186,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy_main_binary-amd64_Packages",
+            "sha256": "12ce0797a6ed39a1fee1321985976c6b78872a8fe4c7ef2fb712f2364c9839a3"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/main/binary-amd64/Packages.xz",
+          "release_sha256": "6883c1cb0fcfeefc2ad2e99746fcbb28cf8b2df66ce49904765d883dbf94a1ca",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi8_3.4.2-4_amd64.deb"
+        }
+      ],
+      "version": "3.4.2-4"
+    },
+    "libpython3.10-minimal": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 816508,
+      "filename": "pool/main/p/python3.10/libpython3.10-minimal_3.10.12-1~22.04.18_amd64.deb",
+      "package": "libpython3.10-minimal",
+      "package_content_authenticated": false,
+      "sha256": "ccbd08562769e0a38b34005dc8bde200838e6c6530cc04ac34525129ed42d847",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+        }
+      ],
+      "version": "3.10.12-1~22.04.18"
+    },
+    "libpython3.10-stdlib": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 1850286,
+      "filename": "pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb",
+      "package": "libpython3.10-stdlib",
+      "package_content_authenticated": false,
+      "sha256": "ee09afbc981a4aaa00053f019eab6b45dcc4dbeb4ca4fcc4277eff539e09f228",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/libpython3.10-stdlib_3.10.12-1~22.04.18_amd64.deb"
+        }
+      ],
+      "version": "3.10.12-1~22.04.18"
+    },
+    "libssl3": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 1907006,
+      "filename": "pool/main/o/openssl/libssl3_3.0.2-0ubuntu1.30_amd64.deb",
+      "package": "libssl3",
+      "package_content_authenticated": false,
+      "sha256": "d1b4636e32ac6d3b95d583ac05ac548b1aa248414bae1c51b14f54be0f8fd7bc",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl3_3.0.2-0ubuntu1.30_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl3_3.0.2-0ubuntu1.30_amd64.deb"
+        }
+      ],
+      "version": "3.0.2-0ubuntu1.30"
+    },
+    "python3.10-minimal": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 2277402,
+      "filename": "pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb",
+      "package": "python3.10-minimal",
+      "package_content_authenticated": false,
+      "sha256": "34e4c7383fdf2562d78321acfee5aa1f7b92be371dd79410496ad35cb773f326",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb"
+        }
+      ],
+      "version": "3.10.12-1~22.04.18"
+    },
+    "zlib1g": {
+      "architecture": "amd64",
+      "archive_read_here": false,
+      "bytes": 58406,
+      "filename": "pool/main/z/zlib/zlib1g_1.2.11.dfsg-2ubuntu9.2_amd64.deb",
+      "package": "zlib1g",
+      "package_content_authenticated": false,
+      "sha256": "9dc17e51a1be2d9ed63b7b84ef0e4e29c5abe6f1bc62cb03e7181483cce8a2f2",
+      "sources": [
+        {
+          "index": {
+            "bytes": 22511228,
+            "path": "/var/lib/apt/lists/us-west-2.ec2.archive.ubuntu.com_ubuntu_dists_jammy-updates_main_binary-amd64_Packages",
+            "sha256": "538dba84cd58fa414dc7242ba7d6cb4b58d42535a2b8d8ef3ba5c3d79f73c494"
+          },
+          "index_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/binary-amd64/Packages.xz",
+          "release_sha256": "8776e12b98b387ed0fd791bf2f9f733c39ace09b3435f2b470147f1e55c79ef9",
+          "release_url": "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/Release",
+          "url": "https://archive.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2ubuntu9.2_amd64.deb"
+        },
+        {
+          "index": {
+            "bytes": 21028804,
+            "path": "/var/lib/apt/lists/security.ubuntu.com_ubuntu_dists_jammy-security_main_binary-amd64_Packages",
+            "sha256": "ff06c59ca6bd70d1e236457656292afc51a97c1e17fe5916f3043a02b0091510"
+          },
+          "index_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/main/binary-amd64/Packages.xz",
+          "release_sha256": "df8f969b9d421bd98407d98388c4fc6891d37e9f56effb833c51a3346421bb79",
+          "release_url": "https://security.ubuntu.com/ubuntu/dists/jammy-security/Release",
+          "url": "https://security.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2ubuntu9.2_amd64.deb"
+        }
+      ],
+      "version": "1:1.2.11.dfsg-2ubuntu9.2"
+    }
+  },
+  "source_candidate_runtime_admitted": false,
+  "source_metadata_only": true
+}

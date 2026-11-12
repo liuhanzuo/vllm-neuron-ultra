@@ -1,0 +1,144 @@
+{
+  "schema": "lfm3-sdk053-required-gates-v1",
+  "status": "all pending on new SDK stack",
+  "contract_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_typed_slot_writer_contract_v1.py",
+    "sha256": "39c39d3c535c4ecea9c4a4553ed4b56607933794c2d97f208fd59e057a08e84b"
+  },
+  "preserved": {
+    "primitive": {
+      "regression_cpu_cases": 1648,
+      "extended_cpu_cases": 2068,
+      "raw_device_graphs": 4,
+      "raw_device_checks": 36,
+      "raw_bf16_all_uint16_words_required": true,
+      "regression_device_graphs": 9,
+      "regression_device_checks": 43,
+      "regression_alias_graphs": 12,
+      "regression_alias_checks": 60,
+      "extended_device_graphs": 42,
+      "extended_device_checks": 2520,
+      "extended_alias_graphs": 24,
+      "extended_alias_checks": 192
+    },
+    "added": {
+      "typed_raw_bit_patterns_both_dtypes": true,
+      "production_dispatch_one_row_original": true,
+      "slot_int64_oob_normalized_before_int32": true,
+      "fp32_alias_companion_required": true,
+      "every_store_exactly_once": true,
+      "input_buffers_unchanged": true,
+      "no_dtype_views_or_payload_arithmetic": true
+    },
+    "b4": {
+      "numeric_frames": 32,
+      "cold_frames": 96,
+      "long_steps": 1529,
+      "long_frames": 84,
+      "quality_cases": 96
+    },
+    "b8": {
+      "numeric_frames": 32,
+      "cold_frames": 200,
+      "long_steps": 1529,
+      "long_frames": 168,
+      "quality_cases": 96
+    },
+    "b16": {
+      "numeric_frames": 64,
+      "cold_frames": 400,
+      "long_steps": 1529,
+      "long_frames": 336,
+      "quality_cases": 96
+    },
+    "lifecycle": {
+      "fresh_cold_processes": 7,
+      "states": 70,
+      "fill_roundtrips": 140,
+      "zero_roundtrips": 140,
+      "snapshots": 5,
+      "all_slots_and_original_buckets": true,
+      "request_slot_reuse": true,
+      "actual_must_alias_state": true
+    },
+    "comparisons": {
+      "controls": [
+        "original_b4",
+        "selected_writer_v4_b4"
+      ],
+      "candidates": [
+        "typed_writer_b4",
+        "typed_writer_b8",
+        "typed_writer_b16"
+      ],
+      "workloads": 5,
+      "rounds": 3,
+      "same_load_concurrency": [
+        1,
+        4
+      ],
+      "separate_capacity_concurrency": [
+        8,
+        16
+      ],
+      "original_output_budgets": true,
+      "original_sampler": true,
+      "original_criteria": true,
+      "measured_requests_per_variant": 704,
+      "measured_output_tokens_per_variant": 189952,
+      "warmup_requests_per_variant": 16,
+      "greedy_text_pairs_per_candidate": 384
+    }
+  },
+  "criteria": {
+    "cosine_min": 0.995,
+    "kl_max_nats": 0.02,
+    "max_abs_error_max": 2.0,
+    "argmax_match_fraction_min": 0.9,
+    "all_reference_margins_gt_0.5_must_match": true
+  },
+  "primitive_total_including_existing_supplements": 113,
+  "additional_context4096": {
+    "status": "pending; supplement, never replacement",
+    "capacities": [
+      4,
+      8,
+      16
+    ],
+    "kv_shape_per_rank": [
+      "B",
+      2,
+      4096,
+      128
+    ],
+    "modes": [
+      "standalone",
+      "MUST_ALIAS"
+    ],
+    "dtypes": [
+      "bfloat16",
+      "float32"
+    ],
+    "slots": [
+      "valid",
+      "empty",
+      "duplicate",
+      "out-of-order",
+      "int64-out-of-bounds"
+    ],
+    "boundaries": [
+      2047,
+      2048,
+      4095
+    ],
+    "requirements": [
+      "no input truncation",
+      "reject capacity exhaustion before mutation",
+      "prefill old-tail clearing",
+      "request-slot reuse and isolation",
+      "retain all original buckets",
+      "CTE and TKG buckets 128/256/512/1024/2048/4096"
+    ]
+  },
+  "speedup": null
+}
