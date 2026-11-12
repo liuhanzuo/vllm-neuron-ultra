@@ -1,0 +1,49 @@
+{
+  "schema": "minicpm5_formal_literal_budget_root_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T19:13:34.980303+00:00",
+  "passed": true,
+  "source_only": true,
+  "blockers": [],
+  "source_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-literal-budget-source-delivery-20261112-v1.json",
+    "bytes": 6495,
+    "sha256": "3b7eb20df42213041e402b3c21672f598f601e5b36b690f054b0c56678a299bc"
+  },
+  "runtime_delta": "One reserve_runtime expression and three versioned import edges; no frozen source mutation",
+  "actual_tests": {
+    "terminal_chunk": "0eea72",
+    "exit_code": 0,
+    "tests": 8,
+    "log": {
+      "path": "/tmp/minicpm5-budget-root-tests-20261112.log",
+      "bytes": 881,
+      "sha256": "4acf515098a0c4a04a2deff6b9b23514e186a3e180f16530e413518af38a8480"
+    }
+  },
+  "pure_budget_counts": {
+    "original": {
+      "digest_bytes": 911953,
+      "digest_calls": 18
+    },
+    "removed": {
+      "digest_bytes": 359930,
+      "digest_calls": 6
+    },
+    "successor": {
+      "digest_bytes": 552023,
+      "digest_calls": 12
+    }
+  },
+  "findings": [
+    "Both conservative budgets and canonical JSON match frozen implementation on saved actual r5 metadata.",
+    "Same-call reuse only; no persistent authority, file, identity or decoded-history cache.",
+    "Prospective reference check, inventory, durable write and fresh before_spawn readback remain inherited.",
+    "All original guard boundaries, CPU600/605 and wall900 limits preserved.",
+    "Reducing six pure digest calls is not evidence of whole CPU-time sufficiency."
+  ],
+  "runtime_admitted": false,
+  "native_executed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

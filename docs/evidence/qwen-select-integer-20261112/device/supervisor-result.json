@@ -1,0 +1,99 @@
+{
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/admission.json",
+    "sha256": "39c81d5ab4d4fa60105587a48284ce5eeaeb1e09279515ac6d9f9c0e2a96db42"
+  },
+  "automatic_successor": false,
+  "complete": true,
+  "counts": {
+    "diagnostic_calls": 12,
+    "graphs": 3
+  },
+  "full_model_qualified": false,
+  "layouts": [
+    {
+      "bitwise_matches": {
+        "external_s16_select": {
+          "negative_nan_raw": {
+            "idle": true,
+            "one_active": true
+          },
+          "original_raw": {
+            "idle": true,
+            "one_active": true
+          }
+        },
+        "internal_s16_select": {
+          "negative_nan_raw": {
+            "idle": true,
+            "one_active": true
+          },
+          "original_raw": {
+            "idle": true,
+            "one_active": true
+          }
+        },
+        "one_bf16_select": {
+          "negative_nan_raw": {
+            "idle": false,
+            "one_active": false
+          },
+          "original_raw": {
+            "idle": false,
+            "one_active": false
+          }
+        }
+      },
+      "calls": 12,
+      "diagnostic_complete": true,
+      "full_model_qualified": false,
+      "graphs": 3,
+      "layout": "conv-select-probes",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/conv-select-probes/leaf-result.json",
+        "sha256": "a8a8f0846e99fae58a91d6ee7ae5e257eb3940ab4d09933402ba9ba0ac489b82"
+      },
+      "model_speedup_claim": false,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/conv-select-probes/native-process-exit.json",
+        "sha256": "1ead31afc59a530c04d4cf6ad2b9552e03dab5d81ec793c21518adbcaa4e7905"
+      },
+      "qualification_matrix_completed": false,
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/conv-select-probes/report.json",
+        "sha256": "87032d6353563df70515d84f6d5de49ce448f1364c21d1f0752d6150b22ebc23"
+      }
+    }
+  ],
+  "owner": {
+    "process": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_probe_serial_v1.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/admission.json",
+        "--binding-sha256",
+        "39c81d5ab4d4fa60105587a48284ce5eeaeb1e09279515ac6d9f9c0e2a96db42"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r2-20261112-slot-select-probes.service",
+      "pid": 976578,
+      "ppid": 1583,
+      "start_ticks": "429131066"
+    },
+    "service_owner": {
+      "invocation_id": "fc247d25e1f4461ba33149c795fcbf17",
+      "pid": 976578,
+      "start_ticks": 429131066,
+      "unit": "trn1-qwen35-sampler-r2-20261112-slot-select-probes"
+    }
+  },
+  "passed": true,
+  "qualification_matrix_completed": false,
+  "self_exit_claimed": false
+}

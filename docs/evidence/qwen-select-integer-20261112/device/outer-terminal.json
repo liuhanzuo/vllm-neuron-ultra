@@ -1,0 +1,134 @@
+{
+  "actual_external_tool_exit_pending": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/admission.json",
+    "sha256": "39c81d5ab4d4fa60105587a48284ce5eeaeb1e09279515ac6d9f9c0e2a96db42"
+  },
+  "automatic_successor": false,
+  "complete_owned_unit_terminals": [
+    {
+      "cleanup_complete": true,
+      "exit_observed": true,
+      "group_observations": [
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r2-20261112-slot-select-probes.service"
+        },
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r2-20261112-slot-select-probes.service"
+        }
+      ],
+      "observed_unix_ns": 1794510919720427123,
+      "process_owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-I",
+          "-B",
+          "-X",
+          "pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/bytecode-never-created",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_probe_serial_v1.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/admission.json",
+          "--binding-sha256",
+          "39c81d5ab4d4fa60105587a48284ce5eeaeb1e09279515ac6d9f9c0e2a96db42"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r2-20261112-slot-select-probes.service",
+        "pid": 976578,
+        "ppid": 1583,
+        "start_ticks": "429131066"
+      },
+      "properties": {
+        "ActiveState": "active",
+        "After": "basic.target -.mount app.slice",
+        "BindsTo": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "1",
+        "ExecMainPID": "976578",
+        "ExecMainStatus": "0",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_probe_serial_v1.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/admission.json --binding-sha256 39c81d5ab4d4fa60105587a48284ce5eeaeb1e09279515ac6d9f9c0e2a96db42 ; ignore_errors=no ; start_time=[Thu 2026-11-12 19:13:22 UTC] ; stop_time=[Thu 2026-11-12 19:15:18 UTC] ; pid=976578 ; code=exited ; status=0 }",
+        "ExecStopPost": "",
+        "Id": "trn1-qwen35-sampler-r2-20261112-slot-select-probes.service",
+        "InvocationID": "fc247d25e1f4461ba33149c795fcbf17",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "1073741824",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryHigh": "5368709120",
+        "MemoryMax": "6442450944",
+        "MemorySwapMax": "0",
+        "RemainAfterExit": "yes",
+        "Result": "success",
+        "RuntimeMaxUSec": "2h",
+        "SendSIGKILL": "yes",
+        "StandardError": "inherit",
+        "StandardOutput": "append",
+        "SubState": "exited",
+        "TasksMax": "256",
+        "TimeoutStopUSec": "15s",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "remaining_processes": [],
+      "server_owner": {
+        "invocation_id": "fc247d25e1f4461ba33149c795fcbf17",
+        "pid": 976578,
+        "start_ticks": 429131066,
+        "unit": "trn1-qwen35-sampler-r2-20261112-slot-select-probes"
+      },
+      "systemd_exit_status": {
+        "ExecMainCode": 1,
+        "ExecMainStatus": 0,
+        "Result": "success"
+      },
+      "unacknowledged_terminal": null
+    }
+  ],
+  "failed": false,
+  "failure": null,
+  "full_model_qualified": false,
+  "outer_owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-I",
+      "-B",
+      "-X",
+      "pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-select-probe-r2-20261112/bytecode-never-created",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_probe_serial_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-slot-select-probe-r2-20261112-spec.json",
+      "--spec-sha256",
+      "8b97a181a3fef0d720df17ba229ea3ce30a142b7390aae76bfb010d637e847c0",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-slot-select-probe-r2-20261112-review.json",
+      "--review-sha256",
+      "0dfecb6f813f527baa2da52279333e0c2aab1fd2c2ce89e12062449d36bca791"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 968407,
+    "ppid": 2480035,
+    "start_ticks": "429096689"
+  },
+  "qualification_matrix_completed": false,
+  "result_present": true,
+  "schema": "qwen35_slot_select_probe_outer_terminal_v1",
+  "self_exit_claimed": false,
+  "storage": {
+    "allocated_bytes": 3563520,
+    "entries": 83,
+    "layouts": {
+      "conv-select-probes": {
+        "allocated_bytes": 2039808,
+        "logical_bytes": 1881165
+      }
+    },
+    "logical_bytes": 3373792
+  },
+  "whole_owned_scope_drained": true
+}
