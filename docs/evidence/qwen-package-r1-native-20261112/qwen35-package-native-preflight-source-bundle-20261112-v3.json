@@ -1,0 +1,339 @@
+{
+  "checkout": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107",
+  "native_executed": false,
+  "neuron_kwargs": {
+    "apply_seq_ids_mask": true,
+    "batch_size": 4,
+    "context_encoding_buckets": [
+      128,
+      256,
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "ctx_batch_size": 1,
+    "enable_bucketing": true,
+    "is_block_kv_layout": false,
+    "is_continuous_batching": true,
+    "is_prefix_caching": false,
+    "lora_config": null,
+    "max_context_length": 4096,
+    "on_device_sampling_config": null,
+    "padding_side": "right",
+    "quantized": false,
+    "seq_len": 4096,
+    "torch_dtype": "bfloat16",
+    "tp_degree": 2
+  },
+  "official_config": {
+    "bytes": 2486,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/Qwen__Qwen3.5-2B.config.json",
+    "sha256": "351910aefdcd2fe8fea99ca97b5106d0c230ca130a4f68468bb26f15357a6052"
+  },
+  "package_sources": {
+    "vllm_neuron/__init__.py": "70d4db750a8213758205101d73186af02a14d9fee883303023ae5efd37208fec",
+    "vllm_neuron/core/__init__.py": "34c6f6a40914df002a1136804f2627c4d797033b2dc726fabff8a387bb2a6f11",
+    "vllm_neuron/core/scheduler.py": "bf69b12b9ece4235ebfc6fb6bb45a7b67c17aabc2fa37f993cfb8da937594d50",
+    "vllm_neuron/distributed/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vllm_neuron/models/__init__.py": "f4b98116f32de98fc7ac1103dbb9e8ec10805ea3466d4c8fed2a42e2fb9fe68f",
+    "vllm_neuron/models/lfm3/__init__.py": "57be299c865486907f8ceeec7d2c4cf5d9d47d3ea7876e6677936161228b2d2d",
+    "vllm_neuron/models/lfm3/artifacts.py": "ad799b2a14f26d9e53aa86d73d12437eebb0f89323b6260ca5e3160547bd6286",
+    "vllm_neuron/models/lfm3/cache_writer.py": "bd1af5ae871baf7deab294670072d4d014ead3318e93025a17bad9824ca05427",
+    "vllm_neuron/models/lfm3/helpers.py": "89cccbdd092b732a44302ea06921102ea41d961860fe9594f18c103ec250b742",
+    "vllm_neuron/models/lfm3/identity.py": "a712e40e4e83b1fb3bf7bf2b66896760cd1f8ba8776019105054785f6c442b27",
+    "vllm_neuron/models/lfm3/modeling.py": "3da916f38ecf9202dbc3b898e04351f80f1bccf3763807dcef8985b3872fa70e",
+    "vllm_neuron/models/lfm3/nki_write.py": "b8ef846eb495c559c1b2094d8bc2deb265e34bbce2ad909828aad0dc57f7a9a5",
+    "vllm_neuron/models/lfm3/nki_write_torch.py": "b359b5b315827f923899b96cd88ad9d1a868bf6d956ee6541362486ac9ac03b3",
+    "vllm_neuron/models/lfm3/prepare_view.py": "9257a8c6199cf647cad45e6b6f22eb52110d4e60c6d1e213ec1e699d6d2ba15f",
+    "vllm_neuron/models/lfm3/provenance.py": "c1fd318c96aa365ce29041a805ca03bdf9c65e7dc726a28386ff5865702b5da3",
+    "vllm_neuron/models/lfm3/registration.py": "5a50f16089ea91e61d53eae2641054e67d877e06f857466f89a1b689444a5d1e",
+    "vllm_neuron/models/lfm3/text_core.py": "85ac7401dccef0b286460854093285a289f9abe14d38385b75fb33b60b21aecf",
+    "vllm_neuron/models/nemotron9b/__init__.py": "e2435f7fae27ed68fda952ebffc854204a320e720eb7eca9bdd623283dcd5959",
+    "vllm_neuron/models/nemotron9b/artifacts.py": "23e9512442c235b971dd04c19c9ad2103d699630f3895ae81136050f2c491187",
+    "vllm_neuron/models/nemotron9b/cache.py": "67943c48d429ed3f9ce9113edaa724b3840ed89857849873f511698726312c11",
+    "vllm_neuron/models/nemotron9b/helpers.py": "3ca8d82079ca339834fcf0689c270d9eb0b359e11764f82cea45e8f96b7f75c3",
+    "vllm_neuron/models/nemotron9b/identity.py": "b95e4e7535cad63e6df707aaa5422ac4ad26879386f9b2c9d0777667636699e4",
+    "vllm_neuron/models/nemotron9b/modeling.py": "b86ca3656e048d38958d535db5c01de387b2a6897048d9a3f24c354630288665",
+    "vllm_neuron/models/nemotron9b/nki_read.py": "4054bcc17149a6b81139218a5ad7c2b716b6a1c149e418ddbd139cf801dcd579",
+    "vllm_neuron/models/nemotron9b/nki_read_torch.py": "a8afef312d6f91d0590c71cc0268383bb873c8272cea515e84e74f5f2721be4e",
+    "vllm_neuron/models/nemotron9b/nki_write.py": "b8ef846eb495c559c1b2094d8bc2deb265e34bbce2ad909828aad0dc57f7a9a5",
+    "vllm_neuron/models/nemotron9b/nki_write_torch.py": "b359b5b315827f923899b96cd88ad9d1a868bf6d956ee6541362486ac9ac03b3",
+    "vllm_neuron/models/nemotron9b/prepare_view.py": "8c68ec861b6f733f2baa29d9ea77b5b677242009dc86b8d37caf1efa6b75335a",
+    "vllm_neuron/models/nemotron9b/primitives.py": "a5022c303779dc2bcd50a4959e4a621fed37d9a2f36856b0f3062d2d3dd25594",
+    "vllm_neuron/models/nemotron9b/provenance.py": "451d168eee16995173d2c105ff31e142dbf290cbcc4208c3789b741705970eff",
+    "vllm_neuron/models/nemotron9b/registration.py": "29b230ee18161e3315446f434e405ab870c8459bfd499e0537db747a8b1b1ea9",
+    "vllm_neuron/models/nemotron9b/serve.py": "a7cf24b490ab3e2efb55214dfaf409e9086ebee19a2001c4ab8dbb987e3b140e",
+    "vllm_neuron/models/nemotron9b/state.py": "634063828f9799823a78a56ad16a65ac955e9878ee9f18fd1c504ca24368df19",
+    "vllm_neuron/models/nemotron9b/text_core.py": "d26c17bd52e4a087099d7b78f8a80c8adf04d3ec9bae57b65042c4af925e8e24",
+    "vllm_neuron/models/qwen35/__init__.py": "a07686e18368bfded1b040270c2e335ece72db3aefa15a79020c2ff067a4c28f",
+    "vllm_neuron/models/qwen35/artifacts.py": "f32a7bffb8752514aa65ca7e0599b3781557bf7974e7b3bec311df473b656091",
+    "vllm_neuron/models/qwen35/build.py": "e449f71f5759cc861cb02fd3b40d6d3186f64d8d33cf275da1f901d9641514c8",
+    "vllm_neuron/models/qwen35/helpers.py": "b77c567096ba8869b04ebe9971d2418939752f506a5fce6ccebbc5ea1d9b787d",
+    "vllm_neuron/models/qwen35/identity.py": "4bdf0769b1cfb577480da9bd416310baec254e6300cf41597437c488401a98b9",
+    "vllm_neuron/models/qwen35/modeling.py": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad",
+    "vllm_neuron/models/qwen35/prepare_view.py": "c326d48eee241dc60a1f7a7b779f8bd75182809fb7b1991f7a7d177ad91f566b",
+    "vllm_neuron/models/qwen35/primitives.py": "64db0f2a04dcf41f3747694419d576fa4fb865038fc273c5030bb7604ade81fa",
+    "vllm_neuron/models/qwen35/provenance.py": "682313f7b2e71b6b5bbeb3a11e82190bfa3c77ddd9a209bec36ae85835e77e89",
+    "vllm_neuron/models/qwen35/registration.py": "bb5a3a97efa7ea253549697c0386c7a3e98d26a76dcf9f47faa79ba259a43ff7",
+    "vllm_neuron/models/qwen35/serve.py": "7a16b34b805075b5eef9771057cbcc3ebb0fb207814072d782fd3aa9212a9265",
+    "vllm_neuron/models/qwen35/state.py": "095e46f6d02dfc4b43cd77ebaa20a7a25a4879d2786b2c1a2ed5a6e73ffbabc7",
+    "vllm_neuron/models/qwen35/text_core.py": "c9ee19b8e95eae12193e292286804e660424ca5fd0ace1b64c57f4e9d37011ba",
+    "vllm_neuron/models/qwen35/validation.py": "294c81d07aee0396c960afc1d6f78a0da98d838ab05cd970cbe55a8536ab6dff",
+    "vllm_neuron/models/smollm3/__init__.py": "4555128e22c214030432dbdab4e983ec50e7ee84bf818977795a76098bcad00d",
+    "vllm_neuron/models/smollm3/artifacts.py": "4bc4892f971fa9fabed049e13aff0e34a95056e6dcbb8cc4bb3107189670d2f5",
+    "vllm_neuron/models/smollm3/cache_attention.py": "9a92dce147ad8f740864b31a48323d0cc0a37860a24b5e263616eb76a28c33d7",
+    "vllm_neuron/models/smollm3/helpers.py": "b904d2b8ec9e49a57237114c756166806c534bb614d136bbee48ea6c05a008f3",
+    "vllm_neuron/models/smollm3/identity.py": "31cc6a3993ec0bf1be61cb07f431ed682ecb4d4c678a03d1d3e9af30067645e2",
+    "vllm_neuron/models/smollm3/modeling.py": "8501ad8016a3a7f6396825e9410ed7878083791ef4e0b4542081e9d08243a6a5",
+    "vllm_neuron/models/smollm3/nki_read.py": "4054bcc17149a6b81139218a5ad7c2b716b6a1c149e418ddbd139cf801dcd579",
+    "vllm_neuron/models/smollm3/nki_read_torch.py": "a8afef312d6f91d0590c71cc0268383bb873c8272cea515e84e74f5f2721be4e",
+    "vllm_neuron/models/smollm3/nki_write.py": "b8ef846eb495c559c1b2094d8bc2deb265e34bbce2ad909828aad0dc57f7a9a5",
+    "vllm_neuron/models/smollm3/nki_write_torch.py": "b359b5b315827f923899b96cd88ad9d1a868bf6d956ee6541362486ac9ac03b3",
+    "vllm_neuron/models/smollm3/prepare_view.py": "1c0ac2ed24baa8b43338b271cbaf53cc077855581e7202d8f8f975fd5e7ad3b8",
+    "vllm_neuron/models/smollm3/provenance.py": "62202d9338e7e43262bd73157988041b5db19d04d38d9e6f8fbc05a921c1299b",
+    "vllm_neuron/models/smollm3/registration.py": "438a3b4abe2f9eb70b5a56fc50ce65f0c25df8c0fd25137d5d99e32ea26224ec",
+    "vllm_neuron/models/smollm3/text_core.py": "97fd88e4ca0ffbd470328d5359216ad4ba364f3b2e949a5c0e6775bd7e583527",
+    "vllm_neuron/platform.py": "4387dfe509f055d72b93d955c1fb103142e000c452898680bb71e3e0886f8f26",
+    "vllm_neuron/platform_overrides.py": "01e81c6ec753ced45dd57bded421d0909ec930b0cd61ec25382b7dfb711aba6d",
+    "vllm_neuron/worker/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vllm_neuron/worker/constants.py": "8342a9cfcd077b3c3b5d8ad23254fa3080a1f30c02331a7889c21965ad9726a3",
+    "vllm_neuron/worker/cpu_sampler.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "vllm_neuron/worker/neuron_worker.py": "3f3c2195e1fc399e56b701d63a6d1f67f46d6bcaef38b42ffce095fe1a1201ba",
+    "vllm_neuron/worker/neuronx_distributed_model_loader.py": "c1881ab64a296bb6a98657b8a8135ee8facc954c5e684803f2624dd2e2dcbb31",
+    "vllm_neuron/worker/neuronx_distributed_model_runner.py": "4484edd883d199310e1646969417e05a8162148e404f840dc66cad6c6233a77e"
+  },
+  "python": "/home/ubuntu/venvs/vllm_neuron/bin/python",
+  "runtime_input_created": false,
+  "schema": "qwen35-package-native-preflight-v3-source-bundle",
+  "sdk_sources": {
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/config.py": "6380d0671130b519642509bf4de76412a7ab0f6d092c3676197cd1610185314e",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "neuronx-distributed-inference/neuronx_distributed_inference/modules/autobucketing.py": "20dd4423e3f7b3c3e59878fb8ccba90866abfc8cc417344dbb453cc2e11b5052",
+    "neuronx-distributed-inference/neuronx_distributed_inference/modules/padding.py": "c1968712adb23d663fe00ea22f3cf3da3db7c31b36950149769051c3bdb65f63",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/compile_env.py": "d09e4657c2493b6edc6f813d82faf31606fe9b9eefc0540420c7d59a8c30595b",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/constants.py": "3abeaa788717620dcac7370e0ec7a58a8066a0e8d5000856cab16290a23366a8",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/hf_adapter.py": "239065404165d30005d673a36bc5f19ffc2ac3fe263911d6f15dbdb58204c58f",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/runtime_env.py": "13551de195b0a632e70b752c029bf3efe8883b46dcfc2ad6b61b710554558df0",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/layers.py": "b179b02c512c2c29a59dcdcfae958fc4f4a55f11cb0b2bbe9c004aef341276ab",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/layers_utils.py": "2ff098674feed3e43897c516f832a596a98c50067c4a1d429c5c8918e4a83d44",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/mappings.py": "873e45445f315f74fc4d392b74f45e99ad9c45e5365cf231692b0a44e4bef1ea",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/parallel_state.py": "1db2d04151aab7878f0df621471cb14ed459c1225a65f96301a0fdfb2f69fb2b",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/random.py": "6fb5260d2fc627c46701770b3ad94e9820a23ca9546b869a20e57d99239de8d2",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/utils.py": "90d37e4615a848f20ab2f41fbbf2470fbd0b525f5dd106b53a0de6db6a6a3966",
+    "neuronx-distributed/neuronx_distributed/trace/model_builder.py": "7323a755fbe8c9253cdb8977d8a21dca083c9b132d2b8a3664aa89e0da047e91",
+    "neuronx-distributed/neuronx_distributed/utils/model_utils.py": "79fe81789649cbe899b3bc26fee2886d8d50ba35c38f27127ed4bbf26d3a638e",
+    "torch-neuronx/torch_neuronx/xla_impl/trace.py": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786",
+    "torch-xla/torch_xla/version.py": "b32ec3638fa05c17246fe549b6c95db6c5b58238fff663836f1646997a42b4e7"
+  },
+  "site_packages": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages",
+  "software": {
+    "neuronx-cc": "2.23.6484.0+3b612583",
+    "neuronx-distributed": "0.17.26814+4b18de63",
+    "neuronx-distributed-inference": "0.8.16251+f3ca5575",
+    "torch": "2.8.0",
+    "torch-neuronx": "2.8.0.2.12.22436+0f1dac25",
+    "transformers": "4.57.6",
+    "vllm": "0.11.0"
+  },
+  "source_commit": "e40fd753ba080a9a4640688f4d6beda9985b7099",
+  "source_delivery": {
+    "bytes": 2780,
+    "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/test/qwen35/source_delivery_v2.json",
+    "sha256": "e73b5d59d28be857f16cc9349d042f3e0687956bdf61f569c6c1e3ea4a3ff835"
+  },
+  "source_only": true,
+  "tokenizer": {
+    "files": {
+      "chat_template.jinja": {
+        "algorithm": "git-blob-sha1",
+        "digest": "0ef09f214eaa6d9bca297988afc1454b5827b2c7",
+        "size": 7755
+      },
+      "config.json": {
+        "algorithm": "git-blob-sha1",
+        "digest": "d30a15be1bbfd610f58ad80f1fbeb6778f58a80f",
+        "size": 2908
+      },
+      "merges.txt": {
+        "algorithm": "git-blob-sha1",
+        "digest": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+        "size": 3353259
+      },
+      "tokenizer.json": {
+        "algorithm": "sha256",
+        "digest": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "size": 12807982
+      },
+      "tokenizer_config.json": {
+        "algorithm": "git-blob-sha1",
+        "digest": "fae3ce993e07c092ad024dde45e592379fde91bb",
+        "size": 16709
+      },
+      "vocab.json": {
+        "algorithm": "git-blob-sha1",
+        "digest": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+        "size": 6722759
+      }
+    },
+    "runtime_payload_read_required": true,
+    "sources": {
+      "case": {
+        "bytes": 1339,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/case.json",
+        "sha256": "4bea2f115e696cfad39f349649d0b1a6d2958a34f37a0c0f39c7a8093be49d74"
+      },
+      "driver_source": {
+        "bytes": 19436,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v3.py",
+        "sha256": "cbfb11f5e47e79d5a5b793b96a226ba6ec079036d28fb07dbea0a63da686e30f"
+      },
+      "hf_reference": {
+        "bytes": 27292,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-2b-hf-reference.json",
+        "sha256": "4dc20be7c912f132ced2916676dcd33e452f33bb5bce441104a39dce195e85c8"
+      },
+      "historical_quality": {
+        "bytes": 271998,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/quality96.json",
+        "sha256": "8623e8843377968627478493c9c345ea3c7f4632aedf150a0301e9e0e3aeab77"
+      },
+      "historical_workloads": {
+        "bytes": 637454,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-state-reset-full-v1/workloads.json",
+        "sha256": "3c9ab71d3a504eeb124fdb82a414869e63acd9865c3632f9ac9adcdf8311e2a3"
+      },
+      "long_reference": {
+        "bytes": 62911,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35-baseline/long-decode-hf-reference.json",
+        "sha256": "dfa000e272ba888180bd5ffa6d378cd0eb72d49e2b2f2bb093ccf286142ac608"
+      },
+      "long_source": {
+        "bytes": 10291,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/validate_qwen35_long_decode.py",
+        "sha256": "b9f4bf6d1db700c0b56c57ec3b9917a03487a665256087df1fd2bbc8aa8cab9f"
+      },
+      "orchestrate_source": {
+        "bytes": 30463,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/orchestrate.py",
+        "sha256": "6fbd6c43f1a071aa8bf3e8e4423ef5f1d60a3e16c3856b60aadf39ce05f7d185"
+      },
+      "quality_source": {
+        "bytes": 8269,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/evaluate_quality.py",
+        "sha256": "9dc5842eb7d02c1254f1ab9052078843a1e12adf33abc1dd830ae9dc6404fb94"
+      },
+      "quality_suite": {
+        "bytes": 54511,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/quality-suite.json",
+        "sha256": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb"
+      },
+      "workload_source": {
+        "bytes": 4355,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/benchmark_workloads.py",
+        "sha256": "8a1798ee3b4d5518673125caec9d2878a3ad9c1d282553003b35b8354617b039"
+      }
+    },
+    "tokenizer_payload_read_during_preparation": false
+  },
+  "view_config": {
+    "architectures": [
+      "Qwen35NeuronTextForCausalLM"
+    ],
+    "attention_bias": false,
+    "attention_dropout": 0.0,
+    "attn_output_gate": true,
+    "bos_token_id": null,
+    "dtype": "bfloat16",
+    "eos_token_id": 248044,
+    "full_attention_interval": 4,
+    "head_dim": 256,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "initializer_range": 0.02,
+    "intermediate_size": 6144,
+    "layer_types": [
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention",
+      "linear_attention",
+      "linear_attention",
+      "linear_attention",
+      "full_attention"
+    ],
+    "linear_conv_kernel_dim": 4,
+    "linear_key_head_dim": 128,
+    "linear_num_key_heads": 16,
+    "linear_num_value_heads": 16,
+    "linear_value_head_dim": 128,
+    "mamba_ssm_dtype": "float32",
+    "max_position_embeddings": 262144,
+    "mlp_only_layers": [],
+    "model_type": "qwen35_neuron_text",
+    "mtp_num_hidden_layers": 1,
+    "mtp_use_dedicated_embeddings": false,
+    "num_attention_heads": 8,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 2,
+    "pad_token_id": 248044,
+    "rms_norm_eps": 1e-06,
+    "rope_parameters": {
+      "mrope_interleaved": true,
+      "mrope_section": [
+        11,
+        11,
+        10
+      ],
+      "partial_rotary_factor": 0.25,
+      "rope_theta": 10000000,
+      "rope_type": "default"
+    },
+    "rope_theta": 10000000,
+    "tie_word_embeddings": true,
+    "torch_dtype": "bfloat16",
+    "use_cache": true,
+    "vocab_size": 248320
+  },
+  "view_config_sha256": "4cba2b52418d64a36321fe6a3abf6cf7574365750c3b3a7c50025331931ff3d8",
+  "worker_sources": [
+    {
+      "bytes": 27329,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py",
+      "sha256": "a8de94e9caf4fd99fa281a4239778f5e721b49d932dde2138b547e8c42e4ec5d"
+    },
+    {
+      "bytes": 31014,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_native_preflight_v3.py",
+      "sha256": "00c9e891cdf74516e4f998576f7f048162c5dcc743e35fac49a1e0daf9fbddcd"
+    },
+    {
+      "bytes": 4796,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_native_preflight_v3.py",
+      "sha256": "2bee22899eb56d692511330255141c4c80e4a654486220e63ee5389bbc52b4ac"
+    },
+    {
+      "bytes": 15052,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_tokenizer_checks_v3.py",
+      "sha256": "a254ab186cfe1ea4a3faba4be1e82b23dca3f010b85bbfe34ac4e948ff5ef8fc"
+    }
+  ]
+}

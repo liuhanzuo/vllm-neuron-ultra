@@ -1,0 +1,93 @@
+INFO 11-12 15:36:15 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 15:36:15 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 15:36:15 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 15:36:15 [__init__.py:207] Platform plugin neuron is activated
+INFO 11-12 15:36:15 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 15:36:15 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 15:36:15 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 15:36:15 [__init__.py:207] Platform plugin neuron is activated
+Could not import vLLM config module for overrides: cannot import name 'ModelConfig' from partially initialized module 'vllm.config' (most likely due to a circular import) (/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/__init__.py)
+Error applying Neuron config overrides: Subprocess/network forbidden: subprocess.Popen
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 449, in <module>
+    main()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 445, in main
+    execute(json.loads(raw))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 408, in execute
+    parent = native_checks(spec, bundle, 'parent')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 345, in native_checks
+    package.register(); package.register()
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/__init__.py", line 11, in register
+    from .registration import install
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/registration.py", line 5, in <module>
+    from vllm.model_executor.models.registry import ModelRegistry
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/model_executor/__init__.py", line 4, in <module>
+    from vllm.model_executor.parameter import (BasevLLMParameter,
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/model_executor/parameter.py", line 12, in <module>
+    from vllm.distributed import (get_tensor_model_parallel_rank,
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/distributed/__init__.py", line 4, in <module>
+    from .communication_op import *
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/distributed/communication_op.py", line 9, in <module>
+    from .parallel_state import get_tp_group
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/distributed/parallel_state.py", line 152, in <module>
+    direct_register_custom_op(
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/utils/__init__.py", line 2657, in direct_register_custom_op
+    from vllm.platforms import current_platform
+  File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/platforms/__init__.py", line 248, in __getattr__
+    _current_platform = resolve_obj_by_qualname(
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/platform.py", line 40, in __init__
+    self._ensure_config_overrides_applied()
+  File "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/platform.py", line 101, in _ensure_config_overrides_applied
+    from vllm.config import ModelConfig, ParallelConfig
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/__init__.py", line 35, in <module>
+    from vllm.config.model import (ConvertOption, HfOverrides, LogprobsMode,
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/model.py", line 25, in <module>
+    from vllm.transformers_utils.config import (
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/transformers_utils/config.py", line 21, in <module>
+    from transformers.models.auto.image_processing_auto import (
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/models/auto/image_processing_auto.py", line 28, in <module>
+    from ...image_processing_utils_fast import BaseImageProcessorFast
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/image_processing_utils_fast.py", line 43, in <module>
+    from .processing_utils import Unpack
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/processing_utils.py", line 75, in <module>
+    from .modeling_utils import PreTrainedAudioTokenizerBase
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/modeling_utils.py", line 70, in <module>
+    from .loss.loss_utils import LOSS_MAPPING
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/loss/loss_utils.py", line 21, in <module>
+    from .loss_d_fine import DFineForObjectDetectionLoss
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/loss/loss_d_fine.py", line 21, in <module>
+    from .loss_for_object_detection import (
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/loss/loss_for_object_detection.py", line 28, in <module>
+    from scipy.optimize import linear_sum_assignment
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/optimize/__init__.py", line 412, in <module>
+    from ._optimize import *
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/optimize/_optimize.py", line 35, in <module>
+    from scipy.linalg import cholesky, issymmetric, LinAlgError
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/linalg/__init__.py", line 208, in <module>
+    from ._basic import *
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/linalg/_basic.py", line 13, in <module>
+    from ._decomp import _asarray_validated
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/linalg/_decomp.py", line 26, in <module>
+    from scipy._lib._util import _asarray_validated
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/_lib/_util.py", line 18, in <module>
+    from scipy._lib._array_api import array_namespace
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/scipy/_lib/_array_api.py", line 15, in <module>
+    from numpy.testing import assert_
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/testing/__init__.py", line 11, in <module>
+    from ._private.utils import *
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/testing/_private/utils.py", line 1253, in <module>
+    _SUPPORTS_SVE = check_support_sve()
+  File "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/testing/_private/utils.py", line 1247, in check_support_sve
+    output = subprocess.run(cmd, capture_output=True, text=True)
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1735, in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 220, in guard
+    require(event not in ('subprocess.Popen', 'os.system', 'socket.connect'), 'Subprocess/network forbidden: ' + event)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py", line 46, in require
+    raise RuntimeError(message)
+RuntimeError: Subprocess/network forbidden: subprocess.Popen
