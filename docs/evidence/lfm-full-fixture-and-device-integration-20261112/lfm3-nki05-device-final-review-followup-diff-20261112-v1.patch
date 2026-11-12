@@ -1,0 +1,83 @@
+--- lfm3_nki05_extended_device_leaf_v1.py
++++ lfm3_nki05_extended_device_leaf_v2.py
+@@ -55,7 +55,7 @@
+                 compiler_args=['--target=trn1', '--auto-cast=none', '-O2'])
+             artifact = directory / 'model.pt'
+             compiled.save(str(artifact))
+-            result['artifact_identity']=context.artifact(artifact,phase,spec)
++            result['artifact_identity']=context.artifact(artifact,phase,dict(spec,variant='candidate'))
+             result.update(compile_seconds=time.monotonic()-began, artifact_sha256=p.sha(artifact))
+             for mapping in p.mappings(capacity, rows):
+                 slots = torch.tensor(mapping)
+@@ -158,7 +158,7 @@
+                     '--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=1 --vectorize-strided-dma'])
+             artifact = directory/'model.pt'
+             compiled.save(str(artifact))
+-            result['artifact_identity']=context.artifact(artifact,phase,spec)
++            result['artifact_identity']=context.artifact(artifact,phase,dict(spec,dtype='bfloat16',rows=capacity,shapes=[list(value.shape) for value in initial]))
+             result.update(compile_seconds=time.monotonic()-began, artifact_sha256=p.sha(artifact))
+             states = dict(compiled.states._parameters)
+             names = [[name for name,value in states.items() if torch_same(value,expected)] for expected in initial]
+--- lfm3_nki05_device_supplements_v1.py
++++ lfm3_nki05_device_supplements_v2.py
+@@ -9,7 +9,7 @@
+ from lfm3_nki05_device_context_v1 import require_context
+ from lfm3_nki05_typed_dispatch_v1 import make_writer
+ from lfm3_nki05_device_oracle_v1 import store_slots
+-from lfm3_nki05_extended_device_leaf_v1 import torch_same,tensor_sha
++from lfm3_nki05_extended_device_leaf_v2 import torch_same,tensor_sha
+ from lfm3_typed_slot_writer_contract_v1 import bit_patterns
+ 
+ 
+--- check_lfm3_nki05_device_binding_source_v2.py
++++ check_lfm3_nki05_device_binding_source_v3.py
+@@ -26,7 +26,7 @@
+     'lfm3_nki05_typed_dispatch_v1','lfm3_nki05_device_context_v1','lfm3_nki05_device_oracle_v1',
+     'lfm3_nki05_device_matrix_v1','lfm3_nki05_raw_device_leaf_v1',
+     'lfm3_nki05_regression_device_leaf_v1','lfm3_nki05_regression_alias_leaf_v1',
+-    'lfm3_nki05_extended_device_leaf_v1','lfm3_nki05_device_supplements_v1']
++    'lfm3_nki05_extended_device_leaf_v2','lfm3_nki05_device_supplements_v2']
+ MODULES={name:importlib.import_module(name) for name in NAMES}
+ jit=MODULES[NAMES[0]];wrapper=MODULES[NAMES[1]];dispatch=MODULES[NAMES[2]]
+ ctx=MODULES[NAMES[3]];matrix=MODULES[NAMES[5]];raw=MODULES[NAMES[6]]
+@@ -286,13 +286,13 @@
+         for typ in (ast.Try,ast.ClassDef):self.assertEqual(science([next(x for x in old.body if isinstance(x,typ))]),science([next(x for x in new.body if isinstance(x,typ))]))
+     def test_extended_complete_scientific_bodies_exact(self):
+         for name in ('device','alias'):
+-            old=function('lfm3_batch_slots_bits_extended_v4.py',name);new=function('lfm3_nki05_extended_device_leaf_v1.py',name)
++            old=function('lfm3_batch_slots_bits_extended_v4.py',name);new=function('lfm3_nki05_extended_device_leaf_v2.py',name)
+             def scientific_tail(fn):
+                 start=next(i for i,x in enumerate(fn.body) if isinstance(x,ast.Expr) and isinstance(x.value,ast.Call) and isinstance(x.value.func,ast.Attribute) and x.value.func.attr=='set_num_threads')
+                 return fn.body[start:]
+             self.assertEqual(science(scientific_tail(old)),science(scientific_tail(new)),name)
+     def test_byte_compare_helpers_exact(self):
+-        for name in ('torch_same','tensor_sha'):self.assertEqual(dump(function('lfm3_batch_slots_bits_extended_v4.py',name)),dump(function('lfm3_nki05_extended_device_leaf_v1.py',name)))
++        for name in ('torch_same','tensor_sha'):self.assertEqual(dump(function('lfm3_batch_slots_bits_extended_v4.py',name)),dump(function('lfm3_nki05_extended_device_leaf_v2.py',name)))
+     def test_sequential_oracle_exact(self):
+         old=function('lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/helpers.py','store_slots')
+         new=function('lfm3_nki05_device_oracle_v1.py','store_slots')
+@@ -316,6 +316,15 @@
+             self.assertFalse({'exec','eval','compile'}&set(calls))
+             self.assertNotIn('simulate_kernel',source);self.assertNotIn('writeback_shim',source)
+             self.assertFalse(any(isinstance(n,ast.If) and '__main__' in ast.unparse(n.test) for n in parsed.body))
++    def test_extended_alias_receipt_contains_actual_shapes_dtype_and_variant(self):
++        parsed=function('lfm3_nki05_extended_device_leaf_v2.py','alias')
++        calls=[x for x in ast.walk(parsed) if isinstance(x,ast.Call) and isinstance(x.func,ast.Attribute) and x.func.attr=='artifact']
++        self.assertEqual(len(calls),1)
++        case=calls[0].args[2]
++        self.assertEqual(ast.unparse(case.args[0]),'spec')
++        self.assertEqual({x.arg for x in case.keywords},{'dtype','rows','shapes'})
++        self.assertIn('initial',ast.unparse(case))
++
+     def test_actual_trace_and_alias_operations_retained(self):
+         for name in NAMES[6:]:
+             source=(ROOT/(name+'.py')).read_text();self.assertIn('torch_neuronx.trace(',source);self.assertIn('context.artifact(',source)
+@@ -336,7 +345,7 @@
+             for b in (4,8,16):
+                 rows=[tuple(words[-i:]+words[:-i]) for i in range(b)]
+                 self.assertEqual(len(set(rows)),b)
+-        self.assertIn('raw.roll(row)',(ROOT/'lfm3_nki05_device_supplements_v1.py').read_text())
++        self.assertIn('raw.roll(row)',(ROOT/'lfm3_nki05_device_supplements_v2.py').read_text())
+     def test_no_native_modules_loaded(self):
+         self.assertFalse(set(BLOCKED)&{name.split('.')[0] for name in sys.modules})
+ 

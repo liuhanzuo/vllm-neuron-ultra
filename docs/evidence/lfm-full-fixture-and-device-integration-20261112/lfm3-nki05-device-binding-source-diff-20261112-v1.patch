@@ -1,0 +1,1439 @@
+--- /dev/null
++++ slot_cache_nki05_typed_jit_v1.py
+@@ -0,0 +1,34 @@
++"""NKI0.5 device factory; no native import or compilation on module import."""
++import os
++from importlib import metadata
++
++DEVICE_SOFTWARE = {
++    'nki': '0.5.0+28631259367.ga768afa6',
++    'torch': '2.9.1+cpu',
++    'torch-neuronx': '2.9.0.2.15.32035+de43f57c',
++    'neuronx-cc': '2.26.6360.0+6f180f47',
++}
++
++
++def require(value,message):
++    if not value:raise RuntimeError(message)
++
++
++def wrap_device_kernel(function,nki_api,environment):
++    """Public NKI jit; this does not invoke the kernel or simulate it."""
++    require(callable(function),'Exact observer-free function supplied')
++    require(environment.get('NEURON_PLATFORM_TARGET_OVERRIDE')=='trn1', 'Explicit Trn1 target required')
++    require(environment.get('NEURON_LOGICAL_NC_CONFIG')=='1', 'Original LNC1 required')
++    require(environment.get('NKI_SIMULATOR','0')=='0','Device path cannot use simulator')
++    return nki_api.jit(function)
++
++
++def make_device_kernel(admit):
++    require(callable(admit) and admit() is True,'Future owned device admission required before native import')
++    require({name:metadata.version(name) for name in DEVICE_SOFTWARE}==DEVICE_SOFTWARE,
++            'Distinct exact NKI0.5 device software identity; old package identity is not changed')
++    import nki
++    from slot_cache_nki05_typed_selector_v1 import make_kernel
++    kernel=wrap_device_kernel(make_kernel(),nki,os.environ)
++    require(admit() is True,'Device admission survives JIT construction')
++    return kernel
+--- slot_cache_typed_selector_torch_v1.py
++++ slot_cache_nki05_typed_torch_v1.py
+@@ -1,26 +1,34 @@
+-"""Trace-facing BF16/FP32 payload API; only slot indices are cast to int32."""
++"""Typed trace wrapper; native Torch is imported only during an admitted call."""
+ 
+ 
+-def store_slots_typed_selector(cache, updates, slots):
+-    import torch
+-    from slot_cache_nki_typed_selector_v1 import slot_cache_typed_selector
+-    assert cache.dtype in (torch.bfloat16, torch.float32) and updates.dtype == cache.dtype
+-    assert slots.dtype in (torch.int32, torch.int64)
+-    assert cache.ndim >= 2 and updates.ndim == cache.ndim and slots.ndim == 1
+-    capacity, rows = cache.shape[0], updates.shape[0]
+-    assert capacity in (4, 8, 16) and 1 <= rows <= capacity
+-    assert updates.shape[1:] == cache.shape[1:] and slots.shape == (rows,)
+-    assert cache.device == updates.device == slots.device
++def apply_typed_writer(cache,updates,slots,torch_api,device_kernel):
++    assert cache.dtype in (torch_api.bfloat16,torch_api.float32) and updates.dtype==cache.dtype
++    assert slots.dtype in (torch_api.int32,torch_api.int64)
++    assert cache.ndim>=2 and updates.ndim==cache.ndim and slots.ndim==1
++    capacity,rows=cache.shape[0],updates.shape[0]
++    assert capacity in (4,8,16) and 1<=rows<=capacity
++    assert updates.shape[1:]==cache.shape[1:] and slots.shape==(rows,)
++    assert cache.device==updates.device==slots.device
+     assert cache.is_contiguous() and updates.is_contiguous() and slots.is_contiguous()
+-    width = 1
++    width=1
+     for size in cache.shape[1:]:
+-        assert size > 0
+-        width *= size
+-    assert width % 128 == 0
+-    # Normalize before narrowing: int64 OOB must not wrap into a valid slot.
+-    valid = (slots >= 0) & (slots < capacity)
+-    normalized = torch.where(valid, slots, torch.full_like(slots, -1)).to(torch.int32)
+-    result = slot_cache_typed_selector(cache.reshape(capacity, width),
+-        updates.reshape(rows, width), normalized)
+-    assert result.dtype == cache.dtype and result.shape == (capacity, width)
++        assert size>0
++        width*=size
++    assert width%128==0
++    # Exact original normalization before narrowing: huge int64 must stay inactive.
++    valid=(slots>=0)&(slots<capacity)
++    normalized=torch_api.where(valid,slots,torch_api.full_like(slots,-1)).to(torch_api.int32)
++    result=device_kernel(cache.reshape(capacity,width),updates.reshape(rows,width),normalized)
++    assert result.dtype==cache.dtype and result.shape==(capacity,width)
+     return result.reshape(cache.shape)
++
++
++def make_typed_writer(device_kernel,admit):
++    assert callable(device_kernel) and callable(admit)
++    def writer(cache,updates,slots):
++        assert admit() is True,'Owned phase must remain admitted before Torch input'
++        import torch
++        result=apply_typed_writer(cache,updates,slots,torch,device_kernel)
++        assert admit() is True,'Owned phase must remain admitted after Torch output'
++        return result
++    return writer
+--- lfm3_typed_slot_writer_v1.py
++++ lfm3_nki05_typed_dispatch_v1.py
+@@ -1,17 +1,11 @@
+-"""Uninstalled candidate production dispatch; original one-row prefill stays.
+-
+-This module has no install hook, launch path, server mutation, or native import
+-on import. A separately reviewed runtime successor must bind this writer.
+-"""
+-from slot_cache_typed_selector_torch_v1 import store_slots_typed_selector
++"""Explicit uninstalled production dispatch; one-row prefill stays original."""
+ 
+ 
+-def make_writer(capacity, original_store_slots):
+-    assert capacity in (4, 8, 16) and callable(original_store_slots)
+-    def writer(cache, updates, slots):
+-        assert cache.shape[0] == capacity
+-        assert 1 <= updates.shape[0] <= capacity
+-        if updates.shape[0] == 1:
+-            return original_store_slots(cache, updates, slots)
+-        return store_slots_typed_selector(cache, updates, slots)
++def make_writer(capacity,original_store_slots,typed_writer):
++    assert capacity in (4,8,16) and callable(original_store_slots) and callable(typed_writer)
++    def writer(cache,updates,slots):
++        assert cache.shape[0]==capacity and 1<=updates.shape[0]<=capacity
++        if updates.shape[0]==1:
++            return original_store_slots(cache,updates,slots)
++        return typed_writer(cache,updates,slots)
+     return writer
+--- /dev/null
++++ lfm3_nki05_device_context_v1.py
+@@ -0,0 +1,122 @@
++"""Unbound runtime interface for unchanged device scientific bodies.
++
++A future root-owned runtime must implement every method, bind actual full CPU
++success/idle/history/resources and source hashes, then call a leaf. This module
++creates no admission, paths, lock, service or current runnable binding.
++"""
++from abc import ABC,abstractmethod
++from pathlib import Path
++from lfm3_typed_slot_writer_contract_v1 import required_gates
++from slot_cache_nki05_typed_jit_v1 import DEVICE_SOFTWARE,make_device_kernel
++from slot_cache_nki05_typed_torch_v1 import make_typed_writer
++
++ARTIFACT_SCHEMA='lfm3-nki05-typed-device-artifact-v1'
++VARIANT='typed_selector_nki05_v1'
++CONTEXT4096_REQUIRED=True
++FULL_MODEL_GATES=required_gates()
++RUNTIME_ADMITTED=False
++COMPILE_PEAK_BYTES=None
++COMPILE_ARTIFACT_CAP_BYTES=None
++REQUIRED_GATES=dict(cpu_regression=1648,cpu_extended=2068,raw_device_graphs=4,raw_device_checks=36,
++    regression_device_graphs=9,regression_device_checks=43,regression_alias_graphs=12,regression_alias_checks=60,
++    extended_device_graphs=42,extended_device_checks=2520,extended_alias_graphs=24,extended_alias_checks=192,
++    fp32_alias_required=True,int64_oob_before_narrowing_required=True,one_row_original_dispatch_required=True,
++    cold4096_required=True,long4096_required=True,slot_reuse4096_required=True,serving_graph4096_required=True)
++PHASES=('raw_device','regression_device','regression_alias','extended_device','extended_alias',
++        'fp32_alias','wrapper_controls','context4096_device','context4096_alias')
++
++
++class DeviceContext(ABC):
++    """Actual owning runtime implements authority and bounded IO, not this source-only leaf."""
++    @abstractmethod
++    def authorize(self,phase):
++        """Authenticate source/software, CPU actual exit+full audit, current idle/history,
++        prerequisites and owned process before imports; bound compile/artifact budgets.
++        Must raise on failure; return exactly True while the actual phase remains owned.
++        """
++        raise NotImplementedError
++    @abstractmethod
++    def prerequisite(self,name):
++        """Return independently authenticated full CPU or preceding device gate metadata."""
++        raise NotImplementedError
++    @abstractmethod
++    def paths(self,phase):
++        """Return (original source root, exclusive fresh phase output root)."""
++        raise NotImplementedError
++    @abstractmethod
++    def sources(self):
++        """Full actual leaf/kernel/SDK scientific source digest map, never old artifact pins."""
++        raise NotImplementedError
++    @abstractmethod
++    def save(self,path,value,phase):
++        """Owned atomic bounded JSON save, always below this fresh output root."""
++        raise NotImplementedError
++    @abstractmethod
++    def hash_artifact(self,path,phase):
++        """Bounded streaming digest of this admitted artifact; never read old artifacts."""
++        raise NotImplementedError
++    @abstractmethod
++    def record_artifact(self,path,phase,case):
++        """Save and return new receipt with schema, variant, software, source_sha256,
++        phase, path, case and sha256. Runtime must authenticate and bound all IO.
++        Reference/candidate label and complete actual shapes/dtypes are in case.
++        """
++        raise NotImplementedError
++
++    def protocol(self,phase):
++        # Immutable matrix functions are source-pinned, never caller-supplied.
++        from lfm3_nki05_device_matrix_v1 import BoundMatrix
++        self.require_phase(phase)
++        return BoundMatrix(self,phase)
++
++    def artifact(self,path,phase,case):
++        self.require_phase(phase)
++        root=Path(self.paths(phase)[1]).resolve()
++        actual=Path(path).resolve()
++        if not actual.is_relative_to(root):
++            raise RuntimeError('Artifact must be under the admitted fresh output root')
++        receipt=self.record_artifact(actual,phase,case)
++        expected=dict(schema=ARTIFACT_SCHEMA,variant=VARIANT,software=DEVICE_SOFTWARE,
++            source_sha256=self.sources(),phase=phase,path=str(actual),case=case,
++            sha256=self.hash_artifact(actual,phase))
++        if not isinstance(receipt,dict) or any(receipt.get(k)!=v for k,v in expected.items()):
++            raise RuntimeError('Distinct exact NKI0.5 artifact identity required')
++        self.require_phase(phase)
++        return receipt
++
++    def writer(self,phase):
++        self.require_phase(phase)
++        admit=lambda:self.authorize(phase)
++        return make_typed_writer(make_device_kernel(admit),admit)
++
++    def require_phase(self,phase):
++        if not __debug__ or phase not in PHASES or self.authorize(phase) is not True:
++            raise RuntimeError('Explicit owned device phase required; no default admission')
++
++
++def require_context(context,phase):
++    if not isinstance(context,DeviceContext):raise RuntimeError('Future DeviceContext implementation required')
++    context.require_phase(phase)
++    require_cpu_summary(context.prerequisite('full_cpu'))
++    return tuple(Path(value) for value in context.paths(phase))
++
++
++def require_cpu_summary(proof):
++    """Necessary summary checks; context must independently authenticate every batch,
++    actual outer exit, warning receipts, drained owners/lock and fresh handoff.
++    This check alone does not provide runtime admission.
++    """
++    expected={stage:dict(cases=3716,batches=291)
++        for stage in ('original_fixture','new_fixture','candidate')}
++    expected['controls']=dict(cases=1,batches=1)
++    if not isinstance(proof,dict) or proof.get('schema')!='lfm3_nki05_full_cpu_result_v1':
++        raise RuntimeError('Actual full CPU successor proof required')
++    if proof.get('stage_counts')!=expected:
++        raise RuntimeError('Retain all three full 3716-case matrices and actual control')
++    if any(proof.get(k) is not True for k in ('complete','passed','cpu_full_gate_passed',
++            'simulator_writeback_workaround_required','original_simulator_failure_preserved')):
++        raise RuntimeError('Original and modified simulator evidence required')
++    if any(proof.get(k) is not False for k in ('device_behavior_proven','alias_gate_passed',
++            'full_model_qualified','new_speedup_claim','automatic_successor_launch')):
++        raise RuntimeError('CPU result cannot promote device/model/performance status')
++
+--- /dev/null
++++ lfm3_nki05_device_oracle_v1.py
+@@ -0,0 +1,10 @@
++"""Original package Torch sequential oracle, imported only in admitted device leaves."""
++
++
++def store_slots(cache,updates,slots):
++    import torch
++    indices=torch.arange(cache.shape[0],device=cache.device)
++    for row in range(updates.shape[0]):
++        selected=indices==slots[row]
++        cache=torch.where(selected.reshape((-1,)+(1,)*(cache.ndim-1)),updates[row:row+1],cache)
++    return cache
+--- lfm3_batch_slots_bits_protocol_v4.py
++++ lfm3_nki05_device_matrix_v1.py
+@@ -1,57 +1,13 @@
+-"""Prerequisite correctness protocol for larger LFM batches; stdlib only.
++"""Exact original pure matrices; bounded IO is supplied by an admitted context.
+ 
+-This does not qualify an eight/sixteen-row model or measure throughput.
+-The selected four-row model and every original acceptance gate stay intact.
++Generated as ordinary reviewed source during preparation, never dynamically
++extracted/re-written at runtime. Original 2068 CPU cases are retained for count
++comparison only; this module never runs the simulator.
+ """
+-import hashlib
+-import json
+-import os
+ from pathlib import Path
+-import subprocess
+ 
+-ROOT = Path(__file__).resolve().parent
+-DEST = ROOT / 'lfm3-batch-slots-bitcopy-v4'
+-QUEUE = 'trn1-lfm3-batch-slots-bitcopy-v4-queue'
+-PYTHON = '/home/ubuntu/venvs/vllm_neuron/bin/python'
+-PHASES = ('regression_cpu', 'extended_cpu', 'regression_device', 'regression_alias',
+-          'extended_device', 'extended_alias')
+-UNITS = {x: 'trn1-latest-verify-lfm3-batch-slots-bits-v4-' + x.replace('_', '-') for x in PHASES}
+-KERNEL = ROOT / 'slot_cache_nki_capacity16_bits_v4.py'
+-WRAPPER = ROOT / 'slot_cache_nki_capacity16_bits_torch_v4.py'
+-REGRESSION = {x: ROOT / ('lfm3_batch_slots_bits_' + x + '_v4.py')
+-              for x in ('regression_cpu', 'regression_device', 'regression_alias')}
+ WIDTHS = (128, 256, 384, 7168, 16256, 16384, 16512, 32768, 65536,
+           131072, 262144, 524288, 2097152)
+-
+-
+-def read(path):
+-    path = Path(path)
+-    assert path.stat().st_size < 4 * 1024 ** 2, path
+-    return json.loads(path.read_text())
+-
+-
+-def save(path, value):
+-    path = Path(path)
+-    temp = path.with_suffix(path.suffix + '.tmp')
+-    temp.write_text(json.dumps(value, indent=2, ensure_ascii=False, allow_nan=False) + '\n')
+-    temp.replace(path)
+-
+-
+-def sha(path):
+-    value = hashlib.sha256()
+-    with Path(path).open('rb') as stream:
+-        for block in iter(lambda: stream.read(1024 ** 2), b''):
+-            value.update(block)
+-    return value.hexdigest()
+-
+-
+-def file_identity(path):
+-    s = Path(path).stat()
+-    return [s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns]
+-
+-
+-def digest_object(value):
+-    return hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+ 
+ 
+ def mappings(capacity, rows, exhaustive_winners=False):
+@@ -129,92 +85,22 @@
+             [capacity - 1] * capacity, list(range(capacity))]
+ 
+ 
+-def verify(large=False, phase=None):
+-    assert __debug__
+-    plan = read(DEST / 'plan.json')
+-    for name, expected in plan['source_sha256'].items():
+-        assert Path(name).stat().st_size < 4 * 1024 ** 2
+-        assert Path(name).suffix not in ('.so', '.pt', '.parquet', '.safetensors')
+-        assert sha(name) == expected, name
+-    assert set(plan['large_sha256']) == set(plan['large_file_identities'])
+-    for name, expected in plan['large_file_identities'].items():
+-        assert file_identity(name) == expected, name
+-    if large:
+-        from run_nanbeige42_stride_recovery_queue import running_heavy_units
+-        assert phase in PHASES
+-        assert running_heavy_units() == [UNITS[phase] + '.service']
+-        for name, expected in plan['large_sha256'].items():
+-            assert sha(name) == expected and file_identity(name) == plan['large_file_identities'][name], name
+-    assert plan['cpu_protocol_sha256'] == digest_object(cpu_cases())
+-    assert plan['device_specs'] == device_specs() and plan['alias_specs'] == alias_specs()
+-    return plan
+ 
++class BoundMatrix:
++    mappings=staticmethod(mappings)
++    cpu_cases=staticmethod(cpu_cases)
++    device_specs=staticmethod(device_specs)
++    alias_specs=staticmethod(alias_specs)
++    alias_mappings=staticmethod(alias_mappings)
+ 
+-def guard(phase, child=False):
+-    """Only the frozen systemd owner or its same-cgroup descendants may execute."""
+-    from run_nanbeige42_stride_recovery_queue import running_heavy_units
+-    assert __debug__ and phase in (*PHASES, 'queue')
+-    unit = QUEUE if phase == 'queue' else UNITS[phase]
+-    owner = int(subprocess.check_output(['systemctl', '--user', 'show', unit,
+-        '-p', 'MainPID', '--value'], text=True).strip() or 0)
+-    assert owner > 0
+-    assert Path('/proc/self/cgroup').read_text().rstrip().endswith('/' + unit + '.service')
+-    if child:
+-        pid = os.getpid()
+-        for _ in range(8):
+-            if pid == owner:
+-                break
+-            stat = Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()
+-            pid = int(stat[1])
+-        assert pid == owner
+-    else:
+-        assert owner == os.getpid()
+-        script = 'run_lfm3_batch_slots_bits_queue_v4.py' if phase == 'queue' else 'run_lfm3_batch_slots_bits_worker_v4.py'
+-        suffix = [] if phase == 'queue' else [phase]
+-        argv = [x.decode() for x in Path('/proc/self/cmdline').read_bytes().split(b'\0') if x]
+-        i = argv.index(str(ROOT / script))
+-        assert argv[i:] == [str(ROOT / script), *suffix]
+-    if phase != 'queue':
+-        assert running_heavy_units() == [unit + '.service']
++    def __init__(self,context,phase):
++        self.context,self.phase=context,phase
++        self.DEST=Path(context.paths(phase)[1])
+ 
++    def save(self,path,value):
++        self.context.require_phase(self.phase)
++        self.context.save(path,value,self.phase)
+ 
+-def check_phase(phase, result):
+-    assert phase in PHASES and result['complete'] and result['passed']
+-    if phase == 'regression_cpu':
+-        assert result['exhaustive_cases'] == 1560 and len(result['extra_cases']) == 88
+-        assert all(x['passed'] for x in result['extra_cases'])
+-    elif phase in ('regression_device', 'regression_alias'):
+-        graphs, checks = (9, 43) if phase == 'regression_device' else (12, 60)
+-        assert len(result['graphs']) == graphs and sum(len(x['checks']) for x in result['graphs']) == checks
+-        for graph in result['graphs']:
+-            for row in graph['checks']:
+-                keys = ('bitwise_equal', 'cache_input_unchanged', 'updates_input_unchanged') if phase == 'regression_device' else (
+-                    'attention_finite', 'cache_k_bitwise', 'cache_v_bitwise', 'input_k_bitwise', 'input_v_bitwise')
+-                assert all(row[key] for key in keys)
+-    elif phase == 'extended_cpu':
+-        assert result['cases'] == len(cpu_cases())
+-        assert result['protocol_sha256'] == digest_object(cpu_cases())
+-        expected = list(range(len(cpu_cases())))
+-        assert [i for row in result['batches'] for i in range(row['start'], row['stop'])] == expected
+-        assert all(row['passed'] for row in result['batches'])
+-    else:
+-        specs = device_specs() if phase == 'extended_device' else alias_specs()
+-        assert [x['spec'] for x in result['graphs']] == specs
+-        assert all(x['passed'] for x in result['graphs'])
+-        expected = [len(mappings(x['capacity'], x['rows'])) if phase == 'extended_device'
+-                    else len(alias_mappings(x['capacity'])) for x in specs]
+-        assert [x['checks'] for x in result['graphs']] == expected
+-    assert not result.get('full_model_qualified', False) and not result.get('speedup_claim', False)
+-
+-
+-def check_final(result, plan):
+-    assert result['complete'] and result['passed'] and result['phases'] == list(PHASES)
+-    assert result['plan_sha256'] == sha(DEST / 'plan.json')
+-    assert len(result['reports']) == len(PHASES)
+-    for phase, row in zip(PHASES, result['reports']):
+-        path = DEST / phase / 'validation.json'
+-        assert row['phase'] == phase and row['path'] == str(path) and row['sha256'] == sha(path)
+-        check_phase(phase, read(path))
+-    assert result['source_sha256'] == plan['source_sha256']
+-    assert result['full_model_qualified'] is False and result['speedup_claim'] is False
+-    assert result['optimization_selected'] is False
++    def sha(self,path):
++        self.context.require_phase(self.phase)
++        return self.context.hash_artifact(path,self.phase)
+--- probe_slot_cache_nki_predicated.py
++++ lfm3_nki05_raw_device_leaf_v1.py
+@@ -1,59 +1,37 @@
+-"""CPU/device checks of exact bit patterns, including every BF16 storage value."""
+-import argparse
+-import hashlib
++"""Complete original raw device matrix with explicit NKI0.5 context; no CLI."""
+ import json
+ import sys
+-from pathlib import Path
++from lfm3_nki05_device_context_v1 import require_context
+ 
+-ROOT = Path(__file__).resolve().parent
+-DEST = ROOT / 'slot-cache-nki-predicated-probe'
+ MAPPINGS = [[0, 1, 2, 3], [3, 1, 0, 2], [3, -1, -1, -1],
+             [-1, -1, -1, -1], [2, 2, 0, 3], [4, 0, -1, 2],
+             [0, 9, 0, 0], [-9, -9, -9, -9], [4, 5, 6, 7]]
+ 
+ 
+-def main():
+-    parser = argparse.ArgumentParser()
+-    parser.add_argument('mode', choices=('cpu', 'device'))
+-    mode = parser.parse_args().mode
++def run(context):
++    phase='raw_device'
++    ROOT,DEST=require_context(context,phase)
++    mode='device'
++    plan={'source_sha256':context.sources()}
+     import numpy as np
+     import ml_dtypes
+-    plan = json.loads((DEST / 'plan.json').read_text())
+-    for name, digest in plan['source_sha256'].items():
+-        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name
+-    if mode == 'cpu':
+-        import neuronxcc.nki as nki
+-        from slot_cache_nki_predicated import slot_cache_gather_predicated
+-    else:
+-        proof = json.loads((DEST / 'simulator-raw-bit-diagnostic.json').read_text())
+-        assert proof['complete'] and len(proof['rows']) == 16
+-        controls = [row for row in proof['rows'] if row['input'] == 'canonical' or row['dtype'] == 'float32']
+-        assert len(controls) == 12 and all(row['mismatched_elements'] == 0 for row in controls)
+-        assert proof['source_sha256']['slot_cache_nki_predicated.py'] == plan['source_sha256']['slot_cache_nki_predicated.py']
+-        import torch
+-        import torch_neuronx
+-        from slot_cache_nki_predicated_torch import store_slots_nki_predicated
+-        torch.set_num_threads(1)
++    import torch
++    import torch_neuronx
++    store_slots_nki_predicated=context.writer(phase)
++    torch.set_num_threads(1)
+ 
+-        class Write(torch.nn.Module):
+-            def forward(self, cache, updates, slots):
+-                return store_slots_nki_predicated(cache, updates, slots)
++    class Write(torch.nn.Module):
++        def forward(self,cache,updates,slots):
++            return store_slots_nki_predicated(cache,updates,slots)
+ 
+     report = {'complete': False, 'passed': False, 'mode': mode, 'checks': [], 'graphs': [],
+               'source_sha256': plan['source_sha256'],
+-              'scope': 'Four shape/dtype cases, 36 mappings. Width65536 includes every uint16 storage '
+-                       'word after explicit special-value injection. BF16/FP32 raw storage, '
+-                       'signed zeros, subnormals, NaN payloads, infinities. Device raw-bit comparisons remain strict. '
+-                       'CPU preflight uses 12 passing canonical/FP32 controls because pure DMA identity simulation '
+-                       'also canonicalizes BF16 NaN payloads; original raw CPU failure is retained. '
+-                       'No alias/full-model/speed claim; complete1648 CPU protocol remains required.'}
++              'scope': 'Original four actual device graphs and 36 strict raw-bit mappings. Every BF16 word; no simulator writeback in this device path. Complete 3716 CPU gates are separate. No alias/model/speed claim.'}
+     output = DEST / (mode + '.json')
+     assert not output.exists()
+ 
+     def save():
+-        temporary = output.with_suffix('.json.tmp')
+-        temporary.write_text(json.dumps(report, indent=2))
+-        temporary.replace(output)
++        context.save(output,report,phase)
+ 
+     try:
+         for dtype_name in ('bfloat16', 'float32'):
+@@ -73,42 +51,36 @@
+                     assert np.unique(cache.view(np.uint16)).size == 65536
+                     assert np.unique(updates.view(np.uint16)).size == 65536
+                 before_cache, before_updates = cache.tobytes(), updates.tobytes()
+-                if mode == 'device':
+-                    tdtype = torch.bfloat16 if itemsize == 2 else torch.float32
+-                    tc = torch.from_numpy(cache.view(np.uint16).copy()).view(tdtype)
+-                    tu = torch.from_numpy(updates.view(np.uint16).copy()).view(tdtype)
+-                    directory = DEST / f'{dtype_name}-{width}'
+-                    assert not directory.exists()
+-                    directory.mkdir()
+-                    compiled = torch_neuronx.trace(Write().eval(), (tc, tu, torch.arange(4)),
+-                        compiler_workdir=str(directory),
+-                        compiler_args=['--target=trn1', '--auto-cast=none', '-O2'])
+-                    artifact = directory / 'model.pt'
+-                    compiled.save(str(artifact))
+-                    report['graphs'].append({'dtype': dtype_name, 'width': width,
+-                        'artifact_sha256': hashlib.sha256(artifact.read_bytes()).hexdigest()})
++                tdtype = torch.bfloat16 if itemsize == 2 else torch.float32
++                tc = torch.from_numpy(cache.view(np.uint16).copy()).view(tdtype)
++                tu = torch.from_numpy(updates.view(np.uint16).copy()).view(tdtype)
++                directory = DEST / f'{dtype_name}-{width}'
++                assert not directory.exists()
++                directory.mkdir()
++                compiled = torch_neuronx.trace(Write().eval(), (tc, tu, torch.arange(4)),
++                    compiler_workdir=str(directory),
++                    compiler_args=['--target=trn1', '--auto-cast=none', '-O2'])
++                artifact = directory / 'model.pt'
++                compiled.save(str(artifact))
++                artifact_identity=context.artifact(artifact,phase,dict(dtype=dtype_name,shape=[4,width],rows=4,variant='candidate'))
++                report['graphs'].append({'dtype': dtype_name, 'width': width,
++                    'artifact_sha256': context.hash_artifact(artifact,phase), 'artifact_identity':artifact_identity})
+                 for mapping in MAPPINGS:
+                     expected = cache.copy()
+                     for row, slot in enumerate(mapping):
+                         if 0 <= slot < 4:
+                             expected[slot] = updates[row]
+-                    if mode == 'cpu':
+-                        actual = nki.simulate_kernel(slot_cache_gather_predicated, cache, updates, np.asarray(mapping, dtype=np.int32))
+-                        assert actual.shape == cache.shape and actual.dtype == cache.dtype
+-                        actual_bytes = actual.tobytes()
+-                        unchanged = cache.tobytes() == before_cache and updates.tobytes() == before_updates
+-                    else:
+-                        actual = compiled(tc, tu, torch.tensor(mapping))
+-                        assert actual.shape == tc.shape and actual.dtype == tc.dtype
+-                        actual_bytes = actual.contiguous().view(torch.uint8).numpy().tobytes()
+-                        unchanged = tc.view(torch.uint8).numpy().tobytes() == before_cache and tu.view(torch.uint8).numpy().tobytes() == before_updates
++                    actual = compiled(tc, tu, torch.tensor(mapping))
++                    assert actual.shape == tc.shape and actual.dtype == tc.dtype
++                    actual_bytes = actual.contiguous().view(torch.uint8).numpy().tobytes()
++                    unchanged = tc.view(torch.uint8).numpy().tobytes() == before_cache and tu.view(torch.uint8).numpy().tobytes() == before_updates
+                     row = {'dtype': dtype_name, 'width': width, 'slots': mapping,
+                            'bitwise_equal': actual_bytes == expected.tobytes(), 'inputs_unchanged': unchanged}
+                     report['checks'].append(row)
+                     save()
+                     assert row['bitwise_equal'] and unchanged, row
+-                if mode == 'device':
+-                    del compiled
++                del compiled
++        assert len(report['graphs'])==4 and len(report['checks'])==36
+         report.update(complete=True, passed=True, torch_imported='torch' in sys.modules)
+     except Exception as exc:
+         report['error'] = repr(exc)
+@@ -116,7 +88,3 @@
+     finally:
+         save()
+         print(json.dumps({k: v for k, v in report.items() if k not in ('checks', 'source_sha256')}), flush=True)
+-
+-
+-if __name__ == '__main__':
+-    main()
+--- lfm3_package_primitive_device_v2.py
++++ lfm3_nki05_regression_device_leaf_v1.py
+@@ -4,36 +4,31 @@
+ import time
+ from pathlib import Path
+ 
+-ROOT = Path(__file__).resolve().parent
+-DEST = Path('/mnt/nvme/lfm3-package-paired-full-v2/primitive-device')
++from lfm3_nki05_device_context_v1 import require_context
+ 
+ 
+-def main():
+-    proof = json.loads((ROOT / 'lfm3-package-paired-full-v2/primitive-cpu/validation.json').read_text())
+-    assert proof['complete'] and proof['passed'] and proof['exhaustive_cases'] == 1560
+-    assert len(proof['extra_cases']) == 88 and all(row['passed'] for row in proof['extra_cases'])
+-    for name, digest in proof['source_sha256'].items():
+-        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name
++def run(context):
++    phase='regression_device'
++    ROOT,DEST=require_context(context,phase)
++    proof=context.prerequisite('raw_device')
++    assert proof['complete'] and proof['passed'] and len(proof['graphs'])==4 and len(proof['checks'])==36
+     import torch
+     import torch_neuronx
+-    from vllm_neuron.models.lfm3.nki_write_torch import store_slots_nki_predicated
+-    from vllm_neuron.models.lfm3.helpers import store_slots
++    store_slots_nki_predicated=context.writer(phase)
++    from lfm3_nki05_device_oracle_v1 import store_slots
+     torch.set_num_threads(1)
+     torch.manual_seed(20261031)
+     output = DEST / 'validation.json'
+     assert not output.exists()
+     report = {'complete': False, 'passed': False, 'graphs': [],
+-              'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+-                  for name in [Path(__file__).name, '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/nki_write_torch.py', '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/nki_write.py', '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/helpers.py']},
++              'source_sha256':context.sources(),
+               'scope': 'Standalone actual Trn1 NKI primitive graphs. LFM five KV lengths, convolution and one-row '
+                        'prefill; RNJ4096 KV and Nemotron FP32 SSM widths. Raw bytes against sequential Torch '
+                        'oracle, including signed zero/Inf/NaN and unchanged input buffers. '
+                        'No alias-state, full-model, quality or throughput claim.'}
+ 
+     def save():
+-        temporary = output.with_suffix('.json.tmp')
+-        temporary.write_text(json.dumps(report, indent=2))
+-        temporary.replace(output)
++        context.save(output,report,phase)
+ 
+     def same(a, b):
+         return torch.equal(a.contiguous().view(torch.uint8), b.contiguous().view(torch.uint8))
+@@ -66,9 +61,10 @@
+                     compiler_workdir=str(directory), compiler_args=['--target=trn1', '--auto-cast=none', '-O2'])
+                 artifact = directory / 'model.pt'
+                 compiled.save(str(artifact))
++                artifact_identity=context.artifact(artifact,phase,dict(name=name,shape=list(shape),rows=rows,dtype=str(dtype),variant='candidate'))
+                 row = {'name': name, 'shape': list(shape), 'dtype': str(dtype),
+                        'compile_seconds': time.monotonic() - started,
+-                       'artifact_sha256': hashlib.sha256(artifact.read_bytes()).hexdigest(), 'checks': []}
++                       'artifact_sha256': context.hash_artifact(artifact,phase), 'artifact_identity':artifact_identity, 'checks': []}
+                 report['graphs'].append(row)
+                 for mapping in mappings if rows == 4 else [[0], [3], [-1]]:
+                     slots = torch.tensor(mapping)
+@@ -89,9 +85,3 @@
+         raise
+     finally:
+         save()
+-
+-
+-if __name__ == '__main__':
+-    from lfm3_package_paired_protocol_v2 import primitive_admission
+-    primitive_admission('primitive-device')
+-    main()
+--- lfm3_package_primitive_alias_v2.py
++++ lfm3_nki05_regression_alias_leaf_v1.py
+@@ -9,22 +9,21 @@
+ import time
+ from pathlib import Path
+ 
+-ROOT = Path(__file__).resolve().parent
+-DEST = Path('/mnt/nvme/lfm3-package-paired-full-v2/primitive-alias')
++from lfm3_nki05_device_context_v1 import require_context
+ 
+ 
+-def main():
+-    proof = json.loads((ROOT / 'lfm3-package-paired-full-v2/primitive-device/validation.json').read_text())
+-    assert proof['complete'] and proof['passed'] and len(proof['graphs']) == 9
+-    for name, digest in proof['source_sha256'].items():
+-        assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest, name
++def run(context):
++    phase='regression_alias'
++    ROOT,DEST=require_context(context,phase)
++    proof=context.prerequisite('regression_device')
++    assert proof['complete'] and proof['passed'] and len(proof['graphs'])==9
++    assert sum(len(row['checks']) for row in proof['graphs'])==43
+     import torch
+     import torch_neuronx
+-    from vllm_neuron.models.lfm3.nki_write_torch import store_slots_nki_predicated
+-    from vllm_neuron.models.lfm3.helpers import store_slots
++    store_slots_nki_predicated=context.writer(phase)
++    from lfm3_nki05_device_oracle_v1 import store_slots
+     torch.set_num_threads(1)
+     torch.manual_seed(20261031)
+-    DEST.mkdir(exist_ok=True)
+     output = DEST / 'validation.json'
+     assert not output.exists(), 'Preserve previous probe results'
+     report = {'complete': False, 'graphs': [],
+@@ -34,7 +33,7 @@
+                        'qualification or throughput claim.'}
+ 
+     def save():
+-        output.write_text(json.dumps(report, indent=2, allow_nan=False))
++        context.save(output,report,phase)
+ 
+     def same(a, b):
+         return torch.equal(a.contiguous().view(torch.uint8), b.contiguous().view(torch.uint8))
+@@ -83,6 +82,7 @@
+                             '--model-type=transformer', '-O2', '--lnc=1',
+                             "--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=1 --vectorize-strided-dma"])
+                     compiled.save(str(directory / 'model.pt'))
++                    artifact_identity=context.artifact(directory/'model.pt',phase,dict(variant=label,length=length,kv_heads=heads,shape=[4,heads,length,128],rows=4,dtype='bfloat16'))
+                     states = dict(compiled.states._parameters.items())
+                     k_names = [name for name, value in states.items() if same(value, initial_k)]
+                     v_names = [name for name, value in states.items() if same(value, initial_v)]
+@@ -90,7 +90,7 @@
+                     del states
+                     torch_neuronx.move_trace_to_device(compiled, 0)
+                     assert all(value.device.type == "privateuseone" for value in dict(compiled.states._parameters.items()).values())
+-                    row = {'variant': label, 'length': length, 'kv_heads': heads, 'compile_seconds': time.monotonic() - start, 'checks': []}
++                    row = {'variant': label, 'length': length, 'kv_heads': heads, 'artifact_identity':artifact_identity, 'compile_seconds': time.monotonic() - start, 'checks': []}
+                     report['graphs'].append(row)
+                     for step, sample in enumerate(samples):
+                         expected = eager(*sample)
+@@ -119,12 +119,5 @@
+         report['error'] = repr(exc)
+         raise
+     finally:
+-        report['source_sha256'] = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in
+-                                  [Path(__file__).name, '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/nki_write_torch.py', '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/nki_write.py', '/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/helpers.py']}
++        report['source_sha256'] = context.sources()
+         save()
+-
+-
+-if __name__ == '__main__':
+-    from lfm3_package_paired_protocol_v2 import primitive_admission
+-    primitive_admission('primitive-alias')
+-    main()
+--- lfm3_batch_slots_bits_extended_v4.py
++++ lfm3_nki05_extended_device_leaf_v2.py
+@@ -1,66 +1,9 @@
+-"""Actual simulator/device/alias tests; imported heavy libraries only in owned children."""
+-import argparse
++"""Full immutable successors of original extended device and alias scientific bodies."""
+ import gc
+ import hashlib
+-from pathlib import Path
+ import time
+-import lfm3_batch_slots_bits_protocol_v4 as p
+-
+-
+-def numpy_inputs(case):
+-    import numpy as np
+-    import ml_dtypes
+-    dtype = ml_dtypes.bfloat16 if case['dtype'] == 'bfloat16' else np.float32
+-    rng = np.random.default_rng(case['seed'])
+-    cache = rng.normal(size=(case['capacity'], case['width'])).astype(dtype)
+-    updates = rng.normal(size=(len(case['slots']), case['width'])).astype(dtype)
+-    patterns = ([0, 0x8000, 0x7f80, 0xff80, 0x7fc1, 0x7fff, 0xffc3, 1, 0x7f, 0x80, 0x3f80, 0xbf80]
+-                if case['dtype'] == 'bfloat16' else
+-                [0, 0x80000000, 0x7f800000, 0xff800000, 0x7fc00001, 0x7fffffff, 0xffc00003,
+-                 1, 0x7fffff, 0x800000, 0x3f800000, 0xbf800000])
+-    integer = np.uint16 if case['dtype'] == 'bfloat16' else np.uint32
+-    bits = np.asarray(patterns, dtype=integer)
+-    for i, row in enumerate(cache.view(integer)):
+-        row[:len(bits)] = np.roll(bits, i)
+-    for i, row in enumerate(updates.view(integer)):
+-        row[:len(bits)] = np.roll(bits[::-1], i)
+-    return cache, updates, np.asarray(case['slots'], dtype=np.int32)
+-
+-
+-def cpu(start, stop):
+-    import neuronxcc.nki as nki
+-    from slot_cache_nki_capacity16_bits_v4 import slot_cache_gather_predicated
+-    cases = p.cpu_cases()
+-    assert 0 <= start < stop <= len(cases) and stop - start <= 32
+-    path = p.DEST / 'extended_cpu' / f'{start:05d}-{stop:05d}.json'
+-    assert not path.exists()
+-    result = dict(complete=False, passed=False, start=start, stop=stop, checks=[])
+-    began = time.monotonic()
+-    try:
+-        for case in cases[start:stop]:
+-            cache, updates, slots = numpy_inputs(case)
+-            before = [hashlib.sha256(x.tobytes()).hexdigest() for x in (cache, updates, slots)]
+-            expected = cache.copy()
+-            for row, slot in enumerate(case['slots']):
+-                if 0 <= slot < case['capacity']:
+-                    expected[slot] = updates[row]
+-            actual = nki.simulate_kernel(slot_cache_gather_predicated, cache, updates, slots)
+-            equal = (actual.dtype == cache.dtype and actual.shape == cache.shape
+-                     and actual.tobytes() == expected.tobytes())
+-            unchanged = before == [hashlib.sha256(x.tobytes()).hexdigest() for x in (cache, updates, slots)]
+-            result['checks'].append(dict(id=case['id'], bitwise_equal=equal, inputs_unchanged=unchanged,
+-                actual_sha256=hashlib.sha256(actual.tobytes()).hexdigest(),
+-                expected_sha256=hashlib.sha256(expected.tobytes()).hexdigest(), input_sha256=before))
+-            p.save(path, result)
+-            assert equal and unchanged, case
+-            del cache, updates, slots, expected, actual
+-        result.update(complete=True, passed=True)
+-    except BaseException as error:
+-        result['error'] = repr(error)
+-        raise
+-    finally:
+-        result['seconds'] = time.monotonic() - began
+-        p.save(path, result)
++from lfm3_nki05_device_context_v1 import require_context
++from lfm3_nki05_device_matrix_v1 import BoundMatrix
+ 
+ 
+ def torch_same(a, b):
+@@ -74,16 +17,22 @@
+     return hashlib.sha256(value.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
+ 
+ 
+-def device(index):
++def device(context,index):
++    phase='extended_device'
++    require_context(context,phase)
++    proof=context.prerequisite('regression_alias')
++    assert proof['complete'] and proof['passed']
++    p=BoundMatrix(context,phase)
++    assert type(index) is int and 0<=index<len(p.device_specs())
+     import torch
+     import torch_neuronx
+-    from slot_cache_nki_capacity16_bits_torch_v4 import store_slots_nki_predicated
+-    from qwen35_text_port import store_slots
++    store_slots_nki_predicated=context.writer(phase)
++    from lfm3_nki05_device_oracle_v1 import store_slots
+     torch.set_num_threads(1)
+     torch.manual_seed(20261103 + index)
+     spec = p.device_specs()[index]
+     capacity, rows = spec['capacity'], spec['rows']
+-    directory = p.DEST / 'extended_device' / spec['name']
++    directory = p.DEST / spec['name']
+     directory.mkdir()
+     cache = torch.randn(spec['shape'], dtype=torch.bfloat16)
+     updates = torch.randn((rows, *spec['shape'][1:]), dtype=torch.bfloat16)
+@@ -106,6 +55,7 @@
+                 compiler_args=['--target=trn1', '--auto-cast=none', '-O2'])
+             artifact = directory / 'model.pt'
+             compiled.save(str(artifact))
++            result['artifact_identity']=context.artifact(artifact,phase,dict(spec,variant='candidate'))
+             result.update(compile_seconds=time.monotonic()-began, artifact_sha256=p.sha(artifact))
+             for mapping in p.mappings(capacity, rows):
+                 slots = torch.tensor(mapping)
+@@ -129,11 +79,17 @@
+         p.save(directory / 'result.json', result)
+ 
+ 
+-def alias(index):
++def alias(context,index):
++    phase='extended_alias'
++    require_context(context,phase)
++    proof=context.prerequisite('extended_device')
++    assert proof['complete'] and proof['passed']
++    p=BoundMatrix(context,phase)
++    assert type(index) is int and 0<=index<len(p.alias_specs())
+     import torch
+     import torch_neuronx
+-    from slot_cache_nki_capacity16_bits_torch_v4 import store_slots_nki_predicated
+-    from qwen35_text_port import store_slots
++    store_slots_nki_predicated=context.writer(phase)
++    from lfm3_nki05_device_oracle_v1 import store_slots
+     torch.set_num_threads(1)
+     spec = p.alias_specs()[index]
+     # A reference/candidate pair receives the same initial state and call tensors.
+@@ -141,7 +97,7 @@
+     capacity, length = spec['capacity'], spec['length']
+     writer = store_slots if spec['variant'] == 'reference' else store_slots_nki_predicated
+     conv = spec['kind'] == 'conv'
+-    directory = p.DEST / 'extended_alias' / spec['name']
++    directory = p.DEST / spec['name']
+     directory.mkdir()
+ 
+     class Attention(torch.nn.Module):
+@@ -202,6 +158,7 @@
+                     '--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=1 --vectorize-strided-dma'])
+             artifact = directory/'model.pt'
+             compiled.save(str(artifact))
++            result['artifact_identity']=context.artifact(artifact,phase,dict(spec,dtype='bfloat16',rows=capacity,shapes=[list(value.shape) for value in initial]))
+             result.update(compile_seconds=time.monotonic()-began, artifact_sha256=p.sha(artifact))
+             states = dict(compiled.states._parameters)
+             names = [[name for name,value in states.items() if torch_same(value,expected)] for expected in initial]
+@@ -241,22 +198,3 @@
+         result['seconds']=time.monotonic()-began
+         p.save(directory/'result.json',result)
+ 
+-
+-def main():
+-    parser=argparse.ArgumentParser()
+-    parser.add_argument('phase',choices=['extended_cpu','extended_device','extended_alias'])
+-    parser.add_argument('indexes',nargs='+',type=int)
+-    args=parser.parse_args()
+-    p.guard(args.phase,child=True)
+-    p.verify()
+-    if args.phase=='extended_cpu':
+-        assert len(args.indexes)==2
+-        cpu(*args.indexes)
+-    else:
+-        assert len(args.indexes)==1
+-        specs=p.device_specs() if args.phase=='extended_device' else p.alias_specs()
+-        assert 0<=args.indexes[0]<len(specs)
+-        (device if args.phase=='extended_device' else alias)(args.indexes[0])
+-
+-
+-if __name__=='__main__':main()
+--- /dev/null
++++ lfm3_nki05_device_supplements_v2.py
+@@ -0,0 +1,181 @@
++"""Additional real-device gates; no launch context or native work on import.
++
++FP32 persistent alias is separate from the old FP32 standalone SSM test.
++Wrapper controls exercise huge signed int64 selectors and production one-row
++original dispatch. These cases supplement, never replace, original matrices.
++"""
++import gc
++import time
++from lfm3_nki05_device_context_v1 import require_context
++from lfm3_nki05_typed_dispatch_v1 import make_writer
++from lfm3_nki05_device_oracle_v1 import store_slots
++from lfm3_nki05_extended_device_leaf_v2 import torch_same,tensor_sha
++from lfm3_typed_slot_writer_contract_v1 import bit_patterns
++
++
++def control_mappings(capacity,rows):
++    assert capacity in (4,8,16) and 1<=rows<=capacity
++    choices=[list(range(rows)),list(reversed(range(capacity)))[:rows],
++        [capacity-1]*rows,[-1]*rows]
++    for invalid in (-9,capacity,capacity+9,-(2**31),2**31-1,
++                    -(2**32),2**32,2**32+capacity-1,-(2**63),2**63-1):
++        choices.append([invalid]*rows)
++        if rows>1:
++            choices.extend([[invalid]+[capacity-1]*(rows-1),[0]*(rows-1)+[invalid]])
++    return [row for i,row in enumerate(choices) if row not in choices[:i]]
++
++
++def wrapper_specs():
++    return [dict(capacity=b,rows=rows,dtype=dtype,shape=[b,256],
++                 name=f'b{b}-r{rows}-{dtype}',variant='production_dispatch')
++            for b in (4,8,16) for rows in sorted({1,4,b})
++            for dtype in ('bfloat16','float32')]
++
++
++def fp32_alias_specs():
++    return [dict(capacity=b,rows=b,dtype='float32',shape=[b,64,80,128],
++                 name=f'b{b}-fp32-ssm-{variant}',variant=variant)
++            for b in (4,8,16) for variant in ('reference','candidate')]
++
++
++def raw_fixture(shape,dtype_name,reverse=False):
++    import torch
++    width=1
++    for size in shape[1:]:width*=size
++    words=list(bit_patterns(dtype_name))
++    if reverse:words=words[::-1]
++    raw=torch.tensor(words,dtype=torch.uint16 if dtype_name=='bfloat16' else torch.uint32)
++    raw=raw.repeat((width+len(words)-1)//len(words))[:width]
++    # Distinct row patterns are essential: permutations and duplicate winners
++    # would be invisible with identical payloads in every slot.
++    raw=torch.stack([raw.roll(row) for row in range(shape[0])])
++    return raw.view(torch.bfloat16 if dtype_name=='bfloat16' else torch.float32).reshape(shape)
++
++
++def wrapper_controls(context,index):
++    phase='wrapper_controls'
++    ROOT,DEST=require_context(context,phase)
++    proof=context.prerequisite('fp32_alias')
++    assert proof['complete'] and proof['passed']
++    specs=wrapper_specs()
++    assert type(index) is int and 0<=index<len(specs)
++    spec=specs[index]
++    import torch
++    import torch_neuronx
++    torch.set_num_threads(1)
++    b,rows=spec['capacity'],spec['rows']
++    typed=context.writer(phase)
++    branches=dict(original=0,typed=0)
++    def original(cache,updates,slots):
++        branches['original']+=1
++        return store_slots(cache,updates,slots)
++    def candidate(cache,updates,slots):
++        branches['typed']+=1
++        return typed(cache,updates,slots)
++    write=make_writer(b,original,candidate)
++    class Write(torch.nn.Module):
++        def forward(self,cache,updates,slots):return write(cache,updates,slots)
++    cache=raw_fixture(spec['shape'],spec['dtype'])
++    updates=raw_fixture([rows,256],spec['dtype'],True)
++    initial=[tensor_sha(x) for x in (cache,updates)]
++    directory=DEST/spec['name'];directory.mkdir()
++    result=dict(complete=False,passed=False,spec=spec,checks=[],
++                full_model_qualified=False,new_speedup_claim=False)
++    started=time.monotonic()
++    try:
++        with torch.inference_mode():
++            compiled=torch_neuronx.trace(Write().eval(),(cache,updates,torch.arange(rows,dtype=torch.int64)),
++                compiler_workdir=str(directory/'compiler'),
++                compiler_args=['--target=trn1','--auto-cast=none','-O2'])
++            expected_branch='original' if rows==1 else 'typed'
++            assert branches[expected_branch]>0 and branches['typed' if rows==1 else 'original']==0
++            artifact=directory/'model.pt';compiled.save(str(artifact))
++            result['artifact_identity']=context.artifact(artifact,phase,spec)
++            result['trace_dispatch_counts']=dict(branches)
++            for mapping in control_mappings(b,rows):
++                slots=torch.tensor(mapping,dtype=torch.int64)
++                expected=store_slots(cache,updates,slots)
++                actual=compiled(cache,updates,slots)
++                check=dict(slots=mapping,bitwise_equal=torch_same(actual,expected),
++                    dtype_shape_preserved=actual.dtype==cache.dtype and actual.shape==cache.shape,
++                    inputs_unchanged=initial==[tensor_sha(x) for x in (cache,updates)] and slots.tolist()==mapping)
++                result['checks'].append(check);context.save(directory/'result.json',result,phase)
++                assert all(check[k] for k in ('bitwise_equal','dtype_shape_preserved','inputs_unchanged'))
++            result.update(complete=True,passed=True)
++            del compiled;gc.collect()
++    except BaseException as error:
++        result['error']=repr(error);raise
++    finally:
++        result['seconds']=time.monotonic()-started
++        context.save(directory/'result.json',result,phase)
++
++
++def fp32_alias(context,index):
++    phase='fp32_alias'
++    ROOT,DEST=require_context(context,phase)
++    proof=context.prerequisite('extended_alias')
++    assert proof['complete'] and proof['passed']
++    specs=fp32_alias_specs()
++    assert type(index) is int and 0<=index<len(specs)
++    spec=specs[index]
++    import torch
++    import torch_neuronx
++    torch.set_num_threads(1)
++    typed=context.writer(phase)
++    writer=store_slots if spec['variant']=='reference' else typed
++    class State(torch.nn.Module):
++        def __init__(self,state,write):
++            super().__init__()
++            self.cache=torch.nn.Parameter(state.clone(),requires_grad=False)
++            self.write=write
++        def forward(self,updates,slots):
++            return self.cache.clone(),self.write(self.cache,updates,slots)
++    b=spec['capacity']
++    initial=raw_fixture(spec['shape'],'float32')
++    updates=raw_fixture(spec['shape'],'float32',True)
++    source=State(initial,writer).eval();eager=State(initial,store_slots).eval()
++    # Full refill, permutation, inactive, duplicate last-writer, out-of-range,
++    # huge int64 normalization and reuse; actual state persists between calls.
++    mappings=control_mappings(b,b)+[list(range(b)),[-1]*b,list(reversed(range(b)))]
++    directory=DEST/spec['name'];directory.mkdir()
++    result=dict(complete=False,passed=False,spec=spec,checks=[],
++                full_model_qualified=False,new_speedup_claim=False)
++    started=time.monotonic()
++    try:
++        with torch.inference_mode():
++            compiled=torch_neuronx.trace(source,(updates,torch.arange(b,dtype=torch.int64)),
++                input_output_aliases={source.cache:1},compiler_workdir=str(directory/'compiler'),
++                compiler_args=['--target=trn1','--auto-cast=none','--model-type=transformer',
++                    '-O2','--lnc=1',
++                    '--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=1 --vectorize-strided-dma'])
++            artifact=directory/'model.pt';compiled.save(str(artifact))
++            result['artifact_identity']=context.artifact(artifact,phase,spec)
++            names=[name for name,value in compiled.states._parameters.items() if torch_same(value,initial)]
++            assert len(names)==1
++            torch_neuronx.move_trace_to_device(compiled,0)
++            assert all(value.device.type=='privateuseone' for value in compiled.states._parameters.values())
++            bindings={name:id(value) for name,value in compiled.states._parameters.items()}
++            for step,mapping in enumerate(mappings):
++                # Vary writes after refill to make lost state and reuse observable.
++                value=updates if step%2==0 else initial
++                slots=torch.tensor(mapping,dtype=torch.int64)
++                before=[tensor_sha(x) for x in (value,slots)]
++                expected=eager(value,slots)
++                actual=tuple(x.detach().cpu().clone() for x in compiled(value,slots))
++                states=dict(compiled.states._parameters)
++                check=dict(step=step,slots=mapping,prior_state_bitwise=torch_same(actual[0],expected[0]),
++                    cache_output_bitwise=torch_same(actual[1],expected[1]),
++                    persistent_state_bitwise=torch_same(states[names[0]],expected[1]),
++                    bindings_unchanged={name:id(x) for name,x in states.items()}==bindings,
++                    inputs_unchanged=before==[tensor_sha(x) for x in (value,slots)])
++                result['checks'].append(check);context.save(directory/'result.json',result,phase)
++                assert all(check[k] for k in ('prior_state_bitwise','cache_output_bitwise',
++                    'persistent_state_bitwise','bindings_unchanged','inputs_unchanged'))
++                eager.cache.copy_(expected[1])
++            result.update(complete=True,passed=True)
++            del states,compiled;gc.collect()
++    except BaseException as error:
++        result['error']=repr(error);raise
++    finally:
++        result['seconds']=time.monotonic()-started
++        context.save(directory/'result.json',result,phase)
+--- /dev/null
++++ check_lfm3_nki05_device_binding_source_v3.py
+@@ -0,0 +1,357 @@
++"""Source/mock verification only. Never imports native libraries or runs devices."""
++import ast
++import copy
++import hashlib
++import importlib
++import importlib.abc
++import json
++import math
++import os
++from pathlib import Path
++import resource
++import sys
++import types
++import unittest
++from unittest import mock
++
++ROOT=Path(__file__).resolve().parent
++BLOCKED=('torch','torch_neuronx','torch_xla','numpy','ml_dtypes','nki','neuronxcc','ctypes','vllm','vllm_neuron')
++class NativeBlocker(importlib.abc.MetaPathFinder):
++    def find_spec(self,fullname,path=None,target=None):
++        if fullname.split('.')[0] in BLOCKED:
++            raise AssertionError('Native import forbidden in source/mock checks: '+fullname)
++BLOCKER=NativeBlocker()
++sys.meta_path.insert(0,BLOCKER)
++NAMES=['slot_cache_nki05_typed_jit_v1','slot_cache_nki05_typed_torch_v1',
++    'lfm3_nki05_typed_dispatch_v1','lfm3_nki05_device_context_v1','lfm3_nki05_device_oracle_v1',
++    'lfm3_nki05_device_matrix_v1','lfm3_nki05_raw_device_leaf_v1',
++    'lfm3_nki05_regression_device_leaf_v1','lfm3_nki05_regression_alias_leaf_v1',
++    'lfm3_nki05_extended_device_leaf_v2','lfm3_nki05_device_supplements_v2']
++MODULES={name:importlib.import_module(name) for name in NAMES}
++jit=MODULES[NAMES[0]];wrapper=MODULES[NAMES[1]];dispatch=MODULES[NAMES[2]]
++ctx=MODULES[NAMES[3]];matrix=MODULES[NAMES[5]];raw=MODULES[NAMES[6]]
++regdev=MODULES[NAMES[7]];regalias=MODULES[NAMES[8]];extended=MODULES[NAMES[9]];supp=MODULES[NAMES[10]]
++
++
++def tree(name):return ast.parse((ROOT/name).read_text())
++def function(name,fn):return next(x for x in tree(name).body if isinstance(x,ast.FunctionDef) and x.name==fn)
++def dump(node):return ast.dump(node,include_attributes=False)
++def subkey(node,key):return isinstance(node,ast.Subscript) and isinstance(node.slice,ast.Constant) and node.slice.value==key
++
++def cpu_proof():
++    return dict(schema='lfm3_nki05_full_cpu_result_v1',complete=True,passed=True,
++        stage_counts={**{k:dict(cases=3716,batches=291) for k in ('original_fixture','new_fixture','candidate')},'controls':dict(cases=1,batches=1)},
++        cpu_full_gate_passed=True,simulator_writeback_workaround_required=True,original_simulator_failure_preserved=True,
++        device_behavior_proven=False,alias_gate_passed=False,full_model_qualified=False,new_speedup_claim=False,automatic_successor_launch=False)
++
++class FakeContext(ctx.DeviceContext):
++    def __init__(self,allow=True):self.allow=allow;self.saved=[];self.proof=cpu_proof();self.bad_receipt={}
++    def authorize(self,phase):return self.allow
++    def prerequisite(self,name):return self.proof
++    def paths(self,phase):return ROOT,Path('/source-only-mock-output')/phase
++    def sources(self):return {'immutable-mock-source.py':'a'*64}
++    def save(self,path,value,phase):self.saved.append((str(path),value,phase))
++    def hash_artifact(self,path,phase):return 'b'*64
++    def record_artifact(self,path,phase,case):
++        return dict(schema=ctx.ARTIFACT_SCHEMA,variant=ctx.VARIANT,software=dict(jit.DEVICE_SOFTWARE),
++            source_sha256=self.sources(),phase=phase,path=str(path),case=case,sha256='b'*64,**self.bad_receipt)
++
++class Tensor:
++    """Payload values are raw integer words; no floats, arithmetic or dtype views."""
++    def __init__(self,data,shape,dtype,device='cpu',contiguous=True,events=None):
++        self.data=list(data);self.shape=tuple(shape);self.dtype=dtype;self.device=device;self.ndim=len(self.shape)
++        self.contiguous=contiguous;self.events=[] if events is None else events
++        assert len(self.data)==math.prod(self.shape)
++    def is_contiguous(self):return self.contiguous
++    def reshape(self,*shape):
++        shape=tuple(shape[0]) if len(shape)==1 and isinstance(shape[0],(tuple,list)) else tuple(shape)
++        self.events.append(('reshape',self.dtype,shape))
++        return Tensor(self.data,shape,self.dtype,self.device,self.contiguous,self.events)
++    def __ge__(self,other):return Tensor([v>=other for v in self.data],self.shape,'bool',events=self.events)
++    def __lt__(self,other):return Tensor([v<other for v in self.data],self.shape,'bool',events=self.events)
++    def __and__(self,other):return Tensor([a and b for a,b in zip(self.data,other.data)],self.shape,'bool',events=self.events)
++    def to(self,dtype):
++        assert self.dtype in ('int32','int64') and dtype=='int32','Payload narrowing is forbidden'
++        self.events.append(('to',list(self.data),dtype))
++        return Tensor([((v+2**31)%2**32)-2**31 for v in self.data],self.shape,dtype,events=self.events)
++
++class FakeTorch:
++    bfloat16='bfloat16';float32='float32';int32='int32';int64='int64'
++    @staticmethod
++    def full_like(tensor,value):return Tensor([value]*len(tensor.data),tensor.shape,tensor.dtype,events=tensor.events)
++    @staticmethod
++    def where(valid,yes,no):
++        result=[a if chosen else b for chosen,a,b in zip(valid.data,yes.data,no.data)]
++        yes.events.append(('where',result))
++        return Tensor(result,yes.shape,yes.dtype,events=yes.events)
++
++class FakeKernel:
++    def __init__(self):self.calls=[]
++    def __call__(self,cache,updates,slots):
++        self.calls.append((cache,updates,slots));b,width=cache.shape;result=cache.data[:]
++        for row,slot in enumerate(slots.data):
++            if 0<=slot<b:result[slot*width:(slot+1)*width]=updates.data[row*width:(row+1)*width]
++        return Tensor(result,cache.shape,cache.dtype)
++
++def inputs(b=4,rows=4,dtype='bfloat16',slots=None,slot_dtype='int64'):
++    if slots is None:slots=list(range(rows))
++    # Raw exceptional words plus row marker; per-row payloads differ.
++    bits=(0,0x8000,1,0x7fc1,0x7fa1,0x7f80,0xff80,0x8001) if dtype=='bfloat16' else (0,0x80000000,1,0x7fc00001,0x7fa00001,0x7f800000,0xff800000,0x80000001)
++    c=Tensor([bits[i%len(bits)]^(row+1) for row in range(b) for i in range(256)],(b,2,128),dtype)
++    u=Tensor([bits[::-1][i%len(bits)]^(row+17) for row in range(rows) for i in range(256)],(rows,2,128),dtype)
++    s=Tensor(slots,(rows,),slot_dtype)
++    return c,u,s
++
++class ScienceNormalizer(ast.NodeTransformer):
++    """TEST ONLY: allow path/artifact wiring and selection of the original device branch."""
++    def visit_If(self,node):
++        if isinstance(node.test,ast.Compare) and dump(node.test.left)==dump(ast.Name(id='mode',ctx=ast.Load())):
++            value=ast.literal_eval(node.test.comparators[0])
++            chosen=node.body if value=='device' else node.orelse
++            output=[]
++            for stmt in chosen:
++                changed=self.visit(stmt)
++                output.extend(changed if isinstance(changed,list) else [changed] if changed else [])
++            return output
++        return self.generic_visit(node)
++    def visit_Assign(self,node):
++        if any(isinstance(t,ast.Name) and t.id=='artifact_identity' or subkey(t,'artifact_identity') or subkey(t,'source_sha256') for t in node.targets):return None
++        return self.generic_visit(node)
++    def visit_Dict(self,node):
++        pairs=[]
++        for key,value in zip(node.keys,node.values):
++            if isinstance(key,ast.Constant) and key.value=='artifact_identity':continue
++            if isinstance(key,ast.Constant) and key.value=='artifact_sha256':value=ast.Constant(value='ARTIFACT_SHA_WIRING')
++            pairs.append((key,value))
++        node.keys=[x for x,y in pairs];node.values=[y for x,y in pairs]
++        return self.generic_visit(node)
++    def visit_BinOp(self,node):
++        if isinstance(node.op,ast.Div) and isinstance(node.right,ast.Constant) and node.right.value in ('extended_device','extended_alias') and dump(node.left)==dump(ast.Attribute(value=ast.Name(id='p',ctx=ast.Load()),attr='DEST',ctx=ast.Load())):
++            return node.left
++        return self.generic_visit(node)
++
++def science(nodes):
++    return dump(ScienceNormalizer().visit(ast.Module(body=copy.deepcopy(nodes),type_ignores=[])))
++
++class FactoryTests(unittest.TestCase):
++    def test_real_api_shape(self):
++        fn=lambda:None;api=types.SimpleNamespace(jit=mock.Mock(return_value='JITTED'))
++        result=jit.wrap_device_kernel(fn,api,dict(NEURON_PLATFORM_TARGET_OVERRIDE='trn1',NEURON_LOGICAL_NC_CONFIG='1'))
++        self.assertEqual(result,'JITTED');api.jit.assert_called_once_with(fn)
++    def test_environment_rejections(self):
++        valid=dict(NEURON_PLATFORM_TARGET_OVERRIDE='trn1',NEURON_LOGICAL_NC_CONFIG='1',NKI_SIMULATOR='0')
++        for key,value in [('NEURON_PLATFORM_TARGET_OVERRIDE','trn2'),('NEURON_LOGICAL_NC_CONFIG','2'),('NKI_SIMULATOR','1')]:
++            with self.subTest(key=key),self.assertRaises(RuntimeError):jit.wrap_device_kernel(lambda:None,types.SimpleNamespace(jit=lambda f:f),dict(valid,**{key:value}))
++    def test_noncallable_rejected(self):
++        with self.assertRaises(RuntimeError):jit.wrap_device_kernel(None,None,{})
++    def test_admission_before_metadata_or_native(self):
++        with mock.patch.object(jit.metadata,'version',side_effect=AssertionError('metadata reached')):
++            for admit in (None,lambda:False,lambda:1):
++                with self.assertRaises(RuntimeError):jit.make_device_kernel(admit)
++    def test_exact_software_rejected_before_native(self):
++        with mock.patch.object(jit.metadata,'version',return_value='OLD'),self.assertRaises(RuntimeError):jit.make_device_kernel(lambda:True)
++    def test_factory_calls_observer_free_function_and_jit(self):
++        plain=lambda:None;kernel=importlib.import_module('slot_cache_nki05_typed_selector_v1')
++        api=types.SimpleNamespace(jit=mock.Mock(return_value='compiled-function'))
++        admission=mock.Mock(return_value=True)
++        with mock.patch.dict(sys.modules,{'nki':api}),mock.patch.object(kernel,'make_kernel',return_value=plain),mock.patch.object(jit.metadata,'version',side_effect=jit.DEVICE_SOFTWARE.__getitem__),mock.patch.dict(os.environ,dict(NEURON_PLATFORM_TARGET_OVERRIDE='trn1',NEURON_LOGICAL_NC_CONFIG='1',NKI_SIMULATOR='0')):
++            self.assertEqual(jit.make_device_kernel(admission),'compiled-function')
++        api.jit.assert_called_once_with(plain);self.assertEqual(admission.call_count,2)
++    def test_factory_rechecks_admission(self):
++        kernel=importlib.import_module('slot_cache_nki05_typed_selector_v1')
++        with mock.patch.dict(sys.modules,{'nki':types.SimpleNamespace(jit=lambda f:f)}),mock.patch.object(kernel,'make_kernel',return_value=lambda:None),mock.patch.object(jit.metadata,'version',side_effect=jit.DEVICE_SOFTWARE.__getitem__),mock.patch.dict(os.environ,dict(NEURON_PLATFORM_TARGET_OVERRIDE='trn1',NEURON_LOGICAL_NC_CONFIG='1',NKI_SIMULATOR='0')),self.assertRaises(RuntimeError):
++            jit.make_device_kernel(mock.Mock(side_effect=[True,False]))
++
++class WrapperTests(unittest.TestCase):
++    def test_all_supplemental_selectors_match_unbounded_integer_oracle(self):
++        for spec in supp.wrapper_specs():
++            b,rows,dtype=spec['capacity'],spec['rows'],spec['dtype']
++            for slots in supp.control_mappings(b,rows):
++                with self.subTest(b=b,rows=rows,dtype=dtype,slots=slots):
++                    c,u,s=inputs(b,rows,dtype,slots);kernel=FakeKernel();before=(c.data[:],u.data[:],s.data[:])
++                    actual=wrapper.apply_typed_writer(c,u,s,FakeTorch,kernel)
++                    expected=c.data[:]
++                    for row,slot in enumerate(slots):
++                        if 0<=slot<b:expected[slot*256:(slot+1)*256]=u.data[row*256:(row+1)*256]
++                    self.assertEqual(actual.data,expected);self.assertEqual(actual.shape,c.shape);self.assertEqual(actual.dtype,dtype)
++                    self.assertEqual((c.data,u.data,s.data),before)
++                    self.assertEqual(kernel.calls[0][2].data,[x if 0<=x<b else -1 for x in slots])
++                    self.assertTrue(all(x[0]=='reshape' for x in c.events+u.events))
++    def test_normalization_occurs_before_narrowing(self):
++        c,u,s=inputs(slots=[2**32,2**32+3,-2**32,-2**63]);kernel=FakeKernel()
++        wrapper.apply_typed_writer(c,u,s,FakeTorch,kernel)
++        self.assertEqual(s.events,[('where',[-1]*4),('to',[-1]*4,'int32')])
++    def test_int32_slots(self):
++        c,u,s=inputs(slot_dtype='int32');out=wrapper.apply_typed_writer(c,u,s,FakeTorch,FakeKernel());self.assertEqual(out.data,u.data)
++    def test_last_writer_duplicates(self):
++        c,u,s=inputs(slots=[2,2,-1,2]);out=wrapper.apply_typed_writer(c,u,s,FakeTorch,FakeKernel())
++        self.assertEqual(out.data[512:768],u.data[768:1024]);self.assertEqual(out.data[:512],c.data[:512])
++    def test_dtype_device_shape_contiguity_rejections(self):
++        mutations=[lambda c,u,s:setattr(c,'dtype','float16'),lambda c,u,s:setattr(u,'dtype','float32'),lambda c,u,s:setattr(s,'dtype','float32'),lambda c,u,s:setattr(s,'device','other'),lambda c,u,s:setattr(u,'contiguous',False),lambda c,u,s:setattr(s,'shape',(2,2)),lambda c,u,s:setattr(u,'shape',(4,1,256)),lambda c,u,s:setattr(c,'shape',(3,2,128))]
++        for mutation in mutations:
++            c,u,s=inputs();mutation(c,u,s)
++            with self.assertRaises(AssertionError):wrapper.apply_typed_writer(c,u,s,FakeTorch,FakeKernel())
++    def test_width_alignment_rejected(self):
++        c=Tensor([0]*4*129,(4,129),'float32');u=Tensor([1]*4*129,(4,129),'float32');s=Tensor(range(4),(4,),'int64')
++        with self.assertRaises(AssertionError):wrapper.apply_typed_writer(c,u,s,FakeTorch,FakeKernel())
++    def test_wrong_output_dtype_rejected(self):
++        c,u,s=inputs()
++        with self.assertRaises(AssertionError):wrapper.apply_typed_writer(c,u,s,FakeTorch,lambda a,b,c:Tensor(a.data,a.shape,'float32'))
++    def test_wrong_output_shape_rejected(self):
++        c,u,s=inputs()
++        with self.assertRaises(AssertionError):wrapper.apply_typed_writer(c,u,s,FakeTorch,lambda a,b,c:Tensor(a.data,(2,512),a.dtype))
++    def test_lazy_writer_admission_prevents_torch_import(self):
++        writer=wrapper.make_typed_writer(FakeKernel(),lambda:False)
++        with self.assertRaises(AssertionError):writer(*inputs())
++    def test_lazy_writer_rechecks_after(self):
++        writer=wrapper.make_typed_writer(FakeKernel(),mock.Mock(side_effect=[True,False]))
++        with mock.patch.dict(sys.modules,{'torch':FakeTorch}),self.assertRaises(AssertionError):writer(*inputs())
++    def test_production_dispatch_one_row_and_multiple(self):
++        for b in (4,8,16):
++            for rows in sorted({1,4,b}):
++                original=mock.Mock(return_value='original');typed=mock.Mock(return_value='typed')
++                write=dispatch.make_writer(b,original,typed)
++                self.assertEqual(write(*inputs(b,rows)),'original' if rows==1 else 'typed')
++                self.assertEqual(original.call_count,1 if rows==1 else 0);self.assertEqual(typed.call_count,0 if rows==1 else 1)
++
++class ContextTests(unittest.TestCase):
++    def test_abstract_context_not_runnable(self):
++        with self.assertRaises(TypeError):ctx.DeviceContext()
++    def test_every_leaf_unbound_rejects_before_native(self):
++        calls=[lambda:raw.run(None),lambda:regdev.run(None),lambda:regalias.run(None),lambda:extended.device(None,0),lambda:extended.alias(None,0),lambda:supp.fp32_alias(None,0),lambda:supp.wrapper_controls(None,0)]
++        for call in calls:
++            with self.assertRaises(RuntimeError):call()
++    def test_explicit_denial_rejects_before_native(self):
++        with self.assertRaises(RuntimeError):raw.run(FakeContext(False))
++    def test_partial_cpu_proof_rejected_before_native(self):
++        value=FakeContext();value.proof['stage_counts']['candidate']['cases']=16
++        with self.assertRaises(RuntimeError):raw.run(value)
++    def test_complete_cpu_summary_only(self):ctx.require_cpu_summary(cpu_proof())
++    def test_each_cpu_pass_and_controls_required(self):
++        for stage in ('original_fixture','new_fixture','candidate','controls'):
++            value=cpu_proof();del value['stage_counts'][stage]
++            with self.assertRaises(RuntimeError):ctx.require_cpu_summary(value)
++    def test_cpu_counts_and_flags_cannot_promote(self):
++        for key in ('complete','passed','cpu_full_gate_passed','simulator_writeback_workaround_required','original_simulator_failure_preserved','device_behavior_proven','alias_gate_passed','full_model_qualified','new_speedup_claim','automatic_successor_launch'):
++            value=cpu_proof();value[key]=not value[key]
++            with self.assertRaises(RuntimeError):ctx.require_cpu_summary(value)
++    def test_unknown_phase_rejected(self):
++        with self.assertRaises(RuntimeError):ctx.require_context(FakeContext(),'serving')
++    def test_matrix_io_bound_to_phase(self):
++        value=FakeContext();p=value.protocol('extended_device');p.save(p.DEST/'a.json',{'x':1})
++        self.assertEqual(value.saved,[('/source-only-mock-output/extended_device/a.json',{'x':1},'extended_device')]);self.assertEqual(p.sha(p.DEST/'fake.pt'),'b'*64)
++    def test_artifact_receipt_exact_identity(self):
++        value=FakeContext();phase='raw_device';case={'shape':[4,256],'dtype':'float32','variant':'candidate'}
++        receipt=value.artifact(value.paths(phase)[1]/'model.pt',phase,case)
++        self.assertEqual(receipt['software'],jit.DEVICE_SOFTWARE);self.assertEqual(receipt['case'],case)
++    def test_old_artifact_reuse_rejected(self):
++        with self.assertRaises(RuntimeError):FakeContext().artifact('/old-package/model.pt','raw_device',{})
++    def test_receipt_drift_rejected(self):
++        for key in ('schema','variant','software','source_sha256','case','sha256','phase','path'):
++            value=FakeContext();original=value.record_artifact
++            value.record_artifact=lambda p,ph,c,key=key:dict(original(p,ph,c),**{key:'drift'})
++            with self.assertRaises(RuntimeError):value.artifact(value.paths('raw_device')[1]/'model.pt','raw_device',{})
++    def test_runtime_budgets_and_4096_still_pending(self):
++        self.assertFalse(ctx.RUNTIME_ADMITTED);self.assertIsNone(ctx.COMPILE_PEAK_BYTES);self.assertIsNone(ctx.COMPILE_ARTIFACT_CAP_BYTES)
++        self.assertTrue(ctx.CONTEXT4096_REQUIRED)
++        for key in ('cold4096_required','long4096_required','slot_reuse4096_required','serving_graph4096_required'):self.assertIs(ctx.REQUIRED_GATES[key],True)
++        self.assertEqual(ctx.FULL_MODEL_GATES['comparisons']['measured_requests_per_variant'],704)
++        self.assertEqual(ctx.FULL_MODEL_GATES['comparisons']['measured_output_tokens_per_variant'],189952)
++        self.assertEqual(ctx.FULL_MODEL_GATES['b16']['long_steps'],1529)
++
++class ScientificSourceTests(unittest.TestCase):
++    def test_all_original_pins_unchanged(self):
++        manifest=json.loads((ROOT/'research/lfm3-nki05-device-pretest-source-manifest-20261112-v1.json').read_text())
++        for name,digest in {**manifest['predecessors'],**manifest['kernel']}.items():self.assertEqual(hashlib.sha256((ROOT/name).read_bytes()).hexdigest(),digest,name)
++    def test_matrix_function_bodies_exact(self):
++        for name in ('mappings','cpu_cases','device_specs','alias_specs','alias_mappings'):
++            self.assertEqual(dump(function('lfm3_batch_slots_bits_protocol_v4.py',name)),dump(function('lfm3_nki05_device_matrix_v1.py',name)),name)
++    def test_full_original_matrix_counts(self):
++        self.assertEqual(len(matrix.cpu_cases()),2068);self.assertEqual(len(matrix.device_specs()),42)
++        self.assertEqual(sum(len(matrix.mappings(x['capacity'],x['rows'])) for x in matrix.device_specs()),2520)
++        self.assertEqual(len(matrix.alias_specs()),24);self.assertEqual(sum(len(matrix.alias_mappings(x['capacity'])) for x in matrix.alias_specs()),192)
++    def test_raw_mapping_and_entire_nested_device_loop_exact(self):
++        old=function('probe_slot_cache_nki_predicated.py','main');new=function('lfm3_nki05_raw_device_leaf_v1.py','run')
++        self.assertEqual(science([next(x for x in old.body if isinstance(x,ast.Try)).body[0]]),science([next(x for x in new.body if isinstance(x,ast.Try)).body[0]]))
++        node=next(x for x in tree('probe_slot_cache_nki_predicated.py').body if isinstance(x,ast.Assign) and isinstance(x.targets[0],ast.Name) and x.targets[0].id=='MAPPINGS')
++        self.assertEqual(raw.MAPPINGS,ast.literal_eval(node.value));self.assertEqual(len(raw.MAPPINGS)*4,36)
++    def test_regression_device_full_try_exact(self):
++        old=function('lfm3_package_primitive_device_v2.py','main');new=function('lfm3_nki05_regression_device_leaf_v1.py','run')
++        self.assertEqual(science([next(x for x in old.body if isinstance(x,ast.Try))]),science([next(x for x in new.body if isinstance(x,ast.Try))]))
++        for name in ('shapes','mappings'):
++            def rows(fn):return [x for x in fn.body if isinstance(x,(ast.Assign,ast.AugAssign)) and ((isinstance(x,ast.Assign) and any(isinstance(t,ast.Name) and t.id==name for t in x.targets)) or (isinstance(x,ast.AugAssign) and isinstance(x.target,ast.Name) and x.target.id==name))]
++            self.assertEqual(science(rows(old)),science(rows(new)))
++    def test_regression_alias_full_try_and_class_exact(self):
++        old=function('lfm3_package_primitive_alias_v2.py','main');new=function('lfm3_nki05_regression_alias_leaf_v1.py','run')
++        for typ in (ast.Try,ast.ClassDef):self.assertEqual(science([next(x for x in old.body if isinstance(x,typ))]),science([next(x for x in new.body if isinstance(x,typ))]))
++    def test_extended_complete_scientific_bodies_exact(self):
++        for name in ('device','alias'):
++            old=function('lfm3_batch_slots_bits_extended_v4.py',name);new=function('lfm3_nki05_extended_device_leaf_v2.py',name)
++            def scientific_tail(fn):
++                start=next(i for i,x in enumerate(fn.body) if isinstance(x,ast.Expr) and isinstance(x.value,ast.Call) and isinstance(x.value.func,ast.Attribute) and x.value.func.attr=='set_num_threads')
++                return fn.body[start:]
++            self.assertEqual(science(scientific_tail(old)),science(scientific_tail(new)),name)
++    def test_byte_compare_helpers_exact(self):
++        for name in ('torch_same','tensor_sha'):self.assertEqual(dump(function('lfm3_batch_slots_bits_extended_v4.py',name)),dump(function('lfm3_nki05_extended_device_leaf_v2.py',name)))
++    def test_sequential_oracle_exact(self):
++        old=function('lfm3-package-native-core-v1/work/target/vllm_neuron/models/lfm3/helpers.py','store_slots')
++        new=function('lfm3_nki05_device_oracle_v1.py','store_slots')
++        self.assertEqual(science([x for x in old.body if not (isinstance(x,ast.Expr) and isinstance(x.value,ast.Constant) and isinstance(x.value.value,str))]),science([x for x in new.body if not isinstance(x,ast.Import)]))
++    def test_wrapper_semantics_ast_same_after_explicit_injection(self):
++        old=function('slot_cache_typed_selector_torch_v1.py','store_slots_typed_selector');new=function('slot_cache_nki05_typed_torch_v1.py','apply_typed_writer')
++        class Names(ast.NodeTransformer):
++            def visit_Name(self,node):
++                if node.id=='torch':node.id='torch_api'
++                if node.id=='slot_cache_typed_selector':node.id='device_kernel'
++                return node
++        expected=[x for x in old.body if not isinstance(x,(ast.Import,ast.ImportFrom))]
++        expected=Names().visit(ast.Module(body=expected,type_ignores=[]))
++        self.assertEqual(dump(expected),dump(ast.Module(body=new.body,type_ignores=[])))
++    def test_no_runtime_ast_rewrite_simulator_or_shell_launcher(self):
++        for name in NAMES:
++            source=(ROOT/(name+'.py')).read_text();parsed=ast.parse(source)
++            imported=[x.name.split('.')[0] for n in ast.walk(parsed) if isinstance(n,ast.Import) for x in n.names]
++            self.assertNotIn('ast',imported);self.assertNotIn('subprocess',imported)
++            calls=[n.func.id for n in ast.walk(parsed) if isinstance(n,ast.Call) and isinstance(n.func,ast.Name)]
++            self.assertFalse({'exec','eval','compile'}&set(calls))
++            self.assertNotIn('simulate_kernel',source);self.assertNotIn('writeback_shim',source)
++            self.assertFalse(any(isinstance(n,ast.If) and '__main__' in ast.unparse(n.test) for n in parsed.body))
++    def test_extended_alias_receipt_contains_actual_shapes_dtype_and_variant(self):
++        parsed=function('lfm3_nki05_extended_device_leaf_v2.py','alias')
++        calls=[x for x in ast.walk(parsed) if isinstance(x,ast.Call) and isinstance(x.func,ast.Attribute) and x.func.attr=='artifact']
++        self.assertEqual(len(calls),1)
++        case=calls[0].args[2]
++        self.assertEqual(ast.unparse(case.args[0]),'spec')
++        self.assertEqual({x.arg for x in case.keywords},{'dtype','rows','shapes'})
++        self.assertIn('initial',ast.unparse(case))
++
++    def test_actual_trace_and_alias_operations_retained(self):
++        for name in NAMES[6:]:
++            source=(ROOT/(name+'.py')).read_text();self.assertIn('torch_neuronx.trace(',source);self.assertIn('context.artifact(',source)
++        for name in (NAMES[8],NAMES[9],NAMES[10]):
++            source=(ROOT/(name+'.py')).read_text();self.assertIn('input_output_aliases=',source);self.assertIn('move_trace_to_device(',source);self.assertIn('compiled.states._parameters',source)
++    def test_supplemental_matrices_preserve_originals(self):
++        self.assertEqual(len(supp.wrapper_specs()),16);self.assertEqual(len(supp.fp32_alias_specs()),6)
++        for spec in supp.fp32_alias_specs():self.assertEqual(spec['shape'],[spec['capacity'],64,80,128])
++        for b in (4,8,16):
++            for rows in sorted({1,4,b}):
++                mappings=supp.control_mappings(b,rows)
++                self.assertIn([2**32]*rows,mappings);self.assertIn([2**32+b-1]*rows,mappings)
++                self.assertIn([-2**63]*rows,mappings);self.assertIn([2**63-1]*rows,mappings)
++    def test_supplemental_raw_patterns_distinguish_every_slot(self):
++        # Same pure word construction, without allocating a Torch tensor.
++        for dtype in ('bfloat16','float32'):
++            words=list(supp.bit_patterns(dtype))
++            for b in (4,8,16):
++                rows=[tuple(words[-i:]+words[:-i]) for i in range(b)]
++                self.assertEqual(len(set(rows)),b)
++        self.assertIn('raw.roll(row)',(ROOT/'lfm3_nki05_device_supplements_v2.py').read_text())
++    def test_no_native_modules_loaded(self):
++        self.assertFalse(set(BLOCKED)&{name.split('.')[0] for name in sys.modules})
++
++if __name__=='__main__':
++    resource.setrlimit(resource.RLIMIT_AS,(256*2**20,256*2**20))
++    resource.setrlimit(resource.RLIMIT_CPU,(60,60))
++    resource.setrlimit(resource.RLIMIT_FSIZE,(2*2**20,2*2**20))
++    os.sched_setaffinity(0,{7});os.nice(19)
++    unittest.main(verbosity=2)
