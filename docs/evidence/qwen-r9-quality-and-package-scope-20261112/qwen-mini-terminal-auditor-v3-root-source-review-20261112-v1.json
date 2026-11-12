@@ -1,0 +1,46 @@
+{
+  "schema": "qwen_mini_terminal_auditor_v3_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T11:14:39.691795+00:00",
+  "source_only": true,
+  "passed": true,
+  "blockers": [],
+  "qwen_auditor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r9_terminal_root_20261112_v3.py",
+    "sha256": "f3db4748a5034e7133dae28f570d552fc5fde8be2f0b9cf4b354e317d946b41f"
+  },
+  "mini_auditor": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_bootstrap_r2_root_20261112_v3.py",
+    "sha256": "cae2583b4970103bd79f0227aec39b5e9d44b627baa3f5fe0057a040688e16ad"
+  },
+  "qwen_findings": [
+    "Handle acknowledged/unacknowledged/never-loaded service terminals without inventing owners or exits",
+    "Retain a leaf written before nonzero child exit without counting that phase complete"
+  ],
+  "mini_findings": [
+    "Validate exact historical row contents through existing verify_recorded_history",
+    "Require six distinct expected stage paths and exact summary keys"
+  ],
+  "qwen_source_test": {
+    "terminal_chunk": "58f16c",
+    "exit_code": 0,
+    "three_terminal_shapes": true,
+    "uncaptured_live_pid_rejected": true,
+    "changed_invocation_and_exit_rejected": true,
+    "existing_model_metadata_rechecked": true
+  },
+  "mini_source_test": {
+    "terminal_chunk": "768456",
+    "exit_code": 0,
+    "six_exact_paths": true,
+    "four_duplicate_path_rejections": true,
+    "existing_history_verifier_call_wired": true
+  },
+  "peer_reviewers": [
+    "/root/qwen_r9_final_audit_review_20261112",
+    "/root/mini_r2_terminal_audit_review_20261112"
+  ],
+  "actual_final_audits_pending": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

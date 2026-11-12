@@ -1,0 +1,42 @@
+{
+  "schema": "qwen35_unified_package_portability_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T11:14:39.691795+00:00",
+  "source_only": true,
+  "sampler_byte_identical": true,
+  "sampler_sources": [
+    {
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/cpu_sampler.py",
+      "sha256": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py",
+      "sha256": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a"
+    }
+  ],
+  "runner": {
+    "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+    "sha256": "4484edd883d199310e1646969417e05a8162148e404f840dc66cad6c6233a77e"
+  },
+  "research_worker_integration": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py",
+    "sha256": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314"
+  },
+  "packaged_opt_in": "NEURON_CPU_SAMPLER_FAST=1 with normal packaged worker and CPU sampling selected",
+  "research_worker_requires_switch_absent": true,
+  "qwen35_model_packaged": false,
+  "external_model_dependencies": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py",
+      "sha256": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_vllm_registration.py",
+      "sha256": "1455ca3b4d82b919a893b9e792435a38d71b854717a6c75544474acde540846c"
+    }
+  ],
+  "next_required": "Package exact text adapter/primitives/registration/corrected split/artifact admission separately; qualify packaged path with original full model/sampler/quality/HTTP gates",
+  "native_run_performed": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
