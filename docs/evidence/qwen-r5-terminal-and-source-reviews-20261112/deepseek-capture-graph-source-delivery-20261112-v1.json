@@ -1,0 +1,115 @@
+{
+  "schema": "deepseek_capture_graph_source_delivery_v1",
+  "author": "/root/deepseek_capture_readiness_20261112",
+  "created_at": "2026-11-12T22:39:33.182275+00:00",
+  "source_only": true,
+  "files": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_capture_graph_entry_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_capture_graph_entry_v1.py",
+      "bytes": 19311,
+      "sha256": "e06d7994040f118c9f41996ac5cc6f1dbb2fa89d13e5fba2663f7417dcd03547"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_capture_graph_entry_v1.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_capture_graph_entry_v1.py",
+      "bytes": 17164,
+      "sha256": "d38b646fe533f201cb8a09a4ed823641a7b841f75f5a19c1db94f1e3feb33951"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-capture-graph-source-checks-20261112-v1.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-capture-graph-source-checks-20261112-v1.json",
+      "bytes": 11587,
+      "sha256": "afc50c37757ff320ca71da1d0cd178d284dd86a9befcdd36db4bb4cafe37b998"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-capture-graph-source-delivery-20261112-v1.md": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-capture-graph-source-delivery-20261112-v1.md",
+      "bytes": 7928,
+      "sha256": "11be500ea250dbea243ab7ab86da06760ea2ab4767150836ce64fc32a9773a3b"
+    }
+  },
+  "prior_frozen_deliveries": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-boundary-reference-entry-source-delivery-20261112-v1.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-boundary-reference-entry-source-delivery-20261112-v1.json",
+      "bytes": 3559,
+      "sha256": "fc0dc907329ebff8d2c6a3fb938629928e9b223b10334c7a23700c6bf90ee5aa"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-cold-control-source-delivery-20261112-v1.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-cold-control-source-delivery-20261112-v1.json",
+      "bytes": 4875,
+      "sha256": "2c4204cdc568e565479afeb07cda053dbb609d2fb385b0153677f6e51e8fe672"
+    }
+  },
+  "prior_source_config_pins_unchanged": 21,
+  "all_prior_delivery_members_unchanged": true,
+  "checks": {
+    "tests": 20,
+    "actual_tool_terminal": "d68bdb",
+    "exit_code": 0
+  },
+  "new_leaf_scope": [
+    "build original CPU-sampler BF16 TP2 capture graph in three fresh namespaces",
+    "validate full serialized config with exactly the two original capture deltas",
+    "validate actual future 12 graph metadata/541 outputs/469 device-visible outputs/aliases469..540",
+    "record and externally authenticate 39 complete build files",
+    "load in a separate fresh process with skip_warmup=True, require12 routes/144 TP state objects"
+  ],
+  "observations": {
+    "original_config_bytes": 8378,
+    "original_config_sha256": "26b0382de78b251aaa45fcd2c70e632140bba9f1120579e3888fed5685860a18",
+    "original_save_sharded_checkpoint": false,
+    "original_skip_sharding": false,
+    "actual_checkpoint_loader_view": "/mnt/nvme/models/DeepSeek-R1-0528-Qwen3-8B-neuron-yarn-exp20261031",
+    "sdk_deletes_preexisting_compiler_workdir": true,
+    "compile_pool_cap_requires_existing_wrapper_import": true,
+    "metaneff_num_states_is_not_populated_count_actual_input_types": true
+  },
+  "budget": {
+    "two_arm_raw_output_bytes": 47150344192,
+    "excludes": [
+      "compiler/cache/NEFF/model.pt",
+      "runtime sharding/shared-memory/temporary weight copies"
+    ],
+    "full_compile_and_load_peak_bound_proven": false
+  },
+  "original_scope_retained": {
+    "native_frames": 42,
+    "device_frames": 84,
+    "native_full_KV_tensors": 3024,
+    "device_full_KV_tensors": 6048,
+    "device_state_objects": 144,
+    "original_failed_indices": [
+      33,
+      35,
+      36,
+      38,
+      40,
+      42,
+      45,
+      47,
+      48,
+      50,
+      60,
+      62,
+      68,
+      70
+    ],
+    "long_decode_steps": 2041,
+    "long_checkpoints": 93,
+    "quality_prompts": 96
+  },
+  "remaining": [
+    "Independent root source review",
+    "Full original-versus-capture weight-key/TP-sharding and physical-layout evidence, not assumed from names",
+    "Complete finite compiler/cache/artifact/weight/shared-memory resource budget and actual serial admission",
+    "Real SDK config roundtrip, compilation, ABI/load observations and independently authenticated actual exit",
+    "Complete fresh observer-off/on raw logits/KV/lifecycle neutrality and original failure preservation",
+    "Original long2041/93,slot reuse,partial batch/inactive resume,quality96,matched HTTP qualification"
+  ],
+  "native_imports_performed": false,
+  "actual_model_payloads_read": false,
+  "actual_compiled_payloads_read": false,
+  "compiler_or_model_executed": false,
+  "lock_acquired": false,
+  "handoff_changed": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
