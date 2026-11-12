@@ -1,0 +1,52 @@
+{
+  "schema": "spark26_neuron_port_root_source_review_v1",
+  "reviewer": "/root",
+  "observed_at": "2026-11-12T02:08:00.236923+00:00",
+  "source_only_accepted": true,
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-handoff-20261112-v1.json",
+    "sha256": "694d8e007c137970613a8590d241e3fb47df5147ff316f9d53e5d48fb15504a1",
+    "bytes": 3593
+  },
+  "notes": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-notes-20261112-v1.md",
+    "sha256": "96b04d9a93716c0091aac08067df339c77b44e4675ae6887bed70d9afe16ac29",
+    "bytes": 4668
+  },
+  "independent_checks": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-port-source-root-checks-20261112-v1.json",
+    "sha256": "dda124cab835d116ea5e5474d34fa9ec471583460734072ffcabfff438f9e622",
+    "bytes": 4322
+  },
+  "tool": {
+    "session_id": 4896,
+    "terminal_chunk": "2173d0",
+    "exit_code": 0
+  },
+  "scalar_index_source_assertions": 5688,
+  "source_sha256": {
+    "spark26_port_contract_v1.py": "d5daf661989539b9dfcba912aa88215b8ecbd5e6105b4fd34c2b1567c9f50ec9",
+    "spark26_text_port_v1.py": "6f73df2a8a8660f87ba2966acabc6bd50bbc7e22011300aa751442804d0e4801",
+    "spark26_neuron_adapter_v1.py": "f993c29ac7525e6692938c58472baaf6afbd13e73d3c449af32b3b04c59fee34",
+    "spark26_vllm_registration_v1.py": "4f41f1684d98ea43e841848166816e64742db2909c1b3634a6f73c6941bccbc3",
+    "check_spark26_port_source_v1.py": "fd8438516706bc1b50c95c0033a2379af60deabc730809fca40d126d1a24cdd8"
+  },
+  "model_revision": "aa074aa851209a683aeaf5f99a8e25a642d94541",
+  "target": {
+    "batch_size": 4,
+    "context": 4096,
+    "tp_degree": 2
+  },
+  "cache_bytes_per_rank_independently_recomputed": 415014912,
+  "review_scope": [
+    "Original pinned Spark source compared for FP32 residual/norm, split QKV, per-kind RoPE, headwise sigmoid gating and GELU.",
+    "Explicit per-layer 511 sliding and4096 full cache design; original cache oracle compared in scalar tests.",
+    "State conversion and SDK entry points are unexecuted recipes; loader, native imports and serving entrypoints intentionally reject.",
+    "No assertion count is a tensor/model/device test count."
+  ],
+  "native_tensor_execution": false,
+  "sdk_abi_qualified": false,
+  "full_model_qualified": false,
+  "speedup_claim": false,
+  "next": "Read target SDK loader/trace source to resolve implementable ABI; actual original-weight/TP2/compile/fullqualification remains under serial slot."
+}

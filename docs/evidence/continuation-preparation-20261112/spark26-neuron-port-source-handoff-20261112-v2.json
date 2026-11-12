@@ -1,0 +1,72 @@
+{
+  "created_at": "2026-11-12T02:25:34.633351+00:00",
+  "status": "unexecuted_tensor_source_and_sdk_wiring_not_runtime_admitted",
+  "v1_source_hashes_unchanged": true,
+  "parent_v1_root_acceptance_sha256": "f9accae238075c5ddd7349d2a9cef4bb51a9705778af0dfa3f975d704a807260",
+  "source_sha256": {
+    "spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0",
+    "spark26_text_port_v2.py": "8eae6d77a3017d33ce9882cb2c98907e2057c4877597e7ac1d7edec86ed91399",
+    "spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+    "spark26_vllm_registration_v2.py": "844b40fac54070caaf895470364a05f00efecb34684b1e0e1be0290137c67abc",
+    "check_spark26_port_source_v2.py": "fee13e4d77a109ca047ba4b0bbf398aaa9871a26147e2c488ead286b863fc7d9",
+    "check_spark26_port_host_source_v2.py": "0223d93c6adf24628cec24c5183670b90ca307d04fc4ea08119b762d35714c10"
+  },
+  "sdk_source_sha256": {
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/trace.py": "c5aff7fc700a89505b7698314e7f9daf3527057ac5090b50a1b3541b074bef2e",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_loader.py": "328ddd70fa0c47939400d6275612a37a790d82a0aa1d27421414b641e395c994"
+  },
+  "check_evidence": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-checks-20261112-v2.json",
+  "check_evidence_sha256": "1f3130bd038b5c4e4b662d96b3735c494d5e66dda19605c88946ce2f9e9668c6",
+  "checks": {
+    "scalar_ast_mock_main": 1607,
+    "selected_host_wrapper_ast_mock": 21,
+    "partial_batch_arrangements": 209,
+    "native_tensor_or_model_tests": 0
+  },
+  "fixed_source_abi": [
+    "7 positional trace inputs; no custom trace kwargs",
+    "model. prefix stripped by SDK before hook; Spark unprefixed keys and explicit tied head clone hook",
+    "one logits output then72 K/V cache values in exact ParameterList order",
+    "int32 SDK input converted to long before index operations",
+    "inactive -1 rows only safe-read clampedslot0; writes compare original slotid and preserve other rows",
+    "one-token prompt padded to2 with [1,0] mask; right-padding physical positions derived by stage",
+    "host per-slot seen counters, stale/decode-before-prefill rejection and reset",
+    "GroupQueryAttention_QKV fused native one-matmul path; SDK fused-qkv sharding separately splits Q/K/V"
+  ],
+  "target": {
+    "sdk_site": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages",
+    "tp_degree": 2,
+    "max_batch_size": 4,
+    "ctx_batch_size": 1,
+    "tkg_batch_size": 4,
+    "max_length": 4096,
+    "apply_seq_ids_mask": true,
+    "fused_qkv": true,
+    "kernels": false
+  },
+  "true_runtime_pending": [
+    "framework imports and actual module construction",
+    "actual original checkpoint read/tied values and preshard TP2 tensors",
+    "native BF16/FP32 numerics including packed projection, RoPE, softmax, GELU and collectives",
+    "trace static shape/padding/72-cache alias correctness and torch.where/gather/scatter lowering",
+    "fresh-process cold-cache plus >511 long decode, inactive slot preservation and reuse",
+    "matched full-model quality and paired HTTP performance"
+  ],
+  "explicit_limits": [
+    "source guards stop module import and registration before native work",
+    "SDK inherited reset_kv_cache debug method is not supported by this candidate: it expects model.past_key_values; cold tests must use independently designed fresh-load/reset protocol",
+    "source-only finite mask/oracle/mock assertions are not tensor or model qualification",
+    "official1M max positions are not this4096 target runtime qualification",
+    "masked per-slot torch.where may create substantial cache traffic; compiler/performance behavior is unmeasured"
+  ],
+  "native_imports": false,
+  "weights_downloaded": false,
+  "tensor_payload_reads": false,
+  "compiler_or_neuron_execution": false,
+  "live_runtime_binding": false,
+  "speedup_claim": false
+}

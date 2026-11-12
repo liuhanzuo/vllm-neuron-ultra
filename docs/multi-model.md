@@ -1,8 +1,8 @@
-最新进展：[LFM 完整测试数据、Mini 映射诊断与 Dory 接入](lfm-fixtures-dory-mapping-20261112.md)。LFM 原环境的 3,716 用例／291 批次测试数据已完成并独立复核，新环境复现仍在运行。MiniCPM5 映射观察逻辑经修正后通过 47 项独立模拟检查，原生追踪尚未接入。Dory 有限 glibc 元数据读取已接入原串行流程，新增 30 项检查通过；真实下载与原 15 条加载关系仍待验证。本轮没有新增合格提速。
+最新进展：[LFM 日志上限与 Qwen、MiniCPM5、Spark 后续准备](continuation-preparation-20261112.md)。LFM 完整 CPU r1 实际失败，已独立复核并排空；日志修正通过 38 项独立检查。Qwen r6 完整配置来源校验通过，外层运行器已启动。Spark v2 完成 SDK 接线并通过 1,628 项独立源码／模拟检查；Mini 映射观察原生接口通过 27 项模拟检查，实际追踪仍待完成。本轮没有新增合格提速。
 
 [各模型提速总表](model-speedups-20261112.md)集中列出已测 BF16、历史 INT8 与主机开销优化，并标明基线、工作负载和验证范围。
 
-前一版：[MiniCPM5 SDK 导入实测与 Qwen 监控修正](mini-sdk-import-qwen-monitor-20261112.md)。
+前一版：[LFM 完整测试数据、Mini 映射诊断与 Dory 接入](lfm-fixtures-dory-mapping-20261112.md)；[MiniCPM5 SDK 导入实测与 Qwen 监控修正](mini-sdk-import-qwen-monitor-20261112.md)。
 
 此前记录：[Qwen 冷缓存修复与 Dory 依赖检查实测](qwen-cold-fix-dory-elf-20261112.md)；[Qwen 原生预检与 MiniCPM5 固定输入对照](qwen-native-preflight-and-mini-pv-20261111.md)。
 

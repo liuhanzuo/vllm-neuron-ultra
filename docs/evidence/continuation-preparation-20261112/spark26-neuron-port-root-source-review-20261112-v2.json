@@ -1,0 +1,52 @@
+{
+  "cache_bytes_per_rank": 415014912,
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-handoff-20261112-v2.json",
+    "sha256": "5c9c7d3fa27eeacbf89f286d5ccb7f24489e43aa4e30a5a3e160cfdcb40f3a1f"
+  },
+  "full_model_qualified": false,
+  "independent_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-independent-review-20261112-v2.json",
+    "sha256": "d485240831cdd0fe400bbf771de448a2179633f1665d8c2ccf56c8194f842f9a"
+  },
+  "independently_rerun_scalar_ast_mock_assertions": 1628,
+  "limitations": [
+    "source guards stop module import and registration before native work",
+    "SDK inherited reset_kv_cache debug method is not supported by this candidate: it expects model.past_key_values; cold tests must use independently designed fresh-load/reset protocol",
+    "source-only finite mask/oracle/mock assertions are not tensor or model qualification",
+    "official1M max positions are not this4096 target runtime qualification",
+    "masked per-slot torch.where may create substantial cache traffic; compiler/performance behavior is unmeasured"
+  ],
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T02:41:36.525663+00:00",
+  "partial_batch_arrangements": 209,
+  "remaining": [
+    "framework imports and actual module construction",
+    "actual original checkpoint read/tied values and preshard TP2 tensors",
+    "native BF16/FP32 numerics including packed projection, RoPE, softmax, GELU and collectives",
+    "trace static shape/padding/72-cache alias correctness and torch.where/gather/scatter lowering",
+    "fresh-process cold-cache plus >511 long decode, inactive slot preservation and reuse",
+    "matched full-model quality and paired HTTP performance"
+  ],
+  "reviewer": "/root",
+  "root_read_full_contract_tensor_adapter_registration_sources": true,
+  "runtime_admitted": false,
+  "schema": "spark26_neuron_port_root_source_review_v2",
+  "sdk_source_sha256": {
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_loader.py": "328ddd70fa0c47939400d6275612a37a790d82a0aa1d27421414b641e395c994",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/trace.py": "c5aff7fc700a89505b7698314e7f9daf3527057ac5090b50a1b3541b074bef2e",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22"
+  },
+  "source_only_accepted": true,
+  "source_sha256": {
+    "check_spark26_port_host_source_v2.py": "0223d93c6adf24628cec24c5183670b90ca307d04fc4ea08119b762d35714c10",
+    "check_spark26_port_source_v2.py": "fee13e4d77a109ca047ba4b0bbf398aaa9871a26147e2c488ead286b863fc7d9",
+    "spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+    "spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0",
+    "spark26_text_port_v2.py": "8eae6d77a3017d33ce9882cb2c98907e2057c4877597e7ac1d7edec86ed91399",
+    "spark26_vllm_registration_v2.py": "844b40fac54070caaf895470364a05f00efecb34684b1e0e1be0290137c67abc"
+  }
+}

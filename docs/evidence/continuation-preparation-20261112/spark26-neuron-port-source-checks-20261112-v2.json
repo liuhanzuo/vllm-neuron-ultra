@@ -1,0 +1,81 @@
+{
+  "status": "source_only_not_runtime_admitted",
+  "main": {
+    "passed": true,
+    "checks": 1607,
+    "partial_batch_arrangements": 209,
+    "scope": "stdlib scalar/AST and selected-function mocks only; no native tensor/model checks",
+    "specification": {
+      "status": "source_only_not_runtime_admitted",
+      "sdk_site": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages",
+      "sdk_versions": {
+        "neuronx-distributed-inference": "0.8.16251+f3ca5575",
+        "neuronx-distributed": "0.17.26814+4b18de63",
+        "vllm-neuron": "0.2.2+lts",
+        "vllm": "0.11.0",
+        "torch": "2.8.0",
+        "transformers": "4.57.6"
+      },
+      "target": {
+        "batch_size": 4,
+        "max_context": 4096,
+        "tp_degree": 2
+      },
+      "context_batch": 1,
+      "decode_batch": 4,
+      "apply_seq_ids_mask": true,
+      "trace_inputs": [
+        "input_ids",
+        "attention_mask",
+        "position_ids",
+        "seq_ids",
+        "sampling_params",
+        "prev_hidden",
+        "adapter_ids"
+      ],
+      "cache_output_count": 72,
+      "qkv": "one GroupQueryAttention_QKV native packed projection; kernels disabled",
+      "runtime_pending": [
+        "actual original-checkpoint load and TP2 sharding/numerical equivalence",
+        "native tensor execution, tracing and mixed-cache output alias application",
+        "Neuron compile/lowering, cold cache, long decode and request-slot reuse",
+        "matched quality and HTTP performance qualification"
+      ],
+      "native_executed": false,
+      "model_qualified": false,
+      "speedup_claim": false
+    },
+    "source_sha256": {
+      "spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0",
+      "spark26_text_port_v2.py": "8eae6d77a3017d33ce9882cb2c98907e2057c4877597e7ac1d7edec86ed91399",
+      "spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+      "spark26_vllm_registration_v2.py": "844b40fac54070caaf895470364a05f00efecb34684b1e0e1be0290137c67abc",
+      "check_spark26_port_source_v2.py": "fee13e4d77a109ca047ba4b0bbf398aaa9871a26147e2c488ead286b863fc7d9"
+    },
+    "sdk_mocked_source_sha256": {
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/trace.py": "c5aff7fc700a89505b7698314e7f9daf3527057ac5090b50a1b3541b074bef2e",
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22"
+    },
+    "native_executed": false,
+    "weights_loaded": false,
+    "model_qualified": false,
+    "runtime_admitted": false,
+    "speedup_claim": false
+  },
+  "host": {
+    "passed": true,
+    "checks": 21,
+    "scope": "selected host-wrapper AST on stdlib list mocks only",
+    "source_sha256": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/check_spark26_port_host_source_v2.py": "0223d93c6adf24628cec24c5183670b90ca307d04fc4ea08119b762d35714c10",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0"
+    },
+    "native_tensor_execution": false,
+    "model_qualified": false,
+    "runtime_admitted": false
+  },
+  "total_scalar_ast_mock_assertions": 1628,
+  "native_tensor_model_tests": 0,
+  "first_host_mock_failure": "research/spark26-port-host-mock-first-failure-20261112-v2.json"
+}

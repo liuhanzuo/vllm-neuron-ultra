@@ -1,0 +1,104 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v3.py
+@@ -19,6 +19,9 @@
+ import time
+ import zlib
+ 
++import lfm3_full_cpu_known_warnings_v1 as known_warnings
++WARNING_LOG = known_warnings.bootstrap(__name__, sys.argv)
++
+ import minicpm5_layer0_execution_protocol_v4 as p
+ from minicpm5_layer0_runtime_auth_v1 import identity
+ from research import descriptor_serial_lock_proof_v1 as descriptor
+@@ -26,7 +29,7 @@
+ import lfm3_nki05_serial_history_v1 as history
+ import lfm3_nki05_transport_diagnostic_v3 as diagnostic
+ import lfm3_nki05_torch_namespace_sources_v1 as namespace_sources
+-import lfm3_nki05_full_cpu_leaf_v2 as science
++import lfm3_nki05_full_cpu_leaf_v3 as science
+ import smollm3_record_bytecode_v1 as bytecode
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -52,6 +55,11 @@
+              'terminal_handoff', 'output_root', 'unit', 'resources', 'lock_identity', 'canonical_sha256',
+              'root_floor_bytes', 'output_cap_bytes', 'nvme_floor_bytes', 'max_files', 'cpu_protocol',
+              'model_qualification_claim', 'automatic_successor_launch'}
++
++
++def warning_receipt(mode):
++    p.require(WARNING_LOG is not None and WARNING_LOG.mode == mode, 'Early exact warning journal required')
++    return WARNING_LOG.snapshot()
+ 
+ 
+ def encode(value):
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v2.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v3.py
+@@ -17,6 +17,7 @@
+ import time
+ from unittest.mock import patch
+ 
++import lfm3_full_cpu_known_warnings_v1 as known_warnings
+ import run_lfm3_typed_writer_cpu_pilot_v3 as legacy
+ import lfm3_typed_fixture_ledger_leaf_v1 as fixtures
+ from lfm3_nki05_compact_writeback_v1 import CompactWriteback
+@@ -132,6 +133,7 @@
+             and report['begin'] == begin and report['end'] == end,
+             'Complete exact finite child result')
+     require(report['full_model_qualified'] is report['new_speedup_claim'] is False, 'CPU-only result scope')
++    known_warnings.validate_receipt(report['warning_log'], 'batch')
+     if stage == 'controls':
+         require(report['controls_validation'] == fixtures.validate_small_controls(report['arms']), 'Actual three-arm control receipts')
+         return
+@@ -331,13 +333,14 @@
+             legacy.p.audit_child(phase,(begin,end))
+             try:
+                 execute_batch_science(host,root,stage,phase,begin,end,admission_ref,admit,result)
+-                result.update(complete=True,passed=True)
++                result.update(complete=True,passed=True,warning_log=host.warning_receipt('batch'))
+                 validate_report(result,stage,phase,begin,end,values[phase][begin:end],admission_ref)
+             except BaseException as error:
+                 failure=error
+                 result.update(complete=False,passed=False,error_type=type(error).__name__,error=str(error)[:2048],original_failure_preserved=True)
+             finally:
+                 result['seconds']=time.monotonic()-began
++                result['warning_log']=host.warning_receipt('batch')
+                 host.once(path,result)
+     except BaseException:
+         raise
+@@ -388,6 +391,7 @@
+ 
+ 
+ def require_full_success(result):
++    known_warnings.validate_receipt(result['warning_log'], 'worker')
+     require(result['schema']=='lfm3_nki05_full_cpu_result_v1' and result['complete'] is result['passed'] is True,
+             'All full CPU passes and actual controls completed')
+     require(result['stage_counts']=={stage:dict(cases=1,batches=1) if stage=='controls' else dict(cases=3716,batches=291) for stage in STAGES},
+@@ -455,7 +459,7 @@
+             proofs=runtime.verify_runtime_distributions(old_plan['runtime'])
+         require(len(proofs)==7,'All original seven runtime distributions authenticated')
+         host.once(root/'runtime-auth.json',dict(complete=True,admission=admission_ref,owner=owner,
+-                    legacy_distributions=7,proofs=proofs,model_payloads_read=False,new_speedup_claim=False))
++                    legacy_distributions=7,proofs=proofs,warning_log=host.warning_receipt('worker'),model_payloads_read=False,new_speedup_claim=False))
+         for stage in STAGES:
+             (root/stage).mkdir();(root/stage/'tmp').mkdir()
+             phase_refs=[];cases_done=batches_done=0
+@@ -490,15 +494,17 @@
+             stage_complete(host,root,stage,admission_ref)
+             result['stages'].append(host.reference(root/(stage+'-complete.json')))
+             result['stage_counts'][stage]=dict(cases=cases_done,batches=batches_done)
+-        result.update(complete=True,passed=True,cpu_full_gate_passed=True)
++        result.update(complete=True,passed=True,cpu_full_gate_passed=True,warning_log=host.warning_receipt('worker'))
+         require_full_success(result);admit()
++        result['warning_log']=host.warning_receipt('worker')
+         host.once(root/'diagnostic-result.json',result)
+         host.once(root/'worker-result.json',dict(complete=True,passed=True,owner=owner,admission=admission_ref,
+                     diagnostic=host.reference(root/'diagnostic-result.json'),self_exit_claimed=False,
+                     full_model_qualified=False,new_speedup_claim=False))
+     except BaseException as error:
+         if not (root/'diagnostic-result.json').exists():
+-            result.update(complete=False,passed=False,cpu_full_gate_passed=False,error_type=type(error).__name__,error=str(error)[:2048])
++            result.update(complete=False,passed=False,cpu_full_gate_passed=False,error_type=type(error).__name__,error=str(error)[:2048],
++                          warning_log=host.warning_receipt('worker'))
+             host.once(root/'diagnostic-result.json',result)
+         host.report_failure(root/'worker-failure.json',error,owner=owner,admission=admission_ref)
+         raise

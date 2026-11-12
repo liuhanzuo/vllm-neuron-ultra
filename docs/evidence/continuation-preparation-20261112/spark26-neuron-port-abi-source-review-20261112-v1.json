@@ -1,0 +1,71 @@
+{
+  "created_at": "2026-11-12T02:09:10.608375+00:00",
+  "scope": "source reading only; v1 frozen unchanged",
+  "sdk_source_sha256": {
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/__editable___vllm_neuron_0_2_2_lts_finder.py": "44998894985332f2df183563b724e8f078e91c05e5ed25dd929d09e76176b6da",
+    "/home/ubuntu/src/vllm-neuron/vllm_neuron/worker/neuronx_distributed_model_loader.py": "328ddd70fa0c47939400d6275612a37a790d82a0aa1d27421414b641e395c994"
+  },
+  "findings": [
+    {
+      "topic": "checkpoint keys/tie hook",
+      "source": "application_base.py:691-730",
+      "resolved": "get_state_dict strips model. before convert_hf_to_neuron_state_dict; afterward calls update_state_dict_for_tied_weights if tied config. Local directory uses load_state_dict without native HF model construction.",
+      "successor": "Accept unprefixed embedding/layers/norm keys; validate complete original schema; split QKV; explicitly implement embedding-to-head tie method. v1 converter takes prefixed originals and is not connected."
+    },
+    {
+      "topic": "trace input signature",
+      "source": "model_wrapper.py:352-362,572-576",
+      "resolved": "Seven positional inputs (input_ids,attention_mask,position_ids,seq_ids,sampling_params,hidden_states,adapter_ids); arbitrary kwargs not traced.",
+      "successor": "Use standard seven-input signature and derive cache_positions/valid_lengths only after enforcing right-padding/no prefix or chunked prefill; no nonexistent spark_* kwargs."
+    },
+    {
+      "topic": "trace cache aliases",
+      "source": "model_wrapper.py:1583-1621",
+      "resolved": "With output_logits disabled and no capture/spec/LoRA, outputs index0=logits and index1+i aliases kv_mgr.past_key_values[i].",
+      "successor": "Preserve72 cache outputs in layer K,V order; reject output_logits/tensor capture/spec/LoRA/async until validated; alias actual values still needs compile test."
+    },
+    {
+      "topic": "int32 inputs",
+      "source": "model_wrapper.py:718-725,1336-1337",
+      "resolved": "Wrapper converts int64 inputs to int32 before calls.",
+      "successor": "Explicit long conversion on gather/scatter/index_copy indices in tensor helper; source v1 currently assumes long positions."
+    },
+    {
+      "topic": "model class lookup",
+      "source": "neuronx_distributed_model_loader.py:655-669",
+      "resolved": "Spark2_5ForCausalLM splits to spark2_5 and causal-lm, matching MODEL_TYPES; editable finder confirms target source tree.",
+      "successor": "Process-local AutoConfig and ModelRegistry plus MODEL_TYPES keys can be connected from source evidence."
+    },
+    {
+      "topic": "slot order/restore",
+      "source": "neuronx_distributed_model_loader.py:111-158,345-374",
+      "resolved": "Loader sorts input_block_ids and all matching batch inputs, passes seq_ids, restores output order.",
+      "successor": "Reuse loader route instead of duplicating reorder; keep independent unsorted->sorted->restore tests."
+    },
+    {
+      "topic": "partial-batch dummy cache writes",
+      "source": "model_wrapper.py:614-645",
+      "resolved": "Pads B<4 to missing slots and repeats first row. With apply_seq_ids_mask, unused slot IDs become -1.",
+      "successor": "Implement masked per-slot writes preserving all inactive rows; clamp only gather index is insufficient because duplicate slot0 writes can corrupt live state. Then require apply_seq_ids_mask and reject unsupported padded forms."
+    },
+    {
+      "topic": "single-token prefill",
+      "source": "model_base.py:3535-3553,3596-3597 and existing qwen35_neuron_adapter.py:224-233",
+      "resolved": "One-token zero position requires preserving prefill selection and nonempty mask; existing independent adapter pads to2 with [1,0] attention mask.",
+      "successor": "Implement local equivalent without modifying shared adapter; derive physical positions arange for prefill padded rows and use valid length only for stored/visible keys."
+    }
+  ],
+  "runtime_verification_still_needed": [
+    "original checkpoint tensor load and exact full-model BF16/FP32 numerics",
+    "split projection and TP2 reduction equivalence",
+    "actual tracing/cache alias and int32-to-index lowering",
+    "cold cache and long decode beyond511, inactive slot preservation and slot reuse",
+    "matched native references and HTTP quality/performance"
+  ],
+  "native_imports": false,
+  "tensor_payload_reads": false,
+  "runtime_admitted": false
+}

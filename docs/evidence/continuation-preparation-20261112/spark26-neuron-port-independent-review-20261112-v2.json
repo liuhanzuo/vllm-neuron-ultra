@@ -1,0 +1,180 @@
+{
+  "schema": "spark26_neuron_port_independent_source_review_v2",
+  "reviewer": "/root/spark_v2_root_review",
+  "created_at": "2026-11-12T02:40:18.020Z",
+  "status": "independent_source_review_complete_not_root_approval",
+  "source_review_recommendation": "Source and selected SDK wiring are internally consistent within the constrained target. Root may accept this as source-only progress; no runtime admission is implied.",
+  "source_review_complete": true,
+  "root_approval": false,
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-handoff-20261112-v2.json",
+    "sha256": "5c9c7d3fa27eeacbf89f286d5ccb7f24489e43aa4e30a5a3e160cfdcb40f3a1f"
+  },
+  "checks_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/spark26-neuron-port-source-checks-20261112-v2.json",
+    "sha256": "1f3130bd038b5c4e4b662d96b3735c494d5e66dda19605c88946ce2f9e9668c6"
+  },
+  "hash_verification": {
+    "terminal_chunk": "12288d",
+    "exit_code": 0,
+    "all_six_delivered_sources_match": true,
+    "all_six_delivered_sdk_sources_match": true
+  },
+  "original_v1_verification": {
+    "terminal_chunk": "7a8377",
+    "exit_code": 0,
+    "all_five_root_reviewed_v1_sources_unchanged": true
+  },
+  "extra_read_source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_contract_v1.py": "2a667c5b3b6c52a910135e1b982fb6ea1c6b9d762c1ca1dad41537c0276fd8cf",
+    "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/config.py": "6380d0671130b519642509bf4de76412a7ab0f6d092c3676197cd1610185314e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/new-small-model-code-prerequisites-20261104-v72/spark-modeling.py": "9cf0d1ad2b54b9f7088792779ddd8b5cb4d4fe63bfea054da7f2dd16362bcaf4"
+  },
+  "independent_test_runs": [
+    {
+      "command": "python3 -B check_spark26_port_source_v2.py",
+      "workdir": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "tool": {
+        "terminal_chunk": "0cefbe",
+        "exit_code": 0,
+        "wall_time_seconds": 4.83127675
+      },
+      "result": {
+        "passed": true,
+        "checks": 1607,
+        "partial_batch_arrangements": 209,
+        "scope": "stdlib scalar/AST and selected-function mocks only; no native tensor/model checks",
+        "specification": {
+          "status": "source_only_not_runtime_admitted",
+          "sdk_site": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages",
+          "sdk_versions": {
+            "neuronx-distributed-inference": "0.8.16251+f3ca5575",
+            "neuronx-distributed": "0.17.26814+4b18de63",
+            "vllm-neuron": "0.2.2+lts",
+            "vllm": "0.11.0",
+            "torch": "2.8.0",
+            "transformers": "4.57.6"
+          },
+          "target": {
+            "batch_size": 4,
+            "max_context": 4096,
+            "tp_degree": 2
+          },
+          "context_batch": 1,
+          "decode_batch": 4,
+          "apply_seq_ids_mask": true,
+          "trace_inputs": [
+            "input_ids",
+            "attention_mask",
+            "position_ids",
+            "seq_ids",
+            "sampling_params",
+            "prev_hidden",
+            "adapter_ids"
+          ],
+          "cache_output_count": 72,
+          "qkv": "one GroupQueryAttention_QKV native packed projection; kernels disabled",
+          "runtime_pending": [
+            "actual original-checkpoint load and TP2 sharding/numerical equivalence",
+            "native tensor execution, tracing and mixed-cache output alias application",
+            "Neuron compile/lowering, cold cache, long decode and request-slot reuse",
+            "matched quality and HTTP performance qualification"
+          ],
+          "native_executed": false,
+          "model_qualified": false,
+          "speedup_claim": false
+        },
+        "source_sha256": {
+          "spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0",
+          "spark26_text_port_v2.py": "8eae6d77a3017d33ce9882cb2c98907e2057c4877597e7ac1d7edec86ed91399",
+          "spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+          "spark26_vllm_registration_v2.py": "844b40fac54070caaf895470364a05f00efecb34684b1e0e1be0290137c67abc",
+          "check_spark26_port_source_v2.py": "fee13e4d77a109ca047ba4b0bbf398aaa9871a26147e2c488ead286b863fc7d9"
+        },
+        "sdk_mocked_source_sha256": {
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/trace.py": "c5aff7fc700a89505b7698314e7f9daf3527057ac5090b50a1b3541b074bef2e",
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/gqa.py": "2d3deefb5b833320f79299d24a4fbeb4ded267461971887c06491770ed716b22"
+        },
+        "native_executed": false,
+        "weights_loaded": false,
+        "model_qualified": false,
+        "runtime_admitted": false,
+        "speedup_claim": false
+      }
+    },
+    {
+      "command": "python3 -B check_spark26_port_host_source_v2.py",
+      "workdir": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+      "tool": {
+        "terminal_chunk": "7c5e4e",
+        "exit_code": 0,
+        "wall_time_seconds": 0.000013028
+      },
+      "result": {
+        "passed": true,
+        "checks": 21,
+        "scope": "selected host-wrapper AST on stdlib list mocks only",
+        "source_sha256": {
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_neuron_adapter_v2.py": "cb21325f96cb825ebbbc2b6dc344321ba88ab168be8d59983c0ff59ae709ec48",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/check_spark26_port_host_source_v2.py": "0223d93c6adf24628cec24c5183670b90ca307d04fc4ea08119b762d35714c10",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_port_contract_v2.py": "1dc5b0fb0cfdfb18ba52dc3056882412e63113ddc2f53552489d38027ebef2f0"
+        },
+        "native_tensor_execution": false,
+        "model_qualified": false,
+        "runtime_admitted": false
+      }
+    }
+  ],
+  "total_scalar_ast_mock_assertions": 1628,
+  "partial_batch_arrangements": 209,
+  "native_tensor_model_tests": 0,
+  "findings": [
+    {
+      "topic": "checkpoint and packed TP2 projection",
+      "assessment": "SDK strips model. before conversion and invokes the tie hook afterward. v2 preserves the original packed Q4096/K1024/V1024 rows and maps them to qkv_proj.Wqkv. The pinned SDK separately shards Q/K/V to local Q2048/K512/V512, with local eight-head gate/out columns aligned. Opaque-row mocks confirm one packed projection and split; they do not establish floating-point equivalence."
+    },
+    {
+      "topic": "trace ABI and output aliases",
+      "assessment": "The candidate has exactly the seven positional inputs used by the constrained SDK route. output_logits, tensor capture, speculation and LoRA are rejected. One FP32 logits output precedes 72 BF16 K/V cache outputs in ParameterList order; SDK source uses offset1 in that route. Actual graph alias application and dtype/lowering still need execution."
+    },
+    {
+      "topic": "physical cache arithmetic",
+      "assessment": "27 sliding layers retain511 prior tokens so appended current KV gives a512-token window;9 full layers allocate4096 positions. Prefill computes newest physical-ring contents and zeros invalid cells. Decode reads chronological prior cells before writing p modulo511; full attention masks the old current cell and appends current KV. Index arguments explicitly use long despite SDK int32 inputs. Reviewed arithmetic is not tensor execution.",
+      "cache_bytes_per_rank": 415014912
+    },
+    {
+      "topic": "partial batches and slot isolation",
+      "assessment": "Pinned SDK source sorts/pads missing slots and sets inactive IDs to-1 when apply_seq_ids_mask=True. Candidate clamps only read indices; destination selection compares the original ID against physical slots, so dummy rows cannot overwrite slot0. Selected actual masked_slot_write AST passed209 active/dummy arrangements. Main gather/scatter/cache functions were not numerically executed."
+    },
+    {
+      "topic": "host request and SDK prefill path",
+      "assessment": "Host checks unique real slots, contiguous right-padded prompt positions, stale/missing history, no mixed phases, and bounds below4096. One-token prompt is padded to2 with[1,0] mask. The constrained SDK selects prefill on minimum position0; model prefill derives physical arange and mask lengths, avoiding SDK padding position1. Host seen counters update only after base forward succeeds. Prefill replaces the requested row; reset clears host bookkeeping."
+    },
+    {
+      "topic": "original math preserved in source",
+      "assessment": "Pinned official source and v2 agree in FP32 residual/norm, separate per-attention-kind RoPE, BF16 projection intent, headwise sigmoid gating, stable FP32 softmax and configured GELU MLP. TP2 reductions, BF16 rounding, RoPE and compiler behavior are unexecuted."
+    },
+    {
+      "topic": "entrypoint guards",
+      "assessment": "Adapter requires runtime admission before native imports; registration install rejects before registration. Existing source-only guard stays unconditional. No serving installation or native imports were attempted."
+    }
+  ],
+  "risks_and_limits": [
+    "These1628 assertions are scalar/AST/list-mock assertions, not1628 model or device tests.",
+    "The packed QKV native constructor, original checkpoint load, tied tensors, TP2 sharding and collectives still need admitted native tests.",
+    "Actual gather/scatter/torch.where lowering and72-output cache alias behavior remain unverified; current tests execute only selected helper/host/SDK ASTs on mocks.",
+    "Per-slot torch.where repeatedly selects across complete cache tensors and may add cache traffic. No performance or speedup claim is supported.",
+    "Inherited SDK reset_kv_cache() debug helper expects model.past_key_values and is incompatible with the candidate kv_mgr attribute. reset() clears bookkeeping only. Cold qualification requires a fresh-load protocol; routine slot reuse is expected to overwrite its row.",
+    "Compile, cold-cache, decode beyond511, slot reuse/isolation, quality96 and matched HTTP comparison remain pending.",
+    "Target is TP2/B4 decode/B1 prefill/context4096. Official1M metadata does not extend this qualification.",
+    "No source defect requiring changes was confirmed within this source-only review. This does not establish actual framework import or runtime correctness."
+  ],
+  "native_imports": false,
+  "weights_loaded": false,
+  "tensor_payload_reads": false,
+  "compiler_or_neuron_execution": false,
+  "live_runtime_binding": false,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "speedup_claim": false
+}

@@ -1,0 +1,128 @@
+{
+  "approved_by_root": false,
+  "author": "/root/lfm_v3_independent_review",
+  "checks": [
+    {
+      "command": "python3 -B check_lfm3_nki05_full_cpu_successor_v3.py",
+      "count": 26,
+      "exit_code": 0,
+      "name": "full_cpu_successor_source_integration",
+      "terminal_chunk": "fae4b6"
+    },
+    {
+      "command": "python3 -B check_lfm3_full_cpu_known_warnings_v1.py",
+      "count": 12,
+      "exit_code": 0,
+      "name": "known_warning_specific",
+      "terminal_chunk": "726611"
+    },
+    {
+      "added_execution_sources": 3,
+      "exit_code": 0,
+      "name": "independent_complete_source_pin_and_additive_map_check",
+      "retained_original_count": 592,
+      "source_count": 595,
+      "terminal_chunk": "c419f9"
+    },
+    {
+      "diagnostic_result_json_saved": false,
+      "exit_code": 0,
+      "name": "worker_warning_receipt_error_during_original_failure_pure_mock",
+      "native_modules_loaded": false,
+      "original_error_retained_in_python_exception_context": true,
+      "success_reported": false,
+      "terminal_chunk": "479bfb",
+      "worker_failure_json_saved": false
+    }
+  ],
+  "confirmed": {
+    "all_595_actual_source_hashes_verified": true,
+    "all_counts_are_bounded_and_exact_integer_and_conserve_observed": true,
+    "all_original_592_pins_retained_unchanged": true,
+    "batches_per_full_pass": 291,
+    "cases_per_full_pass": 3716,
+    "children": 874,
+    "control_children": 1,
+    "four_exact_warning_signatures_require_category_message_absolute_filename_lineno_source_hash_and_line": true,
+    "full_leaf_diff_read": true,
+    "full_passes": 3,
+    "full_runner_diff_read": true,
+    "known_warning_source_rechecked_per_match_with_bounded_stable_named_read": true,
+    "limits_unchanged": {
+      "address_space_bytes": 12884901888,
+      "allowed_cpus": "6-7",
+      "file_bytes": 262144,
+      "max_files": 2048,
+      "memory_max_bytes": 10737418240,
+      "nice": 19,
+      "output_bytes": 1073741824,
+      "worker_seconds": 30000
+    },
+    "normalized_leaf_AST_identical_to_v2_except_warning_receipts_and_validation": true,
+    "normalized_runner_AST_identical_to_v2_except_bootstrap_and_receipt_accessor": true,
+    "original_actual_child_exit_gate_unchanged": true,
+    "original_lock_ownership_service_drain_and_release_functions_unchanged": true,
+    "original_scientific_execution_and_thresholds_unchanged": true,
+    "passed_report_does_not_override_exit120": true,
+    "unknown_or_changed_warnings_forwarded_unchanged": true,
+    "warning_filters_unchanged": true,
+    "warning_helper_read": true,
+    "warning_receipts_added_to_existing_files_only": true,
+    "worker_forwards_first_match_and_batches_store_all_known_signatures_and_counts": true
+  },
+  "current_runtime_binding_created": false,
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-v3-logging-only-source-delivery-20261112-v1.json",
+    "sha256": "9decf5dc0e2b17c6864cc58e0b627fd31e9675cc9f63755e08762a4b5880f758"
+  },
+  "finding": {
+    "id": "warning_receipt_failure_can_obstruct_structured_failure_evidence",
+    "locations": [
+      {
+        "detail": "warning_receipt in finally can raise before host.once(path,result).",
+        "function": "batch",
+        "line": 343,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v3.py"
+      },
+      {
+        "detail": "warning_receipt in except can raise before diagnostic-result and worker-failure are saved.",
+        "function": "execute_full_cpu",
+        "line": 504,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v3.py"
+      }
+    ],
+    "practical_trigger": "KnownWarningLog.snapshot intentionally raises if warnings.showwarning was replaced or accounting validation fails. This is not observed in a real run.",
+    "recommendation": "Before native execution, consider a new immutable successor that preserves the original failure and records receipt-generation failure separately; successful reports must still require valid receipts.",
+    "reproduction": "Pure mock: original admit raises, host.warning_receipt raises; the latter is raised with original as __context__, and neither diagnostic-result.json nor worker-failure.json exists.",
+    "root_decision_required_for_source_acceptance": true,
+    "severity": "diagnostic robustness; no false success or scientific-gate bypass"
+  },
+  "frozen_v2_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v2.py": "cee465642e4cc7101b2e216c5cd71f727e5820c3485977c1dbed897e3fe82b16",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py": "01a39c067f41b2a32e70f23e78019c9524892267fcd6f7a7d9c992279551d0aa"
+  },
+  "full_model_qualified": false,
+  "limitations": [
+    "No full CPU science, tensor/model/raw/native imports, compiler, RECORD verification, process/service inspection or lock operations were performed.",
+    "Counts cover calls delivered to showwarning only, through the saved snapshot; default-filtered, library-captured and final interpreter-shutdown warnings are outside the receipt scope.",
+    "Unknown output can still exhaust the original log cap; no unlimited-log guarantee.",
+    "Historical log saturation is supported by the saved delivery evidence; the underlying EFBIG/SIGXFSZ/flush mechanism was not directly observed or reaudited here."
+  ],
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T02:38:16.271035+00:00",
+  "review_verdict": "All delivered 38 checks and independent 595-pin validation pass. Scientific/runtime guards are preserved. One diagnostic-failure robustness finding remains for root disposition; this record is not root approval.",
+  "runtime_admitted": false,
+  "schema": "lfm3_full_cpu_v3_independent_review_v1",
+  "scope": "Independent source/stdlib/mock review; no runtime admission or root approval.",
+  "source_candidate": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-execution-source-candidate-20261112-v3.json",
+    "sha256": "7f1e545a701a96c39c982792289eaedb56e9091efc81f600e8eb0ed20c3deaf7"
+  },
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/check_lfm3_full_cpu_known_warnings_v1.py": "c5d0d8f3c22d6eda5b3c855c2d38eee9f344d1b39587ee18cc53175c7e40ccee",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/check_lfm3_nki05_full_cpu_successor_v3.py": "34d02d32b12343c4deac0a880adc0cbe102433b9efca2f6dc1db22e370df1f47",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_full_cpu_known_warnings_v1.py": "c5881cec0c2b43f87880a800fb2120b0ba1427ad127f794015b04b0afae99856",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3_nki05_full_cpu_leaf_v3.py": "23a8d42b8766d811b6677d52f592190740460cf577a617ce86927e58f7ca8c75",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v3.py": "035a8b06f1f8018c3ec196ae46bf21234241056ae14f819a5b62e7e2074ae310"
+  }
+}
