@@ -1,0 +1,28 @@
+{
+  "commands_executed": 0,
+  "current_binding_written": false,
+  "exit_code": 0,
+  "frozen_native_v5_and_serial_v4_unchanged": true,
+  "lock_acquired": false,
+  "native_imports": false,
+  "passed": true,
+  "rapid_exit_policy": "Existing live-identity observation is fail-closed. If helper exits before that observation, its actual waited exit is retained as failure; no retry or success substitution.",
+  "schema": "qwen35_package_helper_cleanup_source_audit_v5",
+  "script": {
+    "bytes": 7774,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_helper_cleanup_v5.py",
+    "sha256": "b47b0870a25f83db95a1ce55ae47e3a58754f0de0b80df25e9df0374c9cc2446"
+  },
+  "services_launched": false,
+  "source_only": true,
+  "terminal_chunk": "817a4f",
+  "tests": 6,
+  "verified": [
+    "Already-exited helper identity failure performs actual wait and writes failed receipt, even exit code zero.",
+    "Live child observation failure performs terminate followed by actual wait.",
+    "Terminate timeout escalates to kill followed by actual wait, preserving failure and recursive drain pending.",
+    "Runtime deadline uses same kill/wait sequence.",
+    "If final kill wait itself fails, no success receipt is emitted; native exception exits nonzero and root must complete original recursive cgroup drain.",
+    "Required evidence rejects missing event, failed event, missing actual wait, CPU backend or wrong consumed library path."
+  ]
+}

@@ -1,0 +1,82 @@
+INFO 11-12 16:26:33 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 16:26:33 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 16:26:33 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 16:26:33 [__init__.py:207] Platform plugin neuron is activated
+INFO 11-12 16:26:33 [__init__.py:36] Available plugins for group vllm.platform_plugins:
+INFO 11-12 16:26:33 [__init__.py:38] - neuron -> vllm_neuron:register
+INFO 11-12 16:26:33 [__init__.py:41] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 11-12 16:26:33 [__init__.py:207] Platform plugin neuron is activated
+Could not import vLLM config module for overrides: cannot import name 'ModelConfig' from partially initialized module 'vllm.config' (most likely due to a circular import) (/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/__init__.py)
+{"event": "qwen35_optional_numpy_probe_denied", "source": {"path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/testing/_private/utils.py", "sha256": "dc5ad24cc8b439da43383043a27720883433768e4d280e9855f437b8a4524277"}, "function": "check_support_sve", "machine": "x86_64", "command": "lscpu", "subprocess_started": false, "denied_before_exec": true, "exception": "FileNotFoundError", "reason": "Optional SVE discovery denied by the existing no-subprocess policy"}
+Could not import required modules for chat completion stream override: No module named 'vllm_neuron.patches'
+{"event": "qwen35_required_pjrt_helper_exit", "label": "parent", "owner": {"pid": 851624, "start_ticks": 428130806, "ppid": 851490, "argv": ["/home/ubuntu/venvs/vllm_neuron/bin/python3", "/home/ubuntu/venvs/vllm_neuron/bin/libneuronpjrt-path"], "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-package-r3-v4-20261112-package-native-preflight.service", "executable": "/usr/bin/python3.10"}, "parent_pid": 851490, "command": ["/home/ubuntu/venvs/vllm_neuron/bin/libneuronpjrt-path"], "sdk_command": ["libneuronpjrt-path"], "environment": {"HOME": "/home/ubuntu", "LANG": "C.UTF-8", "PATH": "/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin", "XDG_RUNTIME_DIR": "/run/user/1000", "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus", "NEURON_QWEN35": "1", "NEURON_ON_DEVICE_SAMPLING_DISABLED": "1", "NEURON_CPU_SAMPLER_FAST": "0", "XLA_DISABLE_FUNCTIONALIZATION": "1", "VLLM_WORKER_MULTIPROC_METHOD": "spawn", "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1", "TOKENIZERS_PARALLELISM": "false", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1", "TORCHINDUCTOR_COMPILE_THREADS": "1", "PYTHONDONTWRITEBYTECODE": "1", "HF_HOME": "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r3-v4-20261112/native/hf-cache", "XDG_CACHE_HOME": "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r3-v4-20261112/native/cache", "TMPDIR": "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r3-v4-20261112/native/tmp", "PYTHONNOUSERSITE": "1", "PYTHONPYCACHEPREFIX": "/mnt/nvme/neuron-work/qwen35-package-preflight-package-r3-v4-20261112/native/pjrt-helper-empty-pycache"}, "actual_returncode": 0, "popen_wait_observed": true, "stdout": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libneuronpjrt.so\n", "stderr": "", "elapsed_seconds": 0.8200987130403519, "library": {"bytes": 490967240, "ctime_ns": 1790148556431120432, "device": 66306, "inode": 8263433, "mtime_ns": 1772167698894522025, "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libneuronpjrt.so"}, "failure": null, "same_owned_cgroup_required": true, "whole_recursive_cgroup_drain_pending": true, "self_exit_claimed": false, "fabricated_command_output": false}
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py:16: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from .mappings import (
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py:16: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from .mappings import (
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/parallel_layers/layers.py:16: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from .mappings import (
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:74: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/blockwise.py:76: UserWarning: Warning: Failed to import blockwise_mm_baseline_shard_n_k1_while_2loops: No module named 'neuronxcc.nki._private.blockwise_matmul_while'
+  warnings.warn(f"Warning: {error}")
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/moe_fused_tkg.py:49: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/moe_fused_tkg.py:49: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/modules/moe/moe_fused_tkg.py:49: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  component, error = import_nki(config)
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/attention/utils.py:13: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.custom_calls import neuron_cumsum
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/lora_serving/lora_checkpoint.py:9: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.gqa import replicate_kv
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/lora_serving/lora_checkpoint.py:9: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.gqa import replicate_kv
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/modules/lora_serving/lora_checkpoint.py:9: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.gqa import replicate_kv
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/dbrx/modeling_dbrx.py:38: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.attention_base import NeuronAttentionBase
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/dbrx/modeling_dbrx.py:38: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.attention_base import NeuronAttentionBase
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/dbrx/modeling_dbrx.py:38: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.attention_base import NeuronAttentionBase
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/dbrx/modeling_dbrx.py:38: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.modules.attention.attention_base import NeuronAttentionBase
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/utils/constants.py:1: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.models.dbrx.modeling_dbrx import NeuronDbrxForCausalLM
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/llama4/modeling_llama4_vision.py:62: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.models.mllama.modeling_mllama_vision import (
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/utils/constants.py:6: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.models.mixtral.modeling_mixtral import NeuronMixtralForCausalLM
+/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/utils/constants.py:14: DeprecationWarning: torch_neuronx.nki_jit is deprecated, use nki.jit instead.
+  from neuronx_distributed_inference.models.qwen3_moe.modeling_qwen3_moe import NeuronQwen3MoeForCausalLM
+WARNING 11-12 16:26:45 [_custom_ops.py:20] Failed to import from vllm._C with ImportError('libcuda.so.1: cannot open shared object file: No such file or directory')
+WARNING:root:NeuronConfig init: Unexpected keyword arguments: {'enable_long_context_mode': False, 'enable_token_tree': False, 'is_chunked_prefill': False, 'is_hidden_dim_shuffled': False, 'is_intermediate_dim_shuffled': False, 'is_prefill_stage': None, 'kv_cache_tiling': False, 'kv_cache_update_with_kernel': False, 'tile_cc': False}
+WARNING:root:NeuronConfig init: Unexpected keyword arguments: {'enable_long_context_mode': False, 'enable_token_tree': False, 'is_chunked_prefill': False, 'is_hidden_dim_shuffled': False, 'is_intermediate_dim_shuffled': False, 'is_prefill_stage': None, 'kv_cache_tiling': False, 'kv_cache_update_with_kernel': False, 'tile_cc': False}
+WARNING:root:NeuronConfig init: Unexpected keyword arguments: {'enable_long_context_mode': False, 'enable_token_tree': False, 'is_chunked_prefill': False, 'is_hidden_dim_shuffled': False, 'is_intermediate_dim_shuffled': False, 'is_prefill_stage': None, 'kv_cache_tiling': False, 'kv_cache_update_with_kernel': False, 'tile_cc': False}
+The tokenizer you are loading from '/mnt/nvme/neuron-work/qwen35-package-preflight-package-r3-v4-20261112/native/shared-hf-config' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+WARNING:vllm_neuron.platform:Pin memory is not supported on Neuron.
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 658, in <module>
+    main()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 654, in main
+    execute(json.loads(raw))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 617, in execute
+    parent = native_checks(spec, bundle, 'parent')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 592, in native_checks
+    binding=binding, origins=origins(bundle), registration_idempotent=True,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 441, in origins
+    require(path.is_relative_to(Path(SITE_PACKAGES)), 'Foreign native Python module: ' + name)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v5.py", line 57, in require
+    raise RuntimeError(message)
+RuntimeError: Foreign native Python module: torch.classes

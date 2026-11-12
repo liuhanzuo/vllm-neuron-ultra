@@ -1,0 +1,767 @@
+{
+  "commands_executed": false,
+  "initialization_chain": [
+    "Qwen package register",
+    "registration.install imports NeuronCausalLM loader",
+    "NxDI models.config imports NxD quantization config",
+    "NxD __init__ imports kernels.flash_attn",
+    "torch_xla.__init__._aws_ec2_inf_trn_init",
+    "torch_neuronx.xla.init",
+    "initialization.initialize",
+    "Initializer.__init__",
+    "libneuronpjrt-path",
+    "libneuronxla.libneuronpjrt_path.main"
+  ],
+  "module_scope_calls": [],
+  "native_imports_executed": false,
+  "optional_denied_processes": [
+    {
+      "caller": "numpy.testing._private.utils.check_support_sve",
+      "command": "lscpu",
+      "fallback": "original except OSError returns False on x86_64"
+    }
+  ],
+  "packages": [
+    "libneuronxla",
+    "torch_neuronx",
+    "torch_xla",
+    "neuronx_distributed",
+    "neuronx_distributed_inference",
+    "vllm",
+    "transformers",
+    "torch/_dynamo",
+    "torch/_inductor",
+    "torch/utils"
+  ],
+  "process_calls": [
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(ver_cmd, stderr=subprocess.STDOUT)",
+      "line": 182,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libncc.py",
+      "scope": "_neuronx_cc_impl_fast",
+      "sha256": "1545066b7fd8e443a8676d757043e99725cde5fdca0f2e82946f80c3588a51a5"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, cwd=tmpdir, env=env, capture_output=True, text=True, check=True)",
+      "line": 198,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libncc.py",
+      "scope": "_neuronx_cc_impl_fast",
+      "sha256": "1545066b7fd8e443a8676d757043e99725cde5fdca0f2e82946f80c3588a51a5"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(ver_cmd, stderr=subprocess.STDOUT)",
+      "line": 71,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+      "scope": "call_neuron_compiler",
+      "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, stderr=subprocess.PIPE, cwd=work_dir, env=env)",
+      "line": 114,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+      "scope": "call_neuron_compiler",
+      "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run([hlo_opt_executable_path, '--input', input_hlo_path, '--output', output_hlo_path, '--passes', 'convert-inputs-to-optimal-shape', '--input-type', 'proto', '--output-type', 'proto'])",
+      "line": 670,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/hlo_utils.py",
+      "scope": "convert_inputs_to_optimal_shape",
+      "sha256": "482adeb61a1cbfaf095eae97e973bde04b5aac026bac69daafe902d1d45b7d72"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, shell=False, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)",
+      "line": 14,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/scripts/nxdi_distributed_launcher.py",
+      "scope": "get_command_output",
+      "sha256": "945f2d93a87599fd682ea6dde03c3786e723fee5a7c5bf6a4820436de66619af"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd_str, capture_output=True, shell=True)",
+      "line": 17,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/utils/profiling.py",
+      "scope": "run_shell_command",
+      "sha256": "0b17c8d76a511f1b199c81bb1540ec1587503200d6943c17a47660c5288c0554"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(['gprof2dot', '-f', 'pstats', '--node-label=total-time-percentage', '--node-label=self-time-percentage', '--node-label=total-time', str(profile_path)], stdout=subprocess.PIPE)",
+      "line": 438,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py",
+      "scope": "cprofile_wrapper.profile_wrapper",
+      "sha256": "a513a5f5618d2b18f483fda750180b41dc5d09a052d0155ca21b81f294069f68"
+    },
+    {
+      "call": "subprocess.check_call",
+      "expression": "subprocess.check_call(['dot', '-Tsvg', '-o', str(svg_path)], stdin=gprof2dot_process.stdout)",
+      "line": 450,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py",
+      "scope": "cprofile_wrapper.profile_wrapper",
+      "sha256": "a513a5f5618d2b18f483fda750180b41dc5d09a052d0155ca21b81f294069f68"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['nvcc', '--version'])",
+      "line": 257,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_dynamo/debug_utils.py",
+      "scope": "_cuda_system_info_comment",
+      "sha256": "ac564264ba0063eb9d61783b01b41d6b820caa50ff4b9365cabe378cde105c12"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(cmd, cwd=subdir, stdout=stdout, stderr=stderr, env=new_env)",
+      "line": 470,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_dynamo/repro/after_aot.py",
+      "scope": "isolate_fails",
+      "sha256": "ee1148d93a38d9d7ab83297d7b49552ec3381825e5bc42eff957c8a2a5d542e1"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(args, capture_output=True, cwd=cwd, check=False)",
+      "line": 172,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_dynamo/test_minifier_common.py",
+      "scope": "MinifierTestBase._maybe_subprocess_run",
+      "sha256": "57ef20f02c1422d1c791ef8b6f762f234b8e92d0c783ca85b6954b5c7476d4c8"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(cmd, env={**os.environ, **extra_env}, pass_fds=(subproc_read_fd, subproc_write_fd))",
+      "line": 143,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/autotune_process.py",
+      "scope": "TuningProcess.start",
+      "sha256": "c2d42316590fe7e5997b34cde2298947c988ded9061739a4cc103f96f9240c4e"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd.split(), capture_output=True, text=True, check=True)",
+      "line": 2144,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "AotCodeCompiler.compile",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(('openssl', 'sha512', filename), capture_output=True, text=True)",
+      "line": 2344,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "_precompile_header._get_file_checksum",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['ldd', os.path.join(search, file)])",
+      "line": 3029,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "HalideCodeCache._search_for_file",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.check_call",
+      "expression": "subprocess.check_call(shlex.split(halide_cmd_gen.get_command_line()))",
+      "line": 3198,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "HalideCodeCache.build_standalone_runtime",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(cmd_parts, stderr=subprocess.STDOUT, env=os.environ)",
+      "line": 3805,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "CUDACodeCache.compile",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(cmd_parts, stderr=subprocess.STDOUT, text=True, env=os.environ)",
+      "line": 3961,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/codecache.py",
+      "scope": "ROCmCodeCache.compile",
+      "sha256": "971ca0978de4e920fd45e2e92b660216eb8a14b962e410c1388afc371b77feb4"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(cmd, env={**os.environ, 'PYTHONPATH': os.environ.get('TORCH_CUSTOM_PYTHONPATH', os.pathsep.join(sys.path)), 'TORCH_WARM_POOL': '0', 'LD_LIBRARY_PATH': get_ld_library_path()}, pass_fds=(subproc_read_fd, subproc_write_fd), stdout=subprocess.DEVNULL if local else None, stderr=subprocess.DEVNULL if local else None)",
+      "line": 142,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/compile_worker/subproc_pool.py",
+      "scope": "SubprocPool.__init__",
+      "sha256": "72a8e44a7ea586e8a5274834c4367f62125fa4ff5ea78334398dd36936214fc3"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cxx, '--version'])",
+      "line": 97,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "cpp_compiler_search",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_call",
+      "expression": "subprocess.check_call([conda, 'create', f'--prefix={prefix}', '--channel=conda-forge', '--quiet', '-y', 'python=3.8', 'gxx'], stdout=subprocess.PIPE)",
+      "line": 114,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "install_gcc_via_conda",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '/help'], stderr=subprocess.STDOUT)",
+      "line": 136,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "check_compiler_exist_windows",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd.split(), capture_output=True, text=True, check=True)",
+      "line": 185,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "convert_cubin_to_obj",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd.split(), capture_output=True, text=True, check=True)",
+      "line": 188,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "convert_cubin_to_obj",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd.split(), capture_output=True, text=True, check=True)",
+      "line": 199,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "convert_cubin_to_obj",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cpp_compiler, '--version'])",
+      "line": 205,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "_is_apple_clang",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cpp_compiler, '/help'], stderr=subprocess.STDOUT)",
+      "line": 239,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "_is_msvc_cl",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cpp_compiler, '--version'], stderr=subprocess.DEVNULL)",
+      "line": 264,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "_is_intel_compiler",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '-v'], stderr=subprocess.STDOUT, env=env)",
+      "line": 324,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "get_compiler_version_info",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '--version'], stderr=subprocess.STDOUT, env=env)",
+      "line": 329,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "get_compiler_version_info",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, cwd=cwd, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)",
+      "line": 379,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "_run_compile_cmd",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(command.split())",
+      "line": 892,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "is_conda_llvm_openmp_installed",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['brew', '--prefix', 'libomp'])",
+      "line": 908,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "homebrew_libomp",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cpp_compiler, '-print-file-name=bin'])",
+      "line": 922,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "perload_clang_libomp_win",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([cpp_compiler, f'-print-file-name={lib_name}'], stderr=subprocess.DEVNULL)",
+      "line": 937,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpp_builder.py",
+      "scope": "perload_icx_libomp_win._load_icx_built_in_lib_by_name",
+      "sha256": "2345a91613597748715e0c4f6d4c26eadd8e1ba53177cfbbe427c5f78628db3a"
+    },
+    {
+      "call": "subprocess.check_call",
+      "expression": "subprocess.check_call([sys.executable, '-c', VecISA._avx_py_load.replace('__lib_path__', output_path)], cwd=output_dir, stderr=subprocess.DEVNULL, env={**os.environ, 'PYTHONPATH': os.environ.get('TORCH_CUSTOM_PYTHONPATH', os.pathsep.join(sys.path))})",
+      "line": 126,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/cpu_vec_isa.py",
+      "scope": "VecISA.check_build",
+      "sha256": "2f78c89f6a40a3e36eb91d9f1fcbdbfacace1e6476410864719d621507efe428"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(ncu_cmd, check=True)",
+      "line": 378,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/_inductor/wrapper_benchmark.py",
+      "scope": "ncu_analyzer",
+      "sha256": "6048081d9b6e0c65bd7265203b79623531f155ac05c04c3076eda3815ffad3be"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['python', input_filename], env=env, capture_output=True, text=True, cwd=os.path.dirname(input_filename) or '.')",
+      "line": 109,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/_get_clean_triton.py",
+      "scope": "process_file",
+      "sha256": "3233f0d0c3bb432f05474d4e49eeb5d668cc235ab10e3e974deab9aa26541b26"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, capture_output=True)",
+      "line": 120,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/_strobelight/cli_function_profiler.py",
+      "scope": "StrobelightCLIFunctionProfiler._run_async",
+      "sha256": "bf038adefb0a4dc7fa73beb0aa5bd979f96b1f4903cbef471baa47ea6dd02842"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, capture_output=True)",
+      "line": 145,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/_strobelight/cli_function_profiler.py",
+      "scope": "StrobelightCLIFunctionProfiler._wait_for_running",
+      "sha256": "bf038adefb0a4dc7fa73beb0aa5bd979f96b1f4903cbef471baa47ea6dd02842"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, capture_output=True)",
+      "line": 170,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/_strobelight/cli_function_profiler.py",
+      "scope": "StrobelightCLIFunctionProfiler._stop_run",
+      "sha256": "bf038adefb0a4dc7fa73beb0aa5bd979f96b1f4903cbef471baa47ea6dd02842"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, capture_output=True)",
+      "line": 193,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/_strobelight/cli_function_profiler.py",
+      "scope": "StrobelightCLIFunctionProfiler._get_results",
+      "sha256": "bf038adefb0a4dc7fa73beb0aa5bd979f96b1f4903cbef471baa47ea6dd02842"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['which', cmd], capture_output=True, check=False)",
+      "line": 501,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/benchmark/utils/valgrind_wrapper/timer_interface.py",
+      "scope": "_ValgrindWrapper.__init__",
+      "sha256": "d4ea2117f083cc2e6930cf7d425561cc3430c8b5a840cc13c8e78e979c93301a"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(args, stdout=f_stdout_stderr, stderr=subprocess.STDOUT, **kwargs)",
+      "line": 603,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/benchmark/utils/valgrind_wrapper/timer_interface.py",
+      "scope": "_ValgrindWrapper._invoke.run",
+      "sha256": "d4ea2117f083cc2e6930cf7d425561cc3430c8b5a840cc13c8e78e979c93301a"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)",
+      "line": 93,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/collect_env.py",
+      "scope": "run",
+      "sha256": "2ecc3b7e6c1eb097d446aff9bb72b1e3e6a5119c550bf4a640042be0f57280bf"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '-v'], stderr=subprocess.STDOUT, env=env)",
+      "line": 406,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "check_compiler_ok_for_platform",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '--version'], stderr=subprocess.STDOUT, env=env)",
+      "line": 409,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "check_compiler_ok_for_platform",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '-dumpfullversion', '-dumpversion'])",
+      "line": 457,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "get_compiler_abi_compatibility_and_version",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(compiler, stderr=subprocess.STDOUT)",
+      "line": 461,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "get_compiler_abi_compatibility_and_version",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([nvcc, '--version'])",
+      "line": 490,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "_check_cuda_version",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '-v'], stderr=subprocess.STDOUT, env=env)",
+      "line": 1724,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "check_compiler_is_gcc",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output([compiler, '--version'], stderr=subprocess.STDOUT, env=env)",
+      "line": 1727,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "check_compiler_is_gcc",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(pch_cmd, shell=True, stderr=subprocess.STDOUT)",
+      "line": 1821,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "_check_and_build_extension_h_precompiler_headers.build_precompile_header",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output('ninja --version'.split())",
+      "line": 2299,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "is_ninja_available",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, shell=IS_WINDOWS and IS_HIP_EXTENSION, stdout=stdout_fileno if verbose else subprocess.PIPE, stderr=subprocess.STDOUT, cwd=build_directory, check=True, env=env)",
+      "line": 2595,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "_run_ninja_build",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['where', 'cl'])",
+      "line": 2946,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/utils/cpp_extension.py",
+      "scope": "_write_ninja_file",
+      "sha256": "c860d5612821c13f1d6a6c76ab59b9d6162eb260f041f466876f888bf197d5e7"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command)",
+      "line": 224,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/experimental/profiler/v1_x/profiling.py",
+      "scope": "profile.__exit__",
+      "sha256": "ac3b264879ca5462ddb1a0c4ee1757c431531eeecf924ffac142465df3b4381b"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command)",
+      "line": 420,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/experimental/profiler/v2_x/profiling.py",
+      "scope": "profile.tensorboard_post_process",
+      "sha256": "2f028ad1007d6b014a47fafd05c90b0370d3b9c8897d4104f9d3366816781e81"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['libneuronpjrt-path'], stdout=subprocess.PIPE)",
+      "line": 88,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__init__",
+      "sha256": "34b4c73980c4513696569f4cf2ef51fe9de5952a9957a9af706e2457fcb90116"
+    },
+    {
+      "call": "subprocess.call",
+      "expression": "subprocess.call(cmd, shell=True, cwd=workdir)",
+      "line": 49,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/parallel_compile/analyze_utils.py",
+      "scope": "compile",
+      "sha256": "0f3873ab54d6883afd25e9df5837b1856fe74f8c785874f932cee465ac157708"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "Popen(cmd, stdout=PIPE, stderr=STDOUT, env=graph_tracing_env)",
+      "line": 352,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/parallel_compile/neuron_parallel_compile.py",
+      "scope": "run_train_script",
+      "sha256": "c16edc4d5b4c4889434e9aad9c926da0c2ef067e6632781113b2c6add1d86dc1"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, cwd=compiler_workdir)",
+      "line": 334,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/analyze.py",
+      "scope": "check_supported_unsupported",
+      "sha256": "eae4d5530493a6318ec846115975ee6cc26dbe6988cfc4ee849b0f3a1105023a"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(f'md5sum {computelibs[0]}', shell=True)",
+      "line": 217,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/custom_op.py",
+      "scope": "load",
+      "sha256": "6d39d0e7a961f98258a8a8e816960017ef09365a5566eeafd1afe105e8e97674"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, shell=True, capture_output=True)",
+      "line": 234,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/custom_op.py",
+      "scope": "load",
+      "sha256": "6d39d0e7a961f98258a8a8e816960017ef09365a5566eeafd1afe105e8e97674"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(f'md5sum {libname}', shell=True)",
+      "line": 275,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/custom_op.py",
+      "scope": "load_library",
+      "sha256": "6d39d0e7a961f98258a8a8e816960017ef09365a5566eeafd1afe105e8e97674"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, shell=True, capture_output=True)",
+      "line": 289,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/custom_op.py",
+      "scope": "load_library",
+      "sha256": "6d39d0e7a961f98258a8a8e816960017ef09365a5566eeafd1afe105e8e97674"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command)",
+      "line": 320,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/trace.py",
+      "scope": "hlo_compile",
+      "sha256": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['ruff', 'check', new_module_folder, tests_folder, model_init_file, '--fix'], cwd=REPO_PATH, stdout=subprocess.DEVNULL)",
+      "line": 553,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/commands/add_new_model_like.py",
+      "scope": "create_new_model_like",
+      "sha256": "2cf1aa527f0d434853f08185a421f8569d897038cb23f52c65427b0eaeeb9e03"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['ruff', 'format', new_module_folder, tests_folder, model_init_file], cwd=REPO_PATH, stdout=subprocess.DEVNULL)",
+      "line": 558,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/commands/add_new_model_like.py",
+      "scope": "create_new_model_like",
+      "sha256": "2cf1aa527f0d434853f08185a421f8569d897038cb23f52c65427b0eaeeb9e03"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['python', 'utils/check_doc_toc.py', '--fix_and_overwrite'], cwd=REPO_PATH, stdout=subprocess.DEVNULL)",
+      "line": 563,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/commands/add_new_model_like.py",
+      "scope": "create_new_model_like",
+      "sha256": "2cf1aa527f0d434853f08185a421f8569d897038cb23f52c65427b0eaeeb9e03"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['python', 'utils/sort_auto_mappings.py'], cwd=REPO_PATH, stdout=subprocess.DEVNULL)",
+      "line": 566,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/commands/add_new_model_like.py",
+      "scope": "create_new_model_like",
+      "sha256": "2cf1aa527f0d434853f08185a421f8569d897038cb23f52c65427b0eaeeb9e03"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(['python', 'utils/modular_model_converter.py', new_lowercase_name], cwd=REPO_PATH, stdout=subprocess.DEVNULL)",
+      "line": 569,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/commands/add_new_model_like.py",
+      "scope": "create_new_model_like",
+      "sha256": "2cf1aa527f0d434853f08185a421f8569d897038cb23f52c65427b0eaeeb9e03"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(cmd_line, stdout=subprocess.PIPE)",
+      "line": 59,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/onnx/__main__.py",
+      "scope": "export_with_optimum",
+      "sha256": "259f5999e46c9c38adc133166fe7454fc5bd00498ca0c28b4374af6f20a4634c"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(ffmpeg_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)",
+      "line": 54,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/pipelines/audio_classification.py",
+      "scope": "ffmpeg_read",
+      "sha256": "f54e8099500f7cf22776e05b76e79dd275d9a4c763da7593815dd2d26ea0a25a"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(ffmpeg_command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)",
+      "line": 34,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/pipelines/audio_utils.py",
+      "scope": "ffmpeg_read",
+      "sha256": "1cbcdd04535039f0f22496ef7cc6176535e559c8d33cbc9668f3ba7d4ba54249"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, bufsize=bufsize)",
+      "line": 270,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/pipelines/audio_utils.py",
+      "scope": "_ffmpeg_stream",
+      "sha256": "1cbcdd04535039f0f22496ef7cc6176535e559c8d33cbc9668f3ba7d4ba54249"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, text=True, stderr=subprocess.PIPE, encoding='utf-8')",
+      "line": 287,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/pipelines/audio_utils.py",
+      "scope": "_get_microphone_name",
+      "sha256": "1cbcdd04535039f0f22496ef7cc6176535e559c8d33cbc9668f3ba7d4ba54249"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(command, stderr=subprocess.STDOUT)",
+      "line": 2587,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/testing_utils.py",
+      "scope": "run_command",
+      "sha256": "9b408cdd6815d00ed6e4667ada564009b8b28bee2ebe68d3ba88fa405b4ecb27"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(command, env=env, check=True, capture_output=True)",
+      "line": 2829,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/testing_utils.py",
+      "scope": "run_test_using_subprocess.wrapper",
+      "sha256": "9b408cdd6815d00ed6e4667ada564009b8b28bee2ebe68d3ba88fa405b4ecb27"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(cmd, capture_output=True, env=env, text=True, check=True)",
+      "line": 3842,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/testing_utils.py",
+      "scope": "torchrun",
+      "sha256": "9b408cdd6815d00ed6e4667ada564009b8b28bee2ebe68d3ba88fa405b4ecb27"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['ninja', '--version'])",
+      "line": 1102,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/utils/import_utils.py",
+      "scope": "is_ninja_available",
+      "sha256": "66b2ac40be2c538dbd9409370c1f6bf769934b8b232edac365e16299c5ec1108"
+    },
+    {
+      "call": "subprocess.Popen",
+      "expression": "subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=shell)",
+      "line": 101,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/collect_env.py",
+      "scope": "run",
+      "sha256": "5a9d55f58aaac4a211024d78c38397bb17973dcb6b94ad4f96777d56f40342c4"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run([sys.executable, __file__], input=input_bytes, capture_output=True)",
+      "line": 284,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/distributed/device_communicators/all_reduce_utils.py",
+      "scope": "gpu_p2p_access_check",
+      "sha256": "0a40e20b9909d4d081b50fcb9df358796ea542566ba7b8bd4278ba59db3a96f7"
+    },
+    {
+      "call": "subprocess.run",
+      "expression": "subprocess.run(_SUBPROCESS_COMMAND, input=input_bytes, capture_output=True)",
+      "line": 960,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/model_executor/models/registry.py",
+      "scope": "_run_in_subprocess",
+      "sha256": "66cc1cd3245239328c86af49dde46ac98bfefa3b5e52d038eb683c2d06076c25"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['sysctl -n hw.optional.arm.FEAT_BF16'], shell=True)",
+      "line": 80,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/platforms/cpu.py",
+      "scope": "CpuPlatform.supported_dtypes",
+      "sha256": "0a71e9e78a5feb4435884fac762b2718730c2463c961a88200df4ed586d35cd2"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output('lscpu -J -e=CPU,CORE,NODE', shell=True, text=True)",
+      "line": 281,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/platforms/cpu.py",
+      "scope": "CpuPlatform.get_allowed_cpu_core_node_list",
+      "sha256": "0a71e9e78a5feb4435884fac762b2718730c2463c961a88200df4ed586d35cd2"
+    },
+    {
+      "call": "subprocess.check_output",
+      "expression": "subprocess.check_output(['/sbin/ldconfig', '-p'])",
+      "line": 1346,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/utils/__init__.py",
+      "scope": "find_library",
+      "sha256": "15644926d0877d9b11694fc03629717a7a47d6f995afdef141746ed385cd4ce4"
+    }
+  ],
+  "process_related_source_files_parsed": 54,
+  "required_initialization_processes": [
+    {
+      "caller": "torch_neuronx.initialization.initializer.Initializer.__init__",
+      "command": [
+        "libneuronpjrt-path"
+      ],
+      "reason": "required real NEURON PJRT library location"
+    }
+  ],
+  "schema": "qwen35_package_native_initialization_source_audit_v5",
+  "source_files_scanned": 4169,
+  "source_only": true,
+  "source_reachability_findings": [
+    "libneuronxla helper package imports only define compiler/cache/profiler process functions; the locator main only prints the library path.",
+    "torch_neuronx remaining process calls belong to trace/analyze/custom-op/profiling paths not invoked by package registration/config/CPU split/sampler/tokenizer.",
+    "NxD remaining process call is hlo_utils weight-sharding transformation; NxDI process calls belong to distributed-launcher/profiling.",
+    "vLLM registry subprocess is lazy model inspection; package register_model receives an actual class, and get_supported_archs only returns model keys.",
+    "vLLM ldconfig helper and CPU platform lscpu code are not called by the selected Neuron platform.",
+    "Transformers process calls belong to audio pipelines, command/ONNX/testing tools or CUDA model ninja availability, not current config/tokenizer paths.",
+    "Torch Dynamo/Inductor process calls are compiler, benchmark, repro or autotune operations. No torch.compile/model is invoked; TORCHINDUCTOR_COMPILE_THREADS=1 stays fixed.",
+    "Original platform optional chat override catches its missing patches ImportError as warning; AST mock confirms no raise.",
+    "SDK-added NEURON/PJRT variables must not leak into the required fresh spawn; pass the original pre-import clean environment only during child.start."
+  ],
+  "source_scan_is_not_runtime_qualification": true
+}

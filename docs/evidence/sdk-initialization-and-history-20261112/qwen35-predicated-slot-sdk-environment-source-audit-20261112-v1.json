@@ -1,0 +1,789 @@
+{
+  "blockers": [
+    {
+      "description": "Exact dict(os.environ)==environment(work) rejects at least three unconditional real SDK defaults after native imports. Timing guard repeats every0.5s; this is an execution blocker even though source/mock lifecycle suite passed.",
+      "frozen_contract": {
+        "bytes": 16930,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_contract_v2.py",
+        "sha256": "32820ce0e3028d62d09e4e62f8e9bd72c84555981169daef5e01ede447cab6e3"
+      },
+      "id": "strict-clean-after-sdk-import",
+      "line": 105
+    },
+    {
+      "description": "os.environ.update(key=value) writes literal key. trace defaults cpu_backend=True; generate_hlo uses mock_neuron_cores then set_pjrt_device(True). With initial PJRT_DEVICE=NEURON, normal/exception context exit leaves PJRT_DEVICE=CPU and key=NEURON.",
+      "id": "sdk-context-key-restore-typo",
+      "line": 35,
+      "source": {
+        "bytes": 4404,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/contexts.py",
+        "sha256": "67a256026207cfd206f1303ec2f084e22ac7be8740ac98717c96c7b14291f81e"
+      }
+    }
+  ],
+  "environment_write_sites": [
+    {
+      "line": 46,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_xla_flags",
+      "source": "os.environ['XLA_FLAGS'] = ' '.join(flags)"
+    },
+    {
+      "line": 93,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_libtpu_flags",
+      "source": "os.environ['LIBTPU_INIT_ARGS'] = ' '.join(flags)"
+    },
+    {
+      "line": 97,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '1')"
+    },
+    {
+      "line": 98,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('GRPC_VERBOSITY', 'ERROR')"
+    },
+    {
+      "line": 118,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_debug_env",
+      "source": "os.environ.setdefault('XLA_FNTRACKER_FILE', tmp_fname)"
+    },
+    {
+      "line": 139,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_aws_ec2_inf_trn_init",
+      "source": "os.environ.setdefault('NEURON_LIBRARY_PATH', libneuronpjrt_path())"
+    },
+    {
+      "line": 176,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_tpu_vm_library_path",
+      "source": "os.environ['PTXLA_TPU_LIBRARY_PATH'] = bundled_libtpu_path"
+    },
+    {
+      "line": 181,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_tpu_vm_library_path",
+      "source": "os.environ['PTXLA_TPU_LIBRARY_PATH'] = libtpu.get_library_path()"
+    },
+    {
+      "line": 103,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('ALLOW_MULTIPLE_LIBTPU_LOAD', '1')"
+    },
+    {
+      "line": 104,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('TPU_ML_PLATFORM', 'PyTorch/XLA')"
+    },
+    {
+      "line": 106,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('TPU_ML_PLATFORM_VERSION', __version__)"
+    },
+    {
+      "line": 107,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('ENABLE_RUNTIME_UPTIME_TELEMETRY', '1')"
+    },
+    {
+      "line": 110,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_setup_default_env",
+      "source": "os.environ.setdefault('TPU_MEGACORE', 'megacore_dense')"
+    },
+    {
+      "line": 148,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "scope": "_aws_ec2_inf_trn_init",
+      "source": "libneuronxla.configure_environment()"
+    },
+    {
+      "line": 54,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "set_device_type",
+      "source": "os.environ[xenv.PJRT_DEVICE] = pjrt_device"
+    },
+    {
+      "line": 228,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "use_spmd",
+      "source": "os.environ['XLA_USE_SPMD'] = '1'"
+    },
+    {
+      "line": 275,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "initialize_cache",
+      "source": "os.environ['XLA_PERSISTENT_CACHE_PATH'] = path"
+    },
+    {
+      "line": 276,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "initialize_cache",
+      "source": "os.environ['XLA_PERSISTENT_CACHE_READ_ONLY'] = '1' if readonly else '0'"
+    },
+    {
+      "line": 65,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.PJRT_DEVICE] = 'TPU'"
+    },
+    {
+      "line": 231,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "use_spmd",
+      "source": "os.environ['XLA_AUTO_SPMD'] = '1'"
+    },
+    {
+      "line": 68,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.PJRT_DEVICE] = 'CUDA'"
+    },
+    {
+      "line": 74,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.PJRT_DEVICE] = 'CUDA'"
+    },
+    {
+      "line": 75,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.GPU_NUM_DEVICES] = num_devices_str"
+    },
+    {
+      "line": 78,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.PJRT_DEVICE] = 'NEURON'"
+    },
+    {
+      "line": 81,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "scope": "_maybe_select_default_device",
+      "source": "os.environ[xenv.PJRT_DEVICE] = 'CPU'"
+    },
+    {
+      "line": 95,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "num_local_processes",
+      "source": "os.environ['NEURON_PJRT_PROCESSES_NUM_DEVICES'] = ','.join(['1' for _ in range(num_processes)])"
+    },
+    {
+      "line": 37,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "set_rt_root_comm_id",
+      "source": "os.environ['NEURON_RT_ROOT_COMM_ID'] = '{}:{}'.format(root_addr, root_port)"
+    },
+    {
+      "line": 46,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "set_envvar_defaults",
+      "source": "os.environ.setdefault('ALLREDUCE_GRADIENTS_BUCKET_SIZE_MB', '50')"
+    },
+    {
+      "line": 85,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "configure_pjrt_environment",
+      "source": "os.environ['NEURON_PJRT_PROCESS_INDEX'] = os.environ.get('RANK', '0')"
+    },
+    {
+      "line": 89,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "configure_pjrt_environment",
+      "source": "os.environ['PJRT_LOCAL_PROCESS_RANK'] = os.environ.get('LOCAL_RANK', '0')"
+    },
+    {
+      "line": 108,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "initialize_env",
+      "source": "os.environ['NEURON_PJRT_PROCESS_INDEX'] = str(local_rank)"
+    },
+    {
+      "line": 68,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "configure_pjrt_environment",
+      "source": "os.environ['NEURON_PJRT_WORLD_SIZE'] = os.environ.get('WORLD_SIZE', '1')"
+    },
+    {
+      "line": 72,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "configure_pjrt_environment",
+      "source": "os.environ['PJRT_LOCAL_PROCESS_COUNT'] = os.environ.get('LOCAL_WORLD_SIZE', '1')"
+    },
+    {
+      "line": 77,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "configure_pjrt_environment",
+      "source": "os.environ['NEURON_RT_VISIBLE_CORES'] = os.environ.get('LOCAL_RANK', '0')"
+    },
+    {
+      "line": 110,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "scope": "initialize_env",
+      "source": "os.environ['NEURON_RT_VISIBLE_CORES'] = str(local_rank)"
+    },
+    {
+      "line": 67,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron_utils.py",
+      "scope": "remap_visible_cores",
+      "source": "os.environ['NEURON_RT_VISIBLE_CORES'] = str(remapped_core)"
+    },
+    {
+      "line": 101,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "scope": "initialize_singleprocess",
+      "source": "os.environ.setdefault(xenv.PJRT_LOCAL_PROCESS_COUNT, '1')"
+    },
+    {
+      "line": 111,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "scope": "initialize_multiprocess",
+      "source": "os.environ.setdefault(xenv.PJRT_LOCAL_PROCESS_RANK, str(local_rank))"
+    },
+    {
+      "line": 112,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "scope": "initialize_multiprocess",
+      "source": "os.environ.setdefault(xenv.PJRT_LOCAL_PROCESS_COUNT, str(local_world_size))"
+    },
+    {
+      "line": 217,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "scope": "_initialize_single_process",
+      "source": "os.environ.setdefault(xenv.PJRT_LOCAL_PROCESS_RANK, str(local_rank))"
+    },
+    {
+      "line": 218,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "scope": "_initialize_single_process",
+      "source": "os.environ.setdefault(xenv.PJRT_LOCAL_PROCESS_COUNT, str(local_world_size))"
+    },
+    {
+      "line": 39,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/jax_workarounds.py",
+      "scope": "jax_env_context",
+      "source": "os.environ['SKIP_MEGASCALE_PJRT_CLIENT'] = 'true'"
+    },
+    {
+      "line": 43,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/jax_workarounds.py",
+      "scope": "jax_env_context",
+      "source": "os.environ['SKIP_MEGASCALE_PJRT_CLIENT'] = previous_skip_megascale_env"
+    },
+    {
+      "line": 45,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/jax_workarounds.py",
+      "scope": "jax_env_context",
+      "source": "os.environ.pop('SKIP_MEGASCALE_PJRT_CLIENT', None)"
+    },
+    {
+      "line": 75,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/experimental/plugins.py",
+      "scope": "use_dynamic_plugins",
+      "source": "os.environ[xenv.PJRT_DYNAMIC_PLUGINS] = '1'"
+    },
+    {
+      "line": 39,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "num_local_processes",
+      "source": "os.environ['NEURON_PJRT_PROCESSES_NUM_DEVICES'] = ','.join(['1' for _ in range(num_processes)])"
+    },
+    {
+      "line": 67,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "initialize_env_wrapper",
+      "source": "os.environ['NEURON_PJRT_PROCESS_INDEX'] = str(local_rank)"
+    },
+    {
+      "line": 61,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "initialize_env_wrapper",
+      "source": "os.environ['NEURON_PT_MPMD_MODE'] = '1'"
+    },
+    {
+      "line": 69,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "initialize_env_wrapper",
+      "source": "os.environ['NEURON_RT_VISIBLE_CORES'] = str(local_rank)"
+    },
+    {
+      "line": 142,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "<module>",
+      "source": "os.environ['JAX_LOGGING_LEVEL'] = 'NOTSET'"
+    },
+    {
+      "line": 124,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "_add_lib_preload",
+      "source": "os.environ['LD_PRELOAD'] = os.pathsep.join([p.strip(os.pathsep) for p in ld_preloads if p])"
+    },
+    {
+      "line": 102,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "scope": "initialize_env_wrapper",
+      "source": "os.environ['NEURON_RT_VISIBLE_CORES'] = str(remapped_core)"
+    },
+    {
+      "line": 262,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "set_rt_root_comm_id",
+      "source": "os.environ['NEURON_RT_ROOT_COMM_ID'] = '{}:{}'.format(root_addr, root_port)"
+    },
+    {
+      "line": 117,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "init",
+      "source": "os.environ['XLA_USE_EAGER_DEBUG_MODE'] = '1'"
+    },
+    {
+      "line": 159,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "set_allreduce_bucket_size",
+      "source": "os.environ['ALLREDUCE_GRADIENTS_BUCKET_SIZE_MB'] = os.environ['BUCKET_CAP_MB']"
+    },
+    {
+      "line": 163,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "set_allreduce_bucket_size",
+      "source": "os.environ['ALLREDUCE_GRADIENTS_BUCKET_SIZE_MB'] = '50'"
+    },
+    {
+      "line": 203,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "maybe_disable_pjrt_async_exec",
+      "source": "_maybe_setenv('NEURON_PJRT_ASYNC_RUNTIME', '1')"
+    },
+    {
+      "line": 85,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "scope": "init",
+      "source": "os.environ['NEURON_PT_MPMD_MODE'] = '1'"
+    },
+    {
+      "line": 27,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/contexts.py",
+      "scope": "environment",
+      "source": "os.environ.update(**env)"
+    },
+    {
+      "line": 33,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/contexts.py",
+      "scope": "environment",
+      "source": "os.environ.pop(key)"
+    },
+    {
+      "line": 35,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/contexts.py",
+      "scope": "environment",
+      "source": "os.environ.update(key=value)"
+    },
+    {
+      "line": 61,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "_remove_unused_gpu_flags",
+      "source": "os.environ['XLA_FLAGS'] = ' '.join(flags)"
+    },
+    {
+      "line": 20,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "_disable_functionalization",
+      "source": "_maybe_setenv('XLA_DISABLE_FUNCTIONALIZATION', '1')"
+    },
+    {
+      "line": 26,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "_disable_numeric_cc_token",
+      "source": "_maybe_setenv('DISABLE_NUMERIC_CC_TOKEN', '1')"
+    },
+    {
+      "line": 142,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer._initialize_pjrt_ranks",
+      "source": "os.environ['NEURON_PJRT_PROCESS_INDEX'] = os.environ.get('RANK', '0')"
+    },
+    {
+      "line": 148,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer._initialize_pjrt_ranks",
+      "source": "os.environ['PJRT_LOCAL_PROCESS_RANK'] = os.environ.get('LOCAL_RANK', '0')"
+    },
+    {
+      "line": 294,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__set_envvar_defaulted_and_save",
+      "source": "os.environ[key_to] = value"
+    },
+    {
+      "line": 83,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__init__",
+      "source": "os.environ['PJRT_DEVICE'] = 'NEURON'"
+    },
+    {
+      "line": 87,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__init__",
+      "source": "os.environ['NEURON_LIBRARY_PATH'] = subprocess.run(['libneuronpjrt-path'], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()"
+    },
+    {
+      "line": 102,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__init__",
+      "source": "libneuronxla.configure_environment()"
+    },
+    {
+      "line": 274,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__clear_previous_pjrt_env_vars",
+      "source": "os.environ[key] = previous_val"
+    },
+    {
+      "line": 272,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "scope": "Initializer.__clear_previous_pjrt_env_vars",
+      "source": "del os.environ[key]"
+    },
+    {
+      "line": 57,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/utils/utils.py",
+      "scope": "_maybe_setenv",
+      "source": "os.environ[key] = value"
+    },
+    {
+      "line": 13,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/__init__.py",
+      "scope": "configure_environment",
+      "source": "_maybe_setenv('XLA_IR_SHAPE_CACHE_SIZE', _default_xla_ir_shape_cache_size)"
+    },
+    {
+      "line": 45,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/__init__.py",
+      "scope": "_maybe_setenv",
+      "source": "_os.environ[key] = value"
+    },
+    {
+      "line": 16,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/__init__.py",
+      "scope": "configure_environment",
+      "source": "_maybe_setenv('NEURON_RT_STOCHASTIC_ROUNDING_EN', _default_rt_stochastic_rounding_enable)"
+    },
+    {
+      "line": 27,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/version.py",
+      "scope": "maybe_set_pjrt_c_api_version",
+      "source": "os.environ[env_key] = api_version"
+    },
+    {
+      "line": 10,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/hook.py",
+      "scope": "hook",
+      "source": "_maybe_setenv('NEURON_RT_ROOT_COMM_ID', _default_root_comm_id)"
+    },
+    {
+      "line": 17,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/hook.py",
+      "scope": "_maybe_setenv",
+      "source": "os.environ[key] = value"
+    },
+    {
+      "line": 20,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/core/__init__.py",
+      "scope": "<module>",
+      "source": "os.environ[envkey] = '1'"
+    },
+    {
+      "line": 53,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/core/__init__.py",
+      "scope": "<module>",
+      "source": "del os.environ[envkey]"
+    },
+    {
+      "line": 2330,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py",
+      "scope": "_TorchCompileInductorWrapper.__init__",
+      "source": "os.environ['DISABLE_CUPTI_LAZY_REINIT'] = '1'"
+    },
+    {
+      "line": 2335,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py",
+      "scope": "_TorchCompileInductorWrapper.__init__",
+      "source": "os.environ['TEARDOWN_CUPTI'] = '0'"
+    },
+    {
+      "line": 266,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py",
+      "scope": "_load_dll_libraries",
+      "source": "os.environ['PATH'] = ';'.join(dll_paths + [os.environ['PATH']])"
+    },
+    {
+      "line": 411,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/cuda/__init__.py",
+      "scope": "_lazy_init",
+      "source": "os.environ['CUDA_MODULE_LOADING'] = 'LAZY'"
+    }
+  ],
+  "exact_required_delta": {
+    "ALLREDUCE_GRADIENTS_BUCKET_SIZE_MB": "50",
+    "GRPC_VERBOSITY": "ERROR",
+    "JAX_LOGGING_LEVEL": "NOTSET",
+    "NEURON_LIBRARY_PATH": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libneuronpjrt.so",
+    "NEURON_RT_ROOT_COMM_ID": "localhost:62182",
+    "PJRT_DEVICE": "NEURON",
+    "TF_CPP_MIN_LOG_LEVEL": "1",
+    "XLA_DISABLE_FUNCTIONALIZATION": "1",
+    "XLA_FLAGS": " --xla_cpu_enable_fast_math=false --xla_gpu_force_compilation_parallelism=8",
+    "XLA_IR_SHAPE_CACHE_SIZE": "20480"
+  },
+  "exact_version_sources": [
+    {
+      "bytes": 281,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/version.py",
+      "sha256": "ba23e699ea8931779f14ccfcb3ed6dc67a14452d5e49ebd91875d418dba2a7f1"
+    },
+    {
+      "bytes": 179,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/version.py",
+      "sha256": "b32ec3638fa05c17246fe549b6c95db6c5b58238fff663836f1646997a42b4e7"
+    }
+  ],
+  "excluded_paths": [
+    {
+      "condition": "XLA_USE_BF16 or XLA_DOWNCAST_BF16",
+      "path": "libneuronxla.configure_environment",
+      "reason": "Neither input is present in clean slot environment; BF16 tensor dtype alone does not activate this branch.",
+      "writes": "NEURON_RT_STOCHASTIC_ROUNDING_EN=1"
+    },
+    {
+      "path": "libneuronxla.hook/maybe_set_pjrt_c_api_version",
+      "reason": "No Python call to hook in this slot initialization route; torch_xla2.8.1 has no entry in pinned supported-client table. Unexpected observed extra keys must fail, not auto-whitelist.",
+      "writes": "NEURON_INTERNAL_PJRT_C_API_VERSION / root communication ID"
+    },
+    {
+      "path": "torchrun/xmp/plugin.configure_single_process",
+      "reason": "Slot is one ordinary fresh process, not torchelastic/xmp. Do not pre-whitelist distributed branches.",
+      "writes": "NEURON_PJRT_* / PJRT_LOCAL_PROCESS_* / NEURON_PT_MPMD_MODE"
+    },
+    {
+      "path": "torch_xla TPU/debug/JAX contexts",
+      "reason": "No TPU/debug flags requested; temporary JAX context restores its key before leaf guard.",
+      "writes": "TPU_*,LIBTPU_INIT_ARGS,XLA_FNTRACKER_FILE,SKIP_MEGASCALE_PJRT_CLIENT"
+    },
+    {
+      "path": "torch/CUDA graphs or lazy CUDA initialization",
+      "reason": "No CUDA device/compiler path in frozen slot workload.",
+      "writes": "DISABLE_CUPTI_LAZY_REINIT,TEARDOWN_CUPTI,CUDA_MODULE_LOADING"
+    },
+    {
+      "path": "torch_neuronx._add_lib_preload",
+      "reason": "Top-level invocation commented out; no blanket LD_PRELOAD allowance.",
+      "writes": "LD_PRELOAD"
+    },
+    {
+      "path": "trace CPU lowering contexts",
+      "reason": "Allowed only during original exact nested context code objects and restored on exit, never stable initialized keys.",
+      "writes": "NEURON_INTERNAL_MOCK_TPU=1,TPU_NUM_DEVICES=1,PJRT_DEVICE=CPU"
+    }
+  ],
+  "finite_optional_delta": {
+    "PJRT_DYNAMIC_PLUGINS": "1"
+  },
+  "initialization_chain": [
+    "frozen run_case guard(before_native_imports)",
+    "numpy import: temporary OPENBLAS_MAIN_FREE/GOTOBLAS_MAIN_FREE then removed",
+    "torch import: no installed torch.backends entry point; no default CUDA initialization",
+    "torch_neuronx.__init__ imports xla/distributed/testing/trace chain, which imports torch_xla",
+    "torch_xla default logging and XLA flags",
+    "torch_xla._aws_ec2_inf_trn_init sets NEURON_LIBRARY_PATH then torch_neuronx.xla.init",
+    "Initializer sets PJRT_DEVICE, required real libneuronpjrt-path result, functionalization, libneuronxla shape-cache default, root communication ID",
+    "non-torchelastic ranks/config reset return without distributed env additions",
+    "xla.set_allreduce_bucket_size=50, async default skipped because pinned NEURON_PJRT_EXEC_QUEUE_DEPTH feature=1",
+    "torch_neuronx top-level JAX_LOGGING_LEVEL=NOTSET for PT>=2.8",
+    "optional torch_xla PJRT_DYNAMIC_PLUGINS=1 branch controlled by native _has_cuda_support",
+    "frozen run_case before_compile guard is first post-import explicit boundary"
+  ],
+  "native_executed": false,
+  "original_AST_reproduction": {
+    "SDK_imports": false,
+    "context_cases": [
+      {
+        "after": {},
+        "initial": false,
+        "raises": false
+      },
+      {
+        "after": {},
+        "initial": false,
+        "raises": true
+      },
+      {
+        "after": {
+          "PJRT_DEVICE": "CPU",
+          "key": "NEURON"
+        },
+        "initial": true,
+        "raises": false
+      },
+      {
+        "after": {
+          "PJRT_DEVICE": "CPU",
+          "key": "NEURON"
+        },
+        "initial": true,
+        "raises": true
+      }
+    ],
+    "exact_delta": {
+      "GRPC_VERBOSITY": "ERROR",
+      "TF_CPP_MIN_LOG_LEVEL": "1",
+      "XLA_FLAGS": " --xla_cpu_enable_fast_math=false --xla_gpu_force_compilation_parallelism=8"
+    },
+    "exit_code": 0,
+    "pure_default_functions": [
+      "_setup_default_env",
+      "_set_missing_flags",
+      "_setup_xla_flags"
+    ],
+    "tool_terminal": "65a364",
+    "v2_error": "Exact clean slot environment"
+  },
+  "schema": "qwen35_predicated_slot_sdk_environment_source_audit_v1",
+  "source_files": [
+    {
+      "bytes": 9898,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "sha256": "cbde3e68a24209523c66db254ef3060fa77af3b8d50702fe45bf78c2dbd4e279"
+    },
+    {
+      "bytes": 9569,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/runtime.py",
+      "sha256": "e9cca412711ed12310033280afda70387316ad336ea5618a8d61d39db4b9d3bc"
+    },
+    {
+      "bytes": 4796,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron.py",
+      "sha256": "ed0f6d4dcf972e7c13b90ca8bfc28cf2ef1c3aa83672567fd38af17604f03d13"
+    },
+    {
+      "bytes": 2434,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/neuron_utils.py",
+      "sha256": "548e43198afa92ea72ac499bb1ec0559d9233158950f9d0d41183ec0efb7243c"
+    },
+    {
+      "bytes": 7514,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/pjrt.py",
+      "sha256": "6b3b29a771252ed6bc10ff0a28b5d6d129b1deef4f6ffbd4244788b5895ef073"
+    },
+    {
+      "bytes": 2526,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/rendezvous.py",
+      "sha256": "f4009d0b7eeeb23639640b8571b080c9079272f388ec535a8f536db6027f0214"
+    },
+    {
+      "bytes": 2090,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/_internal/jax_workarounds.py",
+      "sha256": "ef8ae3ad0e33a8db0594abf180c48084569948fa3624231b4ee73b03ddb0bd34"
+    },
+    {
+      "bytes": 2740,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/experimental/plugins.py",
+      "sha256": "10f15e65ce6a2e5e5ea5e075aff076038bfc139faddcc324385a8fc39f14e7ab"
+    },
+    {
+      "bytes": 5792,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/__init__.py",
+      "sha256": "1842b2414de6a85a259d04a6786385f67e78513345bd6935be4351171f42d8ca"
+    },
+    {
+      "bytes": 13504,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla.py",
+      "sha256": "cc5f040784603de5817817874bff18e7f79d469ed45d41836d72979e82d97a01"
+    },
+    {
+      "bytes": 4404,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/contexts.py",
+      "sha256": "67a256026207cfd206f1303ec2f084e22ac7be8740ac98717c96c7b14291f81e"
+    },
+    {
+      "bytes": 13212,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/initialization/initializer.py",
+      "sha256": "34b4c73980c4513696569f4cf2ef51fe9de5952a9957a9af706e2457fcb90116"
+    },
+    {
+      "bytes": 1988,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/utils/utils.py",
+      "sha256": "834f4ace222bd6c6079432b2c438bf040f5cda2843e8b87e7d727360c5d06f2a"
+    },
+    {
+      "bytes": 28862,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/trace.py",
+      "sha256": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786"
+    },
+    {
+      "bytes": 4893,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/rendezvous.py",
+      "sha256": "ff741ca72da8492564060bd80d1c91ce15b03dc750eada977d5657eec144039b"
+    },
+    {
+      "bytes": 1795,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/__init__.py",
+      "sha256": "ce74235a966860162ad075118461d96cc79d91cc88dc61cff3793290a51d7f54"
+    },
+    {
+      "bytes": 2550,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/version.py",
+      "sha256": "0e1ec41dac19b19e245c63704d5f20e1cfed265e03b9dab853008f02cc739ee8"
+    },
+    {
+      "bytes": 919,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/hook.py",
+      "sha256": "ddb8b401223aba91b57b284be8e61c113cc0fe2a7d43c10ea44dafda642ae582"
+    },
+    {
+      "bytes": 8227,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/libncc.py",
+      "sha256": "1545066b7fd8e443a8676d757043e99725cde5fdca0f2e82946f80c3588a51a5"
+    },
+    {
+      "bytes": 17522,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+      "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+    },
+    {
+      "bytes": 5780,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/numpy/core/__init__.py",
+      "sha256": "08db0ef806f8cb03365b3dc06ea58e1f78a0d6ae419e8f4fb1432b0aff87352e"
+    },
+    {
+      "bytes": 102960,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py",
+      "sha256": "2f0deb66d5dff6b9c02a62832c3bf3824c2ee031c462a3afeb9ca170466da5bf"
+    },
+    {
+      "bytes": 64719,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/cuda/__init__.py",
+      "sha256": "d3f653e93dae15f5c8ea3cf65e66cce3156d1f8ddeaa000e970b14c0a29718a8"
+    }
+  ],
+  "source_only": true,
+  "source_only_limits": [
+    "Environment-write scan proves Python source paths and exact AST mock behavior only; native environment effects and complete compilation remain unmeasured.",
+    "Native SDK initialization failure before first compile remains a failure. Unknown additional stable keys are deliberately rejected.",
+    "New successor uses full original input environment and exact latched delta; no namespace-wide allowance or global environment reset."
+  ],
+  "versions": {
+    "torch_metadata": "2.8.0",
+    "torch_source": "2.8.0+cu128",
+    "torch_xla_source": "2.8.1"
+  }
+}
