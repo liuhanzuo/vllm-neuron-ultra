@@ -10,7 +10,7 @@
 
 CPU 完整通过后，第一个实际编译应直接使用原 raw-device 矩阵的首图；成功后继续原设备／持久 alias 矩阵，再推进 typed B4 和 B8/B16 整模型配对。原门槛包括 raw 4 图／36 检查、B4 设备 9／43、B4 alias 12／60、B8/B16 设备 42／2,520、alias 24／192。还需补齐原 typed 契约要求的 FP32 持久 alias、int64 大值越界和生产分派检查，不能以较窄的历史结果代替。
 
-环境也有实际缺口：旧已验收 package 固定 Python 3.10、Torch 2.8、NxDI 0.8；新 NKI 0.5 环境为 Python 3.12、Torch 2.9.1、NxDI 0.10，只有 `vllm-0.16.0+empty` 元数据，尚无 vLLM 源码目录。因此后续 HTTP 必须先完成真实服务环境接入并使用新的软件／源码／artifact 身份，不能放宽旧 package 身份检查或直接继承旧提速。
+环境接入仍需验证：旧已验收 package 固定 Python 3.10、Torch 2.8、NxDI 0.8；新 NKI 0.5 环境为 Python 3.12、Torch 2.9.1、NxDI 0.10。更正本页先前的“尚无 vLLM 源码”判断：editable finder 实际指向已存在的 `research/vllm016-source/vllm`，其中有 1,311 个 Python 文件；`vllm-0.16.0+empty` 的 `+empty` 表示构建时不带编译扩展，不表示缺少 Python 源码。见[完整更正与静态依赖核对](editable-source-and-runtime-entry-20261112.md)。后续 HTTP 仍须验证真实导入、ABI 和模型接入，并使用新的软件／源码／artifact 身份，不能放宽旧 package 身份检查或直接继承旧提速。
 
 旧整模型流程固定 context 2048；另一路设计提出的 context 4096 目标仍保留为未完成项。原语矩阵中的 KV4096 控制、CPU 案例和旧 2048 冷缓存结果，均不能证明 LFM 整模型 4096 已通过。对应的模型图、参考轨迹、冷启动、长解码及槽位复用仍需补齐。
 
