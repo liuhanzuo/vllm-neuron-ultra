@@ -1,0 +1,130 @@
+--- qwen35_sampler_runtime_contract_v10.py
++++ qwen35_sampler_runtime_contract_v11.py
+@@ -155,10 +155,10 @@
+     return result
+ 
+ 
+-RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v10.py", "qwen35_sampler_runtime_preflight_v1.py",
+-                 "qwen35_sampler_runtime_io_v10.py", "qwen35_sampler_runtime_history_v10.py",
+-                 "qwen35_sampler_runtime_service_v10.py", "qwen35_sampler_runtime_adapter_v10.py",
+-                 "run_qwen35_sampler_runtime_v10.py", "qwen35_sampler_torch_namespace_sources_v1.py",
++RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v11.py", "qwen35_sampler_runtime_preflight_v1.py",
++                 "qwen35_sampler_runtime_io_v11.py", "qwen35_sampler_runtime_history_v11.py",
++                 "qwen35_sampler_runtime_service_v11.py", "qwen35_sampler_runtime_adapter_v11.py",
++                 "run_qwen35_sampler_runtime_v11.py", "qwen35_sampler_torch_namespace_sources_v1.py",
+                  "qwen35_sampler_native_leaves_v1.py", "qwen35_sampler_native_leaves_v2.py",
+                  "qwen35_sampler_history_supplement_v1.py")
+ STARTUP_FILES = tuple("/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/" + name
+--- qwen35_sampler_runtime_io_v10.py
++++ qwen35_sampler_runtime_io_v11.py
+@@ -15,7 +15,7 @@
+ import sys
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v10 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
++from qwen35_sampler_runtime_contract_v11 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
+                                                budget, control_root, digest, reference, require, server_temporary_roots)
+ 
+ 
+@@ -270,7 +270,20 @@
+     for path, key in ((ROOT, "root_floor_bytes"), (Path("/mnt/nvme"), "nvme_floor_bytes")):
+         s = os.statvfs(path); free[str(path)] = s.f_bavail * s.f_frsize
+         remaining = max(0, LIMITS["total_allocated_output_bytes"] - usage["allocated_bytes"]) if reserve and path.name == "nvme" else 0
+-        require(free[str(path)] >= LIMITS[key] + remaining, "actual storage floor/reservation failed")
++        required = LIMITS[key] + remaining
++        if not free[str(path)] >= required:
++            # All filesystem fields below belong to this one statvfs call.
++            # f_fsid identifies the filesystem; it is deliberately not st_dev.
++            failure = dict(path=str(path),
++                device=dict(kind="statvfs_fsid", value=s.f_fsid),
++                available_bytes=free[str(path)], floor_bytes=LIMITS[key],
++                remaining_reservation_bytes=remaining, required_bytes=required,
++                shortfall_bytes=required - free[str(path)],
++                failed_constraints=(["floor"] if free[str(path)] < LIMITS[key] else [])
++                    + (["reservation"] if remaining and free[str(path)] < required else []),
++                reserve=reserve)
++            raise ValueError("actual storage floor/reservation failed: "
++                             + json.dumps(failure, sort_keys=True, separators=(",", ":")))
+     with Path("/proc/meminfo").open() as stream: text = stream.read(65537)
+     require(len(text) <= 65536, "bounded memory observation")
+     values = {line.split(":", 1)[0]: line.split(":", 1)[1].strip().split() for line in text.splitlines()}
+--- qwen35_sampler_runtime_history_v10.py
++++ qwen35_sampler_runtime_history_v11.py
+@@ -10,9 +10,9 @@
+ from pathlib import Path
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v10 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
++from qwen35_sampler_runtime_contract_v11 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
+     control_root, digest, host_sources, reference, require, units, validate_spec)
+-from qwen35_sampler_runtime_io_v10 import Metadata, identity, loaded_local_sources, process_api, raw, read
++from qwen35_sampler_runtime_io_v11 import Metadata, identity, loaded_local_sources, process_api, raw, read
+ 
+ 
+ class Bundle:
+--- qwen35_sampler_runtime_service_v10.py
++++ qwen35_sampler_runtime_service_v11.py
+@@ -15,12 +15,12 @@
+ import subprocess
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v10 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
++from qwen35_sampler_runtime_contract_v11 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v10 import (identity, once, process_api, raw, read, read_if_present, ref,
++from qwen35_sampler_runtime_io_v11 import (identity, once, process_api, raw, read, read_if_present, ref,
+                                         service_owner, wait_until)
+ 
+-CLI = str(Q / "run_qwen35_sampler_runtime_v10.py")
++CLI = str(Q / "run_qwen35_sampler_runtime_v11.py")
+ PROPERTY_KEYS = ("Id,LoadState,ActiveState,SubState,MainPID,ControlPID,Job,InvocationID,ControlGroup,Result,"
+                  "ExecMainPID,ExecMainCode,ExecMainStatus,ExecStart,ExecStopPost,Environment,BindsTo,After,"
+                  "MemoryMax,MemoryHigh,MemorySwapMax,TasksMax,KillMode,RemainAfterExit,SendSIGKILL,"
+--- qwen35_sampler_runtime_adapter_v10.py
++++ qwen35_sampler_runtime_adapter_v11.py
+@@ -16,12 +16,12 @@
+ import urllib.request
+ import uuid
+ 
+-from qwen35_sampler_runtime_contract_v10 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
++from qwen35_sampler_runtime_contract_v11 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
+     control_root, digest, native_environment, phase_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v10 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
++from qwen35_sampler_runtime_io_v11 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
+     raw, read, read_if_present, ref, resources, service_owner, storage, wait_until)
+-from qwen35_sampler_runtime_history_v10 import Authority, Bundle, check_running
+-from qwen35_sampler_runtime_service_v10 import (CLI, Service, argv, expected_phase, properties, supervise,
++from qwen35_sampler_runtime_history_v11 import Authority, Bundle, check_running
++from qwen35_sampler_runtime_service_v11 import (CLI, Service, argv, expected_phase, properties, supervise,
+                                                 validate_api_failure, API_ERROR_MESSAGE)
+ from qwen35_sampler_pair_protocol_v1 import BASE, expected_case, host_identity
+ 
+--- run_qwen35_sampler_runtime_v10.py
++++ run_qwen35_sampler_runtime_v11.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parent, Path(__file__).resolve().parents[1]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_sampler_runtime_contract_v10 import reference, require
++    from qwen35_sampler_runtime_contract_v11 import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_sampler_runtime_adapter_v10 import outer
++        from qwen35_sampler_runtime_adapter_v11 import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_sampler_runtime_adapter_v10 import coordinator, native_leaf, worker_bootstrap
++    from qwen35_sampler_runtime_adapter_v11 import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_sampler_runtime_service_v10 import supervise
++        from qwen35_sampler_runtime_service_v11 import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 

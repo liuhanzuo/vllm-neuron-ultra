@@ -1,5 +1,7 @@
 # LFM3 新版插件与 MiniCPM5 环境准备
 
+后续实际进展：Mini 两个补充成员核验已完成，根盘回收约 1.78 GiB，Qwen 存储失败诊断 v11 已独立审查。详见[最新结果与验证边界](mini-origins-complete-and-storage-recovery-20261112.md)。下文保留各阶段的过程与当时结论。
+
 2026-11-12：LFM3 的 vLLM-Neuron 0.5.3 迁移源码已发布到独立分支，提交 [`be4c914`](https://github.com/liuhanzuo/vllm-neuron-ultra/commit/be4c914bf33714101436341c81d752470e42e0c2)。[分支说明](https://github.com/liuhanzuo/vllm-neuron-ultra/blob/trn1-sdk053-lfm3-20261112/docs/lfm3-sdk053/README.md)包含实现范围与全部待完成的验证。**该分支尚未通过设备和整模型验证，没有新增提速倍数。** 原有已验证提速表保持原口径。
 
 ## LFM3 具体完成了什么
