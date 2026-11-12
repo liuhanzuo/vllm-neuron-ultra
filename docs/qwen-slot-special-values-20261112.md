@@ -35,3 +35,5 @@ HLO 是 protobuf 二进制。旧检查器在整个文件上搜索 Base64，误�
 原始负零、NaN payload 和负 NaN 输入均保留，不做规范化后“通过”的替换。后继即使诊断顺利结束，也只提供六次字节观察；原八布局、32 图、46,368 次调用，以及整模型数值、冷缓存、长解码、槽位复用、质量和匹配 HTTP 门槛继续保留。
 
 完整来源、实际日志、HLO 和独立退出证据见[证据清单](evidence/qwen-slot-special-values-20261112/manifest.json)。另见[上一轮实际设备结果](qwen-slot-first-device-result-20261112.md)与[独立包完整验证接线](qwen-package-full-validation-source-20261112.md)。
+
+后续[保存 HLO 的独立定位](qwen-allocation-mini-r5-20261112.md)确认四个 BF16 select、无显式 convert 或浮点算术；具体编译 pass 仍未知。新的整数选择对照正在准备，未改写本页六次设备调用的结果或验收范围。

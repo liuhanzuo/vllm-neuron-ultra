@@ -1,0 +1,1293 @@
+{
+  "compiler_executed": false,
+  "current_bindings_history_locks_or_processes_inspected": false,
+  "full_model_qualified": false,
+  "hlo": {
+    "bf16_select_ids": [
+      18,
+      32,
+      46,
+      60
+    ],
+    "bitcast_convert_instructions": 0,
+    "computations": 1,
+    "convert_instructions": 0,
+    "floating_point_arithmetic_instructions": 0,
+    "full_instruction_summary": [
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 1,
+        "name": "p0",
+        "opcode": "parameter",
+        "operands": [],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 2,
+        "name": "broadcast.2",
+        "opcode": "broadcast",
+        "operands": [
+          1
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 3,
+        "name": "p1",
+        "opcode": "parameter",
+        "operands": [],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 4,
+        "name": "slice.4",
+        "opcode": "slice",
+        "operands": [
+          3
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 5,
+        "name": "broadcast.5",
+        "opcode": "broadcast",
+        "operands": [
+          4
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 6,
+        "name": "reshape.6",
+        "opcode": "reshape",
+        "operands": [
+          5
+        ],
+        "shape": [
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 7,
+        "name": "broadcast.7",
+        "opcode": "broadcast",
+        "operands": [
+          6
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 8,
+        "name": "p2",
+        "opcode": "parameter",
+        "operands": [],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 9,
+        "name": "slice.9",
+        "opcode": "slice",
+        "operands": [
+          8
+        ],
+        "shape": [
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 10,
+        "name": "reshape.10",
+        "opcode": "reshape",
+        "operands": [
+          9
+        ],
+        "shape": []
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 11,
+        "name": "constant.11",
+        "opcode": "constant",
+        "operands": [],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 12,
+        "name": "broadcast.12",
+        "opcode": "broadcast",
+        "operands": [
+          10
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [
+          "EQ"
+        ],
+        "comparison_type": [
+          "SIGNED"
+        ],
+        "dtype": "PRED",
+        "id": 13,
+        "name": "compare.13",
+        "opcode": "compare",
+        "operands": [
+          11,
+          12
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 14,
+        "name": "reshape.14",
+        "opcode": "reshape",
+        "operands": [
+          13
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 15,
+        "name": "broadcast.15",
+        "opcode": "broadcast",
+        "operands": [
+          14
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 16,
+        "name": "reshape.16",
+        "opcode": "reshape",
+        "operands": [
+          15
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 17,
+        "name": "broadcast.17",
+        "opcode": "broadcast",
+        "operands": [
+          16
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 18,
+        "name": "select.18",
+        "opcode": "select",
+        "operands": [
+          17,
+          7,
+          2
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 19,
+        "name": "broadcast.19",
+        "opcode": "broadcast",
+        "operands": [
+          18
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 20,
+        "name": "slice.20",
+        "opcode": "slice",
+        "operands": [
+          3
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 21,
+        "name": "broadcast.21",
+        "opcode": "broadcast",
+        "operands": [
+          20
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 22,
+        "name": "reshape.22",
+        "opcode": "reshape",
+        "operands": [
+          21
+        ],
+        "shape": [
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 23,
+        "name": "broadcast.23",
+        "opcode": "broadcast",
+        "operands": [
+          22
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 24,
+        "name": "slice.24",
+        "opcode": "slice",
+        "operands": [
+          8
+        ],
+        "shape": [
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 25,
+        "name": "reshape.25",
+        "opcode": "reshape",
+        "operands": [
+          24
+        ],
+        "shape": []
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 26,
+        "name": "broadcast.26",
+        "opcode": "broadcast",
+        "operands": [
+          25
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [
+          "EQ"
+        ],
+        "comparison_type": [
+          "SIGNED"
+        ],
+        "dtype": "PRED",
+        "id": 27,
+        "name": "compare.27",
+        "opcode": "compare",
+        "operands": [
+          11,
+          26
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 28,
+        "name": "reshape.28",
+        "opcode": "reshape",
+        "operands": [
+          27
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 29,
+        "name": "broadcast.29",
+        "opcode": "broadcast",
+        "operands": [
+          28
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 30,
+        "name": "reshape.30",
+        "opcode": "reshape",
+        "operands": [
+          29
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 31,
+        "name": "broadcast.31",
+        "opcode": "broadcast",
+        "operands": [
+          30
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 32,
+        "name": "select.32",
+        "opcode": "select",
+        "operands": [
+          31,
+          23,
+          19
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 33,
+        "name": "broadcast.33",
+        "opcode": "broadcast",
+        "operands": [
+          32
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 34,
+        "name": "slice.34",
+        "opcode": "slice",
+        "operands": [
+          3
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 35,
+        "name": "broadcast.35",
+        "opcode": "broadcast",
+        "operands": [
+          34
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 36,
+        "name": "reshape.36",
+        "opcode": "reshape",
+        "operands": [
+          35
+        ],
+        "shape": [
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 37,
+        "name": "broadcast.37",
+        "opcode": "broadcast",
+        "operands": [
+          36
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 38,
+        "name": "slice.38",
+        "opcode": "slice",
+        "operands": [
+          8
+        ],
+        "shape": [
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 39,
+        "name": "reshape.39",
+        "opcode": "reshape",
+        "operands": [
+          38
+        ],
+        "shape": []
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 40,
+        "name": "broadcast.40",
+        "opcode": "broadcast",
+        "operands": [
+          39
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [
+          "EQ"
+        ],
+        "comparison_type": [
+          "SIGNED"
+        ],
+        "dtype": "PRED",
+        "id": 41,
+        "name": "compare.41",
+        "opcode": "compare",
+        "operands": [
+          11,
+          40
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 42,
+        "name": "reshape.42",
+        "opcode": "reshape",
+        "operands": [
+          41
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 43,
+        "name": "broadcast.43",
+        "opcode": "broadcast",
+        "operands": [
+          42
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 44,
+        "name": "reshape.44",
+        "opcode": "reshape",
+        "operands": [
+          43
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 45,
+        "name": "broadcast.45",
+        "opcode": "broadcast",
+        "operands": [
+          44
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 46,
+        "name": "select.46",
+        "opcode": "select",
+        "operands": [
+          45,
+          37,
+          33
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 47,
+        "name": "broadcast.47",
+        "opcode": "broadcast",
+        "operands": [
+          46
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 48,
+        "name": "slice.48",
+        "opcode": "slice",
+        "operands": [
+          3
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 49,
+        "name": "broadcast.49",
+        "opcode": "broadcast",
+        "operands": [
+          48
+        ],
+        "shape": [
+          1,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 50,
+        "name": "reshape.50",
+        "opcode": "reshape",
+        "operands": [
+          49
+        ],
+        "shape": [
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 51,
+        "name": "broadcast.51",
+        "opcode": "broadcast",
+        "operands": [
+          50
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 52,
+        "name": "slice.52",
+        "opcode": "slice",
+        "operands": [
+          8
+        ],
+        "shape": [
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 53,
+        "name": "reshape.53",
+        "opcode": "reshape",
+        "operands": [
+          52
+        ],
+        "shape": []
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "S64",
+        "id": 54,
+        "name": "broadcast.54",
+        "opcode": "broadcast",
+        "operands": [
+          53
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [
+          "EQ"
+        ],
+        "comparison_type": [
+          "SIGNED"
+        ],
+        "dtype": "PRED",
+        "id": 55,
+        "name": "compare.55",
+        "opcode": "compare",
+        "operands": [
+          11,
+          54
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 56,
+        "name": "reshape.56",
+        "opcode": "reshape",
+        "operands": [
+          55
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 57,
+        "name": "broadcast.57",
+        "opcode": "broadcast",
+        "operands": [
+          56
+        ],
+        "shape": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 58,
+        "name": "reshape.58",
+        "opcode": "reshape",
+        "operands": [
+          57
+        ],
+        "shape": [
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "PRED",
+        "id": 59,
+        "name": "broadcast.59",
+        "opcode": "broadcast",
+        "operands": [
+          58
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "BF16",
+        "id": 60,
+        "name": "select.60",
+        "opcode": "select",
+        "operands": [
+          59,
+          51,
+          47
+        ],
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "comparison_direction": [],
+        "comparison_type": [],
+        "dtype": "TUPLE",
+        "id": 61,
+        "name": "tuple.61",
+        "opcode": "tuple",
+        "operands": [
+          60
+        ],
+        "shape": []
+      }
+    ],
+    "input_parameters": [
+      {
+        "dtype": "BF16",
+        "parameter": 0,
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "dtype": "BF16",
+        "parameter": 1,
+        "shape": [
+          4,
+          3072,
+          4
+        ]
+      },
+      {
+        "dtype": "S64",
+        "parameter": 2,
+        "shape": [
+          4
+        ]
+      }
+    ],
+    "instructions": 61,
+    "opcode_counts": {
+      "broadcast": 24,
+      "compare": 4,
+      "constant": 1,
+      "parameter": 3,
+      "reshape": 16,
+      "select": 4,
+      "slice": 8,
+      "tuple": 1
+    },
+    "scope": "SDK setup_compiler_dirs serializes this HLO before hlo_compile invokes neuronx-cc; not the compiler final machine IR."
+  },
+  "mechanism_findings": {
+    "established": "The frozen torch.where loop lowers to four BF16 selects with BF16 branch storage; no explicit conversion or floating arithmetic appears in the saved compiler-input HLO.",
+    "excluded_at_this_boundary": "An explicit frontend BF16-to-FP32-to-BF16 convert chain is absent.",
+    "fast_math": {
+      "auto_cast_none_proves_bitwise_select_semantics": false,
+      "cpu_flag_is_neuron_backend_math_contract": false,
+      "cpu_xla_flag": "--xla_cpu_enable_fast_math=false",
+      "observed_args_have_explicit_fast_math_switch": false,
+      "original_compiler_args": [
+        "--target=trn1",
+        "--auto-cast=none",
+        "--model-type=transformer",
+        "-O2",
+        "--lnc=1",
+        "--tensorizer-options=--enable-ccop-compute-overlap --cc-pipeline-tiling-factor=1 --vectorize-strided-dma"
+      ],
+      "recommendation": "Keep all original compiler flags in the next probe. Do not invent a backend fast-math flag or claim -O2 is the cause.",
+      "supported_neuron_fast_math_disable_flag_established_by_read_python_sources": false
+    },
+    "still_hypothesis": "BF16 select lowering, optimization or its graph-specific runtime implementation normalizes signed zero and NaN; no individual compiler pass is identified."
+  },
+  "native_executed": false,
+  "payloads_read": "Only the authorized 4084-byte HLO metadata; no weights/model.pt/NEFF/tensor payload.",
+  "performance_claimed": false,
+  "primitive_qualified": false,
+  "prior_actual_six_call_raw_audit": {
+    "bytes": 139048,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-slot-special-value-r2-independent-raw-review-20261112-v1.json",
+    "sha256": "1cb3e38eb2d0dec4fad72f4f027d34c2e8437814fa15f0f7806bf5ec41094b23"
+  },
+  "proposal": {
+    "calls": 12,
+    "capture": "Save full inputs, every output, all mismatch u32 offsets, input-after hashes and whole HLO. Continue other calls after output mismatch; exceptions abort, no fallback/retry.",
+    "compiler_flags": "Exactly original FLAGS, no flag sweep",
+    "external_integer_hlo_gate": "S16 input/output payload and four S16 selects; no BF16 select or numeric conversion.",
+    "external_integer_io": "Construct cache/updates from the same raw bytes using uint8 storage viewed as torch.int16. No numeric cast. Slots remain int64. Save output as raw int16 bytes with explicit dtype.",
+    "followup_qualification": "Even a passing integer variant must separately pass all original eight layouts, both modes, all625 mappings, raw+finite profiles, persistent state/old-read/input checks and original timing schedule. The failed original reference remains failed.",
+    "full_raw_offset_cap_bytes": 8388608,
+    "graphs": 3,
+    "independent_diagnostic_not_baseline_replacement": true,
+    "internal_bitcast_hlo_gate": "Trace both BF16 inputs through BitcastConvert to S16, all four selects in S16, final BitcastConvert to BF16. Follow called computations; reject numerical Convert or a rewritten BF16-select path.",
+    "invocation_gate": "Actual loaded forward_v2 invocation, same fixed core, stable saved artifact hash and complete output; reject a host passthrough.",
+    "lifecycle": "New explicitly bound successor only, original owner/SDKEnvironment/resources/drain, max one live graph; no launch implemented here.",
+    "measured_calls": 0,
+    "oracle": "Idle: exact cache; one_active: cache slots0..2 unchanged, output slot3 equals update row0; all 98304 bytes checked.",
+    "profiles": "Original fixed original_raw and negative_nan_raw, unchanged salts and complete bytes",
+    "schedule": [
+      {
+        "arm": "one_bf16_select",
+        "mapping": "idle",
+        "profile": "original_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "one_bf16_select",
+        "mapping": "one_active",
+        "profile": "original_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "one_bf16_select",
+        "mapping": "idle",
+        "profile": "negative_nan_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "one_bf16_select",
+        "mapping": "one_active",
+        "profile": "negative_nan_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "internal_s16_select",
+        "mapping": "idle",
+        "profile": "original_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "internal_s16_select",
+        "mapping": "one_active",
+        "profile": "original_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "internal_s16_select",
+        "mapping": "idle",
+        "profile": "negative_nan_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "internal_s16_select",
+        "mapping": "one_active",
+        "profile": "negative_nan_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "external_s16_select",
+        "mapping": "idle",
+        "profile": "original_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "external_s16_select",
+        "mapping": "one_active",
+        "profile": "original_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "external_s16_select",
+        "mapping": "idle",
+        "profile": "negative_nan_raw",
+        "slots": [
+          -1,
+          -1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "arm": "external_s16_select",
+        "mapping": "one_active",
+        "profile": "negative_nan_raw",
+        "slots": [
+          3,
+          -1,
+          -1,
+          -1
+        ]
+      }
+    ],
+    "single_select_hlo_gate": "Exactly one BF16 select with runtime slot predicate; no floating arithmetic/Convert.",
+    "source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_bitcast_proposal_v1.py"
+  },
+  "qualification_matrix_completed": false,
+  "reference_hlo": {
+    "bytes": 4084,
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/artifacts/standalone-reference/model/graph.hlo",
+    "sha256": "be083f7f728dcdb6a744fbacadf840c647ab06b5eff0b1355004cdc573c67d5e"
+  },
+  "reviewer": "/root/qwen_slot_diagnostic_source_review_20261112",
+  "schema": "qwen35_slot_select_hlo_mechanism_source_review_v1",
+  "sdk_source_support": {
+    "backend_compilation_and_bitwise_fidelity_unproven": true,
+    "numeric_conversion_distinct": "Op.cast -> mkop(Convert)",
+    "prototype_uses_torch_dtype_view": false,
+    "reinterpretation": "torch_xla.core.xla_builder.Op.bitcast -> mkop(BitcastConvert)",
+    "signed16_type_maps_present": true,
+    "xla_call": "torch_neuronx.xla_impl.base.xla_call -> xla_op_registry.register"
+  },
+  "source_files": [
+    {
+      "bytes": 11238,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_text_port.py",
+      "sha256": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34"
+    },
+    {
+      "bytes": 9103,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py",
+      "sha256": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4"
+    },
+    {
+      "bytes": 14270,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_device_leaf_v1.py",
+      "sha256": "fbee83e19a4aea6f3e69a7702afafda5a29e8390a64425e49b0a03db81007137"
+    },
+    {
+      "bytes": 2052,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated.py",
+      "sha256": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e"
+    },
+    {
+      "bytes": 387,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated_torch.py",
+      "sha256": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67"
+    },
+    {
+      "bytes": 33219,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/service/hlo_pb2.py",
+      "sha256": "8d332b4180bc80e2b376a3018de0013920e6878b3eb260c52540ef07bc5b0922"
+    },
+    {
+      "bytes": 35334,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/xla_data_pb2.py",
+      "sha256": "642ae1b5dc64a3188401d5f40dac475e0e4e20878b6473dda8e0e3306d8ba1f3"
+    },
+    {
+      "bytes": 23975,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/pyhlo/scribe.py",
+      "sha256": "90b12746699f020bc100dee1fba45f29abe3a40fee9586becae77aef40b53abe"
+    },
+    {
+      "bytes": 7193,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/base.py",
+      "sha256": "1a892277077e9952728d1c186c66af52d7162b4d4913a401458e38f0ff36aeae"
+    },
+    {
+      "bytes": 42041,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/hlo_conversion.py",
+      "sha256": "ea60d13f1bbf9c1839d24af215c04b0bd14d2168fd591d5cd04d48bd9ac0fe6e"
+    },
+    {
+      "bytes": 28862,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/trace.py",
+      "sha256": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786"
+    },
+    {
+      "bytes": 37611,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/core/xla_builder.py",
+      "sha256": "ee315ac0cfa9f052a5a437d693bc1d65aae7ea7bf7c3d0b661384bc6723a8772"
+    },
+    {
+      "bytes": 2785,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/core/xla_op_registry.py",
+      "sha256": "e92449e7f164c9a20f52ee33ea014f44ff83e003429dcbcbd2200998ee5b8dc0"
+    },
+    {
+      "bytes": 9898,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_xla/__init__.py",
+      "sha256": "cbde3e68a24209523c66db254ef3060fa77af3b8d50702fe45bf78c2dbd4e279"
+    },
+    {
+      "bytes": 14233,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_protocol_v2.py",
+      "sha256": "f879c9bde82c61893f63abd71cc372e9834f4e4f576410bf57884fe3373e5868"
+    },
+    {
+      "bytes": 3242,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_select_bitcast_proposal_v1.py",
+      "sha256": "856b97e931567d88eca26d1982889606779abae318e7f1615b9b1fca3d8cd201"
+    },
+    {
+      "bytes": 6978,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_slot_select_bitcast_proposal_v1.py",
+      "sha256": "cd6a0a9c4bf212aebc58064eed85700e92b8135ac9d466dee83f8083184e5ff2"
+    },
+    {
+      "bytes": 10780,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/inspect_qwen35_slot_select_hlo_v1.py",
+      "sha256": "65f4b8f9c7d630e9c17d302c1573f998d23984db85cfb42e8f0d8530f6e09edc"
+    }
+  ],
+  "source_mock_tests": {
+    "command": "/home/ubuntu/venvs/vllm_neuron/bin/python -I -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_slot_select_bitcast_proposal_v1.py",
+    "exit_code": 0,
+    "scope": "12 fake-SDK calls through actual proposal and frozen writer AST; all65536 host integer encodings; no native validation.",
+    "terminal_chunk": "822bde",
+    "tests": 5
+  },
+  "source_only": true
+}

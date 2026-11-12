@@ -1,0 +1,32 @@
+# Mini formal r5 metadata preparation: exact completed-slot text successor
+
+Frozen v8 preparation cannot accept the full later catalog: its extension domain rejects two /tmp source pins added by completed slot diagnostics. The exact paths are /tmp/trn1-prepare-qwen-slot-special-r1-20261112.py (22de1c3228633a17906ea0cd8e626702aedd8c0e155bf5812708934a57bed0ab) and /tmp/trn1-prepare-qwen-slot-special-r2-20261112.py (4a6aa6e4daf82a5e91291b57ef3e6e14b6b44c3da4224d61b3fd57010c26afe7). Neither pin may be discarded from complete history.
+
+The new shared helper permits exactly both path/SHA pairs after authenticating the saved v104 catalog's complete 153-row prefix and its exact terminal rows 151/152. It checks actual tool, source pin, owners, units, actual outer/tool exit, physical drain, original lock evidence, 0/6 runtime calls, and false qualification flags. Unknown /tmp paths, changed pins, subsets, missing/reordered/rewritten historical rows, or incomplete terminal evidence fail. All other pins go through the unmodified v1 extension validator, including all seventy checkout pins and the original LFM rules. The original <=2048 extension and 8 MiB ordinary metadata caps remain.
+
+The caller supplies any subsequent complete catalog explicitly. v105 with 154 rows passes the same historical-prefix check; no current total row count is built into the production helper or preparer. The original full serial catalog validation still checks all appended rows. This is append-only historical compatibility, not discovery or authorization of a current run.
+
+Five runtime/preparation successors are minimal: completed helper v2, PV catalog auth v2, catalog preparation v3, outer entry v9, and formal binder v3. Auth v2 and catalog preparation v3 differ from their frozen originals only in the shared helper import. Outer v9 differs from accepted v8 only in its PV auth import. It retains the exact two tuple/list boundary fix, source adapter v3, observed adapter v5, backend v4, logic v2, full source fence, exact owner wire codec, original wait/cleanup, resource limits, complete literal v6 and SDK worker v6. Binder v3 keeps all seven v2 runtime sources, adds three new runtime files, and accepts fourteen exact source refs including both catalog and formal preparer versions.
+
+The sixth file is prepare_minicpm5_formal_r5_metadata_root_v1.py. It has inert import and requires explicit catalog, handoff, last predecessor, source delivery, attempt ID, output names and handoff field. It uses the ordinary original preparer and MetadataOnlyReader when root later runs it. It permits the existing stdlib ctypes lineage; framework imports remain blocked. It creates in-memory requests, calls the full unchanged reconstruction route, validates unchanged inputs, and only then publishes complete exclusive candidate metadata. Every source review remains an unapproved draft. It does not create the future runtime output directory, acquire a lock, observe processes, authenticate native bytes, launch a child, or select current history. Root must run it only after the active metadata job has actually exited and been audited.
+
+Six source/mock tests pass on Python 3.12 (session51690/77b4e3/0) and pinned Python3.10 (session90852/9f3ba5/0). These use real saved v104/v105 catalog and terminal JSON, real source text and actual preparation/assembly functions with explicitly mocked old audit reconstruction. No current binding is written. Full 154-row assembly preserves 48,220 sources, 172 bootstrap pins, 25 recursive bootstrap imports, and 8,431,311 bytes of complete release data (plus the unchanged 65,536-byte reservation below16MiB). The executable root wrapper also has a mock assembly check; its own executed-preparer source is an additional pin. Actual root preparation may report a larger count after legitimate catalog appends.
+
+Root source review should verify: (1) exact six source hashes and unchanged accepted v8 sources; (2) exact two external pins and full v104-prefix/terminal authentication, no general /tmp permission; (3) shared prepare/runtime helper and only-import changes in auth/preparation/outer9; (4) full catalog/source-map merges, fourteen source refs, bootstrap closure, full literal and SDK worker identity; (5) 9 native checks and 1284 scientific rows remain pending, original cold-cache/long-decode/slot gates are not bypassed or claimed complete; (6) original resource/pipe/output caps and original actual wait/drain are unchanged; (7) all generated reviews remain drafts and the root must rebind downstream hashes after its independent review before actual execution.
+
+After the current job really ends, root chooses its then-current complete catalog and idle handoff, and the exact last terminal. Invoke the following with those explicit references and a fresh32-hex attempt ID. MINI_SLOT_SOURCE_DELIVERY_SHA is the SHA in the accompanying frozen source delivery; no current reference is inferred by the script.
+
+```bash
+python3 -I -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_minicpm5_formal_r5_metadata_root_v1.py \
+  --catalog "$MINI_CATALOG_PATH" --catalog-sha256 "$MINI_CATALOG_SHA" \
+  --handoff "$MINI_HANDOFF_PATH" --handoff-sha256 "$MINI_HANDOFF_SHA" \
+  --predecessor "$MINI_PREDECESSOR_PATH" --predecessor-sha256 "$MINI_PREDECESSOR_SHA" \
+  --source-delivery /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-completed-slot-catalog-source-delivery-20261112-v1.json \
+  --source-delivery-sha256 "$MINI_SLOT_SOURCE_DELIVERY_SHA" \
+  --handoff-catalog-field complete_current_serial_catalog_next \
+  --artifact-prefix /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r5-20261112 \
+  --output-root /home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-formal-r5-20261112 \
+  --attempt-id "$MINI_ATTEMPT_ID" --unit trn1-mini-formal-import-r5-20261112
+```
+
+Use complete_current_serial_catalog instead if that is the actual chosen handoff field. An outdated or mismatched reference fails. This command was not run for the source delivery. Expected outputs are fresh r5 request/original-request, original-preparation, complete source map/contract, native policy drafts, PV/diagnostic/outer specs and review drafts, SDK entry template, outer entry plan, and preparation receipt. Preserve failed r1-r4 evidence; none is overwritten or retried implicitly.
