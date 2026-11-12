@@ -1,0 +1,154 @@
+{
+  "actual_model_or_serial_execution": false,
+  "actual_spec_created": false,
+  "actual_tests": {
+    "bytes": 1398,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-short-ipc-v10-independent-actual-tests-20261112-v1.json",
+    "sha256": "50fc8144058688ec994f422e866d5c1673360c520e8b8ceeb869c7aed86970e5"
+  },
+  "author_delivery": {
+    "bytes": 4339,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-short-ipc-v10-source-delivery-20261112-v1.json",
+    "sha256": "0ed2e2db2a6a7bc08cffd57090462c25060cf76e6aa7c7edd1b4181d5da886cc"
+  },
+  "blockers": [],
+  "current_physical_checks": false,
+  "findings": [
+    {
+      "UTF8_length_used": true,
+      "evidence": "Hash-checked pinned vllm/utils/__init__.py constructs ipc://{envs.VLLM_RPC_BASE_PATH}/{uuid4()}; pinned envs.py reads explicit VLLM_RPC_BASE_PATH. New control root /mnt/nvme/neuron-work/qw-<run_name> is deterministic, distinct from unchanged model output, and remains on the original monitored NVMe parent.",
+      "illustrative_run_name": "r8-v10-20261112",
+      "illustrative_worst_path_bytes": 99,
+      "limit_bytes": 107,
+      "nonascii_run_names_rejected": true,
+      "overlimit_rejected": true,
+      "passed": true,
+      "pathname_excludes_transport_prefix": true,
+      "run_name23_worst_bytes": 107,
+      "run_name24_worst_bytes": 108,
+      "six_server_phases": true,
+      "topic": "short_path_and_exact_actual_vLLM_contract",
+      "uuid_bytes": 36
+    },
+    {
+      "evidence": "worker_bootstrap invokes phase_environment and returns child_environment; unchanged supervise uses that exact map in subprocess.Popen(env=...), and unchanged native_leaf API branch uses context.child_environment in os.execvpe. Six API phases get VLLM_RPC_BASE_PATH=TMPDIR=exact declared phase/control/tmp; inherited TMPDIR/RPC overrides and mismatched phase paths reject. Other native/scientific environment fields are unchanged.",
+      "passed": true,
+      "topic": "explicit_environment_reaches_actual_child_and_exec"
+    },
+    {
+      "evidence": "storage_scan still visits both original model output and the new control_root. Every accepted socket is inventoried and counted as an entry before type dispatch; st_blocks*512 is charged to the unchanged64MiB temporary class and2GiB total. Original1024-entry,128MiB single-file/socket and all other class/log limits remain. Only singleton lowercase UUID4 variant8/9/a/b sockets directly under one of six declared server tmp paths pass. Model-output sockets, nonserver/root tmp sockets, nesting, wrong version/variant/name, symlinks, hardlinks, FIFOs and character/block devices reject.",
+      "passed": true,
+      "temp_limit_boundary_tested": true,
+      "terminal_double_scan_stability_preserved": true,
+      "topic": "two_tree_budget_and_socket_scope"
+    },
+    {
+      "clarification": "This preserves owned-process cleanup and stored-evidence accounting. It does not add socket-file unlinking or claim any live socket/service drain was observed.",
+      "evidence": "Whole service module AST is identical after version references. Original45s owned cleanup, authenticated invocation/PID/group checks, TERM/KILL/deadline and retained-lock-until-drain behavior are unchanged. Adapter outer/Phase/declared-service reconstruction still derive all phase/receipt paths from the same control_root; original fresh output/control/handoff checks and exclusive phase directories remain. Resource guard and terminal storage scan cover both trees.",
+      "passed": true,
+      "topic": "ownership_cleanup_and_freshness"
+    },
+    {
+      "additions": 6,
+      "evidence": "Full six-module AST comparison, after removing only the enumerated IPC path/env/socket additions and normalizing version references, equals v9. All original science/cold/long/reuse/vector/quality/HTTP logic, thresholds, limits and ownership checks therefore remain. Actual executed r7 spec is hash-checked; all48002 mapping entries retain identical values in an in-memory additive union with six new runtime files (48008 entries). No actual successor spec was built and no native binary pins were read.",
+      "inmemory_union": 48008,
+      "installed_RPC_sources_already_in_original_map": true,
+      "original_pins": 48002,
+      "passed": true,
+      "saved_executed_spec": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r7-20261112-spec-v9.json",
+        "sha256": "0572165e81926a8daf92675390537b7c837713f84f739ad4e202db3c13360f1b"
+      },
+      "topic": "science_limits_and_historical_sources"
+    },
+    {
+      "evidence": "Small wrapper delegates original complete v9 candidate/history/input validation, verifies exact v10 manifest identity/limits and existing pinned RPC selectors, conflict-checks additive six sources, and rebuilds in-memory artifact refs. The resulting review remains passed=false and launch_authorized=false; no future catalog is selected and no files/services/admissions are created by preparation. Long paths fail before old preparation or metadata reads.",
+      "passed": true,
+      "topic": "preparation_boundary"
+    }
+  ],
+  "frozen_sources_modified": false,
+  "full_model_qualified": false,
+  "handoff_created": false,
+  "launch_authorized": false,
+  "limits": {
+    "all_logs_bytes": 536870912,
+    "all_metadata_bytes": 134217728,
+    "capture_payload_bytes": 536870912,
+    "coordinator_log_bytes": 16777216,
+    "host_environment_string_bytes": 65536,
+    "leaf_log_bytes": 8388608,
+    "max_output_entries": 1024,
+    "memory_available_floor_bytes": 2147483648,
+    "metadata_bytes": 8388608,
+    "model_payload_bytes": 872415232,
+    "model_single_file_bytes": 536870912,
+    "monitor_interval_seconds": 0.5,
+    "nvme_floor_bytes": 32212254720,
+    "outer_wall_seconds": 180000,
+    "owned_cleanup_seconds": 45,
+    "root_floor_bytes": 30064771072,
+    "root_running_ack_seconds": 180,
+    "server_log_bytes": 67108864,
+    "single_file_bytes": 134217728,
+    "source_map_entries": 100000,
+    "spec_envelope_bytes": 67108864,
+    "startup_ack_seconds": 60,
+    "temporary_and_directory_bytes": 67108864,
+    "total_allocated_output_bytes": 2147483648
+  },
+  "manifest": {
+    "bytes": 3095,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-short-ipc-v10-sources-20261112-v1.json",
+    "sha256": "7bc928e5f6d4b0450a593b0e0aa3265512ff04a17bd6413e8b67dcd3143c986c"
+  },
+  "native_imports": false,
+  "new_speedup_claim": false,
+  "passed": true,
+  "preparation_source": {
+    "bytes": 4819,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_sampler_v10_candidate_v1.py",
+    "sha256": "0a75982bbb460a11a7ad82d2a94031a51fbb830dbd5068852394784a8c774a51"
+  },
+  "residual_limits": [
+    "Pure source/mock review cannot prove successful API startup, model execution, live socket lifecycle or real cleanup; actual root admission and execution remain separate.",
+    "All48002 previous hash values were preserved in the metadata union; this review did not rehash all underlying historical/source/native files. Runtime original source verification remains required.",
+    "Existing symlink/type checks and bounded transient-publication retry semantics are retained; no claim of stronger concurrent filesystem race guarantees was added.",
+    "The previous r7 natural exit1 due IPC122>107 remains failed; this source fix creates no model qualification or speedup."
+  ],
+  "reviewed_runtime_sources": {
+    "qwen35_sampler_runtime_adapter_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v10.py",
+      "sha256": "df87441e51671593b01758eac4e9a06c7cd8ebbc88e564f3c850fed1f11a5a93"
+    },
+    "qwen35_sampler_runtime_contract_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_contract_v10.py",
+      "sha256": "75d3e6e753654322203ba5f3d16e3cd4f6e141be5fbfcbad852942c5b6a2f433"
+    },
+    "qwen35_sampler_runtime_history_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v10.py",
+      "sha256": "e796a773b33cee3454487ec5c6f78d1fac0509d0a8c34ffd86c0c3f4d5215f9e"
+    },
+    "qwen35_sampler_runtime_io_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_io_v10.py",
+      "sha256": "a1563dc21787dd26c926ec15b7e5423bf92185f82879bed123c14116dc118ae2"
+    },
+    "qwen35_sampler_runtime_service_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_service_v10.py",
+      "sha256": "6e31007920f13247320dda7d26daae25f89c88348579dbdbefbcb627df4702e6"
+    },
+    "run_qwen35_sampler_runtime_v10.py": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v10.py",
+      "sha256": "bcb109870c5b50cb55839827a83becab2ca56e13ec9a8ef091f87962a7d09a00"
+    }
+  },
+  "reviewer": "/root/mini_mapping_authority_source",
+  "runtime_admitted": false,
+  "schema": "qwen35_short_ipc_v10_independent_source_review_v1",
+  "source_diff": {
+    "bytes": 11852,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-short-ipc-v10-source-diff-20261112-v1.patch",
+    "sha256": "38e4fe081cf6086e6b4c556a41d1761245700361db0f5731262c987fb7de6009"
+  },
+  "source_only": true
+}
