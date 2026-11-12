@@ -1,0 +1,438 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v2/io.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/io.py
+@@ -205,6 +205,86 @@
+                              path.name) is not None)
+ 
+ 
++class CompilerTreeRace(PublicationRace):
++    """Discard a partial build observation; require complete topology convergence."""
++
++
++def compiler_mutation(path, spec, *, addition=False):
++    """Only the pinned SDK's private build namespaces, before artifact sealing.
++
++    Cache final files are never expected to disappear. The compiler can replace
++    bucket/layout work trees; their internal filenames are private compiler
++    implementation details, so those trees require complete rescans instead of
++    treating a missing entry as zero usage.
++    """
++    path = Path(path)
++    if not path.is_absolute() or '..' in path.parts:
++        return False
++    if (Path(spec['output_root']) / 'build-immutable-identities.json').exists():
++        return False
++    cache = Path(spec['case']['compiler_cache'])
++    if path == cache or cache in path.parents:
++        parts = path.relative_to(cache).parts
++        if not parts: return addition
++        if parts[0] != 'neuronxcc-2.23.6484.0+3b612583': return False
++        if len(parts) == 1: return addition
++        if re.fullmatch(r'MODULE_[0-9a-f]{20}\+[0-9a-f]{8}', parts[1]) is None: return False
++        if len(parts) == 2: return addition
++        if len(parts) != 3: return False
++        name = parts[2]
++        if name == 'model.hlo_module.pb.lock': return True
++        suffix = re.escape(os.uname().nodename) + r'-[1-9][0-9]*'
++        if any(re.fullmatch(re.escape(base) + '-' + suffix, name) is not None
++               for base in ('model.hlo_module.pb', 'model.neff', 'wrapped_neff.hlo')):
++            return True
++        return addition and name in ('model.hlo_module.pb', 'model.neff', 'wrapped_neff.hlo',
++                                     'compile_flags.json', 'model.done', 'model.log')
++    work = Path(spec['case']['compiler_workdir'])
++    if path == work or work in path.parents:
++        parts = path.relative_to(work).parts
++        if not parts: return addition
++        if parts[0] == 'layout_opt': return True
++        if parts == ('neuron_config.json',): return addition
++        if parts[0] not in ('context_encoding_model', 'token_generation_model'): return False
++        if len(parts) == 1: return addition
++        return re.fullmatch(r'_tp0_bk[0-5]', parts[1]) is not None
++    return False
++
++
++def native_temporary(path, spec):
++    return any(root in path.parents for root in temporary_roots(
++        (Path(spec['output_root']), control_root(spec))))
++
++
++def complete_live_topology(before, after, spec):
++    """Compare two complete inventories, allowing in-place output growth.
++
++    Both scans already enforced every file/class/entry cap. Return False only
++    for declared transient topology changes, which require a fresh scan pair;
++    unknown disappearance/replacement fails immediately. The caller returns
++    the latest complete accounting, never a partial or older usage total.
++    """
++    old = {row[0]: row for row in before}; new = {row[0]: row for row in after}
++    stable = True
++    for name in old.keys() | new.keys():
++        a, b = old.get(name), new.get(name)
++        if a is not None and b is not None and a[1:4] == b[1:4]:
++            # Directory byte counts/timestamps may change as children publish.
++            # The complete path set and directory inode still have to agree.
++            if stat.S_ISDIR(a[3]): continue
++            if a[4] == b[4] and b[5] >= a[5] and b[6] >= a[6]: continue
++        path = Path(name)
++        known = (transient(path) or native_temporary(path, spec)
++                 or compiler_mutation(path, spec, addition=a is None))
++        # A final metadata name may replace its exact observed atomic peer.
++        if a is None and path.suffix == '.json':
++            known = known or any(str(path.with_name(path.name + suffix)) in old
++                                 for suffix in ('.tmp', '.publishing'))
++        require(known, 'unknown storage topology/identity change: ' + name)
++        stable = False
++    return stable
++
++
+ def storage_scan(spec):
+     from .budget import roots as all_roots, reviewed_budget, unchanged_inputs, check_view_link, CLASSES
+     reviewed = unchanged_inputs(spec, reviewed_budget(spec))
+@@ -223,6 +303,8 @@
+             except FileNotFoundError:
+                 if any(tmp in path.parents for tmp in temporary_roots(science_roots)):
+                     raise PublicationRace("declared native temporary disappeared before stat")
++                if compiler_mutation(path, spec):
++                    raise CompilerTreeRace("private compiler entry disappeared before stat")
+                 raise
+             entries += 1
+             inventory.append((str(path), s.st_dev, s.st_ino, s.st_mode, s.st_nlink, s.st_size, s.st_blocks, s.st_mtime_ns, s.st_ctime_ns))
+@@ -246,6 +328,8 @@
+                 except FileNotFoundError:
+                     if any(tmp in path.parents for tmp in temporary_roots(science_roots)):
+                         raise PublicationRace("declared native temporary directory disappeared before scan")
++                    if compiler_mutation(path, spec):
++                        raise CompilerTreeRace("private compiler directory reset during scan")
+                     raise
+                 continue
+             if stat.S_ISSOCK(s.st_mode):
+@@ -270,17 +354,26 @@
+ 
+ 
+ def storage(spec, *, terminal=False):
+-    # Running log sizes need not be static. Only known atomic publication
+-    # races get finite retries; arbitrary disappearance/hardlinks fail closed.
++    # The original eight-attempt bound also covers SDK build-tree churn.
++    # A partial compiler scan is discarded, then two complete inventories must
++    # converge on topology/identity. Live logs/ordinary files may keep growing.
++    # Drained terminal observations retain the original exact equality rule.
++    settling_compiler = False
+     for attempt in range(8):
+         try:
+             value, inventory = storage_scan(spec)
+             if terminal:
+                 second, again = storage_scan(spec)
+                 require(value == second and inventory == again, "terminal output inventory is not stable")
++            elif settling_compiler:
++                second, again = storage_scan(spec)
++                if not complete_live_topology(inventory, again, spec):
++                    raise CompilerTreeRace("private compiler topology has not converged")
++                return second
+             return value
+-        except PublicationRace:
+-            if attempt == 7: raise ValueError("known atomic publisher did not settle within finite storage retries")
++        except PublicationRace as exc:
++            settling_compiler = settling_compiler or isinstance(exc, CompilerTreeRace)
++            if attempt == 7: raise ValueError("known publication/compiler topology did not settle within finite storage retries")
+             time.sleep(.01)
+ 
+ 
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v2/run.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/run.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parents[1], Path(__file__).resolve().parents[2]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_package_serial_runtime_v2.contract import reference, require
++    from qwen35_package_serial_runtime_v3.contract import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_package_serial_runtime_v2.adapter import outer
++        from qwen35_package_serial_runtime_v3.adapter import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_package_serial_runtime_v2.adapter import coordinator, native_leaf, worker_bootstrap
++    from qwen35_package_serial_runtime_v3.adapter import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_package_serial_runtime_v2.service import supervise
++        from qwen35_package_serial_runtime_v3.service import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v2/test_source.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/test_source.py
+@@ -22,7 +22,7 @@
+             raise AssertionError('native import forbidden in SOURCE/MOCK: ' + fullname)
+ 
+ sys.meta_path.insert(0, NativeBlocker())
+-from qwen35_package_serial_runtime_v2 import contract as c, io, budget as b, wiring as w, adapter as a, service as svc, readiness as ready
++from qwen35_package_serial_runtime_v3 import contract as c, io, budget as b, wiring as w, adapter as a, service as svc, readiness as ready
+ from qwen35_package_full_validation_v2 import entry, sampler, http
+ 
+ 
+@@ -178,7 +178,7 @@
+ 
+     def test_original_lock_and_atomic_publication_are_exact_ast(self):
+         old = Q / 'qwen35_sampler_runtime_io_v12.py'; new = HERE / 'io.py'
+-        for name in ('RetainedLock', 'descriptor', 'PublicationRace', 'transient', 'observed_stat', 'once', 'identity', 'raw', 'storage', 'Metadata'):
++        for name in ('RetainedLock', 'descriptor', 'PublicationRace', 'transient', 'observed_stat', 'once', 'identity', 'raw', 'Metadata'):
+             self.assertEqual(node(old, name), node(new, name), name)
+ 
+     def test_whole_history_authority_and_running_ack_exact_ast(self):
+@@ -450,7 +450,7 @@
+             with self.assertRaisesRegex(ValueError, 'identities changed'): w.check_build_seal(spec)
+ 
+     def test_stage25_refuses_unadmitted_external_guard_before_inputs(self):
+-        from qwen35_package_serial_runtime_v2 import final_audit
++        from qwen35_package_serial_runtime_v3 import final_audit
+         with patch.object(final_audit, 'Bundle') as bundle:
+             with self.assertRaisesRegex(ValueError, 'serial audit authority'):
+                 final_audit.audit({}, {}, {}, lambda: None)
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/test_compiler_storage.py
+@@ -0,0 +1,239 @@
++"""SOURCE/STDLIB MOCK: tiny synthetic files; no SDK/native/process/lock calls."""
++from contextlib import contextmanager
++import os
++from pathlib import Path
++import shutil
++import tempfile
++import unittest
++from unittest.mock import patch
++
++from test_source import Storage, io, b
++
++
++class CompilerStorage(unittest.TestCase):
++    @contextmanager
++    def fixture(self):
++        with tempfile.TemporaryDirectory() as temp:
++            spec, reviewed, control = Storage().fixture(temp)
++            with patch.object(io, 'control_root', return_value=control), \
++                    patch.object(b, 'control_root', return_value=control), \
++                    patch.object(b, 'reviewed_budget', return_value=reviewed), \
++                    patch.object(b, 'unchanged_inputs', side_effect=lambda spec, value: value), \
++                    patch.object(io.time, 'sleep') as sleep:
++                yield spec, reviewed, control, sleep
++
++    def cache(self, spec):
++        directory = Path(spec['case']['compiler_cache']) / 'neuronxcc-2.23.6484.0+3b612583' / (
++            'MODULE_' + 'a' * 20 + '+' + 'b' * 8)
++        directory.mkdir(parents=True)
++        return directory
++
++    def work(self, spec):
++        directory = Path(spec['case']['compiler_workdir']) / 'context_encoding_model' / '_tp0_bk0'
++        directory.mkdir(parents=True)
++        return directory
++
++    def vanish_on_stat(self, victim, operation):
++        original = io.observed_stat
++        changed = []
++        def observe(path):
++            if path == victim and not changed:
++                changed.append(True); operation()
++            return original(path)
++        return patch.object(io, 'observed_stat', side_effect=observe)
++
++    def test_sdk_atomic_cache_publish_recounts_final_file(self):
++        for name in ('model.hlo_module.pb', 'model.neff', 'wrapped_neff.hlo'):
++            with self.subTest(name=name), self.fixture() as (spec, reviewed, control, sleep):
++                directory = self.cache(spec)
++                final = directory / name
++                temporary = directory / (name + '-' + os.uname().nodename + '-12345')
++                temporary.write_bytes(b'synthetic' * 700)
++                with self.vanish_on_stat(temporary, lambda: temporary.replace(final)):
++                    result = io.storage(spec)
++                self.assertTrue(final.is_file()); self.assertFalse(temporary.exists())
++                expected, inventory = io.storage_scan(spec)
++                self.assertEqual(result, expected)
++                self.assertEqual(result['allocated_bytes'], sum(row[6] * 512 for row in inventory))
++                sleep.assert_called_once_with(.01)
++
++    def test_sdk_cache_unlock_recounts_complete_tree(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            directory = self.cache(spec)
++            lock = directory / 'model.hlo_module.pb.lock'; lock.touch()
++            (directory / 'model.neff').write_bytes(b'synthetic' * 700)
++            with self.vanish_on_stat(lock, lock.unlink): result = io.storage(spec)
++            self.assertEqual(result, io.storage_scan(spec)[0])
++            sleep.assert_called_once_with(.01)
++
++    def test_bucket_replacement_does_not_reuse_partial_usage(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            directory = self.work(spec); victim = directory / 'model' / 'graph.hlo'
++            victim.parent.mkdir(); victim.write_bytes(b'old synthetic')
++            def reset():
++                shutil.rmtree(directory); directory.mkdir()
++                (directory / 'model.synthetic.neff').write_bytes(b'new synthetic' * 900)
++            with self.vanish_on_stat(victim, reset): result = io.storage(spec)
++            self.assertEqual(result, io.storage_scan(spec)[0])
++            self.assertGreater(result['classes']['compiler_workdir'], 9000)
++            sleep.assert_called_once_with(.01)
++
++    def test_layout_directory_disappears_during_enumeration(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            directory = Path(spec['case']['compiler_workdir']) / 'layout_opt'
++            directory.mkdir(parents=True); original = Path.iterdir; changed = []
++            def children(path):
++                if path == directory and not changed:
++                    changed.append(True); directory.rmdir(); directory.mkdir()
++                    (directory / 'metaneff').write_bytes(b'synthetic')
++                    raise FileNotFoundError('SDK directory reset during enumeration')
++                return original(path)
++            with patch.object(Path, 'iterdir', children): result = io.storage(spec)
++            self.assertEqual(result, io.storage_scan(spec)[0]); sleep.assert_called_once_with(.01)
++
++    def test_unknown_cache_missing_and_wrong_sdk_or_hostname_fail_immediately(self):
++        for name in ('model.neff', 'arbitrary.lock', 'model.neff-wrong-host-12345',
++                     'compile_flags.json', 'model.neff-' + os.uname().nodename + '-0'):
++            with self.subTest(name=name), self.fixture() as (spec, reviewed, control, sleep):
++                victim = self.cache(spec) / name; victim.write_bytes(b'synthetic')
++                with self.vanish_on_stat(victim, victim.unlink):
++                    with self.assertRaises(FileNotFoundError): io.storage(spec)
++                sleep.assert_not_called()
++        with self.fixture() as (spec, reviewed, control, sleep):
++            wrong = Path(spec['case']['compiler_cache']) / 'neuronxcc-other' / ('MODULE_' + 'a'*20 + '+' + 'b'*8)
++            wrong.mkdir(parents=True); victim = wrong / 'model.hlo_module.pb.lock'; victim.touch()
++            with self.vanish_on_stat(victim, victim.unlink):
++                with self.assertRaises(FileNotFoundError): io.storage(spec)
++            sleep.assert_not_called()
++
++    def test_unknown_workdir_branch_and_other_tree_missing_fail(self):
++        for key, relative in (('compiler_workdir', 'unexpected/file.bin'),
++                              ('compiler_workdir', 'context_encoding_model/_tp0_bk6/graph.neff'),
++                              ('artifact', 'model.neff'), ('model_path', 'model.neff')):
++            with self.subTest(key=key, relative=relative), self.fixture() as (spec, reviewed, control, sleep):
++                victim = Path(spec['case'][key]) / relative
++                victim.parent.mkdir(parents=True); victim.write_bytes(b'synthetic')
++                with self.vanish_on_stat(victim, victim.unlink):
++                    with self.assertRaises(FileNotFoundError): io.storage(spec)
++                sleep.assert_not_called()
++
++    def test_sealed_build_has_no_new_compiler_mutation_exception(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            root = Path(spec['output_root']); root.mkdir()
++            (root / 'build-immutable-identities.json').write_text('{}')
++            lock = self.cache(spec) / 'model.hlo_module.pb.lock'; lock.touch()
++            with self.vanish_on_stat(lock, lock.unlink):
++                with self.assertRaises(FileNotFoundError): io.storage(spec)
++            sleep.assert_not_called()
++
++    def test_symlink_and_hardlink_in_compiler_trees_still_fail(self):
++        for tree in ('compiler_cache', 'compiler_workdir'):
++            with self.subTest(tree=tree), self.fixture() as (spec, reviewed, control, sleep):
++                directory = self.cache(spec) if tree == 'compiler_cache' else self.work(spec)
++                target = Path(spec['output_root']).parent / 'outside'; target.write_bytes(b'synthetic')
++                entry = directory / 'model.neff'; entry.symlink_to(target)
++                with self.assertRaises(ValueError): io.storage(spec)
++                entry.unlink(); os.link(target, entry)
++                with self.assertRaises(ValueError): io.storage(spec)
++                sleep.assert_not_called()
++
++    def test_each_cap_checked_again_after_topology_race(self):
++        for field in ('single_file_bytes', 'allocated_bytes', 'entries'):
++            with self.subTest(field=field), self.fixture() as (spec, reviewed, control, sleep):
++                directory = self.work(spec); victim = directory / 'old'; victim.write_bytes(b'synthetic')
++                def reset():
++                    victim.unlink(); (directory / 'new').write_bytes(b'x' * 9000)
++                    reviewed['classes']['compiler_workdir'][field] = 1
++                with self.vanish_on_stat(victim, reset):
++                    with self.assertRaisesRegex(ValueError, 'cap'): io.storage(spec)
++                sleep.assert_called_once_with(.01)
++
++    def test_live_log_and_regular_compiler_file_growth_converges(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            output = self.work(spec) / 'graph.neff'; output.write_bytes(b'synthetic')
++            log = control / 'shared-build' / 'phase.log'; log.parent.mkdir(parents=True)
++            log.write_bytes(b'synthetic log')
++            original = io.storage_scan; scans = []
++            def scan(value):
++                if not scans:
++                    scans.append(None); raise io.CompilerTreeRace('injected prior SDK reset')
++                for path in (output, log):
++                    with path.open('ab') as stream: stream.write(b'x' * 5000)
++                observed = original(value); scans.append(observed); return observed
++            with patch.object(io, 'storage_scan', side_effect=scan): result = io.storage(spec)
++            self.assertEqual(len(scans), 3); self.assertEqual(result, scans[-1][0])
++            for kind in ('compiler_workdir', 'build_auxiliary'):
++                self.assertGreater(scans[-1][0]['classes'][kind], scans[-2][0]['classes'][kind])
++            sleep.assert_called_once_with(.01)
++
++    def test_growth_past_cap_on_second_complete_scan_is_rejected(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            output = self.work(spec) / 'graph.neff'; output.write_bytes(b'synthetic')
++            original = io.storage_scan; calls = []
++            def scan(value):
++                calls.append(True)
++                if len(calls) == 1: raise io.CompilerTreeRace('injected prior SDK reset')
++                if len(calls) == 3:
++                    output.write_bytes(b'x' * 10000)
++                    reviewed['classes']['compiler_workdir']['single_file_bytes'] = 8192
++                return original(value)
++            with patch.object(io, 'storage_scan', side_effect=scan):
++                with self.assertRaisesRegex(ValueError, 'single.*cap'): io.storage(spec)
++            self.assertEqual(len(calls), 3)
++
++    def test_topology_churn_between_complete_scans_restarts_both(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            lock = self.cache(spec) / 'model.hlo_module.pb.lock'; lock.touch()
++            original = io.storage_scan; calls = []
++            def scan(value):
++                calls.append(True)
++                if len(calls) == 1: raise io.CompilerTreeRace('injected prior SDK reset')
++                if len(calls) == 3: lock.unlink()
++                return original(value)
++            with patch.object(io, 'storage_scan', side_effect=scan): result = io.storage(spec)
++            self.assertEqual(len(calls), 5); self.assertEqual(sleep.call_count, 2)
++            self.assertEqual(result, original(spec)[0])
++
++    def test_unknown_disappearance_between_complete_scans_is_not_swallowed(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            directory = Path(spec['case']['artifact']); directory.mkdir()
++            victim = directory / 'model.neff'; victim.write_bytes(b'synthetic')
++            original = io.storage_scan; calls = []
++            def scan(value):
++                calls.append(True)
++                if len(calls) == 1: raise io.CompilerTreeRace('injected prior SDK reset')
++                if len(calls) == 3: victim.unlink()
++                return original(value)
++            with patch.object(io, 'storage_scan', side_effect=scan):
++                with self.assertRaisesRegex(ValueError, 'unknown storage topology'): io.storage(spec)
++            self.assertEqual(len(calls), 3); sleep.assert_called_once_with(.01)
++
++    def test_unknown_inode_replacement_between_complete_scans_fails(self):
++        with self.fixture() as (spec, reviewed, control, sleep):
++            directory = Path(spec['case']['artifact']); directory.mkdir()
++            victim = directory / 'model.neff'; victim.write_bytes(b'synthetic')
++            original = io.storage_scan; calls = []
++            def scan(value):
++                calls.append(True)
++                if len(calls) == 1: raise io.CompilerTreeRace('injected prior SDK reset')
++                if len(calls) == 3:
++                    replacement = directory / 'replacement'
++                    replacement.write_bytes(b'synthetic'); replacement.replace(victim)
++                return original(value)
++            with patch.object(io, 'storage_scan', side_effect=scan):
++                with self.assertRaisesRegex(ValueError, 'unknown storage topology'): io.storage(spec)
++            self.assertEqual(len(calls), 3); sleep.assert_called_once_with(.01)
++
++    def test_eight_attempt_bound_and_terminal_exact_inventory_preserved(self):
++        with patch.object(io, 'storage_scan', side_effect=io.CompilerTreeRace('never settles')) as scan, \
++                patch.object(io.time, 'sleep') as sleep:
++            with self.assertRaisesRegex(ValueError, 'finite storage retries'): io.storage({})
++            self.assertEqual(scan.call_count, 8); self.assertEqual(sleep.call_count, 7)
++        with patch.object(io, 'storage_scan', side_effect=[({'bytes': 1}, []), ({'bytes': 2}, [])]), \
++                patch.object(io.time, 'sleep') as sleep:
++            with self.assertRaisesRegex(ValueError, 'terminal output inventory'): io.storage({}, terminal=True)
++            sleep.assert_not_called()
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)

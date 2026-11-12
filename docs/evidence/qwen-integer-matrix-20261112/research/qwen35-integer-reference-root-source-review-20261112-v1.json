@@ -1,0 +1,55 @@
+{
+  "blockers": [],
+  "compiler_executed": false,
+  "controls": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-integer-reference-source-controls-20261112-v1.json",
+    "sha256": "376f4fbba2490524ed3955a2a5ffd3f18f7d3f2982761964799c2e067340e7d7"
+  },
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-integer-reference-serial-source-delivery-20261112-v1.json",
+    "sha256": "2fdf290ef1070d7bdd77a909fc4b27cf60b533ed05eee7f5299e249e50661dce"
+  },
+  "full_model_qualified": false,
+  "native_executed": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T19:41:13.123811+00:00",
+  "reviewer": "/root",
+  "reviews": [
+    "Root reviewed integer writer and exact device-leaf diff: only compiled reference changes to bitcast/S16 or S32/store_slots/bitcast. Original NKI writer, host oracle, old-state gather, aliases and ordered schedule remain.",
+    "Root independently passed ten source and twenty-four serial/mock tests. Author initial inventory failure remains recorded; current manifest and original sources hashes rechecked unchanged.",
+    "All eight layouts, 625 mappings, raw/finite, standalone/persistent MUST_ALIAS, 32 graphs and 46368 calls retained with original full byte checks, time/resource limits and cleanup.",
+    "Integer-reference ratios are not original floating baseline or full-model speedups; FP32 lowering, persistent state and original old-value gather remain unproved until actual full matrix."
+  ],
+  "root_tests": [
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "cc7a46"
+      },
+      "log": {
+        "path": "/tmp/qwen-integer-matrix-root-source-tests-20261112.log",
+        "sha256": "832c1ce60ced622aa4fb4042efb52d471f659d4b30c221248a74f9e83c522895"
+      },
+      "suite": "source",
+      "tests": 10
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_session",
+        "session_id": 33118,
+        "terminal_chunk": "7bd93d"
+      },
+      "log": {
+        "path": "/tmp/qwen-integer-matrix-root-serial-tests-20261112.log",
+        "sha256": "e21b117b53100cbb253d5d10045a3629ea0dc6ff47df26e8868eafeeec883cde"
+      },
+      "suite": "serial",
+      "tests": 24
+    }
+  ],
+  "runtime_bound": false,
+  "schema": "qwen35_integer_reference_root_source_review_v1",
+  "source_accepted": true
+}

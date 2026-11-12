@@ -1,0 +1,315 @@
+{
+  "accounting_findings": [
+    "All six trees are charged by lstat allocated blocks; the view links themselves are charged without recursively charging the original 4,548,221,488-byte weight target again.",
+    "Persistent artifact/cache/workdir and temporary HLO/NEFF copies are separately accounted; shared-build TMPDIR has the smaller build_auxiliary 256 MiB total and 128 MiB per-file ceilings.",
+    "No source proof shows the 1 GiB artifact/file or 3 GiB workdir budget is necessarily inadequate; compiler/intermediate peaks remain unknown.",
+    "SDK cache atomic replace/unlock and bucket reset can race v2 scanning. v3 discards incomplete scans and uses finite topology convergence instead of omitting disappeared entries."
+  ],
+  "actual_runtime_admitted": false,
+  "budget": {
+    "additional_allocated_bytes": 6744440832,
+    "build_file_limit_bytes": 1073741824,
+    "classes": {
+      "artifact": {
+        "allocated_bytes": 1073741824,
+        "entries": 256,
+        "single_file_bytes": 1073741824
+      },
+      "build_auxiliary": {
+        "allocated_bytes": 268435456,
+        "entries": 2048,
+        "single_file_bytes": 134217728
+      },
+      "compiler_cache": {
+        "allocated_bytes": 2147483648,
+        "entries": 4096,
+        "single_file_bytes": 1073741824
+      },
+      "compiler_workdir": {
+        "allocated_bytes": 3221225472,
+        "entries": 8192,
+        "single_file_bytes": 1073741824
+      },
+      "view": {
+        "allocated_bytes": 33554432,
+        "entries": 64,
+        "single_file_bytes": 16777216
+      }
+    },
+    "required_nvme_bytes": 42177921024,
+    "required_root_bytes": 31138512896,
+    "trial_ceiling_not_peak_prediction": true
+  },
+  "compiler_executed": false,
+  "evidence": [
+    {
+      "finding": "Actual Qwen class inherits NeuronBaseForCausalLM.",
+      "label": "Qwen inherits NxDI application compile",
+      "line": 201,
+      "source": {
+        "bytes": 13132,
+        "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/modeling.py",
+        "sha256": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad"
+      },
+      "statement": "class NeuronQwen35ForCausalLM(NeuronBaseForCausalLM):"
+    },
+    {
+      "finding": "Inherited application implementation is NeuronApplicationBase.",
+      "label": "NxDI inheritance",
+      "line": 3074,
+      "source": {
+        "bytes": 176537,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py",
+        "sha256": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63"
+      },
+      "statement": "class NeuronBaseForCausalLM(NeuronApplicationBase):"
+    },
+    {
+      "finding": "get_builder reads BASE_COMPILE_WORK_DIR at line 150 and passes it explicitly; shared /tmp/nxd_model fallback is not selected.",
+      "label": "Explicit builder workdir",
+      "line": 165,
+      "source": {
+        "bytes": 38218,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py",
+        "sha256": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad"
+      },
+      "statement": "compiler_workdir=base_compile_work_dir,"
+    },
+    {
+      "finding": "Compile invokes trace without serializing initialization weights into compiler_workdir.",
+      "label": "No trace checkpoint serialization",
+      "line": 303,
+      "source": {
+        "bytes": 38218,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/application_base.py",
+        "sha256": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad"
+      },
+      "statement": "initialize_model_weights=False, dry_run=dry_run"
+    },
+    {
+      "finding": "The exact case omits this setting; compile skips persisting sharded weights and load shards in memory.",
+      "label": "Sharded checkpoints default false",
+      "line": 367,
+      "source": {
+        "bytes": 56905,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/config.py",
+        "sha256": "6380d0671130b519642509bf4de76412a7ab0f6d092c3676197cd1610185314e"
+      },
+      "statement": "self.save_sharded_checkpoint = kwargs.pop(\"save_sharded_checkpoint\", False)"
+    },
+    {
+      "finding": "Bucket compilation supplies work_dir and cache_dir=None to neuron_xla_compile.",
+      "label": "Actual cache API",
+      "line": 603,
+      "source": {
+        "bytes": 62169,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/model_builder.py",
+        "sha256": "7323a755fbe8c9253cdb8977d8a21dca083c9b132d2b8a3664aa89e0da047e91"
+      },
+      "statement": "def submit_compilation_job_with_cache(key, bucket_rank, **kwargs):"
+    },
+    {
+      "finding": "Main bucket compiler runs with cwd=work_dir and inherits the leaf TMPDIR.",
+      "label": "Compiler working directory",
+      "line": 114,
+      "source": {
+        "bytes": 17522,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+        "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+      },
+      "statement": "res = subprocess.run(cmd, stderr=subprocess.PIPE, cwd=work_dir, env=env)"
+    },
+    {
+      "finding": "Temporary HLO and NEFF copies use Python tempfile; child TMPDIR exists before the fresh interpreter starts.",
+      "label": "Compiler temporary HLO/NEFF copies",
+      "line": 251,
+      "source": {
+        "bytes": 17522,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+        "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+      },
+      "statement": "with tempfile.TemporaryDirectory() as tmpdirname:"
+    },
+    {
+      "finding": "cache_dir=None resolves to the reviewed independent cache root.",
+      "label": "Cache environment selection",
+      "line": 78,
+      "source": {
+        "bytes": 21272,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_cache.py",
+        "sha256": "cdfa0d6f5c2481da7d4331b36e14985363b6b29c05d257c27c866b8a1e841f90"
+      },
+      "statement": "compile_cache_path = os.environ.get(\"NEURON_COMPILE_CACHE_URL\", None)"
+    },
+    {
+      "finding": "The three upload_file targets use temporary names suffixed by hostname-PID, then os.replace.",
+      "label": "Cache atomic publication",
+      "line": 385,
+      "source": {
+        "bytes": 21272,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_cache.py",
+        "sha256": "cdfa0d6f5c2481da7d4331b36e14985363b6b29c05d257c27c866b8a1e841f90"
+      },
+      "statement": "tempname = f'{cache_path}-{self._unique_suffix}'"
+    },
+    {
+      "finding": "The SDK removes model.hlo_module.pb.lock after cache publication.",
+      "label": "Cache unlock unlink",
+      "line": 343,
+      "source": {
+        "bytes": 21272,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_cache.py",
+        "sha256": "cdfa0d6f5c2481da7d4331b36e14985363b6b29c05d257c27c866b8a1e841f90"
+      },
+      "statement": "def hlo_release_lock(self, h):"
+    },
+    {
+      "finding": "create_subdir=False deletes and recreates the supplied bucket workdir before compilation.",
+      "label": "Compiler bucket workdir reset",
+      "line": 142,
+      "source": {
+        "bytes": 17522,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+        "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+      },
+      "statement": "def get_work_dir(work_dir, create_subdir=True):"
+    },
+    {
+      "finding": "The v3 transient matcher binds this exact cache version directory, not arbitrary installed versions.",
+      "label": "Fixed SDK cache version",
+      "line": 1,
+      "source": {
+        "bytes": 81,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronxcc/version/__init__.py",
+        "sha256": "2f1b7813d08920761278643cd87449c287580260e23b28fb1a74cadbbf31a726"
+      },
+      "statement": "__version__ = '2.23.6484.0+3b612583'"
+    },
+    {
+      "finding": "Optional layout transform uses the explicit compiler_workdir/layout_opt output and log paths.",
+      "label": "Optional layout compiler route",
+      "line": 1273,
+      "source": {
+        "bytes": 62169,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/model_builder.py",
+        "sha256": "7323a755fbe8c9253cdb8977d8a21dca083c9b132d2b8a3664aa89e0da047e91"
+      },
+      "statement": "wlt_neff_artifact = torch_neuronx.xla_impl.trace.generate_neff("
+    },
+    {
+      "finding": "This compiler invocation supplies no cwd: it inherits experiment ROOT. Explicit outputs/logs and TMPDIR are routed, but closed compiler relative side effects are unproven.",
+      "label": "Optional layout inherited cwd",
+      "line": 320,
+      "source": {
+        "bytes": 28862,
+        "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch_neuronx/xla_impl/trace.py",
+        "sha256": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786"
+      },
+      "statement": "status = subprocess.run(command).returncode"
+    },
+    {
+      "finding": "Build TMPDIR is control/shared-build/tmp; capture/quality/http have separate output tmp/rpc paths.",
+      "label": "Leaf temporary routing",
+      "line": 232,
+      "source": {
+        "bytes": 14750,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/contract.py",
+        "sha256": "217d8a4270ef88571d81587d8ab10f39df6a7bf1c13195f0212ae7b53b089024"
+      },
+      "statement": "result = dict(environment, TMPDIR=str(Path(phase[\"control\"]) / \"tmp\"))"
+    },
+    {
+      "finding": "TMPDIR is supplied to a fresh child interpreter before native imports or tempfile initialization.",
+      "label": "Fresh leaf environment",
+      "line": 401,
+      "source": {
+        "bytes": 33016,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/service.py",
+        "sha256": "686cb514e6af992632d4427d5ba2886a296c0e9ff9a079a1cd1640f4ec13a732"
+      },
+      "statement": "process = subprocess.Popen(child_argv, env=env, cwd=ROOT, stdin=subprocess.DEVNULL,"
+    },
+    {
+      "finding": "Original continuous root/NVMe statvfs floors, remaining reservation and MemAvailable checks are preserved byte-for-byte at function AST level.",
+      "label": "Global free-space and reserve checks",
+      "line": 380,
+      "source": {
+        "bytes": 23299,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/io.py",
+        "sha256": "c87cbe6702ac25bf0a8be950dcb1367a35baee5f4167814b111e77f5e17022fb"
+      },
+      "statement": "def resources(spec, *, reserve=False):"
+    },
+    {
+      "finding": "Only exact cache naming and known 12 bucket/layout work trees before sealing can trigger new transient recovery.",
+      "label": "Scoped compiler transient recovery",
+      "line": 212,
+      "source": {
+        "bytes": 23299,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/io.py",
+        "sha256": "c87cbe6702ac25bf0a8be950dcb1367a35baee5f4167814b111e77f5e17022fb"
+      },
+      "statement": "def compiler_mutation(path, spec, *, addition=False):"
+    },
+    {
+      "finding": "After compiler topology races, complete scans must agree on topology and identity; in-place ordinary file/log growth is allowed, with all caps checked on each scan.",
+      "label": "Complete topology convergence",
+      "line": 259,
+      "source": {
+        "bytes": 23299,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/io.py",
+        "sha256": "c87cbe6702ac25bf0a8be950dcb1367a35baee5f4167814b111e77f5e17022fb"
+      },
+      "statement": "def complete_live_topology(before, after, spec):"
+    }
+  ],
+  "full_model_qualified": false,
+  "limits": [
+    "Periodic monitoring is not a filesystem hard quota, and compiler growth can occur between observations.",
+    "Optional layout compiler cwd remains experiment ROOT; no claim is made that closed native compiler side effects are restricted to the six trees.",
+    "HF_HOME=/mnt/nvme/hf is outside the six trees. The inspected fixed local-model path did not establish a mandatory download/write there.",
+    "The root preparation snapshot has only 144257024 bytes beyond the 29 GiB requirement; original live resource checks remain necessary.",
+    "Unknown cache filenames/version/hostname and unknown workdir branches do not receive the new disappearing-path exception. Workdir internals within the exact known bucket/layout subtree are treated as private compiler topology and require complete rescan convergence."
+  ],
+  "lock_acquired": false,
+  "model_tensor_neff_payload_read": false,
+  "native_executed": false,
+  "new_speedup_claim": false,
+  "observed_space_from_root_receipt": {
+    "observed_at": "2026-11-12T19:29:47.904059+00:00",
+    "remeasured_by_this_review": false,
+    "space": {
+      "nvme": {
+        "available_bytes": 43371413504,
+        "remaining_after_reservation": 1193492480,
+        "required_bytes": 42177921024
+      },
+      "root": {
+        "available_bytes": 31282769920,
+        "remaining_after_reservation": 144257024,
+        "required_bytes": 31138512896
+      }
+    }
+  },
+  "resource_budget": {
+    "bytes": 7135,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r1-20261112-resource-budget.json",
+    "sha256": "9f4d67a8d683771e3a5f1776d102ea93af581bdf2ede51d093ab588080a8415b"
+  },
+  "reviewer": "/root/qwen_package_budget_review_20261112",
+  "root_preparation_receipt": {
+    "bytes": 3572,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r1-root-budget-preparation-20261112-v1.json",
+    "sha256": "f78b48fe37cec576da838962038e3f0298fba61c8acbb869ff2043e939e80635"
+  },
+  "schema": "qwen35_package_build_storage_source_review_v1",
+  "scope": "Read-only SDK/source review plus separately authorized v3 SOURCE/STDLIB MOCK successor; this is not runtime admission.",
+  "shared_cache_deletion_authorized": false,
+  "source_only": true,
+  "stat_inputs": {
+    "bytes": 4442,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r1-20261112-stat-inputs.json",
+    "sha256": "94b8ec74b02406fca5980c183d8423b36b1703879ebdca5056ca5fcb657a63be"
+  },
+  "v3_successor_directory": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3"
+}

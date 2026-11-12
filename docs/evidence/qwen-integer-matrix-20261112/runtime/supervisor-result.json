@@ -1,0 +1,385 @@
+{
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/admission.json",
+    "sha256": "60b7c812fc01fcad958a7d3e6281cac79674285c37e6f98f85a1f7024cba3513"
+  },
+  "automatic_successor": false,
+  "complete": true,
+  "counts": {
+    "correctness_calls": 40000,
+    "graphs": 32,
+    "measured_calls": 5120,
+    "reset_calls": 224,
+    "total_runtime_calls": 46368,
+    "warmup_calls": 1024
+  },
+  "full_model_qualified": false,
+  "layouts": [
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "conv",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/conv/leaf-result.json",
+        "sha256": "475c1992dd2ad16fb91a0497dc817a4a574753f967a15343102d809619aa1bb2"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/conv/native-process-exit.json",
+        "sha256": "ce013c703f43f6293d58859fc5fa4c55c017c94e6852c9fece77854c7dbbf507"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/conv/report.json",
+        "sha256": "714c9342a5d45019ad606833f4719b386e4592413927a77d8f9fef62c33d13a8"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "recurrent",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/recurrent/leaf-result.json",
+        "sha256": "efa8ed375f5a3b96374f3d5e9df3d32ebc51dc11ab6f28c2b6ed95b2be312010"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/recurrent/native-process-exit.json",
+        "sha256": "c6ba29a061b7808b1375cba004aa9792f98543b063f0866c61c63fe0fe5b0737"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/recurrent/report.json",
+        "sha256": "7481e795f3cb641f0a2f2c4f060002c931a600ca2706c7cfdf6f7be648c214d9"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv128",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv128/leaf-result.json",
+        "sha256": "4c03d1bf59ea1c1e0e3c618bc18a1306518caa354574e0b6794c6ce896f25227"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv128/native-process-exit.json",
+        "sha256": "416ef3e41ebac19dd3f24ade33079a8a9ec2457f6eaf3e3d65b8556cfd5541b1"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv128/report.json",
+        "sha256": "0751568af2f8238da39be306123c6d733a6f6fdb745d6d4f985076620bf8f942"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv256",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv256/leaf-result.json",
+        "sha256": "8f3e19d5d0450f43995fb9425cb0b352ce0985a97faa1c53e319f32c0f751748"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv256/native-process-exit.json",
+        "sha256": "faba27606ab19b59cec9685001beb556946a40dce9365b8d2fd82500d26acf43"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv256/report.json",
+        "sha256": "598a57d63b5eae4e89de51ee9ed73074a5cd0527f554715dde889035876010b1"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv512",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv512/leaf-result.json",
+        "sha256": "3956be11f13a2502a67ca8d39eaddee5b7958e89c2e3b4bb4f76839da095ae44"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv512/native-process-exit.json",
+        "sha256": "225f11f9e322a4f6a3c4b058286fba0263a0e58dafac390666ecc826b8e12590"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv512/report.json",
+        "sha256": "b25daae2b4e13f5a898ca9f3a005ba3382fede00afa1b636747a76cddeb8d418"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv1024",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv1024/leaf-result.json",
+        "sha256": "1a8b89956f64046dee194999031436bb69ca09ba9156efa7c674c21998e7f0c9"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv1024/native-process-exit.json",
+        "sha256": "c08cd469d8cb76990b3e0a2561ee7d23859c203ea6848f9f505d601fb455c1c0"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv1024/report.json",
+        "sha256": "32e1fd8b8baabf7f5af2b265b520cb0a4d2306cfe1f822ddf1a135cbd0768230"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv2048",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv2048/leaf-result.json",
+        "sha256": "1b6f1602286695e066ccaa1c22d154f32c22fd2625b433fcc851deef991e9b04"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv2048/native-process-exit.json",
+        "sha256": "5a14df3fd1d31f57d5a1d90f01ba20cf2a0142a64d77106ad2a5bf888cdd2b10"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv2048/report.json",
+        "sha256": "07543d86f601ed6f52a07e5cdfde3b9e9ec70f7fcb81318d14e67b3684c2557f"
+      }
+    },
+    {
+      "counts": {
+        "correctness_calls": 5000,
+        "graphs": 4,
+        "measured_calls": 640,
+        "reset_calls": 28,
+        "total_runtime_calls": 5796,
+        "warmup_calls": 128
+      },
+      "graphs": 4,
+      "layout": "kv4096",
+      "leaf_result": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv4096/leaf-result.json",
+        "sha256": "27b2618d6b280528da5482401bbd5cc2995ebaac7de058434466f34c8f47e346"
+      },
+      "model_speedup_claim": false,
+      "passed": true,
+      "process_exit": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv4096/native-process-exit.json",
+        "sha256": "b7933c06ec4ba5bfd8023e1c6ab1b9a11957fbfade23d7b01b85078a28cbe24f"
+      },
+      "reference_implementation": {
+        "candidate": "unchanged_store_slots_nki_predicated",
+        "floating_storage_types": [
+          "bfloat16",
+          "float32"
+        ],
+        "integer_select_types": [
+          "s16",
+          "s32"
+        ],
+        "name": "integer_bitcast_store_slots_v1",
+        "numeric_conversion": false,
+        "original_floating_reference_failed_status_preserved": true,
+        "original_model_baseline_speedup_claim": false,
+        "original_old_value_gather_unchanged": true
+      },
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/kv4096/report.json",
+        "sha256": "9d49877300de6cd76c89e26ca8d1fea007bf87aa86aab34e2ee33de67c121889"
+      }
+    }
+  ],
+  "owner": {
+    "process": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_integer_reference_serial_v1.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-integer-reference-slot-r1-20261112/admission.json",
+        "--binding-sha256",
+        "60b7c812fc01fcad958a7d3e6281cac79674285c37e6f98f85a1f7024cba3513"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-20261112-integer-reference-slot.service",
+      "pid": 999767,
+      "ppid": 1583,
+      "start_ticks": "429360654"
+    },
+    "service_owner": {
+      "invocation_id": "320f7ba18372407c8452d91f2d53b9dc",
+      "pid": 999767,
+      "start_ticks": 429360654,
+      "unit": "trn1-qwen35-sampler-r1-20261112-integer-reference-slot"
+    }
+  },
+  "passed": true,
+  "self_exit_claimed": false
+}

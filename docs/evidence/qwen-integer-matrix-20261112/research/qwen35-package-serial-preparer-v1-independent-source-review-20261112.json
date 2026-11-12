@@ -1,0 +1,127 @@
+{
+  "actual_preparation_invoked": false,
+  "binary_payload_read": false,
+  "blockers": [
+    {
+      "id": "json_nonfinite_exponent",
+      "location": "StableReaders.metadata",
+      "needed": "Reject decoded nonfinite floats throughout the metadata tree (or finite-check parse_float), in an additive successor; preserve v1.",
+      "problem": "parse_constant rejects literal NaN/Infinity, but standard JSON exponent overflow 1e999/-1e999 is decoded to +/-inf and accepted, including nested objects and arrays.",
+      "reproduced_cases": [
+        "{\"x\":1e999}",
+        "{\"x\":[-1e999]}",
+        "{\"x\":{\"y\":1e999}}"
+      ],
+      "severity": "source_control_gap"
+    },
+    {
+      "id": "retained_unopened_reference_output_collision",
+      "location": "_future and prepare forbidden-path construction",
+      "needed": "Include every retained reference path in the output collision set, without opening payloads or selecting current bindings. Keep future output paths distinct and false candidate review.",
+      "problem": "The future-path exclusion set includes observed inputs/all_inputs/source pins but omits retained references that were not individually opened. Future overlay_path can equal sdk_operator_recovery, native_manifest, completed_sdk or a later catalog terminal path, producing incompatible new/old hash refs for one path.",
+      "reproduced_cases": [
+        "overlay.sdk_operator_recovery",
+        "overlay.native_manifest",
+        "catalog.completed_sdk",
+        "catalog.runs[-1].terminal"
+      ],
+      "severity": "source_control_gap"
+    }
+  ],
+  "compiler_executed": false,
+  "current_binding_selected": false,
+  "device_executed": false,
+  "history_resolved": false,
+  "independent_tests": {
+    "bytes": 8183,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_preparer_independent_v1.py",
+    "sha256": "76e0ab04dad8fcddbde000631ea503657c923a23c17d6427f8a06375625954ff"
+  },
+  "integration": {
+    "bytes": 7704,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v1-integration-20261112.md",
+    "sha256": "c3ecc3cd86fb259eba30c6743753d9334e8cc075a3894f86e35ad5ce2af379bb"
+  },
+  "launch_authorized": false,
+  "lock_acquired": false,
+  "native_executed": false,
+  "no_actual_overwrite": true,
+  "observed_at": "2026-11-12T19:47:37.970847+00:00",
+  "original_delivery_and_sources_unchanged": true,
+  "passed": false,
+  "positive_findings": [
+    "Complete source union is exact across seed, recovered/base, ordered catalog increments, selected runtime, runtime input pins, frozen science input/capture manifests and preparation helpers for runtime v2 and v3.",
+    "Recovered-only sources survive and remain outside the overlay extension; base inputs remain behind their original reference and seed/overlay JSON identities are preserved.",
+    "All runtime files and all five v2 pure-import dependencies are required for v3. Source hash conflicts and metadata identity drift fail.",
+    "The original ordered catalog prefix, original failed rows, complete seed actual tool/owners/units and 256-row boundary are retained.",
+    "All six exact scientific binaries are kept outside JSON extensions and are statted twice without payload reads.",
+    "Returned candidate and serialized review always remain passed=false and launch_authorized=false; actual contract admission rejects the returned review.",
+    "No current-state discovery, real candidate publication, native import, History resolution, service/process launch or lock acquisition occurs in the preparer or synthetic tests."
+  ],
+  "reviewer": "/root/qwen_integer_matrix_successor_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_serial_preparer_independent_source_review_v1",
+  "scope_limits": [
+    "Source-only review; no then-current History/physical/resource admission or native package outcome is established.",
+    "Both reproduced issues returned only in-memory false candidates or temporary JSON parser values. The source never published or overwrote retained files; root exclusive creation and full runtime History remain additional gates.",
+    "Injected metadata readers are a documented authentication trust boundary; the synthetic fixtures intentionally use supplied in-memory identities.",
+    "The frozen implementation has not been modified. Root requested an additive v2 successor and independent recheck of affected controls."
+  ],
+  "services_launched": false,
+  "source_delivery": {
+    "bytes": 5211,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v1-source-delivery-20261112.json",
+    "sha256": "c673298dbc026cc720f0cd21496a21a1bf112954c9635687105a0133925ecd40"
+  },
+  "source_only": true,
+  "subject": {
+    "bytes": 28843,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v1.py",
+    "sha256": "4db81cd01947aabd9c2cf3a21c928212d5184e9f2665b46e1b97b6c00363c9b7"
+  },
+  "validation": [
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "93bcde"
+      },
+      "command": "python3 -I -B (inline delivery-pin verification and unittest loader for test_prepare_qwen35_package_serial_candidate_v1)",
+      "name": "Frozen delivery and all nine pinned source/dependency/log files; delivered suite",
+      "tests_failed": 0,
+      "tests_passed": 27,
+      "tests_run": 27
+    },
+    {
+      "actual_tool": {
+        "exit_code": 1,
+        "kind": "tool_call",
+        "terminal_chunk": "5e79ea"
+      },
+      "command": "python3 -I -B check_qwen35_package_preparer_independent_v1.py",
+      "failing_subtests": 7,
+      "name": "Independent supplemental suite",
+      "tests_failed": 2,
+      "tests_passed": 8,
+      "tests_run": 10
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "d3013f"
+      },
+      "name": "Minimal finite-number reproduction",
+      "outcome": "accepted_nonfinite_exponent=true"
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "e1d61b"
+      },
+      "name": "Minimal retained reference collision reproduction",
+      "outcome": "both recovery and native manifest collisions accepted; returned review_authorized=false"
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "author": "/root/qwen_integer_matrix_successor_20261112",
+  "coverage": [
+    {
+      "cache": [
+        4,
+        3072,
+        4
+      ],
+      "call": "linear conv",
+      "decode_updates": [
+        4,
+        3072,
+        4
+      ],
+      "dtype": "bfloat16",
+      "matrix_layout": "conv",
+      "package_line": 104,
+      "per_rank_buffers": 18,
+      "prefill_updates": [
+        1,
+        3072,
+        4
+      ],
+      "research_line": 102
+    },
+    {
+      "cache": [
+        4,
+        8,
+        128,
+        128
+      ],
+      "call": "linear recurrent",
+      "decode_updates": [
+        4,
+        8,
+        128,
+        128
+      ],
+      "dtype": "float32",
+      "matrix_layout": "recurrent",
+      "package_line": 104,
+      "per_rank_buffers": 18,
+      "prefill_updates": [
+        1,
+        8,
+        128,
+        128
+      ],
+      "research_line": 102
+    },
+    {
+      "cache": "[4,1,L,256] decode prefix of [4,1,4096,256]",
+      "call": "full attention K/V",
+      "decode_updates": "[4,1,L,256], L in [128,256,512,1024,2048,4096]",
+      "dtype": "bfloat16",
+      "matrix_layout": "kv128..kv4096",
+      "package_line": 151,
+      "per_rank_buffers": 12,
+      "prefill_updates": [
+        1,
+        1,
+        4096,
+        256
+      ],
+      "research_line": 149
+    }
+  ],
+  "current_run_prepared": false,
+  "device_executed": false,
+  "full_model_gates": [
+    "all96 actual state bindings and original dtype/rank/shape/raw-zero clear",
+    "original numeric thresholds and all finite logits",
+    "all6 cold buckets and slot duplicates",
+    "1541-step long decode plus slot reuse, partial batch, inactive resume",
+    "203 complete output vectors with original bitwise/precision gates unchanged",
+    "same CPU sampler, capture/packet controls and 13 negative controls as appropriate",
+    "all96 quality fixtures and unchanged original grading, prompts and 69/96 baseline reproduction",
+    "fresh observer-free HTTP smoke/initial120/matched workloads; paired timing only after quality gates",
+    "actual process exits, descendant drain, complete History/source/input/artifact identities and external final qualification"
+  ],
+  "full_model_qualified": false,
+  "gaps": [
+    "Prefill uses ctx_batch_size=1: cache capacity4, update rows1, slots1. Current primitive matrix has cache4/update4/slots4, so prefill is not qualified by it.",
+    "Real package graph seq_ids are int32: text loader passes sorted IDs; SDK trace creates int32 and forward converts int64 to int32. Primitive matrix accepts int64 and candidate internally converts to int32. Add a separate targeted int32-entry proof.",
+    "Full-attention decode consumes a prefix slice of maximum KV state and concatenates untouched tail afterward; full-model stride, reshape materialization, gather/update dependencies, tail bytes, multi-state aliases and TP2 need actual integrated verification.",
+    "Primitive uses an explicitly new integer-bitcast reference and a single-core standalone/persistent graph. It does not establish original floating baseline correctness on raw exceptional payloads, compiler fusion, packaged TP2 behavior or full-model speedup."
+  ],
+  "implementation_points": [
+    "Give LinearAttention and FullAttention a default original cache_writer callable; replace only four store_slots calls with that callable.",
+    "NeuronQwen35Model.init_model binds selected callable after its existing TP sharding; prefill models bind original writer regardless of candidate mode. Preserve old gathers, conv/delta/attention math, FP32 _apply, all aliases and KV tail concatenation.",
+    "Candidate wrapper keeps original BF16/FP32 payload dtype, flatten/reshape and int32 slot behavior of reviewed NKI kernel. Qualify actual int32 input and sliced KV cases before integrated run.",
+    "Add writer identity, phase scope, kernel/helper source hashes and schema/version to build_identity and artifact admission. Same source tree for both arms, separate fresh artifact/cache/workdir paths and manifest identities; reject cross-arm artifact reuse.",
+    "Extend package source closure beyond glob(\"*.py\") if choosing a kernel subdirectory; preserve SDK/package provenance and capture identities."
+  ],
+  "mapping": {
+    "coverage": "All625 four-row matrix mappings cover the serving decode mapping values, including inactive rows and duplicates; service active slots normally unique. Input dtype and surrounding graph differences still require integration validation.",
+    "meaning": "-1 inactive; 0..3 state slots; original loop and NKI both last-write-wins on duplicates",
+    "range": [
+      -1,
+      0,
+      1,
+      2,
+      3
+    ],
+    "real_route": "runner input_block_ids -> NeuronCausalLM seq_ids -> SDK int32 conversion/sort/pad -> model.forward seq_ids -> layer slots; token-level paged slot_mapping is not this writer input"
+  },
+  "matched_comparison": {
+    "artifacts": "Compile and validate separate new 12-graph artifacts for each writer mode, with resource review for both outputs; existing sampler-only shared-artifact assumptions cannot be reused unchanged.",
+    "baseline_writer": "original torch_where store_slots",
+    "candidate_writer": "NKI predicated only on decode; original prefill",
+    "cpu_sampler_fast": "Same explicit value in both arms; preferably1 only after its independent package25-stage qualification. Never baseline0/candidate1 in writer A/B.",
+    "fixed": [
+      "same prepared model bytes/tokenizer/revision",
+      "same package source except explicit writer selection",
+      "BF16 weights/conv/KV and FP32 recurrent state",
+      "TP2 B4 maxB4 decodeB4 ctxB1 context4096 all6 buckets",
+      "same compiler options/SDK/graph flags, hardware, cores, CPU/thread/memory policy",
+      "same prompts/tokens/generation/scheduler/padding/slot sequence and reset policy",
+      "same server launch, observer-off timed HTTP and paired measurement protocol"
+    ],
+    "integer_reference": "Separate named diagnostic only; never silently replace original model baseline with bitcast reference."
+  },
+  "native_imported": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T20:09:35.239085+00:00",
+  "order": [
+    "First finish and independently audit the currently running complete primitive matrix; final result is owned by root, not inferred by this plan.",
+    "Then finish the independent packaged sampler full25-stage qualification, with existing baseline/candidate sampler meanings unchanged. Do not modify this frozen package or harness while those stages are pending.",
+    "Only afterward create an isolated additive cache-writer branch/source successor, int32/slice targeted proofs and explicit source review.",
+    "Define a distinct writer experiment/harness preserving every original scientific/resource/history gate, but holding sampler fixed and giving each writer its own source-bound graph artifact.",
+    "Execute cold states, numeric, all6 cold buckets,1541-step long decode with slot reuse/partial/resume,203 vectors, sampler/capture controls,quality96,matched HTTP and independent final actual-exit audit.",
+    "Report fresh writer end-to-end ratio by named workload and baseline. Never multiply earlier sampler/model/primitive speedups."
+  ],
+  "package_modified": false,
+  "proposed_switch": {
+    "default": "torch_where",
+    "implemented": false,
+    "name": "NEURON_QWEN35_CACHE_WRITER",
+    "new_package_files": [
+      "cache_writer.py",
+      "slot_cache_nki_predicated.py"
+    ],
+    "selection": "Resolve once during Neuron model construction/trace and bind per-attention cache_writer callable; prefill always uses original torch_where. CPU reference retains default original callable. No global monkeypatch or mutable per-call environment lookup.",
+    "standalone_package_requirement": "Use package-relative kernel imports; never import /home/ubuntu/experiments helpers from packaged serving.",
+    "unsupported_behavior": "Reject unknown mode or candidate shape/dtype/phase drift; no silent fallback inside eligible decode.",
+    "values": [
+      "torch_where",
+      "nki_predicated_decode_v1"
+    ]
+  },
+  "schema": "qwen35_cache_writer_package_source_plan_v1",
+  "source_checks": {
+    "attention_layers": 6,
+    "linear_layers": 18,
+    "native_imports": false,
+    "original_package_stages": 25,
+    "shape_derivation_from_pinned_model_and_tp2": true,
+    "state_buffers_per_rank": 48,
+    "state_buffers_total": 96,
+    "store_slots_package_research_ast_identical": true
+  },
+  "source_only": true,
+  "sources": {
+    "integer_reference": {
+      "bytes": 2045,
+      "lines": {
+        "int64_requirement": [
+          45
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_integer_slot_reference_v1.py",
+      "sha256": "2d07a14d1e25fc6668f2df5104df9c110338a86a115b7135fb46f1fd4b5c3538"
+    },
+    "loader": {
+      "bytes": 42818,
+      "lines": {
+        "text_forward": [
+          369
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_loader.py",
+      "sha256": "c1881ab64a296bb6a98657b8a8135ee8facc954c5e684803f2624dd2e2dcbb31"
+    },
+    "nki_kernel": {
+      "bytes": 2052,
+      "lines": {
+        "copy": [
+          35
+        ],
+        "kernel": [
+          8
+        ],
+        "last_writer": [
+          25
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated.py",
+      "sha256": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e"
+    },
+    "nki_wrapper": {
+      "bytes": 387,
+      "lines": {
+        "entry": [
+          6
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki_predicated_torch.py",
+      "sha256": "33f4ffdd55d0a3eb3a1b7c9f3ddf2f7505161a7809a2fabb22956988475b7f67"
+    },
+    "package_artifacts": {
+      "bytes": 6482,
+      "lines": {
+        "admission": [
+          53
+        ],
+        "build": [
+          87
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/artifacts.py",
+      "sha256": "f32a7bffb8752514aa65ca7e0599b3781557bf7974e7b3bec311df473b656091"
+    },
+    "package_checks": {
+      "bytes": 8097,
+      "lines": {
+        "cold": [
+          56
+        ],
+        "long": [
+          78
+        ],
+        "quality": [
+          90
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/checks.py",
+      "sha256": "dce9068362346f91f077196b73dd08bdd31ea651cb616e0cbd5fde20057a7225"
+    },
+    "package_final_audit": {
+      "bytes": 8676,
+      "lines": {
+        "external_audit": [
+          21,
+          23
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v3/final_audit.py",
+      "sha256": "ab631ab0e0abbd2866be0c286406fb18a20fdea9399279dd89eb273d6d951c1b"
+    },
+    "package_identity": {
+      "bytes": 11820,
+      "lines": {
+        "build_identity": [
+          214
+        ],
+        "scope": [
+          146
+        ],
+        "source_identity": [
+          205
+        ],
+        "variant": [
+          136
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/identity.py",
+      "sha256": "4bdf0769b1cfb577480da9bd416310baec254e6300cf41597437c488401a98b9"
+    },
+    "package_modeling": {
+      "bytes": 13132,
+      "lines": {
+        "decode_bucket_slice": [
+          188
+        ],
+        "hybrid_cache": [
+          78
+        ],
+        "layer_call": [
+          189
+        ],
+        "preserve_fp32": [
+          155
+        ],
+        "tail_preservation": [
+          191
+        ],
+        "tp_sharding": [
+          129
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/modeling.py",
+      "sha256": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad"
+    },
+    "package_provenance": {
+      "bytes": 13966,
+      "lines": {},
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/provenance.py",
+      "sha256": "682313f7b2e71b6b5bbeb3a11e82190bfa3c77ddd9a209bec36ae85835e77e89"
+    },
+    "package_registration": {
+      "bytes": 3489,
+      "lines": {
+        "text_route": [
+          18
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/registration.py",
+      "sha256": "bb5a3a97efa7ea253549697c0386c7a3e98d26a76dcf9f47faa79ba259a43ff7"
+    },
+    "package_stage_order": {
+      "bytes": 7189,
+      "lines": {},
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/stage_order.json",
+      "sha256": "c0c61972814cb9acc428e4aff0a269789080c86150af7d469e42fe42032d5ffb"
+    },
+    "package_state": {
+      "bytes": 3105,
+      "lines": {
+        "all96_bindings": [
+          11
+        ],
+        "clear": [
+          31
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/state.py",
+      "sha256": "095e46f6d02dfc4b43cd77ebaa20a7a25a4879d2786b2c1a2ed5a6e73ffbabc7"
+    },
+    "package_text": {
+      "bytes": 11301,
+      "lines": {
+        "attention_writes": [
+          151
+        ],
+        "linear_writes": [
+          104
+        ],
+        "old_kv_gather": [
+          139
+        ],
+        "old_linear_gather": [
+          90
+        ],
+        "writer": [
+          49
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/text_core.py",
+      "sha256": "c9ee19b8e95eae12193e292286804e660424ca5fd0ace1b64c57f4e9d37011ba"
+    },
+    "package_validation": {
+      "bytes": 2435,
+      "lines": {
+        "long_frames": [
+          20
+        ],
+        "state_gate": [
+          34
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/validation.py",
+      "sha256": "294c81d07aee0396c960afc1d6f78a0da98d838ab05cd970cbe55a8536ab6dff"
+    },
+    "primitive_leaf": {
+      "bytes": 14509,
+      "lines": {
+        "old_read": [
+          111
+        ],
+        "slot_dtype": [
+          221
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_integer_reference_device_leaf_v1.py",
+      "sha256": "2bf42ed6640c92dec36d27f9d8fa37b7ecb218088b5dc25cb2a48b4bd20590db"
+    },
+    "primitive_protocol": {
+      "bytes": 9103,
+      "lines": {
+        "layouts": [
+          15
+        ],
+        "mappings": [
+          20
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py",
+      "sha256": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4"
+    },
+    "research_adapter": {
+      "bytes": 13100,
+      "lines": {},
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_neuron_adapter.py",
+      "sha256": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2"
+    },
+    "research_text": {
+      "bytes": 11238,
+      "lines": {
+        "attention_writes": [
+          149
+        ],
+        "linear_writes": [
+          102
+        ],
+        "writer": [
+          47
+        ]
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_text_port.py",
+      "sha256": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34"
+    },
+    "runner": {
+      "bytes": 66550,
+      "lines": {
+        "decode_slot": [
+          863,
+          924,
+          1089,
+          1125
+        ],
+        "free_slots": [
+          140
+        ],
+        "int64_slots": [
+          1005,
+          1037
+        ],
+        "new_slot": [
+          843
+        ]
+      },
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "4484edd883d199310e1646969417e05a8162148e404f840dc66cad6c6233a77e"
+    },
+    "sdk_base": {
+      "bytes": 176537,
+      "lines": {
+        "decode_batch": [
+          3130,
+          3182
+        ],
+        "prefill_batch": [
+          3159
+        ]
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_base.py",
+      "sha256": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63"
+    },
+    "sdk_wrapper": {
+      "bytes": 83554,
+      "lines": {
+        "convert": [
+          718
+        ],
+        "convert_called": [
+          1337
+        ],
+        "inactive_mask": [
+          621
+        ],
+        "trace_int32": [
+          254
+        ]
+      },
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed_inference/models/model_wrapper.py",
+      "sha256": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241"
+    }
+  }
+}

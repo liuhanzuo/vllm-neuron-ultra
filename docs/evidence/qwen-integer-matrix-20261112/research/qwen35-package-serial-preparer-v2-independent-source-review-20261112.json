@@ -1,0 +1,159 @@
+{
+  "actual_preparation_invoked": false,
+  "author_validation_references": {
+    "note": "Author executed 32+10 tests; this reviewer independently executed the affected 2+5 controls and inspected/AST-compared the full change. Do not conflate their execution receipts.",
+    "reviewer_authored_suite_reexecution": {
+      "actual_exit_chunk": "0bfd40",
+      "actual_exit_code": 0,
+      "command": [
+        "python3",
+        "-I",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_preparer_independent_v1.py",
+        "--candidate-module",
+        "prepare_qwen35_package_serial_candidate_v2"
+      ],
+      "independent_root_review_still_required": true,
+      "log": {
+        "bytes": 1032,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v2-independent-test-output-20261112.txt",
+        "sha256": "f28abaf84b6f8ee68ca999daf03c489ac278c13e5b0036ac92f01a187170edd9"
+      },
+      "passed": true,
+      "test_source": {
+        "bytes": 8183,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_preparer_independent_v1.py",
+        "sha256": "76e0ab04dad8fcddbde000631ea503657c923a23c17d6427f8a06375625954ff"
+      },
+      "tests": 10
+    },
+    "source_mock_validation": {
+      "actual_exit_chunk": "38faa9",
+      "actual_exit_code": 0,
+      "command": [
+        "python3",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_package_serial_candidate_v2.py"
+      ],
+      "log": {
+        "bytes": 2687,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v2-source-mock-output-20261112.txt",
+        "sha256": "119538863e83a7b8ec876149192a713b7eaa29fe19a02901ea20aade38666954"
+      },
+      "native_import_blocker": true,
+      "passed": true,
+      "real_prepare_file_IO_process_and_lock_blockers": true,
+      "synthetic_inputs_only": true,
+      "tests": 32
+    }
+  },
+  "binary_payload_read": false,
+  "blockers": [],
+  "compiler_executed": false,
+  "current_binding_selected": false,
+  "device_executed": false,
+  "history_resolved": false,
+  "independent_tests": {
+    "bytes": 8183,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_preparer_independent_v1.py",
+    "sha256": "76e0ab04dad8fcddbde000631ea503657c923a23c17d6427f8a06375625954ff"
+  },
+  "independent_validation": [
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "f86e0c"
+      },
+      "name": "Frozen v2 delivery, all source/log/diff/dependency pins"
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "65d55c"
+      },
+      "command": "python3 -I -B check_qwen35_package_preparer_independent_v1.py --candidate-module prepare_qwen35_package_serial_candidate_v2 IndependentPreparation.test_overflowed_json_numbers_are_rejected_at_any_depth IndependentPreparation.test_retained_but_unopened_reference_paths_cannot_be_outputs",
+      "name": "Reviewer-authored two prior failure tests",
+      "passed": true,
+      "tests": 2
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "94d394"
+      },
+      "methods": [
+        "Preparation.test_all_four_future_metadata_paths_reject_all_retained_refs",
+        "Preparation.test_annotated_and_lexical_alias_retained_refs_reject_collision",
+        "Preparation.test_injected_metadata_nonfinite_exponent_value_rejected",
+        "Preparation.test_nested_finite_json_numbers_remain_accepted",
+        "StableReader.test_overflow_exponents_rejected_at_every_json_depth"
+      ],
+      "name": "Five v2 control tests independently executed",
+      "passed": true,
+      "tests": 5
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "07676e"
+      },
+      "name": "Whole-source normalized AST equality and frozen v1 hash recheck",
+      "result": "Entire v2 equals v1 after removing exactly two reviewed controls plus import/doc/schema changes; all v1 delivery pins unchanged."
+    }
+  ],
+  "launch_authorized": false,
+  "lock_acquired": false,
+  "native_executed": false,
+  "observed_at": "2026-11-12T19:49:52.378318+00:00",
+  "original_delivery_and_sources_unchanged": true,
+  "passed": true,
+  "predecessor_review": {
+    "bytes": 6419,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v1-independent-source-review-20261112.json",
+    "sha256": "8a01c78a294e740b8d51bebd5853efb01f9c636b65c17ce13bb275f944b8e5df"
+  },
+  "resolved_findings": [
+    {
+      "evidence": "New iterative finite_json_numbers validates every decoded/injected metadata float, including objects/arrays and positive/negative exponent overflow. Existing finite values remain accepted.",
+      "id": "json_nonfinite_exponent",
+      "status": "fixed and independently reproduced rejection"
+    },
+    {
+      "evidence": "New iterative retained_reference_paths collects all absolute path+sha256 references, including annotated and lexical-alias references, from the explicit request and every read metadata value. Its complete set joins the unchanged _future forbidden paths. Recovery/native manifests, completed_sdk and later catalog terminals cannot be future outputs.",
+      "id": "retained_unopened_reference_output_collision",
+      "status": "fixed and independently reproduced rejection"
+    }
+  ],
+  "retained_findings": [
+    "Complete seed, recovered-only/base sources, exact ordered catalog prefix and every source increment remain retained.",
+    "Base input reference and every existing seed/overlay JSON metadata hash/identity remain unchanged; six typed scientific binaries remain stat-only and separate.",
+    "v2 and v3 runtime source closures plus v2 pure-contract import sources remain required.",
+    "Returned candidate/review remain passed=false and launch_authorized=false; preparer performs no publication or admission.",
+    "All original resource, envelope, package configuration, full History and 25-stage runtime gates are unchanged."
+  ],
+  "reviewer": "/root/qwen_integer_matrix_successor_20261112",
+  "runtime_admitted": false,
+  "schema": "qwen35_package_serial_preparer_independent_source_review_v2",
+  "scope_limits": [
+    "This passed flag approves only the reviewed source successor. It is not a true candidate review, then-current binding review, launch grant or scientific qualification.",
+    "Only in-memory synthetic candidates and small temporary JSON files were used. No historical file or current runtime metadata was overwritten.",
+    "Production injected readers remain responsible for authenticated complete metadata bytes; root supplies explicit then-current refs and independent source-only guard.",
+    "Root must still select real inputs, publish with exclusive/no-overwrite semantics, perform exact final binding review and retain unchanged full History/physical/runtime admission."
+  ],
+  "services_launched": false,
+  "source_delivery": {
+    "bytes": 7122,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v2-source-delivery-20261112.json",
+    "sha256": "3b754581a69fa24838e42e670bcc149026075c63ea8e0dfffc0ed27d4e5a534c"
+  },
+  "source_only": true,
+  "subject": {
+    "bytes": 30427,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v2.py",
+    "sha256": "3915eab600ac0ba6e953273ff72c65dcee174bb344272b4317b64cf64ee5adf7"
+  }
+}
