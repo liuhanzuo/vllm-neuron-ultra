@@ -1,0 +1,258 @@
+{
+  "actual_outer_exit_observed": true,
+  "actual_tool": {
+    "exit_code": 1,
+    "kind": "tool_session",
+    "session_id": 95781,
+    "terminal_chunk": "270de1"
+  },
+  "actual_tool_exit_observed": true,
+  "admission": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-formal-r4-20261112/admission.json",
+    "sha256": "b2053d0db12ba0cc6716a9859fdcdd3d3db8245f3821243e4823349753cf9904"
+  },
+  "admission_wire_bytes": 43273,
+  "auditor_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_minicpm5_formal_r4_prestart_exit_root_v1.py",
+    "sha256": "e46eb41b6b5fd9a5c19b3c8bbcfcacf94d0af6fde68cf42e5b0fda94315c2c52"
+  },
+  "child_exit_receipt_expected": false,
+  "failure": "First complete admission equality rejects two tuple/list identity fields after JSON roundtrip.",
+  "failure_source_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-r4-prerequisite-failure-source-review-20261112-v1.json",
+    "sha256": "88e66efe7ba38f938286f185ecbd05811f112d0f0d42b7abc8d8586e6a29b0b3"
+  },
+  "full_model_qualified": false,
+  "launcher_wait": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-launcher-wait.json",
+    "sha256": "0838c1741b6d72c41f94798d67ce0a255461045ce576ace57c2239c24b7ec759"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "log": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-tool.log",
+    "sha256": "080b6dce98a93f472f25b6a670e5ba1ad50ed62df21ed8b571692f225094f704"
+  },
+  "model_executed": false,
+  "native_ABI_qualified": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T16:51:53.174326+00:00",
+  "observer_started": false,
+  "original_cleanup": "No-child drain proof, then original descriptor close; independent current observations above.",
+  "original_lock_reacquired_and_released": true,
+  "owners": [
+    {
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-I",
+        "-S",
+        "-B",
+        "-X",
+        "pycache_prefix=/dev/null",
+        "-c",
+        "\"\"\"Reviewed -c source entry; inert when imported for source-only tests.\n\nFuture callers must pass these exact source bytes as the -c argument, bind the\nwhole argv externally, and provide an independently reviewed role-specific\nplan. No on-disk entry .py/.pyc is executed. This component does not authenticate\nnative libraries, acquire/release the serial descriptor, or start a child.\n\"\"\"\nimport sys\nimport posix\nimport time\n\nROOT = '/home/ubuntu/experiments/trn1-latest-models-20261031'\nOUTER_PYTHON = '/home/ubuntu/venvs/model_reference_2026/bin/python'\nOUTER_EXE = '/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/bin/python3.12'\nSDK_PYTHON = '/home/ubuntu/venvs/vllm_neuron/bin/python'\nPREFIX = '/dev/null'\nPLAN_CAP = 2 ** 20\nSOURCE_CAP = 2 ** 20\nSOURCE_TOTAL_CAP = 16 * 2 ** 20\nFIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns')\nBLOCKED = ('ctypes', '_ctypes', 'torch', 'numpy', 'neuronx_distributed',\n    'neuronx_distributed_inference', 'minicpm5_python_trace_lifecycle_v4',\n    'research.minicpm5_pv_sdk_import_diagnostic_v1')\n\n\ndef require(ok, message):\n    if not ok:\n        raise ValueError(message)\n\n\ndef canonical(path):\n    return (type(path) is str and path.startswith('/') and path != '/'\n        and all(part and part not in ('.', '..') for part in path.split('/')[1:]))\n\n\ndef digest(raw, check=lambda: None):\n    \"\"\"Small pure-Python SHA256: no hashlib/SSL/native import before bootstrap.\n\n    Only bounded source and JSON bytes use this implementation. Native payload\n    hashing remains the original authenticator's responsibility.\n    \"\"\"\n    require(type(raw) is bytes and len(raw) <= 2 * SOURCE_TOTAL_CAP, 'Bounded digest bytes')\n    k = (0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,\n         0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,\n         0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,\n         0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,\n         0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,\n         0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,\n         0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,\n         0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2)\n    h = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]\n    message = raw + b'\\x80' + b'\\0' * ((55 - len(raw)) % 64) + (len(raw) * 8).to_bytes(8, 'big')\n    mask = (1 << 32) - 1\n    def rotate(x, n):\n        return (x >> n) | ((x << (32 - n)) & mask)\n    for offset in range(0, len(message), 64):\n        if offset % 4096 == 0:\n            check()\n        w = [int.from_bytes(message[offset+i:offset+i+4], 'big') for i in range(0, 64, 4)]\n        for i in range(16, 64):\n            x,y = w[i-15],w[i-2]\n            s0 = rotate(x,7) ^ rotate(x,18) ^ (x >> 3)\n            s1 = rotate(y,17) ^ rotate(y,19) ^ (y >> 10)\n            w.append((w[i-16] + s0 + w[i-7] + s1) & mask)\n        a,b,c,d,e,f,g,hh = h\n        for i in range(64):\n            s1 = rotate(e,6) ^ rotate(e,11) ^ rotate(e,25)\n            t1 = (hh + s1 + ((e & f) ^ (~e & g)) + k[i] + w[i]) & mask\n            s0 = rotate(a,2) ^ rotate(a,13) ^ rotate(a,22)\n            t2 = (s0 + ((a & b) ^ (a & c) ^ (b & c))) & mask\n            hh,g,f,e,d,c,b,a = g,f,e,(d+t1)&mask,c,b,a,(t1+t2)&mask\n        h = [(x+y)&mask for x,y in zip(h,(a,b,c,d,e,f,g,hh))]\n    check()\n    return ''.join('%08x' % value for value in h)\n\n\nclass SystemPorts:\n    \"\"\"Concrete operations, never called by the source-only test suite.\"\"\"\n    def now(self): return time.monotonic()\n    def lstat(self, path): return posix.lstat(path)\n    def open(self, path): return posix.open(path, posix.O_RDONLY|posix.O_NOFOLLOW|posix.O_NONBLOCK|posix.O_CLOEXEC)\n    def fstat(self, fd): return posix.fstat(fd)\n    def read(self, fd, size): return posix.read(fd, size)\n    def close(self, fd): return posix.close(fd)\n    def readlink(self, path): return posix.readlink(path)\n\n\nclass Entry:\n    \"\"\"Own the cache fence and source receipts for the whole future process.\n\n    The original bootstrap successor must adopt deadline exactly: entry work\n    is already charged to it. This object never initializes/restarts a timer.\n    \"\"\"\n    def __init__(self, *, runtime=sys, ports=None):\n        self.runtime = runtime\n        self.ports = SystemPorts() if ports is None else ports\n        self.started = self.ports.now()\n        self.deadline = None\n        self.failure = None\n        self.role = self.plan = self.entry_sha256 = None\n        self.audit = self.finder = None\n        self.sources = {}\n        self.source_bytes = 0\n        self.prefix_identity = None\n        self.state = 'new'\n        self.native_authority_verified = False\n        self.history_owner = None\n        self.plan_reference = None\n        self.admission_envelope = None\n        self.types_tracker = self.types_observation = None\n\n    def fail(self, error):\n        if self.failure is None:\n            self.failure = error\n        raise self.failure\n\n    def check(self):\n        if self.failure is not None:\n            raise self.failure\n        try:\n            require(self.deadline is not None and self.started <= self.ports.now() < self.deadline,\n                    'Original absolute entry deadline, including pre-bootstrap imports')\n            require(self.runtime.pycache_prefix == PREFIX and self.runtime.dont_write_bytecode,\n                    'Original no-cache prefix/-B retained')\n            require(self.prefix() == self.prefix_identity, 'Same non-directory cache prefix retained')\n            if self.audit is not None:\n                self.check_finder_ownership()\n        except BaseException as error:\n            self.fail(error)\n\n    def check_finder_ownership(self):\n        stack=self.runtime.meta_path\n        require(sum(item is self.finder for item in stack)==1,'One retained no-cache source finder')\n        index=stack.index(self.finder)\n        if self.history_owner is None:\n            require(index==0,'Entry source finder remains first before concrete history handoff')\n            return\n        gate,auth,guard,gate_module,auth_module=self.history_owner\n        require(auth.guard is guard and gate.guard is guard and auth.failure is None\n            and gate.state!='failed','Same concrete successful history/native owner')\n        require(index<=3,'Only original temporary native-source/fence layers before entry finder')\n        fences=0;sources=0\n        for item in stack[:index]:\n            if type(item) is gate_module.PreImportFence:\n                fences+=1\n                require(gate.state=='authenticating' and sources==0,\n                        'Original preimport fence precedes source owner during native authentication')\n            else:\n                require(type(item) is auth_module.SourceFinder and item.auth is auth\n                    and auth.native_receipt is not None and self.native_authority_verified,\n                    'Only concrete authenticated source finder may precede entry finder')\n                sources+=1\n        require(fences<=1 and sources<=2,'Original one fence and at most nested concrete source loaders')\n\n    def bind_history_owner(self,gate,auth,guard):\n        \"\"\"Concrete outer312 gate/authenticator handoff, not a caller predicate.\n\n        The exact classes are already executed from this entry's pinned source\n        loader. Bootstrap source verification below is required before ctypes.\n        The permanent audit hook and original entry finder remain installed.\n        \"\"\"\n        self.check()\n        require(self.role=='outer312' and self.history_owner is None and not self.native_authority_verified,\n                'One outer-only source ownership handoff')\n        gate_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_history_gate_v1')\n        auth_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_native_authenticator_v3')\n        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_bootstrap_descriptor_v4')\n        require(gate_module is not None and auth_module is not None and guard_module is not None\n            and type(gate) is gate_module.HistoricalImportGate\n            and type(auth) is auth_module.NativeAuthenticator\n            and type(guard) is guard_module.EntryBootstrapDescriptor,\n            'Exact source-verified concrete gate/authenticator/descriptor implementations')\n        for module in (gate_module,auth_module,guard_module):\n            require(module.__file__ in self.sources,'Concrete owner really executed from entry-pinned source')\n        require(guard.entry is self and guard.deadline==self.deadline and guard.started==self.started\n            and gate.guard is guard and auth.guard is guard and gate.state=='new'\n            and gate.bootstrap['binding']==guard.binding\n            and gate.bootstrap['outer_deadline']==self.deadline,\n            'Same actual retained descriptor and absolute entry deadline')\n        authority={key:self.plan['native_authority'][key] for key in ('path','sha256')}\n        require(gate.authority==authority and auth.native_receipt is None,\n                'Original outer role authority, not already imported native state')\n        for method,name in ((gate.ctypes_loader,'load_ctypes'),(gate.history_loader,'load_history'),\n                            (gate.verify_loaded_native,'verify_loaded_native'),\n                            (gate.verify_loaded_history,'verify_loaded_history')):\n            require(getattr(method,'__self__',None) is auth\n                and getattr(method,'__func__',None) is getattr(auth_module.NativeAuthenticator,name),\n                'Gate native/history steps are exact concrete authenticator methods')\n        self.history_owner=(gate,auth,guard,gate_module,auth_module)\n        self.check()\n\n    def confirm_bootstrap_sources(self,auth):\n        \"\"\"Run after concrete native authentication and before gate fence exits.\"\"\"\n        self.check()\n        require(self.history_owner is not None and self.history_owner[1] is auth\n            and auth.native_receipt is not None and auth.failure is None,\n            'Actual bound native authenticator completed before source ownership change')\n        gate,_,guard,_,_=self.history_owner\n        require(gate.state=='authenticating' and gate.receipt is None\n            and auth.bootstrap==gate.bootstrap and auth.authority==gate.authority,\n            'Same original preimport gate still owns transition')\n        if self.role == 'outer312':\n            require(self.types_tracker is not None and self.types_observation is None,\n                    'Actual early outer types observation retained once')\n            observed = self.types_tracker.finish(PIN)\n            require(observed['executed_through_pinned_loader'] is True\n                    and observed['original_execution_provenance_gap'] is False,\n                    'Formal source ownership requires actual pinned types execution; never reload preexisting module')\n            self.types_observation = observed\n        pins=auth.bootstrap['source_sha256']\n        for path,sha in self.plan['bootstrap_sources'].items():\n            require(pins.get(path)==sha,'Every bootstrap pin retained in full original source map')\n        for path,row in self.sources.items():\n            current=auth.reader.verified.get(path)\n            source_sha=pins.get(path)\n            if self.role=='outer312' and path==PIN['path']:\n                require(auth.source_pins.get(path)==PIN['sha256']\n                    and (source_sha is None or source_sha==PIN['sha256']),\n                    'Exact nonlocal types source authenticated by original archive origins, no PV domain expansion')\n                source_sha=auth.source_pins[path]\n            require(current is not None and source_sha==row['sha256']==current['sha256']\n                and row['bytes']==current['bytes']\n                and row['identity']==tuple(current['identity'][name] for name in FIELDS),\n                'Actual executed bootstrap bytes and current full-auth source identities match')\n        self.native_authority_verified=True\n        self.check()\n\n    def bind_sdk_history_owner(self,gate,auth,guard):\n        self.check()\n        require(self.role=='sdk310' and self.history_owner is None and not self.native_authority_verified,\n                'Separate once-only SDK310 concrete source ownership')\n        module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_native_v4')\n        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_guard_v2')\n        require(module is not None and guard_module is not None\n            and type(gate) is module.SDKHistoryGate and type(auth) is module.SDKNativeAuthenticator\n            and type(guard) is guard_module.SDKEntryGuard,\n            'Exact separate SDK gate/authenticator/parent-lease guard source types')\n        for item in (module,guard_module):\n            require(item.__file__ in self.sources,'SDK owner source really executed from pinned bytes')\n        require(guard.entry is self and gate.guard is guard and auth.guard is guard\n            and gate.entry is self and gate.auth is auth and gate.state=='new'\n            and auth.native_receipt is None and gate.bootstrap==auth.bootstrap\n            and gate.bootstrap['outer_deadline']==self.deadline,\n            'Same acknowledged SDK child, source release and inherited absolute deadline')\n        authority={key:self.plan['native_authority'][key] for key in ('path','sha256')}\n        require(gate.authority==auth.authority==authority,\n                'Only independent SDK310 authority, never outer312 receipt')\n        self.history_owner=(gate,auth,guard,module,module)\n        self.check()\n\n    def native_import_allowed(self,name):\n        if self.history_owner is None or not self.native_authority_verified:\n            return False\n        gate,auth,guard,gate_module,auth_module=self.history_owner\n        if name.split('.')[0] in ('torch','numpy','neuronx_distributed','neuronx_distributed_inference'):\n            return self.role=='sdk310' and gate.state=='complete_original_authentication'\n        require(gate.receipt is not None and gate.receipt['native_authority']==auth.native_receipt,\n                'Concrete original gate accepted native receipt before ctypes/history import')\n        require(any(type(item) is auth_module.SourceFinder and item.auth is auth\n            for item in self.runtime.meta_path[:self.runtime.meta_path.index(self.finder)]),\n            'ctypes/history only through exact authenticated no-cache source loader')\n        return True\n\n    def prefix(self):\n        dev = self.ports.lstat('/dev')\n        null = self.ports.lstat(PREFIX)\n        require(dev.st_mode & 0o170000 == 0o040000 and null.st_mode & 0o170000 == 0o020000\n                and null.st_rdev == 259, '/dev/null is canonical Linux character device 1:3, never a cache directory')\n        return (dev.st_dev, dev.st_ino, dev.st_mode, null.st_dev, null.st_ino, null.st_mode, null.st_rdev)\n\n    def read_source(self, path, sha, cap=SOURCE_CAP):\n        self.check()\n        require(canonical(path) and type(sha) is str and len(sha)==64\n                and all(c in '0123456789abcdef' for c in sha), 'Exact source/plan path and SHA256')\n        parts = path.split('/')[1:]\n        for i in range(len(parts)-1):\n            require(self.ports.lstat('/'+'/'.join(parts[:i+1])).st_mode & 0o170000 == 0o040000,\n                    'Canonical source ancestry, no symlinks')\n        before = self.ports.lstat(path)\n        fields = tuple(getattr(before, name) for name in FIELDS)\n        require(before.st_mode & 0o170000 == 0o100000 and before.st_nlink >= 1\n                and 0 < before.st_size <= cap, 'Bounded regular source/plan')\n        fd = self.ports.open(path)\n        data = bytearray()\n        try:\n            require(tuple(getattr(self.ports.fstat(fd), name) for name in FIELDS)==fields,\n                    'Source before/open identities equal')\n            while True:\n                self.check()\n                block = self.ports.read(fd, min(65536, before.st_size + 1 - len(data)))\n                require(type(block) is bytes, 'Binary source read')\n                if not block:\n                    break\n                data.extend(block)\n                require(len(data) <= before.st_size, 'Source size cannot grow')\n            require(len(data)==before.st_size\n                and tuple(getattr(self.ports.fstat(fd), name) for name in FIELDS)==fields\n                and tuple(getattr(self.ports.lstat(path), name) for name in FIELDS)==fields,\n                'Complete source EOF and stable identities')\n        finally:\n            self.ports.close(fd)\n        raw = bytes(data)\n        require(digest(raw, self.check)==sha, 'Executed source bytes match reviewed SHA256')\n        return raw, fields\n\n    def startup(self, source_literal):\n        \"\"\"Validate actual -c argv before decoding any external JSON/module.\"\"\"\n        require(self.state=='new', 'Once-only no-cache entry startup')\n        self.state='starting'\n        try:\n            s = self.runtime\n            flags = s.flags\n            require(flags.isolated==1 and flags.no_site==1 and flags.ignore_environment==1\n                and flags.no_user_site==1 and flags.optimize==0 and s.dont_write_bytecode\n                and s.pycache_prefix==PREFIX, 'Exact -I -S -B plus non-directory pycache prefix')\n            require(type(source_literal) is str and 0 < len(source_literal.encode()) < 65536,\n                    'Bounded literal reviewed source entry')\n            args = s.argv\n            require(len(args)==8 and args[0]=='-c' and args[1]=='--mini-source-entry'\n                and args[2] in ('outer312','sdk310'), 'Exact role-specific source-entry CLI')\n            self.role=args[2]\n            python = OUTER_PYTHON if self.role=='outer312' else SDK_PYTHON\n            require(s.executable==python and tuple(s.version_info[:2])==\n                ((3,12) if self.role=='outer312' else (3,10)), 'Original per-role Python, no outer/SDK substitution')\n            require(s.orig_argv==[python,'-I','-S','-B','-X','pycache_prefix='+PREFIX,'-c',source_literal,*args[1:]],\n                    'Actual immutable -c literal and complete original argv')\n            require(args[7]=='new' if self.role=='outer312' else args[7]!='new',\n                    'Only outer establishes deadline; worker inherits same outer absolute deadline')\n            self.deadline = self.started+900 if args[7]=='new' else float(args[7])\n            require(self.started < self.deadline <= self.started+900,\n                    'Original finite 900s deadline, never worker restart')\n            self.prefix_identity=self.prefix()\n            self.entry_sha256=digest(source_literal.encode(), self.check)\n            require(self.entry_sha256==args[6], 'Actual executed -c source bytes authenticated')\n            require(not any(n==p or n.startswith(p+'.') for n in s.modules for p in BLOCKED),\n                    'No historical/ctypes/model preimport before entry')\n            for name in ('sys','posix','time'):\n                require(name in s.builtin_module_names and s.modules[name].__spec__.origin=='built-in',\n                        'Entry uses original built-in primitives only')\n            # Startup source modules must have selected .py providers; CPython\n            # attempted cache paths are descendants of the validated character\n            # device. This also rejects a preloaded direct sourceless provider.\n            for module in tuple(s.modules.values()):\n                path=getattr(module,'__file__',None)\n                require(not path or not str(path).endswith(('.pyc','.pyo')),\n                        'No startup sourceless bytecode provider')\n            self.state='prefix_verified'\n            return args[3],args[4],args[5]\n        except BaseException as error:\n            self.fail(error)\n\n    def install(self, external):\n        \"\"\"Use existing frozen import machinery; never import importlib/ctypes.\"\"\"\n        self.check()\n        require(self.state=='prefix_verified' and self.audit is None,\n                'Cache fence installed once before any bootstrap source import')\n        entry=self\n\n        class SourceLoader(external.SourceFileLoader):\n            def get_code(self, name):\n                try:\n                    entry.check()\n                    raw, fields=entry.read_source(self.path,entry.plan['bootstrap_sources'][self.path])\n                    entry.source_bytes+=len(raw)\n                    require(entry.source_bytes<=SOURCE_TOTAL_CAP, 'Bounded total bootstrap source bytes')\n                    code=compile(raw,self.path,'exec',dont_inherit=True,optimize=0)\n                    entry.sources[self.path]=dict(sha256=digest(raw,entry.check),bytes=len(raw),identity=fields)\n                    return code\n                except BaseException as error:\n                    entry.fail(error)\n\n        class Finder:\n            def find_spec(self, name, path=None, target=None):\n                try:\n                    entry.check()\n                    if any(name==p or name.startswith(p+'.') for p in BLOCKED):\n                        require(entry.native_import_allowed(name),\n                                'Entry still precedes separate native/history authority')\n                    spec=external.PathFinder.find_spec(name,path,target)\n                    if spec is None:\n                        return None\n                    origin=spec.origin\n                    if origin and str(origin).endswith(('.pyc','.pyo')):\n                        raise ValueError('Sourceless bytecode is forbidden')\n                    if origin and origin.startswith(ROOT+'/'):\n                        require(entry.plan is not None and origin in entry.plan['bootstrap_sources']\n                            and type(spec.loader) is external.SourceFileLoader,\n                            'Every bootstrap local source is explicitly pinned')\n                        spec.loader=SourceLoader(name,origin)\n                        return spec\n                    return None\n                except BaseException as error:\n                    entry.fail(error)\n\n        def audit(event, args):\n            if event=='minicpm5.nocache.install' and args==(entry,):\n                entry.audit_seen=True\n            # Importlib treats this as an unavailable cache and proceeds to\n            # source. Direct sourceless imports cannot get bytes either.\n            if event=='open' and args and isinstance(args[0],(str,bytes)):\n                name=args[0].decode('utf-8','surrogateescape') if isinstance(args[0],bytes) else args[0]\n                if name.endswith(('.pyc','.pyo')):\n                    raise FileNotFoundError('Entry refuses all bytecode cache reads/writes')\n\n        self.finder=Finder()\n        self.runtime.meta_path.insert(0,self.finder)\n        self.audit_seen=False\n        self.runtime.addaudithook(audit)\n        self.audit=audit\n        self.runtime.audit('minicpm5.nocache.install',self)\n        require(self.audit_seen,'The actual runtime installed the permanent audit hook')\n        self.state='fenced'\n\n    def load_plan(self, reference, json_module):\n        self.check()\n        try:\n            require(self.state=='fenced' and self.plan is None, 'One exact entry plan')\n            raw,_=self.read_source(reference['path'],reference['sha256'],PLAN_CAP)\n            def unique(pairs):\n                out={}\n                for key,value in pairs:\n                    require(key not in out,'Unique entry plan keys');out[key]=value\n                return out\n            def nonfinite(value):\n                raise ValueError('Finite entry JSON')\n            plan=json_module.loads(raw,object_pairs_hook=unique,parse_constant=nonfinite)\n            self.plan_reference=dict(reference)\n            if plan.get('schema')=='minicpm5_fixed_input_pv_sdk_import_diagnostic_admission_v1':\n                require(self.role=='sdk310' and type(plan.get('source_entry_plan')) is dict,\n                        'Only SDK uses parent-authenticated existing admission as its entry plan')\n                self.admission_envelope=plan\n                plan=plan['source_entry_plan']\n            require(set(plan)=={'schema','role','python','executable','native_authority',\n                'bootstrap_sources','entry_sha256','entry_module','entry_path','successor_input'},\n                'Exact reviewed per-role entry plan fields')\n            require(plan['schema']=='minicpm5_source_entry_plan_v1' and plan['role']==self.role\n                and plan['entry_sha256']==self.entry_sha256 and plan['python']==self.runtime.executable,\n                'Entry plan binds actual literal/role/interpreter')\n            exe=self.ports.readlink('/proc/self/exe')\n            require(canonical(exe) and plan['executable']==exe and\n                (exe==OUTER_EXE if self.role=='outer312' else exe!=OUTER_EXE),\n                'Per-role actual original executable; SDK cannot reuse outer executable')\n            authority=plan['native_authority']\n            require(type(authority) is dict and set(authority)=={'role','python','path','sha256'}\n                and authority['role']==self.role and authority['python']==plan['python']\n                and canonical(authority['path']) and len(authority['sha256'])==64,\n                'Explicit separate outer312 versus SDK310 native authority; not validated here')\n            pins=plan['bootstrap_sources']\n            require(type(pins) is dict and 0<len(pins)<=2048 and all(canonical(p)\n                and p.startswith(ROOT+'/') and p.endswith('.py') and type(sha) is str\n                and len(sha)==64 and all(c in '0123456789abcdef' for c in sha) for p,sha in pins.items()),\n                'Exact bounded complete pre-native local source closure')\n            require(type(plan['entry_module']) is str and all(part.isidentifier() for part in plan['entry_module'].split('.'))\n                and plan['entry_path']==ROOT+'/'+plan['entry_module'].replace('.','/')+'.py'\n                and plan['entry_path'] in pins, 'Explicit future reviewed source successor, no old CLI fallback')\n            self.plan=plan\n            self.state='plan_verified'\n            return plan\n        except BaseException as error:\n            self.fail(error)\n\n    def receipt(self):\n        self.check()\n        require(self.plan is not None, 'No entry receipt before exact plan authentication')\n        return dict(schema='minicpm5_source_entry_receipt_v1',role=self.role,\n            python=self.plan['python'],executable=self.plan['executable'],\n            entry_sha256=self.entry_sha256,started_monotonic=self.started,\n            outer_deadline=self.deadline,pycache_prefix=PREFIX,\n            prefix_identity=self.prefix_identity,executed_sources={p:dict(r) for p,r in self.sources.items()},\n            native_authority=dict(self.plan['native_authority']),native_authority_verified=False)\n\n\n\"\"\"One outer312 source pin and honest pre-JSON execution observation.\n\nInert, import-free source for a future exact frozen literal. No filesystem or\nprocess operations of its own. Source reads use the existing bounded Entry.\nDo not import this local module before Entry.plan is available; embed its exact\nreviewed source alongside the existing helper, before child.main is called.\n\"\"\"\n\nPIN = {\n    'path': '/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/lib/python3.12/types.py',\n    'sha256': '345474ef027a1273f353da9bdc1f7c18f65335e72e681bcc0376774cc51f2405',\n    'bytes': 10993,\n}\n\n\ndef require(ok, message):\n    if not ok:\n        raise ValueError(message)\n\n\ndef provider_snapshot(runtime):\n    module = runtime.modules.get('types')\n    spec = getattr(module, '__spec__', None)\n    return dict(present=module is not None,\n                module_file=getattr(module, '__file__', None),\n                spec_name=getattr(spec, 'name', None),\n                spec_origin=getattr(spec, 'origin', None),\n                loader_type=type(getattr(module, '__loader__', None)).__name__,\n                loader_is_spec_loader=getattr(module, '__loader__', None) is getattr(spec, 'loader', None))\n\n\nclass TypesSourceObservation:\n    \"\"\"Keep loaded-at-entry evidence separate from execution through our loader.\"\"\"\n\n    def __init__(self, runtime):\n        self.runtime = runtime\n        self.initial_module = runtime.modules.get('types')\n        self.initial_snapshot = provider_snapshot(runtime)\n        self.entry = self.external = self.finder = self.loader_type = None\n        self.executed_module = self.execution_receipt = None\n        self.after_json_snapshot = None\n        self.finished = False\n\n    def _source(self):\n        raw, identity = self.entry.read_source(PIN['path'], PIN['sha256'], PIN['bytes'])\n        require(len(raw) == PIN['bytes'], 'Exact reviewed outer types source size')\n        self.entry.source_bytes += len(raw)\n        require(self.entry.source_bytes <= self.source_total_cap, 'Original whole-source byte cap')\n        return raw, dict(sha256=PIN['sha256'], bytes=len(raw), identity=identity)\n\n    def _provider(self, module, loader):\n        spec = getattr(module, '__spec__', None)\n        require(module is not None and getattr(module, '__name__', None) == 'types'\n                and getattr(module, '__file__', None) == PIN['path']\n                and getattr(spec, 'name', None) == 'types'\n                and getattr(spec, 'origin', None) == PIN['path']\n                and getattr(module, '__loader__', None) is loader\n                and getattr(spec, 'loader', None) is loader,\n                'Exact loaded types module/source/spec/loader correspondence')\n\n    def install_before_json(self, entry, external, source_total_cap):\n        require(self.entry is None and self.runtime.modules.get('types') is self.initial_module,\n                'One installation; preserve earliest types module identity')\n        require(source_total_cap == 16 * 2**20, 'Unchanged original whole-source byte cap')\n        require(self.runtime.meta_path and self.runtime.meta_path[0] is entry.finder,\n                'Wrap the original first source finder')\n        self.entry, self.external = entry, external\n        self.source_total_cap = source_total_cap\n        tracker, previous = self, entry.finder\n\n        class TypesLoader(external.SourceFileLoader):\n            def get_code(self, name):\n                require(name == 'types' and self.path == PIN['path'], 'Only the exact types source')\n                raw, row = tracker._source()\n                code = compile(raw, PIN['path'], 'exec', dont_inherit=True, optimize=0)\n                self.pending_receipt = row\n                return code\n\n            def exec_module(self, module):\n                require(tracker.initial_module is None and tracker.executed_module is None,\n                        'Never reload or replace an already loaded types module')\n                tracker._provider(module, self)\n                entry.check()\n                super().exec_module(module)\n                require(tracker.runtime.modules.get('types') is module,\n                        'Same module remains registered after complete execution')\n                tracker._provider(module, self)\n                entry.check()\n                # get_code alone is not an execution receipt. Record only after\n                # SourceFileLoader.exec_module returns successfully.\n                entry.sources[PIN['path']] = dict(self.pending_receipt)\n                tracker.execution_receipt = dict(self.pending_receipt)\n                tracker.executed_module = module\n\n        class TypesFinder:\n            def find_spec(self, name, path=None, target=None):\n                found = previous.find_spec(name, path, target)\n                if name != 'types':\n                    return found\n                require(found is None, 'No different earlier types provider')\n                spec = external.PathFinder.find_spec(name, path, target)\n                require(spec is not None and spec.origin == PIN['path']\n                        and type(spec.loader) is external.SourceFileLoader,\n                        'Only the reviewed ordinary types source provider')\n                spec.loader = TypesLoader(name, PIN['path'])\n                return spec\n\n        self.loader_type = TypesLoader\n        self.finder = TypesFinder()\n        self.runtime.meta_path[0] = self.finder\n        entry.finder = self.finder\n        entry.check()\n\n    def after_json(self):\n        require(self.entry is not None and self.after_json_snapshot is None,\n                'One explicit checkpoint after successful JSON import')\n        self.after_json_snapshot = provider_snapshot(self.runtime)\n\n    def finish(self, candidate_row):\n        require(not self.finished and self.after_json_snapshot is not None,\n                'Complete observation only after JSON checkpoint')\n        require({key: candidate_row[key] for key in PIN} == PIN,\n                'Early literal pin equals the later authenticated candidate table')\n        module = self.runtime.modules.get('types')\n        if self.executed_module is not None:\n            require(module is self.executed_module\n                    and type(getattr(module, '__loader__', None)) is self.loader_type\n                    and self.entry.sources.get(PIN['path']) == self.execution_receipt,\n                    'Same completed pinned types execution and retained receipt')\n        else:\n            require(self.initial_module is not None and module is self.initial_module\n                    and type(getattr(module, '__loader__', None)) is self.external.SourceFileLoader\n                    and PIN['path'] not in self.entry.sources,\n                    'Preexisting module stays preexisting; never fabricate its execution receipt')\n        self._provider(module, module.__loader__)\n        _, current_source = self._source()\n        self.entry.check()\n        self.finished = True\n        executed = self.executed_module is not None\n        return dict(schema='minicpm5_outer_types_source_observation_v1',\n                    first_checkpoint=self.initial_snapshot,\n                    after_json=self.after_json_snapshot,\n                    final_provider=provider_snapshot(self.runtime),\n                    initial_load_timing='before_first_checkpoint' if self.initial_module is not None else 'after_first_checkpoint',\n                    current_source_reference=dict(PIN), current_source_identity=current_source['identity'],\n                    current_source_bytes_verified=True, loaded_provider_metadata_matches=True,\n                    executed_through_pinned_loader=executed,\n                    execution_receipt=dict(self.execution_receipt) if executed else None,\n                    original_execution_provenance_gap=not executed,\n                    interpreter_startup_cause_established=False,\n                    preexisting_module_reloaded=False,\n                    accepted_native_authority_created=False,\n                    full_model_qualified=False, new_speedup_claim=False)\n\ndef main():\n    \"\"\"Future literal invocation only. No CLI fallback to historical worker.\"\"\"\n    entry=Entry()\n    source=sys.orig_argv[7] if len(sys.orig_argv)>7 else ''\n    plan_path,plan_sha,successor_input=entry.startup(source)\n    if entry.role == 'outer312':\n        entry.types_tracker = TypesSourceObservation(sys)\n    external=sys.modules['_frozen_importlib_external']\n    require(external.__spec__.origin=='frozen','Interpreter frozen import machinery')\n    entry.install(external)\n    if entry.types_tracker is not None:\n        entry.types_tracker.install_before_json(entry, external, SOURCE_TOTAL_CAP)\n    import json  # After the non-directory prefix and bytecode audit fence.\n    if entry.types_tracker is not None:\n        entry.types_tracker.after_json()\n    plan=entry.load_plan(dict(path=plan_path,sha256=plan_sha),json)\n    require(plan['successor_input']==successor_input,'Exact future original input reference')\n    # Both trusted source roots are explicit; the installed finder still\n    # requires every selected local file in the complete reviewed source map.\n    # The actual dual-bootstrap discovery used this same ROOT/Q order.\n    sys.path[:0]=[ROOT,ROOT+'/research']\n    try:\n        module=__import__(plan['entry_module'],fromlist=['source_entry'])\n        require(module.__file__==plan['entry_path'] and module.__file__ in entry.sources,\n                'Pinned successor really executed from source')\n        result=module.source_entry(entry,successor_input)\n        entry.check()\n        require(type(result) is int and 0<=result<=255,'Successor returns actual explicit process exit code')\n        return result\n    except BaseException as error:\n        entry.fail(error)\n\n\nif __name__=='__main__':\n    sys.exit(main())\n",
+        "--mini-source-entry",
+        "outer312",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-outer-entry-plan-final.json",
+        "95b7c880cc3ec980b05747c63b4c0a1baa5917d2dc4423720f4d9bcbf41fa235",
+        "{\"review\":{\"path\":\"/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-outer-review-accepted.json\",\"sha256\":\"80656772ccf5deefeabd747254c3d2f7a1075ea84c1ede606eebb0ff186d50ea\"},\"spec\":{\"path\":\"/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-outer-spec-final.json\",\"sha256\":\"c89f15bd42cd83256570f52b13a249f7d40e2715eb743d9c8b940f56efcc1022\"}}",
+        "bbf5affece28e3d6356ce27d48ccdb7f4d707fbf6717808a69ca1f61222763d0",
+        "new"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 855446,
+      "ppid": 855445,
+      "start_ticks": "428176935"
+    }
+  ],
+  "owners_gone": true,
+  "physically_drained": true,
+  "remaining_conjuncts_evaluated": false,
+  "reviewer": "/root",
+  "root_live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-root-live.json",
+    "sha256": "9c5d9e2c0b1426ed300daaefebc97432c645e1da95004d39f8430978f790f8ab"
+  },
+  "root_reproduction": {
+    "actual_physical_drain_asserted": false,
+    "actual_saved_admission": {
+      "bytes": 43273,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-formal-r4-20261112/admission.json",
+      "sha256": "b2053d0db12ba0cc6716a9859fdcdd3d3db8245f3821243e4823349753cf9904"
+    },
+    "actual_saved_launcher_wait": {
+      "bytes": 199,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-launcher-wait.json",
+      "sha256": "0838c1741b6d72c41f94798d67ce0a255461045ce576ace57c2239c24b7ec759"
+    },
+    "actual_saved_log": {
+      "bytes": 2293,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-tool.log",
+      "sha256": "080b6dce98a93f472f25b6a670e5ba1ad50ed62df21ed8b571692f225094f704"
+    },
+    "actual_tool_terminal_independently_observed": false,
+    "current_processes_services_locks_inspected": false,
+    "full_model_qualified": false,
+    "later_conjuncts_not_evaluated": true,
+    "native_ABI_qualified": false,
+    "native_imports_blocked": [
+      "_ctypes",
+      "ctypes",
+      "neuronx_distributed",
+      "neuronx_distributed_inference",
+      "neuronxcc",
+      "numpy",
+      "torch",
+      "torch_neuronx"
+    ],
+    "new_speedup_claim": false,
+    "original_finally_mock_closes_once_after_proof": true,
+    "original_first_conjunct_reproduced_false": true,
+    "original_observed_and_base_drain_return_no_child_proof": true,
+    "original_three_constructors_and_auth_with_mocks_start_no_child": true,
+    "output_names": [
+      "admission.json"
+    ],
+    "root_review": {
+      "bytes": 4451,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-root-concrete-review.json",
+      "sha256": "c6bfb506aa16b6285cff3a98b024cbe6e30cbc302b32994ffbda3a3d26379882"
+    },
+    "schema": "minicpm5_formal_r4_prerequisite_failure_source_check_v1",
+    "source_derived_tuple_fixture_reencodes_exact_saved_wire": true,
+    "source_only": true,
+    "source_pins": {
+      "minicpm5_formal_literal_codec_v1.py": {
+        "bytes": 14347,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_formal_literal_codec_v1.py",
+        "sha256": "b2909dec9b14aa55b0d543b597b04423fbb0d5bbc96c9ed3354d51cf5ea2eb20"
+      },
+      "minicpm5_layer1_operator_native_outer_support_v3.py": {
+        "bytes": 4195,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_native_outer_support_v3.py",
+        "sha256": "97118e158c53d4c5653e0e8c8129ec079d9e8f95ee9230b6a83cba37a4bc499b"
+      },
+      "minicpm5_pv_sdk_import_diagnostic_v1.py": {
+        "bytes": 26711,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_pv_sdk_import_diagnostic_v1.py",
+        "sha256": "a4bfe07b23e22e6a1b9773c1e87343d617689c8188ceebf6d79bbbb8c61e90f7"
+      },
+      "minicpm5_sdk_mapping_nocache_entry_v6.py": {
+        "bytes": 37178,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v6.py",
+        "sha256": "bbf5affece28e3d6356ce27d48ccdb7f4d707fbf6717808a69ca1f61222763d0"
+      },
+      "minicpm5_sdk_mapping_observed_adapter_v4.py": {
+        "bytes": 15121,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_observed_adapter_v4.py",
+        "sha256": "ffeeecc0ddf9232cfee3e03f9379054215e1f6ce89cb271a02c97af559fb3ccc"
+      },
+      "minicpm5_sdk_mapping_outer_source_entry_v7.py": {
+        "bytes": 12302,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v7.py",
+        "sha256": "6dedc9e99054467e09bd2afc6de7fb99cc188eab6ba9d2f95fbdb2e7849b7b4a"
+      },
+      "minicpm5_sdk_mapping_source_adapter_v2.py": {
+        "bytes": 5288,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_source_adapter_v2.py",
+        "sha256": "5a52ce7b951026c2a0697d7045c586834604ede04fa4f821844fd61131ed3045"
+      }
+    }
+  },
+  "root_review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-formal-import-r4-20261112-root-concrete-review.json",
+    "sha256": "c6bfb506aa16b6285cff3a98b024cbe6e30cbc302b32994ffbda3a3d26379882"
+  },
+  "schema": "minicpm5_formal_r4_prestart_root_actual_exit_v1",
+  "sdk_child_started": false,
+  "sdk_import_completed": false,
+  "two_current_service_observations": [
+    {
+      "active_heavy": [],
+      "outer_pid_observation": null,
+      "properties": {
+        "ActiveState": "inactive",
+        "After": "",
+        "AllowedCPUs": "",
+        "BindsTo": "",
+        "CPUAffinity": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "0",
+        "ExecMainPID": "0",
+        "ExecMainStatus": "0",
+        "ExecStopPost": "",
+        "Id": "trn1-mini-formal-import-r4-20261112.service",
+        "InvocationID": "",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "infinity",
+        "LoadState": "not-found",
+        "MainPID": "0",
+        "MemoryHigh": "infinity",
+        "MemoryMax": "infinity",
+        "MemorySwapMax": "infinity",
+        "Nice": "0",
+        "RemainAfterExit": "no",
+        "Result": "success",
+        "RuntimeMaxUSec": "infinity",
+        "SendSIGKILL": "yes",
+        "SubState": "dead",
+        "TasksMax": "37867",
+        "TimeoutStopUSec": "1min 30s",
+        "WorkingDirectory": ""
+      },
+      "recursive_group": {
+        "absent": true,
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-formal-import-r4-20261112.service"
+      }
+    },
+    {
+      "active_heavy": [],
+      "outer_pid_observation": null,
+      "properties": {
+        "ActiveState": "inactive",
+        "After": "",
+        "AllowedCPUs": "",
+        "BindsTo": "",
+        "CPUAffinity": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "0",
+        "ExecMainPID": "0",
+        "ExecMainStatus": "0",
+        "ExecStopPost": "",
+        "Id": "trn1-mini-formal-import-r4-20261112.service",
+        "InvocationID": "",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "infinity",
+        "LoadState": "not-found",
+        "MainPID": "0",
+        "MemoryHigh": "infinity",
+        "MemoryMax": "infinity",
+        "MemorySwapMax": "infinity",
+        "Nice": "0",
+        "RemainAfterExit": "no",
+        "Result": "success",
+        "RuntimeMaxUSec": "infinity",
+        "SendSIGKILL": "yes",
+        "SubState": "dead",
+        "TasksMax": "37867",
+        "TimeoutStopUSec": "1min 30s",
+        "WorkingDirectory": ""
+      },
+      "recursive_group": {
+        "absent": true,
+        "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-formal-import-r4-20261112.service"
+      }
+    }
+  ],
+  "units": [
+    "trn1-mini-formal-import-r4-20261112"
+  ]
+}
