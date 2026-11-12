@@ -1,0 +1,154 @@
+--- minicpm5_sdk_mapping_bootstrap_descriptor_v3.py
++++ minicpm5_sdk_mapping_bootstrap_descriptor_v4.py
+@@ -5,6 +5,7 @@
+ starts a fresh 900 seconds after source-entry work has already consumed time.
+ """
+ from research import minicpm5_sdk_mapping_bootstrap_descriptor_v2 as previous
++from research import minicpm5_sdk_mapping_bounded_alarm_v1 as timing
+ 
+ require=previous.require
+ 
+@@ -22,6 +23,7 @@
+         self.entry=entry
+         self.entry_started=entry.started
+         self.entry_deadline=entry.deadline
++        self.bounded_alarm=None
+         super().__init__(attempt_id,unit,ports=ports)
+ 
+     def impose_original_limits(self):
+@@ -49,10 +51,10 @@
+                 raise self.failed
+             self.alarm_callback=alarm
+             self.ports.install_alarm_handler(alarm)
+-            remaining=self.deadline-self.ports.now()
+-            require(0<remaining<=limits['wall_seconds'],
+-                    'Only remaining original absolute deadline may be armed')
+-            self.ports.set_alarm(remaining)
++            self.bounded_alarm=timing.BoundedAlarm(self.deadline,now=self.ports.now,
++                get_timer=self.ports.get_alarm,set_timer=self.ports.set_alarm,
++                get_handler=self.ports.alarm_handler,handler=self.alarm_callback)
++            self.bounded_alarm.arm_once()
+             self.state='guarded'
+             self()
+             return self.deadline
+@@ -68,7 +70,20 @@
+             require((self.entry.started,self.entry.deadline)==(self.entry_started,self.entry_deadline)
+                 and (self.started,self.deadline)==(self.entry_started,self.entry_deadline),
+                 'Entry source fence/deadline ownership unchanged')
+-            return super().__call__(**ignored)
++            require(self.state in ('guarded','adopted') and self.bounded_alarm is not None
++                and self.bounded_alarm.deadline==self.deadline,
++                'Original guarded descriptor and first-arm proof retained')
++            self.bounded_alarm.check()
++            require(self.ports.affinity()=={previous.logic.LIMITS['cpu']}
++                and self.ports.nice()>=previous.logic.LIMITS['nice'],
++                'Original CPU6 and background priority retained')
++            require(all(self.ports.get_limit(name)==values for name,values in self._limit_pairs().items()),
++                    'Original AS/CPU/FSIZE limits retained')
++            original,resolved,running=self.ports.executable()
++            require(original==previous.ORIGINAL_PYTHON and resolved==running==previous.ORIGINAL_EXECUTABLE
++                and self.ports.flags()==(True,True,0),'Original outer interpreter/-B/assertions')
++            require(self.ports.proc(self.owner['pid'])==self.owner,'Actual original owner identity retained')
++            return self._prove()
+         except BaseException as error:
+             if self.failed is None:self.failed=error
+             raise self.failed
+--- minicpm5_sdk_mapping_worker_guard_v1.py
++++ minicpm5_sdk_mapping_worker_guard_v2.py
+@@ -10,6 +10,7 @@
+ import time
+ from research import descriptor_serial_lock_proof_v1 as proof
+ from research import minicpm5_sdk_mapping_observer_logic_v1 as logic
++from research import minicpm5_sdk_mapping_bounded_alarm_v1 as timing
+ from research import minicpm5_sdk_mapping_bootstrap_descriptor_v2 as parent
+ import minicpm5_layer0_execution_protocol_v4 as process
+ 
+@@ -50,6 +51,7 @@
+         self.ports=Ports() if ports is None else ports
+         self.owner=self.release=None
+         self.failure=self.alarm_callback=None
++        self.bounded_alarm=None
+         self.state='new'
+         require(self.binding['lock_identity']==parent.ORIGINAL_LOCK
+             and self.binding['lock_policy']==parent.LOCK_POLICY
+@@ -83,9 +85,10 @@
+                 raise self.failure
+             self.alarm_callback=alarm
+             self.ports.install(alarm)
+-            remaining=self.entry.deadline-self.ports.now()
+-            require(0<remaining<=logic.LIMITS['wall_seconds'],'Only remaining original outer time')
+-            self.ports.arm(remaining)
++            self.bounded_alarm=timing.BoundedAlarm(self.entry.deadline,now=self.ports.now,
++                get_timer=self.ports.alarm,set_timer=self.ports.arm,
++                get_handler=self.ports.handler,handler=self.alarm_callback)
++            self.bounded_alarm.arm_once()
+             self.state='guarded';self()
+             return copy.deepcopy(self.owner)
+         except BaseException as error:
+@@ -97,10 +100,9 @@
+         try:
+             self.entry.check()
+             require(self.state in ('guarded','released','adopted'),'Actual SDK guard started')
+-            remaining,interval=self.ports.alarm()
+-            require(0<remaining<=self.entry.deadline-self.ports.now()<=logic.LIMITS['wall_seconds']
+-                and interval==0 and self.ports.handler() is self.alarm_callback,
+-                'Same finite inherited deadline, no timer restart')
++            require(self.bounded_alarm is not None and self.bounded_alarm.deadline==self.entry.deadline,
++                    'Same original inherited first-arm proof')
++            self.bounded_alarm.check()
+             require(self.ports.affinity()=={logic.LIMITS['cpu']} and self.ports.nice()>=logic.LIMITS['nice']
+                 and all(self.ports.limit(n)==v for n,v in self.limits().items()),
+                 'All original child limits remain exact')
+--- minicpm5_sdk_mapping_nocache_entry_v4.py
++++ minicpm5_sdk_mapping_nocache_entry_v5.py
+@@ -163,7 +163,7 @@
+                 'One outer-only source ownership handoff')
+         gate_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_history_gate_v1')
+         auth_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_native_authenticator_v2')
+-        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_bootstrap_descriptor_v3')
++        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_bootstrap_descriptor_v4')
+         require(gate_module is not None and auth_module is not None and guard_module is not None
+             and type(gate) is gate_module.HistoricalImportGate
+             and type(auth) is auth_module.NativeAuthenticator
+@@ -215,7 +215,7 @@
+         require(self.role=='sdk310' and self.history_owner is None and not self.native_authority_verified,
+                 'Separate once-only SDK310 concrete source ownership')
+         module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_native_v2')
+-        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_guard_v1')
++        guard_module=self.runtime.modules.get('research.minicpm5_sdk_mapping_worker_guard_v2')
+         require(module is not None and guard_module is not None
+             and type(gate) is module.SDKHistoryGate and type(auth) is module.SDKNativeAuthenticator
+             and type(guard) is guard_module.SDKEntryGuard,
+--- minicpm5_sdk_mapping_outer_source_entry_v2.py
++++ minicpm5_sdk_mapping_outer_source_entry_v3.py
+@@ -9,7 +9,7 @@
+ import signal
+ import sys
+ import time
+-from research import minicpm5_sdk_mapping_bootstrap_descriptor_v3 as descriptor
++from research import minicpm5_sdk_mapping_bootstrap_descriptor_v4 as descriptor
+ from research import minicpm5_sdk_mapping_history_gate_v1 as history
+ from research import minicpm5_sdk_mapping_native_authenticator_v2 as native
+ from research import minicpm5_sdk_mapping_source_adapter_v1 as adapter
+@@ -105,8 +105,8 @@
+             worker_plan=metadata.read(spec['sdk_entry_template'])
+             launch.separate_authorities(entry.plan,worker_plan)
+             require(worker_plan['successor_input']=='admission:self'
+-                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v2'
+-                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v2.py')
++                and worker_plan['entry_module']=='research.minicpm5_sdk_mapping_worker_source_entry_v3'
++                and worker_plan['entry_path']==str(original.ROOT/'research/minicpm5_sdk_mapping_worker_source_entry_v3.py')
+                 and all(pins.get(path)==sha for path,sha in worker_plan['bootstrap_sources'].items()),
+                 'Exact separately reviewed SDK310 worker source closure')
+             entry_raw,_=authenticator.reader.read(spec['sdk_entry_source'],65535)
+--- minicpm5_sdk_mapping_worker_source_entry_v2.py
++++ minicpm5_sdk_mapping_worker_source_entry_v3.py
+@@ -10,7 +10,7 @@
+ from pathlib import Path
+ import signal
+ import stat
+-from research import minicpm5_sdk_mapping_worker_guard_v1 as startup
++from research import minicpm5_sdk_mapping_worker_guard_v2 as startup
+ from research import minicpm5_sdk_mapping_worker_native_v2 as native
+ from research import minicpm5_sdk_mapping_nocache_launch_v2 as launch
+ 

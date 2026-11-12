@@ -1,0 +1,31 @@
+{
+  "actual_lock_or_service_operation": false,
+  "actual_native_imports": false,
+  "cause": "getitimer remaining is sampled before monotonic now; comparison to a later deadline-now can reject a normally counting-down timer. Existing mock has zero elapsed time between relevant calls.",
+  "delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-actual-entry-source-integration-delivery-20261112-v1.json",
+    "sha256": "ff4bf2b02e9f78ad41fa525e58a4797f6eb465a9e6c95bf8c31af667bbab53fb"
+  },
+  "mock": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_worker_guard_v1.py",
+    "sha256": "e06809b33734b4bdafc43c76962dd212b0983fa878940d6388cfd8da002d7e58"
+  },
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T04:54:54.309129+00:00",
+  "reproduction": {
+    "actual_result": "ObservationError: Same finite inherited deadline, no timer restart",
+    "actual_tool_chunk": "c53bff",
+    "exit_code": 0,
+    "monotonic_progress_per_now_seconds": 1e-06,
+    "stage": "SDKEntryGuard.start immediately calling __call__",
+    "zero_elapsed_mock": "PASS"
+  },
+  "requested_successor": "Preserve fixed absolute deadline and sticky failure/no restart; bracket elapsed timer observations and arm operation, exercise advancing clock/system-call delays and true restarts. Add complete source_entry flow mocks.",
+  "reviewer": "/root",
+  "schema": "minicpm5_actual_entry_clock_observation_root_rejection_v1",
+  "source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_guard_v1.py",
+    "sha256": "1767b03334c2875f2d8ae246d2d0efba5f6089c6c11d2b03d93a49f44bc2e191"
+  },
+  "source_component_accepted": false
+}

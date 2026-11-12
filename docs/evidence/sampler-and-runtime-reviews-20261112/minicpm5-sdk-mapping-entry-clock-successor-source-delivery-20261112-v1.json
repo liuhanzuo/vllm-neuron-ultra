@@ -1,0 +1,137 @@
+{
+  "schema": "minicpm5_sdk_mapping_entry_clock_successor_source_delivery_v1",
+  "observed_at": "2026-11-12T04:59:54.601645+00:00",
+  "agent": "/root/mini_mapping_authority_source",
+  "source_only": true,
+  "runtime_admitted": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false,
+  "files": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_bounded_alarm_v1.py",
+      "bytes": 4181,
+      "sha256": "918045b686992739287836152cdf04c02ac4d5ad2facad111f4ab53702eb6b14"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_bootstrap_descriptor_v4.py",
+      "bytes": 4788,
+      "sha256": "1be9dd67df215f5a32526f86f37e7e543fec3dd98a9cc3e012f67191110fafdd"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_guard_v2.py",
+      "bytes": 8207,
+      "sha256": "d3d2221a6c8c80f920896b03add76c062b669aec73976e53ba388ee88ded8133"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_nocache_entry_v5.py",
+      "bytes": 27492,
+      "sha256": "6a62783a5d448d33f034e1d3ecddab8e4a07ac4408e8cca6f31cd0f6db6e7dea"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_outer_source_entry_v3.py",
+      "bytes": 10341,
+      "sha256": "681c154e2a4ced432ad1a29f2cd16c403a43644243d752bc2cb8357f64711a3c"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_worker_source_entry_v3.py",
+      "bytes": 7321,
+      "sha256": "68ca2f949e8698ed2a6cc5350a8850f6bedfbfcbd9ab47522a39a40340bb3fdb"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_alarm_brackets_v1.py",
+      "bytes": 7681,
+      "sha256": "57470d280355f7b5f517ae002c5eb6a489840956567528b1c7d1df8a5fb8aca5"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_worker_full_flow_v1.py",
+      "bytes": 13431,
+      "sha256": "f4397a896106bcd74d5e00a234809e1059943c675f8c6bd4f95d67a88ad85edd"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_nocache_entry_v5.py",
+      "bytes": 16630,
+      "sha256": "4d3c728a022fac6025881b7317c9ab640dd61dbd395f2c0ee33a287aea9c246e"
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_entry_integration_v3.py",
+      "bytes": 14419,
+      "sha256": "7b8e17a25e913e885fd15c96f352a737549bd9be8745091ee44f4dcd87c58567"
+    }
+  ],
+  "diff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-entry-clock-successor-20261112-v1.patch",
+    "sha256": "c0da80530cf7cf8d6f1ca346aac3ee5a7341e95e25fa33d0e4ad8ba244e8b141"
+  },
+  "superseded_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-actual-entry-source-integration-delivery-20261112-v1.json",
+    "sha256": "ff4bf2b02e9f78ad41fa525e58a4797f6eb465a9e6c95bf8c31af667bbab53fb",
+    "root_accepted": false,
+    "reason": "Root actual c53bff/0 demonstrated natural 1microsecond clock advance falsely rejects SDK alarm observation. Earlier fixed mock clock hid this. Original12source files remain frozen."
+  },
+  "actual_tests": [
+    {
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_alarm_brackets_v1.py",
+      "terminal_chunk": "404056",
+      "exit_code": 0,
+      "tests": 14,
+      "seconds": 0.009
+    },
+    {
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_worker_full_flow_v1.py",
+      "terminal_chunk": "ad8227",
+      "exit_code": 0,
+      "tests": 10,
+      "seconds": 0.004
+    },
+    {
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_entry_integration_v3.py",
+      "terminal_chunk": "4abcda",
+      "exit_code": 0,
+      "tests": 18,
+      "seconds": 0.658
+    },
+    {
+      "command": "python3 -B research/check_minicpm5_sdk_mapping_nocache_entry_v5.py",
+      "start_chunk": "55ef8b",
+      "session_id": 97777,
+      "terminal_chunk": "319111",
+      "exit_code": 0,
+      "tests": 35,
+      "seconds": 1.974
+    }
+  ],
+  "new_source_checks": 77,
+  "fixes": [
+    "Shared BoundedAlarm records monotonic before/after initial setitimer and each getitimer observation, using actual prior timer returned by setitimer to forbid overwriting an active timer.",
+    "Initial requested relative duration is floored to microseconds from original deadline minus sampled now minus50ms early reserve. The complete initial syscall bracket plus1microsecond timeval precision must fit that reserve; excessive cost fails sticky without changing deadline.",
+    "First possible expiry interval is [before+requested-1us,after+requested+1us] and its upper bound must be at most original deadline. Every later [before+remaining-1us,after+remaining+1us] intersects this retained interval; no per-check900s or fresh deadline is computed.",
+    "SDK guard and outer descriptor use same proof and preserve actual inherited Entry deadline, original handler, AS2GiB/CPU/FSIZE/affinity/nice, original parent descriptor proof and sticky failure.",
+    "Source entry exact type pins updated to immutable guard/descriptor successors; outer and SDK concrete source_entry modules updated only for these selected successor names. Original full9/scientific/domain/Store/adapter/drain bodies are not reduced."
+  ],
+  "clock_test_evidence": [
+    "1microsecond clock advance per clock read passes both actual outer and SDK guard algorithms.",
+    "Simulated initial arm and getitimer syscall costs plus microsecond quantization pass when bounded.",
+    "Initial arming overrun above50ms fails sticky; deadline remains unchanged.",
+    "Same-handler restart to900s, restart to old remaining after elapsed time, and restart to later original absolute deadline all reject.",
+    "Long observation syscall costs never broaden first expiry bound. Periodic timer, changed handler, cancelled timer, expired absolute deadline and second arm fail."
+  ],
+  "full_worker_flow_tests": [
+    "Complete actual source_entry Python body executes all original gate/order calls through source/native/process/file mock boundaries; sourcefinder is entered/exited and actual result code returned.",
+    "Original import diagnostic failure writes original failed summary and returns1 without inventing self-exit evidence.",
+    "Injected failure at13preimport boundaries prevents execute_import and summary.",
+    "Missing original ninth native member, complete source-map mismatch, unaccepted review, wrong actual argv, nonzero capture IO and postimport metadata/persistence failures propagate correctly."
+  ],
+  "original_unchanged_dependencies": [
+    "minicpm5_sdk_mapping_source_adapter_v1.py",
+    "minicpm5_sdk_mapping_nocache_launch_v2.py",
+    "minicpm5_sdk_mapping_worker_native_v2.py",
+    "minicpm5_sdk_mapping_native_authenticator_v2.py",
+    "minicpm5_sdk_mapping_history_gate_v1.py"
+  ],
+  "limits_and_uncertainty": [
+    "The proven alarm may fire up to about50ms earlier. Original absolute900s envelope is never enlarged; no retry/arm after failed bound.",
+    "Timer observations have finite microsecond resolution and syscall brackets. Repeated identical expiry changes within the irreducible intersection cannot be distinguished from a timer that was never reset; no claim of continuous setter non-invocation is made. The interval never broadens and its upper bound cannot exceed original deadline.",
+    "No actual timer, current proc, lock, native ELF, ctypes, SDK, model, service or environment operation was executed in these checks.",
+    "Unchanged runtime blockers from prior delivery remain: actual root-reviewed complete specs/source maps, original outer positive FFI evidence, separate SDK310 signed python3.10/_ctypes/libffi origins and actual mapped native closure, fresh serial admission and full model gates."
+  ]
+}
