@@ -49,6 +49,9 @@ from vllm.v1.sample.sampler import Sampler
 from vllm_neuron.worker.constants import (NEURON_MULTI_MODAL_MODELS,
                                           TORCH_DTYPE_TO_NEURON_AMP)
 
+# Source-bound Qwen3.5 admission is installed before generic cache fallback.
+QWEN35_ARTIFACT_ADMISSION_SCHEMA = "vllm-neuron-ultra-qwen35-split-v1"
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -182,6 +185,11 @@ class NeuronModelBase(nn.Module):
 
         if getattr(config, "model_type", None) == "nemotron9b_neuron_text":
             from vllm_neuron.models.nemotron9b.artifacts import load_or_compile
+            return load_or_compile(self, model_name_or_path, neuronx_model_cls,
+                                   config, kwargs)
+
+        if getattr(config, "model_type", None) == "qwen35_neuron_text":
+            from vllm_neuron.models.qwen35.artifacts import load_or_compile
             return load_or_compile(self, model_name_or_path, neuronx_model_cls,
                                    config, kwargs)
 

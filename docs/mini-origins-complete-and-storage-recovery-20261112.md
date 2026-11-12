@@ -48,6 +48,6 @@ r9 已启动实际工具会话 78094，绑定最新 140 条完整运行记录和
 
 统一分支的 [cpu_sampler.py](../vllm_neuron/worker/cpu_sampler.py) 与本轮 Qwen 研究候选实现逐字节相同，完整摘要为 `9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a`。普通插件 worker 在选择 CPU 采样时可通过 `NEURON_CPU_SAMPLER_FAST=1` 启用每实例优化，算法不需要再次移植。
 
-但分支尚未包含完整的 Qwen3.5 模型注册、文本适配器和正确的 split 接入。本轮依赖实验目录里的专用服务入口、模型注册和研究 worker，不能据此宣称安装此仓库即可直接运行完整 Qwen3.5 配置。研究 worker 使用自己的实例挂接方式，要求 `NEURON_CPU_SAMPLER_FAST` 等旧开关完全不存在，即使设为 `0` 也会拒绝；不能与普通插件开关混用。
+本轮首次范围检查时，分支尚未包含完整的 Qwen3.5 模型注册、文本适配器和正确的 split 接入。本轮依赖实验目录里的专用服务入口、模型注册和研究 worker，不能据此宣称安装此仓库即可直接运行完整 Qwen3.5 配置。研究 worker 使用自己的实例挂接方式，要求 `NEURON_CPU_SAMPLER_FAST` 等旧开关完全不存在，即使设为 `0` 也会拒绝；不能与普通插件开关混用。
 
-后续需将原文本适配器、相关算子、模型注册、split 修正和编译产物校验接入单独的包路径，再对该路径重做原模型／采样／quality96／HTTP 验收。代码相同以及本轮实验结果，都不能直接证明新的包路径拥有同样性能；两侧 DEBUG 行为也必须保持一致。见[完整质量结果、核验后继与分支范围证据](evidence/qwen-r9-quality-and-package-scope-20261112/manifest.json)。
+随后已将原文本适配器、相关算子、模型注册、split 修正和编译产物校验接入独立包路径；25 项源码／模拟检查和 23 个原实现 AST 对应检查通过。详见 [Qwen3.5 实验包入口、修正与验证范围](qwen35-package-20261112.md)。该路径仍需真实编译及原模型／采样／quality96／HTTP 验收。代码相同以及本轮实验结果，都不能直接证明新的包路径拥有同样性能；两侧 DEBUG 行为也必须保持一致。见[完整质量结果、核验后继与分支范围证据](evidence/qwen-r9-quality-and-package-scope-20261112/manifest.json)。

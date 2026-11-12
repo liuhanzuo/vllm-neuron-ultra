@@ -1,0 +1,710 @@
+{
+  "existing_repo_dependencies": {
+    "vllm_neuron/__init__.py": "70d4db750a8213758205101d73186af02a14d9fee883303023ae5efd37208fec",
+    "vllm_neuron/models/__init__.py": "f4b98116f32de98fc7ac1103dbb9e8ec10805ea3466d4c8fed2a42e2fb9fe68f",
+    "vllm_neuron/worker/cpu_sampler.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "vllm_neuron/worker/neuronx_distributed_model_loader.py": "c1881ab64a296bb6a98657b8a8135ee8facc954c5e684803f2624dd2e2dcbb31",
+    "vllm_neuron/worker/neuronx_distributed_model_runner.py": "4484edd883d199310e1646969417e05a8162148e404f840dc66cad6c6233a77e"
+  },
+  "external_direct_imports": [
+    "argparse",
+    "collections",
+    "concurrent.futures",
+    "contextlib",
+    "copy",
+    "hashlib",
+    "importlib.metadata",
+    "json",
+    "logging",
+    "math",
+    "neuronx_distributed.parallel_layers",
+    "neuronx_distributed.parallel_layers.layers",
+    "neuronx_distributed.parallel_layers.utils",
+    "neuronx_distributed.trace.model_builder",
+    "neuronx_distributed_inference.models.config",
+    "neuronx_distributed_inference.models.model_base",
+    "neuronx_distributed_inference.utils.constants",
+    "neuronx_distributed_inference.utils.hf_adapter",
+    "os",
+    "pathlib",
+    "runpy",
+    "stat",
+    "sys",
+    "torch",
+    "torch.nn.functional",
+    "transformers",
+    "transformers.models.auto.configuration_auto",
+    "types",
+    "vllm.model_executor.models.registry",
+    "vllm_neuron.worker",
+    "vllm_neuron.worker.neuronx_distributed_model_loader"
+  ],
+  "native_modules_imported_by_scan": [],
+  "original_experiment_source_sha256": {
+    "frontend_split_correction_v2.py": "1845febc4e220001cebc562b075538f7d0233118dd33de8b695b210e78ff735d",
+    "prepare_qwen35_text_view.py": "ca41ec2577e5a39a555b1b5b750f06d96ecd921fe55386ad6486376e3982143b",
+    "qwen35_neuron_adapter.py": "de89afc16b64e06235d19246db486b465f5bb45ab4f4b1d6a67199439db89fe2",
+    "qwen35_primitives.py": "4ce394ed810a743504391a91af6026fb30953bd0415ef63e8c883a2660d4ecbf",
+    "qwen35_split_full_protocol_v4.py": "6ba3e04c39469c3d4b4acb3f3ed9f1bc611050bcb781b952aac7115c666cf2c2",
+    "qwen35_split_runtime_v4.py": "423677588248dcab659a582a88026ae1da889d28bd89e3008d452a04aa5a0082",
+    "qwen35_state_inplace_reset_v1.py": "6a3f45eb63b3b1251334da56dc6d7520e9eec01240f43e2258751e2c36d148ce",
+    "qwen35_state_reset_full_protocol_v1.py": "eb4fa6c86ee1e6424abd78961cd14941c5ea7cd36a1f45440e108b80e548d9f4",
+    "qwen35_text_port.py": "3b560a3dcbb925a4c010a679ebe8c5532178672d77edbe768d490e307cdd2e34",
+    "qwen35_vllm_registration.py": "1455ca3b4d82b919a893b9e792435a38d71b854717a6c75544474acde540846c",
+    "server_with_qwen35_split_v4.py": "ceeae584cfc54c8940a38483c5ff2cc72167f1af15ece590330f1270ace78c3f"
+  },
+  "package_sources": {
+    "vllm_neuron/models/qwen35/__init__.py": {
+      "imports": [
+        {
+          "line": 6,
+          "module": "os",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": ".identity",
+          "names": [
+            "selected_variant"
+          ],
+          "relative": true
+        },
+        {
+          "line": 11,
+          "module": ".registration",
+          "names": [
+            "install"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "a07686e18368bfded1b040270c2e335ece72db3aefa15a79020c2ff067a4c28f"
+    },
+    "vllm_neuron/models/qwen35/artifacts.py": {
+      "imports": [
+        {
+          "line": 3,
+          "module": "json",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 4,
+          "module": "logging",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 5,
+          "module": "os",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 6,
+          "module": "concurrent.futures",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 7,
+          "module": "contextlib",
+          "names": [
+            "contextmanager"
+          ],
+          "relative": false
+        },
+        {
+          "line": 8,
+          "module": "pathlib",
+          "names": [
+            "Path"
+          ],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": "types",
+          "names": [
+            "SimpleNamespace"
+          ],
+          "relative": false
+        },
+        {
+          "line": 11,
+          "module": ".identity",
+          "names": [
+            "ARTIFACT_MANIFEST",
+            "AdmissionError",
+            "build_identity",
+            "canonical_configuration",
+            "digest_file",
+            "read_json",
+            "require",
+            "same_identity"
+          ],
+          "relative": true
+        },
+        {
+          "line": 71,
+          "module": "neuronx_distributed.trace.model_builder",
+          "names": [],
+          "relative": false
+        }
+      ],
+      "sha256": "f32a7bffb8752514aa65ca7e0599b3781557bf7974e7b3bec311df473b656091"
+    },
+    "vllm_neuron/models/qwen35/build.py": {
+      "imports": [
+        {
+          "line": 8,
+          "module": "argparse",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": ".identity",
+          "names": [
+            "read_json",
+            "selected_variant"
+          ],
+          "relative": true
+        },
+        {
+          "line": 14,
+          "module": ".registration",
+          "names": [
+            "install"
+          ],
+          "relative": true
+        },
+        {
+          "line": 16,
+          "module": ".modeling",
+          "names": [
+            "NeuronQwen35ForCausalLM"
+          ],
+          "relative": true
+        },
+        {
+          "line": 17,
+          "module": "neuronx_distributed_inference.utils.hf_adapter",
+          "names": [
+            "load_pretrained_config"
+          ],
+          "relative": false
+        },
+        {
+          "line": 18,
+          "module": ".artifacts",
+          "names": [
+            "load_or_compile"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "e449f71f5759cc861cb02fd3b40d6d3186f64d8d33cf275da1f901d9641514c8"
+    },
+    "vllm_neuron/models/qwen35/helpers.py": {
+      "imports": [
+        {
+          "line": 15,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        }
+      ],
+      "sha256": "b77c567096ba8869b04ebe9971d2418939752f506a5fce6ccebbc5ea1d9b787d"
+    },
+    "vllm_neuron/models/qwen35/identity.py": {
+      "imports": [
+        {
+          "line": 3,
+          "module": "hashlib",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 4,
+          "module": "importlib.metadata",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 5,
+          "module": "json",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 6,
+          "module": "math",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 7,
+          "module": "os",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 8,
+          "module": "pathlib",
+          "names": [
+            "Path"
+          ],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": "stat",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": "sys",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 11,
+          "module": ".provenance",
+          "names": [
+            "MODEL_ID",
+            "REVISION",
+            "SOURCE_FILES",
+            "EXPECTED_MODEL",
+            "CONFIG_VIEW_SHA256",
+            "SOFTWARE",
+            "SDK_SOURCE_FILES",
+            "SDK_EXPECTED_SOURCE_SHA256"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "4bdf0769b1cfb577480da9bd416310baec254e6300cf41597437c488401a98b9"
+    },
+    "vllm_neuron/models/qwen35/modeling.py": {
+      "imports": [
+        {
+          "line": 7,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 8,
+          "module": "torch",
+          "names": [
+            "nn"
+          ],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": "torch.nn.functional",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": "neuronx_distributed.parallel_layers",
+          "names": [
+            "parallel_state"
+          ],
+          "relative": false
+        },
+        {
+          "line": 11,
+          "module": "neuronx_distributed.parallel_layers.layers",
+          "names": [
+            "ParallelEmbedding",
+            "ColumnParallelLinear",
+            "RowParallelLinear",
+            "BaseParallelLinear"
+          ],
+          "relative": false
+        },
+        {
+          "line": 14,
+          "module": "neuronx_distributed.parallel_layers.utils",
+          "names": [
+            "set_tensor_model_parallel_attributes"
+          ],
+          "relative": false
+        },
+        {
+          "line": 15,
+          "module": "neuronx_distributed_inference.models.config",
+          "names": [
+            "InferenceConfig",
+            "NeuronConfig"
+          ],
+          "relative": false
+        },
+        {
+          "line": 16,
+          "module": "neuronx_distributed_inference.models.model_base",
+          "names": [
+            "NeuronBaseModel",
+            "NeuronBaseForCausalLM"
+          ],
+          "relative": false
+        },
+        {
+          "line": 17,
+          "module": ".text_core",
+          "names": [
+            "Layer",
+            "RMSNorm",
+            "LinearAttention"
+          ],
+          "relative": true
+        },
+        {
+          "line": 238,
+          "module": "neuronx_distributed_inference.utils.constants",
+          "names": [
+            "MODEL_TYPES"
+          ],
+          "relative": false
+        }
+      ],
+      "sha256": "2cffd29a292a5b5115e8c4499f0ab1a24b3388abbf6d9787580138ff918234ad"
+    },
+    "vllm_neuron/models/qwen35/prepare_view.py": {
+      "imports": [
+        {
+          "line": 3,
+          "module": "argparse",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 4,
+          "module": "copy",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 5,
+          "module": "json",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 6,
+          "module": "os",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 7,
+          "module": "pathlib",
+          "names": [
+            "Path"
+          ],
+          "relative": false
+        },
+        {
+          "line": 8,
+          "module": ".identity",
+          "names": [
+            "SOURCE_FILES",
+            "CONFIG_VIEW_SHA256",
+            "VIEW_MANIFEST",
+            "digest_file",
+            "read_json",
+            "require",
+            "verify_files",
+            "view_manifest"
+          ],
+          "relative": true
+        },
+        {
+          "line": 10,
+          "module": ".provenance",
+          "names": [
+            "ORIGINAL_CONFIG"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "c326d48eee241dc60a1f7a7b779f8bd75182809fb7b1991f7a7d177ad91f566b"
+    },
+    "vllm_neuron/models/qwen35/primitives.py": {
+      "imports": [
+        {
+          "line": 9,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": "torch.nn.functional",
+          "names": [],
+          "relative": false
+        }
+      ],
+      "sha256": "64db0f2a04dcf41f3747694419d576fa4fb865038fc273c5030bb7604ade81fa"
+    },
+    "vllm_neuron/models/qwen35/provenance.py": {
+      "imports": [],
+      "sha256": "682313f7b2e71b6b5bbeb3a11e82190bfa3c77ddd9a209bec36ae85835e77e89"
+    },
+    "vllm_neuron/models/qwen35/registration.py": {
+      "imports": [
+        {
+          "line": 3,
+          "module": "transformers",
+          "names": [
+            "AutoConfig",
+            "PretrainedConfig"
+          ],
+          "relative": false
+        },
+        {
+          "line": 4,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 5,
+          "module": "vllm.model_executor.models.registry",
+          "names": [
+            "ModelRegistry"
+          ],
+          "relative": false
+        },
+        {
+          "line": 6,
+          "module": "vllm_neuron.worker.neuronx_distributed_model_loader",
+          "names": [
+            "NeuronCausalLM"
+          ],
+          "relative": false
+        },
+        {
+          "line": 7,
+          "module": ".modeling",
+          "names": [
+            "install_nxdi",
+            "NeuronQwen35ForCausalLM"
+          ],
+          "relative": true
+        },
+        {
+          "line": 8,
+          "module": ".identity",
+          "names": [
+            "SCHEMA",
+            "require",
+            "selected_variant"
+          ],
+          "relative": true
+        },
+        {
+          "line": 9,
+          "module": "transformers.models.auto.configuration_auto",
+          "names": [
+            "CONFIG_MAPPING"
+          ],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": "vllm_neuron.worker",
+          "names": [
+            "neuronx_distributed_model_loader"
+          ],
+          "relative": false
+        },
+        {
+          "line": 58,
+          "module": "neuronx_distributed_inference.utils.constants",
+          "names": [
+            "MODEL_TYPES"
+          ],
+          "relative": false
+        }
+      ],
+      "sha256": "bb5a3a97efa7ea253549697c0386c7a3e98d26a76dcf9f47faa79ba259a43ff7"
+    },
+    "vllm_neuron/models/qwen35/serve.py": {
+      "imports": [
+        {
+          "line": 8,
+          "module": "os",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": "runpy",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": ".identity",
+          "names": [
+            "require",
+            "selected_variant"
+          ],
+          "relative": true
+        },
+        {
+          "line": 14,
+          "module": ".",
+          "names": [
+            "register"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "7a16b34b805075b5eef9771057cbcc3ebb0fb207814072d782fd3aa9212a9265"
+    },
+    "vllm_neuron/models/qwen35/state.py": {
+      "imports": [
+        {
+          "line": 3,
+          "module": "collections",
+          "names": [
+            "Counter"
+          ],
+          "relative": false
+        },
+        {
+          "line": 4,
+          "module": "hashlib",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 5,
+          "module": ".identity",
+          "names": [
+            "require"
+          ],
+          "relative": true
+        },
+        {
+          "line": 32,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        }
+      ],
+      "sha256": "095e46f6d02dfc4b43cd77ebaa20a7a25a4879d2786b2c1a2ed5a6e73ffbabc7"
+    },
+    "vllm_neuron/models/qwen35/text_core.py": {
+      "imports": [
+        {
+          "line": 8,
+          "module": "torch",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 9,
+          "module": "torch",
+          "names": [
+            "nn"
+          ],
+          "relative": false
+        },
+        {
+          "line": 10,
+          "module": "torch.nn.functional",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 11,
+          "module": ".helpers",
+          "names": [
+            "split_last_dim"
+          ],
+          "relative": true
+        },
+        {
+          "line": 12,
+          "module": ".primitives",
+          "names": [
+            "conv_decode",
+            "conv_prefill",
+            "delta_decode",
+            "delta_prefill"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "c9ee19b8e95eae12193e292286804e660424ca5fd0ace1b64c57f4e9d37011ba"
+    },
+    "vllm_neuron/models/qwen35/validation.py": {
+      "imports": [
+        {
+          "line": 6,
+          "module": "collections",
+          "names": [
+            "Counter"
+          ],
+          "relative": false
+        },
+        {
+          "line": 7,
+          "module": "math",
+          "names": [],
+          "relative": false
+        },
+        {
+          "line": 8,
+          "module": ".identity",
+          "names": [
+            "require"
+          ],
+          "relative": true
+        }
+      ],
+      "sha256": "294c81d07aee0396c960afc1d6f78a0da98d838ab05cd970cbe55a8536ab6dff"
+    }
+  },
+  "pinned_runtime_versions": {
+    "neuronx-cc": "2.23.6484.0+3b612583",
+    "neuronx-distributed": "0.17.26814+4b18de63",
+    "neuronx-distributed-inference": "0.8.16251+f3ca5575",
+    "torch": "2.8.0",
+    "torch-neuronx": "2.8.0.2.12.22436+0f1dac25",
+    "transformers": "4.57.6",
+    "vllm": "0.11.0"
+  },
+  "pinned_sdk_source_sha256": {
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/application_base.py": "c894ac1f1aa3b6563051d6bfde230c468aa72d47ee6fc282b5a15b1c821b67ad",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/config.py": "6380d0671130b519642509bf4de76412a7ab0f6d092c3676197cd1610185314e",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/model_base.py": "b130a8540211a31c4d8715139d2b2d81385497d01ca36a16affa8d8f03056b63",
+    "neuronx-distributed-inference/neuronx_distributed_inference/models/model_wrapper.py": "5ab0ee9095e1f7a5f1b2a81322641fc81d9bfd697045114de0a7b5d88e73f241",
+    "neuronx-distributed-inference/neuronx_distributed_inference/modules/autobucketing.py": "20dd4423e3f7b3c3e59878fb8ccba90866abfc8cc417344dbb453cc2e11b5052",
+    "neuronx-distributed-inference/neuronx_distributed_inference/modules/padding.py": "c1968712adb23d663fe00ea22f3cf3da3db7c31b36950149769051c3bdb65f63",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/compile_env.py": "d09e4657c2493b6edc6f813d82faf31606fe9b9eefc0540420c7d59a8c30595b",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/constants.py": "3abeaa788717620dcac7370e0ec7a58a8066a0e8d5000856cab16290a23366a8",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/hf_adapter.py": "239065404165d30005d673a36bc5f19ffc2ac3fe263911d6f15dbdb58204c58f",
+    "neuronx-distributed-inference/neuronx_distributed_inference/utils/runtime_env.py": "13551de195b0a632e70b752c029bf3efe8883b46dcfc2ad6b61b710554558df0",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/layers.py": "b179b02c512c2c29a59dcdcfae958fc4f4a55f11cb0b2bbe9c004aef341276ab",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/layers_utils.py": "2ff098674feed3e43897c516f832a596a98c50067c4a1d429c5c8918e4a83d44",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/mappings.py": "873e45445f315f74fc4d392b74f45e99ad9c45e5365cf231692b0a44e4bef1ea",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/parallel_state.py": "1db2d04151aab7878f0df621471cb14ed459c1225a65f96301a0fdfb2f69fb2b",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/random.py": "6fb5260d2fc627c46701770b3ad94e9820a23ca9546b869a20e57d99239de8d2",
+    "neuronx-distributed/neuronx_distributed/parallel_layers/utils.py": "90d37e4615a848f20ab2f41fbbf2470fbd0b525f5dd106b53a0de6db6a6a3966",
+    "neuronx-distributed/neuronx_distributed/trace/model_builder.py": "7323a755fbe8c9253cdb8977d8a21dca083c9b132d2b8a3664aa89e0da047e91",
+    "neuronx-distributed/neuronx_distributed/utils/model_utils.py": "79fe81789649cbe899b3bc26fee2886d8d50ba35c38f27127ed4bbf26d3a638e",
+    "torch-neuronx/torch_neuronx/xla_impl/trace.py": "5bab452aaae0a73883c5ae6c3e57ed86fbe121095c3a622ad6c3675d2d390786",
+    "torch-xla/torch_xla/version.py": "b32ec3638fa05c17246fe549b6c95db6c5b58238fff663836f1646997a42b4e7"
+  },
+  "scope": "Exact direct Python import scan; SDK sources are pinned separately, not a dynamic native-library dependency scan."
+}
