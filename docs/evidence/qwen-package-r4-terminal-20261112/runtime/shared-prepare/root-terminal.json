@@ -1,0 +1,78 @@
+{
+  "cleanup_complete": true,
+  "exit_observed": true,
+  "group_observations": [
+    {
+      "absent": true,
+      "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-pkg-r4-20261112-shared-prepare.service"
+    },
+    {
+      "absent": true,
+      "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-pkg-r4-20261112-shared-prepare.service"
+    }
+  ],
+  "observed_unix_ns": 1794520975555376922,
+  "process_owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/run.py",
+      "--mode",
+      "supervisor",
+      "--binding",
+      "/mnt/nvme/neuron-work/qw-pkg-r4-20261112/shared-prepare/phase-spec.json",
+      "--binding-sha256",
+      "f99a98c2409197433bab85c56901c60ec22eb93c7b5d6be050932d61ad8ec6d1"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-pkg-r4-20261112-shared-prepare.service",
+    "pid": 1387289,
+    "ppid": 1583,
+    "start_ticks": "430147207"
+  },
+  "properties": {
+    "ActiveState": "active",
+    "After": "basic.target -.mount app.slice trn1-qwen35-sampler-pkg-r4-20261112-coordinator.service",
+    "BindsTo": "trn1-qwen35-sampler-pkg-r4-20261112-coordinator.service",
+    "ControlGroup": "",
+    "ControlPID": "0",
+    "Environment": "",
+    "ExecMainCode": "1",
+    "ExecMainPID": "1387289",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i BASE_COMPILE_WORK_DIR=/mnt/nvme/neuron-work/qwen35-package-full-v2-compiler-20261112-r1 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/hf HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILED_ARTIFACTS=/mnt/nvme/neuron-artifacts/qwen35-package-full-v2-20261112-r1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-package-full-v2-cache-20261112-r1 NEURON_CPU_SAMPLER_FAST=0 NEURON_ON_DEVICE_SAMPLING_DISABLED=1 NEURON_QWEN35=1 NEURON_QWEN35_ALLOW_COMPILE=0 NEURON_RT_VISIBLE_CORES=0-1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 PYTHONPATH=/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107:/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031 TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_COMPILE_THREADS=1 TRN1_COMPILE_WORKERS=1 XDG_RUNTIME_DIR=/run/user/1000 XLA_DISABLE_FUNCTIONALIZATION=1 /home/ubuntu/venvs/vllm_neuron/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/run.py --mode supervisor --binding /mnt/nvme/neuron-work/qw-pkg-r4-20261112/shared-prepare/phase-spec.json --binding-sha256 f99a98c2409197433bab85c56901c60ec22eb93c7b5d6be050932d61ad8ec6d1 ; ignore_errors=no ; start_time=[Thu 2026-11-12 22:02:43 UTC] ; stop_time=[Thu 2026-11-12 22:02:55 UTC] ; pid=1387289 ; code=exited ; status=0 }",
+    "ExecStopPost": "",
+    "Id": "trn1-qwen35-sampler-pkg-r4-20261112-shared-prepare.service",
+    "InvocationID": "aa57caa8dd604120a9c670ea45280a4a",
+    "Job": "",
+    "KillMode": "control-group",
+    "LimitFSIZE": "134217728",
+    "LoadState": "loaded",
+    "MainPID": "0",
+    "MemoryHigh": "3221225472",
+    "MemoryMax": "4294967296",
+    "MemorySwapMax": "1073741824",
+    "RemainAfterExit": "yes",
+    "Result": "success",
+    "RuntimeMaxUSec": "30min",
+    "SendSIGKILL": "yes",
+    "StandardError": "inherit",
+    "StandardOutput": "append",
+    "SubState": "exited",
+    "TasksMax": "256",
+    "TimeoutStopUSec": "15s",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+  },
+  "remaining_processes": [],
+  "server_owner": {
+    "invocation_id": "aa57caa8dd604120a9c670ea45280a4a",
+    "pid": 1387289,
+    "start_ticks": 430147207,
+    "unit": "trn1-qwen35-sampler-pkg-r4-20261112-shared-prepare"
+  },
+  "systemd_exit_status": {
+    "ExecMainCode": 1,
+    "ExecMainStatus": 0,
+    "Result": "success"
+  },
+  "unacknowledged_terminal": null
+}

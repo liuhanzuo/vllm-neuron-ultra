@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/run.py", line 44, in <module>
+    raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/run.py", line 36, in main
+    if args.mode == "coordinator": return coordinator(binding)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/adapter.py", line 407, in coordinator
+    result = run(adapter)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/wiring.py", line 227, in run
+    result = Phase(adapter, arm, name, phase_directory(spec, arm, name), adapter.admission['attempt_id']).leaf()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/adapter.py", line 261, in leaf
+    code = wait_until(lambda: read_if_present(self.stage / "child-exit.json"), self.adapter.observer.check,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/io.py", line 161, in wait_until
+    guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/adapter.py", line 86, in check
+    resources(self.spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/io.py", line 409, in resources
+    usage = storage(spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/io.py", line 392, in storage
+    value, inventory = storage_scan(spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v6/io.py", line 349, in storage_scan
+    require(tree_class == "view", "symlinks forbidden outside exact prepared view")
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: symlinks forbidden outside exact prepared view

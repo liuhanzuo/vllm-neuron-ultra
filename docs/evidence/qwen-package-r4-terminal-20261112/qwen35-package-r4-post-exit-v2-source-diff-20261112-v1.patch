@@ -1,0 +1,88 @@
+--- /home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v1.py
++++ /home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v2.py
+@@ -17,7 +17,7 @@
+ 
+ ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ Q = ROOT / 'research'
+-SELF = Path('/home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v1.py')
++SELF = Path('/home/ubuntu/qwen35_package_full_r4_post_exit_20261112_v2.py')
+ CAP = 8 * 2**20
+ 
+ 
+@@ -145,6 +145,12 @@
+ 
+ 
+ def audit_outcome(tool, terminal, spec_ref, review_ref, external_ref, guard, audit):
++    if terminal is None:
++        require(tool['exit_code'] != 0, 'missing original terminal requires an actual failed outer exit')
++        return dict(actual_outer_exit_code=tool['exit_code'], outer_reported_failed=None,
++            outer_terminal_missing=True, stage25=None, stage25_error=None,
++            all25_stages_audited=False, full_model_qualified=False, new_speedup_claim=False,
++            status='outer_failed_without_terminal')
+     result = dict(actual_outer_exit_code=tool['exit_code'], outer_reported_failed=terminal['failed'],
+                   stage25=None, stage25_error=None, all25_stages_audited=False,
+                   full_model_qualified=False, new_speedup_claim=False)
+@@ -179,7 +185,7 @@
+     request_raw, request_identity = stable_source(request_ref, CAP); request = json.loads(request_raw)
+     require(set(request) == {'schema', 'binding', 'root_live', 'admission', 'running_handoff',
+         'external_tool_result', 'observer_source', 'ack_source', 'outputs'}
+-        and request['schema'] == 'qwen35_package_r4_post_exit_request_v1', 'exact explicit request required')
++        and request['schema'] == 'qwen35_package_r4_post_exit_request_v2', 'exact explicit request required')
+     require(request['observer_source']['path'] == str(SELF) == str(Path(__file__).resolve())
+             and ROOT not in SELF.parents, 'separately reviewed external observer path required')
+     source_refs = [request['observer_source'], request['ack_source']]
+@@ -222,13 +228,30 @@
+             coordinator=coordinator, running=dict(reference=request['running_handoff'], observation=running_observation, value=running)),
+             'complete actual running ACK required')
+     external = read(request['external_tool_result']); tool = actual_tool(external, wanted)
+-    terminal_ref = io.ref(control / 'outer-terminal.json'); terminal = read(terminal_ref)
+-    require(terminal['schema'] == 'qwen35_sampler_outer_observed_terminal_v1'
+-            and terminal['admission'] == request['admission'] and terminal['outer_owner'] == admission['outer_owner']
+-            and terminal['original_lock_identity'] == contract.LOCK_IDENTITY and terminal['self_exit_claimed'] is False
+-            and terminal['whole_owned_scope_drained'] is True and type(terminal['failed']) is bool,
+-            'authentic full outer terminal required; missing evidence remains unresolved')
+-    active_scope_failure = read(terminal['active_scope_failure']) if terminal['active_scope_failure'] is not None else None
++    terminal_path = control / 'outer-terminal.json'
++    terminal_missing = not os.path.lexists(terminal_path)
++    terminal_ref = None if terminal_missing else io.ref(terminal_path)
++    terminal = None if terminal_missing else read(terminal_ref)
++    if terminal_missing:
++        require(tool['exit_code'] != 0, 'missing original terminal requires a real nonzero external exit')
++    else:
++        require(terminal['schema'] == 'qwen35_sampler_outer_observed_terminal_v1'
++                and terminal['admission'] == request['admission'] and terminal['outer_owner'] == admission['outer_owner']
++                and terminal['original_lock_identity'] == contract.LOCK_IDENTITY and terminal['self_exit_claimed'] is False
++                and terminal['whole_owned_scope_drained'] is True and type(terminal['failed']) is bool,
++                'authentic full outer terminal required when present')
++    active_failure_path = control / 'active-scope-failure.json'
++    active_failure_ref = (terminal['active_scope_failure'] if terminal is not None else
++                          io.ref(active_failure_path) if os.path.lexists(active_failure_path) else None)
++    active_scope_failure = read(active_failure_ref) if active_failure_ref is not None else None
++    failure_logs = []
++    if terminal_missing:
++        for path in (control / 'coordinator.log', control / 'shared-build' / 'phase.log'):
++            log_ref = io.ref(path)
++            raw, _ = stable_source(log_ref, CAP)
++            require(raw, 'retain actual nonempty failure logs')
++            observed_metadata[str(path)] = io.identity(path)
++            failure_logs.append(dict(reference=log_ref, bytes=len(raw)))
+     oldcat = read(spec['current_serial_catalog']); overlay = read(spec['history_overlay'])
+     require(oldcat['current_handoff'] == admission['freshness']['latest_handoff'], 'executed predecessor catalog chain')
+     outputs = request['outputs']
+@@ -286,6 +309,7 @@
+     try:
+         def guard():
+             lock.check(); require(latest.latest_handoff() == running_observation, 'unknown later handoff')
++            require(not terminal_missing or not os.path.lexists(terminal_path), 'missing original terminal appeared during independent recovery')
+             require(all(io.identity(path) == identity for path, identity in observed_metadata.items()),
+                     'authenticated input metadata changed during audit')
+             require(not any(n.split('.')[0] in ('torch', 'torch_neuronx', 'numpy', 'neuronxcc', 'vllm', 'transformers') for n in sys.modules), 'no native imports in observer')
+@@ -312,6 +336,8 @@
+             root_binding=request['binding'], root_live=request['root_live'], spec=spec_ref, review=review_ref,
+             admission=request['admission'], coordinator_owner=coordinator_ref, running_handoff=request['running_handoff'],
+             running_ack=ack_ref, outer_terminal=terminal_ref, original_outer_terminal=terminal,
++            original_outer_terminal_missing=terminal_missing, original_outer_terminal_path=str(terminal_path),
++            original_failure_logs=failure_logs, independent_physical_proof_used=terminal_missing,
+             original_active_scope_failure=active_scope_failure,
+             owners=owners, owners_gone=True, all_declared_units=sorted(contract.units(spec['run_name']).values()),
+             physically_drained=True, two_current_scope_observations=observations,
