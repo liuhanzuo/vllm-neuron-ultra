@@ -1,0 +1,105 @@
+{
+  "run_id": "650a2f45-d687-4c08-8e61-87ad221bf43f",
+  "root_owner": {
+    "unit": "trn1-qwen35-sampler-r9-v11-20261112-coordinator",
+    "pid": 3647606,
+    "start_ticks": 425915130,
+    "invocation_id": "8a3e8232496e48dc9078016d20996b3f"
+  },
+  "observer_role": "root_owner_auditor",
+  "observer_source": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_adapter_v11.py",
+  "observer_source_sha256": "461ed0b75c3d53d3b64e2a9fa03a2c948aac6cff09020e6295539dcf7a339cb5",
+  "observed_unix_ns": 1794480277913050189,
+  "observation_kind": "live_ready",
+  "exit_observed": false,
+  "server_active": true,
+  "ready": true,
+  "server_owner": {
+    "unit": "trn1-qwen35-sampler-r9-v11-20261112-baseline-capture",
+    "pid": 3877298,
+    "start_ticks": 426073063,
+    "invocation_id": "3ba92ba57e744ddf9bb4904c85584caf"
+  },
+  "api_process_owner": {
+    "pid": 3877475,
+    "start_ticks": "426073219",
+    "ppid": 3877298,
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py",
+      "--model",
+      "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031",
+      "--served-model-name",
+      "qwen3.5-2b-text",
+      "--tensor-parallel-size",
+      "2",
+      "--max-model-len",
+      "4096",
+      "--max-num-seqs",
+      "4",
+      "--no-enable-prefix-caching",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8010",
+      "--additional-config",
+      "{\"override_neuron_config\": {\"on_device_sampling_config\": null, \"apply_seq_ids_mask\": true, \"context_encoding_buckets\": [128, 256, 512, 1024, 2048, 4096]}}",
+      "--worker-cls",
+      "qwen35_sampler_worker_v1.BaselineCaptureWorker"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-capture.service"
+  },
+  "proc_owner_matches": true,
+  "invocation_matches": true,
+  "worker_in_server_cgroup": true,
+  "worker_owner": {
+    "pid": 3879000,
+    "start_ticks": 426074574,
+    "ppid": 3877475,
+    "argv": [
+      "VLLM::EngineCore"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r9-v11-20261112-baseline-capture.service"
+  },
+  "startup_config_proof": {
+    "dp_size_derived_from_pinned_source_clean_environment_and_argv": 1,
+    "dp_rank_derived_from_pinned_source_clean_environment_and_argv": 0,
+    "parallel_config_object_directly_observed": false,
+    "observer_seen_or_call_id_directly_observed": false,
+    "actual_api_initial_environment_sha256": "9a9dc7a252f47a35e8a182fdd04a2ca0f5244b52548c088d088955140b1fbc92",
+    "dp_environment_overrides_present": false,
+    "actual_api_argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/server_with_qwen35_split_v4.py",
+      "--model",
+      "/mnt/nvme/models/Qwen3.5-2B-neuron-text-exp20261031",
+      "--served-model-name",
+      "qwen3.5-2b-text",
+      "--tensor-parallel-size",
+      "2",
+      "--max-model-len",
+      "4096",
+      "--max-num-seqs",
+      "4",
+      "--no-enable-prefix-caching",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8010",
+      "--additional-config",
+      "{\"override_neuron_config\": {\"on_device_sampling_config\": null, \"apply_seq_ids_mask\": true, \"context_encoding_buckets\": [128, 256, 512, 1024, 2048, 4096]}}",
+      "--worker-cls",
+      "qwen35_sampler_worker_v1.BaselineCaptureWorker"
+    ],
+    "startup_source_sha256": {
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/config/parallel.py": "33def3bb46ce10a43df3cd97879a4299b25e48beaceede8203e1941c43c415e1",
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/engine/arg_utils.py": "2238ade872b5f7478330fa9ca1214389520e08991582090e3e03e2feabcf95ac",
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/envs.py": "a70016521a542d7bfa4884c0f9c3efc74df8cd030f5971a58774a87ab35d3803",
+      "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/v1/engine/core.py": "4573563d926cafe0f1e11ebb25e862ce3bc722af9a24425dec791b9d43cfbedd"
+    },
+    "written_packets_before_diagnostic": 0,
+    "receipt_before_diagnostic": false,
+    "zero_seen_count_claimed": false,
+    "actual_B1_B4_each16_still_required": true
+  }
+}
