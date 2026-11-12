@@ -1,0 +1,84 @@
+{
+  "actual_service_properties": {
+    "ActiveState": "active",
+    "After": "app.slice -.mount basic.target",
+    "AllowedCPUs": "6-7",
+    "BindsTo": "",
+    "CPUAffinity": "6-7",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-full-cpu-r1-20261112.service",
+    "ControlPID": "0",
+    "Environment": "",
+    "ExecMainCode": "0",
+    "ExecMainPID": "2673721",
+    "ExecMainStatus": "0",
+    "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/home/ubuntu/venvs/vllm_neuron_053_py312/bin:/usr/bin:/bin HOME=/home/ubuntu XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/tmp/empty-pycache TMPDIR=/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/tmp NEURON_RT_VISIBLE_CORES= NKI_PRECISE_FP=1 NEURON_PLATFORM_TARGET_OVERRIDE=trn1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 LFM3_NKI05_ATTEMPT=8e6d60e6bf5db8764c765dc73976b2e9 /home/ubuntu/venvs/vllm_neuron_053_py312/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py --mode worker --admission /mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/admission.json --admission-sha256 dad9b67a8ac407238f9ef50928f1ed006a96cce2c3c1104835ca6090ded30e8b ; ignore_errors=no ; start_time=[Thu 2026-11-12 01:11:02 UTC] ; stop_time=[n/a] ; pid=2673721 ; code=(null) ; status=0/0 }",
+    "ExecStopPost": "",
+    "Id": "trn1-lfm3-nki05-full-cpu-r1-20261112.service",
+    "InvocationID": "4d94c15db044410cb66d112650e64d30",
+    "Job": "",
+    "KillMode": "control-group",
+    "LimitAS": "12884901888",
+    "LimitCPU": "30000",
+    "LimitFSIZE": "262144",
+    "LoadState": "loaded",
+    "MainPID": "2673721",
+    "MemoryHigh": "8589934592",
+    "MemoryMax": "10737418240",
+    "MemorySwapMax": "0",
+    "Nice": "19",
+    "RemainAfterExit": "yes",
+    "Result": "success",
+    "RuntimeMaxUSec": "8h 20min",
+    "SendSIGKILL": "yes",
+    "SubState": "running",
+    "TasksMax": "32",
+    "TimeoutStopUSec": "15s",
+    "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+  },
+  "actual_worker": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron_053_py312/bin/python",
+      "-B",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/run_lfm3_nki05_full_cpu_serial_v2.py",
+      "--mode",
+      "worker",
+      "--admission",
+      "/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/admission.json",
+      "--admission-sha256",
+      "dad9b67a8ac407238f9ef50928f1ed006a96cce2c3c1104835ca6090ded30e8b"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-lfm3-nki05-full-cpu-r1-20261112.service",
+    "invocation_id": "4d94c15db044410cb66d112650e64d30",
+    "pid": 2673721,
+    "ppid": 1583,
+    "start_ticks": "422637087",
+    "unit": "trn1-lfm3-nki05-full-cpu-r1-20261112"
+  },
+  "admission": {
+    "path": "/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/admission.json",
+    "sha256": "dad9b67a8ac407238f9ef50928f1ed006a96cce2c3c1104835ca6090ded30e8b"
+  },
+  "first_stage_directory_present": "original_fixture/regression_cpu",
+  "full_cpu_result_pending": true,
+  "full_model_qualified": false,
+  "independent_raw_or_native_rehash_performed": false,
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-full-cpu-r1-root-actual-live-20261112-v1.json",
+    "sha256": "f6d34aaeb518839d93d36011a759daa4b3a3f16c04ee2060b29cc42957ac4f8e"
+  },
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T01:13:26.104487+00:00",
+  "outer_alive": true,
+  "reported_legacy_distributions": 7,
+  "runtime_auth": {
+    "path": "/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/runtime-auth.json",
+    "sha256": "c7ae3896066b3905de5171eb5171008b25a57baf26287d3827c0027cc115134e"
+  },
+  "schema": "lfm3_full_cpu_root_worker_observation_v1",
+  "tool_session": 39484,
+  "worker_alive": true,
+  "worker_owner": {
+    "path": "/mnt/nvme/lfm3-nki05-full-cpu-r1-20261112/worker-owner.json",
+    "sha256": "a5679f9bbde1a44e2a255f22b9235467e090ae2b4af9954767d8f9cc4f1bcad4"
+  }
+}

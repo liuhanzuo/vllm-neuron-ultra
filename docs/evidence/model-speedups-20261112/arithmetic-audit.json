@@ -1,0 +1,114 @@
+{
+  "schema": "trn1_historical_host_throughput_arithmetic_audit_v1",
+  "reviewer": "/root",
+  "new_native_execution": false,
+  "pairs": [
+    {
+      "model": "qwen3",
+      "precision": "bf16",
+      "reference": "qwen3-bf16-cpu-random-tp2-b4-http.json",
+      "candidate": "qwen3-bf16-cpu-fast-random-tp2-b4-http.json",
+      "prompt_tokens": 19,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      },
+      "reference_median": {
+        "single": 20.20901621270241,
+        "concurrent": 42.64583087175176
+      },
+      "candidate_median": {
+        "single": 28.73918725611984,
+        "concurrent": 105.40542955866495
+      },
+      "ratio": {
+        "single": 1.4220972932891103,
+        "concurrent": 2.471646756646606
+      },
+      "full_model_qualified": false
+    },
+    {
+      "model": "qwen3",
+      "precision": "int8",
+      "reference": "qwen3-int8-cpu-random-tp2-b4-http.json",
+      "candidate": "qwen3-int8-cpu-fast-random-tp2-b4-http.json",
+      "prompt_tokens": 19,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40,
+        "seed": 1234
+      },
+      "reference_median": {
+        "single": 26.623089686448285,
+        "concurrent": 48.69777318739137
+      },
+      "candidate_median": {
+        "single": 43.91309993693008,
+        "concurrent": 154.79923967602974
+      },
+      "ratio": {
+        "single": 1.6494366526993587,
+        "concurrent": 3.1787745012560396
+      },
+      "full_model_qualified": false
+    },
+    {
+      "model": "granite42-3b",
+      "precision": "bf16",
+      "reference": "granite42-3b-bf16-reference-stochastic-http.json",
+      "candidate": "granite42-3b-bf16-fast-stochastic-http.json",
+      "prompt_tokens": 30,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40
+      },
+      "reference_median": {
+        "single": 36.935678865391885,
+        "concurrent": 71.57154004367143
+      },
+      "candidate_median": {
+        "single": 55.214261728971465,
+        "concurrent": 192.74786107679867
+      },
+      "ratio": {
+        "single": 1.494876050070554,
+        "concurrent": 2.693079692838634
+      },
+      "full_model_qualified": false
+    },
+    {
+      "model": "granite42-3b",
+      "precision": "int8",
+      "reference": "granite42-3b-int8-reference-stochastic-http.json",
+      "candidate": "granite42-3b-int8-fast-stochastic-http.json",
+      "prompt_tokens": 30,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40
+      },
+      "reference_median": {
+        "single": 44.178262283206585,
+        "concurrent": 77.85681419564501
+      },
+      "candidate_median": {
+        "single": 72.42252423652772,
+        "concurrent": 245.27590098954357
+      },
+      "ratio": {
+        "single": 1.6393248736733945,
+        "concurrent": 3.1503459719427265
+      },
+      "full_model_qualified": false
+    }
+  ],
+  "round_rates_recomputed": 48,
+  "request_usage_records_checked": 120,
+  "streaming_reaudited": false,
+  "no_new_model_qualification": true,
+  "scope": "Historical saved matched host overhead measurements only; no device artifacts rehashed, no causal sampler-only attribution"
+}

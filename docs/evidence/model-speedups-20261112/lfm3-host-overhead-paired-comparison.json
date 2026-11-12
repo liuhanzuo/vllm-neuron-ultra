@@ -1,0 +1,86 @@
+{
+  "complete": true,
+  "workloads": {
+    "medium_prompt": {
+      "single_median_tok_s": {
+        "reference": 28.51002874278045,
+        "fast": 29.26741388592201,
+        "speedup": 1.0265655692589701
+      },
+      "concurrent_median_tok_s": {
+        "reference": 95.03055911793653,
+        "fast": 99.4049133483443,
+        "speedup": 1.0460310269771118
+      }
+    },
+    "short_decode": {
+      "single_median_tok_s": {
+        "reference": 29.3593184522743,
+        "fast": 30.161825189032026,
+        "speedup": 1.0273339702371584
+      },
+      "concurrent_median_tok_s": {
+        "reference": 99.41709420326036,
+        "fast": 104.97912430708519,
+        "speedup": 1.0559464159398295
+      }
+    },
+    "long_prompt": {
+      "single_median_tok_s": {
+        "reference": 5.299703087312616,
+        "fast": 5.322599141331646,
+        "speedup": 1.0043202522182504
+      },
+      "concurrent_median_tok_s": {
+        "reference": 20.22753525383898,
+        "fast": 20.461596286836727,
+        "speedup": 1.0115714065040784
+      }
+    },
+    "short_stochastic": {
+      "single_median_tok_s": {
+        "reference": 21.98205541335729,
+        "fast": 29.530153718210215,
+        "speedup": 1.3433754561580424
+      },
+      "concurrent_median_tok_s": {
+        "reference": 47.1322040413779,
+        "fast": 98.55946483237314,
+        "speedup": 2.091127856992358
+      }
+    },
+    "mixed_lengths": {
+      "median_tok_s": {
+        "reference": 16.877339879616905,
+        "fast": 20.745175897271842,
+        "speedup": 1.2291733202769828
+      }
+    }
+  },
+  "scope": "Matched three-round HTTP medians; same original BF16 weights and compiled graphs. Fast changes CPU sampling and host debug overhead. Quality evidence is limited to the fixed 96 greedy prompts; stochastic text identity is not claimed.",
+  "greedy_quality": {
+    "identical_texts": 96,
+    "correct": 63,
+    "suite_sha256": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb"
+  },
+  "stochastic_short120": {
+    "single_median_tok_s": {
+      "reference": 22.72610455804119,
+      "fast": 30.401219977569074,
+      "speedup": 1.3377224372054644
+    },
+    "concurrent_median_tok_s": {
+      "reference": 48.67626826855898,
+      "fast": 102.91138766580471,
+      "speedup": 2.1142004374291226
+    }
+  },
+  "evidence_sha256": {
+    "greedy-equivalence.json": "ff55efab9b9918f49f787eaaf419d3d9d492afaf27d2d3531231b17f8a9cc191",
+    "cpu-sampler-validation.json": "1d7c90148d3f7934293fc5a24ffd41053f401aee0c464a659375f442e5955ca9",
+    "reference-stochastic-http.json": "73a5c650af7d00b0ac454dd47da415bad2d9edc7b63dcf0b6163d51e1f28b290",
+    "fast-stochastic-http.json": "f30c2bc6518268cf5404a27143ff8429adcc2590289c5ebdbddc20565400a7c3",
+    "reference-workloads.json": "41539fde0f38a188bf46d0ece204f7466a13220db183f000e6c77d5b234b25df",
+    "fast-workloads.json": "e6a846c46047b67a970512c2fa3180cd3c1fb5af3a1ad69359f8a609853d5ccb"
+  }
+}

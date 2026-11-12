@@ -1,0 +1,390 @@
+--- qwen35_sampler_runtime_contract_v4.py
++++ qwen35_sampler_runtime_contract_v6.py
+@@ -154,10 +154,10 @@
+     return result
+ 
+ 
+-RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v4.py", "qwen35_sampler_runtime_preflight_v1.py",
+-                 "qwen35_sampler_runtime_io_v4.py", "qwen35_sampler_runtime_history_v4.py",
+-                 "qwen35_sampler_runtime_service_v4.py", "qwen35_sampler_runtime_adapter_v4.py",
+-                 "run_qwen35_sampler_runtime_v4.py", "qwen35_sampler_torch_namespace_sources_v1.py",
++RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v6.py", "qwen35_sampler_runtime_preflight_v1.py",
++                 "qwen35_sampler_runtime_io_v6.py", "qwen35_sampler_runtime_history_v6.py",
++                 "qwen35_sampler_runtime_service_v6.py", "qwen35_sampler_runtime_adapter_v6.py",
++                 "run_qwen35_sampler_runtime_v6.py", "qwen35_sampler_torch_namespace_sources_v1.py",
+                  "qwen35_sampler_native_leaves_v1.py", "qwen35_sampler_native_leaves_v2.py")
+ STARTUP_FILES = tuple("/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/" + name
+                       for name in ("config/parallel.py", "engine/arg_utils.py", "envs.py", "v1/engine/core.py"))
+--- qwen35_sampler_runtime_io_v4.py
++++ qwen35_sampler_runtime_io_v6.py
+@@ -14,7 +14,7 @@
+ import sys
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v4 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
++from qwen35_sampler_runtime_contract_v6 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
+                                                budget, control_root, digest, reference, require)
+ 
+ 
+--- qwen35_sampler_runtime_history_v4.py
++++ qwen35_sampler_runtime_history_v6.py
+@@ -10,9 +10,9 @@
+ from pathlib import Path
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v4 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
++from qwen35_sampler_runtime_contract_v6 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
+     control_root, digest, host_sources, reference, require, units, validate_spec)
+-from qwen35_sampler_runtime_io_v4 import Metadata, identity, loaded_local_sources, process_api, raw, read
++from qwen35_sampler_runtime_io_v6 import Metadata, identity, loaded_local_sources, process_api, raw, read
+ 
+ 
+ class Bundle:
+--- qwen35_sampler_runtime_service_v4.py
++++ qwen35_sampler_runtime_service_v6.py
+@@ -15,12 +15,12 @@
+ import subprocess
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v4 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
++from qwen35_sampler_runtime_contract_v6 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v4 import (identity, once, process_api, raw, read, read_if_present, ref,
++from qwen35_sampler_runtime_io_v6 import (identity, once, process_api, raw, read, read_if_present, ref,
+                                         service_owner, wait_until)
+ 
+-CLI = str(Q / "run_qwen35_sampler_runtime_v4.py")
++CLI = str(Q / "run_qwen35_sampler_runtime_v6.py")
+ PROPERTY_KEYS = ("Id,LoadState,ActiveState,SubState,MainPID,ControlPID,Job,InvocationID,ControlGroup,Result,"
+                  "ExecMainPID,ExecMainCode,ExecMainStatus,ExecStart,ExecStopPost,Environment,BindsTo,After,"
+                  "MemoryMax,MemoryHigh,MemorySwapMax,TasksMax,KillMode,RemainAfterExit,SendSIGKILL,"
+@@ -147,8 +147,8 @@
+                                "Result": value["Result"]}, "saved exact actual systemd exit fields are required")
+         require(status["Result"] in ("success", "exit-code", "signal", "core-dump", "timeout", "watchdog", "oom-kill",
+                                       "resources", "protocol", "start-limit-hit")
+-                and (status["Result"] != "success" or (status["ExecMainCode"], status["ExecMainStatus"]) == (1, 0)),
+-                "saved success cannot mask a nonzero or signal exit")
++                and (status["Result"] != "success" or (status["ExecMainCode"], status["ExecMainStatus"]) in ((1, 0), (2, 15))),
++                "saved status must be an actual exit or observed systemd clean SIGTERM")
+         require(status["Result"] != "exit-code" or status["ExecMainCode"] == 1 and status["ExecMainStatus"] != 0,
+                 "saved exit-code failure must retain an actual nonzero exited status")
+         require(status["Result"] not in ("signal", "core-dump")
+@@ -194,6 +194,8 @@
+ 
+     def observe(self):
+         observed = properties(self.unit)
++        sink = getattr(self, "observation_sink", None)
++        if sink is not None: sink(self.unit, copy.deepcopy(observed))
+         if observed["LoadState"] == "not-found" and self.saved_terminal is not None:
+             return self.collected_terminal(observed)
+         self.historical_terminal_reuse = None
+--- qwen35_sampler_runtime_adapter_v4.py
++++ qwen35_sampler_runtime_adapter_v6.py
+@@ -16,12 +16,12 @@
+ import urllib.request
+ import uuid
+ 
+-from qwen35_sampler_runtime_contract_v4 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
++from qwen35_sampler_runtime_contract_v6 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v4 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
++from qwen35_sampler_runtime_io_v6 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
+     raw, read, read_if_present, ref, resources, service_owner, storage, wait_until)
+-from qwen35_sampler_runtime_history_v4 import Authority, Bundle, check_running
+-from qwen35_sampler_runtime_service_v4 import (CLI, Service, argv, expected_phase, properties, supervise)
++from qwen35_sampler_runtime_history_v6 import Authority, Bundle, check_running
++from qwen35_sampler_runtime_service_v6 import (CLI, Service, argv, expected_phase, properties, supervise)
+ from qwen35_sampler_pair_protocol_v1 import BASE, expected_case, host_identity
+ 
+ 
+@@ -498,9 +498,13 @@
+         if adapter.active is not None: adapter.active.finish()
+ 
+ 
+-def declared_services(spec, admission_ref, coordinator_owner=None):
++def declared_services(spec, admission_ref, coordinator_owner=None, retained=None, observations=None):
+     """Outer recovery sees only declared phase specs, never guesses live jobs."""
+     co = coordinator_service(spec, admission_ref, coordinator_owner)
++    if retained is not None:
++        previous = retained.setdefault(co.unit, co)
++        require(previous.owner == coordinator_owner, "retained coordinator identity changed")
++        co = previous
+     if coordinator_owner is not None: co.started = True
+     result = [co]
+     for key in units(spec["run_name"]):
+@@ -509,20 +513,58 @@
+         path = control_root(spec) / (arm + "-" + name) / "phase-spec.json"
+         if not path.exists():
+             value = properties(units(spec["run_name"])[key])
+-            require(value["LoadState"] == "not-found" and value["InvocationID"] == "", "undeclared phase unit appeared")
+-            process_api().empty_group(process_api().GROUP_PREFIX + units(spec["run_name"])[key] + ".service")
+-            continue
++            if observations is not None:
++                observations.append({"unit": units(spec["run_name"])[key], "raw_properties": copy.deepcopy(value)})
++            # The coordinator publishes phase-spec before installing its unit.
++            # Recheck only that exact path after observing an installation.
++            if not path.exists():
++                require(value["LoadState"] == "not-found" and value["InvocationID"] == "", "undeclared phase unit appeared")
++                require(retained is None or units(spec["run_name"])[key] not in retained,
++                        "previously declared phase spec disappeared")
++                try:
++                    process_api().empty_group(process_api().GROUP_PREFIX + units(spec["run_name"])[key] + ".service")
++                except RuntimeError as error:
++                    # Only the observed absent->declared launch window changes
++                    # the required proof from empty group to exact service.
++                    # Other cgroup errors and undeclared descendants still fail.
++                    if str(error) != "Live group descendants" or not path.exists(): raise
++                    if observations is not None:
++                        observations.append({"unit": units(spec["run_name"])[key],
++                                             "declaration_published_during_absence_check": True})
++                if not path.exists(): continue
+         phase_ref = ref(path); phase = read(phase_ref)
+         require(phase["admission"] == admission_ref and phase["arm"] == arm and phase["phase"] == name
+                 and phase["coordinator"] == coordinator_owner and phase == expected_phase(spec, admission_ref, coordinator_owner,
+                     phase["run_id"], arm, name, phase["directory"], phase["host_identity"]), "outer authenticates exact declared phase")
+         owner = read_if_present(path.parent / "supervisor-owner.json")
+         service = phase_service(spec, phase, phase_ref, owner)
++        if retained is not None:
++            previous = retained.get(service.unit)
++            if previous is not None:
++                require(previous.declared_reference == phase_ref
++                        and (previous.argv, previous.env, previous.props, previous.log, previous.parent)
++                        == (service.argv, service.env, service.props, service.log, service.parent),
++                        "retained phase declaration changed")
++                require(owner is None or previous.owner in (None, owner), "phase owner receipt changed identity")
++                if owner is not None and previous.owner is None:
++                    require(previous.installed_invocation in (None, owner["service_owner"]["invocation_id"]),
++                            "acknowledged invocation differs from observed installation")
++                    if previous.pending_process is not None:
++                        require(all(previous.pending_process[k] == owner["process"][k]
++                                    for k in ("pid", "start_ticks", "ppid", "cgroup")), "acknowledged pending process changed")
++                    previous.owner = copy.deepcopy(owner)
++                service = previous
++            else:
++                service.declared_reference = copy.deepcopy(phase_ref)
++                retained[service.unit] = service
+         value = properties(service.unit)
++        if observations is not None:
++            observations.append({"unit": service.unit, "phase_reference": phase_ref, "raw_properties": copy.deepcopy(value)})
++            service.observation_sink = lambda unit, actual: observations.append({"unit": unit, "raw_properties": actual})
+         saved_terminal = read_if_present(path.parent / "root-terminal.json")
+         require(owner is None or value["LoadState"] != "not-found" or saved_terminal is not None,
+                 "previously acknowledged service disappeared without saved terminal evidence")
+-        if owner is not None and saved_terminal is not None:
++        if owner is not None and saved_terminal is not None and service.saved_terminal is None:
+             service.bind_saved_terminal(phase, phase_ref, ref(path.parent / "supervisor-owner.json"),
+                                         ref(path.parent / "root-terminal.json"))
+         if saved_terminal is not None and saved_terminal.get("unacknowledged_terminal") is not None:
+@@ -537,6 +579,115 @@
+     return result
+ 
+ 
++class ActiveScopeMonitor:
++    """Bounded observations of declared scope; never a name-only exemption.
++
++    Identity memory survives monitor calls and startup ACK publication. Only
++    authenticated phase transitions may cause a retry. The original frozen
++    scientific policy and all resource limits are unchanged.
++    """
++    ATTEMPTS = 4
++    LIST_ARGV = ["systemctl", "--user", "list-units", "--type=service",
++                 "--state=running,activating,deactivating", "--plain", "--no-legend", "--no-pager"]
++
++    def __init__(self, spec, admission_ref, coordinator, guard):
++        self.spec, self.admission_ref, self.coordinator, self.guard = spec, admission_ref, coordinator, guard
++        self.retained = {coordinator.unit: coordinator}
++        self.previous_live = set()
++        self.failure_evidence = None
++        self.observation = None
++
++    def snapshot(self, label, events):
++        self.guard()
++        text = process_api().command(self.LIST_ARGV, cap=256 * 1024)
++        require(type(text) is str and len(text.encode()) <= 256 * 1024, "bounded complete active-unit listing")
++        names = [line.split()[0].removesuffix(".service") for line in text.splitlines()
++                 if line.split() and line.split()[0].startswith("trn1-")]
++        row = {"kind": label, "raw_systemctl_list": text, "units": sorted(names), "observed_unix_ns": time.time_ns()}
++        events.append(row)
++        require(len(names) == len(set(names)), "duplicate active heavy service")
++        require(set(names) <= set(units(self.spec["run_name"]).values()), "unknown competing active heavy service")
++        require(len(names) <= 2 and (not names or self.coordinator.unit in names),
++                "coordinator plus at most one simultaneously active phase")
++        return set(names)
++
++    def scan(self, label, events):
++        self.guard()
++        rows = []; events.append({"kind": label, "services": rows})
++        services = declared_services(self.spec, self.admission_ref, self.coordinator.owner, self.retained, rows)
++        live = set(); values = {}
++        for service in services:
++            if not service.started: continue
++            self.guard()
++            value = service.observe()
++            if not process_api().terminal(value):
++                live.add(service.unit)
++                if value["MainPID"] != "0":
++                    expected = service.owner["process"] if service.owner is not None else service.pending_process
++                    actual = process_api().proc(int(value["MainPID"]))
++                    if expected is not None and actual != expected:
++                        require(service.owner is None and service.pending_process is not None
++                                and type(actual) is dict and actual.get("argv") == service.argv
++                                and all(actual.get(k) == expected[k] for k in ("pid", "start_ticks", "ppid", "cgroup")),
++                                "active process identity changed within complete scope observation")
++                        # A single env->Python exec can occur after observe's
++                        # proc read. Reuse its full property/invocation/command
++                        # validator once; never rewrite or adopt an identity.
++                        self.guard()
++                        value = service.observe()
++                        require(not process_api().terminal(value) and service.owner is not None
++                                and service.owner["process"] == actual
++                                and value["MainPID"] == str(actual["pid"])
++                                and process_api().proc(actual["pid"]) == actual,
++                                "expected env to Python exec did not converge within one reauthentication")
++                        self.guard()
++                        expected = service.owner["process"]
++                    require(expected is not None and actual == expected,
++                            "active process identity changed within complete scope observation")
++            record = {"unit": service.unit, "properties": copy.deepcopy(value),
++                      "phase_reference": copy.deepcopy(getattr(service, "declared_reference", None)),
++                      "owner": copy.deepcopy(service.owner), "pending_process": copy.deepcopy(service.pending_process),
++                      "installed_invocation": service.installed_invocation}
++            rows.append(record); values[service.unit] = record
++        return services, live, values
++
++    def drain_removed(self, names, current_live, events):
++        for unit in sorted(names - current_live):
++            require(unit in self.retained and self.retained[unit].started,
++                    "listed unit lacks authenticated current admission declaration")
++            terminal = self.retained[unit].drained()
++            events.append({"kind": "removed_unit_complete_terminal", "unit": unit, "terminal": terminal})
++
++    def observe(self):
++        events = []
++        report = {"schema": "qwen35_sampler_active_scope_observation_v1", "admission": self.admission_ref,
++                  "coordinator": copy.deepcopy(self.coordinator.owner), "events": events,
++                  "observation_successful": False, "historical_r5_cause_proven": False}
++        try:
++            for attempt in range(self.ATTEMPTS):
++                self.guard()
++                before = self.snapshot("active_before", events)
++                _, first_live, first = self.scan("scope_before", events)
++                require(before <= set(first), "active unit has no authenticated declaration")
++                after = self.snapshot("active_after", events)
++                services, second_live, second = self.scan("scope_after", events)
++                require(after <= set(second), "active unit has no authenticated declaration")
++                self.drain_removed(before | first_live | self.previous_live, after | second_live, events)
++                self.guard()
++                if before == after == first_live == second_live and first == second:
++                    self.previous_live = second_live
++                    report.update(observation_successful=True, attempts=attempt + 1)
++                    self.observation = report
++                    return services, second[self.coordinator.unit]["properties"]
++                require(attempt + 1 < self.ATTEMPTS, "active scope changed continuously within bounded retries")
++                time.sleep(.01)
++            raise AssertionError("finite active scope observation exhausted")
++        except BaseException as error:
++            report["failure"] = {"type": type(error).__name__, "message": str(error)[:2048]}
++            self.failure_evidence = report
++            raise
++
++
+ def retain_until_drained(lock, services, error):
+     """No more scientific work. Retain the lease on unresolved owned cgroups."""
+     print(json.dumps({"event": "qwen35_sampler_cleanup_blocked", "error_type": type(error).__name__,
+@@ -561,6 +712,7 @@
+     lock = RetainedLock(); lock.acquire()
+     started = time.monotonic(); bundle = None; co = None; admission_ref = None; control = None
+     all_services = []; drained = False; result = None; failed = None
++    scope_monitor = None; scope_failure_ref = None
+     interrupt = [False]; old_handlers = {}
+     for sig in (signal.SIGTERM, signal.SIGINT):
+         old_handlers[sig] = signal.signal(sig, lambda *_: interrupt.__setitem__(0, True))
+@@ -612,19 +764,12 @@
+         running = check_running(bundle, admission_ref, admission, coordinator_ref, co.owner)
+         once(control / "running-ack.json", {"admission": admission_ref, "coordinator_owner": coordinator_ref,
+                                            "coordinator": co.owner, "running": running})
++        scope_monitor = ActiveScopeMonitor(spec, admission_ref, co, guard)
+         while True:
+             guard()
+             from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+             require(latest.latest_handoff() == running["observation"], "unknown later handoff during current execution")
+-            value = co.observe()
+-            all_services = declared_services(spec, admission_ref, co.owner)
+-            live = []
+-            for service in all_services:
+-                if service.started:
+-                    current = service.observe()
+-                    if not process_api().terminal(current): live.append(service.unit)
+-            require(len(live) <= 2 and (not live or co.unit in live), "coordinator plus at most one actual phase")
+-            process_api().active_heavy(live)
++            all_services, value = scope_monitor.observe()
+             if process_api().terminal(value): break
+             time.sleep(LIMITS["monitor_interval_seconds"])
+         result = read_if_present(control / "coordinator-result.json")
+@@ -632,6 +777,8 @@
+                 "coordinator did not produce its completed real result")
+     except BaseException as error:
+         failed = error
++        if scope_monitor is not None and scope_monitor.failure_evidence is not None:
++            scope_failure_ref = once(control / "active-scope-failure.json", scope_monitor.failure_evidence)
+     finally:
+         try:
+             if admission_ref is not None:
+@@ -639,7 +786,9 @@
+                 # original authenticated argv/invocation is captured before
+                 # cleanup; never use an unverified arbitrary service name.
+                 co_owner = co.owner if co is not None else None
+-                if co_owner is not None: all_services = declared_services(bundle.spec, admission_ref, co_owner)
++                if co_owner is not None:
++                    all_services = declared_services(bundle.spec, admission_ref, co_owner,
++                        None if scope_monitor is None else scope_monitor.retained)
+             for service in reversed(all_services):
+                 if service.started: service.cleanup()
+             drained = True
+@@ -649,7 +798,8 @@
+             # changed phase. Never fall back to an older short service list.
+             def complete_scope():
+                 if admission_ref is not None and co is not None and co.owner is not None:
+-                    return declared_services(bundle.spec, admission_ref, co.owner)
++                    return declared_services(bundle.spec, admission_ref, co.owner,
++                        None if scope_monitor is None else scope_monitor.retained)
+                 return all_services
+             all_services = retain_until_drained(lock, complete_scope, cleanup_error)
+             drained = True
+@@ -662,6 +812,7 @@
+                         if s.started and s.historical_terminal_reuse is not None],
+                     "whole_owned_scope_drained": True, "result_present": result is not None,
+                     "failed": failed is not None, "failure": None if failed is None else {"type": type(failed).__name__, "message": str(failed)[:2048]},
++                    "active_scope_failure": scope_failure_ref,
+                     "storage": storage(bundle.spec, terminal=True), "full_model_qualified": False,
+                     "self_exit_claimed": False, "actual_external_tool_exit_pending": True,
+                     "independent_final_audit_required": True, "automatic_successor": False}
+--- run_qwen35_sampler_runtime_v4.py
++++ run_qwen35_sampler_runtime_v6.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parent, Path(__file__).resolve().parents[1]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_sampler_runtime_contract_v4 import reference, require
++    from qwen35_sampler_runtime_contract_v6 import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_sampler_runtime_adapter_v4 import outer
++        from qwen35_sampler_runtime_adapter_v6 import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_sampler_runtime_adapter_v4 import coordinator, native_leaf, worker_bootstrap
++    from qwen35_sampler_runtime_adapter_v6 import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_sampler_runtime_service_v4 import supervise
++        from qwen35_sampler_runtime_service_v6 import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 

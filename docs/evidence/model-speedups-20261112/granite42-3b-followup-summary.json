@@ -1,0 +1,438 @@
+{
+  "complete": true,
+  "int8_strict_numerical_gate_passed": false,
+  "variants": {
+    "bf16-reference": {
+      "complete": true,
+      "case": {
+        "name": "granite42-3b-bf16-reference",
+        "model_path": "/mnt/nvme/models/granite-4.2-3b",
+        "served_name": "granite-4.2-3b",
+        "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-bf16-cpu-tp2-b4",
+        "batch": 4,
+        "tp": 2,
+        "max_model_len": 2048,
+        "cpu": true,
+        "adapter": "granite",
+        "compile_workers": 2,
+        "skip_sampling_probe": true,
+        "note": "vLLM-Neuron 0.2.2+lts baseline with required Granite architecture adapter, original BF16 weights, standard CPU greedy sampler, no CPU fast sampler. Adapter baseline is not stock upstream Granite support. Full model numerical and quality qualification is separate from smoke/throughput measurement.",
+        "cpu_fast_sampler": false
+      },
+      "startup_s": 40.10686047328636,
+      "quality_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-reference-quality96.json",
+      "quality_correct": 78,
+      "quality_total": 96,
+      "http_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-reference-stochastic-http.json",
+      "http": {
+        "single_best_tok_s": 37.02155730955583,
+        "single_median_tok_s": 36.935678865391885,
+        "concurrent_best_tok_s": 71.84837501653683,
+        "concurrent_median_tok_s": 71.57154004367143,
+        "streaming_ttft_ms": [
+          62.9023308865726,
+          219.61319306865335,
+          167.4219169653952,
+          115.43155228719115
+        ],
+        "streaming_mean_token_interval_ms": [
+          55.76065128684795,
+          54.44333654585756,
+          54.8835001854586,
+          55.322676384430224
+        ]
+      },
+      "integrity": {
+        "requests_checked": 19,
+        "all_output_budgets_exact": true
+      },
+      "memory_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-reference-runtime-memory.json"
+    },
+    "bf16-fast": {
+      "complete": true,
+      "case": {
+        "name": "granite42-3b-bf16-fast",
+        "model_path": "/mnt/nvme/models/granite-4.2-3b",
+        "served_name": "granite-4.2-3b",
+        "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-bf16-cpu-tp2-b4",
+        "batch": 4,
+        "tp": 2,
+        "max_model_len": 2048,
+        "cpu": true,
+        "adapter": "granite",
+        "compile_workers": 2,
+        "skip_sampling_probe": true,
+        "note": "vLLM-Neuron 0.2.2+lts baseline with required Granite architecture adapter, original BF16 weights, standard CPU greedy sampler, no CPU fast sampler. Adapter baseline is not stock upstream Granite support. Full model numerical and quality qualification is separate from smoke/throughput measurement.",
+        "cpu_fast_sampler": true,
+        "cpu_sampler_stats_dir": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-fast-sampler-stats"
+      },
+      "startup_s": 38.107357691042125,
+      "quality_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-fast-quality96.json",
+      "quality_correct": 78,
+      "quality_total": 96,
+      "http_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-fast-stochastic-http.json",
+      "http": {
+        "single_best_tok_s": 55.68129001403675,
+        "single_median_tok_s": 55.214261728971465,
+        "concurrent_best_tok_s": 192.9424990209151,
+        "concurrent_median_tok_s": 192.74786107679867,
+        "streaming_ttft_ms": [
+          94.1780349239707,
+          180.80694414675236,
+          137.27325294166803,
+          50.854253116995096
+        ],
+        "streaming_mean_token_interval_ms": [
+          20.527694679546254,
+          19.79768429217594,
+          20.162631898429712,
+          20.889648142419443
+        ]
+      },
+      "integrity": {
+        "requests_checked": 19,
+        "all_output_budgets_exact": true
+      },
+      "memory_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-fast-runtime-memory.json"
+    },
+    "int8-reference": {
+      "complete": true,
+      "case": {
+        "name": "granite42-3b-int8-reference",
+        "model_path": "/mnt/nvme/models/granite-4.2-3b",
+        "served_name": "granite-4.2-3b",
+        "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-int8-cpu-tp2-b4",
+        "quant_path": "/mnt/nvme/models/granite-4.2-3b-int8-exp20261031",
+        "batch": 4,
+        "tp": 2,
+        "max_model_len": 2048,
+        "cpu": true,
+        "int8": true,
+        "adapter": "granite",
+        "compile_workers": 2,
+        "skip_sampling_probe": true,
+        "baseline_numerical_proof": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-real-logits-validation.json",
+        "baseline_artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-bf16-cpu-tp2-b4",
+        "note": "First controlled quantization comparison against the qualified BF16 adapter baseline. Same TP2/B4/context2048, standard CPU greedy sampler, original BF16 embedding and lm_head. INT8 quality must be qualified separately; this case is not a final optimized recommendation.",
+        "cpu_fast_sampler": false
+      },
+      "startup_s": 40.10661585768685,
+      "quality_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-reference-quality96.json",
+      "quality_correct": 77,
+      "quality_total": 96,
+      "http_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-reference-stochastic-http.json",
+      "http": {
+        "single_best_tok_s": 44.19666108315608,
+        "single_median_tok_s": 44.178262283206585,
+        "concurrent_best_tok_s": 78.19432537733306,
+        "concurrent_median_tok_s": 77.85681419564501,
+        "streaming_ttft_ms": [
+          81.45191799849272,
+          117.02510807663202,
+          153.21036474779248,
+          45.3948643989861
+        ],
+        "streaming_mean_token_interval_ms": [
+          50.84635034407012,
+          50.54418889790022,
+          50.241251941770315,
+          51.14808931805882
+        ]
+      },
+      "integrity": {
+        "requests_checked": 19,
+        "all_output_budgets_exact": true
+      },
+      "memory_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-reference-runtime-memory.json"
+    },
+    "int8-fast": {
+      "complete": true,
+      "case": {
+        "name": "granite42-3b-int8-fast",
+        "model_path": "/mnt/nvme/models/granite-4.2-3b",
+        "served_name": "granite-4.2-3b",
+        "artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-int8-cpu-tp2-b4",
+        "quant_path": "/mnt/nvme/models/granite-4.2-3b-int8-exp20261031",
+        "batch": 4,
+        "tp": 2,
+        "max_model_len": 2048,
+        "cpu": true,
+        "int8": true,
+        "adapter": "granite",
+        "compile_workers": 2,
+        "skip_sampling_probe": true,
+        "baseline_numerical_proof": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-real-logits-validation.json",
+        "baseline_artifact": "/mnt/nvme/neuron-artifacts/latest-20261031-granite42-3b-bf16-cpu-tp2-b4",
+        "note": "First controlled quantization comparison against the qualified BF16 adapter baseline. Same TP2/B4/context2048, standard CPU greedy sampler, original BF16 embedding and lm_head. INT8 quality must be qualified separately; this case is not a final optimized recommendation.",
+        "cpu_fast_sampler": true,
+        "cpu_sampler_stats_dir": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-fast-sampler-stats"
+      },
+      "startup_s": 40.1044274228625,
+      "quality_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-fast-quality96.json",
+      "quality_correct": 77,
+      "quality_total": 96,
+      "http_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-fast-stochastic-http.json",
+      "http": {
+        "single_best_tok_s": 72.61297502693947,
+        "single_median_tok_s": 72.42252423652772,
+        "concurrent_best_tok_s": 246.40386962238267,
+        "concurrent_median_tok_s": 245.27590098954357,
+        "streaming_ttft_ms": [
+          34.68531230464578,
+          116.74585100263357,
+          89.07595789059997,
+          62.2885599732399
+        ],
+        "streaming_mean_token_interval_ms": [
+          16.016931664355162,
+          15.322723821149905,
+          15.556784209740512,
+          15.786073143210483
+        ]
+      },
+      "integrity": {
+        "requests_checked": 19,
+        "all_output_budgets_exact": true
+      },
+      "memory_output": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-fast-runtime-memory.json"
+    }
+  },
+  "quality_comparisons": {
+    "quantization": {
+      "reference": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-reference-quality96.json",
+      "candidate": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-reference-quality96.json",
+      "suite_sha256": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb",
+      "reference_correct": 78,
+      "candidate_correct": 77,
+      "total": 96,
+      "reference_groups": {
+        "gsm8k64": {
+          "correct": 54,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 4
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 1
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "candidate_groups": {
+        "gsm8k64": {
+          "correct": 53,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 3
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 2
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "lost_correct_cases": [
+        "gsm8k-test-0245",
+        "gsm8k-test-0626",
+        "gsm8k-test-0888"
+      ],
+      "gained_correct_cases": [
+        "gsm8k-test-0324",
+        "gsm8k-test-1174"
+      ],
+      "identical_texts": 45,
+      "interpretation": "Paired finite-sample regression evidence only. Net score can hide individual losses; inspect both lost and gained cases. No universal quality-equivalence claim."
+    },
+    "bf16-fast-sampler": {
+      "reference": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-reference-quality96.json",
+      "candidate": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-bf16-fast-quality96.json",
+      "suite_sha256": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb",
+      "reference_correct": 78,
+      "candidate_correct": 78,
+      "total": 96,
+      "reference_groups": {
+        "gsm8k64": {
+          "correct": 54,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 4
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 1
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "candidate_groups": {
+        "gsm8k64": {
+          "correct": 54,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 4
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 1
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "lost_correct_cases": [],
+      "gained_correct_cases": [],
+      "identical_texts": 96,
+      "interpretation": "Paired finite-sample regression evidence only. Net score can hide individual losses; inspect both lost and gained cases. No universal quality-equivalence claim."
+    },
+    "int8-fast-sampler": {
+      "reference": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-reference-quality96.json",
+      "candidate": "/home/ubuntu/experiments/trn1-latest-models-20261031/granite42-3b-int8-fast-quality96.json",
+      "suite_sha256": "aa3bc376c3d449cd8a57e7d25fce74035bc10e590cf5b70ac4c7a962d10b9ceb",
+      "reference_correct": 77,
+      "candidate_correct": 77,
+      "total": 96,
+      "reference_groups": {
+        "gsm8k64": {
+          "correct": 53,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 3
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 2
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "candidate_groups": {
+        "gsm8k64": {
+          "correct": 53,
+          "total": 64,
+          "request_errors": 0,
+          "length_capped": 3
+        },
+        "arithmetic8": {
+          "correct": 0,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 2
+        },
+        "json8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "retrieval8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        },
+        "list8": {
+          "correct": 8,
+          "total": 8,
+          "request_errors": 0,
+          "length_capped": 0
+        }
+      },
+      "lost_correct_cases": [],
+      "gained_correct_cases": [],
+      "identical_texts": 96,
+      "interpretation": "Paired finite-sample regression evidence only. Net score can hide individual losses; inspect both lost and gained cases. No universal quality-equivalence claim."
+    }
+  },
+  "scope": "Initial B4 INT8 quality and host-sampler comparisons. Larger batches, kernels, new stack, workload matrix and other models remain pending."
+}

@@ -1,0 +1,152 @@
+{
+  "actual_tool": {
+    "exit_code": 1,
+    "kind": "tool_session",
+    "session_id": 77722,
+    "terminal_chunk": "5f79e2"
+  },
+  "actual_tool_exit_observed": true,
+  "child_exit_code": 1,
+  "complete_error_record_saved": true,
+  "current_active_heavy_services": [],
+  "diagnostic_import_passed": false,
+  "exception": {
+    "complete": true,
+    "errno_inferred": false,
+    "nodes": [
+      {
+        "cause": null,
+        "context": null,
+        "errno": null,
+        "errno_obtained": false,
+        "errno_present": false,
+        "message": "libcusparseLt.so.0: failed to map segment from shared object",
+        "suppress_context": false,
+        "traceback": "Traceback (most recent call last):\n  File \"/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_pv_sdk_import_diagnostic_v1.py\", line 176, in execute_import\n  File \"/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py\", line 416, in <module>\nbuiltins.ImportError: libcusparseLt.so.0: failed to map segment from shared object\n",
+        "traceback_frames": [
+          {
+            "file": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_pv_sdk_import_diagnostic_v1.py",
+            "function": "execute_import",
+            "line": 176
+          },
+          {
+            "file": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/torch/__init__.py",
+            "function": "<module>",
+            "line": 416
+          }
+        ],
+        "type": "builtins.ImportError"
+      }
+    ],
+    "root": 0,
+    "root_cause_determined": false,
+    "traceback_source_lines_included": false
+  },
+  "failure_stage": "torch_import",
+  "full_model_qualified": false,
+  "live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-r1-root-actual-live-20261112-v1.json",
+    "sha256": "3b547acd9653752c6faa773b684678fd94066773d8e2c9003769d3ff407a6d20"
+  },
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "mapping_failure_root_cause_proven": false,
+  "model_executed": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T01:00:54.355841+00:00",
+  "observed_memory_kB": [
+    {
+      "Threads": 1,
+      "VmPeak": 315360,
+      "VmRSS": 150300,
+      "VmSize": 159176,
+      "label": "before_import"
+    },
+    {
+      "Threads": 1,
+      "VmPeak": 1699632,
+      "VmRSS": 201400,
+      "VmSize": 362644,
+      "label": "after_failure"
+    }
+  ],
+  "original_lock_observed_free": true,
+  "original_resource_limits_preserved": true,
+  "output_root": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112",
+  "owned_process_groups_empty": true,
+  "owners": [
+    {
+      "argv": [
+        "/home/ubuntu/venvs/model_reference_2026/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_minicpm5_pv_sdk_import_diagnostic_v1.py",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-r1-spec-20261112-v1.json",
+        "--spec-sha256",
+        "f2881cc3512cda838542c84bbda284451c7d5c08b400a84854edf072cba1a9be",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-r1-review-20261112-v1.json",
+        "--review-sha256",
+        "58308b10906498f4a77038db869773484bb97ffb36a424a1eb926c59bd4bd23b"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 2649089,
+      "ppid": 2480035,
+      "start_ticks": "422519213"
+    },
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_pv_sdk_import_diagnostic_worker_v1.py",
+        "--admission",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/admission.json",
+        "--admission-sha256",
+        "7168b0121ca200d4997a96433822583877088d518b8e61fb5b7235e4fff5c8b4",
+        "--phase",
+        "1"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 2657133,
+      "ppid": 2649089,
+      "start_ticks": "422549718"
+    }
+  ],
+  "owners_gone": true,
+  "raw_capture_bytes_read": 0,
+  "receipts": {
+    "admission.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/admission.json",
+      "sha256": "7168b0121ca200d4997a96433822583877088d518b8e61fb5b7235e4fff5c8b4"
+    },
+    "phase-1-exit.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/phase-1-exit.json",
+      "sha256": "1fed7eafe03e64dcf0cd026da6296f4128a1addd7c6d2386536847d6f772c4d0"
+    },
+    "phase-1-owner.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/phase-1-owner.json",
+      "sha256": "cae9acbf6202d4bb00edd7fe75e733a0ce9e7aef10407d03b50a5220f9fc1268"
+    },
+    "phase-1-summary.json": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-fixed-input-pv-sdk-import-r1-20261112/phase-1-summary.json",
+      "sha256": "837a686029df5ba2d3932ca2ca17ab18bcd1a6b5eda3f6deeb1834df2c7123e6"
+    }
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-r1-review-20261112-v1.json",
+    "sha256": "58308b10906498f4a77038db869773484bb97ffb36a424a1eb926c59bd4bd23b"
+  },
+  "reviewer": "/root",
+  "schema": "minicpm5_sdk_import_root_actual_exit_v1",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-import-r1-spec-20261112-v1.json",
+    "sha256": "f2881cc3512cda838542c84bbda284451c7d5c08b400a84854edf072cba1a9be"
+  },
+  "summary_independently_checked": true,
+  "two_actual_systemctl_observations": [
+    "at-spi-dbus-bus.service               loaded active     running      Accessibility services bus\ndbus.service                          loaded active     running      D-Bus User Message Bus\nxiaogou-remote-488a1df069f4-6.service loaded activating auto-restart Xiaogou remote Claude CLI agent\nxiaogou-remote-6.service              loaded active     running      Xiaogou remote Claude CLI agent\n",
+    "at-spi-dbus-bus.service               loaded active     running      Accessibility services bus\ndbus.service                          loaded active     running      D-Bus User Message Bus\nxiaogou-remote-488a1df069f4-6.service loaded activating auto-restart Xiaogou remote Claude CLI agent\nxiaogou-remote-6.service              loaded active     running      Xiaogou remote Claude CLI agent\n"
+  ]
+}
