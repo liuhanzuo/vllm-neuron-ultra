@@ -1,0 +1,100 @@
+{
+  "schema": "qwen35_package_serial_runtime_independent_source_review_v1",
+  "reviewer": "/root/mini_formal_native_review_20261112",
+  "observed_at": "2026-11-12T18:55:10Z",
+  "source_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v1/source_delivery.json",
+    "sha256": "0cfa28a77ea72d946dc200faf85e343f36b8b79f324c316eb80dd9c28bdc1988"
+  },
+  "source_only": true,
+  "source_only_accepted": false,
+  "passed": false,
+  "blockers": [
+    {
+      "id": "readiness_delayed_supervisor_log",
+      "severity": "blocking_source_issue",
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v1/readiness.py",
+      "line": 86,
+      "trigger": "EngineCore has emitted its load/warmup completion and /health returns 200, while the supervisor has not yet forwarded that PIPE record into phase-server.log.",
+      "behavior": "completed_engine_line raises ValueError for zero matching lines; capture and plain readiness propagate it. Phase.__enter__ immediately cleans up instead of remaining not ready under its original deadline.",
+      "source_chain": [
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v1/service.py",
+          "function": "supervise",
+          "evidence": "subprocess stdout PIPE is read with selector and asynchronously forwarded with os.write(1, block)"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v1/readiness.py",
+          "function": "api_ready",
+          "lines": [
+            121,
+            123,
+            135,
+            139
+          ],
+          "evidence": "Successful health is followed directly by completion-log validation"
+        },
+        {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v1/adapter.py",
+          "function": "Phase.__enter__",
+          "evidence": "Exceptions from wait_until(self.api_ready) call self.finish() and are re-raised"
+        }
+      ],
+      "mock": {
+        "source": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_package_readiness_delayed_log_independent_v1.py",
+          "sha256": "c1bd1c325027bfc5c4d88324436f4c683881ffc1ccac40bd058bba963fb482a9"
+        },
+        "tool_chunk": "85bbc9",
+        "exit_code": 0,
+        "first_observation": "ValueError: unique same-PID completed EngineCore load/warmup log required",
+        "later_observation": "Same mock PID and log produce valid load_completion proof after append",
+        "actual_api_or_supervisor_started": false
+      },
+      "required_change": "In a new successor, return not-ready only when no complete load marker has reached the log; propagate through capture/plain api_ready before writing startup proof; continue within existing startup/outer deadlines. Preserve one exact same-PID marker; reject wrong-PID/duplicate markers, identity/file errors and every original environment/socket/cgroup requirement.",
+      "root_and_author_notified": true,
+      "author_acknowledged": true
+    }
+  ],
+  "verified": {
+    "delivered_files": 19,
+    "input_source_metadata_pins": 117,
+    "full_frozen_science_delivery_sha256": "020b4032a594a2a9dddee0e530e8b596456529540b4ed32937de49f9473e1b0d",
+    "exact_preserved_ast_blocks": 33,
+    "hash_ast_check_tool": {
+      "chunk": "d5bc81",
+      "exit_code": 0
+    },
+    "author_45_source_mock_suite": {
+      "repeated_by_this_review": false,
+      "result_authenticated_by_delivery": true,
+      "session_id": 41351,
+      "terminal_chunk": "740d0f",
+      "exit_code": 0
+    }
+  },
+  "reviewed_paths": {
+    "stage_wiring": "STAGES has 25 exact stages; 21 actual Phase services plus three metadata gates execute serially. Coordinator records 24 only; external root owns stage25. Prefix/no-restart checks cover leaves and API phases.",
+    "original_science": "Frozen full_validation_v2 bodies remain unchanged and pinned. Both capture arms and replay/13control gates precede quality; both quality arms precede measured HTTP. The 203 raw-vector result is saved and checked; cold/long/request-slot gates remain original.",
+    "readiness": "Pinned source supports EngineCore_DP0 prefix, VLLM::EngineCore title and UniProcExecutor load ordering. Actual API listener, complete initial environment/argv, direct worker parent/start/cgroup and same-PID load evidence are required. Plain quality/HTTP have no capture hook. The delayed-log race blocks v1 acceptance.",
+    "compile_and_load": "All four package paths are fresh/absent, including independent cache/workdir. Only actual build child can compile. All six environment fields used by graph identity match build/load. Twelve graph.neff files and loaded routes are required. Existing artifacts are fully hash checked, with no fallback compilation. Build requires real wait and pre-cleanup drained group before immutable stat seal.",
+    "budgets": "Six disjoint roots, root-reviewed budget mandatory before original lock. Original 2 GiB science classes retained with five explicit extra classes. Every resources call reserves all unused approved budget plus headroom/floors. Logical/allocated file caps, blocks/entries, exact view-link source identities and post-build immutable identities retained.",
+    "races": "Only known JSON publication and declared TMPDIR disappearance receive finite retries; unknown compiler-tree changes fail closed. Periodic monitoring is not a hard filesystem quota.",
+    "lifecycle": "All 33 claimed history/descriptor/monitor/Service/supervise/Popen.wait/cleanup ASTs independently match original v12. Actual owner/release ACK, InvocationID, systemd terminal and recursive drain remain; build pre-cleanup drain is added.",
+    "external_audit": "Stage25 requires an independent admitted/exclusive guard, distinct actual observer, real outer tool session exit0, outer gone, all21 phase child waits/service terminals/drain, all24 receipts, original saved science gates, complete History physical pair, source/input/build identities and stable six-tree storage. It retains full_model_qualified=false and no automatic best promotion."
+  },
+  "remaining_native_questions": [
+    "Actual capture/plain readiness, fresh compilation and full science require a future admitted run after the source fix.",
+    "Reviewed capacity/headroom are finite trial limits; this review does not establish compile peak storage or predict completion."
+  ],
+  "frozen_sources_modified": false,
+  "current_history_read": false,
+  "current_run_bound": false,
+  "current_proc_read": false,
+  "payloads_read": false,
+  "native_imported": false,
+  "compiler_executed": false,
+  "lock_acquired": false,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}
