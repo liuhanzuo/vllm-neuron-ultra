@@ -1,0 +1,17 @@
+.
+Compiler status PASS
+Neuron NKI - Kernel call: qwen35_conv_identity_dma(cache = Tensor(shape: (384, 128), dtype: bfloat16))
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 422, in <module>
+    if __name__ == '__main__': raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 419, in main
+    return (supervisor if args.mode == 'supervisor' else layout)(reference(dict(path=args.binding,sha256=args.binding_sha256)))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 286, in layout
+    report = run_diagnostic(work, guard=guard, save_report=save, record_artifact=artifact)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_leaf_v1.py", line 55, in run_diagnostic
+    hlo_proof=protocol.identity_hlo_proof(protocol.checked(hlo_ref,16*2**20))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_protocol_v1.py", line 90, in identity_hlo_proof
+    require(len(configs)==1,'One complete NKI backend config in identity HLO')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: One complete NKI backend config in identity HLO

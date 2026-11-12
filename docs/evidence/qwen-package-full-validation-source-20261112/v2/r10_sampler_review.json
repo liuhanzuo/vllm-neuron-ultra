@@ -1,0 +1,97 @@
+{
+  "scope": "Read-only metadata review of the qualified research sampler; no packet payload/native replay in this source preparation",
+  "refs": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-qualified-selection-20261112-v1.json": {
+      "bytes": 4025,
+      "sha256": "1411e083e58e36edc9d6e0071bacb4f1c24352e5ab39a5cab41dc917df572057"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-root-actual-exit-20261112-v1.json": {
+      "bytes": 360548,
+      "sha256": "424791589ba1cf6c1d4455ad18e08608b8baf05527dedc482233fba0058a73c2"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r10-20261112-spec-v12.json": {
+      "bytes": 8804235,
+      "sha256": "86a4c46dafcd3c16c74101caef26604af8e4b4041bcc3c6406faeab60d8d433f"
+    },
+    "/mnt/nvme/neuron-work/qwen35-sampler-pair-r10-v12-20261112/sampler-controls.json": {
+      "bytes": 9280,
+      "sha256": "8219e3a549cf49cbd94b1a6e682b5d83509d61cc4660e4dac7491d632cfddf81"
+    },
+    "/mnt/nvme/neuron-work/qwen35-sampler-pair-r10-v12-20261112/baseline/sampler-replay.json": {
+      "bytes": 19198,
+      "sha256": "47374439a0a0ebfb2178c58d1640dd66f9a99c5436145633384a38c2fca33625"
+    },
+    "/mnt/nvme/neuron-work/qwen35-sampler-pair-r10-v12-20261112/baseline/capture/packets/capture-receipt.json": {
+      "bytes": 6466,
+      "sha256": "92e93758e00625da445add06d1d88b3769ebed9e20f1e3be4a13b6b93ebde78c"
+    },
+    "/mnt/nvme/neuron-work/qwen35-sampler-pair-r10-v12-20261112/candidate/sampler-replay.json": {
+      "bytes": 19425,
+      "sha256": "7f25face097a372bfc0973e11d12d9a4b6e39a9dab4a14356146c46045bacf36"
+    },
+    "/mnt/nvme/neuron-work/qwen35-sampler-pair-r10-v12-20261112/candidate/capture/packets/capture-receipt.json": {
+      "bytes": 6467,
+      "sha256": "7f69c0478c75fe0e0168c469ba313dde8b469ab24c5714d795ec44df56959128"
+    }
+  },
+  "science_sources_joined_to_actual_r10_spec": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_capture_v1.py": "76a88edea1613d7847550a744f054f21b21a0ecdfc4d16217c8154b847ef39ec",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_replay_v1.py": "6eae6c039f851dd84ddf86c34e6e27c3b4a985dbd0167c3c955056f27fa70413",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_bounded_operation_v1.py": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_worker_v1.py": "2b0efa44a66078c49e358b3975299db4cbe6c7e0d4d66503cd4d3834b5a08ee2",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_instance_v1.py": "834dfdbc0b63a5f713b609128447905170a3c17d63fb2db106008bab85307314",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_leaves_v2.py": "efdca076af1eafbc423f0b23f3c5604204efc84c2b3ee7f9d6d200809d160db7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py": "c46775d7a046a6351db7576e86c64456ea8e8bc5edf22b119977e44462430b13",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_driver_v3.py": "cbfb11f5e47e79d5a5b793b96a226ba6ec079036d28fb07dbea0a63da686e30f"
+  },
+  "actual_research_arms": {
+    "baseline": {
+      "packets": 32,
+      "rows": 80,
+      "fast_path_rows": 77,
+      "counts": {
+        "1": 16,
+        "2": 0,
+        "3": 0,
+        "4": 16
+      },
+      "returncode": 0,
+      "actual_child_returncode": 0,
+      "max_total_variation": 6.705522537231445e-08,
+      "max_probability_error": 1.1920928955078125e-07
+    },
+    "candidate": {
+      "packets": 32,
+      "rows": 80,
+      "fast_path_rows": 78,
+      "counts": {
+        "1": 16,
+        "2": 0,
+        "3": 0,
+        "4": 16
+      },
+      "returncode": 0,
+      "actual_child_returncode": 0,
+      "max_total_variation": 7.450580596923828e-08,
+      "max_probability_error": 1.1920928955078125e-07
+    }
+  },
+  "actual_research_controls": [
+    "partial_explicit_generators",
+    "all_explicit_generators",
+    "k_absent",
+    "k_zero",
+    "k_above64",
+    "non_float32",
+    "invalid_p",
+    "processed_logits",
+    "processed_logprobs",
+    "excessive_kth_ties",
+    "nonfinite_max_or_kth",
+    "cdf_near_boundary",
+    "cdf_boundary_tie"
+  ],
+  "actual_research_controls_returncode": 0,
+  "package_results_inherited": false,
+  "package_qualified": false
+}

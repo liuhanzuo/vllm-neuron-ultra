@@ -1,0 +1,282 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/validate_real_logits.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/numeric.py
+@@ -11,7 +11,7 @@
+ import torch
+ from transformers import AutoModelForCausalLM, AutoTokenizer
+ 
+-ROOT=Path(__file__).resolve().parent
++ROOT=Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ 
+ def fixtures(tokenizer):
+     texts=[
+@@ -72,65 +72,15 @@
+         'reference_top1':int(ref.argmax()),'neuron_top1':int(got.argmax())}
+ 
+ def neuron(args):
+-    import server_with_bias_fix
+-    from granite_adapter import NeuronGraniteForCausalLM as cls
+-    if args.adapter=='granite_flash':
+-        from granite_flash_adapter import NeuronGraniteFlashForCausalLM as cls
+-    if args.adapter=='qwen35_text':
+-        from qwen35_vllm_registration import install
+-        install()
+-        from qwen35_neuron_adapter import NeuronQwen35ForCausalLM as cls
+-    if args.adapter=='lfm3':
+-        from lfm3_vllm_registration import install
+-        install()
+-        from lfm3_neuron_adapter import NeuronLfm3ForCausalLM as cls
+-    if args.adapter=='gemma4_text':
+-        from gemma4_vllm_registration import install
+-        install()
+-        from gemma4_neuron_adapter import NeuronGemma4ForCausalLM as cls
+-    if args.adapter=='ministral3_text':
+-        from ministral3_vllm_registration import install
+-        install()
+-        from ministral3_neuron_adapter import NeuronMinistral3ForCausalLM as cls
+-    if args.adapter=='smollm3_text':
+-        from smollm3_vllm_registration import install
+-        install()
+-        from smollm3_neuron_adapter import NeuronSmolLM3ForCausalLM as cls
+-    if args.adapter=='phi4_text':
+-        from phi4_vllm_registration import install
+-        install()
+-        from phi4_neuron_adapter import NeuronPhi4ForCausalLM as cls
+-    if args.adapter=='olmo3_text':
+-        from olmo3_vllm_registration import install
+-        install()
+-        from olmo3_neuron_adapter import NeuronOlmo3ForCausalLM as cls
+-    if args.adapter=='nanbeige42_text':
+-        from nanbeige42_vllm_registration import install
+-        install()
+-        from nanbeige42_neuron_adapter import NeuronNanbeige42ForCausalLM as cls
+-    if args.adapter=='rnj15_text':
+-        from rnj15_vllm_registration import install
+-        install()
+-        from rnj15_neuron_adapter import NeuronRnj15ForCausalLM as cls
+-    if args.adapter=='nemotron9b_text':
+-        from nemotron9b_vllm_registration import install
+-        install()
+-        from nemotron9b_neuron_adapter import NeuronNemotron9BForCausalLM as cls
+-    if args.adapter=='qwen3_native':
+-        from neuronx_distributed_inference.models.qwen3.modeling_qwen3 import NeuronQwen3ForCausalLM as cls
+-    if args.adapter=='deepseek_qwen3_yarn':
+-        from deepseek_qwen3_vllm_registration import install
+-        install()
+-        from deepseek_qwen3_neuron_adapter import NeuronDeepSeekQwen3ForCausalLM as cls
++    from .runtime import load_admitted
+     from vllm_neuron.worker.neuronx_distributed_model_loader import NeuronModelBase
+     from types import SimpleNamespace
+     torch.set_num_threads(1)
+     evidence=torch.load(args.reference,weights_only=True)
+-    cfg=cls.get_config_cls().load(args.artifacts)
++    model=load_admitted(args.model, args.artifacts)
++    cfg=model.config
+     batch=cfg.neuron_config.batch_size
+     assert batch>=4 and cfg.neuron_config.on_device_sampling_config is None
+-    model=cls(args.model,config=cfg)
+-    model.load(args.artifacts)
+     # Contiguous NxDI caches require canonical slot order at full batch size.
+     # Use the exact vLLM-Neuron serving reorder/restore implementation; raw
+     # NxDI forward does not perform it for a full batch. The initial deliberately
+@@ -187,4 +137,4 @@
+     args=ap.parse_args()
+     (reference if args.phase=='reference' else neuron)(args)
+ 
+-if __name__=='__main__':main()
++if __name__=='__main__':raise SystemExit('Use entry.run_model_stage with the root execution guard')
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/validate_qwen35_long_decode.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/long.py
+@@ -10,9 +10,9 @@
+ import time
+ from pathlib import Path
+ import torch
+-from validate_real_logits import metrics
++from .numeric import metrics
+ 
+-ROOT = Path(__file__).resolve().parent
++ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ DEST = ROOT/'qwen35-baseline'
+ CRITERIA = {'cosine_min':.995,'kl_max_nats':.02,'max_abs_error_max':2.,
+             'argmax_match_fraction_min':.9,'all_reference_margins_gt_0.5_must_match':True}
+@@ -79,20 +79,19 @@
+     (DEST/'long-decode-hf-reference.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
+ 
+ 
+-def neuron(case_path=None, result_dir=None):
++def neuron(case_path, result_dir):
+     from types import SimpleNamespace
+-    from qwen35_vllm_registration import install
+-    install()
+-    from qwen35_neuron_adapter import NeuronQwen35ForCausalLM as cls
++    from .runtime import load_admitted
+     from vllm_neuron.worker.neuronx_distributed_model_loader import NeuronModelBase
+     torch.set_num_threads(1)
+-    case=json.loads(Path(case_path or ROOT/'qwen35-2b-baseline.json').read_text())
+-    result_dir=Path(result_dir or DEST)
++    case=json.loads(Path(case_path).read_text())
++    result_dir=Path(result_dir)
+     result_dir.mkdir(exist_ok=True)
+     evidence=torch.load(DEST/'long-decode-hf-reference.pt',weights_only=True)
+-    cfg=cls.get_config_cls().load(case['artifact'])
++    model=load_admitted(case['model_path'], case['artifact'])
++    cfg=model.config
+     assert cfg.neuron_config.batch_size==4 and cfg.neuron_config.max_length>=LENGTH
+-    model=cls(case['model_path'],config=cfg);model.load(case['artifact']);model.reset()
++    model.reset()
+     order=SimpleNamespace(is_reorder_needed=True,_sort_inputs=NeuronModelBase._sort_inputs)
+     def forward(ids,positions,slots,prefill=False):
+         mask=torch.ones_like(ids) if prefill else (torch.arange(int(positions.max())+1)[None,:]<=positions).long()
+@@ -151,5 +150,4 @@
+ 
+ 
+ if __name__=='__main__':
+-    ap=argparse.ArgumentParser();ap.add_argument('phase',choices=['reference','neuron']);args=ap.parse_args()
+-    (reference if args.phase=='reference' else neuron)()
++    raise SystemExit('Use entry.run_model_stage with the root execution guard')
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/diagnose_qwen35_state_reset_cold_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/cold.py
+@@ -1,4 +1,4 @@
+-"""Observe the unchanged Qwen artifact on cold state across every graph bucket.
++"""Observe newly compiled package Qwen graphs on cold state across every bucket.
+ 
+ This is diagnostic evidence after the failed smoke test, not a speed benchmark.
+ """
+@@ -7,7 +7,7 @@
+ from pathlib import Path
+ from types import SimpleNamespace
+ 
+-ROOT = Path(__file__).resolve().parent
++ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ DEST = ROOT / 'qwen35-state-reset-full-v1'
+ PREFIXES = (32, 128, 256, 512, 1024, 2048, 2052)
+ CONTEXT_BUCKETS = (128, 256, 512, 1024, 2048, 4096)
+@@ -22,20 +22,16 @@
+     raise ValueError(f'Input length {length} exceeds largest bucket {buckets[-1]}')
+ 
+ 
+-def main():
++def main(directory):
++    DEST = Path(directory)
+     import torch
+-    import server_with_bias_fix
+-    from qwen35_vllm_registration import install
+-    install()
+-    from qwen35_neuron_adapter import NeuronQwen35ForCausalLM as cls
++    from .runtime import load_admitted
+     from vllm_neuron.worker.neuronx_distributed_model_loader import NeuronModelBase
+-    from validate_real_logits import metrics
+-    from validate_qwen35_long_decode import passed, CRITERIA as original_criteria
++    from .numeric import metrics
++    from .long import passed, CRITERIA as original_criteria
+ 
+-    from frontend_split_correction_v2 import install as correct_split
+-    correct_split('qwen35')
+-    from qwen35_split_state_checks_v4 import raw_zero_states, graph_routes
+-    from qwen35_state_inplace_reset_v1 import clear_states, verify_cold_reproduction
++    from .state_observation import raw_zero_states, graph_routes, verify_cold_reproduction
++    from vllm_neuron.models.qwen35.state import clear_states
+     torch.set_num_threads(1)
+     case = json.loads((DEST / 'case.json').read_text())
+     reference_path = ROOT / 'qwen35-baseline/long-decode-hf-reference.pt'
+@@ -43,12 +39,11 @@
+     assert json.loads(reference_path.with_suffix('.json').read_text())['incremental_crosscheck_passed']
+     for ref in source:
+         assert all(pos in ref['positions'] for n in PREFIXES for pos in (n-1, n, n+1))
+-    cfg = cls.get_config_cls().load(case['artifact'])
++    model = load_admitted(case['model_path'], case['artifact'])
++    cfg = model.config
+     assert cfg.neuron_config.batch_size == 4 and cfg.neuron_config.tp_degree == 2
+     assert not cfg.neuron_config.async_mode and cfg.neuron_config.cast_type == 'config'
+     assert tuple(cfg.neuron_config.context_encoding_buckets) == CONTEXT_BUCKETS
+-    model = cls(case['model_path'], config=cfg)
+-    model.load(case['artifact'])
+     order = SimpleNamespace(is_reorder_needed=True, _sort_inputs=NeuronModelBase._sort_inputs)
+     route = {}
+ 
+@@ -68,7 +63,7 @@
+     output = DEST / 'cold-buckets.json'
+     assert not output.exists(), 'Preserve previous diagnostic evidence'
+     report = dict(complete=False, case=case, criteria=original_criteria, experiments=[],
+-                  scope='Previously compiled v4 tensor_split graphs, original weights and sequence protocol; seven in-place-cleared device-state '
++                  scope='Newly compiled package tensor_split graphs, original weights and sequence protocol; seven in-place-cleared device-state '
+                         'experiments, two native-HF causal streams repeated in slots0/2 and1/3. Prefill and '
+                         'two teacher-forced B4 decode steps, 84 full-vocabulary frames. Covers all six context '
+                         'and six decode bucket routes, with all96 state tensors raw-zero before each prefix. Native-HF full-causal oracle with its existing short '
+@@ -160,4 +155,4 @@
+ 
+ 
+ if __name__ == '__main__':
+-    main()
++    raise SystemExit('Use entry.run_model_stage with the root execution guard')
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/probe_qwen35_state_copy_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/state_copy.py
+@@ -4,9 +4,8 @@
+ from pathlib import Path
+ from types import SimpleNamespace
+ 
+-from qwen35_state_reset_full_protocol_v1 import ROOT, DEST, verify, save, STATE_COPY
+-from qwen35_state_inplace_reset_v1 import binding_metadata, clear_states
+-from run_nanbeige42_stride_recovery_queue import running_heavy_units
++from .runtime import save, read_build_inventory
++from vllm_neuron.models.qwen35.state import binding_metadata, clear_states
+ 
+ 
+ def digest(value):
+@@ -14,17 +13,16 @@
+     return hashlib.sha256(value.detach().cpu().contiguous().view(torch.uint8).numpy().tobytes()).hexdigest()
+ 
+ 
+-def main():
+-    assert set(running_heavy_units()) == {STATE_COPY + '.service', 'trn1-qwen35-state-reset-full-v1-worker.service'}
+-    verify()
++def main(directory, build_inventory):
++    DEST = Path(directory)
+     output = DEST / 'state-copy.json'; assert not output.exists()
+-    report = dict(complete=False, passed=False, patterns=[], source_sha256=verify()['source_sha256'],
++    report = dict(complete=False, passed=False, patterns=[], source_sha256={str(Path(__file__).resolve()): hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+         full_model_qualified=False, performance_measured=False)
+     try:
+         import torch
+         import torch_neuronx
+         torch.set_num_threads(1)
+-        layout = json.loads((ROOT / 'qwen35-split-corrected-full-v4/cold-buckets.json').read_text())['experiments'][0]['initial_raw_zero_states']
++        layout = read_build_inventory(build_inventory)['state_layout']
+         states = [{}, {}]
+         for row in layout:
+             dtype = {'torch.bfloat16': torch.bfloat16, 'torch.float32': torch.float32}[row['dtype']]
+@@ -74,4 +72,4 @@
+         save(output, report)
+ 
+ 
+-if __name__ == '__main__': main()
++if __name__ == '__main__': raise SystemExit('Use entry.run_model_stage with the root execution guard')
+--- qwen35_sampler_full_checks_v1.py
++++ checks.py
+@@ -42,9 +42,8 @@
+     return namespace
+ 
+ 
+-def check_model_metadata(report, phase, validators):
++def check_model_metadata(report, phase, validators, case):
+     require(__debug__, "original validator assertions must remain enabled")
+-    case = expected_case()
+     if phase == "state_copy":
+         validators["check_state_copy"](report)
+     elif phase == "numeric":
+@@ -88,13 +87,13 @@
+             "fresh_execution_proven": False, "full_model_qualified": False}
+ 
+ 
+-def check_quality_pair(reference, candidate, historical, suite, suite_sha256, validators):
++def check_quality_pair(reference, candidate, historical, suite, suite_sha256, validators, case):
+     require(__debug__, "original validator assertions must remain enabled")
+     fixtures = {r["id"]: r for r in suite["cases"]}
+     require(len(fixtures) == 96, "quality suite incomplete")
+     maps = []
+-    for report in (historical, reference, candidate):
+-        require(report["case"] == expected_case() and report["technical_complete"]
++    for report, report_case in ((historical, expected_case()), (reference, case), (candidate, case)):
++        require(report["case"] == report_case and report["technical_complete"]
+                 and report["suite_sha256"] == suite_sha256 and report["protocol"] == suite["protocol"], "quality protocol mismatch")
+         require(report["total"] == report["requested_cases"] == len(report["rows"]) == 96, "quality rows missing")
+         rows = {r["id"]: r for r in report["rows"]}

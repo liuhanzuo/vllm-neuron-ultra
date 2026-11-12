@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 422, in <module>
+    if __name__ == '__main__': raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 419, in main
+    return (supervisor if args.mode == 'supervisor' else layout)(reference(dict(path=args.binding,sha256=args.binding_sha256)))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 243, in supervisor
+    summaries = run_layouts(spec, binding_ref, owner, guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 203, in run_layouts
+    native = capture_layout(entry_argv('layout', binding_ref, work), environment(work), work,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py", line 173, in capture_layout
+    require(code == 0, 'Actual slot leaf failed; no retry or reduced workload')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: Actual slot leaf failed; no retry or reduced workload

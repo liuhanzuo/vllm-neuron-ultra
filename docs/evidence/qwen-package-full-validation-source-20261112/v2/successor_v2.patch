@@ -1,0 +1,521 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v1/runtime.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/runtime.py
+@@ -47,7 +47,7 @@
+ 
+ 
+ def validate_case(case):
+-    fixed = dict(name='qwen35-package-full-v1-20261112', served_name='qwen3.5-2b-text',
++    fixed = dict(name='qwen35-package-full-v2-20261112', served_name='qwen3.5-2b-text',
+         batch=4, tp=2, max_model_len=4096, cpu=True, adapter='qwen35_text',
+         package_schema='vllm-neuron-ultra-qwen35-split-v1',
+         neuron_configuration=configuration())
+@@ -61,7 +61,7 @@
+     paths = []
+     for key, parent in parents.items():
+         path = Path(case[key])
+-        require(path.is_absolute() and path.parent == Path(parent) and path.name.startswith('qwen35-package-full-v1-'),
++        require(path.is_absolute() and path.parent == Path(parent) and path.name.startswith('qwen35-package-full-v2-'),
+                 'Use a separate explicit package path: ' + key)
+         require(not path.is_symlink(), 'Package path cannot alias a research directory')
+         paths.append(path)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v1/entry.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/entry.py
+@@ -14,6 +14,7 @@
+ 
+ MODEL_FILES = {'state_copy': 'state-copy.json', 'numeric': 'real-logits-validation.json',
+                'cold': 'cold-buckets.json', 'long': 'long-decode-validation.json'}
++SAMPLER_STAGES = ('correctness_capture', 'sampler_replay', 'sampler_controls')
+ PAYLOADS = (('numeric', 'real-logits-validation.json.pt', 'real-logits-validation.json', 32),
+             ('cold', 'cold-buckets.pt', 'cold-buckets.json', 84),
+             ('long', 'long-decode-validation.pt', 'long-decode-validation.json', 87))
+@@ -121,8 +122,18 @@
+                 full_model_qualified=False, fresh_execution_proven=False)
+ 
+ 
++def run_sampler_stage(phase, case, output_root, execution_guard, arm=None):
++    from .sampler import run_sampler_stage as run
++    return run(phase, case, output_root, execution_guard, arm)
++
++
+ if __name__ == '__main__':
+     print(json.dumps(dict(entry='Root imports this module and supplies its current execution_guard',
+         calls=['prepare_view(case, guard)', 'build_fresh(case, output, guard)',
+                'run_model_stage(phase, directory, build_inventory, guard)',
+-               'compare_vectors(directory, guard)'], native_execution=False), indent=2))
++               'compare_vectors(directory, guard)',
++               'sampler.run_capture_diagnostic(case, output, guard)',
++               'run_sampler_stage(sampler_replay, case, output_root, guard, arm)',
++               'run_sampler_stage(sampler_controls, case, output_root, guard)',
++               'sampler.check_saved_sampler_gates(case, output_root) before quality/HTTP'],
++        native_execution=False), indent=2))
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v1/http.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/http.py
+@@ -17,6 +17,13 @@
+     check_environment(case)
+     output = Path(output)
+     require(not output.exists(), 'Historical HTTP output reuse forbidden')
++    require(phase in ('smoke', 'quality96', 'initial120', 'workloads'), 'Unknown HTTP stage')
++    require(output.parent.name == ('quality' if phase in ('smoke', 'quality96') else 'http')
++            and output.parent.parent.name in ('baseline', 'candidate'), 'Exact fresh arm/stage output required')
++    from .sampler import check_saved_sampler_gates
++    check_saved_sampler_gates(case, output.parents[2])
++    if phase in ('initial120', 'workloads'):
++        check_saved_quality(case, output.parents[2] / 'baseline', output.parents[2] / 'candidate')
+     if phase == 'smoke':
+         import orchestrate
+         result = orchestrate.quality(case)
+@@ -67,7 +74,7 @@
+             NEURON_COMPILED_ARTIFACTS=case['artifact'],
+             NEURON_COMPILE_CACHE_URL=case['compiler_cache'], BASE_COMPILE_WORK_DIR=case['compiler_workdir'])
+         require(all(env.get(k) == v for k, v in required.items()), 'Package load-only settings changed')
+-        require(not any(k.startswith(('TRN1_QWEN35', 'QWEN35_SAMPLER_')) or k == 'TRN1_CPU_SAMPLER_FAST'
++        require(not any(k.startswith(('TRN1_QWEN35', 'QWEN35_SAMPLER_', 'QWEN35_PACKAGE_CAPTURE_')) or k == 'TRN1_CPU_SAMPLER_FAST'
+                         for k in env), 'Research host/capture hooks cannot enter measured package arms')
+         directory = Path(directories[arm])
+         require(directory.is_absolute() and directory.name == 'http' and directory.parent.name == arm,
+@@ -109,6 +116,10 @@
+     validate_case(case)
+     from .checks import check_quality_pair, original_validators
+     base, cand = Path(baseline), Path(candidate)
++    require(base.name == 'baseline' and cand.name == 'candidate' and base.parent == cand.parent,
++            'One fresh package pair required')
++    from .sampler import check_saved_sampler_gates
++    check_saved_sampler_gates(case, base.parent)
+     suite_path = ROOT / 'quality-suite.json'
+     return check_quality_pair(read(base / 'quality/quality96.json'), read(cand / 'quality/quality96.json'),
+         read(BASE / 'quality96.json'), read(suite_path), hashlib.sha256(suite_path.read_bytes()).hexdigest(),
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v1/case.example.json
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/case.example.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "qwen35-package-full-v1-20261112",
++  "name": "qwen35-package-full-v2-20261112",
+   "served_name": "qwen3.5-2b-text",
+   "batch": 4,
+   "tp": 2,
+@@ -35,8 +35,8 @@
+     ],
+     "token_generation_buckets": null
+   },
+-  "model_path": "/mnt/nvme/models/qwen35-package-full-v1-view-20261112-r1",
+-  "artifact": "/mnt/nvme/neuron-artifacts/qwen35-package-full-v1-20261112-r1",
+-  "compiler_cache": "/mnt/nvme/neuron-work/qwen35-package-full-v1-cache-20261112-r1",
+-  "compiler_workdir": "/mnt/nvme/neuron-work/qwen35-package-full-v1-compiler-20261112-r1"
++  "model_path": "/mnt/nvme/models/qwen35-package-full-v2-view-20261112-r1",
++  "artifact": "/mnt/nvme/neuron-artifacts/qwen35-package-full-v2-20261112-r1",
++  "compiler_cache": "/mnt/nvme/neuron-work/qwen35-package-full-v2-cache-20261112-r1",
++  "compiler_workdir": "/mnt/nvme/neuron-work/qwen35-package-full-v2-compiler-20261112-r1"
+ }
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/capture_worker.py
+@@ -0,0 +1,123 @@
++"""Spawn-importable diagnostic workers observing the package's installed sampler.
++
++Only capture uses these workers. No sampler is replaced here: the unchanged
++package runner already applies NEURON_CPU_SAMPLER_FAST to its own instance.
++"""
++import hashlib
++import json
++import os
++from pathlib import Path
++
++from .runtime import read, require, validate_case
++from .capture_writer import CaptureFileWriter, nvme_destination
++
++EXPORTS = {'BaselineCaptureWorker': 'baseline', 'CandidateCaptureWorker': 'candidate'}
++REFERENCE = 'vllm.v1.sample.ops.topk_topp_sampler.TopKTopPSampler'
++CANDIDATE = 'vllm_neuron.worker.cpu_sampler.BoundedTopKTopPSampler'
++ENV_PREFIX = 'QWEN35_PACKAGE_CAPTURE_'
++
++
++def worker_name(arm):
++    require(arm in EXPORTS.values(), 'Unknown capture arm')
++    return __name__ + '.' + next(k for k, v in EXPORTS.items() if v == arm)
++
++
++def class_name(value):
++    return type(value).__module__ + '.' + type(value).__name__
++
++
++def capture_identity(case, arm, artifact_manifest_sha256):
++    validate_case(case)
++    require(arm in EXPORTS.values() and type(artifact_manifest_sha256) is str
++            and len(artifact_manifest_sha256) == 64, 'Exact package capture identity required')
++    sources = read(Path(__file__).with_name('capture_sources.json'))
++    value = dict(schema='qwen35_package_sampler_capture_v2', arm=arm, phase='correctness_capture',
++        case=case, artifact_manifest_sha256=artifact_manifest_sha256,
++        source_sha256=sources, worker_class=worker_name(arm),
++        operation_class=REFERENCE if arm == 'baseline' else CANDIDATE,
++        reference_class=REFERENCE, observation_enabled=True, timing_eligible=False)
++    value['sha256'] = hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
++    return value
++
++
++def check_environment(environ, arm):
++    require(arm in EXPORTS.values(), 'Unknown capture arm')
++    require(environ.get('NEURON_CPU_SAMPLER_FAST') == ('0' if arm == 'baseline' else '1'),
++            'Capture must observe the actual package sampler arm')
++    require(environ.get('NEURON_QWEN35') == environ.get('NEURON_ON_DEVICE_SAMPLING_DISABLED') == '1'
++            and environ.get('NEURON_QWEN35_ALLOW_COMPILE') == '0', 'Capture requires package load-only CPU sampling')
++    require(not any(k.startswith(('TRN1_QWEN35', 'QWEN35_SAMPLER_'))
++                    or k in ('TRN1_CPU_SAMPLER_FAST', 'TRN1_SAMPLER_DIAGNOSTIC_DIR') for k in environ),
++            'Research sampler activation/capture is forbidden')
++
++
++def attach(runner, arm, observer_factory, environ=None):
++    check_environment(os.environ if environ is None else environ, arm)
++    require(callable(observer_factory), 'Capture observer required')
++    sampler = runner.cpu_sampler
++    operation = sampler.topk_topp_sampler
++    require(not getattr(sampler, '_qwen35_pair_observed', False), 'Duplicate capture attachment')
++    require(class_name(operation) == (REFERENCE if arm == 'baseline' else CANDIDATE),
++            'Runner did not install the actual package operation')
++    reference = getattr(operation, 'reference', operation)
++    require(class_name(reference) == REFERENCE, 'Single original reference fallback required')
++    observer = observer_factory(runner, sampler, arm)
++    observer.install()
++    require(sampler.topk_topp_sampler is operation, 'Observation replaced the package sampler')
++    return dict(arm=arm, phase='correctness_capture', observation_enabled=True,
++        debug_behavior='unchanged', operator_replaced=arm == 'candidate',
++        operator_installed_by_package=True, observer_only_attachment=True,
++        operation_class=class_name(operation), reference_class=class_name(reference), observer=observer)
++
++
++def make_observer(runner, sampler, arm):
++    from qwen35_sampler_native_capture_v1 import CaptureObserver, NativeSnapshotter
++    return CaptureObserver(runner, sampler, arm,
++        CaptureFileWriter(os.environ[ENV_PREFIX + 'ROOT'], arm), NativeSnapshotter())
++
++
++def record_attachment(worker, runner, attachment):
++    identity = json.loads(os.environ[ENV_PREFIX + 'IDENTITY'])
++    expected = capture_identity(identity['case'], attachment['arm'], identity['artifact_manifest_sha256'])
++    require(identity == expected, 'Capture identity/source set changed')
++    for name, digest in identity['source_sha256'].items():
++        source = Path(name)
++        require(source.is_absolute() and source.stat().st_size < 4 * 1024**2, 'Invalid capture source')
++        require(hashlib.sha256(source.read_bytes()).hexdigest() == digest, 'Capture source changed: ' + name)
++    case = identity['case']
++    require(os.environ.get('NEURON_COMPILED_ARTIFACTS') == case['artifact'], 'Capture artifact environment mismatch')
++    from vllm_neuron.models.qwen35.identity import ARTIFACT_MANIFEST
++    require(hashlib.sha256((Path(case['artifact']) / ARTIFACT_MANIFEST).read_bytes()).hexdigest()
++            == identity['artifact_manifest_sha256'], 'Capture is not bound to the new package artifact')
++    path = nvme_destination(os.environ[ENV_PREFIX + 'RECEIPT'])
++    packets = nvme_destination(os.environ[ENV_PREFIX + 'ROOT'])
++    require(path == packets.parent / 'worker-attachment.json' and packets.name == 'packets',
++            'Exact fresh capture output binding required')
++    value = {k: v for k, v in attachment.items() if k != 'observer'}
++    value.update(pid=os.getpid(), worker_class=type(worker).__module__ + '.' + type(worker).__qualname__,
++        host_identity_sha256=identity['sha256'], case=case,
++        artifact_manifest_sha256=identity['artifact_manifest_sha256'], startup_only=True,
++        full_model_qualified=False, timing_eligible=False)
++    require(value['worker_class'] == identity['worker_class'], 'Actual capture worker differs')
++    with path.open('x') as stream:
++        json.dump(value, stream, indent=2, allow_nan=False); stream.write('\n')
++
++
++def worker_class(base_worker, arm, observer_factory=make_observer, on_attach=record_attachment):
++    class PackageCaptureWorker(base_worker):
++        def get_neuronx_distributed_model_runner(self, vllm_config, device):
++            runner = super().get_neuronx_distributed_model_runner(vllm_config, device)
++            self.qwen35_package_capture_attachment = attach(runner, arm, observer_factory)
++            on_attach(self, runner, self.qwen35_package_capture_attachment)
++            return runner
++    return PackageCaptureWorker
++
++
++def __getattr__(name):
++    if name not in EXPORTS:
++        raise AttributeError(name)
++    from vllm_neuron.worker.neuron_worker import NeuronWorker
++    cls = worker_class(NeuronWorker, EXPORTS[name])
++    cls.__name__, cls.__qualname__, cls.__module__ = name, name, __name__
++    globals()[name] = cls
++    return cls
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/capture_writer.py
+@@ -0,0 +1,61 @@
++"""Original bounded capture writer; no native imports or files on import."""
++import hashlib
++import json
++import os
++from pathlib import Path
++from qwen35_sampler_pair_protocol_v1 import MAX_CAPTURE_BYTES_PER_ARM, MAX_PACKET_BYTES, require
++
++
++def nvme_destination(path):
++    path = Path(path)
++    require(path.is_absolute() and path.resolve() == path, "absolute nonsymlink output required")
++    require(Path("/mnt/nvme/neuron-work") in path.parents, "sampler outputs must use NVMe neuron-work")
++    return path
++
++
++def atomic_metadata(path, value):
++    temporary = path.with_suffix(path.suffix + ".tmp")
++    with temporary.open("x") as stream:
++        json.dump(value, stream, indent=2, allow_nan=False)
++        stream.write("\n")
++        stream.flush()
++        os.fsync(stream.fileno())
++    temporary.replace(path)
++
++
++class CaptureFileWriter:
++    """Only a supplied fresh owned directory; never picks or admits a run."""
++    def __init__(self, directory, arm):
++        self.directory = nvme_destination(directory)
++        require(self.directory.is_dir() and not list(self.directory.iterdir()), "capture directory must already exist and be fresh")
++        self.arm, self.rows, self.total = arm, [], 0
++        with (self.directory / "writer-owner.json").open("x") as stream:
++            json.dump({"pid": os.getpid(), "arm": arm, "phase": "correctness_capture"}, stream)
++
++    def __call__(self, packet):
++        from qwen35_sampler_native_capture_v1 import parse_packet
++        require(type(packet) is bytes and len(packet) <= MAX_PACKET_BYTES and len(self.rows) < 64, "capture writer cap exceeded")
++        require(self.total + len(packet) <= MAX_CAPTURE_BYTES_PER_ARM, "capture writer total cap exceeded")
++        header, _ = parse_packet(packet)
++        require(header["arm"] == self.arm, "capture writer arm changed")
++        shape = header["processed_logits"]["shape"]
++        require(len(shape) == 2 and shape[0] in range(1, 5) and shape[1] == 248320, "capture geometry changed")
++        require(sum(row["rows"] == shape[0] for row in self.rows) < 16, "row-count capture cap exceeded")
++        name = "capture-%04d.bin" % len(self.rows)
++        with (self.directory / name).open("xb") as stream:
++            written = stream.write(packet)
++            require(written == len(packet), "short packet write")
++            stream.flush()
++            os.fsync(stream.fileno())
++        digest = hashlib.sha256(packet).hexdigest()
++        self.total += len(packet)
++        self.rows.append({"file": name, "rows": shape[0], "bytes": len(packet), "sha256": digest,
++                          "call_id": header["call_id"]})
++        counts = {str(n): sum(row["rows"] == n for row in self.rows) for n in range(1, 5)}
++        captured_rows = sum(row["rows"] for row in self.rows)
++        atomic_metadata(self.directory / "capture-receipt.json", {
++            "arm": self.arm, "phase": "correctness_capture", "packets": len(self.rows),
++            "captured_calls_by_rows": counts, "captured_rows": captured_rows,
++            "processed_logit_bytes": captured_rows * 248320 * 4, "total_packet_bytes": self.total,
++            "files": self.rows, "timing_eligible": False, "full_model_qualified": False})
++        return {"bytes": len(packet), "sha256": digest}
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/sampler.py
+@@ -0,0 +1,175 @@
++"""Mandatory original sampler gates before package quality and timed HTTP.
++
++Actual worker/process authentication and post-exit draining remain with the
++existing root. Metadata checks cannot turn mocks into fresh execution proof.
++"""
++import hashlib
++import json
++from pathlib import Path
++
++from .runtime import (validate_case, require, require_execution, read, write_new,
++                      check_environment, server_arguments)
++from .capture_worker import capture_identity, worker_name, ENV_PREFIX, REFERENCE, CANDIDATE
++from qwen35_sampler_pair_protocol_v1 import check_capture_accounting, SAMPLER_GATES
++
++
++def capture_server_arguments(case, arm):
++    return server_arguments(case) + ['--worker-cls', worker_name(arm)]
++
++
++def capture_environment(case, arm, directory, artifact_manifest_sha256):
++    """Additional exact diagnostic bindings for the original root's clean env."""
++    identity = capture_identity(case, arm, artifact_manifest_sha256)
++    directory = Path(directory)
++    require(directory.is_absolute() and directory.name == 'capture' and directory.parent.name == arm,
++            'Exact per-arm capture directory required')
++    return {ENV_PREFIX + 'ROOT': str(directory / 'packets'),
++            ENV_PREFIX + 'RECEIPT': str(directory / 'worker-attachment.json'),
++            ENV_PREFIX + 'IDENTITY': json.dumps(identity, sort_keys=True)}
++
++
++def check_capture_attachment(attachment, live, case, arm, directory, manifest_sha256):
++    """Call on the root's actual ready API/worker observation before diagnostics."""
++    identity = capture_identity(case, arm, manifest_sha256)
++    require(live['observation_kind'] == 'live_ready' and live['server_active'] is True
++            and live['ready'] is True and live['exit_observed'] is False, 'Live capture server required')
++    require(live['proc_owner_matches'] is True and live['invocation_matches'] is True
++            and live['worker_in_server_cgroup'] is True, 'Root must observe actual capture owner')
++    require(attachment['pid'] == live['worker_owner']['pid']
++            and type(live['worker_owner']['start_ticks']) is int and live['worker_owner']['start_ticks'] > 0,
++            'Actual capture worker PID/start identity mismatch')
++    proof = live['startup_config_proof']
++    require(proof['actual_api_argv'] == live['api_process_owner']['argv'] == capture_server_arguments(case, arm),
++            'Actual package capture worker argv changed')
++    env = proof['actual_api_initial_environment']
++    require(all(env.get(k) == v for k, v in capture_environment(case, arm, directory, manifest_sha256).items()),
++            'Actual capture environment binding changed')
++    from .capture_worker import check_environment as check_capture_environment
++    check_capture_environment(env, arm)
++    require(env.get('NEURON_COMPILED_ARTIFACTS') == case['artifact'], 'Live capture artifact changed')
++    for key in ('arm', 'phase', 'case', 'operation_class', 'reference_class', 'worker_class',
++                'artifact_manifest_sha256', 'observation_enabled', 'timing_eligible'):
++        require(attachment[key] == identity[key], 'Actual capture attachment mismatch: ' + key)
++    require(attachment['host_identity_sha256'] == identity['sha256']
++            and attachment['operator_installed_by_package'] is True
++            and attachment['observer_only_attachment'] is True and attachment['debug_behavior'] == 'unchanged',
++            'Capture changed the package operation or DEBUG behavior')
++    return dict(attachment_consistent=True, root_observation_authentication_required=True, timing_eligible=False)
++
++
++def run_capture_diagnostic(case, output, execution_guard):
++    require_execution(execution_guard)
++    validate_case(case); check_environment(case)
++    require(not Path(output).exists(), 'Fresh diagnostic output required')
++    from benchmark_workloads import inputs
++    from bench_http import run_round
++    prompt = inputs(case)[128]
++    sampling = {"temperature": .7, "top_p": .9, "top_k": 40}
++    # Original finite five requests: no seed or retry; B1/B4 quota is checked later.
++    waves = [run_round(8010, case["served_name"], [prompt] * n, 32, False, **sampling) for n in (1, 4)]
++    rows = [row for wave in waves for row in wave["requests"]]
++    require(len(rows) == 5 and all(row["usage"]["prompt_tokens"] == 128
++            and row["usage"]["completion_tokens"] == 32 for row in rows), "diagnostic token budget mismatch")
++    result = {"complete": True, "waves": waves, "requests": 5, "output_tokens": 160,
++              "sampling": sampling, "timing_eligible": False, "full_model_qualified": False}
++    write_new(output, result)
++    return result
++
++
++def run_sampler_stage(phase, case, output_root, execution_guard, arm=None):
++    """Each call in a new admitted process; capture server has already drained."""
++    require_execution(execution_guard)
++    validate_case(case); check_environment(case)
++    root = Path(output_root)
++    from vllm_neuron.models.qwen35.identity import ARTIFACT_MANIFEST
++    manifest_sha256 = hashlib.sha256((Path(case['artifact']) / ARTIFACT_MANIFEST).read_bytes()).hexdigest()
++    if phase == 'sampler_replay':
++        require(arm in ('baseline', 'candidate'), 'Exact replay arm required')
++        output = root / arm / 'sampler-replay.json'
++        require(not output.exists(), 'Fresh sampler replay output required')
++        attachment = read(root / arm / 'capture/worker-attachment.json')
++        identity = capture_identity(case, arm, manifest_sha256)
++        require(attachment['host_identity_sha256'] == identity['sha256']
++                and attachment['case'] == case and attachment['artifact_manifest_sha256'] == manifest_sha256,
++                'Replay must use this new package capture')
++        require(attachment['operation_class'] == identity['operation_class']
++                and attachment['reference_class'] == REFERENCE, 'Actual captured package operation changed')
++        from .sampler_leaves import replay_captures
++        result = replay_captures(root / arm / 'capture/packets', execution_guard)
++        require(all(row['arm'] == arm for row in result['proofs']), 'Replay crossed capture arms')
++        result.update(arm=arm, capture_identity_sha256=identity['sha256'])
++    elif phase == 'sampler_controls':
++        require(arm is None, 'Thirteen controls run once on the actual package implementation')
++        output = root / 'sampler-controls.json'
++        require(not output.exists(), 'Fresh sampler controls output required')
++        from .sampler_leaves import rejection_controls
++        result = rejection_controls(execution_guard)
++    else:
++        raise ValueError('Unknown sampler gate')
++    result.update(case=case, phase=phase, artifact_manifest_sha256=manifest_sha256,
++                  candidate_operation=CANDIDATE, reference_operation=REFERENCE,
++                  fresh_execution_proven=False, full_model_qualified=False, timing_eligible=False)
++    if phase == 'sampler_replay':
++        check_replay_result(result, read(root / arm / 'capture/packets/capture-receipt.json'),
++                            case, arm, manifest_sha256)
++    else:
++        check_controls_result(result, case, manifest_sha256)
++    write_new(output, result)
++    return result
++
++
++def check_replay_result(result, capture, case, arm, manifest_sha256):
++    check_capture_accounting(capture)
++    require(capture['arm'] == arm and result['arm'] == arm and result['case'] == case
++            and result['phase'] == 'sampler_replay', 'Replay arm/case/stage changed')
++    require(result['artifact_manifest_sha256'] == manifest_sha256
++            and result['capture_identity_sha256'] == capture_identity(case, arm, manifest_sha256)['sha256'],
++            'Replay is not tied to the new package capture')
++    require(result['passed'] is True and result['packets'] == capture['packets']
++            and result['rows'] == capture['captured_rows'] and result['all_own_tokens_and_rng_reproduced'] is True
++            and result['all_distribution_gates_passed'] is True and result['fast_path_rows'] > 0,
++            'Complete actual sampler replay is mandatory')
++    require(result['candidate_operation'] == CANDIDATE and result['reference_operation'] == REFERENCE
++            and result['timing_eligible'] is False, 'Package replay implementation/timing changed')
++    rows = result['proofs']
++    require(len(rows) == result['packets'] == len(capture['files']), 'Every captured packet must be replayed')
++    for row, packet in zip(rows, capture['files']):
++        require(row['passed'] is True and row['arm'] == arm and row['call_id'] == packet['call_id']
++                and row['rows'] == packet['rows'] and row['vocabulary'] == 248320
++                and row['own_token_and_rng_reproduced'] is True and row['timing_eligible'] is False,
++                'Packet/row/vocabulary/own-token-RNG proof incomplete')
++        require(0 <= row['total_variation_max'] <= SAMPLER_GATES['total_variation_max']
++                and 0 <= row['max_probability_error'] <= SAMPLER_GATES['max_probability_error_max'],
++                'Full-vocabulary distribution threshold exceeded')
++    require(sum(row['rows'] for row in rows) == result['rows']
++            and sum(row['fast_rows'] for row in rows) == result['fast_path_rows'], 'Replay accounting mismatch')
++
++
++def check_controls_result(result, case, manifest_sha256):
++    require(result['case'] == case and result['phase'] == 'sampler_controls'
++            and result['artifact_manifest_sha256'] == manifest_sha256, 'Controls package case changed')
++    require(result['passed'] is True and result['candidate_operation'] == CANDIDATE
++            and result['reference_operation'] == REFERENCE and result['timing_eligible'] is False,
++            'Controls must execute the actual package candidate and original reference')
++    rows = result['controls']
++    require(len(rows) == 13 and [r['control'] for r in rows] == SAMPLER_GATES['controls'],
++            'All thirteen named rejection controls are mandatory, in original order')
++    require(all(r['passed'] is True and r['reference_calls'] == 1 and r['token_and_rng_equal'] is True for r in rows),
++            'Fallback must reproduce output/error/global and request RNG with one original call')
++    row_fallback = {'excessive_kth_ties', 'nonfinite_max_or_kth', 'cdf_near_boundary', 'cdf_boundary_tie'}
++    require(all(r['whole_call'] == (r['control'] not in row_fallback) for r in rows), 'Control fallback scope changed')
++
++
++def check_saved_sampler_gates(case, root):
++    """Mandatory metadata prerequisite for quality/timing; root proves real exits."""
++    validate_case(case)
++    root = Path(root)
++    from vllm_neuron.models.qwen35.identity import ARTIFACT_MANIFEST
++    manifest_sha256 = hashlib.sha256((Path(case['artifact']) / ARTIFACT_MANIFEST).read_bytes()).hexdigest()
++    for arm in ('baseline', 'candidate'):
++        capture = read(root / arm / 'capture/packets/capture-receipt.json')
++        check_replay_result(read(root / arm / 'sampler-replay.json'), capture, case, arm, manifest_sha256)
++    check_controls_result(read(root / 'sampler-controls.json'), case, manifest_sha256)
++    return dict(metadata_gates_passed=True, actual_capture_arms=2, mandatory_B1_calls_per_arm=16,
++        mandatory_B4_calls_per_arm=16, controls=13, fresh_execution_proven=False,
++        full_model_qualified=False, timing_eligible=False)
+--- /dev/null
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/sampler_leaves.py
+@@ -0,0 +1,42 @@
++"""Original complete actual-packet replay and thirteen controls on package sampler."""
++import hashlib
++from .runtime import require_execution, read as read_small, require
++from .capture_writer import nvme_destination
++from qwen35_sampler_pair_protocol_v1 import MAX_PACKET_BYTES, check_capture_accounting
++
++
++def replay_captures(directory, execution_guard):
++    require_execution(execution_guard)
++    directory = nvme_destination(directory)
++    from .sampler_replay import verify_packet
++    from vllm.v1.sample.ops.topk_topp_sampler import TopKTopPSampler
++    receipt = read_small(directory / "capture-receipt.json")
++    check_capture_accounting(receipt)
++    require(0 < len(receipt["files"]) <= 64, "capture count exceeds cap")
++    rows = []
++    total = 0
++    for index, item in enumerate(receipt["files"]):
++        require_execution(execution_guard)
++        require(item["file"] == "capture-%04d.bin" % index, "capture path/order changed")
++        path = directory / item["file"]
++        require(path.resolve() == path and path.stat().st_size == item["bytes"] <= MAX_PACKET_BYTES, "capture file changed")
++        packet = path.read_bytes()
++        require(hashlib.sha256(packet).hexdigest() == item["sha256"], "capture bytes changed")
++        proof = verify_packet(packet, TopKTopPSampler)
++        require(proof["call_id"] == item["call_id"] and proof["rows"] == item["rows"] and proof["arm"] == receipt["arm"], "capture receipt join failed")
++        rows.append(proof)
++        total += len(packet)
++    require(total == receipt["total_packet_bytes"], "capture byte accounting mismatch")
++    require({str(n): sum(row["rows"] == n for row in rows) for n in range(1, 5)}
++            == receipt["captured_calls_by_rows"], "actual B1/B4 capture quotas not reproduced")
++    return {"passed": True, "packets": len(rows), "rows": sum(x["rows"] for x in rows),
++            "all_own_tokens_and_rng_reproduced": True, "all_distribution_gates_passed": True,
++            "fast_path_rows": sum(x["fast_rows"] for x in rows), "proofs": rows,
++            "full_model_qualified": False, "timing_eligible": False}
++
++
++def rejection_controls(execution_guard):
++    require_execution(execution_guard)
++    from .sampler_replay import verify_rejection_controls
++    from vllm.v1.sample.ops.topk_topp_sampler import TopKTopPSampler
++    return verify_rejection_controls(TopKTopPSampler)

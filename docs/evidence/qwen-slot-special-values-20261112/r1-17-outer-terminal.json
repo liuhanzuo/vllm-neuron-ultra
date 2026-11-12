@@ -1,0 +1,137 @@
+{
+  "actual_external_tool_exit_pending": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/admission.json",
+    "sha256": "485717886d953fc9e41238f926b9d2d6b47eff12d1f5492e72f3d38e17e2af5b"
+  },
+  "automatic_successor": false,
+  "complete_owned_unit_terminals": [
+    {
+      "cleanup_complete": true,
+      "exit_observed": true,
+      "group_observations": [
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v1-20261112-slot-special-values.service"
+        },
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v1-20261112-slot-special-values.service"
+        }
+      ],
+      "observed_unix_ns": 1794505941371641542,
+      "process_owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-I",
+          "-B",
+          "-X",
+          "pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/bytecode-never-created",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/admission.json",
+          "--binding-sha256",
+          "485717886d953fc9e41238f926b9d2d6b47eff12d1f5492e72f3d38e17e2af5b"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v1-20261112-slot-special-values.service",
+        "pid": 915477,
+        "ppid": 1583,
+        "start_ticks": "428639212"
+      },
+      "properties": {
+        "ActiveState": "failed",
+        "After": "-.mount basic.target app.slice",
+        "BindsTo": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "1",
+        "ExecMainPID": "915477",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/admission.json --binding-sha256 485717886d953fc9e41238f926b9d2d6b47eff12d1f5492e72f3d38e17e2af5b ; ignore_errors=no ; start_time=[Thu 2026-11-12 17:51:23 UTC] ; stop_time=[Thu 2026-11-12 17:52:21 UTC] ; pid=915477 ; code=exited ; status=1 }",
+        "ExecStopPost": "",
+        "Id": "trn1-qwen35-sampler-r1-v1-20261112-slot-special-values.service",
+        "InvocationID": "311db1eeecfb4afab3c450d121e32914",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "1073741824",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryHigh": "5368709120",
+        "MemoryMax": "6442450944",
+        "MemorySwapMax": "0",
+        "RemainAfterExit": "yes",
+        "Result": "exit-code",
+        "RuntimeMaxUSec": "2h",
+        "SendSIGKILL": "yes",
+        "StandardError": "inherit",
+        "StandardOutput": "append",
+        "SubState": "failed",
+        "TasksMax": "256",
+        "TimeoutStopUSec": "15s",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "remaining_processes": [],
+      "server_owner": {
+        "invocation_id": "311db1eeecfb4afab3c450d121e32914",
+        "pid": 915477,
+        "start_ticks": 428639212,
+        "unit": "trn1-qwen35-sampler-r1-v1-20261112-slot-special-values"
+      },
+      "systemd_exit_status": {
+        "ExecMainCode": 1,
+        "ExecMainStatus": 1,
+        "Result": "exit-code"
+      },
+      "unacknowledged_terminal": null
+    }
+  ],
+  "failed": true,
+  "failure": {
+    "message": "Actual preflight service failed",
+    "type": "ValueError"
+  },
+  "full_model_qualified": false,
+  "outer_owner": {
+    "argv": [
+      "python3",
+      "-I",
+      "-B",
+      "-X",
+      "pycache_prefix=/mnt/nvme/neuron-work/qwen35-slot-special-value-r1-v1-20261112/bytecode-never-created",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_slot_special_value_serial_v1.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-slot-special-value-r1-v1-20261112-spec.json",
+      "--spec-sha256",
+      "38cebb2ed2e9c4ce88a3013c1f893bf4c7ce6a0afd04d2f6e17e7ddd9b3b141a",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-slot-special-value-r1-v1-20261112-review.json",
+      "--review-sha256",
+      "ce181beeaaec71eea963575844286802cd93a13d4096b4316549560ef2188580"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 907217,
+    "ppid": 2480035,
+    "start_ticks": "428604313"
+  },
+  "qualification_matrix_completed": false,
+  "result_present": false,
+  "schema": "qwen35_slot_special_value_outer_terminal_v1",
+  "self_exit_claimed": false,
+  "storage": {
+    "allocated_bytes": 1941504,
+    "entries": 35,
+    "layouts": {
+      "conv-special-values": {
+        "allocated_bytes": 516096,
+        "logical_bytes": 451378
+      }
+    },
+    "logical_bytes": 1847659
+  },
+  "whole_owned_scope_drained": true
+}

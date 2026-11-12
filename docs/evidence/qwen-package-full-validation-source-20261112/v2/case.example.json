@@ -1,0 +1,42 @@
+{
+  "name": "qwen35-package-full-v2-20261112",
+  "served_name": "qwen3.5-2b-text",
+  "batch": 4,
+  "tp": 2,
+  "max_model_len": 4096,
+  "cpu": true,
+  "adapter": "qwen35_text",
+  "package_schema": "vllm-neuron-ultra-qwen35-split-v1",
+  "neuron_configuration": {
+    "tp_degree": 2,
+    "ctx_batch_size": 1,
+    "batch_size": 4,
+    "max_context_length": 4096,
+    "seq_len": 4096,
+    "enable_bucketing": true,
+    "is_continuous_batching": true,
+    "quantized": false,
+    "torch_dtype": "bfloat16",
+    "padding_side": "right",
+    "on_device_sampling_config": null,
+    "lora_config": null,
+    "pa_num_blocks": 4,
+    "pa_block_size": 4096,
+    "is_block_kv_layout": false,
+    "is_prefix_caching": false,
+    "apply_seq_ids_mask": true,
+    "context_encoding_buckets": [
+      128,
+      256,
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "token_generation_buckets": null
+  },
+  "model_path": "/mnt/nvme/models/qwen35-package-full-v2-view-20261112-r1",
+  "artifact": "/mnt/nvme/neuron-artifacts/qwen35-package-full-v2-20261112-r1",
+  "compiler_cache": "/mnt/nvme/neuron-work/qwen35-package-full-v2-cache-20261112-r1",
+  "compiler_workdir": "/mnt/nvme/neuron-work/qwen35-package-full-v2-compiler-20261112-r1"
+}

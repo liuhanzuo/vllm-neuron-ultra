@@ -1,0 +1,20 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_native_replay_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/sampler_replay.py
+@@ -68,7 +68,7 @@
+ 
+ def verify_packet(packet, reference_factory):
+     import torch
+-    from qwen35_sampler_bounded_operation_v1 import BoundedTopKTopPSampler, _shortlist
++    from vllm_neuron.worker.cpu_sampler import BoundedTopKTopPSampler, _shortlist
+     header, raw = parse_packet(packet)
+     require(header["endian"] == sys.byteorder and header["torch_version"] == str(torch.__version__), "native environment changed")
+     decoder = Decoder(torch, raw)
+@@ -152,7 +152,7 @@
+ is logged as such, not counted as a valid sampling distribution.
+ """
+     import torch
+-    from qwen35_sampler_bounded_operation_v1 import BoundedTopKTopPSampler, _shortlist
++    from vllm_neuron.worker.cpu_sampler import BoundedTopKTopPSampler, _shortlist
+     saved_rng = torch.get_rng_state().clone()
+     results = []
+     try:

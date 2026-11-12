@@ -1,0 +1,26 @@
+{
+  "kind": "source-and-metadata-mock-tests-only",
+  "argv": [
+    "/home/ubuntu/venvs/vllm_neuron/bin/python",
+    "-B",
+    "-c",
+    "import runpy, sys\nclass BlockNative:\n    def find_spec(self, fullname, path=None, target=None):\n        roots = ('torch', 'torch_xla', 'torch_neuronx', 'neuronx_distributed', 'neuronx_distributed_inference', 'libneuronxla', 'vllm', 'transformers', 'numpy', 'ctypes', '_ctypes')\n        if any(fullname == root or fullname.startswith(root + '.') for root in roots):\n            raise RuntimeError('Native import forbidden: ' + fullname)\n        return None\nsys.meta_path.insert(0, BlockNative())\ntest_path = sys.argv[1]\nsys.argv = [test_path]\nrunpy.run_path(test_path, run_name='__main__')\n",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/test_sampler_source.py"
+  ],
+  "returncode": 0,
+  "started_unix_s": 1794505738.5842297,
+  "elapsed_s": 0.6367504596710205,
+  "tests": 30,
+  "passed": true,
+  "stdout_bytes": 3538,
+  "stdout_sha256": "a83ec471e9e18a098119924642393e0e25369223bf7c8f4fa490a5d43fbb986d",
+  "test_sources": {
+    "test_source.py": "315c2aff90387b2ff7284c4b62c1feafe0c197f2b8b160a156704d3193990326",
+    "test_sampler_source.py": "2c2284e1cdc736c573dfc33c2f134dfb4e272e55b0c548c18b79cf88cccf1481"
+  },
+  "meta_path_native_blocker": true,
+  "native_or_payload_execution": false,
+  "fresh_compile_proven": false,
+  "full_model_qualified": false,
+  "performance_measured": false
+}

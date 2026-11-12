@@ -1,0 +1,212 @@
+{
+  "schema": "qwen35_package_full_v2_finite_stage_order",
+  "source_only": true,
+  "runtime_admission": false,
+  "root_keeps_original_complete_history_and_resource_rules": true,
+  "stages": [
+    {
+      "stage": "prepare_view",
+      "entry": "entry.prepare_view(case, guard)"
+    },
+    {
+      "stage": "build12",
+      "entry": "entry.build_fresh(case, new_run/build-inventory.json, guard)",
+      "fresh_paths": [
+        "view",
+        "artifact",
+        "compiler_cache",
+        "compiler_workdir"
+      ],
+      "compile_only_here": true
+    },
+    {
+      "stage": "state_copy",
+      "arm": "baseline",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "numeric",
+      "arm": "baseline",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "cold",
+      "arm": "baseline",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "long",
+      "arm": "baseline",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "vectors203",
+      "arm": "baseline",
+      "entry": "entry.compare_vectors(new_run/arm/model, guard)",
+      "save_return_to": "new_run/arm/model/vectors203.json",
+      "new_process": true
+    },
+    {
+      "stage": "state_copy",
+      "arm": "candidate",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "numeric",
+      "arm": "candidate",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "cold",
+      "arm": "candidate",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "long",
+      "arm": "candidate",
+      "entry": "entry.run_model_stage(phase, new_run/arm/model, build_inventory, guard)",
+      "new_process": true,
+      "prior_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "vectors203",
+      "arm": "candidate",
+      "entry": "entry.compare_vectors(new_run/arm/model, guard)",
+      "save_return_to": "new_run/arm/model/vectors203.json",
+      "new_process": true
+    },
+    {
+      "stage": "correctness_capture",
+      "arm": "baseline",
+      "server": "sampler.capture_server_arguments(case, arm)",
+      "environment": "sampler.capture_environment(case, arm, directory, manifest_sha256)",
+      "live_gate": "sampler.check_capture_attachment(actual_attachment, root_live, case, arm, directory, manifest_sha256)",
+      "entry": "sampler.run_capture_diagnostic(case, new_run/arm/diagnostic-http.json, guard)",
+      "fresh_owned_server": true,
+      "post_exit_root_drain_required": true,
+      "timing_eligible": false
+    },
+    {
+      "stage": "sampler_replay",
+      "arm": "baseline",
+      "entry": "entry.run_sampler_stage(sampler_replay, case, new_run, guard, arm)",
+      "all_actual_packets": true,
+      "new_process": true,
+      "prior_capture_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "correctness_capture",
+      "arm": "candidate",
+      "server": "sampler.capture_server_arguments(case, arm)",
+      "environment": "sampler.capture_environment(case, arm, directory, manifest_sha256)",
+      "live_gate": "sampler.check_capture_attachment(actual_attachment, root_live, case, arm, directory, manifest_sha256)",
+      "entry": "sampler.run_capture_diagnostic(case, new_run/arm/diagnostic-http.json, guard)",
+      "fresh_owned_server": true,
+      "post_exit_root_drain_required": true,
+      "timing_eligible": false
+    },
+    {
+      "stage": "sampler_replay",
+      "arm": "candidate",
+      "entry": "entry.run_sampler_stage(sampler_replay, case, new_run, guard, arm)",
+      "all_actual_packets": true,
+      "new_process": true,
+      "prior_capture_actual_exit_and_drain_required": true
+    },
+    {
+      "stage": "sampler_controls",
+      "arm": "shared",
+      "entry": "entry.run_sampler_stage(sampler_controls, case, new_run, guard)",
+      "controls": 13,
+      "new_process": true
+    },
+    {
+      "stage": "sampler_pair_gate",
+      "entry": "sampler.check_saved_sampler_gates(case, new_run)",
+      "root_authenticates_actual_exits_and_drains": true,
+      "before_all_quality_and_timing": true
+    },
+    {
+      "stage": "quality",
+      "arm": "baseline",
+      "server": "runtime.server_arguments(case)",
+      "entries": [
+        "http.run_http_stage(smoke, case, output, guard)",
+        "http.run_http_stage(quality96, case, output, guard)"
+      ],
+      "fresh_owned_server": true,
+      "observer": false,
+      "post_exit_root_drain_required": true
+    },
+    {
+      "stage": "quality",
+      "arm": "candidate",
+      "server": "runtime.server_arguments(case)",
+      "entries": [
+        "http.run_http_stage(smoke, case, output, guard)",
+        "http.run_http_stage(quality96, case, output, guard)"
+      ],
+      "fresh_owned_server": true,
+      "observer": false,
+      "post_exit_root_drain_required": true
+    },
+    {
+      "stage": "quality_pair_gate",
+      "entry": "http.check_saved_quality(case, baseline, candidate)",
+      "before_any_timed_http": true
+    },
+    {
+      "stage": "matched_http",
+      "arm": "baseline",
+      "server": "runtime.server_arguments(case)",
+      "entries": [
+        "http.run_http_stage(initial120, case, output, guard)",
+        "http.run_http_stage(workloads, case, output, guard)"
+      ],
+      "fresh_owned_server": true,
+      "observer": false,
+      "capture_environment_forbidden": true,
+      "actual_matched_host_settings_required": true,
+      "post_exit_root_drain_required": true
+    },
+    {
+      "stage": "matched_http",
+      "arm": "candidate",
+      "server": "runtime.server_arguments(case)",
+      "entries": [
+        "http.run_http_stage(initial120, case, output, guard)",
+        "http.run_http_stage(workloads, case, output, guard)"
+      ],
+      "fresh_owned_server": true,
+      "observer": false,
+      "capture_environment_forbidden": true,
+      "actual_matched_host_settings_required": true,
+      "post_exit_root_drain_required": true
+    },
+    {
+      "stage": "full_pair_gate",
+      "entry": "http.compare_saved_pair(case, baseline, candidate, root_hosts, dirs)"
+    },
+    {
+      "stage": "independent_final_audit",
+      "entry": "existing root actual exit/drain/source/input/artifact and qualification audit",
+      "self_qualification_forbidden": true
+    }
+  ],
+  "new_package_graphs_required": 12,
+  "research_results_inherited": false
+}
