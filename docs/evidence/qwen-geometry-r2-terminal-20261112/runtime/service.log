@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 445, in <module>
+    if __name__ == '__main__': raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 442, in main
+    return (supervisor if args.mode == 'supervisor' else layout)(reference(dict(path=args.binding,sha256=args.binding_sha256)))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 252, in supervisor
+    summaries = run_layouts(spec, binding_ref, owner, guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 212, in run_layouts
+    native = capture_layout(entry_argv('layout', binding_ref, work), environment(work), work,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 171, in capture_layout
+    bounded()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 159, in bounded
+    guard(); require(time.monotonic() - started < 900, 'Per-layout wall deadline includes launch, compile, calls and drain')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py", line 242, in guard
+    check_environment(root); check_group(own['cgroup'].removeprefix('0::')); resources(spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/contract.py", line 199, in resources
+    root = Path(spec['output_root']); usage = scan_output(root); result = {}
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/contract.py", line 192, in scan_output
+    try: return scan_once(root)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/contract.py", line 177, in scan_once
+    require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1, 'Singleton regular output only')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: Singleton regular output only

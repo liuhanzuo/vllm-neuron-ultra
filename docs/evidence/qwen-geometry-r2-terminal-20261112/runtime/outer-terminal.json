@@ -1,0 +1,165 @@
+{
+  "actual_external_tool_exit_pending": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/admission.json",
+    "sha256": "9daba6a0c0c73bfe76d892869e8eded80900183040f752203fc8aa07aadd8369"
+  },
+  "automatic_successor": false,
+  "complete_owned_unit_terminals": [
+    {
+      "cleanup_complete": true,
+      "exit_observed": true,
+      "group_observations": [
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-writer-r2-20261112-writer-geometry.service"
+        },
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-writer-r2-20261112-writer-geometry.service"
+        }
+      ],
+      "observed_unix_ns": 1794526581378055268,
+      "process_owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-I",
+          "-B",
+          "-X",
+          "pycache_prefix=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/bytecode-never-created",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/admission.json",
+          "--binding-sha256",
+          "9daba6a0c0c73bfe76d892869e8eded80900183040f752203fc8aa07aadd8369"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-writer-r2-20261112-writer-geometry.service",
+        "pid": 1628380,
+        "ppid": 1583,
+        "start_ticks": "430686503"
+      },
+      "properties": {
+        "ActiveState": "failed",
+        "After": "basic.target app.slice -.mount",
+        "BindsTo": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "1",
+        "ExecMainPID": "1628380",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/admission.json --binding-sha256 9daba6a0c0c73bfe76d892869e8eded80900183040f752203fc8aa07aadd8369 ; ignore_errors=no ; start_time=[Thu 2026-11-12 23:32:36 UTC] ; stop_time=[Thu 2026-11-12 23:36:21 UTC] ; pid=1628380 ; code=exited ; status=1 }",
+        "ExecStopPost": "",
+        "Id": "trn1-qwen35-sampler-writer-r2-20261112-writer-geometry.service",
+        "InvocationID": "238514f4c1e446e58a1b2c391e608989",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "1073741824",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryHigh": "5368709120",
+        "MemoryMax": "6442450944",
+        "MemorySwapMax": "0",
+        "RemainAfterExit": "yes",
+        "Result": "exit-code",
+        "RuntimeMaxUSec": "2h",
+        "SendSIGKILL": "yes",
+        "StandardError": "inherit",
+        "StandardOutput": "append",
+        "SubState": "failed",
+        "TasksMax": "256",
+        "TimeoutStopUSec": "15s",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "remaining_processes": [],
+      "server_owner": {
+        "invocation_id": "238514f4c1e446e58a1b2c391e608989",
+        "pid": 1628380,
+        "start_ticks": 430686503,
+        "unit": "trn1-qwen35-sampler-writer-r2-20261112-writer-geometry"
+      },
+      "systemd_exit_status": {
+        "ExecMainCode": 1,
+        "ExecMainStatus": 1,
+        "Result": "exit-code"
+      },
+      "unacknowledged_terminal": null
+    }
+  ],
+  "failed": true,
+  "failure": {
+    "message": "Actual preflight service failed",
+    "type": "ValueError"
+  },
+  "full_model_qualified": false,
+  "outer_owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-I",
+      "-B",
+      "-X",
+      "pycache_prefix=/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r2-20261112/bytecode-never-created",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v2/run.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-writer-geometry-r2-20261112-spec.json",
+      "--spec-sha256",
+      "9208483c46d292a1f1fa7224e9033bf177c86dd231e3e64e0592bc823fed5a46",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-writer-geometry-r2-20261112-review.json",
+      "--review-sha256",
+      "12a710aae71208e052f537e6c21290ad3eb24203a8654dfa900ef7ab91e649a5"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 1619844,
+    "ppid": 2480035,
+    "start_ticks": "430651897"
+  },
+  "result_present": false,
+  "schema": "qwen35_writer_geometry_outer_terminal_v1",
+  "self_exit_claimed": false,
+  "storage": {
+    "allocated_bytes": 11431936,
+    "entries": 97,
+    "layouts": {
+      "conv": {
+        "allocated_bytes": 4882432,
+        "logical_bytes": 4726381
+      },
+      "kv1024": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "kv128": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "kv2048": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "kv256": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "kv4096": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "kv512": {
+        "allocated_bytes": 0,
+        "logical_bytes": 0
+      },
+      "recurrent": {
+        "allocated_bytes": 4968448,
+        "logical_bytes": 4833442
+      }
+    },
+    "logical_bytes": 11111013
+  },
+  "storage_error": null,
+  "whole_owned_scope_drained": true
+}
