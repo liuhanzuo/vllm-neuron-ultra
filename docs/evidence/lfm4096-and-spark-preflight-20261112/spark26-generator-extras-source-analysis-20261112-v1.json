@@ -1,0 +1,309 @@
+{
+  "conclusion": {
+    "current_candidate_extra_policy_unchanged": true,
+    "limitation": "Source evidence does not certify all dynamic imports or authorize execution.",
+    "original_required_roots_and_science_unchanged": true,
+    "package_installation_required_by_this_analysis": false,
+    "safetensors_torch_extra": "Torch integration code is required transitively through Transformers. The extra is installer metadata, not an execution switch; its Torch/NumPy/packaging dependencies are already in the frozen16-root/transitive manifest.",
+    "transformers_torch_extra": "Generator policy, not a frozen diagnostic requirement. External accelerate is not required by the inspected direct diagnostic paths; full import closure is unproven."
+  },
+  "counterfactual_graphs_not_new_manifests": {
+    "existing": {
+      "added_names": [],
+      "removed_names": [],
+      "root_extras": {
+        "safetensors": [
+          "torch"
+        ],
+        "transformers": [
+          "torch"
+        ]
+      },
+      "selected_extras": {
+        "fastapi": [
+          "standard"
+        ],
+        "fastapi_cli": [
+          "standard"
+        ],
+        "mistral_common": [
+          "audio",
+          "image",
+          "opencv",
+          "soundfile",
+          "soxr"
+        ],
+        "pydantic": [
+          "email"
+        ],
+        "pydantic_extra_types": [
+          "pycountry"
+        ],
+        "ray": [
+          "cgraph"
+        ],
+        "safetensors": [
+          "numpy",
+          "torch"
+        ],
+        "transformers": [
+          "torch"
+        ],
+        "uvicorn": [
+          "standard"
+        ]
+      },
+      "selected_names": 179,
+      "unresolved": [
+        {
+          "kind": "missing_installed_distribution",
+          "name": "accelerate"
+        }
+      ]
+    },
+    "without_either_generator_extra": {
+      "added_names": [],
+      "removed_names": [
+        "accelerate"
+      ],
+      "root_extras": {},
+      "selected_extras": {
+        "fastapi": [
+          "standard"
+        ],
+        "fastapi_cli": [
+          "standard"
+        ],
+        "mistral_common": [
+          "audio",
+          "image",
+          "opencv",
+          "soundfile",
+          "soxr"
+        ],
+        "pydantic": [
+          "email"
+        ],
+        "pydantic_extra_types": [
+          "pycountry"
+        ],
+        "ray": [
+          "cgraph"
+        ],
+        "uvicorn": [
+          "standard"
+        ]
+      },
+      "selected_names": 178,
+      "unresolved": []
+    },
+    "without_transformers_extra": {
+      "added_names": [],
+      "removed_names": [
+        "accelerate"
+      ],
+      "root_extras": {
+        "safetensors": [
+          "torch"
+        ]
+      },
+      "selected_extras": {
+        "fastapi": [
+          "standard"
+        ],
+        "fastapi_cli": [
+          "standard"
+        ],
+        "mistral_common": [
+          "audio",
+          "image",
+          "opencv",
+          "soundfile",
+          "soxr"
+        ],
+        "pydantic": [
+          "email"
+        ],
+        "pydantic_extra_types": [
+          "pycountry"
+        ],
+        "ray": [
+          "cgraph"
+        ],
+        "safetensors": [
+          "numpy",
+          "torch"
+        ],
+        "uvicorn": [
+          "standard"
+        ]
+      },
+      "selected_names": 178,
+      "unresolved": []
+    }
+  },
+  "manifest_modified": false,
+  "metadata": {
+    "safetensors-0.7.0": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/safetensors-0.7.0.dist-info/METADATA",
+      "sha256": "6809326fbf17444dd520ab19f0a55b7a18476dbe52a430466bbf5389967c2aaa",
+      "torch_extra_requires": [
+        "packaging ; extra == 'torch'",
+        "safetensors[numpy] ; extra == 'torch'",
+        "torch>=1.10 ; extra == 'torch'"
+      ]
+    },
+    "transformers-4.57.6": {
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers-4.57.6.dist-info/METADATA",
+      "sha256": "91601044a74fe02571a825356754dbbaa9e1d3e3dd3c2237254c15e903e421e3",
+      "torch_extra_requires": [
+        "torch>=2.2; extra == \"torch\"",
+        "accelerate>=0.26.0; extra == \"torch\""
+      ]
+    }
+  },
+  "native_imports": false,
+  "packages_modified": false,
+  "reviewer": "/root/spark_native_diagnostic_source",
+  "runtime_admitted": false,
+  "schema": "spark26_generator_extras_source_analysis_v1",
+  "source_only": true,
+  "sources": [
+    {
+      "bytes": 15613,
+      "end_line": 38,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_provider_v2.py",
+      "reason": "Frozen exact16 roots, no extra selection",
+      "sha256": "12f9d6e63dbe112359d3acd32984d69d993b7fddfee80ef670d4fd901aed93e6",
+      "start_line": 27,
+      "text": "REQUIRED = {\n    'torch': '2.8.0', 'transformers': '4.57.6', 'numpy': '1.26.4',\n    'tokenizers': '0.22.2', 'safetensors': '0.7.0', 'ml_dtypes': '0.5.4',\n    'huggingface_hub': '0.36.2', 'torch_xla': '2.8.1',\n    'torch_neuronx': '2.8.0.2.12.22436+0f1dac25',\n    'neuronx_cc': '2.23.6484.0+3b612583', 'libneuronxla': '2.2.15515.0+50c26cbd',\n    'neuronx_distributed': '0.17.26814+4b18de63',\n    'neuronx_distributed_inference': '0.8.16251+f3ca5575',\n    'vllm': '0.11.0', 'vllm_neuron': '0.2.2+lts', 'regex': '2026.2.19',\n}\nMAX_MANIFEST_ENTRIES = 100000\nMAX_RUNTIME_AUTHENTICATION_READ = 16 * 2**30"
+    },
+    {
+      "bytes": 26189,
+      "end_line": 29,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_manifest_generator_v2.py",
+      "reason": "Generator-added ROOT_EXTRAS",
+      "sha256": "811dae370c8e2bd169fb75c7afd485b1594691d9ea2e19cc41998afe120a1e9a",
+      "start_line": 24,
+      "text": "\nROOT,Q,SITE=provider.contract.ROOT,provider.contract.Q,provider.SITE\nENV=dict(implementation_name='cpython',implementation_version='3.10.12',os_name='posix',\n    platform_machine='x86_64',platform_python_implementation='CPython',platform_system='Linux',\n    python_full_version='3.10.12',python_version='3.10',sys_platform='linux')\nROOT_EXTRAS={'safetensors':['torch'],'transformers':['torch']}"
+    },
+    {
+      "bytes": 15613,
+      "end_line": 302,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_provider_v2.py",
+      "reason": "Actual imported providers and official sources",
+      "sha256": "12f9d6e63dbe112359d3acd32984d69d993b7fddfee80ef670d4fd901aed93e6",
+      "start_line": 260,
+      "text": "\ndef load_official(runtime):\n    \"\"\"Same actual official-module loading mechanism as the successful meta worker.\"\"\"\n    name = '_spark26_pinned_' + contract.original.REVISION\n    require(name not in sys.modules, 'Fresh official pinned package')\n    package = types.ModuleType(name)\n    package.__path__ = [str(contract.original.SOURCE_DIR)]\n    sys.modules[name] = package\n    loaded = []\n    for suffix, path in [('configuration_spark', contract.original.CONFIGURATION),\n                         ('modeling_spark', contract.original.MODELING)]:\n        runtime.check_origin(str(path))\n        spec = importlib.util.spec_from_file_location(name + '.' + suffix, path)\n        module = importlib.util.module_from_spec(spec)\n        sys.modules[spec.name] = module\n        spec.loader.exec_module(module)\n        loaded.append(module)\n    return loaded\n\n\ndef native_providers(runtime):\n    \"\"\"Actual imports only. No mock providers, AST extraction, or port registration.\"\"\"\n    require(type(runtime) is Runtime and runtime.finder is not None, 'Completed concrete runtime authentication')\n    runtime.check_unchanged()\n    import torch\n    from safetensors import safe_open\n    from neuronx_distributed.trace.trace import create_local_weight_qkv\n    from vllm_neuron.worker.neuronx_distributed_model_loader import NeuronModelBase\n    import spark26_text_port_v2 as candidate\n    configuration, modeling = load_official(runtime)\n    require(torch.__version__.split('+')[0] == '2.8.0', 'Original Torch version')\n    require(torch.get_default_device().type == 'cpu' and not torch.distributed.is_initialized(),\n            'Single-process CPU diagnostic; no XLA default or initialized collective')\n    torch.set_num_threads(1)\n    torch.set_num_interop_threads(1)\n    runtime.check_unchanged()\n    result = dict(torch=torch, safe_open=safe_open, configuration=configuration, modeling=modeling,\n                  candidate=candidate, create_local_weight_qkv=create_local_weight_qkv,\n                  NeuronModelBase=NeuronModelBase)\n    import spark26_native_port_diagnostic_v3 as diagnostic\n    diagnostic.validate_native_objects(result)\n    runtime.native_mappings()\n    return result"
+    },
+    {
+      "bytes": 19115,
+      "end_line": 135,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_port_diagnostic_v1.py",
+      "reason": "Direct projection construction and QKV call; no from_pretrained",
+      "sha256": "40a5eebca71fccf8ba7f6f393cfd2aa748a69c954abdf6e37fe0ba3daa245ead",
+      "start_line": 110,
+      "text": "        with torch.device('meta'):\n            official_projection = modeling.Spark2_5Attention(cfg, layer_idx=case['layer']).q_k_v_proj\n            port_projection = candidate.SparkPackedProjection(cfg_dict)\n        official_projection.weight = torch.nn.Parameter(full, requires_grad=False)\n        port_projection.Wqkv.weight = torch.nn.Parameter(full, requires_grad=False)\n        rank_weights = []\n        for rank in plan['tp_ranks']:\n            local = create_local_weight_qkv(rank, 2, full, 0, 4096, 1024)\n            expected = torch.cat((full[rank * 2048:(rank + 1) * 2048],\n                                  full[4096 + rank * 512:4096 + (rank + 1) * 512],\n                                  full[5120 + rank * 512:5120 + (rank + 1) * 512]), 0)\n            contract.require(bits_equal(torch, local, expected), 'Exact original SDK TP2 Q/K/V shard bytes')\n            contract.require(bits_equal(torch, full, full_before), 'SDK sharding must preserve original QKV weight')\n            rank_weights.append(local)\n        for shape in plan['projection_shapes']:\n            guard()\n            x = ((torch.arange(math.prod(shape), dtype=torch.int64) + case['layer'] * 7)\n                 .remainder(29).sub(14).to(torch.bfloat16).div(64).reshape(shape))\n            original = official_projection(x)\n            whole = (original[..., :4096], original[..., 4096:5120], original[..., 5120:])\n            native_port = port_projection(x)\n            contract.require(native_port[3] is None, 'Original v2 packed projection return contract')\n            packed_metrics = {role: numeric_diagnostic(torch, ref, actual)\n                              for role, ref, actual in zip(('Q', 'K', 'V'), whole, native_port[:3])}\n            for rank, local in enumerate(rank_weights):\n                actual = torch.nn.functional.linear(x, local)"
+    },
+    {
+      "bytes": 19299,
+      "end_line": 61,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/spark26_native_port_diagnostic_v3.py",
+      "reason": "Actual host methods on minimal receiver",
+      "sha256": "98eec8a4f739de1d4f47261a455ccf215fe633f8bccaa8004daa63af4ce04213",
+      "start_line": 29,
+      "text": "                     and cls.__module__ == 'vllm_neuron.worker.neuronx_distributed_model_loader',\n                     'Actual imported fixed NeuronModelBase class')\n    for name in ('_reordered', '_sort_inputs'):\n        function = inspect.unwrap(getattr(cls, name))\n        contract.require(function.__name__ == name\n                         and str(Path(function.__code__.co_filename).resolve()) == contract.HOST_LOADER,\n                         'Real fixed host method, not AST-extracted or replacement: ' + name)\n\n\ndef real_host_reorder(torch, model_base, event, key_by_slot, value_by_slot, guard):\n    \"\"\"Exercise actual host sort and inverse restore with real tensor inputs.\n\n    A minimal receiver selects the documented ordinary-cache method branch.\n    This executes the original two methods, not model initialization/forward or\n    SDK padding. Request-linked K/V and positions are checked before B4 filling.\n    \"\"\"\n    guard()\n    slots = event['slots']\n    ids = torch.tensor(slots, dtype=torch.int32)\n    position_ids = torch.tensor([[position] for position in event['positions']], dtype=torch.int32)\n    key = torch.cat([key_by_slot[slot] for slot in slots], dim=0)\n    value = torch.cat([value_by_slot[slot] for slot in slots], dim=0)\n    markers = torch.tensor([[slot, position, epoch] for slot, position, epoch\n                            in zip(slots, event['positions'], event['epochs'])], dtype=torch.int32)\n    inputs = {'position_ids': position_ids, 'key': key, 'value': value, 'request_markers': markers}\n    original_inputs = {name: tensor.clone() for name, tensor in inputs.items()}\n    original_ids = ids.clone()\n    receiver = SimpleNamespace(is_reorder_needed=True, _sort_inputs=model_base._sort_inputs)\n    # This is the original contextmanager/function object from the imported SDK.\n    with model_base._reordered(receiver, ids, **inputs) as (sorted_ids, sorted_inputs, restore):\n        order = sorted(range(len(slots)), key=lambda index: slots[index])\n        index = torch.tensor(order, dtype=torch.long)\n        expected_ids = torch.tensor([slots[i] for i in order], dtype=torch.int32)"
+    },
+    {
+      "bytes": 19418,
+      "end_line": 20,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/new-small-model-code-prerequisites-20261104-v72/spark-modeling.py",
+      "reason": "Official imports PreTrainedModel and DynamicCache",
+      "sha256": "9cf0d1ad2b54b9f7088792779ddd8b5cb4d4fe63bfea054da7f2dd16362bcaf4",
+      "start_line": 1,
+      "text": "import math\n\nimport torch\nimport torch.nn.functional as F\nfrom torch import nn\nfrom transformers.activations import ACT2FN\nfrom transformers.cache_utils import Cache, DynamicCache\nfrom transformers.generation import GenerationMixin\nfrom transformers.masking_utils import create_causal_mask, create_sliding_window_causal_mask\nfrom transformers.modeling_outputs import (\n    BaseModelOutputWithPast,\n    CausalLMOutputWithPast,\n)\nfrom transformers.modeling_utils import PreTrainedModel\nfrom transformers.processing_utils import Unpack\nfrom transformers.pytorch_utils import ALL_LAYERNORM_LAYERS\nfrom transformers.utils import TransformersKwargs, can_return_tuple, logging\n\nfrom .configuration_spark import Spark2_5Config\n"
+    },
+    {
+      "bytes": 308964,
+      "end_line": 55,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/modeling_utils.py",
+      "reason": "Imports safetensors.torch and internal helpers",
+      "sha256": "bf1c6b2a43cf7c36fb79f37c981424dd6ae78eb863fcaa5d2a37e76c9828611d",
+      "start_line": 35,
+      "text": "from zipfile import is_zipfile\n\nimport torch\nfrom huggingface_hub import split_torch_state_dict_into_shards\nfrom packaging import version\nfrom safetensors import safe_open\nfrom safetensors.torch import load_file as safe_load_file\nfrom safetensors.torch import save_file as safe_save_file\nfrom torch import Tensor, nn\nfrom torch.distributions import constraints\nfrom torch.utils.checkpoint import checkpoint\n\nfrom .configuration_utils import PretrainedConfig\nfrom .distributed import DistributedConfig\nfrom .dynamic_module_utils import custom_object_save\nfrom .generation import CompileConfig, GenerationConfig\nfrom .integrations import PeftAdapterMixin, deepspeed_config, is_deepspeed_zero3_enabled, is_fsdp_enabled\nfrom .integrations.accelerate import find_tied_parameters, init_empty_weights\nfrom .integrations.deepspeed import _load_state_dict_into_zero3_model\nfrom .integrations.eager_paged import eager_paged_attention_forward\nfrom .integrations.flash_attention import flash_attention_forward"
+    },
+    {
+      "bytes": 308964,
+      "end_line": 140,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/modeling_utils.py",
+      "reason": "External accelerate import availability guard",
+      "sha256": "bf1c6b2a43cf7c36fb79f37c981424dd6ae78eb863fcaa5d2a37e76c9828611d",
+      "start_line": 126,
+      "text": "if is_accelerate_available():\n    from accelerate import dispatch_model, infer_auto_device_map\n    from accelerate.hooks import add_hook_to_module\n    from accelerate.utils import (\n        check_tied_parameters_on_same_device,\n        extract_model_from_parallel,\n        get_balanced_memory,\n        get_max_memory,\n        offload_weight,\n        save_offload_index,\n    )\n\n    accelerate_version = version.parse(importlib.metadata.version(\"accelerate\"))\n    if accelerate_version >= version.parse(\"0.31\"):\n        from accelerate.utils.modeling import get_state_dict_from_offload"
+    },
+    {
+      "bytes": 308964,
+      "end_line": 4810,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/modeling_utils.py",
+      "reason": "Uncalled from_pretrained device_map path",
+      "sha256": "bf1c6b2a43cf7c36fb79f37c981424dd6ae78eb863fcaa5d2a37e76c9828611d",
+      "start_line": 4801,
+      "text": "\n        if device_map is not None:\n            if is_deepspeed_zero3_enabled():\n                raise ValueError(\"DeepSpeed Zero-3 is not compatible with passing a `device_map`.\")\n            if not is_accelerate_available():\n                raise ValueError(\n                    \"Using a `device_map`, `tp_plan`, `torch.device` context manager or setting `torch.set_default_device(device)` \"\n                    \"requires `accelerate`. You can install it with `pip install accelerate`\"\n                )\n"
+    },
+    {
+      "bytes": 7351,
+      "end_line": 33,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/transformers/integrations/accelerate.py",
+      "reason": "Soft dependency copied native helpers",
+      "sha256": "9c443e4cc385697a269ee28ca20af353f2783cd09933e06ce863dd74f19bb96d",
+      "start_line": 14,
+      "text": "\"\"\"\nSince, https://github.com/huggingface/transformers/pull/36963, loading is always performed with models on meta\ndevice. But since the `init_empty_weights` and `find_tied_parameters` functions are from accelerate, and accelerate is\nsomewhat still a soft dependency, we copy the functions here to be used natively in Transformers.\n\nThe `init_empty_weights` and `init_on_device` functions were copied from `accelerate.big_modeling.py`, and the\n`find_tied_parameters` was copied from `accelerate.utils.modeling.py`\n\"\"\"\n\nfrom contextlib import contextmanager\n\nfrom ..utils import is_torch_available, logging\n\n\nif is_torch_available():\n    import torch\n    import torch.nn as nn\n\n\nlogger = logging.get_logger(__name__)"
+    },
+    {
+      "bytes": 14365,
+      "end_line": 34,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/utils/model_utils.py",
+      "reason": "accelerate ImportError fallback",
+      "sha256": "79fe81789649cbe899b3bc26fee2886d8d50ba35c38f27127ed4bbf26d3a638e",
+      "start_line": 23,
+      "text": "_TRANSFORMERS_AVAIL = True\ntry:\n    from transformers import PreTrainedModel\nexcept ImportError:\n    _TRANSFORMERS_AVAIL = False\n\n_Accelerate_AVAIL = True\ntry:\n    from accelerate import init_on_device as hf_init_on_device\nexcept ImportError:\n    _Accelerate_AVAIL = False\n"
+    },
+    {
+      "bytes": 14365,
+      "end_line": 280,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/utils/model_utils.py",
+      "reason": "Custom init_on_device fallback",
+      "sha256": "79fe81789649cbe899b3bc26fee2886d8d50ba35c38f27127ed4bbf26d3a638e",
+      "start_line": 252,
+      "text": "            return True\n    return False\n\n\n@contextmanager\ndef init_on_device(\n    device: torch.device, include_buffers: bool = False, force_custom_init_on_device: bool = False\n) -> Iterator[None]:\n    \"\"\"\n    A context manager under which models are initialized with all parameters on the specified device.\n    Referred from: https://github.com/huggingface/accelerate/blob/main/src/accelerate/big_modeling.py#L82\n\n    NOTE: force_custom_init_on_device is set to force the custom implementation as there is a bug in the Huggingface implementation\n    where if the parameter requires_grad =False, it will set to True when it reinitializes the parameter as 'module._parameters[name].__dict__'\n    Does not have an attribute requires_grad when its set to False.\n    \"\"\"\n    # Directly use accelerate implementation if available\n    if is_hf_accelerate_available() and not force_custom_init_on_device:\n        with hf_init_on_device(device, include_buffers=include_buffers):\n            yield\n        return\n\n    if is_torch_version_greater_than_2() and include_buffers and not force_custom_init_on_device:\n        with device:\n            yield\n        return\n\n    old_register_parameter = nn.Module.register_parameter\n    if include_buffers:"
+    },
+    {
+      "bytes": 34514,
+      "end_line": 678,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/neuronx_distributed/trace/trace.py",
+      "reason": "QKV split/cat only",
+      "sha256": "c5aff7fc700a89505b7698314e7f9daf3527057ac5090b50a1b3541b074bef2e",
+      "start_line": 659,
+      "text": "def create_local_weight_qkv(rank, world_size, full_weight, partition_dim, q_len, kv_len, out_weight=None):\n    # Shard q,k,v weights separately and then fuse them for each rank\n    q_weight, k_weight, v_weight = torch.split(full_weight, [q_len, kv_len, kv_len], dim=partition_dim)\n    q_weight_list = torch.split(q_weight, divide(q_len, world_size), dim=partition_dim)[rank::world_size]\n    k_weight_list = torch.split(k_weight, divide(kv_len, world_size), dim=partition_dim)[rank::world_size]\n    v_weight_list = torch.split(v_weight, divide(kv_len, world_size), dim=partition_dim)[rank::world_size]\n\n    with torch.no_grad():\n        return torch.cat(\n            (\n                torch.cat(q_weight_list, dim=partition_dim),\n                torch.cat(k_weight_list, dim=partition_dim),\n                torch.cat(v_weight_list, dim=partition_dim),\n            ),\n            dim=partition_dim,\n            out=out_weight,\n        )\n\n\ndef create_local_weight(rank, world_size, full_weight, partition_dim, per_partition_size, stride, out_weight=None):"
+    },
+    {
+      "bytes": 194,
+      "end_line": 10,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/safetensors/__init__.py",
+      "reason": "safe_open Rust re-export",
+      "sha256": "c1bcca66501582702c8c79aaaf2b922428800efa4367134609f8fc57363402dd",
+      "start_line": 1,
+      "text": "# Re-export this\nfrom ._safetensors_rust import (  # noqa: F401\n    SafetensorError,\n    __version__,\n    deserialize,\n    safe_open,\n    _safe_open_handle,\n    serialize,\n    serialize_file,\n)"
+    },
+    {
+      "bytes": 18610,
+      "end_line": 10,
+      "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/safetensors/torch.py",
+      "reason": "Torch integration imports packaging and Torch",
+      "sha256": "53469c6556a12ecc6fa8f6b51a2b4c462681caee9755b9a20484c6b6ece70446",
+      "start_line": 1,
+      "text": "import os\nimport sys\nfrom collections import defaultdict\nfrom typing import Any, Dict, List, Optional, Set, Tuple, Union\nfrom packaging.version import Version\n\nimport torch\n\nfrom safetensors import deserialize, safe_open, serialize, serialize_file\n"
+    }
+  ],
+  "weight_reads": false
+}

@@ -1,0 +1,175 @@
+{
+  "schema": "lfm3_v016_nxdi010_source_migration_supplement_v1",
+  "source_only": true,
+  "evidence": {
+    "new_single_input_batch": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "1cf9bcb9977cfd9173b82980148608399565d00bb9ad15c151fac7db45812a70",
+      "bytes": 79413,
+      "start_line": 151,
+      "end_line": 179,
+      "text": "        self.input_batch = InputBatch(\n            max_num_reqs=self.max_num_reqs,\n            max_model_len=self.max_model_len,\n            max_num_batched_tokens=self.max_num_tokens,\n            device=self.device,\n            pin_memory=self.pin_memory,\n            vocab_size=self.model_config.get_vocab_size(),\n            block_sizes=[self.block_size],\n            kernel_block_sizes=[self.block_size],\n        )\n\n        self.requests: dict[str, CachedRequestState] = {}\n        # req_id -> (input_id -> encoder_output)\n        self.encoder_cache: dict[str, dict[int, torch.Tensor]] = {}\n        self.model = None\n\n        # Initialize KV cache mode flags based on config\n        self.is_prefix_caching = cache_config.enable_prefix_caching\n        self.is_chunked_prefill = scheduler_config.enable_chunked_prefill\n        self.is_block_kv_layout = self.is_prefix_caching or self.is_chunked_prefill\n\n        # The following fields are used to support custom sequence id mapping.\n        # The goal is to retain the batch line information for contiguous kv cache.\n        # A mapping of vLLM request Id to neuron sequence id.\n        self.use_custom_seq_id_mapping = not self.is_chunked_prefill\n        self.vllm_req_to_neuron_seq_id_mapping: Dict[str, int] = {}\n        # Set of neuron sequence id that are free for use.\n        self.free_seq_ids = set(range(self.max_num_reqs))\n        self._draft_token_ids = None"
+    },
+    "new_prefix_single_group": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "1cf9bcb9977cfd9173b82980148608399565d00bb9ad15c151fac7db45812a70",
+      "bytes": 79413,
+      "start_line": 1363,
+      "end_line": 1368,
+      "text": "    def _process_new_request_for_continuous_batching_with_prefix_caching(\n        self, request_data: NewRequestData, data: IntermediateInputData\n    ) -> None:\n        assert len(request_data.block_ids) == 1\n        block_table = copy.deepcopy(request_data.block_ids)[0]\n"
+    },
+    "new_chunked_single_group": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "1cf9bcb9977cfd9173b82980148608399565d00bb9ad15c151fac7db45812a70",
+      "bytes": 79413,
+      "start_line": 1413,
+      "end_line": 1418,
+      "text": "        data.prefill_completion_state.append(None)\n\n        assert len(request_data.block_ids) == 1\n        block_table = copy.deepcopy(request_data.block_ids)[0]\n\n        # pad the block_table to have the length of num_gpu_blocks"
+    },
+    "new_block_single_group": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuronx_distributed_model_runner.py",
+      "sha256": "1cf9bcb9977cfd9173b82980148608399565d00bb9ad15c151fac7db45812a70",
+      "bytes": 79413,
+      "start_line": 1623,
+      "end_line": 1629,
+      "text": "        num_scheduled_tokens: int,\n        data: IntermediateInputData,\n    ) -> None:\n        data.request_ids.append(request_data.req_id)\n        assert len(request_data.block_ids) == 1\n        block_table = copy.deepcopy(request_data.block_ids)[0]\n"
+    },
+    "new_worker_contiguous_budget_selection": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuron_worker.py",
+      "sha256": "8081afa035f9c6722f43fd817d1f7aafb699b3226f656028f41cdb007cea8a77",
+      "bytes": 8554,
+      "start_line": 119,
+      "end_line": 132,
+      "text": "    def determine_available_memory(self):\n        \"\"\"\n        For block KV layout, we query Neuron runtime for available memory.\n        When running models using a contiguous KV cache layout on Neuron, we need\n        exactly max_num_seqs number of blocks, where each block size is equal to\n        max_model_len. Thus we manually calculate the memory size that this many\n        blocks would correspond to.\n\n        \"\"\"\n        if self.model_runner.is_block_kv_layout:\n            return self._query_runtime_memory()\n\n        return self._calculate_contiguous_kv_memory()\n"
+    },
+    "new_loader_causallm": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/worker/neuronx_distributed_model_loader.py",
+      "sha256": "4868467dd6a94f730b6a3877facc0d38464dbc64447b8b8e8a5bb4a7fc5a66f5",
+      "bytes": 53322,
+      "start_line": 472,
+      "end_line": 606,
+      "text": "class NeuronCausalLM(NeuronModelBase):\n    def _remask_fused_spec_output(self, fused, inputs):\n        \"\"\"\n        Handle NxDI fused speculation output.\n\n        NxDI fused spec returns:\n        fused[0] = accepted_tokens_with_padding : [B, T], 0-padded\n        fused[-1] = next_pos_ids\n\n        We convert the 0-padding to -1 past the number of tokens actually\n        generated in this step, so the runner can strip pads.\n        \"\"\"\n        start_time = time.perf_counter()\n\n        accepted_tokens_with_padding = fused[0]\n        next_pos_ids = fused[-1].squeeze(-1)  # [B]\n        positions_vec = inputs[\"position_ids\"][:, -1].to(next_pos_ids.device)\n\n        # Number of tokens generated this step\n        generated_token_counts = (next_pos_ids - positions_vec).to(torch.long)\n\n        # Mask tail with -1 so runner can strip pads\n        B, T = accepted_tokens_with_padding.shape\n        generated_token_counts = generated_token_counts.clamp_(0, T)\n\n        masked = accepted_tokens_with_padding.clone()\n        for b in range(B):\n            masked[b, generated_token_counts[b] :] = -1\n\n        elapsed_ms = (time.perf_counter() - start_time) * 1000\n        logger.debug(\n            \"[PERF]     _remask_fused_spec_output: %.2fms [batch=%d]\", elapsed_ms, B\n        )\n\n        return masked\n\n    def forward(self, input_ids, input_block_ids, **kwargs):\n        forward_start = time.perf_counter()\n        batch_size = (\n            input_ids.shape[0]\n            if isinstance(input_ids, torch.Tensor)\n            else len(input_ids)\n        )\n\n        with self._reordered(input_block_ids, input_ids=input_ids, **kwargs) as (\n            sorted_ids,\n            inputs,\n            restore,\n        ):\n            # Time model execution\n            model_start = time.perf_counter()\n            output = self.model(\n                inputs[\"input_ids\"],\n                attention_mask=None,\n                seq_ids=sorted_ids,\n                block_table=inputs[\"block_tables\"],\n                **{\n                    k: v\n                    for k, v in inputs.items()\n                    if k\n                    not in [\"input_ids\", \"block_tables\", \"prefill_completion_state\"]\n                },\n            )\n            model_elapsed = (time.perf_counter() - model_start) * 1000\n            logger.debug(\"[PERF]     model_execution: %.2fms\", model_elapsed)\n\n            # Time output processing\n            output_proc_start = time.perf_counter()\n            if self.model.config.neuron_config.on_device_sampling_config:\n                output = output.hidden_states\n                if getattr(\n                    self.model.config.neuron_config, \"enable_fused_speculation\", False\n                ):\n                    fused = output\n                    output = self._remask_fused_spec_output(fused, inputs)\n            else:\n                if self.neuron_config.is_chunked_prefill:\n                    assert kwargs.get(\"prefill_completion_state\") is not None\n                    idx_for_sampling = (\n                        kwargs[\"prefill_completion_state\"].nonzero().flatten()\n                    )\n                    output = output.logits[0, idx_for_sampling, :]\n                else:\n                    output = output.logits[:, -1, :]\n            output_proc_elapsed = (time.perf_counter() - output_proc_start) * 1000\n            logger.debug(\"[PERF]     output_processing: %.2fms\", output_proc_elapsed)\n\n            # Time restore operation\n            restore_start = time.perf_counter()\n            result = restore(output)\n            restore_elapsed = (time.perf_counter() - restore_start) * 1000\n            logger.debug(\"[PERF]     restore: %.2fms\", restore_elapsed)\n\n            forward_elapsed = (time.perf_counter() - forward_start) * 1000\n            logger.debug(\n                \"[PERF]   forward() total: %.2fms [batch=%d]\",\n                forward_elapsed,\n                batch_size,\n            )\n\n            return result\n\n    def sample(self, logits: torch.Tensor) -> SamplerOutput | None:\n        if self.model.config.neuron_config.on_device_sampling_config:\n            return SamplerOutput(\n                # The sampled tokens are expanded to 2D tensor with shape\n                # [num_requests, 1], where each row represents one generated\n                # token per request.\n                sampled_token_ids=logits.unsqueeze(-1),\n                logprobs_tensors=None,\n            )\n        else:\n            # CPU sampling is now handled by the model runner\n            # This should not be called when on_device_sampling_config is None\n            # as the model runner will use its own CPU sampler\n            raise RuntimeError(\n                \"CPU sampling should be handled by the model runner, not the model. \"\n                \"This indicates a bug in the sampling path routing.\"\n            )\n\n    def load_weights(self, model_name_or_path: str, architecture: str, **kwargs):\n        neuronx_model_cls = _get_neuron_model_cls(architecture)\n        success, compiled_model_path, config = self._load_weights_common(\n            model_name_or_path, neuronx_model_cls, **kwargs\n        )\n\n        if not success:\n            if not os.path.exists(model_name_or_path):\n                model_name_or_path = self._save_pretrained_model(model_name_or_path)\n            self._compile_and_load_model(\n                model_name_or_path, neuronx_model_cls, config, compiled_model_path\n            )\n        return success, compiled_model_path\n\n"
+    },
+    "new_platform_async_output": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/platform.py",
+      "sha256": "76538eee22dcf1591b34d879f630cef6ae31b4810a304ecbb861f640e11fa8e6",
+      "bytes": 19721,
+      "start_line": 294,
+      "end_line": 300,
+      "text": "        return \"neuron\"\n\n    @classmethod\n    def is_async_output_supported(cls, enforce_eager: bool | None) -> bool:\n        return False\n\n    @classmethod"
+    },
+    "old_sampler_shortlist": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/lfm3-package-native-core-v1/work/target/vllm_neuron/worker/cpu_sampler.py",
+      "sha256": "9638cd6189a819684efe02fb25b959065c9c5ea5cfc3c45ea3a9153b9ce4289a",
+      "bytes": 5605,
+      "start_line": 15,
+      "end_line": 65,
+      "text": "\n_CANDIDATE_CAP = 128\n_MAX_TOP_K = 64\n_CDF_MARGIN = 1e-4\n\n\ndef _shortlist(\n    logits: torch.Tensor,\n    k: torch.Tensor,\n    p: torch.Tensor | None,\n) -> list[tuple[torch.Tensor | None, torch.Tensor | None]]:\n    \"\"\"Return compact token IDs/scores, or (None, None) for fallback rows.\n\n    Keep all ties at the kth value. Fall back when the shortlist cannot hold\n    them, or when floating-point reduction order or tied-token sort order\n    could change the nucleus boundary. Negative infinity is allowed for\n    masked-out tokens, but the maximum and kth values must be finite.\n    \"\"\"\n    width = logits.shape[1]\n    count = min(_CANDIDATE_CAP + 1, width)\n    values, indices = logits.topk(count, dim=-1, sorted=True)\n    result = []\n    for row in range(logits.shape[0]):\n        threshold = values[row, int(k[row]) - 1]\n        if not (torch.isfinite(values[row, 0])\n                and torch.isfinite(threshold)):\n            result.append((None, None))\n            continue\n        if width > _CANDIDATE_CAP and values[row, -1] >= threshold:\n            result.append((None, None))\n            continue\n\n        eligible = values[row] >= threshold\n        scores = values[row, eligible].flip(0)\n        token_ids = indices[row, eligible].flip(0)\n        if p is not None:\n            cutoff = 1 - p[row]\n            cdf = scores.softmax(dim=-1, dtype=torch.float32).cumsum(dim=-1)\n            if torch.any((cdf - cutoff).abs() <= _CDF_MARGIN):\n                result.append((None, None))\n                continue\n            keep = cdf > cutoff\n            keep[-1] = True\n            first = int(torch.nonzero(keep, as_tuple=False)[0, 0])\n            if first and scores[first] == scores[first - 1]:\n                result.append((None, None))\n                continue\n            scores = scores[keep]\n            token_ids = token_ids[keep]\n        result.append((token_ids, scores))\n    return result"
+    },
+    "new_sampler_override_scope": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm016-source/vllm/v1/sample/sampler.py",
+      "sha256": "1f448e18966f5c8727a1247b9e91d8ebe8ffb63bd3891dae5c0e6b7aef1c015b",
+      "bytes": 12583,
+      "start_line": 61,
+      "end_line": 138,
+      "text": "    def __init__(self, logprobs_mode: LogprobsMode = \"raw_logprobs\"):\n        super().__init__()\n        self.topk_topp_sampler = TopKTopPSampler(logprobs_mode)\n        self.pin_memory = is_pin_memory_available()\n        self.logprobs_mode = logprobs_mode\n\n    def forward(\n        self,\n        logits: torch.Tensor,\n        sampling_metadata: SamplingMetadata,\n        predict_bonus_token: bool = False,\n        logprobs_mode_override: LogprobsMode | None = None,\n    ) -> SamplerOutput:\n        logprobs_mode = logprobs_mode_override or self.logprobs_mode\n        # NOTE(woosuk): Use the original logits (before any penalties or\n        # temperature scaling) for the top-k logprobs.\n        # This is different from the V0 sampler, which uses the logits that\n        # is used for sampling (after penalties and temperature scaling).\n        num_logprobs = sampling_metadata.max_num_logprobs\n        if num_logprobs is not None:\n            if logprobs_mode == \"raw_logprobs\":\n                raw_logprobs = self.compute_logprobs(logits)\n            elif logprobs_mode == \"raw_logits\":\n                if logits.dtype == torch.float32:\n                    raw_logprobs = logits.clone()\n                else:\n                    raw_logprobs = logits.to(torch.float32)\n\n        # Use float32 for the logits.\n        logits = logits.to(torch.float32)\n\n        logits = self.apply_logits_processors(\n            logits, sampling_metadata, predict_bonus_token\n        )\n        # Sample the next token.\n        sampled, processed_logprobs = self.sample(logits, sampling_metadata)\n        if processed_logprobs is not None:\n            raw_logprobs = processed_logprobs\n        # Convert sampled token ids to int64 (long) type to ensure compatibility\n        # with subsequent operations that may use these values as indices.\n        # This conversion is necessary because FlashInfer sampling operations\n        # return int32 (while PyTorch argmax and topk return int64).\n        sampled = sampled.long()\n\n        if num_logprobs is None:\n            logprobs_tensors = None\n        elif num_logprobs == -1:\n            # Return the full unsorted and unranked logprobs.\n            logprobs_tensors = LogprobsTensors(\n                torch.empty(0), raw_logprobs, torch.empty(0)\n            )\n        else:\n            # Gather the logprobs and ranks of the topk and sampled token.\n            logprobs_tensors = self.gather_logprobs(\n                raw_logprobs, num_logprobs, token_ids=sampled\n            )\n\n        # Use int32 to reduce the tensor size.\n        sampled = sampled.to(torch.int32)\n\n        # These are GPU tensors.\n        sampler_output = SamplerOutput(\n            # The sampled tokens are expanded to 2D tensor with shape\n            # [num_requests, 1], where each row represents one generated\n            # token per request.\n            sampled_token_ids=sampled.unsqueeze(-1),\n            logprobs_tensors=logprobs_tensors,\n        )\n        return sampler_output\n\n    @staticmethod\n    def apply_temperature(\n        logits: torch.Tensor,\n        temp: torch.Tensor,\n        all_random: bool,\n    ) -> torch.Tensor:\n        # Use in-place division to avoid creating a new tensor.\n        # Avoid division by zero if there are greedy requests."
+    },
+    "typed_native_factory": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/slot_cache_nki05_typed_jit_v1.py",
+      "sha256": "44f3779f3d6b7ea6c474b33ded57e56651d5b344fc0bed91dacf99f015d3d842",
+      "bytes": 1457,
+      "start_line": 1,
+      "end_line": 34,
+      "text": "\"\"\"NKI0.5 device factory; no native import or compilation on module import.\"\"\"\nimport os\nfrom importlib import metadata\n\nDEVICE_SOFTWARE = {\n    'nki': '0.5.0+28631259367.ga768afa6',\n    'torch': '2.9.1+cpu',\n    'torch-neuronx': '2.9.0.2.15.32035+de43f57c',\n    'neuronx-cc': '2.26.6360.0+6f180f47',\n}\n\n\ndef require(value,message):\n    if not value:raise RuntimeError(message)\n\n\ndef wrap_device_kernel(function,nki_api,environment):\n    \"\"\"Public NKI jit; this does not invoke the kernel or simulate it.\"\"\"\n    require(callable(function),'Exact observer-free function supplied')\n    require(environment.get('NEURON_PLATFORM_TARGET_OVERRIDE')=='trn1', 'Explicit Trn1 target required')\n    require(environment.get('NEURON_LOGICAL_NC_CONFIG')=='1', 'Original LNC1 required')\n    require(environment.get('NKI_SIMULATOR','0')=='0','Device path cannot use simulator')\n    return nki_api.jit(function)\n\n\ndef make_device_kernel(admit):\n    require(callable(admit) and admit() is True,'Future owned device admission required before native import')\n    require({name:metadata.version(name) for name in DEVICE_SOFTWARE}==DEVICE_SOFTWARE,\n            'Distinct exact NKI0.5 device software identity; old package identity is not changed')\n    import nki\n    from slot_cache_nki05_typed_selector_v1 import make_kernel\n    kernel=wrap_device_kernel(make_kernel(),nki,os.environ)\n    require(admit() is True,'Device admission survives JIT construction')\n    return kernel"
+    }
+  },
+  "version_metadata": {
+    "neuronx-cc": {
+      "version": "2.26.6360.0+6f180f47",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/neuronx_cc-2.26.6360.0+6f180f47.dist-info/METADATA",
+        "sha256": "a4f3979dfd1ced5a1b7536d7be7dc5c259a723cb835bcd219bfe6a3c54aa7848",
+        "bytes": 855
+      }
+    },
+    "neuronx-distributed": {
+      "version": "0.19.28492+435aae2b",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/neuronx_distributed-0.19.28492+435aae2b.dist-info/METADATA",
+        "sha256": "3e1a43b5b902ded6eaad6a22e307fa22f879d16e81513cc915427101255795e0",
+        "bytes": 1201
+      }
+    },
+    "neuronx-distributed-inference": {
+      "version": "0.10.18399+ed62453e",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/neuronx_distributed_inference-0.10.18399+ed62453e.dist-info/METADATA",
+        "sha256": "e239f617bb6f18b4a594e15374f28d04ed4ab983f0f7fb18d6e106be26ba5772",
+        "bytes": 6114
+      }
+    },
+    "nki": {
+      "version": "0.5.0+28631259367.ga768afa6",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/nki-0.5.0+28631259367.ga768afa6.dist-info/METADATA",
+        "sha256": "4aca327e9a04d94d9fd617f6ea04096e5897085cbdace9abd6700a86a685709b",
+        "bytes": 8324
+      }
+    },
+    "torch": {
+      "version": "2.9.1+cpu",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/torch-2.9.1+cpu.dist-info/METADATA",
+        "sha256": "8c7548e1ac8ff4459eb2e8e71e3a8cd7345215fb49bc7d08368fa427666af1ed",
+        "bytes": 29103
+      }
+    },
+    "torch-neuronx": {
+      "version": "2.9.0.2.15.32035+de43f57c",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/torch_neuronx-2.9.0.2.15.32035+de43f57c.dist-info/METADATA",
+        "sha256": "282ce28174a344c7b81989bad0d2520c192127e55b2e76ca09b01e82a8268f05",
+        "bytes": 999
+      }
+    },
+    "transformers": {
+      "version": "4.57.6",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/transformers-4.57.6.dist-info/METADATA",
+        "sha256": "91601044a74fe02571a825356754dbbaa9e1d3e3dd3c2237254c15e903e421e3",
+        "bytes": 43991
+      }
+    },
+    "vllm": {
+      "version": "0.16.0+empty",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/vllm-0.16.0+empty.dist-info/METADATA",
+        "sha256": "912cfa2f0b485d2244a3c4f62dca307b726a5f7799ce471fb7fb2fbde92fbc86",
+        "bytes": 9161
+      }
+    },
+    "vllm-neuron": {
+      "version": "0.5.3",
+      "metadata": {
+        "path": "/home/ubuntu/venvs/vllm_neuron_053_py312/lib/python3.12/site-packages/vllm_neuron-0.5.3.dist-info/METADATA",
+        "sha256": "fb367226acdd425b3a98e2bd9bf5173b8acc90989b8be7be23f0ce81b5739e69",
+        "bytes": 1468
+      }
+    }
+  },
+  "sdk_text_manifest": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/lfm3-nki05-device-sdk-text-manifest-20261112-v1.json",
+    "sha256": "fa8ac892c6c049e562e1ca93101767836d6a6d762127656eaa9d05c568e15b7f",
+    "bytes": 120860
+  },
+  "observed_absent_paths": [
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/vllm-neuron-053/vllm_neuron/models/lfm3"
+  ],
+  "all_initial_43_source_pins_still_equal": true,
+  "native_or_binary_or_weights_read": false,
+  "prior_generation_failure": {
+    "terminal_chunk": "0cbfc9",
+    "exit_code": 1,
+    "reason": "typed factory excerpt end 39 exceeded actual 34 lines; failed before any output creation"
+  }
+}
