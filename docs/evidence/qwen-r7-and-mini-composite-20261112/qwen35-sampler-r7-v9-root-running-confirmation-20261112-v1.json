@@ -1,0 +1,89 @@
+{
+  "schema": "qwen35_sampler_r7_v9_root_running_confirmation_v1",
+  "observed_at": "2026-11-12T08:11:07.559501+00:00",
+  "reviewer": "/root",
+  "actual_tool": {
+    "kind": "tool_session",
+    "session_id": 91085
+  },
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/admission.json",
+    "sha256": "0773fb59fba0c661974ae23c88b3eda90b34f2fe2b343172f3b97d991d5c9bb5"
+  },
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r7-20261112-spec-v9.json",
+    "sha256": "0572165e81926a8daf92675390537b7c837713f84f739ad4e202db3c13360f1b"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r7-20261112-review-v9.json",
+    "sha256": "51778f9a85a4a2774985d64ed30b7edf31cf519566c0352bc6b860376826e65e"
+  },
+  "outer_owner": {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "-s",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r7-20261112-spec-v9.json",
+      "--spec-sha256",
+      "0572165e81926a8daf92675390537b7c837713f84f739ad4e202db3c13360f1b",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-sampler-r7-20261112-review-v9.json",
+      "--review-sha256",
+      "51778f9a85a4a2774985d64ed30b7edf31cf519566c0352bc6b860376826e65e"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 3189084,
+    "ppid": 2480035,
+    "start_ticks": "425111745"
+  },
+  "coordinator_owner": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/coordinator-owner.json",
+    "sha256": "725ec30bb62de31283c3f7ae32a6109b4997b661ac28a40d52930f59cdfafde2"
+  },
+  "coordinator": {
+    "process": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-B",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/run_qwen35_sampler_runtime_v9.py",
+        "--mode",
+        "coordinator",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/admission.json",
+        "--binding-sha256",
+        "0773fb59fba0c661974ae23c88b3eda90b34f2fe2b343172f3b97d991d5c9bb5"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r7-v9-20261112-coordinator.service",
+      "pid": 3197201,
+      "ppid": 1583,
+      "start_ticks": "425145685"
+    },
+    "service_owner": {
+      "invocation_id": "fc15629165394d5fafc9d0c6e00396d8",
+      "pid": 3197201,
+      "start_ticks": 425145685,
+      "unit": "trn1-qwen35-sampler-r7-v9-20261112-coordinator"
+    }
+  },
+  "running_ack": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/running-ack.json",
+    "sha256": "d100b503a2703ecf01a19fba255c66c52fdcd5c323eb973c13bbed58b81ab9fd"
+  },
+  "running_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v542-qwen35-r7-v9-running.json",
+    "sha256": "d73ee9dbf1aad38cdabd84a06e9951005d4215f91c657aee4a9e3949e4d043bc"
+  },
+  "outer_history_pair": {
+    "path": "/mnt/nvme/neuron-work/qwen35-sampler-pair-r7-v9-20261112-runtime/outer-history-pair.json",
+    "sha256": "abacc155138a54cc6f7dc6708d94df6b9805eacd7229b265782b59ebf7c596d6"
+  },
+  "actual_runtime_admission": true,
+  "exact_owners_live": true,
+  "original_lock_held": true,
+  "full_model_qualified": false,
+  "new_speedup_claim": false
+}

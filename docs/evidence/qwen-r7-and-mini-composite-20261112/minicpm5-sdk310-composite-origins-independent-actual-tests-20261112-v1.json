@@ -1,0 +1,50 @@
+{
+  "actual_binary_or_payload_reads": false,
+  "actual_snapshot_plaintext_reads": false,
+  "actual_tool": {
+    "exit_code": 0,
+    "kind": "tool_call",
+    "terminal_chunk": "ee355d"
+  },
+  "admission_created": false,
+  "command": "taskset -c 7 nice -n 19 prlimit --as=536870912 --cpu=60 -- python3 -I -S -B /home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_composite_origins_independent_v1.py",
+  "delivery": {
+    "bytes": 5420,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-composite-origins-source-delivery-20261112-v1.json",
+    "sha256": "7560b44eb99a6b8447b4d0321eeb1cdbbf42dbe8ee545719183e5b7dbdcd6560"
+  },
+  "failed_harness_attempt": {
+    "actual_tool": {
+      "exit_code": 1,
+      "kind": "tool_call",
+      "terminal_chunk": "a9af8e"
+    },
+    "cause": "Reviewer file fence initially allowed only Python3.12 stdlib and experiment-root JSON; actual interpreter uses Python3.10 and saved actual result JSON is under /mnt/nvme. Access was rejected before reads. Exception formatter/apport also failed closed on disallowed source/config reads.",
+    "correction": "Derive actual stdlib source namespace, permit only .json saved metadata under /mnt/nvme, retain .py/.json-only reads and denied-native/process hooks; run with -I -S -B and default exception hook.",
+    "frozen_runtime_sources_modified": false,
+    "preserved_source": {
+      "bytes": 8905,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-composite-independent-fence-initial-failure-20261112-v1.py.txt",
+      "sha256": "a21a43fe9fe2fa9054918d72e660be8a585790feadc3cddb14cf8a298188a322"
+    }
+  },
+  "handoff_created": false,
+  "native_import_blocker_active": true,
+  "process_or_native_operations_permitted": false,
+  "results": {
+    "bytes": 17074,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-composite-origins-independent-test-results-20261112-v1.json",
+    "sha256": "08ce746e34eec2161c6456525ea9221061823e2566af0bf751b5ac407376e123"
+  },
+  "reviewer": "/root/mini_mapping_authority_source",
+  "schema": "minicpm5_sdk310_composite_origins_independent_actual_tests_v1",
+  "serial_work": false,
+  "source_and_JSON_read_fence_active": true,
+  "test_source": {
+    "bytes": 9019,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_composite_origins_independent_v1.py",
+    "sha256": "b4b1c561183eb208cdbe24a5dadad43a86bb1ca5d73b218a88677ecfcfb21443"
+  },
+  "tests": 18,
+  "unittest_seconds": 0.654
+}
