@@ -1,0 +1,291 @@
+--- qwen35_sampler_runtime_adapter_v8.py
++++ qwen35_sampler_runtime_adapter_v9.py
+@@ -16,12 +16,12 @@
+ import urllib.request
+ import uuid
+ 
+-from qwen35_sampler_runtime_contract_v8 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
++from qwen35_sampler_runtime_contract_v9 import (COORDINATOR_PROPERTIES, LIMITS, LOCK_IDENTITY, PYTHON, Q, ROOT, STARTUP_FILES,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v8 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
++from qwen35_sampler_runtime_io_v9 import (RetainedLock, descriptor, identity, loaded_local_sources, once, process_api,
+     raw, read, read_if_present, ref, resources, service_owner, storage, wait_until)
+-from qwen35_sampler_runtime_history_v8 import Authority, Bundle, check_running
+-from qwen35_sampler_runtime_service_v8 import (CLI, Service, argv, expected_phase, properties, supervise,
++from qwen35_sampler_runtime_history_v9 import Authority, Bundle, check_running
++from qwen35_sampler_runtime_service_v9 import (CLI, Service, argv, expected_phase, properties, supervise,
+                                                 validate_api_failure, API_ERROR_MESSAGE)
+ from qwen35_sampler_pair_protocol_v1 import BASE, expected_case, host_identity
+ 
+--- qwen35_sampler_runtime_contract_v8.py
++++ qwen35_sampler_runtime_contract_v9.py
+@@ -103,13 +103,13 @@
+     reference(spec_ref)
+     keys = {"schema", "run_name", "output_root", "history_overlay", "current_serial_catalog",
+             "source_sha256", "input_extension", "frozen_science_delivery", "running_handoff_path",
+-            "limits", "lock_identity", "native_python", "automatic_successor"}
++            "limits", "lock_identity", "native_python", "automatic_successor", "lfm_r2_scope"}
+     require(type(spec) is dict and set(spec) == keys and spec["schema"] == "qwen35_sampler_runtime_spec_v1", "exact new runtime spec")
+     names = units(spec["run_name"])
+     require(spec["output_root"] == "/mnt/nvme/neuron-work/qwen35-sampler-pair-" + spec["run_name"], "fresh exact NVMe namespace")
+     require(spec["limits"] == LIMITS and spec["lock_identity"] == LOCK_IDENTITY
+             and spec["native_python"] == PYTHON and spec["automatic_successor"] is False, "original lock/scope/finite resource policy")
+-    for key in ("history_overlay", "current_serial_catalog", "frozen_science_delivery"):
++    for key in ("history_overlay", "current_serial_catalog", "frozen_science_delivery", "lfm_r2_scope"):
+         reference(spec[key])
+     require(spec["frozen_science_delivery"] == {
+         "path": str(Q / "qwen35-sampler-pair-source-delivery-20261111-v1.json"),
+@@ -154,11 +154,12 @@
+     return result
+ 
+ 
+-RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v8.py", "qwen35_sampler_runtime_preflight_v1.py",
+-                 "qwen35_sampler_runtime_io_v8.py", "qwen35_sampler_runtime_history_v8.py",
+-                 "qwen35_sampler_runtime_service_v8.py", "qwen35_sampler_runtime_adapter_v8.py",
+-                 "run_qwen35_sampler_runtime_v8.py", "qwen35_sampler_torch_namespace_sources_v1.py",
+-                 "qwen35_sampler_native_leaves_v1.py", "qwen35_sampler_native_leaves_v2.py")
++RUNTIME_FILES = ("qwen35_sampler_runtime_contract_v9.py", "qwen35_sampler_runtime_preflight_v1.py",
++                 "qwen35_sampler_runtime_io_v9.py", "qwen35_sampler_runtime_history_v9.py",
++                 "qwen35_sampler_runtime_service_v9.py", "qwen35_sampler_runtime_adapter_v9.py",
++                 "run_qwen35_sampler_runtime_v9.py", "qwen35_sampler_torch_namespace_sources_v1.py",
++                 "qwen35_sampler_native_leaves_v1.py", "qwen35_sampler_native_leaves_v2.py",
++                 "qwen35_sampler_history_supplement_v1.py")
+ STARTUP_FILES = tuple("/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/vllm/" + name
+                       for name in ("config/parallel.py", "engine/arg_utils.py", "envs.py", "v1/engine/core.py"))
+ 
+--- qwen35_sampler_runtime_history_v8.py
++++ qwen35_sampler_runtime_history_v9.py
+@@ -10,9 +10,9 @@
+ from pathlib import Path
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v8 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
++from qwen35_sampler_runtime_contract_v9 import (LIMITS, LOCK_IDENTITY, Q, RUNTIME_FILES,
+     control_root, digest, host_sources, reference, require, units, validate_spec)
+-from qwen35_sampler_runtime_io_v8 import Metadata, identity, loaded_local_sources, process_api, raw, read
++from qwen35_sampler_runtime_io_v9 import Metadata, identity, loaded_local_sources, process_api, raw, read
+ 
+ 
+ class Bundle:
+@@ -35,6 +35,10 @@
+         overlay = self.meta.read(self.spec["history_overlay"])
+         require(overlay["current_serial_catalog"] == self.spec["current_serial_catalog"], "complete latest catalog binding")
+         resolved = overlays.resolve(overlay, recovered, self.meta.read, self.guard)
++        from qwen35_sampler_history_supplement_v1 import build, extend_scope
++        self.supplement = build(self.meta.read, self.spec["lfm_r2_scope"],
++                                self.meta.read(self.spec["current_serial_catalog"]))
++        resolved["current_scope"] = extend_scope(resolved["current_scope"], self.supplement)
+         # Latest recorder_v3/auditor_v4 receipts reconstruct the entire
+         # inherited source plan. Use the accepted v7 witness dispatcher;
+         # never feed these receipts into the older producer-only validator.
+@@ -97,7 +101,9 @@
+         known = set(self.scope["complete_known_units"])
+         require(completed.physical.validate_pair(pair, required, self.scope["owners"], LOCK_IDENTITY,
+                                                 known_units=known) == known, "entire original two-pass physical scope")
+-        return {"schema": "qwen35_sampler_full_history_pair_v1", "current_serial_catalog": self.spec["current_serial_catalog"],
++        from qwen35_sampler_history_supplement_v1 import observe
++        retirement = observe(self.supplement, process_api(), self.guard)
++        return {"schema": "qwen35_sampler_full_history_pair_v1", "history_supplement": retirement, "current_serial_catalog": self.spec["current_serial_catalog"],
+                 "history_overlay": self.spec["history_overlay"], "resolved_plan_sha256": self.resolved["plan_sha256"],
+                 "physical_pair_schema": completed.physical.PAIR_SCHEMA, "paired_physical": packed_physical(pair),
+                 "full_physical_passes": 2, "complete_known_units": sorted(known),
+--- qwen35_sampler_runtime_io_v8.py
++++ qwen35_sampler_runtime_io_v9.py
+@@ -14,7 +14,7 @@
+ import sys
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v8 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
++from qwen35_sampler_runtime_contract_v9 import (LIMITS, LOCK_PATH, LOCK_IDENTITY, ROOT, Q, PHASES,
+                                                budget, control_root, digest, reference, require)
+ 
+ 
+--- qwen35_sampler_runtime_service_v8.py
++++ qwen35_sampler_runtime_service_v9.py
+@@ -15,12 +15,12 @@
+ import subprocess
+ import time
+ 
+-from qwen35_sampler_runtime_contract_v8 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
++from qwen35_sampler_runtime_contract_v9 import (COORDINATOR_PROPERTIES, LIMITS, PYTHON, Q, ROOT,
+     control_root, digest, native_environment, phase_properties, require, units)
+-from qwen35_sampler_runtime_io_v8 import (identity, once, process_api, raw, read, read_if_present, ref,
++from qwen35_sampler_runtime_io_v9 import (identity, once, process_api, raw, read, read_if_present, ref,
+                                         service_owner, wait_until)
+ 
+-CLI = str(Q / "run_qwen35_sampler_runtime_v8.py")
++CLI = str(Q / "run_qwen35_sampler_runtime_v9.py")
+ PROPERTY_KEYS = ("Id,LoadState,ActiveState,SubState,MainPID,ControlPID,Job,InvocationID,ControlGroup,Result,"
+                  "ExecMainPID,ExecMainCode,ExecMainStatus,ExecStart,ExecStopPost,Environment,BindsTo,After,"
+                  "MemoryMax,MemoryHigh,MemorySwapMax,TasksMax,KillMode,RemainAfterExit,SendSIGKILL,"
+--- run_qwen35_sampler_runtime_v8.py
++++ run_qwen35_sampler_runtime_v9.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parent, Path(__file__).resolve().parents[1]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_sampler_runtime_contract_v8 import reference, require
++    from qwen35_sampler_runtime_contract_v9 import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_sampler_runtime_adapter_v8 import outer
++        from qwen35_sampler_runtime_adapter_v9 import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_sampler_runtime_adapter_v8 import coordinator, native_leaf, worker_bootstrap
++    from qwen35_sampler_runtime_adapter_v9 import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_sampler_runtime_service_v8 import supervise
++        from qwen35_sampler_runtime_service_v9 import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 
+--- prepare_qwen35_sampler_v8_candidate_v2.py
++++ prepare_qwen35_sampler_v9_candidate_v3.py
+@@ -1,4 +1,4 @@
+-"""Finite r6-to-v8 metadata candidate; no launch, latest lookup or file writes.
++"""Finite actual-history r6-to-v9 metadata candidate; no launch, latest lookup or file writes.
+ 
+ All future refs and output names are explicit. Complete recovered/witness
+ resolution, source authentication and physical freshness remain root work.
+@@ -9,7 +9,7 @@
+ from pathlib import Path
+ import re
+ 
+-from qwen35_sampler_runtime_contract_v8 import (LIMITS, LOCK_IDENTITY, PYTHON, Q,
++from qwen35_sampler_runtime_contract_v9 import (LIMITS, LOCK_IDENTITY, PYTHON, Q,
+     digest, merge_sources, reference, require, units)
+ 
+ FIXED = {
+@@ -47,6 +47,12 @@
+ LEAF = dict(path=str(Q/'qwen35_sampler_native_leaves_v2.py'),
+             sha256='efdca076af1eafbc423f0b23f3c5604204efc84c2b3ee7f9d6d200809d160db7')
+ V8_NAMES = tuple('qwen35_sampler_runtime_'+name+'_v8.py' for name in ('contract','io','history','service','adapter')) + ('run_qwen35_sampler_runtime_v8.py',)
++V9_NAMES = tuple(name.replace('_v8', '_v9') for name in V8_NAMES) + ('qwen35_sampler_history_supplement_v1.py',)
++SUPPLEMENT_SOURCES = {
++    str(Q.parent/'lfm3_nki05_device_matrix_v1.py'): 'f9bdd450faa06fefcc9aef5093b610d271215fb3a0f4ad0859bfb05cae64b0e5',
++    str(Q.parent/'lfm3_nki05_full_cpu_metadata_v1.py'): '52db4f38eff4819139bf9c874cf293ef2e51bd997bd8927c970d8b4e5f0365b0',
++    str(Q/'lfm3_full_cpu_successor_history_v3.py'): 'b5d957a6aaae30efefaf1a266897824b34986c61ff65579ef4ef6c7375fb821c',
++}
+ IDENTITY_KEYS = {'realpath','device','inode','size','mtime_ns','ctime_ns'}
+ 
+ 
+@@ -66,7 +72,7 @@
+     """Future explicit JSON-only stable reader; no reads during construction."""
+     def __init__(self, guard): self.guard, self.observed = guard, {}
+     def read(self, ref):
+-        from qwen35_sampler_runtime_io_v8 import identity, raw
++        from qwen35_sampler_runtime_io_v9 import identity, raw
+         reference(ref)
+         require(Path(ref['path']).suffix == '.json', 'Only explicit saved JSON metadata')
+         self.guard(); before = identity(ref['path'])
+@@ -117,9 +123,10 @@
+ 
+ def future_shape(future, old_spec, old_overlay):
+     require(type(future) is dict and set(future) == {'terminal','prerequisite_exit','catalog','run_name','output_root',
+-        'overlay_output_root','running_handoff_path','overlay_path','spec_path','review_candidate_path'},
++        'overlay_output_root','running_handoff_path','overlay_path','spec_path','review_candidate_path',
++        'lfm_r2_scope','successor_sources'},
+         'Every future terminal, catalog, run and output binding must be explicit')
+-    for key in ('terminal','prerequisite_exit','catalog'): reference(future[key])
++    for key in ('terminal','prerequisite_exit','catalog','lfm_r2_scope','successor_sources'): reference(future[key])
+     units(future['run_name'])
+     require(future['run_name'] != old_spec['run_name']
+             and future['output_root'] == '/mnt/nvme/neuron-work/qwen35-sampler-pair-'+future['run_name']
+@@ -133,7 +140,7 @@
+             and re.fullmatch('[a-z0-9][a-z0-9-]*\.json',path.name), 'Finite explicit research JSON output')
+     require(Path(future['running_handoff_path']).name.startswith('continuation-handoff-'), 'Original future handoff namespace')
+     paths = [future[key] for key in ('running_handoff_path','overlay_path','spec_path','review_candidate_path')]
+-    forbidden = {ref['path'] for ref in FIXED.values()} | {future[key]['path'] for key in ('terminal','prerequisite_exit','catalog')}
++    forbidden = {ref['path'] for ref in FIXED.values()} | {future[key]['path'] for key in ('terminal','prerequisite_exit','catalog','lfm_r2_scope','successor_sources')}
+     forbidden.add(old_spec['running_handoff_path'])
+     require(len(set(paths)) == 4 and not set(paths) & forbidden, 'Candidate paths cannot overwrite bound or historical metadata')
+ 
+@@ -223,19 +230,30 @@
+     require(terminal['serial_execution'] is True and terminal['live_tool_sessions']==[] and terminal['active_heavy_units']==[]
+             and terminal.get('running') is False, 'Future catalog must bind a root-observed idle terminal')
+     prerequisite=read(future['prerequisite_exit']);prerequisite_row=rows.get(future['prerequisite_exit']['path'],{})
+-    lfm=fixed['lfm_spec']
+-    require(future['prerequisite_exit']['path'] not in completed_rows
++    from qwen35_sampler_history_supplement_v1 import build as build_supplement
++    supplement=build_supplement(read,future['lfm_r2_scope'],catalog)
++    scope=supplement['scope'];lfm=fixed['lfm_spec']
++    require(scope['actual_exit']==future['prerequisite_exit'] and scope['spec']==FIXED['lfm_spec']
++            and future['prerequisite_exit']['path'] not in completed_rows
+             and prerequisite_row.get('terminal')==future['prerequisite_exit']
+-            and prerequisite.get('reviewer')=='/root' and prerequisite.get('actual_tool_exit_observed') is True
+-            and prerequisite.get('actual_tool')==prerequisite_row.get('tool')
+-            and prerequisite.get('spec')==FIXED['lfm_spec'] and prerequisite.get('output_root')==lfm['output_root']
+-            and prerequisite.get('source_sha256')==lfm['source_sha256'] and len(lfm['source_sha256'])==595
+-            and all(prerequisite_row.get('source_sha256',{}).get(path)==sha for path,sha in lfm['source_sha256'].items())
+-            and prerequisite.get('owners_gone') is True and prerequisite.get('physically_drained') is True
+-            and prerequisite.get('original_lock_observed_free') is True and prerequisite.get('lock_identity')==LOCK_IDENTITY
+-            and prerequisite.get('owners')==prerequisite_row.get('owners')
+-            and lfm['unit'] in prerequisite_row.get('units',[]),
+-            'Explicit future LFM r2 actual exit, original595 sources, actual tool and drained lifecycle required')
++            and prerequisite.get('actual_tool')==scope['actual_tool']==prerequisite_row.get('tool')
++            and prerequisite.get('owners')==scope['owners']==prerequisite_row.get('owners')
++            and scope['source_sha256']==lfm['source_sha256'] and len(lfm['source_sha256'])==595
++            and all(prerequisite_row['source_sha256'].get(path)==sha for path,sha in lfm['source_sha256'].items())
++            and lfm['unit'] in prerequisite_row['units'],
++            'Unchanged actual LFM exit plus separately authenticated complete audit/scope')
++    successor=read(future['successor_sources'])
++    require(set(successor)=={'schema','previous_runtime_review','source_files','dependency_sources','limits','science_unchanged'}
++            and successor['schema']=='qwen35_sampler_complete_history_v9_sources_v1'
++            and successor['previous_runtime_review']==FIXED['runtime_review']
++            and set(successor['source_files'])==set(V9_NAMES)
++            and successor['dependency_sources']==SUPPLEMENT_SOURCES
++            and successor['limits']==LIMITS and successor['science_unchanged'] is True,
++            'Exact additive seven-file source candidate; independent root review remains required')
++    v9=dict(SUPPLEMENT_SOURCES)
++    for name,ref in successor['source_files'].items():
++        reference(ref);require(ref['path']==str(Q/name),'Exact additive successor source path')
++        v9[ref['path']]=ref['sha256']
+     require(contains_reference(terminal,future['prerequisite_exit']), 'Idle handoff must retain the exact future LFM actual exit')
+     row_pins = {}
+     known_units = set()
+@@ -261,7 +279,7 @@
+             reference(dict(path=path,sha256=sha))
+             require(path not in row_pins or row_pins[path] == sha, 'Conflicting source pins across complete future catalog rows')
+             row_pins[path] = sha
+-    pins = merge_sources(old_spec['source_sha256'],v8,row_pins) if row_pins else merge_sources(old_spec['source_sha256'],v8)
++    pins = merge_sources(old_spec['source_sha256'],v8,v9,row_pins) if row_pins else merge_sources(old_spec['source_sha256'],v8,v9)
+     require(not set(units(future['run_name']).values()) & known_units, 'Future Qwen units disjoint from saved rows')
+     require(all(pins.get(path) == sha for path,sha in old_overlay['source_extension'].items()), 'All old overlay source pins retained')
+     recovered_pins = {path:sha for path,sha in old_spec['source_sha256'].items() if path not in old_overlay['source_extension']}
+@@ -283,7 +301,8 @@
+     overlay_ref = object_ref(future['overlay_path'],overlay,ordinary=True)
+     spec = copy.deepcopy(old_spec)
+     spec.update(run_name=future['run_name'], output_root=future['output_root'], running_handoff_path=future['running_handoff_path'],
+-                history_overlay=overlay_ref, current_serial_catalog=copy.deepcopy(future['catalog']),source_sha256=pins)
++                history_overlay=overlay_ref, current_serial_catalog=copy.deepcopy(future['catalog']),source_sha256=pins,
++                lfm_r2_scope=copy.deepcopy(future['lfm_r2_scope']))
+     spec_inputs = copy.deepcopy(old_spec['input_extension']);merge_inputs(spec_inputs,runtime_observed);spec['input_extension']=spec_inputs
+     spec_ref = object_ref(future['spec_path'],spec)
+     candidate = dict(schema='qwen35_sampler_runtime_source_review_v1',reviewer='/root/candidate-preparation',
+@@ -291,7 +310,7 @@
+         spec=spec_ref,source_sha256=copy.deepcopy(pins),launch_authorized=False)
+     artifacts = {future['overlay_path']:overlay,future['spec_path']:spec,future['review_candidate_path']:candidate}
+     guard()
+-    return dict(schema='qwen35_sampler_v8_metadata_candidate_v2', artifacts=artifacts,
++    return dict(schema='qwen35_sampler_v9_metadata_candidate_v3', artifacts=artifacts,
+         references={key:object_ref(future[key],artifacts[future[key]]) for key in ('overlay_path','spec_path','review_candidate_path')},
+         evidence=dict(fixed_inputs=copy.deepcopy(FIXED),future=copy.deepcopy(future),original_sources=47959,
+             full_candidate_sources=len(pins),original_serial_rows=120,completed_serial_rows=121,candidate_serial_rows=len(rows),
+@@ -302,6 +321,9 @@
+             original_base_inputs=8791,overlay_base_input_intersection=0,
+             preparation_only_inputs={p:observed[p] for p in sorted(PREPARATION_ONLY)},
+             future_LFM_actual_exit_and_idle_explicit=True,r6_actual_failed_exit_preserved=True,
++            lfm_owner_count=len(scope['predecessor_owners']),lfm_child_count=len(scope['children']),
++            retired_service_count=1+len(supplement['retired_mini_history']),actual_exit_unchanged=True,
++            successor_runtime_source_review_pending=True,
+             full_recovered_witness_closure_verified=False,Bundle_resolve_performed=False,
+             old_source_payloads_rehashed=False,physical_checks_performed=False,output_freshness_observed=False,
+             runtime_admitted=False,launch_authorized=False,new_speedup_claim=False))
