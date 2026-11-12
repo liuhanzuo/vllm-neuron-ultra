@@ -1,0 +1,1073 @@
+{
+  "schema": "minicpm5_sdk310_two_retired_native_services_metadata_evidence_v1",
+  "observed_at": "2026-11-12T06:51:29.679478+00:00",
+  "reviewer": "/root/lfm_v3_binding_source",
+  "source_report": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-download-r1-current-history-mismatches-20261112-v1.json",
+    "sha256": "f39d1ad0dd6e96a8b2849ec94d4b733f8d0b4bdaca2e4d68199ee84d4db4eb06"
+  },
+  "metadata_only": true,
+  "payloads_read": false,
+  "physical_checks_performed_here": false,
+  "native_execution": false,
+  "services_changed": false,
+  "handoff_or_catalog_written": false,
+  "cases": [
+    {
+      "key": "native_r1_failed",
+      "unit": "trn1-mini-layer1-operator-native-r1-20261111",
+      "invocation_id": "bb6e0be35a364c1da9ae697a5ed70055",
+      "actual_tool": {
+        "kind": "tool_session",
+        "session_id": 88265,
+        "terminal_chunk": "0f7129",
+        "exit_code": 1
+      },
+      "original_actual_exit_code": 1,
+      "original_sdk_model_exit_code": 1,
+      "original_terminal_schema": "minicpm5_native_model_failed_actual_exit_v1",
+      "original_full_model_qualified": false,
+      "original_independent_raw_audit_pending": true,
+      "original_recorder_self_exit_verified_flag": false,
+      "recorder_actual_tool": {
+        "kind": "tool_session",
+        "session_id": 70508,
+        "terminal_chunk": "6dd086",
+        "exit_code": 0
+      },
+      "owners": {
+        "outer": {
+          "pid": 1471058,
+          "start_ticks": "418093092",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v3.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-spec.json",
+            "--spec-sha256",
+            "c4a56036bbe3976c70e9cdca35a7ba2db78236a9fb838d3bf83a7d4a1a1dd74f",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-source-review.json",
+            "--review-sha256",
+            "ff44861da1fa976b20697c1ba49b3b260973919795c817061364c804f1736b2d"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        "coordinator": {
+          "pid": 1478958,
+          "start_ticks": "418123278",
+          "ppid": 1583,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+            "--mode",
+            "coordinator",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+            "--admission-sha256",
+            "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+          "unit": "trn1-mini-layer1-operator-native-r1-20261111",
+          "invocation_id": "bb6e0be35a364c1da9ae697a5ed70055"
+        },
+        "native": {
+          "pid": 1494935,
+          "start_ticks": "418180432",
+          "ppid": 1478958,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+            "--mode",
+            "native",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+            "--admission-sha256",
+            "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+        },
+        "recorder": {
+          "pid": 1575298,
+          "start_ticks": "418831416",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v1.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-20261111-spec.json",
+            "--spec-sha256",
+            "be011d7b8a45601fee850b54283d76f4fd74b02d2de7bf551d3e09cc25e3c42a",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-20261111-review.json",
+            "--review-sha256",
+            "a990b6820316b08e4ac306e17cee952f925a983f8e06d53d42439fbe66fbec76"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        }
+      },
+      "required_current_owners": [
+        {
+          "pid": 1471058,
+          "start_ticks": "418093092",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v3.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-spec.json",
+            "--spec-sha256",
+            "c4a56036bbe3976c70e9cdca35a7ba2db78236a9fb838d3bf83a7d4a1a1dd74f",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-source-review.json",
+            "--review-sha256",
+            "ff44861da1fa976b20697c1ba49b3b260973919795c817061364c804f1736b2d"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        {
+          "pid": 1478958,
+          "start_ticks": "418123278",
+          "ppid": 1583,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+            "--mode",
+            "coordinator",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+            "--admission-sha256",
+            "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+          "unit": "trn1-mini-layer1-operator-native-r1-20261111",
+          "invocation_id": "bb6e0be35a364c1da9ae697a5ed70055"
+        },
+        {
+          "pid": 1494935,
+          "start_ticks": "418180432",
+          "ppid": 1478958,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+            "--mode",
+            "native",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+            "--admission-sha256",
+            "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+        },
+        {
+          "pid": 1575298,
+          "start_ticks": "418831416",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v1.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-20261111-spec.json",
+            "--spec-sha256",
+            "be011d7b8a45601fee850b54283d76f4fd74b02d2de7bf551d3e09cc25e3c42a",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-20261111-review.json",
+            "--review-sha256",
+            "a990b6820316b08e4ac306e17cee952f925a983f8e06d53d42439fbe66fbec76"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        }
+      ],
+      "historical_cleanup": {
+        "physically_drained": true,
+        "properties": {
+          "TimeoutStopUSec": "1min 30s",
+          "RuntimeMaxUSec": "infinity",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "AllowedCPUs": "",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "TasksMax": "37867",
+          "Environment": "",
+          "LimitFSIZE": "infinity",
+          "WorkingDirectory": "",
+          "Nice": "0",
+          "CPUAffinity": "",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-layer1-operator-native-r1-20261111.service",
+          "BindsTo": "",
+          "After": "",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": "",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+          "absent": true
+        },
+        "owners_checked": [
+          {
+            "pid": 1478958,
+            "start_ticks": "418123278",
+            "ppid": 1583,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+              "--mode",
+              "coordinator",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+              "--admission-sha256",
+              "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+            "unit": "trn1-mini-layer1-operator-native-r1-20261111",
+            "invocation_id": "bb6e0be35a364c1da9ae697a5ed70055"
+          },
+          {
+            "pid": 1494935,
+            "start_ticks": "418180432",
+            "ppid": 1478958,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+              "--mode",
+              "native",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+              "--admission-sha256",
+              "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+          }
+        ],
+        "self_exit_claimed": false
+      },
+      "historical_root_model_drain": {
+        "physically_drained": true,
+        "properties": {
+          "TimeoutStopUSec": "1min 30s",
+          "RuntimeMaxUSec": "infinity",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "AllowedCPUs": "",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "TasksMax": "37867",
+          "Environment": "",
+          "LimitFSIZE": "infinity",
+          "WorkingDirectory": "",
+          "Nice": "0",
+          "CPUAffinity": "",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-layer1-operator-native-r1-20261111.service",
+          "BindsTo": "",
+          "After": "",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": "",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+          "absent": true
+        },
+        "owners_checked": [
+          {
+            "pid": 1478958,
+            "start_ticks": "418123278",
+            "ppid": 1583,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+              "--mode",
+              "coordinator",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+              "--admission-sha256",
+              "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service",
+            "unit": "trn1-mini-layer1-operator-native-r1-20261111",
+            "invocation_id": "bb6e0be35a364c1da9ae697a5ed70055"
+          },
+          {
+            "pid": 1494935,
+            "start_ticks": "418180432",
+            "ppid": 1478958,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v7.py",
+              "--mode",
+              "native",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/admission.json",
+              "--admission-sha256",
+              "2fe14cf69fd9e4353a13e75201f49b78c3b99f053044b81fbb2ef33aa8a10f6b"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+          }
+        ],
+        "self_exit_claimed": false
+      },
+      "current_root_observation": {
+        "properties": {
+          "ActiveState": "inactive",
+          "After": "",
+          "AllowedCPUs": "",
+          "BindsTo": "",
+          "CPUAffinity": "",
+          "ControlGroup": "",
+          "ControlPID": "0",
+          "Environment": "",
+          "ExecMainCode": "0",
+          "ExecMainPID": "0",
+          "ExecMainStatus": "0",
+          "ExecStopPost": "",
+          "Id": "trn1-mini-layer1-operator-native-r1-20261111.service",
+          "InvocationID": "",
+          "Job": "",
+          "KillMode": "control-group",
+          "LimitFSIZE": "infinity",
+          "LoadState": "not-found",
+          "MainPID": "0",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "Nice": "0",
+          "RemainAfterExit": "no",
+          "Result": "success",
+          "RuntimeMaxUSec": "infinity",
+          "SendSIGKILL": "yes",
+          "SubState": "dead",
+          "TasksMax": "37867",
+          "TimeoutStopUSec": "1min 30s",
+          "WorkingDirectory": ""
+        },
+        "group": {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r1-20261111.service"
+        },
+        "stable_second_observation": true
+      },
+      "core_pins": {
+        "actual_exit": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-model-actual-exit-20261111-v1.json",
+          "sha256": "3599cd98904b570fa9a48188321a766ccb2f01eefbb113497de0eab42354a2e0"
+        },
+        "recorder_actual_exit": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-actual-exit-20261111-v1.json",
+          "sha256": "facdbe36e8c057bc1edd5d3ad66ce5199d803a64b7f9e0a06da164aa8eaace4d"
+        },
+        "coordinator_owner": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/coordinator-owner.json",
+          "sha256": "85817b5202123d5dcc627137d701fb3ff8725446d0f8de65891086860930b1fb"
+        },
+        "native_owner": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/native-owner.json",
+          "sha256": "01d6b0b29228513b578b0e66a82522378f60ca8b13e54dbeec8662ffe6396dd0"
+        },
+        "cleanup_drained": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/cleanup-drained.json",
+          "sha256": "c56ada2cfcba17ebbcbc5fe3b8346050eef0119f0c7c93ca7ca6c4cef48d2add"
+        },
+        "outer_failure": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/outer-failure.json",
+          "sha256": "e07f3196049cbb6a73fa1a415182556795946072b02d8e4bd0f6dd9d615421e6"
+        }
+      },
+      "current_observation_reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-download-r1-current-history-mismatches-20261112-v1.json",
+        "sha256": "f39d1ad0dd6e96a8b2849ec94d4b733f8d0b4bdaca2e4d68199ee84d4db4eb06"
+      },
+      "exception_decision": "historical_evidence_sufficient_for_exact_unit_only_with_fresh_current_absence_and_all_owners_gone",
+      "runtime_admitted": false,
+      "success_not_inferred_from_unloaded_default_properties": true,
+      "branch": "failed_run_cleaned_without_success_service_exit",
+      "original_nonzero_exit_preserved": true,
+      "successful_model_terminal": false,
+      "outer_failure": {
+        "error_type": "RuntimeError",
+        "error": "Original root28GiB and output30GiB floors remain live",
+        "outer_owner": {
+          "pid": 1471058,
+          "start_ticks": "418093092",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v3.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-spec.json",
+            "--spec-sha256",
+            "c4a56036bbe3976c70e9cdca35a7ba2db78236a9fb838d3bf83a7d4a1a1dd74f",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-20261111-source-review.json",
+            "--review-sha256",
+            "ff44861da1fa976b20697c1ba49b3b260973919795c817061364c804f1736b2d"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        "descriptor_observations": null,
+        "self_exit_claimed": false,
+        "full_model_qualified": false,
+        "new_speedup_claim": false
+      },
+      "missing_runtime_receipts": [
+        "native-result.json",
+        "children-exits.json",
+        "coordinator-result.json",
+        "service-exit.json",
+        "outer-result.json",
+        "native-failure.json",
+        "cleanup-pending.json"
+      ],
+      "requires_success_service_exit": false
+    },
+    {
+      "key": "native_r3_sourceclosure_completed",
+      "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+      "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee",
+      "actual_tool": {
+        "kind": "tool_session",
+        "session_id": 8333,
+        "terminal_chunk": "08b0e2",
+        "exit_code": 0
+      },
+      "original_actual_exit_code": 0,
+      "original_sdk_model_exit_code": 1,
+      "original_terminal_schema": "minicpm5_native_model_actual_exit_v1",
+      "original_full_model_qualified": false,
+      "original_independent_raw_audit_pending": true,
+      "original_recorder_self_exit_verified_flag": false,
+      "recorder_actual_tool": {
+        "kind": "tool_session",
+        "session_id": 10620,
+        "terminal_chunk": "63a3f0",
+        "exit_code": 0
+      },
+      "owners": {
+        "outer": {
+          "pid": 1810304,
+          "start_ticks": "420364013",
+          "ppid": 1810294,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v5.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-spec.json",
+            "--spec-sha256",
+            "287098b30510175e079fa135c1a558eef7b6ff27c2fb439f281f5b8b28c49bb0",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-source-review.json",
+            "--review-sha256",
+            "38b3d31c90f7b9b7f1dec9f648a373a70be5940ec6a75927da6bda18e917968c"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        "coordinator": {
+          "pid": 1818189,
+          "start_ticks": "420394577",
+          "ppid": 1583,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+            "--mode",
+            "coordinator",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+            "--admission-sha256",
+            "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+          "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee"
+        },
+        "native": {
+          "pid": 1834718,
+          "start_ticks": "420453315",
+          "ppid": 1818189,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+            "--mode",
+            "native",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+            "--admission-sha256",
+            "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+        },
+        "recorder": {
+          "pid": 1886796,
+          "start_ticks": "420818246",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v3.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-exit-recorder-spec-20261111-v1.json",
+            "--spec-sha256",
+            "c743bc1e356a38943ccb2d8d97422ebb5e7da8f0036ad9e88c795820df297079",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-exit-recorder-review-20261111-v1.json",
+            "--review-sha256",
+            "11c6de792698628f72d6862feb7fae4e5c56ff3d5f67aa5f5313eb955a5bc496"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        }
+      },
+      "required_current_owners": [
+        {
+          "pid": 1810304,
+          "start_ticks": "420364013",
+          "ppid": 1810294,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v5.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-spec.json",
+            "--spec-sha256",
+            "287098b30510175e079fa135c1a558eef7b6ff27c2fb439f281f5b8b28c49bb0",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-source-review.json",
+            "--review-sha256",
+            "38b3d31c90f7b9b7f1dec9f648a373a70be5940ec6a75927da6bda18e917968c"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        {
+          "pid": 1818189,
+          "start_ticks": "420394577",
+          "ppid": 1583,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+            "--mode",
+            "coordinator",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+            "--admission-sha256",
+            "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+          "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee"
+        },
+        {
+          "pid": 1834718,
+          "start_ticks": "420453315",
+          "ppid": 1818189,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+            "--mode",
+            "native",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+            "--admission-sha256",
+            "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+        },
+        {
+          "pid": 1886796,
+          "start_ticks": "420818246",
+          "ppid": 1003516,
+          "argv": [
+            "python3",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/record_minicpm5_layer1_operator_native_model_exit_v3.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-exit-recorder-spec-20261111-v1.json",
+            "--spec-sha256",
+            "c743bc1e356a38943ccb2d8d97422ebb5e7da8f0036ad9e88c795820df297079",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-exit-recorder-review-20261111-v1.json",
+            "--review-sha256",
+            "11c6de792698628f72d6862feb7fae4e5c56ff3d5f67aa5f5313eb955a5bc496"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        }
+      ],
+      "historical_cleanup": {
+        "physically_drained": true,
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "2h",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "1818189",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "0",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=fd768ff5dd5342dd402abd4c3686cb0c HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json --admission-sha256 0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f ; ignore_errors=no ; start_time=[Wed 2026-11-11 18:57:17 UTC] ; stop_time=[Wed 2026-11-11 20:05:54 UTC] ; pid=1818189 ; code=exited ; status=0 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "BindsTo": "",
+          "After": "-.mount basic.target app.slice",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "exited",
+          "Job": "",
+          "InvocationID": "45f668cfb23c4a01ae457eca6c0d31ee",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "absent": true
+        },
+        "owners_checked": [
+          {
+            "pid": 1818189,
+            "start_ticks": "420394577",
+            "ppid": 1583,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+              "--mode",
+              "coordinator",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+              "--admission-sha256",
+              "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+            "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+            "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee"
+          },
+          {
+            "pid": 1834718,
+            "start_ticks": "420453315",
+            "ppid": 1818189,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+              "--mode",
+              "native",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+              "--admission-sha256",
+              "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+          }
+        ],
+        "self_exit_claimed": false
+      },
+      "historical_root_model_drain": {
+        "physically_drained": true,
+        "properties": {
+          "TimeoutStopUSec": "1min 30s",
+          "RuntimeMaxUSec": "infinity",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "0",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "AllowedCPUs": "",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "TasksMax": "37867",
+          "Environment": "",
+          "LimitFSIZE": "infinity",
+          "WorkingDirectory": "",
+          "Nice": "0",
+          "CPUAffinity": "",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "BindsTo": "",
+          "After": "",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "Job": "",
+          "InvocationID": "",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "absent": true
+        },
+        "owners_checked": [
+          {
+            "pid": 1818189,
+            "start_ticks": "420394577",
+            "ppid": 1583,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+              "--mode",
+              "coordinator",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+              "--admission-sha256",
+              "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+            "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+            "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee"
+          },
+          {
+            "pid": 1834718,
+            "start_ticks": "420453315",
+            "ppid": 1818189,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+              "--mode",
+              "native",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+              "--admission-sha256",
+              "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+          }
+        ],
+        "self_exit_claimed": false
+      },
+      "current_root_observation": {
+        "properties": {
+          "ActiveState": "inactive",
+          "After": "",
+          "AllowedCPUs": "",
+          "BindsTo": "",
+          "CPUAffinity": "",
+          "ControlGroup": "",
+          "ControlPID": "0",
+          "Environment": "",
+          "ExecMainCode": "0",
+          "ExecMainPID": "0",
+          "ExecMainStatus": "0",
+          "ExecStopPost": "",
+          "Id": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "InvocationID": "",
+          "Job": "",
+          "KillMode": "control-group",
+          "LimitFSIZE": "infinity",
+          "LoadState": "not-found",
+          "MainPID": "0",
+          "MemoryHigh": "infinity",
+          "MemoryMax": "infinity",
+          "MemorySwapMax": "infinity",
+          "Nice": "0",
+          "RemainAfterExit": "no",
+          "Result": "success",
+          "RuntimeMaxUSec": "infinity",
+          "SendSIGKILL": "yes",
+          "SubState": "dead",
+          "TasksMax": "37867",
+          "TimeoutStopUSec": "1min 30s",
+          "WorkingDirectory": ""
+        },
+        "group": {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+        },
+        "stable_second_observation": true
+      },
+      "core_pins": {
+        "actual_exit": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-model-actual-exit-20261111-v1.json",
+          "sha256": "00abd33e34bcc09e7b64814a5a1853973c71581f2b74c5a8b45a2aff85225cab"
+        },
+        "recorder_actual_exit": {
+          "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r3-sourceclosure-model-exit-recorder-actual-exit-20261111-v1.json",
+          "sha256": "f51c5e63448fddd3acd21bda6c7a575135e14ddca4a7059c90a662ea54780ab9"
+        },
+        "coordinator_owner": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/coordinator-owner.json",
+          "sha256": "7e456c4cdd03b5b71be9b8bdac98da14432e70b0e216424596ba791004ea1429"
+        },
+        "native_owner": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/native-owner.json",
+          "sha256": "4bb0a5f315ee8523f4ffe77c13516015c864d9295b0f00c3718846f66aed3274"
+        },
+        "cleanup_drained": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/cleanup-drained.json",
+          "sha256": "f3693b692faf4317fb78f970671888e4b912b9fe3473bcb5fcf2b0cd2c71c1fb"
+        },
+        "service_exit": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/service-exit.json",
+          "sha256": "59d8220c41847e743814e73482010b056ba71691b9767bc3151fcdc3217fbb19"
+        },
+        "children_exits": {
+          "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/children-exits.json",
+          "sha256": "aaf068c606a2a1631b85a3240313ef11c2599425d45bde0146ec5e161fdbf637"
+        }
+      },
+      "current_observation_reference": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-download-r1-current-history-mismatches-20261112-v1.json",
+        "sha256": "f39d1ad0dd6e96a8b2849ec94d4b733f8d0b4bdaca2e4d68199ee84d4db4eb06"
+      },
+      "exception_decision": "historical_evidence_sufficient_for_exact_unit_only_with_fresh_current_absence_and_all_owners_gone",
+      "runtime_admitted": false,
+      "success_not_inferred_from_unloaded_default_properties": true,
+      "branch": "successful_run_loaded_exit_then_root_observed_retired",
+      "historical_service_exit": {
+        "owner": {
+          "pid": 1818189,
+          "start_ticks": "420394577",
+          "ppid": 1583,
+          "argv": [
+            "/home/ubuntu/venvs/model_reference_2026/bin/python",
+            "-B",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+            "--mode",
+            "coordinator",
+            "--admission",
+            "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+            "--admission-sha256",
+            "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "unit": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111",
+          "invocation_id": "45f668cfb23c4a01ae457eca6c0d31ee"
+        },
+        "properties": {
+          "TimeoutStopUSec": "15s",
+          "RuntimeMaxUSec": "2h",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "ControlPID": "0",
+          "Result": "success",
+          "ExecMainPID": "1818189",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "0",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i PATH=/usr/bin:/bin HOME=/home/ubuntu LANG=C.UTF-8 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus MINI_LAYER0_ATTEMPT=fd768ff5dd5342dd402abd4c3686cb0c HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 /home/ubuntu/venvs/model_reference_2026/bin/python -B /home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py --mode coordinator --admission /mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json --admission-sha256 0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f ; ignore_errors=no ; start_time=[Wed 2026-11-11 18:57:17 UTC] ; stop_time=[Wed 2026-11-11 20:05:54 UTC] ; pid=1818189 ; code=exited ; status=0 }",
+          "ControlGroup": "",
+          "AllowedCPUs": "6-7",
+          "MemoryHigh": "15032385536",
+          "MemoryMax": "17179869184",
+          "MemorySwapMax": "0",
+          "TasksMax": "128",
+          "Environment": "",
+          "LimitFSIZE": "16777216",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "Nice": "19",
+          "CPUAffinity": "6-7",
+          "KillMode": "control-group",
+          "SendSIGKILL": "yes",
+          "Id": "trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "BindsTo": "",
+          "After": "-.mount basic.target app.slice",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "exited",
+          "Job": "",
+          "InvocationID": "45f668cfb23c4a01ae457eca6c0d31ee",
+          "ExecStopPost": ""
+        },
+        "group": {
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service",
+          "absent": true
+        },
+        "observed_by_outer": {
+          "pid": 1810304,
+          "start_ticks": "420364013",
+          "ppid": 1810294,
+          "argv": [
+            "python3",
+            "-B",
+            "minicpm5_layer1_operator_native_outer_runner_v5.py",
+            "--spec",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-spec.json",
+            "--spec-sha256",
+            "287098b30510175e079fa135c1a558eef7b6ff27c2fb439f281f5b8b28c49bb0",
+            "--review",
+            "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-20261111-source-review.json",
+            "--review-sha256",
+            "38b3d31c90f7b9b7f1dec9f648a373a70be5940ec6a75927da6bda18e917968c"
+          ],
+          "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"
+        },
+        "successful": true,
+        "self_exit_claimed": false
+      },
+      "historical_children_exits": {
+        "complete": true,
+        "owners": [
+          {
+            "pid": 1834718,
+            "start_ticks": "420453315",
+            "ppid": 1818189,
+            "argv": [
+              "/home/ubuntu/venvs/model_reference_2026/bin/python",
+              "-B",
+              "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5_layer1_operator_native_runner_v12.py",
+              "--mode",
+              "native",
+              "--admission",
+              "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/admission.json",
+              "--admission-sha256",
+              "0f4e504db81b972dc35b6c5ba1d868d79496080aa5c6b3dc4d1765d21c34210f"
+            ],
+            "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-mini-layer1-operator-native-r3-sourceclosure-20261111.service"
+          }
+        ],
+        "exit_codes": [
+          0
+        ],
+        "successful": true,
+        "self_exit_claimed": false
+      },
+      "requires_success_service_exit": true
+    }
+  ],
+  "minimum_core_pin_counts": [
+    6,
+    7
+  ],
+  "all_read_references": [
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-download-r1-current-history-mismatches-20261112-v1.json",
+      "sha256": "f39d1ad0dd6e96a8b2849ec94d4b733f8d0b4bdaca2e4d68199ee84d4db4eb06",
+      "bytes": 8002
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r1-model-actual-exit-20261111-v1.json",
+      "sha256": "3599cd98904b570fa9a48188321a766ccb2f01eefbb113497de0eab42354a2e0",
+      "bytes": 615106
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/coordinator-owner.json",
+      "sha256": "85817b5202123d5dcc627137d701fb3ff8725446d0f8de65891086860930b1fb",
+      "bytes": 722
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/native-owner.json",
+      "sha256": "01d6b0b29228513b578b0e66a82522378f60ca8b13e54dbeec8662ffe6396dd0",
+      "bytes": 607
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/cleanup-drained.json",
+      "sha256": "c56ada2cfcba17ebbcbc5fe3b8346050eef0119f0c7c93ca7ca6c4cef48d2add",
+      "bytes": 2584
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r1-model-exit-recorder-actual-exit-20261111-v1.json",
+      "sha256": "facdbe36e8c057bc1edd5d3ad66ce5199d803a64b7f9e0a06da164aa8eaace4d",
+      "bytes": 3025
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r1-20261111/outer-failure.json",
+      "sha256": "e07f3196049cbb6a73fa1a415182556795946072b02d8e4bd0f6dd9d615421e6",
+      "bytes": 990
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-native-r3-sourceclosure-model-actual-exit-20261111-v1.json",
+      "sha256": "00abd33e34bcc09e7b64814a5a1853973c71581f2b74c5a8b45a2aff85225cab",
+      "bytes": 636614
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/coordinator-owner.json",
+      "sha256": "7e456c4cdd03b5b71be9b8bdac98da14432e70b0e216424596ba791004ea1429",
+      "bytes": 765
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/native-owner.json",
+      "sha256": "4bb0a5f315ee8523f4ffe77c13516015c864d9295b0f00c3718846f66aed3274",
+      "bytes": 636
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/cleanup-drained.json",
+      "sha256": "f3693b692faf4317fb78f970671888e4b912b9fe3473bcb5fcf2b0cd2c71c1fb",
+      "bytes": 3665
+    },
+    {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-native-r3-sourceclosure-model-exit-recorder-actual-exit-20261111-v1.json",
+      "sha256": "f51c5e63448fddd3acd21bda6c7a575135e14ddca4a7059c90a662ea54780ab9",
+      "bytes": 2531
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/service-exit.json",
+      "sha256": "59d8220c41847e743814e73482010b056ba71691b9767bc3151fcdc3217fbb19",
+      "bytes": 3690
+    },
+    {
+      "path": "/mnt/nvme/minicpm5-layer1-operator-native-r3-sourceclosure-20261111/children-exits.json",
+      "sha256": "aaf068c606a2a1631b85a3240313ef11c2599425d45bde0146ec5e161fdbf637",
+      "bytes": 827
+    }
+  ],
+  "current_admission_requirements": [
+    "Exact allowlist of the two unit/originalInvocation pairs; no general not-found bypass.",
+    "Reauthenticate all core pins, preserve terminal/tool/schema/exit code and complete original owner objects.",
+    "Require current two stable observations not-found/inactive/dead, blank current InvocationID/Job/ControlGroup, all PIDs0, and exact original cgroup absent.",
+    "Freshly prove all outer/coordinator/native/recorder owners gone, in addition to complete original plan predecessor checks.",
+    "Keep every existing unknown/empty Invocation row and every other service check unchanged.",
+    "R1 remains actual failure1; R3 remains actual0 without full-model or raw-audit promotion."
+  ],
+  "limitations": [
+    "Saved cleanup formats contain single stable snapshots, not invented two-sample receipts; root latest report records stable second current observation, and actual admission must sample afresh.",
+    "No fresh proc/systemctl/cgroup/lock actions were performed by this reviewer.",
+    "Original terminal actual_recorder_tool_exit_verified=False remains immutable; separate root recorder actual-exit resolves recorder lifecycle.",
+    "original_sdk_model_exit_code=1 is a literal retained by both original recorder sources; never substitute it for actual_tool.exit_code."
+  ]
+}
