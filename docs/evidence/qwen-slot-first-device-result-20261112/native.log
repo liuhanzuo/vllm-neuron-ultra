@@ -1,0 +1,17 @@
+.
+Compiler status PASS
+.
+Compiler status PASS
+Neuron NKI - Kernel call: slot_cache_gather_predicated(cache = Tensor(shape: (4, 12288), dtype: bfloat16), updates = Tensor(shape: (4, 12288), dtype: bfloat16), slots = Tensor(shape: (4,), dtype: int32))
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py", line 425, in <module>
+    if __name__ == '__main__': raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py", line 422, in main
+    return (supervisor if args.mode == 'supervisor' else layout)(reference(dict(path=args.binding,sha256=args.binding_sha256)))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py", line 288, in layout
+    report = run_case(name, work / 'artifacts', guard=guard, save_report=save, record_artifact=artifact)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_device_leaf_v1.py", line 232, in run_case
+    samples.append(call(handle, phase, tensor(profile, sequence["update_salt_base"] + step),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_device_leaf_v1.py", line 201, in call
+    raise RuntimeError(f"Full byte comparison failed: {mode}/{handle['variant']}/{phase}")
+RuntimeError: Full byte comparison failed: standalone/reference/correctness

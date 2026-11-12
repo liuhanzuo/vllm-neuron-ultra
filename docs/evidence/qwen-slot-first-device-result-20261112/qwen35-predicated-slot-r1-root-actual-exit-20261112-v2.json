@@ -1,0 +1,370 @@
+{
+  "actual_outer_exit_observed": true,
+  "actual_tool": {
+    "exit_code": 1,
+    "kind": "tool_session",
+    "session_id": 23987,
+    "terminal_chunk": "57d44c"
+  },
+  "actual_tool_exit_observed": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/admission.json",
+    "sha256": "e04d258b924fd1471ce8d45b6086c2912aa01c17623934fafc299af894696c33"
+  },
+  "artifacts": [
+    {
+      "layout": "conv",
+      "mode": "standalone",
+      "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/artifacts/standalone-reference/model.pt",
+      "sha256": "38595fac55af2e83b7134d8df3bc1057490c7e87fa510916d6351343aeb59b92",
+      "size_bytes": 51005,
+      "variant": "reference"
+    },
+    {
+      "layout": "conv",
+      "mode": "standalone",
+      "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/artifacts/standalone-candidate/model.pt",
+      "sha256": "938e0aaef59a60ed2cbeca60c5a0d07be985670f95952de25642708e2a712f84",
+      "size_bytes": 173683,
+      "variant": "candidate"
+    }
+  ],
+  "auditor_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_predicated_slot_r1_root_20261112_v2.py",
+    "sha256": "bea20166ecc7b9f65451c1da2cbf3551755fa939b334f3a4a9958282d767f9d9"
+  },
+  "candidate_correctness_executed": false,
+  "compiled_graphs": 2,
+  "completed_layouts": 0,
+  "failure": "First conv standalone reference correctness call failed full byte comparison; candidate call and timing not reached.",
+  "first_check": {
+    "checks": {
+      "cache_input_unchanged": {
+        "actual_sha256": "9b4b8e4c7149896fd0551703848b16ab84209aa72844dafda8db75be684bcc49",
+        "bitwise_equal": true,
+        "bytes_compared": 98304,
+        "dtype_equal": true,
+        "expected_sha256": "9b4b8e4c7149896fd0551703848b16ab84209aa72844dafda8db75be684bcc49",
+        "passed": true,
+        "shape_equal": true
+      },
+      "slots_unchanged": {
+        "actual_sha256": "af9613760f72635fbdb44a5a0a63c39f12af30f950a6ee5c971be188e89c4051",
+        "bitwise_equal": true,
+        "bytes_compared": 32,
+        "dtype_equal": true,
+        "expected_sha256": "af9613760f72635fbdb44a5a0a63c39f12af30f950a6ee5c971be188e89c4051",
+        "passed": true,
+        "shape_equal": true
+      },
+      "updated_output": {
+        "actual_sha256": "7d4e13be97907a3c255b39b88eafdf33df817290cf363064ff96dd50a1e6c9bb",
+        "bitwise_equal": false,
+        "bytes_compared": 98304,
+        "dtype_equal": true,
+        "expected_sha256": "9b4b8e4c7149896fd0551703848b16ab84209aa72844dafda8db75be684bcc49",
+        "first_different_bytes": [
+          3,
+          8,
+          10,
+          24579,
+          24584,
+          24586,
+          49155,
+          49160,
+          49162,
+          64878,
+          64880,
+          64882,
+          64884,
+          64886,
+          64888,
+          64890
+        ],
+        "passed": false,
+        "shape_equal": true
+      },
+      "updates_unchanged": {
+        "actual_sha256": "4c3044945339cedcad371589831419b161c9d076927e541b6f4f023b803afec3",
+        "bitwise_equal": true,
+        "bytes_compared": 98304,
+        "dtype_equal": true,
+        "expected_sha256": "4c3044945339cedcad371589831419b161c9d076927e541b6f4f023b803afec3",
+        "passed": true,
+        "shape_equal": true
+      }
+    },
+    "detail": {
+      "profile": "raw",
+      "round": 0,
+      "step": 0
+    },
+    "elapsed_ns": null,
+    "mode": "standalone",
+    "passed": false,
+    "phase": "correctness",
+    "slots": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "variant": "reference"
+  },
+  "full_model_qualified": false,
+  "lock_identity": {
+    "device": 66306,
+    "inode": 8294421
+  },
+  "model_executed": false,
+  "native_exit": {
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/native-process-exit.json",
+    "sha256": "222b19bab25d7f99e9eae4824f25d142aec8810a99014fd5dba912b3f4e8b9aa"
+  },
+  "native_log": {
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/native.log",
+    "sha256": "5332eb8393d04e35aebd66cd1edf42f8320313a64cb136cd057f74e7cace9724"
+  },
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-12T17:23:40.521452+00:00",
+  "original_lock_reacquired_and_released": true,
+  "outer_terminal": {
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/outer-terminal.json",
+    "sha256": "60a52ef6c87eb4edfea5059a9ee70899a69ad2a1aaf4a6609a5712745d4abbfb"
+  },
+  "owners": [
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-spec.json",
+        "--spec-sha256",
+        "75fd31b85a4a9db1b2aee8f1f2a827e329a611d7b3dec2705248ba562f6cce06",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-review.json",
+        "--review-sha256",
+        "73f42670301e5c427b2150c50ba783d84e8c26584af8fc3a16482a3160b430c4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 887311,
+      "ppid": 2480035,
+      "start_ticks": "428421391"
+    },
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py",
+        "--mode",
+        "supervisor",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/admission.json",
+        "--binding-sha256",
+        "e04d258b924fd1471ce8d45b6086c2912aa01c17623934fafc299af894696c33"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service",
+      "pid": 895344,
+      "ppid": 1583,
+      "start_ticks": "428456126"
+    },
+    {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py",
+        "--mode",
+        "layout",
+        "--binding",
+        "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/layout-binding.json",
+        "--binding-sha256",
+        "948af0cdc744545e392bb554fd5d5fe9232dc29df12535e1f9db0b6a7993556d"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service",
+      "pid": 895463,
+      "ppid": 895344,
+      "start_ticks": "428457432"
+    }
+  ],
+  "owners_gone": true,
+  "physically_drained": true,
+  "preceding_root_audit_attempt": {
+    "actual_tool": {
+      "exit_code": 1,
+      "kind": "tool_call",
+      "terminal_chunk": "c0519d"
+    },
+    "failure": "Root auditor incorrectly compared running envelope to only2fields; real envelope also contains observation. Failed before lock/physical audit; v2 checks all observed binding fields.",
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_predicated_slot_r1_root_20261112_v1.py",
+      "sha256": "bff3ef61440c7d56eec448ad66cf82fb61a377452069961542931863d50db3d6"
+    }
+  },
+  "primitive_qualified": false,
+  "reconciliation": {
+    "actual_outer_exit_observed": true,
+    "actual_tool": {
+      "exit_code": 1,
+      "kind": "tool_session",
+      "session_id": 23987,
+      "terminal_chunk": "57d44c"
+    },
+    "automatic_successor": false,
+    "full_model_qualified": false,
+    "independent_post_exit_drain": true,
+    "outer_owner": {
+      "argv": [
+        "/home/ubuntu/venvs/vllm_neuron/bin/python",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py",
+        "--mode",
+        "outer",
+        "--spec",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-spec.json",
+        "--spec-sha256",
+        "75fd31b85a4a9db1b2aee8f1f2a827e329a611d7b3dec2705248ba562f6cce06",
+        "--review",
+        "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-review.json",
+        "--review-sha256",
+        "73f42670301e5c427b2150c50ba783d84e8c26584af8fc3a16482a3160b430c4"
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+      "pid": 887311,
+      "ppid": 2480035,
+      "start_ticks": "428421391"
+    },
+    "passed": false,
+    "schema": "qwen35_predicated_slot_reconciliation_v3"
+  },
+  "report": {
+    "path": "/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/conv/report.json",
+    "sha256": "74645c6ee057d423654bbb88a22cbc6c097c612aa0bd4149a2e1901f85967351"
+  },
+  "review": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-review.json",
+    "sha256": "73f42670301e5c427b2150c50ba783d84e8c26584af8fc3a16482a3160b430c4"
+  },
+  "reviewer": "/root",
+  "root_cause_determined": false,
+  "root_live": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-root-live-20261112-v1.json",
+    "sha256": "f4b9714f8bd0b4dd84a57bddf36c0329ad2fa93279adb58269b1c9c9c9d77d06"
+  },
+  "running_handoff": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v568-qwen35-predicated-slot-r1-running.json",
+    "sha256": "4ca203368587ab34a9c1cf3fa60c8b82366b9baae6ed8d3083c3848d68acbf0c"
+  },
+  "runtime_counts": {
+    "correctness": 1,
+    "measured": 0,
+    "reset": 0,
+    "warmup": 0
+  },
+  "schema": "qwen35_predicated_slot_root_actual_exit_v1",
+  "spec": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-predicated-slot-r1-v3-20261112-spec.json",
+    "sha256": "75fd31b85a4a9db1b2aee8f1f2a827e329a611d7b3dec2705248ba562f6cce06"
+  },
+  "two_current_service_observations": [
+    {
+      "trn1-qwen35-sampler-r1-v3-20261112-predicated-slot": {
+        "properties": {
+          "ActiveState": "failed",
+          "After": "basic.target -.mount app.slice",
+          "BindsTo": "",
+          "ControlGroup": "",
+          "ControlPID": "0",
+          "Environment": "",
+          "ExecMainCode": "1",
+          "ExecMainPID": "895344",
+          "ExecMainStatus": "1",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/admission.json --binding-sha256 e04d258b924fd1471ce8d45b6086c2912aa01c17623934fafc299af894696c33 ; ignore_errors=no ; start_time=[Thu 2026-11-12 17:20:52 UTC] ; stop_time=[Thu 2026-11-12 17:21:35 UTC] ; pid=895344 ; code=exited ; status=1 }",
+          "ExecStopPost": "",
+          "Id": "trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service",
+          "InvocationID": "d51b0760ffab44faab6ad47ea4046ebb",
+          "Job": "",
+          "KillMode": "control-group",
+          "LimitFSIZE": "1073741824",
+          "LoadState": "loaded",
+          "MainPID": "0",
+          "MemoryHigh": "5368709120",
+          "MemoryMax": "6442450944",
+          "MemorySwapMax": "0",
+          "RemainAfterExit": "yes",
+          "Result": "exit-code",
+          "RuntimeMaxUSec": "2h",
+          "SendSIGKILL": "yes",
+          "StandardError": "inherit",
+          "StandardOutput": "append",
+          "SubState": "failed",
+          "TasksMax": "256",
+          "TimeoutStopUSec": "15s",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+        },
+        "recursive_group": {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service"
+        }
+      }
+    },
+    {
+      "trn1-qwen35-sampler-r1-v3-20261112-predicated-slot": {
+        "properties": {
+          "ActiveState": "failed",
+          "After": "basic.target -.mount app.slice",
+          "BindsTo": "",
+          "ControlGroup": "",
+          "ControlPID": "0",
+          "Environment": "",
+          "ExecMainCode": "1",
+          "ExecMainPID": "895344",
+          "ExecMainStatus": "1",
+          "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_serial_v3.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-predicated-slot-r1-v3-20261112/admission.json --binding-sha256 e04d258b924fd1471ce8d45b6086c2912aa01c17623934fafc299af894696c33 ; ignore_errors=no ; start_time=[Thu 2026-11-12 17:20:52 UTC] ; stop_time=[Thu 2026-11-12 17:21:35 UTC] ; pid=895344 ; code=exited ; status=1 }",
+          "ExecStopPost": "",
+          "Id": "trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service",
+          "InvocationID": "d51b0760ffab44faab6ad47ea4046ebb",
+          "Job": "",
+          "KillMode": "control-group",
+          "LimitFSIZE": "1073741824",
+          "LoadState": "loaded",
+          "MainPID": "0",
+          "MemoryHigh": "5368709120",
+          "MemoryMax": "6442450944",
+          "MemorySwapMax": "0",
+          "RemainAfterExit": "yes",
+          "Result": "exit-code",
+          "RuntimeMaxUSec": "2h",
+          "SendSIGKILL": "yes",
+          "StandardError": "inherit",
+          "StandardOutput": "append",
+          "SubState": "failed",
+          "TasksMax": "256",
+          "TimeoutStopUSec": "15s",
+          "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+        },
+        "recursive_group": {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-r1-v3-20261112-predicated-slot.service"
+        }
+      }
+    }
+  ],
+  "units": [
+    "trn1-qwen35-sampler-r1-v3-20261112-predicated-slot"
+  ]
+}
