@@ -1,0 +1,190 @@
+{
+  "accepted_native_authority_created": false,
+  "author": "/root/lfm_v3_binding_source",
+  "changes": [
+    {
+      "change": "Partition the virtual STRTAB range at file-backed LOAD boundaries; require exactly one provider per interval and continuous file offsets across all intervals",
+      "preserved_rejections": [
+        "gaps",
+        "overlapping providers including duplicate LOADs",
+        "conflicting translations",
+        "BSS-only bytes",
+        "discontinuous file offsets",
+        "original size/header/string limits"
+      ],
+      "problem": "Known outer Python dynamic string table crosses two adjacent LOAD segments; the old parser required one segment"
+    },
+    {
+      "change": "Validate the kernel interpreter path and its mocked/actual resolver only for the main executable; retain DSO PT_INTERP as parsed content, not another kernel selection",
+      "preserved_rejections": [
+        "missing main PT_INTERP",
+        "unexpected main interpreter path",
+        "wrong resolved original loader",
+        "unknown mapped provider",
+        "wrong device/inode",
+        "missing SONAME dependency",
+        "foreign executable maps"
+      ],
+      "problem": "Authenticated mapped libc.so.6 also carries PT_INTERP and old closure requires every such object to be the main executable"
+    }
+  ],
+  "full_model_qualified": false,
+  "implementation": {
+    "bytes": 14028,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_closure_v2.py",
+    "sha256": "445a06eeaf4707844e24c06a589950d2eaedb9cd3abd333e93b1b4a41ce7e626"
+  },
+  "native_ABI_qualified": false,
+  "new_speedup_claim": false,
+  "not_performed": [
+    "Native/archive/model-payload reads",
+    "Native execution or imports through the protected fence",
+    "Actual process/service/lock observations",
+    "Prepare/admission/serial/experiment execution",
+    "Editing or wiring any frozen source",
+    "History framework changes"
+  ],
+  "previous_implementation_unchanged": {
+    "bytes": 12479,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_mapping_native_closure_v1.py",
+    "sha256": "3d4d6a13947fb8c165ce8bdc32e0fc7ad131d69cf36f1440fc16e54683aab33f"
+  },
+  "provenance": {
+    "actual_original_binary_expected_ref": {
+      "bytes": 31028464,
+      "path": "/home/ubuntu/.local/share/uv/python/cpython-3.12.16-linux-x86_64-gnu/bin/python3.12",
+      "sha256": "23bc148d2b48964b621c5561ff2b81c1d9c7b717967a7491efbf12f4304882b5"
+    },
+    "actual_saved_candidate_content": {
+      "bytes": 13138,
+      "path": "/mnt/nvme/dory-serial-inventory-minicpm5-sdk310-bootstrap-r1-20261112/candidate-content.json",
+      "sha256": "38fdc4d462f5f0c038536306cc28e995d7c91eaed98cfb0309a8eccd46f89ab1"
+    },
+    "actual_saved_outer_observation": {
+      "bytes": 56177,
+      "path": "/mnt/nvme/dory-serial-inventory-minicpm5-sdk310-bootstrap-r1-20261112/outer312/observation.json",
+      "sha256": "d33ef83c90a98f9cb2194258be2889ed8ab388d12afc21bce2ba11cc795364c5"
+    },
+    "actual_saved_sdk_observation": {
+      "bytes": 59729,
+      "path": "/mnt/nvme/dory-serial-inventory-minicpm5-sdk310-bootstrap-r1-20261112/sdk310/observation.json",
+      "sha256": "cc013649c7a61f22f6dbab59c746be59a375e9d2507aadcd786168daab27dc4d"
+    },
+    "historical_authenticated_readelf_json": {
+      "bytes": 137884,
+      "path": "/mnt/nvme/dory-serial-inventory-r5-20261111/inventory/external-closure.json",
+      "sha256": "8e97c912e0cbcd75ee4eead45565a05d727c5bc043ef5bf0ea2eeb51002ffd6e"
+    },
+    "historical_binary_ref": {
+      "bytes": 31028464,
+      "path": "/mnt/nvme/venvs/dory-official-cpu-20261108-v1/bin/python",
+      "sha256": "23bc148d2b48964b621c5561ff2b81c1d9c7b717967a7491efbf12f4304882b5"
+    },
+    "historical_json_selector": "files[0].elf_command.stdout",
+    "readelf_was_not_invoked_here": true,
+    "same_expected_binary_sha_and_size_verified": true,
+    "saved_geometry": {
+      "continuous_file_range": [
+        "0x588",
+        "0xafe4"
+      ],
+      "first_load": {
+        "file_bytes": "0x1000",
+        "file_offset": "0x0",
+        "virtual_address": "0x1ff000"
+      },
+      "second_load": {
+        "file_bytes": "0x5c6c80",
+        "file_offset": "0x1000",
+        "virtual_address": "0x200000"
+      },
+      "strtab_address": "0x1ff588",
+      "strtab_bytes": 43612,
+      "strtab_end_exclusive": "0x209fe4"
+    },
+    "saved_map_replay_scope": "Original sdk earliest saved text/content identities with mocked path resolver; not fresh authority",
+    "synthetic_fixture_scope": "Saved complete LOAD geometry and printed dynamic semantics; reconstructed string entries are synthetic, never original binary bytes"
+  },
+  "remaining": [
+    "Root must independently review and wire an additive successor; old discovery and authenticator sources still import frozen v1",
+    "Actual original Python3.12 ELF and positive FFI symbols have not been parsed successfully by v2; synthetic fixture success is not native proof",
+    "Two SDK module archive members, hashes and fresh identities remain pending; next-input mapping makes no membership claim",
+    "Outer types.py is observed loaded but has pinned_source_receipt_present=false; no source receipt is fabricated and this still needs explicit resolution before any authority acceptance",
+    "Original nine native checks, 1284 scientific descriptor rows, shared900s/2GiB/2MiB budgets and full historical lifecycle remain unchanged"
+  ],
+  "reviewable_diff": {
+    "bytes": 4281,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-native-closure-v2-source-diff-20261112-v1.patch",
+    "sha256": "5aa0abc7e6beeed0ffeb38ae5b7baaacc4b9e4e294a2d408ccd9bd4bca146e03"
+  },
+  "runtime_admitted": false,
+  "schema": "minicpm5_sdk_mapping_native_closure_v2_source_delivery_v1",
+  "source_manifest": {
+    "bytes": 1737,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk-mapping-native-closure-v2-source-manifest-20261112-v1.json",
+    "sha256": "b660f1daaf9fc6c69fbea6a1bb5b2f4bf206d2c85bf68e2d434dc66d82bc800b"
+  },
+  "source_only": true,
+  "source_only_two_member_next_inputs": {
+    "bytes": 15840,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-sdk310-bootstrap-two-member-next-inputs-20261112-v1.json",
+    "sha256": "fb62e0b9149a441b5d244cff21487276995ad64d763aaddfe8f3dc41175f0839"
+  },
+  "tests_source": {
+    "bytes": 12983,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_sdk_mapping_native_closure_v2.py",
+    "sha256": "fb1d22dc7e1fdcd1077ad998a5a86c0f66963a88229ff190c7dad4e084c7e53e"
+  },
+  "verification": {
+    "fence": [
+      "torch",
+      "numpy",
+      "ctypes",
+      "_ctypes",
+      "transformers",
+      "vllm",
+      "neuron",
+      "neuronxcc",
+      "neuronx_distributed",
+      "neuronx_distributed_inference",
+      "nki"
+    ],
+    "limits": {
+      "address_space_bytes": 536870912,
+      "cpu": 7,
+      "cpu_seconds": 60,
+      "interpreter": "system Python -B -s",
+      "nice": 19
+    },
+    "source_diff_check": {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "f02de4"
+      },
+      "added_function": "virtual_file_offset",
+      "changed_existing_functions": [
+        "parse_elf64",
+        "mapped_closure"
+      ],
+      "no_io_or_runtime_calls_in_v2": true,
+      "unchanged_function_asts": [
+        "require",
+        "normalized",
+        "parse_maps",
+        "ffi_definitions"
+      ],
+      "v1_sha_unchanged": true
+    },
+    "tests": {
+      "actual_tool": {
+        "exit_code": 0,
+        "kind": "tool_call",
+        "terminal_chunk": "41f7fb"
+      },
+      "count": 12,
+      "passed": true,
+      "seconds": 0.042
+    }
+  }
+}

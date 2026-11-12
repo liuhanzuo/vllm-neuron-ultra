@@ -1,0 +1,77 @@
+--- research/minicpm5_sdk_mapping_native_closure_v1.py
++++ research/minicpm5_sdk_mapping_native_closure_v2.py
+@@ -1,7 +1,9 @@
+ """Pure observer ELF/maps closure checks; bytes supplied, never files loaded.
+ 
+-ELF parser preserves the accepted Dory parser's semantics with an explicit
+-64 MiB per-object cap for the original 31 MiB interpreter. Maps parsing follows
++Additive v2 permits a dynamic string table to cross adjacent, unambiguous
++file-backed LOAD intervals with continuous file offsets. The original 64 MiB
++per-object cap and all other ELF/symbol checks remain. Only the main executable
++selects the kernel interpreter; a mapped DSO's PT_INTERP is content metadata. Maps parsing follows
+ the accepted Nemotron source. Positive FFI function definitions are mandatory;
+ absence of a libffi dependency or mapping is never treated as proof.
+ """
+@@ -40,6 +42,35 @@
+     require(interpreter is None or interpreter.startswith("/") and len(interpreter) <= 4096,
+             "Absolute finite interpreter path")
+     return result
++
++def virtual_file_offset(loads, address, length):
++    """Map one bounded virtual range to unique, continuous file-backed bytes.
++
++    Each interval must belong to exactly one LOAD's file bytes. Adjacent LOADs
++    may jointly cover the range only when their file offsets are continuous.
++    Holes, overlapping providers, BSS-only bytes and discontinuities fail closed.
++    Program-header/file bounds are checked by parse_elf64 before this helper.
++    """
++    end = address + length
++    cuts = {address, end}
++    for start, _, count in loads:
++        if start < end and address < start + count:
++            cuts.update((max(address, start), min(end, start + count)))
++    ordered = sorted(cuts)
++    first = None
++    for low, high in zip(ordered, ordered[1:]):
++        matches = [base + low - start for start, base, count in loads
++                   if start <= low and high <= start + count]
++        require(len(matches) == 1,
++                "STRTAB interval maps uniquely to file-backed LOAD bytes")
++        offset = matches[0]
++        if first is None:
++            first = offset
++        require(offset == first + low - address,
++                "Adjacent STRTAB LOAD intervals have continuous file offsets")
++    require(first is not None, "Nonempty file-backed STRTAB range")
++    return first
++
+ 
+ def parse_elf64(raw):
+     """Read an in-memory ELF64 little-endian x86-64 object, never execute it.
+@@ -91,10 +122,8 @@
+     require(ended and 5 in values and 10 in values, "Terminated table with explicit STRTAB/STRSZ")
+     address, length = values[5], values[10]
+     require(1 <= length <= 2**20, "Bounded dynamic string table")
+-    matches = [base + address - start for start, base, count in loads
+-               if start <= address and address + length <= start + count]
+-    require(len(matches) == 1, "STRTAB maps uniquely to file-backed LOAD bytes")
+-    strings = raw[matches[0]:matches[0] + length]
++    string_offset = virtual_file_offset(loads, address, length)
++    strings = raw[string_offset:string_offset + length]
+     decoded = []
+     for name, pos in string_offsets:
+         require(pos < length, "String offset in STRSZ")
+@@ -212,8 +241,11 @@
+         for name in obj['needed']:
+             require(name in sonames,'Every ELF dependency has a unique authenticated actual provider')
+             edges.append(dict(requester=path,needed=name,provider=sonames[name]))
+-        if obj['interpreter'] is not None:
+-            require(path==executable and obj['interpreter']=='/lib64/ld-linux-x86-64.so.2'
++        # The kernel consumes PT_INTERP only from the main executable. libc
++        # may also contain PT_INTERP so it can be executed directly; that field
++        # does not select another interpreter when libc is a mapped dependency.
++        if path==executable and obj['interpreter'] is not None:
++            require(obj['interpreter']=='/lib64/ld-linux-x86-64.so.2'
+                 and resolve_path(obj['interpreter'])==loader,'Original-path actual ELF interpreter selection')
+     require(metadata[executable]['interpreter'] is not None,'Original executable PT_INTERP is explicit')
+     return dict(paths=sorted(selected),edges=edges,map_rows=len(rows),kernel_executable_rows=kernel,
