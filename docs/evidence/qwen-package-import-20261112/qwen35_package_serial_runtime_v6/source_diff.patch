@@ -1,0 +1,40 @@
+--- v5/contract.py
++++ v6/contract.py
+@@ -160,7 +160,7 @@
+     require(arm in ("baseline", "candidate"), "exact package sampler arm")
+     return {"HOME": "/home/ubuntu", "LANG": "C.UTF-8", "XDG_RUNTIME_DIR": "/run/user/1000",
+         "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus", "PYTHONDONTWRITEBYTECODE": "1",
+-        "PYTHONOPTIMIZE": "0", "PYTHONPATH": str(Q) + ":" + str(ROOT), "HF_HOME": "/mnt/nvme/hf",
++        "PYTHONOPTIMIZE": "0", "PYTHONPATH": str(PACKAGE) + ":" + str(Q) + ":" + str(ROOT), "HF_HOME": "/mnt/nvme/hf",
+         "TOKENIZERS_PARALLELISM": "false", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1",
+         "PATH": "/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin",
+         "NEURON_COMPILED_ARTIFACTS": case["artifact"], "NEURON_COMPILE_CACHE_URL": case["compiler_cache"],
+--- v5/run.py
++++ v6/run.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parents[1], Path(__file__).resolve().parents[2]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_package_serial_runtime_v5.contract import reference, require
++    from qwen35_package_serial_runtime_v6.contract import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_package_serial_runtime_v5.adapter import outer
++        from qwen35_package_serial_runtime_v6.adapter import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_package_serial_runtime_v5.adapter import coordinator, native_leaf, worker_bootstrap
++    from qwen35_package_serial_runtime_v6.adapter import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_package_serial_runtime_v5.service import supervise
++        from qwen35_package_serial_runtime_v6.service import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 

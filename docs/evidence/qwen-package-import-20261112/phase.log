@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v5/run.py", line 44, in <module>
+    raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v5/run.py", line 40, in main
+    return native_leaf(binding, api=args.mode == "api_bootstrap")
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v5/adapter.py", line 169, in native_leaf
+    result = leaf(context["bundle"].spec, phase, guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v5/wiring.py", line 134, in leaf
+    result = entry.prepare_view(case, guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_full_validation_v2/entry.py", line 26, in prepare_view
+    from vllm_neuron.models.qwen35.prepare_view import prepare
+ModuleNotFoundError: No module named 'vllm_neuron.models'

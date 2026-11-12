@@ -1,0 +1,37 @@
+--- prepare_qwen35_package_serial_candidate_v4.py
++++ prepare_qwen35_package_serial_candidate_v5.py
+@@ -1,4 +1,4 @@
+-"""Explicit package candidate preparation v4; stdlib/source only, never admission.
++"""Explicit package candidate preparation v5; stdlib/source only, never admission.
+ 
+ No latest lookup, file writes, History, lock, payload reads or native import.
+ The caller selects every binding and supplies guarded authenticated readers.
+@@ -331,8 +331,8 @@
+     runtime_directory = Path(request['runtime_directory'])
+     require(str(runtime_directory) == request['runtime_directory']
+             and runtime_directory in (c.Q/'qwen35_package_serial_runtime_v2', c.Q/'qwen35_package_serial_runtime_v3',
+-                                      c.Q/'qwen35_package_serial_runtime_v4', c.Q/'qwen35_package_serial_runtime_v5'),
+-            'only explicit reviewed package runtime v2, v3, v4 or v5 directory')
++                                      c.Q/'qwen35_package_serial_runtime_v4', c.Q/'qwen35_package_serial_runtime_v5', c.Q/'qwen35_package_serial_runtime_v6'),
++            'only explicit reviewed package runtime v2, v3, v4, v5 or v6 directory')
+     runtime_version = runtime_directory.name.rsplit('_', 1)[1]
+     runtime_review = read(request['runtime_review'])
+     require(runtime_review.get('schema') == 'qwen35_package_serial_runtime_'+runtime_version+'_root_source_review_v1'
+@@ -348,7 +348,7 @@
+             and runtime.get('runtime_admitted') is False and runtime.get('frozen_science_delivery') == c.SCIENCE_DELIVERY,
+             'runtime delivery is source only and retains frozen full science')
+     runtime_pins = manifest_pins(runtime['files'])
+-    runtime_files = (*c.RUNTIME_FILES, 'input_pins.json', *(('source_text.py',) if runtime_version == 'v5' else ()))
++    runtime_files = (*c.RUNTIME_FILES, 'input_pins.json', *(('source_text.py',) if runtime_version in ('v5', 'v6') else ()))
+     require(all(str(runtime_directory/name) in runtime_pins for name in runtime_files), 'complete runtime file closure')
+     for path, sha in runtime_pins.items():
+         source(dict(path=path, sha256=sha))
+@@ -446,7 +446,7 @@
+         guard()
+         require(identity_only(path) == expected, 'stat-only payload identity changed before return')
+     guard()
+-    return dict(schema='qwen35_package_serial_candidate_v4', passed=False, launch_authorized=False,
++    return dict(schema='qwen35_package_serial_candidate_v5', passed=False, launch_authorized=False,
+         source_only=True, history_resolved=False, physical_checks_passed=False, native_executed=False,
+         overlay=new_overlay, overlay_bytes=overlay_bytes, overlay_ref=overlay_ref,
+         spec=spec, spec_bytes=spec_bytes, spec_ref=spec_ref,

@@ -1,0 +1,68 @@
+{
+  "finding": "Original environment selected existing editable original checkout lacking models; explicit candidate PACKAGE prefix resolves all native-free prepare_view imports from requested optimized checkout.",
+  "model_or_device_executed": false,
+  "observed_at": "2026-11-12T21:29:45.715733+00:00",
+  "probe_source": "import sys, importlib.abc, importlib.util, json\nclass Block(importlib.abc.MetaPathFinder):\n def find_spec(self,fullname,path=None,target=None):\n  if fullname.split('.')[0] in {'torch','torch_neuronx','torch_xla','numpy','neuronxcc','neuronx_distributed','neuronx_distributed_inference','vllm','transformers'}:raise AssertionError('native import denied: '+fullname)\nsys.meta_path.insert(0,Block())\nimport vllm_neuron\nresult={'origin':vllm_neuron.__file__,'path':list(vllm_neuron.__path__),'sys_path':sys.path,'models_found':False}\nspec=importlib.util.find_spec('vllm_neuron.models')\nif spec is not None:\n result['models_found']=True\n from vllm_neuron.models.qwen35 import prepare_view\n result['prepare_view_source']=prepare_view.__file__\nresult['native_imported']=[n for n in sys.modules if n.split('.')[0] in {'torch','torch_neuronx','numpy','neuronxcc','vllm','transformers'}]\nprint(json.dumps(result))\n",
+  "reviewer": "/root",
+  "rows": [
+    {
+      "actual_returncode": 0,
+      "environment": {
+        "PATH": "/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0",
+        "PYTHONPATH": "/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "mode": "original",
+      "result": {
+        "models_found": false,
+        "native_imported": [],
+        "origin": "/home/ubuntu/src/vllm-neuron/vllm_neuron/__init__.py",
+        "path": [
+          "/home/ubuntu/src/vllm-neuron/vllm_neuron"
+        ],
+        "sys_path": [
+          "",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "/usr/lib/python310.zip",
+          "/usr/lib/python3.10",
+          "/usr/lib/python3.10/lib-dynload",
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages"
+        ]
+      }
+    },
+    {
+      "actual_returncode": 0,
+      "environment": {
+        "PATH": "/home/ubuntu/venvs/vllm_neuron/bin:/usr/bin:/bin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONOPTIMIZE": "0",
+        "PYTHONPATH": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107:/home/ubuntu/experiments/trn1-latest-models-20261031/research:/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "mode": "candidate",
+      "result": {
+        "models_found": true,
+        "native_imported": [],
+        "origin": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/__init__.py",
+        "path": [
+          "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron"
+        ],
+        "prepare_view_source": "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107/vllm_neuron/models/qwen35/prepare_view.py",
+        "sys_path": [
+          "",
+          "/home/ubuntu/src/vllm-neuron-ultra-multi-model-20261107",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031",
+          "/usr/lib/python310.zip",
+          "/usr/lib/python3.10",
+          "/usr/lib/python3.10/lib-dynload",
+          "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages"
+        ]
+      }
+    }
+  ],
+  "schema": "qwen35_package_r3_pythonpath_source_diagnostic_v1",
+  "source_import_only": true,
+  "weights_loaded": false
+}
