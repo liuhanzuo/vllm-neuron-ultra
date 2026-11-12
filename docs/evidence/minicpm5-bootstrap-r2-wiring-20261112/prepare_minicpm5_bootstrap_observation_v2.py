@@ -1,0 +1,96 @@
+"""Compose one unreviewed discovery plan from explicit completed history refs.
+
+No physical checks, payload/native reads, admission, authority or automatic run.
+"""
+import argparse
+import copy
+import json
+from pathlib import Path
+import sys
+Q=Path(__file__).resolve().parent;sys.path[:0]=[str(Q.parent),str(Q)]
+from research import minicpm5_bootstrap_observation_v2 as core
+import prepare_minicpm5_sdk310_deb_plan_v4 as previous
+
+RECORDER_SOURCE_REVIEW=dict(path=str(Q/'minicpm5-sdk310-extra-members-recorder-reference-shape-root-review-20261112-v1.json'),
+    sha256='031a6f79e56858bf4e8c30dd6caa3caef8d38726c19fa5f8997c095f433ffd33')
+SUCCESSORS=('minicpm5_sdk_mapping_native_closure_v2.py','minicpm5_bootstrap_types_source_v1.py',
+    'minicpm5_bootstrap_observation_v2.py','minicpm5_bootstrap_observation_child_v2.py',
+    'run_minicpm5_bootstrap_observation_v2.py','prepare_minicpm5_bootstrap_observation_v2.py')
+
+
+def build(read,*,catalog_ref,scope_ref,predecessor_ref,retirement_acceptance_ref,
+          source_manifest_ref,source_acceptance_ref,output_root):
+    # Reuse complete actual history and all three precise retirement exceptions.
+    # The returned archive-shaped plan is only a source template; no archive
+    # action occurs, and archive-specific fields are removed below.
+    value=previous.build(read,catalog_ref,scope_ref,predecessor_ref,'download',output_root,
+                         retirement_acceptance_ref=retirement_acceptance_ref)
+    manifest=read(source_manifest_ref);accepted=read(source_acceptance_ref)
+    retained=read(core.RETAINED_MANIFEST)
+    extra_ended,_=core.supplemental(read)
+    extra_plan=read(extra_ended['plan']);extra_review=read(extra_ended['review'])
+    core.require(extra_review['reviewer']=='/root' and extra_review['passed'] is True and extra_review['blockers']==[]
+       and core.ref2(extra_review['plan'])==core.ref2(extra_ended['plan'])
+       and extra_review['source_sha256']==extra_plan['source_sha256'], 'Exact accepted actual supplemental source closure')
+    correction=read(RECORDER_SOURCE_REVIEW)
+    core.require(correction['reviewer']=='/root' and correction['passed'] is True and correction['blockers']==[]
+       and correction['only_recorder_reference_shape_comparison_changed'] is True
+       and correction['whole_admission_file_still_hashed_and_validated'] is True, 'Exact original successful recorder correction')
+    inherited=copy.deepcopy(retained['source_sha256'])
+    for path,sha in extra_plan['source_sha256'].items():
+        core.require(path not in inherited or inherited[path]==sha,'Never replace a previously frozen source')
+        inherited[path]=sha
+    record_source=correction['successor'];inherited[record_source['path']]=record_source['sha256']
+    core.require(accepted['reviewer']=='/root' and accepted['passed'] is True and accepted['blockers']==[]
+      and core.ref2(accepted['manifest'])==core.ref2(source_manifest_ref)
+      and accepted['source_sha256']==manifest['source_sha256'],'Exact independent observation source acceptance')
+    pins=manifest['source_sha256']
+    core.require(manifest['schema']=='minicpm5_bootstrap_observation_source_manifest_v2'
+      and 1<=len(pins)<=core.SOURCE_CAP and manifest['limits']==core.LIMITS and manifest['artifact_limits']==core.CAPS
+      and manifest['candidate_inputs']==core.CANDIDATES
+      and manifest['retained_manifest']==core.RETAINED_MANIFEST
+      and len(retained['source_sha256'])==133 and len(extra_plan['source_sha256'])==112
+      and len(inherited)==139 and len(pins)==145
+      and set(pins)==set(inherited)|{str(Q/name) for name in SUCCESSORS}
+      and all(pins.get(path)==sha for path,sha in inherited.items())
+      and all(pins.get(path)==sha for path,sha in value['source_sha256'].items()),
+      'All prior133 and actual supplemental/recorder sources retained; exactly six accepted successors')
+    core.component_reviews(read,pins);core.candidates(read)
+    core.require(manifest['source_component_reviews']==core.COMPONENT_REVIEWS
+       and manifest['supplemental_origin_receipts']==core.SUPPLEMENTAL_RECEIPTS
+       and manifest['recorder_source_review']==RECORDER_SOURCE_REVIEW,'Exact reviewed components and actual supplemental origins')
+    catalog=read(catalog_ref)
+    for ref in core.SUPPLEMENTAL_RECEIPTS.values():
+        terminal=read(ref);rows=[row for row in catalog['runs'] if core.ref2(row['terminal'])==core.ref2(ref)]
+        core.require(len(rows)==1 and rows[0]['tool']==terminal['actual_tool'],
+           'Both supplemental run and actual recorder remain in complete current history')
+    for key in ('archive_inputs','archive_mode','replay_from','producer_actual_exit','producer_recorder_actual_exit'):
+        value.pop(key,None)
+    value.update(schema='minicpm5_bootstrap_observation_plan_v2',work_kind='minicpm5_dual_python_bootstrap_discovery_v2',
+      source_sha256=copy.deepcopy(pins),budget=copy.deepcopy(core.BUDGET),limits=copy.deepcopy(core.LIMITS),
+      artifact_limits=copy.deepcopy(core.CAPS),role_order=list(core.ROLES),candidate_inputs=copy.deepcopy(core.CANDIDATES),
+      observation_source_manifest=copy.deepcopy(source_manifest_ref),observation_source_acceptance=copy.deepcopy(source_acceptance_ref),
+      source_component_reviews=copy.deepcopy(core.COMPONENT_REVIEWS),
+      supplemental_origin_receipts=copy.deepcopy(core.SUPPLEMENTAL_RECEIPTS),
+      observation_only=True,accepted_native_authority_created=False,runtime_admitted=False)
+    return value
+
+
+def main(argv=None):
+    cli=argparse.ArgumentParser(description=__doc__)
+    names=('catalog','scope','predecessor','retirement-acceptance','source-manifest','source-acceptance')
+    for name in names:cli.add_argument('--'+name,required=True);cli.add_argument('--'+name+'-sha256',required=True)
+    cli.add_argument('--output-root',required=True);cli.add_argument('--destination',required=True)
+    a=cli.parse_args(argv)
+    def ref(name):return dict(path=getattr(a,name.replace('-','_')),sha256=getattr(a,name.replace('-','_')+'_sha256'))
+    value=build(previous.c.load,catalog_ref=ref('catalog'),scope_ref=ref('scope'),predecessor_ref=ref('predecessor'),
+       retirement_acceptance_ref=ref('retirement-acceptance'),source_manifest_ref=ref('source-manifest'),
+       source_acceptance_ref=ref('source-acceptance'),output_root=a.output_root)
+    core.verify_sources(value['source_sha256'],previous.c.reference)
+    destination=Path(a.destination)
+    core.require(destination.parent==Q and destination.suffix=='.json'
+       and not destination.name.startswith('continuation-handoff-'),'Only a new unreviewed plan, no handoff')
+    print(json.dumps(previous.c.save(destination,value,8*2**20)),flush=True)
+
+
+if __name__=='__main__':main()

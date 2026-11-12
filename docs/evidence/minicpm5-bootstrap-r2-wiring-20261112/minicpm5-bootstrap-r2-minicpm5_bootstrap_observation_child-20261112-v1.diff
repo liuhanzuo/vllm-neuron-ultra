@@ -1,0 +1,55 @@
+--- minicpm5_bootstrap_observation_child_v1.py
++++ minicpm5_bootstrap_observation_child_v2.py
+@@ -41,6 +41,7 @@
+ def main():
+     require=helpers['require'];digest=helpers['digest'];args=sys.argv
+     role,deadline=validate_arguments(sys,time.monotonic())
++    types_tracker=types_helpers['TypesSourceObservation'](sys) if role=='outer312' else None
+     def time_check():require(time.monotonic()<deadline,'Original inherited deadline expired')
+     def maps():
+         time_check();fd=posix.open('/proc/self/maps',posix.O_RDONLY|posix.O_CLOEXEC);raw=bytearray()
+@@ -63,7 +64,9 @@
+     entry.install(external)
+     # Parent owns the only pipe writer; owner is recorded before this byte.
+     fd=int(args[7]);require(posix.read(fd,1)==b'R','Exact live-owner parent ACK');posix.close(fd)
++    if types_tracker is not None:types_tracker.install_before_json(entry,external,helpers['SOURCE_TOTAL_CAP'])
+     import json
++    if types_tracker is not None:types_tracker.after_json()
+     def read_json(path,sha):return json.loads(entry.read_source(path,sha,8*2**20)[0])
+     plan=read_json(args[3],args[4]);entry.plan={'bootstrap_sources':plan['source_sha256']}
+     admission=read_json(args[5],args[6])
+@@ -124,14 +127,14 @@
+         wrapped=DiscoveryFinder();sys.meta_path[0]=wrapped;entry.finder=wrapped
+         # Only source directories; -S stays effective and no .pth/sitecustomize runs.
+         sys.path[:0]=[helpers['ROOT'],helpers['ROOT']+'/research']
+-        from research import minicpm5_bootstrap_observation_v1 as core
++        from research import minicpm5_bootstrap_observation_v2 as core
+         review=read_json(admission['review']['path'],admission['review']['sha256'])
+         core.validate(plan,review,admission['plan'])
+         import importlib
+         require('ctypes' not in sys.modules and '_ctypes' not in sys.modules,'No premature ctypes import')
+         importlib.import_module(core.ENTRIES[role])
+         require('ctypes' not in sys.modules and '_ctypes' not in sys.modules,'Actual formal inert bootstrap does not load ctypes')
+-        from research import minicpm5_sdk_mapping_native_closure_v1 as closure
++        from research import minicpm5_sdk_mapping_native_closure_v2 as closure
+         from research import descriptor_serial_lock_proof_v1 as lockproof
+         import minicpm5_layer0_execution_protocol_v4 as proc
+         def guard():
+@@ -162,12 +165,15 @@
+         summaries={name:core.summarize_maps(raw.decode('ascii'),role,table,content,closure,lambda path:str(Path(path).resolve()))
+             for name,raw in [('earliest',earliest),('pre_ctypes',before),('post_ctypes',after)]}
+         ffi=content['files'][table[role]['ffi_candidate']]
+-        value=dict(schema='minicpm5_bootstrap_role_observation_v1',role=role,complete=True,plan=admission['plan'],
++        types_observation=types_tracker.finish(pure[types_helpers['PIN']['path']]) if types_tracker is not None else None
++        source_gaps=core.source_execution_gaps(role,types_observation,entry.sources)
++        value=dict(schema='minicpm5_bootstrap_role_observation_v2',role=role,complete=True,plan=admission['plan'],
+             admission=dict(path=args[5],sha256=args[6]),parent_owner=admission['parent_owner'],pid=posix.getpid(),
+             executable=posix.readlink('/proc/self/exe'),argv=list(sys.orig_argv),deadline=deadline,
+             formal_bootstrap_entry=core.ENTRIES[role],executed_sources=entry.sources,
+             maps=refs,map_summaries=summaries,selected_stdlib_providers=selected,
+-            known_pure_source_observations=pure_receipts,
++            known_pure_source_observations=pure_receipts,types_source_observation=types_observation,
++            source_execution_provenance_gaps=source_gaps,
+             libc_requested=libc._name,ffi_definitions=ffi.get('ffi'),ffi_failure=ffi.get('ffi_failure'),
+             ffi_definition_scope='known_candidate_content_only_not_actual_provider_selection',
+             missing_content_origins=any(v['gaps'] for v in summaries.values()),

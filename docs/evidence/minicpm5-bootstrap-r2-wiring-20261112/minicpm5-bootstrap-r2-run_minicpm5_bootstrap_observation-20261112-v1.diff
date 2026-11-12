@@ -1,0 +1,48 @@
+--- run_minicpm5_bootstrap_observation_v1.py
++++ run_minicpm5_bootstrap_observation_v2.py
+@@ -12,7 +12,7 @@
+ 
+ Q=Path(__file__).resolve().parent;ROOT=Q.parent
+ sys.path[:0]=[str(ROOT),str(Q)]
+-from research import minicpm5_bootstrap_observation_v1 as core
++from research import minicpm5_bootstrap_observation_v2 as core
+ import dory_serial_stage_contract_v2 as c
+ import dory_descriptor_inventory_runtime_v2 as runtime
+ import minicpm5_sdk310_retired_lfm_r2_v2 as retirement
+@@ -86,10 +86,11 @@
+     plan=core.validate(c.load(pr,8*2**20),c.load(rr,8*2**20),pr)
+     core.require(plan['lock_policy']==runtime.POLICY,'Original exact descriptor policy')
+     core.verify_sources(plan['source_sha256'],c.reference)
++    core.component_reviews(c.load,plan['source_sha256'])
+     import minicpm5_layer0_execution_protocol_v4 as p
+     import minicpm5_layer0_external_supervisor_v4 as external
+     from research import minicpm5_sdk_mapping_native_authenticator_v2 as native
+-    from research import minicpm5_sdk_mapping_native_closure_v1 as closure
++    from research import minicpm5_sdk_mapping_native_closure_v2 as closure
+     c.verify_loaded(plan['source_sha256']);p.user_bus()
+     out=Path(plan['output_root']);core.require(not out.exists(),'Fresh output; no retry overwrite')
+     fd,owner,lock,first=runtime.acquire(p,pr,rr)
+@@ -130,7 +131,7 @@
+         content=core.collect_content(table,content_reader,closure,guard)
+         content_ref=c.save(out/'candidate-content.json',content,2097152)
+         literal_sources=[]
+-        for name in (core.HELPER,core.CHILD):
++        for name in (core.HELPER,core.CHILD,core.TYPES):
+             reference,raw=c.reference(Q/name,2*2**20)
+             core.require(reference['sha256']==plan['source_sha256'][str(Q/name)],'Exact executed literal component')
+             literal_sources.append(raw.decode('utf8'))
+@@ -175,10 +176,13 @@
+             core.require(result['complete'] is True and result['role']==role and result['deadline']==deadline
+               and result['admission']==core.ref2(ar) and result['accepted_native_authority_created'] is False,
+               'Exact own child observation without authority promotion')
++            source_gaps=core.source_execution_gaps(role,result['types_source_observation'],result['executed_sources'])
++            core.require(result['source_execution_provenance_gaps']==source_gaps,'Preserve honest source-execution gaps separately from native maps')
+             results.append(dict(role=role,result=result_ref,missing_content_origins=result['missing_content_origins'],
++              source_execution_provenance_gaps=source_gaps,
+               ffi_definitions_observed=result['ffi_definitions'] is not None))
+         guard();c.verify_loaded(plan['source_sha256']);content_reader.unchanged(content['files'])
+-        result=dict(schema='minicpm5_bootstrap_observation_result_v1',complete=True,plan=pr,review=rr,owner=owner,
++        result=dict(schema='minicpm5_bootstrap_observation_result_v2',complete=True,plan=pr,review=rr,owner=owner,
+           deadline=deadline,candidate_content=content_ref,children=results,role_order=list(core.ROLES),
+           output_inventory=inventory(out),accepted_native_authority_created=False,actual_process_exit_claimed=False,
+           native_ABI_qualified=False,full_model_qualified=False,new_speedup_claim=False)
