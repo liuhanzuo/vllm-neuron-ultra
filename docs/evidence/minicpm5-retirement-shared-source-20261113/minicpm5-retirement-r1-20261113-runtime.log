@@ -1,0 +1,21 @@
+{"event": "mini_retirement_actual_tool_ack_required", "permit": {"path": "/home/ubuntu/experiments/trn1-latest-models-20261031/minicpm5-retained-retirement-control-retirement-r1-20261113/permit.json", "sha256": "f77e57b48319632bfd419b1ff9bfa441499a0208190e2ade40221eed9dc94047"}, "owner": {"pid": 2059248, "start_ticks": "432926914", "ppid": 2032614, "argv": ["/home/ubuntu/venvs/vllm_neuron/bin/python", "-B", "-u", "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", "--mode", "run", "--spec", "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-r1-20261113-spec.json", "--spec-sha256", "bb7cdfd5134300b69f1ffd41188aa8d0db5bee003a8498780f0f25a7f9626886", "--review", "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-r1-20261113-review.json", "--review-sha256", "066a9fe8f6455183871a66aaf646289f168e8cb97e09b7f7901244e83ee28bb7"], "cgroup": "0::/user.slice/user-1000.slice/session-56.scope"}, "running_handoff_path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-mini-retirement-retirement-r1-20261113-running.json", "no_unlink_before_actual_ack": true}
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 360, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 355, in main
+    if args.mode=='run':result=run(dict(path=args.spec,sha256=args.spec_sha256),dict(path=args.review,sha256=args.review_sha256))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 247, in run
+    if failure is not None:raise failure
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 226, in run
+    transaction_result=transaction.retire(plan,spec['references']['verification'],intent_ref,paths['journal'],exclusive)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_raw_transaction_v1.py", line 136, in retire
+    admitted=_admission(plan,verification_ref,intent_ref,guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_raw_transaction_v1.py", line 84, in _admission
+    _load_evidence(dict(path=path,sha256=sha),Path(path).suffix)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_raw_transaction_v1.py", line 33, in _load_evidence
+    ident=t.identity(path);t.require(ident['size']<32<<20,'Original bounded source/prerequisite contract')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_raw_transport_v1.py", line 54, in identity
+    require(stat.S_ISREG(value.st_mode) and value.st_nlink == 1, 'Singleton regular file required')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_raw_transport_v1.py", line 38, in require
+    raise ValueError(message)
+ValueError: Singleton regular file required

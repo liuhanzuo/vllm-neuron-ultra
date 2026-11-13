@@ -25,7 +25,7 @@ v5 的 17 项主任务测试及 17 项独立测试通过，另以 180 份真实�
 
 [22 项恢复源码与实际启动／失败证据](evidence/minicpm5-retained-recovery-source-20261113/manifest.json)和 [9 项实际完成证据](evidence/minicpm5-retained-recovery-complete-20261113/manifest.json)分别保留修复过程与最终结果；后者包含四个发布文件、完整最终历史和真实成功退出。
 
-**尚未删除生产数据，预计可回收的 9.474609375 GiB 尚未回收。** 清理入口已修正特权检查进程的超时处理：保持原锁，等待 helper、sudo 及其 monitor 全部退出并独立确认，随后保留原超时失败。主任务和独立审查各通过 41 项模拟测试；[14 项源码与审查证据](evidence/minicpm5-retirement-scope-source-20261113/manifest.json)保留实现和完整来源闭包。现已开始基于真实完成记录准备清理；删除前仍将重新验证所有候选文件和保留副本。没有扩容 EBS。
+**尚未删除生产数据，预计可回收的 9.474609375 GiB 尚未回收。** 清理入口已修正特权检查进程的超时处理：保持原锁，等待 helper、sudo 及其 monitor 全部退出并独立确认，随后保留原超时失败。主任务和独立审查各通过 41 项模拟测试；[14 项源码与审查证据](evidence/minicpm5-retirement-scope-source-20261113/manifest.json)保留实现和完整来源闭包。随后真实清理在删除前因历史共享源码检查退出 1，详情见[实际失败及后继修正](minicpm5-retirement-shared-source-20261113.md)。没有扩容 EBS。
 
 ## 可复核材料
 
