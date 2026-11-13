@@ -1,0 +1,304 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/budget.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/budget.py
+@@ -1,7 +1,7 @@
+ """Explicit external reviewed capacity interface; no guessed compile allowance.
+ 
+ This module reads metadata/stat and, prelock, verifies only the fixed16 small
+-installed SDK PWP assets. It never opens model, checkpoint, graph, tensor or
++installed SDK PWP/DVE assets. It never opens model, checkpoint, graph, tensor or
+ packet contents. Prepare/build retain the original actual child ACK.
+ """
+ from pathlib import Path
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/compiler_assets.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/compiler_assets.py
+@@ -1,4 +1,4 @@
+-"""Exactly the 16 installed PWP assets observed in r5, never executable input.
++"""Exactly the 20 installed PWP/DVE assets observed in r5/r6, never executable input.
+ 
+ These typed fixed binary/text assets are authenticated by a frozen JSON source
+ pin, not misclassified as Python/text in the historical source map. No reads
+@@ -14,14 +14,23 @@
+ 
+ from .contract import HERE, SDK, require
+ 
+-MANIFEST_SHA256 = 'd743a0dbc46b06f7f4041748619325cf7def987fd56992e87000a2131799d698'
++MANIFEST_SHA256 = 'd46ae4f1e70e5b2f735704b0572429e3a6c9c44394a31cf50e59da0d2f97567d'
+ ASSET_ROOT = SDK / 'neuronxcc/pwp/pwp_bin_trainium'
++DVE_ROOT = SDK / 'neuronxcc/dve/dve_bin_gen2'
+ GROUPS = ('derivative_silu_and_others', 'natural_log_exp_and_others',
+           'sigmoid_and_others', 'silu_and_others', 'softplus_and_others')
+-NAMES = ('act_info.json',) + tuple(group + suffix for group in GROUPS
++PWP_NAMES = ('act_info.json',) + tuple(group + suffix for group in GROUPS
+                                 for suffix in ('.json', '_bkt.bin', '_ctrl.bin'))
++DVE_NAMES = ('dve_info.json', 'transformer_control_table.bin',
++             'transformer_datapath_table.bin', 'transformer_opcode_table.bin')
++NAMES = PWP_NAMES + DVE_NAMES
+ ATTRIBUTES = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_size', 'st_blocks',
+               'st_mtime_ns', 'st_ctime_ns', 'st_uid', 'st_gid')
++
++
++def target_path(name):
++    require(name in NAMES, 'fixed SDK basename required')
++    return (ASSET_ROOT if name in PWP_NAMES else DVE_ROOT) / name
+ 
+ 
+ def attrs(value):
+@@ -71,12 +80,12 @@
+     payload = raw(path, 64 * 1024)
+     require(hashlib.sha256(payload).hexdigest() == MANIFEST_SHA256, 'fixed compiler asset manifest changed')
+     value = json.loads(payload)
+-    require(value['schema'] == 'qwen35_exact_sdk_pwp_assets_v1' and
++    require(value['schema'] == 'qwen35_exact_sdk_pwp_dve_assets_v1' and
+             value['sdk_version'] == '2.23.6484.0+3b612583' and
+-            set(value['assets']) == {str(ASSET_ROOT / name) for name in NAMES},
+-            'only sixteen actually observed installed SDK assets allowed')
+-    require(value['logical_bytes'] == sum(row['bytes'] for row in value['assets'].values()) == 370753 and
+-            value['allocated_bytes'] == sum(row['identity']['st_blocks'] * 512 for row in value['assets'].values()) == 393216,
++            set(value['assets']) == {str(target_path(name)) for name in NAMES},
++            'only twenty actually observed installed SDK assets allowed')
++    require(value['logical_bytes'] == sum(row['bytes'] for row in value['assets'].values()) == 387197 and
++            value['allocated_bytes'] == sum(row['identity']['st_blocks'] * 512 for row in value['assets'].values()) == 417792,
+             'fixed full SDK asset size/allocated inventory required')
+     for path, row in value['assets'].items():
+         require(set(row['identity']) == set(ATTRIBUTES) and row['bytes'] == row['identity']['st_size'] and
+@@ -89,7 +98,7 @@
+ def asset(path, expected, *, content=True):
+     """Stable bounded nofollow read (or stat); never loads/interprets asset bytes."""
+     path = Path(path)
+-    require(path.parent == ASSET_ROOT and path.name in NAMES, 'fixed SDK path required')
++    require(path.name in NAMES and path == target_path(path.name), 'fixed SDK path required')
+     expected_identity = tuple(expected['identity'][key] for key in ATTRIBUTES)
+     require(0 < expected['bytes'] < 45000 and expected['bytes'] == expected['identity']['st_size'], 'bounded exact SDK asset')
+     with parent_fd(path) as parent:
+@@ -117,7 +126,7 @@
+ 
+ 
+ def verify_all(spec):
+-    """All 16 content pins checked prelock; repeated linked targets checked in scans."""
++    """All 20 content pins checked prelock; repeated linked targets checked in scans."""
+     value = manifest(spec)
+     return [asset(path, row) for path, row in sorted(value['assets'].items())]
+ 
+@@ -133,7 +142,7 @@
+             re.fullmatch(r'neuronxcc-[A-Za-z0-9_-]{1,64}', parts[2]) and
+             re.fullmatch(r'sg[0-9]{2}', parts[3]) and parts[4] in NAMES,
+             'only observed bucket/unit/subgraph SDK asset link form')
+-    target = ASSET_ROOT / parts[4]
++    target = target_path(parts[4])
+     require(str(target) in expected_assets, 'fixed asset absent from authenticated manifest')
+     try:
+         with parent_fd(path, owned_from=root) as parent:
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/io.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/io.py
+@@ -420,7 +420,7 @@
+                 if tree_class == "compiler_workdir":
+                     if path.name in compiler_assets.NAMES:
+                         if sdk_manifest is None: sdk_manifest = compiler_assets.manifest(spec)['assets']
+-                        target = str(compiler_assets.ASSET_ROOT / path.name)
++                        target = str(compiler_assets.target_path(path.name))
+                         link = compiler_assets.compiler_sdk_link(path, spec,
+                             reviewed['classes']['compiler_workdir']['single_file_bytes'], sdk_manifest, s,
+                             content=target not in sdk_targets)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/run.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/run.py
+@@ -20,22 +20,22 @@
+     # fresh systemd spawn; this adds no native imports or defaults/bindings.
+     for path in (Path(__file__).resolve().parents[1], Path(__file__).resolve().parents[2]):
+         if str(path) not in sys.path: sys.path.insert(0, str(path))
+-    from qwen35_package_serial_runtime_v8.contract import reference, require
++    from qwen35_package_serial_runtime_v9.contract import reference, require
+     require(sys.dont_write_bytecode and __debug__, "-B and unoptimized explicit interpreter required")
+     if args.mode == "outer":
+         require(all((args.spec, args.spec_sha256, args.review, args.review_sha256)) and args.binding is None
+                 and args.binding_sha256 is None, "explicit future reviewed spec/review refs required")
+         spec = reference({"path": args.spec, "sha256": args.spec_sha256})
+         review = reference({"path": args.review, "sha256": args.review_sha256})
+-        from qwen35_package_serial_runtime_v8.adapter import outer
++        from qwen35_package_serial_runtime_v9.adapter import outer
+         return outer(spec, review)
+     require(args.binding and args.binding_sha256 and not any((args.spec, args.spec_sha256, args.review, args.review_sha256)),
+             "exact authenticated child binding only")
+     binding = reference({"path": args.binding, "sha256": args.binding_sha256})
+-    from qwen35_package_serial_runtime_v8.adapter import coordinator, native_leaf, worker_bootstrap
++    from qwen35_package_serial_runtime_v9.adapter import coordinator, native_leaf, worker_bootstrap
+     if args.mode == "coordinator": return coordinator(binding)
+     if args.mode == "supervisor":
+-        from qwen35_package_serial_runtime_v8.service import supervise
++        from qwen35_package_serial_runtime_v9.service import supervise
+         return supervise(binding, worker_bootstrap)
+     return native_leaf(binding, api=args.mode == "api_bootstrap")
+ 
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/test_sdk_assets.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/test_sdk_assets.py
+@@ -13,7 +13,7 @@
+ 
+ from test_source import HERE, Q, c, io
+ from test_compiler_storage import CompilerStorage
+-from qwen35_package_serial_runtime_v8 import compiler_assets as ca, budget
++from qwen35_package_serial_runtime_v9 import compiler_assets as ca, budget
+ 
+ 
+ class SDKAssets(unittest.TestCase):
+@@ -21,27 +21,28 @@
+     def fixture(self):
+         with CompilerStorage().fixture() as (spec, reviewed, control, sleep):
+             sdk = control.parent/'sdk-fixture'; sdk.mkdir()
++            dve = control.parent/'dve-fixture'; dve.mkdir()
+             assets = {}
+             for name in ca.NAMES:
+-                path = sdk/name; raw = (name+'-synthetic-only').encode(); path.write_bytes(raw)
++                path = (sdk if name in ca.PWP_NAMES else dve)/name; raw = (name+'-synthetic-only').encode(); path.write_bytes(raw)
+                 assets[str(path)] = dict(sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw),
+                     identity=dict(zip(ca.ATTRIBUTES, ca.attrs(path.lstat()))))
+-            with patch.object(ca, 'ASSET_ROOT', sdk), patch.object(ca, 'manifest', return_value={'assets':assets}):
++            with patch.object(ca, 'ASSET_ROOT', sdk), patch.object(ca, 'DVE_ROOT', dve), patch.object(ca, 'manifest', return_value={'assets':assets}):
+                 yield spec, reviewed, control, sleep, sdk, assets
+ 
+     def link(self, spec, sdk, name='act_info.json', bucket=0, sg='sg00'):
+         path = Path(spec['case']['compiler_workdir'])/f'token_generation_model/_tp0_bk{bucket}/neuronxcc-fixture/{sg}'/name
+-        path.parent.mkdir(parents=True, exist_ok=True); path.symlink_to(sdk/name)
++        path.parent.mkdir(parents=True, exist_ok=True); path.symlink_to((sdk if name in ca.PWP_NAMES else ca.DVE_ROOT)/name)
+         return path
+ 
+-    def test_all16_and_repeated_targets_fully_counted_once(self):
++    def test_all20_and_repeated_targets_fully_counted_once(self):
+         with self.fixture() as (spec, reviewed, control, sleep, sdk, assets):
+             for name in ca.NAMES:
+                 self.link(spec,sdk,name); self.link(spec,sdk,name,bucket=5)
+             result, inventory = io.storage_scan(spec)
+-            self.assertEqual(len(result['compiler_links']),32)
++            self.assertEqual(len(result['compiler_links']),40)
+             self.assertEqual(result['existing_sdk_targets'],sorted(assets))
+-            charged = sum((sdk/name).stat().st_blocks*512 for name in ca.NAMES)
++            charged = sum(ca.target_path(name).stat().st_blocks*512 for name in ca.NAMES)
+             self.assertEqual(result['existing_sdk_allocated_bytes'],charged)
+             self.assertEqual(result['allocated_bytes'],sum(row[6]*512 for row in inventory))
+             self.assertEqual(result['output_allocated_bytes'],result['allocated_bytes']-charged)
+@@ -156,7 +157,7 @@
+ 
+     def test_last_target_is_rechecked_after_complete_inventory(self):
+         with self.fixture() as (spec,reviewed,control,sleep,sdk,assets):
+-            target=sdk/ca.NAMES[-1];self.link(spec,sdk,target.name);original=ca.compiler_sdk_link;calls=[]
++            target=ca.target_path(ca.NAMES[-1]);self.link(spec,sdk,target.name);original=ca.compiler_sdk_link;calls=[]
+             def racing(*args,**kwargs):
+                 result=original(*args,**kwargs);calls.append(True)
+                 if len(calls)==2:target.write_bytes(b'z'*target.stat().st_size)
+@@ -180,15 +181,65 @@
+             self.assertEqual(result['nvme'],max(0,c.LIMITS['total_allocated_output_bytes']+sum(v['allocated_bytes'] for v in review['classes'].values())-usage['output_allocated_bytes'])+19)
+ 
+ 
++    def test_all20_verify_all_reads_exact_two_roots(self):
++        with self.fixture() as (spec, reviewed, control, sleep, sdk, assets):
++            records=ca.verify_all(spec)
++            self.assertEqual({r['path'] for r in records},set(assets))
++            self.assertEqual({Path(r['path']).parent for r in records},{sdk,ca.DVE_ROOT})
++            self.assertEqual(len(records),20)
++
++    def test_dve_cannot_be_relocated_under_pwp_or_other_root(self):
++        with self.fixture() as (spec, reviewed, control, sleep, sdk, assets):
++            for name in ca.DVE_NAMES:
++                link=self.link(spec,sdk,name)
++                for target in (sdk/name,ca.DVE_ROOT/'..'/'dve-fixture'/name,Path('/tmp')/name):
++                    link.unlink();link.symlink_to(target)
++                    with self.subTest(name=name,target=str(target)),self.assertRaisesRegex(ValueError,'exact installed'):
++                        io.storage_scan(spec)
++                link.unlink()
++            link=self.link(spec,sdk,'act_info.json');link.unlink();link.symlink_to(ca.DVE_ROOT/'act_info.json')
++            with self.assertRaisesRegex(ValueError,'exact installed'):io.storage_scan(spec)
++
++    def test_every_dve_content_pin_and_identity_enforced(self):
++        for name in ca.DVE_NAMES:
++            for field in ('hash','identity','missing'):
++                with self.subTest(name=name,field=field),self.fixture() as (spec,reviewed,control,sleep,sdk,assets):
++                    self.link(spec,sdk,name);target=ca.target_path(name)
++                    if field=='hash':assets[str(target)]['sha256']='0'*64
++                    elif field=='identity':assets[str(target)]['identity']['st_ino']+=1
++                    else:target.unlink()
++                    with self.assertRaises(ValueError):io.storage_scan(spec)
++
++    def test_dve_symlink_ancestry_and_target_refused(self):
++        for mode in ('ancestor','target'):
++            with self.subTest(mode=mode),self.fixture() as (spec,reviewed,control,sleep,sdk,assets):
++                name=ca.DVE_NAMES[0];self.link(spec,sdk,name);target=ca.target_path(name)
++                if mode=='ancestor':
++                    original=target.parent;renamed=original.with_name('moved-dve');original.rename(renamed);original.symlink_to(renamed)
++                    with self.assertRaises(OSError):io.storage_scan(spec)
++                else:
++                    target.unlink();target.symlink_to(sdk/'act_info.json')
++                    with self.assertRaises(ValueError):io.storage_scan(spec)
++
++    def test_all20_assets_never_reduce_nvme_reserve(self):
++        with self.fixture() as (spec,reviewed,control,sleep,sdk,assets):
++            for name in ca.NAMES:self.link(spec,sdk,name)
++            usage,_=io.storage_scan(spec)
++            reserve=budget.remaining_reserve(spec,usage,reviewed)
++            expected=c.LIMITS['total_allocated_output_bytes']+sum(row['allocated_bytes'] for row in reviewed['classes'].values())-usage['output_allocated_bytes']+reviewed['headroom_bytes']['nvme']
++            self.assertEqual(reserve['nvme'],expected)
++            self.assertGreater(usage['existing_sdk_allocated_bytes'],0)
++
++
+ class ManifestAndPreservation(unittest.TestCase):
+-    def test_real_manifest_is_metadata_only_fixed16(self):
++    def test_real_manifest_is_metadata_only_fixed20(self):
+         raw=(HERE/'compiler_assets.json').read_bytes()
+         self.assertEqual(hashlib.sha256(raw).hexdigest(),ca.MANIFEST_SHA256)
+         spec={'source_sha256':{str(HERE/'compiler_assets.json'):ca.MANIFEST_SHA256}}
+         with patch.object(io,'raw',return_value=raw):value=ca.manifest(spec)
+-        self.assertEqual(len(value['assets']),16)
+-        self.assertEqual(sum(v['bytes'] for v in value['assets'].values()),370753)
+-        self.assertEqual(sum(v['identity']['st_blocks']*512 for v in value['assets'].values()),393216)
++        self.assertEqual(len(value['assets']),20)
++        self.assertEqual(sum(v['bytes'] for v in value['assets'].values()),387197)
++        self.assertEqual(sum(v['identity']['st_blocks']*512 for v in value['assets'].values()),417792)
+         for bad in ({'source_sha256':{}},{'source_sha256':{str(HERE/'compiler_assets.json'):'0'*64}}):
+             with self.assertRaises(ValueError),patch.object(io,'raw',side_effect=AssertionError('must fail before read')):ca.manifest(bad)
+ 
+@@ -196,7 +247,7 @@
+         spec={'source_sha256':{str(HERE/'compiler_assets.json'):ca.MANIFEST_SHA256}}
+         with patch.object(io,'raw',return_value=b'{}'),self.assertRaisesRegex(ValueError,'manifest changed'):ca.manifest(spec)
+ 
+-    def test_all16_checked_prelock_without_resources_or_lock_on_failure(self):
++    def test_all20_checked_prelock_without_resources_or_lock_on_failure(self):
+         spec={}
+         with patch.object(budget,'validate_spec'),patch.object(io,'read',return_value=spec),\
+              patch.object(budget,'reviewed_budget'),patch.object(budget,'unchanged_inputs'),patch.object(budget,'fresh_paths'),\
+@@ -205,7 +256,7 @@
+             with self.assertRaisesRegex(ValueError,'asset mismatch'):budget.prelock({}, {})
+             check.assert_called_once_with(spec)
+ 
+-    def test_frozen_v7_members_and_preparer_unchanged(self):
++    def test_frozen_v8_members_and_preparer_unchanged(self):
+         for path,row in json.loads((HERE/'predecessor_pins.json').read_text())['files'].items():
+             self.assertEqual(hashlib.sha256(Path(path).read_bytes()).hexdigest(),row['sha256'],path)
+ 
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/test_source.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/test_source.py
+@@ -22,7 +22,7 @@
+             raise AssertionError('native import forbidden in SOURCE/MOCK: ' + fullname)
+ 
+ sys.meta_path.insert(0, NativeBlocker())
+-from qwen35_package_serial_runtime_v8 import contract as c, io, budget as b, wiring as w, adapter as a, service as svc, readiness as ready
++from qwen35_package_serial_runtime_v9 import contract as c, io, budget as b, wiring as w, adapter as a, service as svc, readiness as ready
+ from qwen35_package_full_validation_v2 import entry, sampler, http
+ 
+ 
+@@ -450,7 +450,7 @@
+             with self.assertRaisesRegex(ValueError, 'identities changed'): w.check_build_seal(spec)
+ 
+     def test_stage25_refuses_unadmitted_external_guard_before_inputs(self):
+-        from qwen35_package_serial_runtime_v8 import final_audit
++        from qwen35_package_serial_runtime_v9 import final_audit
+         with patch.object(final_audit, 'Bundle') as bundle:
+             with self.assertRaisesRegex(ValueError, 'serial audit authority'):
+                 final_audit.audit({}, {}, {}, lambda: None)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v8/test_source_text.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v9/test_source_text.py
+@@ -11,7 +11,7 @@
+ from unittest.mock import Mock, patch
+ 
+ from test_source import HERE, Q, c, io
+-from qwen35_package_serial_runtime_v8 import source_text as subject
++from qwen35_package_serial_runtime_v9 import source_text as subject
+ 
+ ORIGINAL = Q / 'minicpm5_layer1_operator_sdk_sources_v1.py'
+ SOURCE_MODULE = 'research.minicpm5_layer1_operator_sdk_sources_v1'

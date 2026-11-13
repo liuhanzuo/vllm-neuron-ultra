@@ -1,0 +1,222 @@
+{
+  "actual_cleanup_performed": false,
+  "actual_history_lock_queue_executed": false,
+  "blockers": [
+    {
+      "actual_exit_code": 0,
+      "actual_probe_chunks": [
+        "609757",
+        "d8299a"
+      ],
+      "fix": "Keep v1 frozen. Minimal successor must recheck history.unchanged() and forced guard(True) after final drained() and immediately before io.once, with regression tests for latest-handoff change, running identity change, and inherited metadata change during final drain.",
+      "id": "final_publication_freshness_after_last_drain",
+      "line": 233,
+      "output": {
+        "bytes": 2066,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-final-guard-independent-probe-20261113-v1.json",
+        "sha256": "ae232a14d60791054b289af1eb21ee0d520cc0cb18f98aab7d726d131006566c"
+      },
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_observer_v1.py",
+      "probe": {
+        "bytes": 5219,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_retained_replay_final_guard_independent_20261113_v1.py",
+        "sha256": "d3637201acb536e88be860563308234d0b2f1c520bd5b99ae5b2b11ab547f83a"
+      },
+      "reproduced": "Real frozen publish_completed executed with fake History/lock/proc and synthetic /tmp output root: unchanged control publishes; changed-before control rejects; last-drain mutation publishes despite unknown newer handoff.",
+      "severity": "blocking",
+      "summary": "Final physical drain can outlive the latest handoff and metadata check; a new handoff during drain does not prevent complete publication.",
+      "trigger": "publish_completed runs history.unchanged(); guard(True); drained(); io.once(...). drained performs multiple systemd/proc/cgroup operations but does not discover latest handoff or recheck History metadata after it completes."
+    }
+  ],
+  "final_frozen_delivered_files_content_and_identity_unchanged": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-caller-contract-20261113-v1.md": {
+      "identity": {
+        "st_blocks": 32,
+        "st_ctime_ns": 1794539443725422191,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347967,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794539443725422191,
+        "st_nlink": 1,
+        "st_size": 14230,
+        "st_uid": 1000
+      },
+      "sha256": "ceaedb744e5d848ab62ae0c2a3417f20da542003573a825e0ad41610b1b0f2d6"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-tests-20261113-v1-final.txt": {
+      "identity": {
+        "st_blocks": 8,
+        "st_ctime_ns": 1794539487701461223,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347968,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794539487701461223,
+        "st_nlink": 1,
+        "st_size": 3526,
+        "st_uid": 1000
+      },
+      "sha256": "8e76fa95dfc41d69e07ee9857c35d09f3559b6822f6c3684a339b0aaeecfedc0"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-tests-20261113-v1-initial.txt": {
+      "identity": {
+        "st_blocks": 8,
+        "st_ctime_ns": 1794539265331360231,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347963,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794539265331360231,
+        "st_nlink": 1,
+        "st_size": 3334,
+        "st_uid": 1000
+      },
+      "sha256": "12f6bc90d332c06b587bf7f81fb40328095e454519c6e7714e1a51d8f7553b59"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_caller_v1.py": {
+      "identity": {
+        "st_blocks": 56,
+        "st_ctime_ns": 1794538931019704866,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347924,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794538931019704866,
+        "st_nlink": 1,
+        "st_size": 26649,
+        "st_uid": 1000
+      },
+      "sha256": "a5a2ecb9f6817bd028108af6423fe1e467db30f5b5abd8f273767dfd51495381"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_contract_v1.py": {
+      "identity": {
+        "st_blocks": 24,
+        "st_ctime_ns": 1794538931023704778,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347920,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794538931023704778,
+        "st_nlink": 1,
+        "st_size": 11226,
+        "st_uid": 1000
+      },
+      "sha256": "d798f2366976956c5b9f48e09a57d7c4f297a6c1c4358cba554d1e2ecd3b68dd"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_history_v1.py": {
+      "identity": {
+        "st_blocks": 16,
+        "st_ctime_ns": 1794537822609160008,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347922,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794537822609160008,
+        "st_nlink": 1,
+        "st_size": 5441,
+        "st_uid": 1000
+      },
+      "sha256": "5d2afbd0ed29ac719181e4cfcee6420617c9130f5e9b64c2439ca16e4e564643"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_observer_v1.py": {
+      "identity": {
+        "st_blocks": 40,
+        "st_ctime_ns": 1794539102500942012,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347928,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794539102500942012,
+        "st_nlink": 1,
+        "st_size": 18672,
+        "st_uid": 1000
+      },
+      "sha256": "fbf09156cbe567485cd2a7b99c3f12f6654b6cebccf1d93e3721a821610f8f5a"
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_minicpm5_retained_replay_v1.py": {
+      "identity": {
+        "st_blocks": 56,
+        "st_ctime_ns": 1794539485909500745,
+        "st_dev": 66306,
+        "st_gid": 1000,
+        "st_ino": 8347962,
+        "st_mode": 33204,
+        "st_mtime_ns": 1794539485909500745,
+        "st_nlink": 1,
+        "st_size": 27944,
+        "st_uid": 1000
+      },
+      "sha256": "2e8984b5a43bccf3b623a3e52fd5090ee0697d95a71695964294d7d1c7fd511c"
+    }
+  },
+  "full_model_qualified": false,
+  "independent_checks": [
+    {
+      "accepted_predecessor_hash_and_identity_count": 15,
+      "actual_chunk": "27591b",
+      "delivered_files": 8,
+      "exit_code": 0,
+      "name": "exact delivery and frozen predecessors"
+    },
+    {
+      "actual_tool": {
+        "exit_code": 0,
+        "session_id": 10765,
+        "terminal_chunk": "06f887"
+      },
+      "name": "caller source/mock tests",
+      "passed": true,
+      "tests": 44
+    },
+    {
+      "actual_chunk": "1a8600",
+      "exit_code": 0,
+      "name": "full comparator, legacy scientific AST, transport synthetic controls",
+      "passed": true,
+      "tests": 34
+    },
+    {
+      "actual_chunk": "88b139",
+      "all_calls": 14,
+      "all_original_and_keeper_rows_match": true,
+      "each_file_bytes": 4325376,
+      "exact_pairs": 2352,
+      "exit_code": 0,
+      "logical_inputs": 11859,
+      "name": "fixed transport map and original logical plan metadata crosscheck",
+      "source_pins": 1869
+    }
+  ],
+  "launch_authorized": false,
+  "limitations": [
+    "No actual current binding, History resolution, lock, service lifecycle, payload read, compiler/model work or retirement performed.",
+    "Passing source/synthetic tests does not prove actual replay throughput, byte equality, real service properties or runtime admission.",
+    "Pre-admission or pre-first-ACK failure is explicitly not finalized by this observer; root retains actual partial evidence and failure.",
+    "Separate retirement still needs actual full byte verification, full scientific equality, independent actual exits/drains, complete then-current History/source/input compatibility and exclusive writer proof.",
+    "No additional blocker was established in this source review; actual current environment and dependencies remain root responsibilities."
+  ],
+  "new_speedup_claim": false,
+  "passed": false,
+  "production_deletion_admitted": false,
+  "real_raw_model_native_payload_bytes_read": 0,
+  "retained_invariants": [
+    "Exact immutable storage plan validates all 2352 pairs and distinct original/keeper identities; verify_pairs compares full bytes and SHA, then rechecks every pair identity before completion receipt.",
+    "Payloads admits all 11859 logical inputs; unchanged replay scientific loop retains full32, 14 reports, 98 layout rows, 9408 cache pairs, 5964 hook pairs, 13632 stage vectors and 256 effects.",
+    "Frozen full comparator requires all14 report hashes/bytes and all98 layout records, exact full seven-HF32 summaries and all original failures. Only exact output namespaces and two declared storage-provenance fields may differ.",
+    "Caller imports no retirement transaction and offers only outer/pair/replay/ack entries; no unlink/retirement call exists. All final deletion/qualification/speedup flags remain false.",
+    "History resolve retains original body with only text/envelope transport substitutions; complete physical_pair/freshness/unchanged methods are inherited. Original source closure and failed model exit1 remain required.",
+    "Typed argv, attempt nonce, InvocationID, PID/start, environment/resource checks, actual service terminal and owned drain remain required. Actual outer tool session is externally ACKed before payload IO.",
+    "Frozen replay audit still forbids subprocess/network and restricts writes; replay caller-result uses accepted exclusive JSON writer. Synthetic exact-audit test passes.",
+    "Independent observer requires externally captured actual owner/session and outer tool terminal; full comparator only follows successful actual exits; final publisher requires independent observer exit0 and a fresh full History/physical pair, subject to listed late-drain blocker."
+  ],
+  "reviewed_delivery": {
+    "bytes": 12678,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-caller-source-delivery-20261113-v1.json",
+    "sha256": "515154f2d98a0169508f99ffe61a424a00ef9ee0946c05ae2f325c60569e89f7"
+  },
+  "reviewer": "/root/qwen_package_dve_assets_20261113",
+  "schema": "minicpm5_retained_replay_caller_independent_source_review_v1",
+  "source_author": "/root/mini_writer_r3_source_compat_20261113",
+  "source_only": true
+}

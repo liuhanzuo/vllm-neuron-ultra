@@ -1,0 +1,46 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_post_audit_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_post_audit_v2.py
+@@ -12,13 +12,13 @@
+ import sys
+ from pathlib import Path
+ 
+-from qwen35_package_serial_runtime_v8.contract import require, control_root, PHASES, LIMITS, PACKAGE
+-from qwen35_package_serial_runtime_v8.io import read, ref, raw, once, process_api, storage, loaded_local_sources, host_source_bytes
+-from qwen35_package_serial_runtime_v8.history import Authority
+-from qwen35_package_audit_physical_v1 import Bundle
+-from qwen35_package_serial_runtime_v8.adapter import declared_services, admit_shape
+-from qwen35_package_serial_runtime_v8.budget import unchanged_inputs
+-from qwen35_package_serial_runtime_v8.wiring import STAGES, ARMS, manifest_sha, stage_receipt, check_build_seal
++from qwen35_package_serial_runtime_v9.contract import require, control_root, PHASES, LIMITS, PACKAGE
++from qwen35_package_serial_runtime_v9.io import read, ref, raw, once, process_api, storage, loaded_local_sources, host_source_bytes
++from qwen35_package_serial_runtime_v9.history import Authority
++from qwen35_package_audit_physical_v2 import Bundle
++from qwen35_package_serial_runtime_v9.adapter import declared_services, admit_shape
++from qwen35_package_serial_runtime_v9.budget import unchanged_inputs
++from qwen35_package_serial_runtime_v9.wiring import STAGES, ARMS, manifest_sha, stage_receipt, check_build_seal
+ 
+ 
+ def bind_pure_package_sources(spec):
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_audit_physical_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_audit_physical_v2.py
+@@ -1,8 +1,8 @@
+ """Package audit-only complete physical pass boundaries; no live IO on import."""
+ import copy
+-from qwen35_package_serial_runtime_v8.history import Bundle as OriginalBundle
+-from qwen35_package_serial_runtime_v8.contract import LOCK_IDENTITY, require
+-from qwen35_package_serial_runtime_v8.io import process_api
++from qwen35_package_serial_runtime_v9.history import Bundle as OriginalBundle
++from qwen35_package_serial_runtime_v9.contract import LOCK_IDENTITY, require
++from qwen35_package_serial_runtime_v9.io import process_api
+ 
+ def _collect_pair(done, guard, physical, read_properties, read_empty_group, *, known_units=None):
+     """Future admitted caller only; no invocation during source preparation.
+@@ -57,7 +57,7 @@
+ 
+ class Bundle(OriginalBundle):
+     def physical_pair(self, authority):
+-        import qwen35_package_audit_physical_v1 as physical
++        import qwen35_package_audit_physical_v2 as physical
+         from research import minicpm5_layer1_operator_recovered_completion_v2 as completed
+         from research.audit_minicpm5_layer1_operator_sdk_result_v3 import packed_physical
+         self.guard(force=True); pair = physical.collect_pair(self.scope, self.guard, authority)

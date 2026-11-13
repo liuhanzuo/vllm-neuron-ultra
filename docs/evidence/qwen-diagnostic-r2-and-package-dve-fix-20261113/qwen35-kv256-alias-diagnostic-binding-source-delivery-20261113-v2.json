@@ -1,0 +1,154 @@
+{
+  "actual_current_refs_selected": false,
+  "actual_current_request_created": false,
+  "actual_history_executed": false,
+  "actual_lock_acquired": false,
+  "actual_native_executed": false,
+  "actual_runtime_preparation": false,
+  "actual_v2_self_checked_before_prepare": true,
+  "all_original_helper_sources_retained": true,
+  "complete_inherited_plan_identity_and_sha_preserved": true,
+  "exact_reversible_edits": [
+    {
+      "after": "SELF = Q / 'prepare_qwen35_kv256_alias_diagnostic_binding_v2.py'",
+      "before": "SELF = Q / 'prepare_qwen35_kv256_alias_diagnostic_binding_v1.py'"
+    },
+    {
+      "after": "\n\n# One unchanged inherited plan; the frozen runtime already has its typed reader.\nPREDECESSOR_PREPARER = dict(path=str(Q/'prepare_qwen35_kv256_alias_diagnostic_binding_v1.py'),\n    sha256='d903881e0a66e0d9e5baec131c7974d08d16935ebdf69439ac2576032f6c5c79')\nINHERITED_PLAN = dict(path=str(Q/'minicpm5-layer1-operator-sdk-r2-20261111-plan.json'),\n    sha256='2e5441f4b2c2ad2efd76192ae92c068c35d3ae9fc51c532062d4284692910632',\n    size_bytes=12803326, schema='minicpm5_layer0_runtime_inputs_v1', original_typed_cap_bytes=32*MIB)\n\n\ndef require(value, message):",
+      "before": "\n\ndef require(value, message):"
+    },
+    {
+      "after": "\ndef inherited_plan_shape(value):\n    \"\"\"Exact plan branch of the existing operator SDK envelope shape checks.\"\"\"\n    require(type(value)is dict and value.get('schema')==INHERITED_PLAN['schema'], 'Original typed plan schema')\n    pins=value['source_sha256']\n    require(type(pins)is dict and len(pins)<=100000, 'Original bounded complete plan source map')\n    for name,digest in pins.items():\n        require(type(name)is str and Path(name).is_absolute()and str(Path(name))==name and '..'not in Path(name).parts\n            and type(digest)is str and re.fullmatch('[0-9a-f]{64}',digest), 'Original literal absolute source pin')\n    reference=value['source_contract']\n    require(type(reference)is dict and set(reference)in({'path','sha256'},{'path','sha256','bytes'})\n        and type(reference['path'])is str and Path(reference['path']).is_absolute()\n        and type(reference['sha256'])is str and re.fullmatch('[a-f0-9]{64}',reference['sha256'])\n        and ('bytes'not in reference or type(reference['bytes'])is int and reference['bytes']>=0),\n        'Original exact source-contract reference')\n    require(type(value['latest_completion'])is dict and type(value['output_root'])is str\n        and type(value['inputs'])is dict and len(value['inputs'])<=100000, 'Original complete typed plan fields')\n\n\ndef retained_input_caps(inputs,seed_inputs,observed,base_ref,base):\n    \"\"\"Ordinary8MiB plus exactly one already-inherited, unchanged typed input.\"\"\"\n    require(all(inputs.get(path)==row for path,row in seed_inputs.items()), 'Every complete seed input retained unchanged')\n    retained={}\n    for path,row in inputs.items():\n        size=row['identity']['size']\n        require(type(size)is int and size>=0, 'Finite original input size')\n        if path!=INHERITED_PLAN['path']:\n            require(size<=8*MIB, 'Ordinary runtime metadata retains original8MiB cap')\n            continue\n        require(base_ref=={k:INHERITED_PLAN[k]for k in('path','sha256')}\n            and row['sha256']==INHERITED_PLAN['sha256']and size==INHERITED_PLAN['size_bytes']\n            and size<=INHERITED_PLAN['original_typed_cap_bytes'], 'Only the exact original typed plan exception')\n        require(seed_inputs.get(path)==row and observed.get(path)==row,\n            'Same full inherited and freshly authenticated plan identity; never refresh or introduce an input')\n        ident=row['identity']\n        require(set(ident)==IDENTITY_KEYS and ident['realpath']==path\n            and all(type(ident[k])is int and ident[k]>=0 for k in IDENTITY_KEYS-{'realpath'}),\n            'Exact complete original plan identity')\n        inherited_plan_shape(base);retained[path]=copy.deepcopy(row)\n    return retained\n\n\ndef verify_executed_preparer(helper):\n    \"\"\"CLI source check before any candidate preparation or output publication.\"\"\"\n    require(helper['schema']=='qwen35_kv256_alias_diagnostic_binding_source_delivery_v2'\n        and helper['source_sha256'].get(str(SELF))==hashlib.sha256(SELF.read_bytes()).hexdigest()\n        and helper['source_sha256'].get(PREDECESSOR_PREPARER['path'])==PREDECESSOR_PREPARER['sha256'],\n        'Exact executed v2 preparer and retained frozen v1 helper must be pre-enrolled')\n\n\ndef api():",
+      "before": "def api():"
+    },
+    {
+      "after": "helper['schema'] == 'qwen35_kv256_alias_diagnostic_binding_source_delivery_v2'\n            and helper['predecessor_preparer'] == PREDECESSOR_PREPARER\n            and helper['retained_input_exception'] == INHERITED_PLAN\n            and helper['source_sha256'].get(PREDECESSOR_PREPARER['path']) == PREDECESSOR_PREPARER['sha256']",
+      "before": "helper['schema'] == 'qwen35_kv256_alias_diagnostic_binding_source_delivery_v1'"
+    },
+    {
+      "after": "    retained_large_inputs = retained_input_caps(inputs, seed['input_extension'], observed, overlay['base_plan'], base)\n    for path in retained_large_inputs: preparation_only.pop(path, None)",
+      "before": "    require(all(v['identity']['size'] <= 8*MIB for v in inputs.values()), 'No large preparation envelope becomes a runtime input')"
+    },
+    {
+      "after": "            full_history_children_recheck_pending=True, original_resource_limits_preserved=True, exact_diagnostic_workload=True, full_geometry_qualified=False,\n            exact_retained_typed_inputs=retained_large_inputs, ordinary_runtime_metadata_cap_bytes=8*MIB),",
+      "before": "            full_history_children_recheck_pending=True, original_resource_limits_preserved=True, exact_diagnostic_workload=True, full_geometry_qualified=False),"
+    },
+    {
+      "after": "    verify_executed_preparer(reader.read(future['preparer_delivery'])['value'])\n    result = prepare(future, reader.read, fresh_path, lambda: None)",
+      "before": "    result = prepare(future, reader.read, fresh_path, lambda: None)"
+    }
+  ],
+  "full_geometry_qualified": false,
+  "full_model_qualified": false,
+  "full_runtime_delivery_unchanged": {
+    "bytes": 622406,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/source_delivery.json",
+    "sha256": "d488592b6299c3d7ad0e3dc4ddd9d7933bf19a1bb9a9456022c00de7b40f4167"
+  },
+  "helper_sources_merged_before_future_preparation": true,
+  "new_source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_kv256_alias_diagnostic_binding_v2.py": "31be4443b197cf4348a7307661038d372823f0f4d5370da97e334a844dcfd9bc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/derive_qwen35_kv256_alias_diagnostic_binding_v2.py": "4ae629f16254aee4db245b12a58578e75cfd8e5f053b666d4e9436857ab05942",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_kv256_alias_diagnostic_binding_v2.py": "ce9174209b21412dde68a1b6d08e91394459543d6d6fafa89df23dbcd37ac98e"
+  },
+  "new_speedup_claim": false,
+  "notes": {
+    "bytes": 6237,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-notes-20261113-v2.md",
+    "sha256": "a20cf0163979d574a0080921a16120f1e1a8c7b4a41b0df09f9760b0bd933b3f"
+  },
+  "ordinary_runtime_input_cap_bytes": 8388608,
+  "predecessor_binding_delivery": {
+    "bytes": 8627,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-source-delivery-20261113-v1.json",
+    "sha256": "4fd8f7e44e82a4a9fc3612e36c82847a18afb6cc2262fec5207b2d4e7db41595"
+  },
+  "predecessor_preparer": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_kv256_alias_diagnostic_binding_v1.py",
+    "sha256": "d903881e0a66e0d9e5baec131c7974d08d16935ebdf69439ac2576032f6c5c79"
+  },
+  "reader_source_proof": {
+    "bytes": 3054,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-reader-proof-20261113-v2.json",
+    "sha256": "aa304c22fe8d032aac0dddfba4d8803b77f892678a7f0d968008042d294c2547"
+  },
+  "retained_input_exception": {
+    "original_typed_cap_bytes": 33554432,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-layer1-operator-sdk-r2-20261111-plan.json",
+    "schema": "minicpm5_layer0_runtime_inputs_v1",
+    "sha256": "2e5441f4b2c2ad2efd76192ae92c068c35d3ae9fc51c532062d4284692910632",
+    "size_bytes": 12803326
+  },
+  "review_contract": {
+    "bytes": 1724,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-source-review-contract-20261113-v2.json",
+    "sha256": "4008b022b0fa1a641a73aa676eadf97ff93220832594071a6fe8f5c774705bce"
+  },
+  "root_review_pending": true,
+  "runtime_admitted": false,
+  "schema": "qwen35_kv256_alias_diagnostic_binding_source_delivery_v2",
+  "source_blockers": [],
+  "source_diff": {
+    "bytes": 8197,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-source-diff-20261113-v2.patch",
+    "sha256": "8e7ecbc0c833db993609e8a2f4febb1930cd9237236b154bb0da81230fc37610"
+  },
+  "source_frozen": true,
+  "source_only": true,
+  "source_sha256": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/historical_b3_payload_partition_v1.py": "8a3dab13e910f7657cda07e0ff9b1fe3c99d535c2a6a084c4f3e009857c5ab5c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/historical_b3_payload_partition_v2.py": "3044095f99585575d088db631071d9c2712e94f18277270ad717abfa198932c0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_package_metadata_v27.py": "cc0cfb2beddf985673a8c286446ad7de460fd2823b79b5044b892b9c793ed4f8",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/qwen35_predicated_slot_protocol_v1.py": "ea0573c8a546fcc5de5b0755017af736664ac2c7d738090aa6f470267b1be7f4",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_sampler_r10_terminal_root_20261112_v2.py": "1e3b8ac82edbaf666c45c4a72d0d8ad3a2e1a8f7a4d54bf6b6363c2b2a10375c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_kv256_alias_diagnostic_binding_v1.py": "dd69edc0178c97facdfa4f8476d3c6847dcea5744a1a36f8b7330e2a8053eb1d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_kv256_alias_diagnostic_binding_v2.py": "31be4443b197cf4348a7307661038d372823f0f4d5370da97e334a844dcfd9bc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_writer_geometry_binding_v1.py": "d297d8e0afbfb2ac48adc9f99ac960a37d567f93ed25b3c24952921fde99b642",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/derive_qwen35_kv256_alias_diagnostic_binding_v2.py": "4ae629f16254aee4db245b12a58578e75cfd8e5f053b666d4e9436857ab05942",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/derive_qwen35_kv256_alias_diagnostic_serial_v1.py": "652656776c8c42f0512082651a9e7af935cb714a94ffca16e7f84966f531f09c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_drain_hold_v1.py": "f3edb608cd908446cd29e02895ed005034c043fb7906fb95e5233336bf0b266f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_operator_sdk_sources_v1.py": "cdc679752fdad493fd00e7f7339e700b91a65604760fcdbbc8f70f49d1f93c30",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_layer1_sdk_batch_layout_sources_v2.py": "d1bd188a44f3d30cf52ccd171b1eed05e6fc7246d96d68dff39591449b6ced6b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_kv256_alias_diagnostic_binding_v1.py": "d903881e0a66e0d9e5baec131c7974d08d16935ebdf69439ac2576032f6c5c79",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_kv256_alias_diagnostic_binding_v2.py": "ce9174209b21412dde68a1b6d08e91394459543d6d6fafa89df23dbcd37ac98e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_sampler_v9_candidate_v3.py": "56ffe488298721a35b2bc6a5aa49557580e0fd3c7f48b078b2eda1f1235159c0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_geometry_binding_v1.py": "8a6c488e89c02829f625d3b5fb93ba456cc903c6d6a736ef08a9254dafcf3dfa",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_geometry_audit_physical_v5.py": "908d1e478a4cc2792bb97a49f21c79a29cde65d5af9948a60c8b60ba0a50e5bd",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_audit_v1.py": "c3770120b3ad73aee92708acea8ff182338ae41a3db65306be98b420863f3a49",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_bytes_v1.py": "a363ed9f2f71d4abe78205c648853ba1c59dd7d4b43f27619a17901efde4f1bf",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_leaf_v1.py": "fa7d73a4a317e3aefc4ed5eac24842adf1cb2c2ac8df48c00b008dc28a8e7178",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_root_helpers_v1.py": "3128db4d230d614111535d5aa7e6baa03eea2b230fad11775ced873b14153520",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/__init__.py": "5b8ac9ad680a7aa8d2f41504fc23f6143079b33a890abf08fe3ac1094c36684b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/contract.py": "7a5e4023e9d741d3fb6c14363a614b2d2e015324d00fb8e761ca6eeb509a1686",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/protocol.py": "a7f55dc07bd545ae534051e13b7fe973af6702d817e828cce8c716f91296ed7c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py": "f15f6066344e4e179ed857ea09d02a92990ae891f78fcf95b8299c12fce8de25",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/storage.py": "1650f1e07e2ba000725def4de1099bd9806e3d63ba285fcefff03a03cf6c9a2a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_identity_nki_v1.py": "f0bfbf7127ca6d1e2868646e95bbd589487b15fb6793d17cc429e81274ccf9d0",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_native_preflight_v3.py": "a8de94e9caf4fd99fa281a4239778f5e721b49d932dde2138b547e8c42e4ec5d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_history_v2.py": "b5f9ccf148982dc28349701d2d167aa5d8f0034d40c99b26245b06a93669186a",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_history_v3.py": "421b0488dae28a24b9b23eea0d437dfa0035c7ec92f8eb6a52b9e837c152433c",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_preflight_serial_v2.py": "b710c461e8276ffad8ff0b787b5d8da1484497f8fc3bd7cdbcda1954eb14d88d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v7/__init__.py": "51898dbf791dc80565367bd7f7dfd8de72b8880dd61bc065b507879a5107f6bc",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v7/contract.py": "5b48b116685da07e5aff6747c67fbf4fc0659bd37d8a8a5563e77154d6b46a6e",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v7/io.py": "5b37ba5f0961de71ea2f61221e7c4a42942e900eac429ea9363dc161bd159c5d",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_package_serial_runtime_v7/source_text.py": "44b9327916e5cb8651fbd535d1bc17903a0063b616c36d846bb9b30c96a23ca1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_predicated_slot_sdk_environment_v1.py": "fbe9299d806012315333f37f29c87c3a514598b07ad5282fa8f3825b303261a7",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py": "c46775d7a046a6351db7576e86c64456ea8e8bc5edf22b119977e44462430b13",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_contract_v12.py": "560442544b0c08a38696d855859bd8f86fe62bf1f27f473f9674207a52ea61c6",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_contract_v9.py": "fb8841a9f300e840dfc3ff75476ae6773c8257115e34ac65fac87e993171afa1",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v12.py": "85e410019f74032c9751653a96a3431ce6225b030b6e954d6236c7b1b86b9fde",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_io_v12.py": "250e176e158c87728703593b6fb1f03d0da5e1e01b856277a7cdedc692bd533f",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_service_v12.py": "5c6a5d4381ab2a166b6b9785a89ac9cda9b08d0075a08b2632b9bc25cf136caa",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_audit_v5.py": "562ba7b655c331d59948812d68dca8fb0e29f22a4bd04234f95db82f5d2913ac",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v1/contract.py": "226798001e39b02ebcd3d6a0882657cc5231caab157b95232a7f264d26d89f3b",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v3/run.py": "8950b9c7a69617fd7b0734c9126c29cda57d4870bef339327b4da434fd30d4bb",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v3/storage.py": "53f41ffee0a31b539dcaf58d3a4bb1273c9e0db73c505785aef913720240b321",
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_qwen35_kv256_alias_diagnostic_v1.py": "23f699b58d6c9bcd355e0e5652e7e47c980842e158d5a69042dfb768e7bba9e5",
+    "/home/ubuntu/qwen35_package_full_r5_post_exit_20261112_v1.py": "dc78d2eddcf1f805dd3b23c5a8b4127a4089caaeaf67fdfb863ffe6c6ccfb29e"
+  },
+  "source_tests": {
+    "bytes": 1044,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-binding-source-tests-20261113-v2.json",
+    "sha256": "b81023a880839f9db73d834e6f33d9c8042873e9b52ba36458d8d9dd7252fe92"
+  }
+}

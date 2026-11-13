@@ -1,0 +1,364 @@
+{
+  "actual_bindings_selected": false,
+  "actual_history_executed": false,
+  "actual_lock_acquired": false,
+  "blockers": [],
+  "cleanup_performed": false,
+  "defect_closed": "final_publication_freshness_after_last_drain",
+  "full_model_qualified": false,
+  "independent_regressions": [
+    {
+      "drains": 4,
+      "error": null,
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-1",
+        "full-history-resolve",
+        "lock-check",
+        "latest-read",
+        "full-history-physical",
+        "lock-check",
+        "latest-read",
+        "history-unchanged",
+        "lock-check",
+        "drain-2",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-3",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "publish-complete",
+        "lock-check",
+        "lock-check",
+        "drain-4",
+        "lock-release"
+      ],
+      "mode": "unchanged",
+      "published": true,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 1,
+      "error": "Unknown newer handoff before final publication",
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "lock-check",
+        "drain-1",
+        "lock-release"
+      ],
+      "mode": "changed_before",
+      "published": false,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 4,
+      "error": "Unknown newer handoff before final publication",
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-1",
+        "full-history-resolve",
+        "lock-check",
+        "latest-read",
+        "full-history-physical",
+        "lock-check",
+        "latest-read",
+        "history-unchanged",
+        "lock-check",
+        "drain-2",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-3",
+        "newer-handoff-published",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "lock-check",
+        "drain-4",
+        "lock-release"
+      ],
+      "mode": "changed_during_last_drain",
+      "published": false,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 4,
+      "error": "Inherited metadata identity changed",
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-1",
+        "full-history-resolve",
+        "lock-check",
+        "latest-read",
+        "full-history-physical",
+        "lock-check",
+        "latest-read",
+        "history-unchanged",
+        "lock-check",
+        "drain-2",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-3",
+        "history-unchanged",
+        "lock-check",
+        "lock-check",
+        "drain-4",
+        "lock-release"
+      ],
+      "mode": "metadata_during_last_drain",
+      "published": false,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 4,
+      "error": "Same final running metadata identity",
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-1",
+        "full-history-resolve",
+        "lock-check",
+        "latest-read",
+        "full-history-physical",
+        "lock-check",
+        "latest-read",
+        "history-unchanged",
+        "lock-check",
+        "drain-2",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-3",
+        "history-unchanged",
+        "lock-check",
+        "lock-check",
+        "lock-check",
+        "drain-4",
+        "lock-release"
+      ],
+      "mode": "running_identity_during_last_drain",
+      "published": false,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 4,
+      "error": "Executing v2 final publisher source changed",
+      "events": [
+        "lock-acquire",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-1",
+        "full-history-resolve",
+        "lock-check",
+        "latest-read",
+        "full-history-physical",
+        "lock-check",
+        "latest-read",
+        "history-unchanged",
+        "lock-check",
+        "drain-2",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "drain-3",
+        "history-unchanged",
+        "lock-check",
+        "latest-read",
+        "lock-check",
+        "lock-check",
+        "drain-4",
+        "lock-release"
+      ],
+      "mode": "source_during_last_drain",
+      "published": false,
+      "published_despite_newer_handoff": false
+    },
+    {
+      "drains": 0,
+      "error": "Separate v2 final publisher must be present in reviewed complete source closure",
+      "events": [],
+      "mode": "missing_source_pin",
+      "published": false,
+      "published_despite_newer_handoff": false
+    }
+  ],
+  "independent_validation": [
+    {
+      "actual_chunk": "acacdf",
+      "actual_exit_code": 0,
+      "name": "frozen v2 delivery plus frozen v1 preservation",
+      "new_files": 5,
+      "v1_preserved_files": 9
+    },
+    {
+      "actual_chunk": "e4a5ae",
+      "actual_exit_code": 0,
+      "name": "author focused tests independently rerun",
+      "passed": true,
+      "tests": 10
+    },
+    {
+      "actual_chunk": "269034",
+      "actual_exit_code": 0,
+      "name": "independent full finalizer with actual verify_self and fake physical world",
+      "output": {
+        "bytes": 4958,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-finalizer-v2-independent-probe-20261113-v1.json",
+        "sha256": "e31aceb3e6e037e955b3e91520552f2924de4388d0340610c2ae7f1983805955"
+      },
+      "passed": true,
+      "scenarios": 7,
+      "source": {
+        "bytes": 6132,
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_minicpm5_retained_finalizer_v2_independent_20261113_v1.py",
+        "sha256": "5ae0abeafc083747bf14ff9d5b72bcbf41b230eb7ec5597917fc56c310189af2"
+      }
+    }
+  ],
+  "launch_authorized": false,
+  "limits": [
+    "Source-only review is not runtime admission or actual replay equality.",
+    "Only v2 finalizer is the accepted successor entry; old observer --mode finalize retains the independently reproduced defect.",
+    "Actual current binding, complete source/input closure, real History/physical state and external tool exits remain root responsibilities.",
+    "Retirement remains unadmitted until actual full2352 byte verification, full11859/full32 replay, exact14/98 equality, real independent exit/drain and exclusive writer proof."
+  ],
+  "native_executed": false,
+  "new_speedup_claim": false,
+  "passed": true,
+  "payload_bytes_read": 0,
+  "preservation": {
+    "complete_History_resolve_physical_pair_unchanged_preserved": true,
+    "independent_observer_actual_owner_session_and_exit_protocol_unchanged": true,
+    "original_reconcile_drain_phases_render_completed_reused_by_identity": true,
+    "original_retained_lock_and_finite_deadline_unchanged": true,
+    "v1_caller_scientific_validation_and_no_retirement_unchanged": true,
+    "v1_publish_body_AST_identical_after_removing_only_added_verify_self_calls_and_final_postdrain_history_guard": true,
+    "verified_current_delivery_hashes_and_filesystem_identities": {
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-finalizer-v2-combined-tests-20261113-v1.txt": {
+        "identity": {
+          "st_blocks": 16,
+          "st_ctime_ns": 1794540182030166799,
+          "st_dev": 66306,
+          "st_gid": 1000,
+          "st_ino": 8348019,
+          "st_mode": 33204,
+          "st_mtime_ns": 1794540182030166799,
+          "st_nlink": 1,
+          "st_size": 5854,
+          "st_uid": 1000
+        },
+        "sha256": "457767397a001344d6e2dcf77c1461ee645d429847ca014f9df67d8bf13dbf75"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-finalizer-v2-contract-20261113-v1.md": {
+        "identity": {
+          "st_blocks": 16,
+          "st_ctime_ns": 1794540180106209013,
+          "st_dev": 66306,
+          "st_gid": 1000,
+          "st_ino": 8348018,
+          "st_mode": 33204,
+          "st_mtime_ns": 1794540180106209013,
+          "st_nlink": 1,
+          "st_size": 5406,
+          "st_uid": 1000
+        },
+        "sha256": "15c58bc18513154e8c252323de03c13b2f76eb8590721f9973573cd8dedd5e59"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-finalizer-v2-tests-20261113-v1.txt": {
+        "identity": {
+          "st_blocks": 8,
+          "st_ctime_ns": 1794540126668373720,
+          "st_dev": 66306,
+          "st_gid": 1000,
+          "st_ino": 8348017,
+          "st_mode": 33204,
+          "st_mtime_ns": 1794540126668373720,
+          "st_nlink": 1,
+          "st_size": 1031,
+          "st_uid": 1000
+        },
+        "sha256": "4e159c0ca0fe575b0875763ab97c865237726f6e43256ab9bfa4a2d6264ca71e"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_finalizer_v2.py": {
+        "identity": {
+          "st_blocks": 16,
+          "st_ctime_ns": 1794540072561566994,
+          "st_dev": 66306,
+          "st_gid": 1000,
+          "st_ino": 8348014,
+          "st_mode": 33204,
+          "st_mtime_ns": 1794540072561566994,
+          "st_nlink": 1,
+          "st_size": 6311,
+          "st_uid": 1000
+        },
+        "sha256": "4e2b9327e6427064cad77a5034dac33afa43f0b7f8bf0560038ac4ef740f9e86"
+      },
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_minicpm5_retained_replay_finalizer_v2.py": {
+        "identity": {
+          "st_blocks": 24,
+          "st_ctime_ns": 1794540126329381196,
+          "st_dev": 66306,
+          "st_gid": 1000,
+          "st_ino": 8348016,
+          "st_mode": 33204,
+          "st_mtime_ns": 1794540126329381196,
+          "st_nlink": 1,
+          "st_size": 10435,
+          "st_uid": 1000
+        },
+        "sha256": "5925c4e30d6f0ffd60340f9829ddd0371686e2b6ed9a7207b3d972e19e29c283"
+      }
+    }
+  },
+  "previous_blocking_review": {
+    "bytes": 10429,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-replay-caller-independent-source-review-20261113-v1.json",
+    "sha256": "3211188b2fdfc48fcdafebd0a7675e57f3bf3b0c04e07b97267bffcecc0d518d"
+  },
+  "production_deletion_admitted": false,
+  "reviewer": "/root/qwen_package_dve_assets_20261113",
+  "runtime_admitted": false,
+  "schema": "minicpm5_retained_replay_finalizer_v2_independent_source_review_v1",
+  "source_author": "/root/mini_writer_r3_source_compat_20261113",
+  "source_delivery": {
+    "bytes": 9455,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retained-finalizer-v2-source-delivery-20261113-v1.json",
+    "sha256": "d8e06bba6ea06c54cd336f87a51529d96b036b41cce1697b0b7d45879c32b7f6"
+  },
+  "source_enrollment": {
+    "actual_finalizer_content_hash_checked": true,
+    "actual_missing_pin_rejected_before_lock": true,
+    "changed_source_during_last_drain_rejected": true,
+    "conflicting_inherited_pin_rejected": true,
+    "every_old_source_input_resource_namespace_field_unchanged": true,
+    "final_guard_rechecks_source_after_last_drain": true,
+    "pure_wrapper_adds_full_v2_source_sha_before_original_v1_spec_render": true,
+    "root_exact_review_covers_full_spec_source_map": true
+  },
+  "source_only": true
+}

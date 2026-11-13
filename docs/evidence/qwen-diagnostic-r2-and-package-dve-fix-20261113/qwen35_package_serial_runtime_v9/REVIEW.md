@@ -1,0 +1,9 @@
+Source-only successor for observed package r6 compiler SDK links.
+
+Exactly 16 existing PWP assets and 4 observed DVE assets are authenticated by the fixed manifest. DVE bytes were not read by this author: all four SHA-256 values, sizes and identities derive from the independent root receipt 266783787c044d56083d7bcac5b0352849ed980a29e4a36775ec100ae1a720d5 and are checked against installed wheel RECORD text.
+
+387197 logical / 417792 allocated bytes in total. PWP and DVE have distinct fixed roots; each basename resolves only to its exact root. No arbitrary SDK path, executable, other generation, basename alias or relative target is accepted. Compiler constant links retain their existing checks. Existing installed targets count once, remain separate from output bytes and never reduce the NVMe reserve. Original file/class/entry caps, floors, source and input checks, all 25 scientific stages, precision, lock, History, original failure records and independent actual-exit audit remain unchanged.
+
+All modified runtime production functions are limited to compiler_assets.manifest/asset/verify_all/compiler_sdk_link, the new exact target_path mapping, and storage_scan using that mapping. run.py changes only its own versioned import namespace. budget.py changes only its descriptive PWP/DVE text. Frozen predecessor hashes and filesystem identities are retained in predecessor_pins.json and source tests recheck them.
+
+SDK Python/text source searches did not expose the link generator; many implementation modules are compiled. The observed 20-file allowlist is not proof of all possible compiler assets. Any additional link remains a closed failure requiring new observed evidence. No native import, compiler/model run, actual current-binding selection, History resolution, lock operation, queue mutation or cleanup occurred. This delivery grants no runtime admission and claims no model qualification or speedup.
