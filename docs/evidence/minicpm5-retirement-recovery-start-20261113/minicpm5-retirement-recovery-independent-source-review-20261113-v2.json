@@ -1,0 +1,86 @@
+{
+  "schema": "minicpm5_retirement_recovery_independent_source_review_v2",
+  "reviewer": "/root/deepseek_off_native_loader_20261113",
+  "review_date": "2026-11-13",
+  "scope": "SOURCE ONLY: frozen implementation source, authored source contract, and synthetic injected tests",
+  "source_review_passed": true,
+  "source_blockers": [],
+  "runtime_admission": false,
+  "deletion_authorized": false,
+  "model_or_raw_replay_authorized": false,
+  "real_recovery_completed": false,
+  "speedup_claim": false,
+  "reviewed_sources": {
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_recovery_v2.py": {
+      "sha256": "0e4e191cae93111de77fb2570b1d76f372256e2ba7da409bc8b19beb95f7e1e2",
+      "identity_device_inode_size_mtime_ns_ctime_ns": [66306, 8348453, 28204, 1794557580589430295, 1794557580589430295]
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_recovery_holders_v2.py": {
+      "sha256": "520b58898dee3a509eccdafa978007a5bfaad92dd13cdb3c2842b4b3a9973297",
+      "identity_device_inode_size_mtime_ns_ctime_ns": [66306, 8348454, 4945, 1794557478413695011, 1794557478413695011]
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_recovery_scope_v2.py": {
+      "sha256": "1741a5d483cfe852d03bcd4a436cf8aa2ad052a2fef6ba03af903123fbbc9304",
+      "identity_device_inode_size_mtime_ns_ctime_ns": [66306, 8348455, 8611, 1794557478413695011, 1794557478413695011]
+    },
+    "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_minicpm5_retained_retirement_recovery_v2.py": {
+      "sha256": "eb0b85f2be38f7138310fc43511915d9d3b85d6ae2b9fcfdfffeda975a06f419",
+      "identity_device_inode_size_mtime_ns_ctime_ns": [66306, 8348456, 35800, 1794557580593430206, 1794557580593430206]
+    }
+  },
+  "independent_test": {
+    "kind": "tool_session",
+    "session_id": 66086,
+    "terminal_chunk": "894cf0",
+    "exit_code": 0,
+    "tests_run": 25,
+    "failures": 0,
+    "errors": 0,
+    "unittest_elapsed_seconds": 25.044,
+    "source_hashes_and_identities_unchanged_before_after": true,
+    "v1_full_guard_v2_full_guard_ast_equal": true,
+    "v1_v2_history_guard_ast_equal": true,
+    "local_python_source_paths_read": 52,
+    "early_audit_installed_before_local_module_import": true,
+    "directory_enumeration": "Only importlib source-directory resolution; no proc, lifecycle, lock or runtime namespace enumeration",
+    "allowed_file_reads": "Read-only Python source/bytecode under the experiment source root or standard Python library roots",
+    "blocked_actual_operations_during_successful_run": [],
+    "actual_history_or_proc_or_lock_or_raw_work": false,
+    "test_runner_wrote_files": false
+  },
+  "retained_reviewer_harness_failure": {
+    "kind": "tool_call",
+    "terminal_chunk": "0ef11f",
+    "exit_code": 1,
+    "tests_run": 0,
+    "cause": "Reviewer early audit allowed only root source directories, so it rejected importlib enumeration of the original qwen35_package_serial_runtime_v7 source package before tests loaded. The system exception reporter subsequently attempted /etc/default/apport; that read was also blocked.",
+    "correction": "Permit directory enumeration only when initiated by frozen importlib source resolution under the known source/library roots; restore sys.__excepthook__ to avoid the system exception reporter. Keep all runtime/data/process/lock/raw operations forbidden.",
+    "implementation_change": false,
+    "actual_metadata_or_raw_read_performed": false
+  },
+  "resolved_review_finding": {
+    "issue": "The earlier draft ran extension metadata reads and the complete original serial_catalog consumer outside the read-only cadence and passed a forced global guard per row, restoring repeated full History/source/holder scans.",
+    "resolution": "Frozen v2 places the extension read, unchanged completed_outputs and complete rebind/original serial_catalog under composition_consumer with the same history_guard and forced entry/exit checks. Each actual publication executes after leaving that stage and has a forced full guard.",
+    "verification": "Source path review plus the real source-extracted original consumer fixture, callback counts, fixed-time zero repeated global-check assertions, mutation rejection and mandatory fences before receipt/catalog/idle writes."
+  },
+  "preserved_properties": [
+    "Original failed remover and failed finalizer must be distinct real nonzero tool terminals; exact failed-finalizer argv, original source, original terminal, running and lock bindings remain required.",
+    "Original spec and full source/execution maps are not edited or filtered. A deep-copied History input alone receives the disjoint three-source audit union, and the resolved historical map must equal the old map exactly.",
+    "The full old catalog is retained. The original completed_outputs receives the original spec. Rebind retains the last remover row's exact tool/owners/units/source delta and adds separately named post-exit audit provenance; it never attributes recovery sources to the old remover.",
+    "The complete old control namespace, directory/file identities and file hashes plus complete failed-finalizer transcript remain checked. Any missing/extra/replaced/changed node, old journal, old publication or their publishing temporary names rejects the narrow recovery branch.",
+    "The original lock, writer exclusion, resource floors/reservations and 7200-second work deadline remain. The new 128 MiB output reservation is additive and independently bounded.",
+    "Original History.physical_pair and Authority remain unchanged and share the reviewed external history_guard. Full two-pass process/service/cgroup checks are retained, including the historical r12 Authority.check metadata path.",
+    "Original verification authenticates every selected row before two complete metadata/allocation passes over all 2352 original/keeper pairs. Synthetic entry confirms 2352 times 3 times 2 identity observations, zero raw payload reads and zero reclaimed bytes.",
+    "The entire holder inspect AST matches the frozen original. Scope behavior is the frozen original with only exact helper target changed; nonce/ancestry/descriptor proof, actual foreground wait and complete helper drainage remain required before release.",
+    "Receipt then catalog then idle publication order is retained, each with full guards. Post-idle checks do not require the former running tip. Cleanup follows the original helper drain and retained-lock release rules; unresolved scope never releases.",
+    "V2 adds eleven bounded observational stage entry/exit events and cumulative full-guard time/count. Full guard and cadence function ASTs equal v1. Broken observational stdout does not bypass predicates or drain."
+  ],
+  "limits": [
+    "This review did not inspect current lifecycle JSON, actual failed-state/control files, actual History resolution/physical evidence, proc, services, the lock, model/compiler state or raw payloads. It did not publish to GitHub or Feishu.",
+    "The parent's reported original 4693 executed-source binding was not independently recounted here. Source preservation was reviewed for the complete bound map without replacement or truncation; actual binding/hash acceptance remains the parent's responsibility.",
+    "Full checks are due at the first callback at least 0.5 seconds after the start of the prior full check. If a full check itself lasts at least 0.5 seconds, the next callback immediately performs another full check. This can retain substantial repeated work; source-only tests prove neither real acceleration nor completion within 7200 seconds.",
+    "The cadence changes global-predicate observation timing and is not a hard 0.5-second wall-clock bound through blocking work. A transient restored mutation can be missed between observations; the original writer exclusion and retained lock remain required.",
+    "The 7200-second work deadline is not permission to release an unresolved helper scope. Inherited drainage can retain ownership beyond the work deadline.",
+    "Successful synthetic tests are source evidence only. Fresh real observation/request/review, actual recovery tool terminal, complete output chain, old-snapshot preservation, real physical drainage and independent acceptance are still required."
+  ]
+}

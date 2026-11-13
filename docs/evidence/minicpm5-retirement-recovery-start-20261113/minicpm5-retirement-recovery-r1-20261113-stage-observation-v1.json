@@ -1,0 +1,126 @@
+{
+  "actual_recovery_accepted": false,
+  "actual_tool": {
+    "actual_exit_observed": false,
+    "kind": "tool_session",
+    "last_poll_chunk": "61027b",
+    "session_id": 78279,
+    "still_running": true
+  },
+  "cumulative_global_guard_count": 335,
+  "cumulative_global_guard_seconds": 28.995343467220664,
+  "log_path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-recovery-r1-20261113.log",
+  "log_prefix_bytes": 2628,
+  "log_prefix_sha256": "9dc82e4be2d5919f65b9b1073768a8a99b640b1404b2a59abe32d0945cb041f7",
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-13T08:25:07.087511+00:00",
+  "observed_events": [
+    {
+      "elapsed_seconds": 4.1319988667964935e-05,
+      "error_type": null,
+      "event": "mini_retirement_recovery_stage",
+      "global_guard_count": 0,
+      "global_guard_seconds": 0.0,
+      "stage": "initial_fence",
+      "stage_elapsed_seconds": 1.1352822184562683e-06,
+      "status": "enter",
+      "success": null,
+      "telemetry_write_failures": 0
+    },
+    {
+      "event": "mini_retirement_recovery_live",
+      "lock_identity": {
+        "device": 66306,
+        "inode": 8294421
+      },
+      "old_finalizer_tool": {
+        "exit_code": 1,
+        "kind": "tool_session",
+        "session_id": 26060,
+        "terminal_chunk": "64c33a"
+      },
+      "old_remover_tool": {
+        "exit_code": 1,
+        "kind": "tool_session",
+        "session_id": 4693,
+        "terminal_chunk": "d5f983"
+      },
+      "owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-B",
+          "-u",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_recovery_v2.py",
+          "--request",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-recovery-r1-20261113-request.json",
+          "--request-sha256",
+          "fb594358448c6841bd3f706fbd706ce6e6a3851354723f9032c4b09bb14997d3"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+        "pid": 2140413,
+        "ppid": 2032614,
+        "start_ticks": "433852811"
+      },
+      "request": {
+        "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-recovery-r1-20261113-request.json",
+        "sha256": "fb594358448c6841bd3f706fbd706ce6e6a3851354723f9032c4b09bb14997d3"
+      },
+      "self_exit_claimed": false
+    },
+    {
+      "elapsed_seconds": 0.3188993250951171,
+      "error_type": null,
+      "event": "mini_retirement_recovery_stage",
+      "global_guard_count": 1,
+      "global_guard_seconds": 0.2359711779281497,
+      "stage": "initial_fence",
+      "stage_elapsed_seconds": 0.3188591403886676,
+      "status": "exit",
+      "success": true,
+      "telemetry_write_failures": 0
+    },
+    {
+      "elapsed_seconds": 0.3189577516168356,
+      "error_type": null,
+      "event": "mini_retirement_recovery_stage",
+      "global_guard_count": 1,
+      "global_guard_seconds": 0.2359711779281497,
+      "stage": "resolve",
+      "stage_elapsed_seconds": 5.736947059631348e-07,
+      "status": "enter",
+      "success": null,
+      "telemetry_write_failures": 0
+    },
+    {
+      "elapsed_seconds": 204.24733727704734,
+      "error_type": null,
+      "event": "mini_retirement_recovery_stage",
+      "global_guard_count": 335,
+      "global_guard_seconds": 28.995343467220664,
+      "stage": "resolve",
+      "stage_elapsed_seconds": 203.9283800991252,
+      "status": "exit",
+      "success": true,
+      "telemetry_write_failures": 0
+    },
+    {
+      "elapsed_seconds": 204.24740687012672,
+      "error_type": null,
+      "event": "mini_retirement_recovery_stage",
+      "global_guard_count": 335,
+      "global_guard_seconds": 28.995343467220664,
+      "stage": "physical",
+      "stage_elapsed_seconds": 5.895271897315979e-07,
+      "status": "enter",
+      "success": null,
+      "telemetry_write_failures": 0
+    }
+  ],
+  "owner_pid": 2140413,
+  "reclaimed_bytes": 0,
+  "resolve_seconds": 203.9283800991252,
+  "resolve_stage_success": true,
+  "retirement_passed": false,
+  "reviewer": "/root",
+  "schema": "minicpm5_retirement_recovery_root_stage_observation_v1"
+}
