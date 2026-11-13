@@ -1,0 +1,1259 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v7.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_pair_candidate_v1.py
+@@ -1,223 +1,36 @@
+-"""Explicit package candidate preparation v7; stdlib/source only, never admission.
+-
+-No latest lookup, file writes, History, lock, payload reads or native import.
+-The caller selects every binding and supplies guarded authenticated readers.
+-The only review returned has passed=False and launch_authorized=False.
++"""Explicit source-only writer-pair candidate; never runtime admission.
++
++The complete inherited package v7 metadata/source/identity contract is retained.
++All IO is injected. Real geometry and full package25 evidence, a reviewed
++simultaneous two-build budget, and actual current serial inputs are mandatory.
++Import performs no History, lock, payload read, native import or publication.
+ """
+ import copy
+ import hashlib
+-import json
+-import math
+-import os
+ from pathlib import Path
+ import re
+-import stat
+-
+-from qwen35_package_serial_runtime_v2 import contract as c
+-
+-IDENTITY_KEYS = {'realpath', 'device', 'inode', 'size', 'mtime_ns', 'ctime_ns'}
+-MIB = 1024**2
+-ORDINARY_CAP, ENVELOPE_CAP = 8*MIB, 64*MIB
++
++from qwen35_writer_pair_serial_runtime_v2 import contract as c
++from prepare_qwen35_package_serial_candidate_v7 import (
++    require, encode, reference, short_ref, identity_shape, file_identity,
++    StableReaders, finite_json_numbers, retained_reference_paths, merge_sources,
++    merge_inputs, catalog_shape, manifest_pins, sdk_asset_identities,
++    ORDINARY_CAP, ENVELOPE_CAP, TEXT_SUFFIXES, PWP_MANIFEST_SHA256)
++
+ SELF = str(Path(__file__).resolve())
+-PWP_MANIFEST_SHA256 = 'd743a0dbc46b06f7f4041748619325cf7def987fd56992e87000a2131799d698'
+-TEXT_SUFFIXES = {'.py', '.json', '.md', '.txt', '.patch', '.sh', '.toml', '.cfg', '.ini', '.jinja'}
+ REQUEST_KEYS = {'seed_spec', 'seed_review', 'seed_actual_exit', 'current_catalog',
+-    'idle_handoff', 'runtime_directory', 'runtime_delivery', 'runtime_review', 'resource_budget', 'case', 'binary_inputs',
+-    'preparation_sources', 'required_helpers', 'extra_metadata', 'future'}
++    'idle_handoff', 'runtime_directory', 'runtime_delivery', 'runtime_review',
++    'resource_budget', 'writer_cases', 'geometry_qualification', 'package_completion',
++    'binary_inputs', 'preparation_sources', 'required_helpers', 'extra_metadata', 'future'}
+ FUTURE_KEYS = {'run_name', 'output_root', 'overlay_output_root', 'running_handoff_path',
+     'overlay_path', 'spec_path', 'review_candidate_path'}
+-
+-
+-def require(value, message):
+-    if not value:
+-        raise ValueError(message)
+-
+-
+-def encode(value, cap=ENVELOPE_CAP):
+-    payload = (json.dumps(value, sort_keys=True, ensure_ascii=False, indent=2,
+-                          allow_nan=False)+'\n').encode()
+-    require(len(payload) <= cap, 'original finite envelope exceeded')
+-    return payload
+-
+-
+-def reference(value):
+-    return c.reference(value)
+-
+-
+-def short_ref(value):
+-    require(type(value) is dict and set(value) in ({'path', 'sha256'}, {'path', 'sha256', 'bytes'}),
+-            'exact metadata or sized source reference required')
+-    return reference({k: value[k] for k in ('path', 'sha256')})
+-
+-
+-def identity_shape(path, value):
+-    require(type(value) is dict and set(value) == IDENTITY_KEYS
+-            and value['realpath'] == path, 'complete exact stat-only identity required')
+-    require(all(type(value[k]) is int and value[k] >= 0 for k in IDENTITY_KEYS-{'realpath'}),
+-            'finite nonnegative identity numbers required')
+-
+-
+-def file_identity(path):
+-    """Stat only; never opens model/checkpoint/graph payloads."""
+-    path = Path(path)
+-    require(path.is_absolute() and str(path) == str(path.resolve())
+-            and not any(p.is_symlink() for p in (path, *path.parents)), 'canonical ordinary input path required')
+-    s = path.lstat()
+-    require(stat.S_ISREG(s.st_mode) and s.st_nlink == 1, 'singleton ordinary input required')
+-    return dict(realpath=str(path), device=s.st_dev, inode=s.st_ino, size=s.st_size,
+-                mtime_ns=s.st_mtime_ns, ctime_ns=s.st_ctime_ns)
+-
+-
+-def _unique(pairs):
+-    result = {}
+-    for key, value in pairs:
+-        require(key not in result, 'duplicate JSON key: '+key)
+-        result[key] = value
+-    return result
+-
+-
+-def finite_json_numbers(value):
+-    """Reject exponent overflow as well as explicit NaN/Infinity tokens."""
+-    pending = [value]
+-    while pending:
+-        item = pending.pop()
+-        if type(item) is float:
+-            require(math.isfinite(item), 'finite JSON numbers required, including exponent values')
+-        elif type(item) is dict:
+-            pending.extend(item.values())
+-        elif type(item) is list:
+-            pending.extend(item)
+-    return value
+-
+-
+-def retained_reference_paths(value):
+-    """Collect all retained absolute references without resolving their IO.
+-
+-    Sized/annotated refs count too. Relative paths inside original provenance
+-    are not rebound to guessed roots. Absolute lexical aliases are included
+-    canonically, without stat/resolve or replacing the original evidence.
+-    Full reference validity/authentication remains unchanged runtime History.
+-    """
+-    result, pending = set(), [value]
+-    while pending:
+-        item = pending.pop()
+-        if type(item) is dict:
+-            path = item.get('path')
+-            if 'sha256' in item and type(path) is str and Path(path).is_absolute():
+-                result.add(path)
+-                result.add(os.path.normpath(path))
+-            pending.extend(item.values())
+-        elif type(item) is list:
+-            pending.extend(item)
+-    return result
+-
+-
+-class StableReaders:
+-    """Optional future root reader. Construction/import performs no IO.
+-
+-    prepare explicitly selects 64 MiB only for seed spec/review and base plan.
+-    All other metadata uses 8 MiB. No aliases, payload decoding or retries that
+-    refresh an already observed identity. Full historical alias handling is
+-    retained in the unchanged runtime History, never replaced by this helper.
+-    """
+-    def __init__(self, guard):
+-        self.guard, self.observed = guard, {}
+-
+-    def source(self, ref, cap=ORDINARY_CAP):
+-        reference(ref)
+-        require(Path(ref['path']).suffix in TEXT_SUFFIXES, 'explicit text sources only; never open binary payloads')
+-        require(type(cap) is int and 0 < cap <= ENVELOPE_CAP, 'finite explicit read cap')
+-        self.guard()
+-        before = file_identity(ref['path'])
+-        require(before['size'] <= cap, 'input exceeds original finite envelope')
+-        fd = os.open(ref['path'], os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC)
+-        try:
+-            opened = os.fstat(fd)
+-            require((opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns, opened.st_ctime_ns)
+-                    == tuple(before[k] for k in ('device', 'inode', 'size', 'mtime_ns', 'ctime_ns')),
+-                    'opened input differs from observed identity')
+-            parts, count = [], 0
+-            while count <= cap:
+-                part = os.read(fd, min(MIB, cap+1-count))
+-                if not part:
+-                    break
+-                parts.append(part)
+-                count += len(part)
+-            payload = b''.join(parts)
+-        finally:
+-            os.close(fd)
+-        require(len(payload) == before['size'] and file_identity(ref['path']) == before
+-                and hashlib.sha256(payload).hexdigest() == ref['sha256'], 'complete stable authenticated read required')
+-        row = dict(sha256=ref['sha256'], identity=before)
+-        require(ref['path'] not in self.observed or self.observed[ref['path']] == row,
+-                'observed input cannot be rebound')
+-        self.observed[ref['path']] = copy.deepcopy(row)
+-        self.guard()
+-        return dict(payload=payload, identity=before)
+-
+-    def metadata(self, ref, cap=ORDINARY_CAP):
+-        require(Path(ref['path']).suffix == '.json', 'JSON metadata only')
+-        saved = self.source(ref, cap)
+-        value = json.loads(saved['payload'], object_pairs_hook=_unique,
+-            parse_constant=lambda _: (_ for _ in ()).throw(ValueError('finite JSON only')))
+-        finite_json_numbers(value)
+-        return dict(value=value, identity=saved['identity'])
+-
+-
+-def merge_sources(*maps):
+-    result = {}
+-    for values in maps:
+-        require(type(values) is dict, 'source map required')
+-        for path, sha in values.items():
+-            reference(dict(path=path, sha256=sha))
+-            require(path not in result or result[path] == sha, 'source pin conflict: '+path)
+-            result[path] = sha
+-    require(0 < len(result) <= c.LIMITS['source_map_entries'], 'original source map cap')
+-    return result
+-
+-
+-def merge_inputs(target, addition, *, json_only=True):
+-    require(type(addition) is dict, 'metadata map required')
+-    for path, row in addition.items():
+-        require(type(row) is dict and set(row) == {'sha256', 'identity'}
+-                and (not json_only or Path(path).suffix == '.json'),
+-                'all extension inputs must be JSON; do not drop incompatible evidence')
+-        reference(dict(path=path, sha256=row['sha256']))
+-        identity_shape(path, row['identity'])
+-        require(path not in target or target[path] == row, 'immutable metadata hash/identity conflict: '+path)
+-        target[path] = copy.deepcopy(row)
+-
+-
+-def catalog_shape(value):
+-    require(type(value) is dict and set(value) == {'schema', 'reviewer', 'passed', 'blockers',
+-            'completed_sdk', 'current_handoff', 'all_later_serial_runs_included', 'runs'}
+-            and value['schema'] == 'minicpm5_operator_later_serial_metadata_catalog_v1'
+-            and value['reviewer'] == '/root' and value['passed'] is True and value['blockers'] == []
+-            and value['all_later_serial_runs_included'] is True and type(value['runs']) is list
+-            and 0 < len(value['runs']) <= 256, 'complete original catalog contract required')
+-    reference(value['current_handoff'])
+-    result = {}
+-    for row in value['runs']:
+-        require(type(row) is dict and set(row) == {'terminal', 'tool', 'owners', 'units', 'source_sha256'},
+-                'complete unchanged serial row required')
+-        reference(row['terminal'])
+-        path = row['terminal']['path']
+-        require(path not in result, 'duplicate serial terminal')
+-        require(type(row['source_sha256']) is dict, 'catalog source extension required')
+-        result[path] = row
+-    return result
+-
+-
+-def manifest_pins(value):
+-    require(type(value) is dict and value, 'complete source manifest required')
+-    return merge_sources({path: row['sha256'] if type(row) is dict else row for path, row in value.items()})
+-
++RUNTIME_DIRECTORY = c.Q / 'qwen35_writer_pair_serial_runtime_v2'
+ 
+ def _future(future, seed, overlay, forbidden):
+     require(type(future) is dict and set(future) == FUTURE_KEYS, 'explicit future output bindings required')
+     c.units(future['run_name'])
+     require(future['run_name'] != seed['run_name'] and future['output_root'] != seed['output_root']
+-            and future['output_root'] == '/mnt/nvme/neuron-work/qwp-'+future['run_name'], 'fresh exact package output namespace')
++            and future['output_root'] == '/mnt/nvme/neuron-work/qww-'+future['run_name'], 'fresh exact writer output namespace')
+     path = Path(future['overlay_output_root'])
+     require(path.parent == Path('/mnt/nvme') and re.fullmatch('minicpm5-layer1-operator-native-[a-z0-9-]{1,64}', path.name)
+             and str(path) == future['overlay_output_root'] and future['overlay_output_root'] != overlay['output_root'],
+@@ -232,29 +45,71 @@
+             and seed['running_handoff_path'] not in paths, 'future paths cannot overwrite retained metadata')
+ 
+ 
+-def sdk_asset_identities(manifest, identity_only, guard, observed):
+-    """Exact fixed16 SDK manifest, stat only; native binary bytes are never read."""
+-    root = c.SDK/'neuronxcc/pwp/pwp_bin_trainium'
+-    groups = ('derivative_silu_and_others', 'natural_log_exp_and_others',
+-              'sigmoid_and_others', 'silu_and_others', 'softplus_and_others')
+-    names = ('act_info.json',) + tuple(g+s for g in groups for s in ('.json', '_bkt.bin', '_ctrl.bin'))
+-    require(manifest.get('schema') == 'qwen35_exact_sdk_pwp_assets_v1' and
+-            manifest.get('sdk_version') == '2.23.6484.0+3b612583' and
+-            set(manifest.get('assets', {})) == {str(root/name) for name in names} and
+-            manifest.get('logical_bytes') == 370753 and manifest.get('allocated_bytes') == 393216,
+-            'fixed sixteen observed installed SDK assets only')
+-    for path, row in manifest['assets'].items():
+-        reference(dict(path=path, sha256=row['sha256']))
+-        actual = row['identity']
+-        require(actual['st_nlink'] == 1 and stat.S_ISREG(actual['st_mode']) and
+-                row['bytes'] == actual['st_size'] == row['record_bytes'] and 0 < row['bytes'] < 45000,
+-                'fixed bounded singleton SDK asset metadata')
+-        expected = dict(realpath=path, device=actual['st_dev'], inode=actual['st_ino'], size=actual['st_size'],
+-                        mtime_ns=actual['st_mtime_ns'], ctime_ns=actual['st_ctime_ns'])
+-        identity_shape(path, expected); guard()
+-        require(identity_only(path) == expected, 'fixed SDK asset stat identity changed')
+-        require(path not in observed, 'SDK asset stat entry duplicated')
+-        observed[path] = expected
++def completed_prerequisites(request, catalog, read):
++    """Authenticate executed geometry and package25 metadata without native IO.
++
++    The geometry checker is pure and examines all saved calls. Package stage25
++    is a separately executed independent audit, never inferred from an exit0
++    alone. Its storage result is retained as input; this function does not guess
++    a new dual-build budget or promote full-model/performance qualification.
++    """
++    from qwen35_writer_pair_validation_v1.geometry import check_complete_geometry, LAYOUTS
++    from qwen35_package_serial_runtime_v8.wiring import STAGES as PACKAGE_STAGES
++    qualification = read(request['geometry_qualification'])
++    require(set(qualification) == {'schema', 'reviewer', 'passed', 'blockers', 'reports',
++            'actual_exit', 'source_sha256', 'full_model_qualified'}
++            and qualification['schema'] == 'qwen35_writer_geometry_independent_qualification_v1'
++            and qualification['reviewer'] == '/root' and qualification['passed'] is True
++            and qualification['blockers'] == [] and qualification['full_model_qualified'] is False
++            and set(qualification['reports']) == set(LAYOUTS), 'complete independently qualified geometry required')
++    actual = read(qualification['actual_exit'])
++    require(actual['schema'] == 'qwen35_writer_geometry_root_actual_exit_v1'
++            and actual['reviewer'] == '/root' and actual['actual_tool_exit_observed'] is True
++            and actual['actual_tool']['exit_code'] == 0 and actual['geometry_qualified'] is True
++            and actual['owners_gone'] is True and actual['physically_drained'] is True
++            and actual['reports'] == qualification['reports']
++            and actual['source_sha256'] == qualification['source_sha256']
++            and actual['full_model_qualified'] is False, 'actual successful independently drained geometry required')
++    rows = catalog_shape(catalog)
++    row = rows.get(qualification['actual_exit']['path'])
++    require(row is not None and row['terminal'] == qualification['actual_exit']
++            and row['tool'] == actual['actual_tool'] and row['owners'] == actual['owners']
++            and row['units'] == actual['units'], 'exact actual geometry row must already be retained')
++    reports = {name: read(ref) for name, ref in qualification['reports'].items()}
++    check_complete_geometry(reports)
++    require(all(report['source_sha256'] == qualification['source_sha256'] for report in reports.values()),
++            'executed geometry source identities must agree')
++    package = read(request['package_completion'])
++    require(package['schema'] == 'qwen35_package_root_actual_exit_v1' and package['reviewer'] == '/root'
++            and package['actual_tool_exit_observed'] is True and package['actual_tool']['exit_code'] == 0
++            and package['owners_gone'] is True and package['physically_drained'] is True
++            and package['completed_stages'] == 24 and len(package['completed_stage_prefix']) == 24
++            and package['outcome']['all25_stages_audited'] is True
++            and package['stage25'] == package['outcome']['stage25']
++            and package['outcome']['stage25_error'] is None, 'actual package completion must include full independent stage25')
++    row = rows.get(request['package_completion']['path'])
++    require(row is not None and row['terminal'] == request['package_completion']
++            and row['tool'] == package['actual_tool'] and row['owners'] == package['owners']
++            and row['units'] == package['all_declared_units'], 'exact completed package row must already be retained')
++    package_spec = read(package['spec'], ENVELOPE_CAP)
++    stage25 = read(package['stage25']); audit = read(stage25['result'])
++    require(stage25['index'] == 25 and (stage25['arm'], stage25['stage']) == PACKAGE_STAGES[-1]
++            and stage25['case'] == package_spec['case'] and stage25['completed'] is True
++            and audit['schema'] == 'qwen35_package_independent_final_audit_v1'
++            and audit['reviewer'] == '/root' and audit['all25_stages_audited'] is True
++            and audit['spec'] == package['spec'] and audit['admission'] == package['admission']
++            and audit['external_tool_exit'] == package['external_tool_exit']
++            and audit['outer_terminal'] == package['outer_terminal']
++            and audit['stage_receipts'] == package['completed_stage_prefix']
++            and type(audit['storage']) is dict and audit['storage'],
++            'actual package stage25 must bind exact full run and retained build/storage facts')
++    for index, reference_ in enumerate(package['completed_stage_prefix'], 1):
++        receipt = read(reference_)
++        require(receipt['index'] == index and (receipt['arm'], receipt['stage']) == PACKAGE_STAGES[index-1]
++                and receipt['completed'] is True and receipt['case'] == package_spec['case'],
++                'all original package stages must remain an exact completed prefix')
++        read(receipt['result'])
++    return merge_sources(qualification['source_sha256'], package_spec['source_sha256'])
+ 
+ 
+ def prepare(request, read_metadata, read_source, identity_only, guard):
+@@ -356,39 +211,32 @@
+ 
+     runtime_directory = Path(request['runtime_directory'])
+     require(str(runtime_directory) == request['runtime_directory']
+-            and runtime_directory in (c.Q/'qwen35_package_serial_runtime_v2', c.Q/'qwen35_package_serial_runtime_v3',
+-                                      c.Q/'qwen35_package_serial_runtime_v4', c.Q/'qwen35_package_serial_runtime_v5', c.Q/'qwen35_package_serial_runtime_v6', c.Q/'qwen35_package_serial_runtime_v7', c.Q/'qwen35_package_serial_runtime_v8'),
+-            'only explicit reviewed package runtime v2, v3, v4, v5, v6, v7 or v8 directory')
+-    runtime_version = runtime_directory.name.rsplit('_', 1)[1]
++            and runtime_directory == RUNTIME_DIRECTORY, 'exact accepted writer runtime v2 directory')
+     runtime_review = read(request['runtime_review'])
+-    require(runtime_review.get('schema') == 'qwen35_package_serial_runtime_'+runtime_version+'_root_source_review_v1'
+-            and runtime_review.get('reviewer') == '/root' and runtime_review.get('passed') is True
+-            and runtime_review.get('source_only') is True and runtime_review.get('blockers') == []
+-            and runtime_review.get('runtime_admitted') is False, 'independent exact runtime source-only review required')
++    require(runtime_review.get('schema') == 'qwen35_writer_pair_runtime_v2_root_source_review_v1'
++            and runtime_review.get('reviewer') == '/root' and runtime_review.get('source_accepted') is True
++            and runtime_review.get('blockers') == [] and runtime_review.get('runtime_admitted') is False,
++            'independent exact writer runtime source review required')
+     runtime_ref = short_ref(runtime_review['source_delivery'])
+     require(runtime_ref == request['runtime_delivery']
+-            and runtime_ref['path'] == str(runtime_directory/'source_delivery.json'), 'exact root-selected runtime source delivery')
++            and runtime_ref['path'] == str(runtime_directory/'source_delivery.json'),
++            'exact root-selected writer runtime source delivery')
+     runtime = read(runtime_ref)
+-    require(runtime.get('schema') == 'qwen35_package_serial_runtime_source_delivery_'+runtime_version
+-            and runtime.get('source_only') is True and runtime.get('launch_authorized') is False
+-            and runtime.get('runtime_admitted') is False and runtime.get('frozen_science_delivery') == c.SCIENCE_DELIVERY,
+-            'runtime delivery is source only and retains frozen full science')
++    require(runtime.get('schema') == 'qwen35_writer_pair_serial_runtime_source_delivery_v2'
++            and runtime.get('source_only') is True and runtime.get('runtime_admitted') is False,
++            'accepted writer runtime remains source-only')
+     runtime_pins = manifest_pins(runtime['files'])
+-    runtime_files = (*c.RUNTIME_FILES, 'input_pins.json', *(('source_text.py',) if runtime_version in ('v5', 'v6', 'v7', 'v8') else ()))
+-    if runtime_version == 'v8': runtime_files += ('compiler_assets.py', 'compiler_assets.json')
+-    require(all(str(runtime_directory/name) in runtime_pins for name in runtime_files), 'complete runtime file closure')
++    require(all(str(runtime_directory/name) in runtime_pins for name in c.RUNTIME_FILES),
++            'complete writer runtime file closure')
+     for path, sha in runtime_pins.items():
+         source(dict(path=path, sha256=sha))
+-    input_manifest = read(dict(path=str(runtime_directory/'input_pins.json'), sha256=runtime_pins[str(runtime_directory/'input_pins.json')]))
+-    require(input_manifest.get('source_only') is True and input_manifest.get('binary_payloads_read') is False,
+-            'runtime input manifest must remain source only')
+-    runtime_input_pins = manifest_pins(input_manifest['files'])
+     science = read(c.SCIENCE_DELIVERY)
+     science_pins = manifest_pins(science['files'])
+-    for name in ('input_sources.json', 'capture_sources.json'):
+-        path = str(c.Q/'qwen35_package_full_validation_v2'/name)
+-        require(path in science_pins, 'frozen science manifest missing')
++    for name in ('input_sources.json', 'capture_sources.json', 'geometry_sources.json'):
++        path = str(c.Q/'qwen35_writer_pair_validation_v1'/name)
++        require(path in science_pins, 'frozen writer science manifest missing')
+         science_pins = merge_sources(science_pins, manifest_pins(read(dict(path=path, sha256=science_pins[path]))))
++    prerequisite_pins = completed_prerequisites(request, catalog, read)
+ 
+     prep = request['preparation_sources']
+     require(type(prep) is dict and SELF in prep and type(request['required_helpers']) is list
+@@ -397,12 +245,13 @@
+     for path, sha in prep.items():
+         source(dict(path=path, sha256=sha))
+     pins = merge_sources(old_sources, *[r['source_sha256'] for r in catalog['runs']], runtime_pins,
+-        {runtime_ref['path']: runtime_ref['sha256']}, runtime_input_pins, science_pins,
++        {runtime_ref['path']: runtime_ref['sha256']}, science_pins, prerequisite_pins,
+         {c.SCIENCE_DELIVERY['path']: c.SCIENCE_DELIVERY['sha256']}, prep)
+     import_sources = (str(c.HERE/'__init__.py'), str(c.HERE/'contract.py'),
+         str(c.Q/'qwen35_sampler_pair_protocol_v1.py'),
+-        str(c.Q/'qwen35_package_full_validation_v2/__init__.py'),
+-        str(c.Q/'qwen35_package_full_validation_v2/runtime.py'))
++        str(c.Q/'qwen35_writer_pair_validation_v1/__init__.py'),
++        str(c.Q/'qwen35_writer_pair_validation_v1/runtime.py'),
++        str(c.Q/'prepare_qwen35_package_serial_candidate_v7.py'))
+     required = (*c.STARTUP_FILES, *import_sources, str(c.Q/'qwen35_sampler_history_supplement_v1.py'),
+                 str(c.Q/'qwen35_sampler_torch_namespace_sources_v1.py'))
+     require(all(p in pins for p in required), 'complete startup and history helper closure required')
+@@ -418,7 +267,7 @@
+     _future(future, seed, overlay, set(observed) | set(all_inputs) | set(pins) | retained_paths)
+     require(set(request['binary_inputs']) == set(c.BINARY_PATHS), 'all six exact binary paths required')
+     stat_observed = {}
+-    if runtime_version == 'v8':
++    if True:  # Exact accepted v2 retains the package v8 SDK manifest.
+         assets_path = str(runtime_directory/'compiler_assets.json')
+         require(runtime_pins[assets_path] == PWP_MANIFEST_SHA256, 'exact frozen SDK asset manifest pin required')
+         assets = read(dict(path=assets_path, sha256=PWP_MANIFEST_SHA256))
+@@ -449,16 +298,18 @@
+                        input_extension=new_overlay_inputs, output_root=future['overlay_output_root'])
+     overlay_bytes = encode(new_overlay, ORDINARY_CAP)
+     overlay_ref = dict(path=future['overlay_path'], sha256=hashlib.sha256(overlay_bytes).hexdigest())
+-    spec = dict(schema='qwen35_package_serial_spec_v1', run_name=future['run_name'], output_root=future['output_root'],
++    spec = dict(schema='qwen35_writer_pair_serial_spec_v1', run_name=future['run_name'], output_root=future['output_root'],
+         history_overlay=overlay_ref, current_serial_catalog=request['current_catalog'], source_sha256=pins,
+         input_extension=spec_inputs, frozen_science_delivery=copy.deepcopy(c.SCIENCE_DELIVERY),
+         running_handoff_path=future['running_handoff_path'], limits=copy.deepcopy(c.LIMITS),
+         lock_identity=copy.deepcopy(c.LOCK_IDENTITY), native_python=c.PYTHON, automatic_successor=False,
+-        lfm_r2_scope=seed['lfm_r2_scope'], case=request['case'], binary_inputs=request['binary_inputs'],
++        lfm_r2_scope=seed['lfm_r2_scope'], case=request['writer_cases']['baseline'],
++        writer_cases=request['writer_cases'], geometry_qualification=request['geometry_qualification'],
++        binary_inputs=request['binary_inputs'],
+         resource_budget=request['resource_budget'], build_file_limit_bytes=budget['build_file_limit_bytes'])
+     spec_bytes = encode(spec)
+     spec_ref = dict(path=future['spec_path'], sha256=hashlib.sha256(spec_bytes).hexdigest())
+-    review = dict(schema='qwen35_package_serial_source_review_v1', reviewer='/root', passed=False,
++    review = dict(schema='qwen35_writer_pair_serial_source_review_v1', reviewer='/root', passed=False,
+         blockers=['Root independent exact binding review, full History and physical/native admission remain pending.'],
+         spec=spec_ref, source_sha256=copy.deepcopy(pins), launch_authorized=False)
+     # Pure validation only. The temporary true object is neither returned nor
+@@ -478,12 +329,13 @@
+         guard()
+         require(identity_only(path) == expected, 'stat-only payload identity changed before return')
+     guard()
+-    return dict(schema='qwen35_package_serial_candidate_v7', passed=False, launch_authorized=False,
++    return dict(schema='qwen35_writer_pair_serial_candidate_v1', passed=False, launch_authorized=False,
+         source_only=True, history_resolved=False, physical_checks_passed=False, native_executed=False,
+         overlay=new_overlay, overlay_bytes=overlay_bytes, overlay_ref=overlay_ref,
+         spec=spec, spec_bytes=spec_bytes, spec_ref=spec_ref,
+         review=review, review_bytes=review_bytes, review_ref=review_ref,
+         catalog_source_extension=extension,
++        completed_prerequisites={key: request[key] for key in ('geometry_qualification', 'package_completion')},
+         seed_references={k: request[k] for k in ('seed_spec', 'seed_review', 'seed_actual_exit')},
+         preparation_only_references={p: observed[p] for p in sorted(preparation_only)},
+         observed_metadata=observed, observed_sources=source_observed,
+@@ -500,25 +352,27 @@
+     Runtime repeats this against its authenticated source_files.json and then
+     performs fresh parent/device/path/resource checks before the original lock.
+     """
+-    keys = {'schema', 'reviewer', 'passed', 'blockers', 'case', 'output_root', 'control_root',
++    keys = {'schema', 'reviewer', 'passed', 'blockers', 'writer_cases', 'output_root', 'control_root',
+             'classes', 'headroom_bytes', 'parent_identities', 'source_files', 'build_file_limit_bytes'}
+-    require(type(value) is dict and set(value) == keys and value['schema'] == 'qwen35_package_reviewed_budget_v1'
++    require(type(value) is dict and set(value) == keys and value['schema'] == 'qwen35_writer_pair_reviewed_budget_v1'
+             and value['reviewer'] == '/root' and value['passed'] is True and value['blockers'] == [], 'root-reviewed exact resource budget required')
+-    require(value['case'] == spec['case'] and value['output_root'] == spec['output_root']
+-            and value['control_root'] == str(c.control_root(spec)), 'reviewed budget must bind all six roots')
+-    classes = {'view', 'artifact', 'compiler_cache', 'compiler_workdir', 'build_auxiliary'}
++    require(value['writer_cases'] == spec['writer_cases'] and value['output_root'] == spec['output_root']
++            and value['control_root'] == str(c.control_root(spec)), 'reviewed budget must bind all ten roots')
++    classes = {arm+'_'+kind for arm in ('baseline', 'candidate')
++               for kind in ('view', 'artifact', 'compiler_cache', 'compiler_workdir')} | {'build_auxiliary'}
+     require(type(value['classes']) is dict and set(value['classes']) == classes, 'all budget classes required')
+     for row in value['classes'].values():
+         require(type(row) is dict and set(row) == {'allocated_bytes', 'single_file_bytes', 'entries'}
+                 and all(type(n) is int and 0 < n < 2**63 for n in row.values())
+                 and row['single_file_bytes'] <= row['allocated_bytes'], 'finite per-class capacity required')
+-    require(value['classes']['build_auxiliary']['allocated_bytes'] >= 2*c.LIMITS['leaf_log_bytes']
++    require(value['classes']['build_auxiliary']['allocated_bytes'] >= 4*c.LIMITS['leaf_log_bytes']
+             and value['build_file_limit_bytes'] == spec['build_file_limit_bytes']
+             == max(row['single_file_bytes'] for row in value['classes'].values()), 'unchanged build auxiliary and file limit policy')
+     require(type(value['headroom_bytes']) is dict and set(value['headroom_bytes']) == {'root', 'nvme'}
+             and all(type(n) is int and 0 < n < 2**63 for n in value['headroom_bytes'].values()), 'finite reviewed headroom required')
+-    roots = [Path(spec['output_root']), c.control_root(spec)] + [Path(spec['case'][k]) for k in ('model_path', 'artifact', 'compiler_cache', 'compiler_workdir')]
+-    require(len(set(roots)) == 6 and not any(a in b.parents for a in roots for b in roots if a != b), 'six disjoint nonnested roots')
++    roots = [Path(spec['output_root']), c.control_root(spec)] + [Path(spec['writer_cases'][arm][k]) for arm in ('baseline', 'candidate')
++        for k in ('model_path', 'artifact', 'compiler_cache', 'compiler_workdir')]
++    require(len(set(roots)) == 10 and not any(a in b.parents for a in roots for b in roots if a != b), 'ten disjoint nonnested roots')
+     require(set(value['parent_identities']) == {str(p.parent) for p in roots}, 'all parent identities required')
+     for path, row in value['parent_identities'].items():
+         require(type(row) is dict and set(row) == {'realpath', 'device', 'inode'} and row['realpath'] == path
+@@ -528,4 +382,34 @@
+         require(type(row) is dict and set(row) == {'pin', 'identity'} and row['pin'] == originals[name]
+                 and row['identity']['realpath'] == str(Path('/mnt/nvme/models/Qwen3.5-2B')/name)
+                 and row['identity']['size'] == originals[name]['size'], 'exact source pin and stat-only identity')
++    for row in value['source_files'].values():
++        identity_shape(row['identity']['realpath'], row['identity'])
+     return value
++
++
++def candidate_envelope(prepared, request):
++    """Small publication candidate; caller writes exact returned bytes once.
++
++    This carries no approved review and cannot launch a model. The root must
++    publish overlay/spec/review-draft exact bytes and independently accept the
++    complete binding with accept_qwen35_writer_pair_root_v1.py afterward.
++    """
++    require(prepared['schema'] == 'qwen35_writer_pair_serial_candidate_v1'
++            and prepared['passed'] is False and prepared['launch_authorized'] is False,
++            'only non-authorizing writer preparation may be enveloped')
++    for kind in ('overlay', 'spec', 'review'):
++        ref = prepared[kind+'_ref']; reference(ref)
++        require(hashlib.sha256(prepared[kind+'_bytes']).hexdigest() == ref['sha256'],
++                'exact prepared publication bytes required')
++    require(prepared['spec']['current_serial_catalog'] == request['current_catalog']
++            and prepared['completed_prerequisites'] == {key: request[key]
++                for key in ('geometry_qualification', 'package_completion')},
++            'publication envelope cannot select different completed inputs')
++    value = dict(schema='qwen35_writer_pair_root_candidate_envelope_v1', passed=False,
++        launch_authorized=False, spec_ref=prepared['spec_ref'], overlay_ref=prepared['overlay_ref'],
++        review_draft_ref=prepared['review_ref'], catalog=request['current_catalog'],
++        idle_handoff=request['idle_handoff'], runtime_source_review=request['runtime_review'],
++        completed_prerequisites=prepared['completed_prerequisites'],
++        preparation_only_references=prepared['preparation_only_references'],
++        preservation=prepared['preservation'])
++    return copy.deepcopy(value), encode(value, ORDINARY_CAP)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/accept_qwen35_package_full_root_r5_20261112_v1.py
++++ /home/ubuntu/accept_qwen35_writer_pair_root_v1.py
+@@ -1,115 +1,131 @@
+-"""Root r5 exact package acceptance; original complete History and 874-child verification retained.
++"""Explicit root acceptance of a prepared writer candidate; no defaults.
+ 
+-Import and --help perform no preparation, History, lock or native work.
++No import-time IO. Only an actual root call after independent source review
++resolves full current History under the original lock. This does not launch.
+ """
+ import argparse
+ from pathlib import Path
+-import re
+ 
+-R = Path('/home/ubuntu/experiments/trn1-latest-models-20261031'); Q = R / 'research'
+-EXACT_REFS = {'catalog': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v115.json', '5250dce2109a6e420c91d358cd0b52ec9386604f16c7e4e85e0e3c86f2a768f2'), 'idle': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/continuation-handoff-20261112-v589-qwen-package-compiler-link-failed.json', '6f4087a133ae962d4cd9fbd761edfc8ff23cad91df28d03605de4200f4761556'), 'runtime-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-runtime-v7-root-source-review-20261112-v1.json', None), 'preparer-review': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-serial-preparer-v6-root-source-review-20261112-v1.json', None), 'budget': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-resource-budget.json', None), 'candidate': ('/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-package-full-r5-20261112-binding-candidate.json', None)}
+-
+-def parser():
+-    value = argparse.ArgumentParser(description=__doc__)
+-    for name in EXACT_REFS:
+-        value.add_argument('--' + name, required=True)
+-        value.add_argument('--' + name + '-sha256', required=True)
+-    return value
+-
+-
+-def selected_refs(args):
+-    result = {}
+-    for name, (expected_path, fixed_sha) in EXACT_REFS.items():
+-        path = getattr(args, name.replace('-', '_'))
+-        sha = getattr(args, name.replace('-', '_') + '_sha256')
+-        if path != expected_path or type(sha) is not str or re.fullmatch('[a-f0-9]{64}', sha) is None:
+-            raise ValueError('exact r5 reference required: ' + name)
+-        if fixed_sha is not None and sha != fixed_sha:
+-            raise ValueError('frozen r5 prerequisite digest changed: ' + name)
+-        result[name] = dict(path=path, sha256=sha)
+-    return result
++R = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
++Q = R / 'research'
+ 
+ 
+ def main(argv=None):
+-    refs = selected_refs(parser().parse_args(argv))
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--request', required=True)
++    parser.add_argument('--request-sha256', required=True)
++    args = parser.parse_args(argv)
+     import datetime
+     import json
+     import os
+-    from pathlib import Path
+     import resource
+     import signal
+     import sys
+     import time
+-
+     sys.path[:0] = [str(Q), str(R)]
+-    assert sys.dont_write_bytecode and __debug__
++    from qwen35_writer_pair_serial_runtime_v2 import contract, io, budget
++    from qwen35_writer_pair_serial_runtime_v2.history import Bundle
++    from prepare_qwen35_writer_pair_candidate_v1 import completed_prerequisites
++    from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
++    require = contract.require
++    require(sys.dont_write_bytecode and __debug__, 'python -B with assertions required')
+     resource.setrlimit(resource.RLIMIT_AS, (2 * 2**30, 2 * 2**30))
+     resource.setrlimit(resource.RLIMIT_CPU, (600, 605)); signal.alarm(600)
+-    from qwen35_package_serial_runtime_v7 import contract, io, budget
+-    from qwen35_package_serial_runtime_v7.history import Bundle
+-    from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+-
+-    candidate_ref = refs['candidate']
+-    candidate = io.read(candidate_ref)
+-    assert not candidate['passed'] and not candidate['launch_authorized']
+-    assert candidate['catalog'] == refs['catalog'] and candidate['idle_handoff'] == refs['idle']
+-    assert candidate['runtime_source_review'] == refs['runtime-review'] and candidate['preparer_source_review'] == refs['preparer-review']
+-    assert candidate['review_path'] == str(Q / 'qwen35-package-full-r5-20261112-review.json')
+-    assert candidate['spec_ref']['path'] == str(Q / 'qwen35-package-full-r5-20261112-spec.json')
+-    assert candidate['review_draft_ref']['path'] == str(Q / 'qwen35-package-full-r5-20261112-review-draft.json')
+-    assert io.read(candidate['runtime_source_review'])['passed']
+-    assert io.read(candidate['preparer_source_review'])['source_accepted']
++    request_ref = contract.reference(dict(path=args.request, sha256=args.request_sha256))
++    request = io.read(request_ref)
++    require(set(request) == {'schema', 'candidate', 'caller_source_review', 'review_path', 'binding_path'}
++            and request['schema'] == 'qwen35_writer_pair_root_accept_request_v1', 'explicit exact root request required')
++    candidate = io.read(request['candidate'])
++    require(candidate['schema'] == 'qwen35_writer_pair_root_candidate_envelope_v1'
++            and candidate['passed'] is False and candidate['launch_authorized'] is False,
++            'non-authorizing writer preparation envelope required')
++    caller_review = io.read(request['caller_source_review'])
++    require(caller_review['reviewer'] == '/root' and caller_review['source_accepted'] is True
++            and caller_review['blockers'] == [] and caller_review['runtime_admitted'] is False,
++            'independent root caller-source review required')
++    runtime_review = io.read(candidate['runtime_source_review'])
++    require(runtime_review['schema'] == 'qwen35_writer_pair_runtime_v2_root_source_review_v1'
++            and runtime_review['source_accepted'] is True and runtime_review['runtime_admitted'] is False,
++            'accepted exact writer runtime v2 source required')
+     spec_ref = candidate['spec_ref']; spec = io.read(spec_ref, 64 * 2**20)
+-    assert spec['run_name'] == 'pkg-r5-20261112' and spec['output_root'] == '/mnt/nvme/neuron-work/qwp-pkg-r5-20261112'
+-    assert spec['resource_budget'] == refs['budget']
+-    assert spec['running_handoff_path'] == str(Q / 'continuation-handoff-20261112-v590-qwen35-package-full-r5-running.json')
+-    catalog = io.read(spec['current_serial_catalog']); idle = io.read(catalog['current_handoff'])
+-    assert spec['current_serial_catalog'] == candidate['catalog'] and catalog['current_handoff'] == candidate['idle_handoff']
+-    assert not idle['running'] and idle['active_serial'] is None and idle['active_heavy_units'] == idle['live_tool_sessions'] == []
+-    tip = latest.latest_handoff(); assert tip['path'] == catalog['current_handoff']['path']
+     draft = io.read(candidate['review_draft_ref'], 64 * 2**20)
+-    assert draft['spec'] == spec_ref and draft['source_sha256'] == spec['source_sha256']
+-    assert draft['passed'] is draft['launch_authorized'] is False
++    require(draft['passed'] is False and draft['launch_authorized'] is False
++            and draft['spec'] == spec_ref and draft['source_sha256'] == spec['source_sha256'],
++            'candidate review binds the exact complete source map')
++    require(spec['history_overlay'] == candidate['overlay_ref']
++            and spec['current_serial_catalog'] == candidate['catalog']
++            and spec['geometry_qualification'] == candidate['completed_prerequisites']['geometry_qualification'],
++            'preparation and actual source bindings agree')
++    self_ref = io.ref(Path(__file__).resolve())
++    require(spec['source_sha256'].get(self_ref['path']) == self_ref['sha256'],
++            'root acceptance source must be pinned before admission')
++    caller_delivery = io.read(caller_review['source_delivery'])
++    for path, row in caller_delivery['files'].items():
++        require(spec['source_sha256'].get(path) == row['sha256'], 'complete reviewed caller source closure required')
++    catalog = io.read(spec['current_serial_catalog']); idle_ref = catalog['current_handoff']; idle = io.read(idle_ref)
++    require(idle_ref == candidate['idle_handoff'] and idle['running'] is False
++            and idle['active_serial'] is None and idle['live_tool_sessions'] == idle['active_heavy_units'] == [],
++            'complete exact idle predecessor required')
++    tip = latest.latest_handoff()
++    require(tip == dict(path=idle_ref['path'], identity=io.identity(idle_ref['path'])), 'current idle identity changed')
++    output_paths = [Path(request[key]) for key in ('review_path', 'binding_path')]
++    require(len(set(output_paths)) == 2, 'distinct fresh acceptance outputs required')
++    for path in output_paths:
++        require(path.parent == Q and path.resolve() == path and path.suffix == '.json'
++                and not path.exists() and not path.is_symlink()
++                and str(path) not in spec['source_sha256'] and str(path) not in spec['input_extension'],
++                'fresh canonical acceptance output required')
+     review = dict(draft, passed=True, blockers=[], launch_authorized=True)
+     contract.validate_spec(spec, review, spec_ref)
++    # All prerequisite reads must remain in the exact immutable input binding.
++    def prerequisite_read(ref, cap=8 * 2**20):
++        bound = spec['input_extension'].get(ref['path'])
++        if cap == 64 * 2**20:
++            bound = candidate['preparation_only_references'].get(ref['path'])
++        require(bound is not None and bound['sha256'] == ref['sha256']
++                and io.identity(ref['path']) == bound['identity'], 'immutable completed prerequisite required')
++        value = io.read(ref, cap)
++        require(io.identity(ref['path']) == bound['identity'], 'completed prerequisite changed during read')
++        return value
++    completed_prerequisites(candidate['completed_prerequisites'], catalog, prerequisite_read)
+     budget.fresh_paths(spec); budget.unchanged_inputs(spec); io.resources(spec, reserve=True)
+     lock = io.RetainedLock(); lock.acquire()
+     try:
+         io.process_api().active_heavy()
+-        assert latest.latest_handoff() == tip
++        require(latest.latest_handoff() == tip, 'unknown successor before source acceptance')
+         payload = (json.dumps(review, sort_keys=True, ensure_ascii=False, indent=2, allow_nan=False) + '\n').encode()
+-        assert len(payload) <= 64 * 2**20
+-        with Path(candidate['review_path']).open('xb') as stream:
++        require(len(payload) <= 64 * 2**20, 'unchanged finite review envelope')
++        with output_paths[0].open('xb') as stream:
+             stream.write(payload); stream.flush(); os.fsync(stream.fileno())
+-        review_ref = io.ref(candidate['review_path'], 64 * 2**20)
++        review_ref = io.ref(output_paths[0], 64 * 2**20)
+         started = time.monotonic(); last = [-1.]
+         def guard():
+-            assert time.monotonic() - started < 600
++            require(time.monotonic() - started < 600, 'original full History acceptance deadline')
+             lock.check()
+             if time.monotonic() - last[0] >= .5:
+-                assert latest.latest_handoff() == tip
++                require(latest.latest_handoff() == tip, 'unknown later handoff during full History')
+                 last[0] = time.monotonic()
+-            assert not any(n.split('.')[0] in ('torch','torch_neuronx','numpy','neuronxcc','vllm','transformers') for n in sys.modules)
+-        print('Exact package source acceptance passed; checking full inherited History', flush=True)
++            require(not any(n.split('.')[0] in ('torch', 'torch_neuronx', 'numpy', 'neuronxcc', 'vllm', 'transformers')
++                    for n in sys.modules), 'no native imports during root source acceptance')
+         bound = Bundle(spec_ref, review_ref, guard).resolve()
+         bound.unchanged(); freshness = bound.freshness()
+-        assert freshness['latest_handoff'] == catalog['current_handoff']
+-        assert len(bound.supplement['scope']['children']) == 874
++        require(freshness['latest_handoff'] == idle_ref and len(bound.supplement['scope']['children']) == 874,
++                'complete original History and all 874 inherited children retained')
+         io.loaded_local_sources(spec['source_sha256']); resources = io.resources(spec, reserve=True)
+-        assert latest.latest_handoff() == tip
+-        result = io.once(Q / 'qwen35-package-full-r5-root-binding-20261112-v1.json', dict(
+-            schema='qwen35_package_full_root_concrete_binding_v1', reviewer='/root', passed=True,
+-            observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(), candidate=candidate_ref,
+-            spec=spec_ref, review=review_ref, history_overlay=spec['history_overlay'],
+-            catalog=spec['current_serial_catalog'], idle_handoff=catalog['current_handoff'],
++        require(latest.latest_handoff() == tip, 'unknown successor before binding publication')
++        result = io.once(output_paths[1], dict(schema='qwen35_writer_pair_root_concrete_binding_v1',
++            reviewer='/root', passed=True, observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++            candidate=request['candidate'], spec=spec_ref, review=review_ref, history_overlay=spec['history_overlay'],
++            catalog=spec['current_serial_catalog'], idle_handoff=idle_ref,
+             source_files=len(spec['source_sha256']), catalog_rows=len(catalog['runs']),
+             input_extension_count=len(spec['input_extension']), preservation=candidate['preservation'],
++            completed_prerequisites=candidate['completed_prerequisites'], caller_source_review=request['caller_source_review'],
+             full_source_history_resolution_passed=True, lfm_children=874, original_failed_statuses_preserved=True,
+             original_lock_reacquired=True, resources=resources, physical_pair_performed=False,
+             native_executed=False, runtime_launched=False, full_model_qualified=False, new_speedup_claim=False))
+     finally:
+         lock.release(True)
+-    print(json.dumps(dict(binding=result, spec=spec_ref, review=review_ref)), flush=True)
++    print(json.dumps(dict(binding=result, spec=spec_ref, review=review_ref)))
+ 
+ 
+ if __name__ == '__main__':
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/ack_qwen35_package_full_r5_root_20261112_v1.py
++++ /home/ubuntu/ack_qwen35_writer_pair_root_v1.py
+@@ -1,47 +1,71 @@
+-"""Bind an externally observed package session after independent live checks."""
++"""Bind an explicitly observed writer-pair tool session after live checks.
++
++Only root supplies an actual tool session and an accepted concrete binding.
++Import performs no IO, History, lock, process work or queue publication.
++"""
+ import argparse
+ import datetime
+ import json
+ from pathlib import Path
+ import sys
+ 
+-R=Path('/home/ubuntu/experiments/trn1-latest-models-20261031'); Q=R/'research'
+-sys.path[:0]=[str(Q),str(R)]
+-from qwen35_package_serial_runtime_v7 import io, contract, adapter, history
+-from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
++R = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
++Q = R / 'research'
+ 
+-def main():
+-    assert sys.dont_write_bytecode and __debug__
+-    parser=argparse.ArgumentParser()
+-    parser.add_argument('--session-id',type=int,required=True)
+-    parser.add_argument('--binding-sha256',required=True)
+-    args=parser.parse_args(); assert args.session_id>0
+-    binding_ref=dict(path=str(Q/'qwen35-package-full-r5-root-binding-20261112-v1.json'),sha256=args.binding_sha256)
+-    binding=io.read(binding_ref)
+-    assert binding['passed'] and binding['full_source_history_resolution_passed']
+-    spec=io.read(binding['spec'],64*2**20)
+-    root=contract.control_root(spec)
+-    admission_ref=io.ref(root/'admission.json'); admission=io.read(admission_ref)
+-    owner_ref=io.ref(root/'coordinator-owner.json'); owner=io.read(owner_ref)
+-    adapter.admit_shape(admission,spec,binding['spec'],binding['review'])
+-    assert io.process_api().proc(admission['outer_owner']['pid'])==admission['outer_owner']
+-    assert io.process_api().proc(owner['process']['pid'])==owner['process']
+-    descriptor=io.descriptor(admission['outer_owner'],admission['retained_fd'])
+-    service=adapter.coordinator_service(spec,admission_ref,owner)
++
++def main(argv=None):
++    parser = argparse.ArgumentParser(description=__doc__)
++    for name in ('binding', 'binding-sha256', 'root-live'):
++        parser.add_argument('--' + name, required=True)
++    parser.add_argument('--session-id', required=True, type=int)
++    args = parser.parse_args(argv)
++    if not (sys.dont_write_bytecode and __debug__ and args.session_id > 0):
++        raise ValueError('python -B, assertions and actual positive tool session required')
++    sys.path[:0] = [str(Q), str(R)]
++    from qwen35_writer_pair_serial_runtime_v2 import io, contract, adapter, history
++    from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
++    require = contract.require
++    binding_ref = contract.reference(dict(path=args.binding, sha256=args.binding_sha256))
++    binding = io.read(binding_ref)
++    require(binding['schema'] == 'qwen35_writer_pair_root_concrete_binding_v1'
++            and binding['reviewer'] == '/root' and binding['passed'] is True
++            and binding['full_source_history_resolution_passed'] is True,
++            'exact independent complete root binding required')
++    spec = io.read(binding['spec'], 64 * 2**20)
++    contract.validate_spec(spec, io.read(binding['review'], 64 * 2**20), binding['spec'])
++    self_ref = io.ref(Path(__file__).resolve())
++    require(spec['source_sha256'].get(self_ref['path']) == self_ref['sha256'],
++            'actual root ACK source must be pinned before launch')
++    live_path = Path(args.root_live)
++    require(live_path.parent == Q and str(live_path) == args.root_live
++            and live_path.suffix == '.json' and not live_path.exists() and not live_path.is_symlink()
++            and str(live_path) not in spec['source_sha256'] and str(live_path) not in spec['input_extension'],
++            'fresh canonical root-live output required')
++    root = contract.control_root(spec)
++    admission_ref = io.ref(root / 'admission.json'); admission = io.read(admission_ref)
++    owner_ref = io.ref(root / 'coordinator-owner.json'); owner = io.read(owner_ref)
++    adapter.admit_shape(admission, spec, binding['spec'], binding['review'])
++    require(io.process_api().proc(admission['outer_owner']['pid']) == admission['outer_owner']
++            and io.process_api().proc(owner['process']['pid']) == owner['process'],
++            'both exact outer/coordinator processes must be live')
++    descriptor = io.descriptor(admission['outer_owner'], admission['retained_fd'])
++    service = adapter.coordinator_service(spec, admission_ref, owner)
+     service.live(); io.process_api().active_heavy((service.unit,))
+-    previous_ref=admission['freshness']['latest_handoff']; previous=io.read(previous_ref)
+-    assert latest.latest_handoff()==dict(path=previous_ref['path'],identity=io.identity(previous_ref['path']))
+-    assert not previous['running'] and not previous['live_tool_sessions']
+-    tool=dict(kind='tool_session',session_id=args.session_id)
+-    now=datetime.datetime.now(datetime.timezone.utc).isoformat()
+-    running=history.expected_running(previous,now,tool,admission_ref,admission,owner_ref,owner)
+-    running_ref=io.once(spec['running_handoff_path'],running)
+-    live_ref=io.once(Q/'qwen35-package-full-r5-root-live-20261112-v1.json',dict(
+-        schema='qwen35_package_full_root_live_v1',reviewer='/root',observed_at=now,
+-        actual_tool=tool,root_binding=binding_ref,outer_owner=admission['outer_owner'],
+-        coordinator_owner=owner_ref,running_handoff=running_ref,descriptor_proof=descriptor,
+-        ack_source=io.ref(Path(__file__).resolve()),device_execution_not_yet_claimed=True,
+-        full_model_qualified=False,new_speedup_claim=False))
+-    print(json.dumps(dict(running=running_ref,root_live=live_ref,actual_tool=tool)))
++    previous_ref = admission['freshness']['latest_handoff']; previous = io.read(previous_ref)
++    require(latest.latest_handoff() == dict(path=previous_ref['path'], identity=io.identity(previous_ref['path']))
++            and not previous['running'] and not previous['live_tool_sessions'],
++            'exact idle predecessor is still current')
++    tool = dict(kind='tool_session', session_id=args.session_id)
++    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
++    running = history.expected_running(previous, now, tool, admission_ref, admission, owner_ref, owner)
++    running_ref = io.once(spec['running_handoff_path'], running)
++    live_ref = io.once(live_path, dict(schema='qwen35_writer_pair_root_live_v1', reviewer='/root',
++        observed_at=now, actual_tool=tool, root_binding=binding_ref,
++        outer_owner=admission['outer_owner'], coordinator_owner=owner_ref,
++        running_handoff=running_ref, descriptor_proof=descriptor, ack_source=self_ref,
++        device_execution_not_yet_claimed=True, full_model_qualified=False, new_speedup_claim=False))
++    print(json.dumps(dict(running=running_ref, root_live=live_ref, actual_tool=tool)))
+ 
+-if __name__=='__main__': main()
++
++if __name__ == '__main__':
++    main()
+--- /home/ubuntu/qwen35_package_full_r5_post_exit_20261112_v1.py
++++ /home/ubuntu/qwen35_writer_pair_post_exit_v1.py
+@@ -9,6 +9,8 @@
+ import datetime
+ import hashlib
+ import json
++import math
++import time
+ import os
+ from pathlib import Path
+ import re
+@@ -17,13 +19,46 @@
+ 
+ ROOT = Path('/home/ubuntu/experiments/trn1-latest-models-20261031')
+ Q = ROOT / 'research'
+-SELF = Path('/home/ubuntu/qwen35_package_full_r5_post_exit_20261112_v1.py')
++SELF = Path('/home/ubuntu/qwen35_writer_pair_post_exit_v1.py')
+ CAP = 8 * 2**20
+ 
+ 
+ def require(ok, message):
+     if not ok:
+         raise ValueError(message)
++
++
++def latest_handoff():
++    from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
++    return latest.latest_handoff()
++
++
++class FreshnessGuard:
++    """Original lock on every call; complete handoff scan on bounded cadence.
++
++    Cadence is evaluated at guard boundaries, as in the accepted outer runtime.
++    A long blocking operation is followed by a due or explicitly forced check.
++    No timer thread, file cache, source omission or alternate identity is used.
++    """
++    def __init__(self, lock, expected):
++        require(type(expected) is dict and set(expected) == {'path', 'identity'}
++                and type(expected['path']) is str and type(expected['identity']) is dict,
++                'Exact original running ACK observation required')
++        self.lock, self.expected = lock, copy.deepcopy(expected)
++        self.last_full_started = None
++        self.last_clock = None
++
++    def __call__(self, force=False):
++        self.lock.check()
++        require(type(force) is bool, 'Explicit full-freshness boundary')
++        now = time.monotonic()
++        require(type(now) in (float, int) and math.isfinite(now)
++                and (self.last_clock is None or now >= self.last_clock), 'Monotonic freshness clock')
++        self.last_clock = now
++        if force or self.last_full_started is None or now - self.last_full_started >= .5:
++            require(latest_handoff() == self.expected, 'Running binding changed during audit')
++            # Record start, so a slow full scan cannot extend the next interval.
++            self.last_full_started = now
+ 
+ 
+ def reference(value):
+@@ -91,7 +126,7 @@
+     expected = set(spec['units']); require(expected, 'complete expected units required')
+     retained, passes = {}, []
+     for _ in range(2):
+-        guard(); process.active_heavy()
++        guard(force=True); process.active_heavy()
+         for owner in owners: process.gone(owner)
+         declarations = []
+         services = declared_services(spec['runtime_spec'], admission_ref, coordinator,
+@@ -116,6 +151,7 @@
+                         'undeclared/unstarted unit must remain absent')
+             current[unit] = dict(properties=props,
+                 recursive_empty_group=process.empty_group(process.GROUP_PREFIX + unit + '.service'))
++        guard(force=True)
+         passes.append(dict(current=current, actual_terminals=terminals,
+                            historical_terminal_reuse=historical, declaration_observations=declarations))
+     require(passes[0]['current'] == passes[1]['current'], 'two stable complete current scope observations required')
+@@ -148,25 +184,26 @@
+     if terminal is None:
+         require(tool['exit_code'] != 0, 'missing original terminal requires an actual failed outer exit')
+         return dict(actual_outer_exit_code=tool['exit_code'], outer_reported_failed=None,
+-            outer_terminal_missing=True, stage25=None, stage25_error=None,
+-            all25_stages_audited=False, full_model_qualified=False, new_speedup_claim=False,
++            outer_terminal_missing=True, stage28=None, stage28_error=None,
++            all28_stages_audited=False, full_model_qualified=False, new_speedup_claim=False,
+             status='outer_failed_without_terminal')
+     result = dict(actual_outer_exit_code=tool['exit_code'], outer_reported_failed=terminal['failed'],
+-                  stage25=None, stage25_error=None, all25_stages_audited=False,
++                  stage28=None, stage28_error=None, all28_stages_audited=False,
+                   full_model_qualified=False, new_speedup_claim=False)
+     if tool['exit_code'] == 0 and terminal['failed'] is False and terminal['result_present'] is True:
+         try:
+-            result['stage25'] = audit(spec_ref, review_ref, external_ref, guard)
+-            result['all25_stages_audited'] = True
++            result['stage28'] = audit(spec_ref, review_ref, external_ref, guard)
++            result['all28_stages_audited'] = True
+         except Exception as error:
+-            result['stage25_error'] = dict(type=type(error).__name__, message=str(error))
+-    result['status'] = ('stage25_audited_pending_root_qualification' if result['all25_stages_audited'] else
+-                        'independent_stage25_failed' if result['stage25_error'] else 'outer_failed_or_inconsistent')
++            result['stage28_error'] = dict(type=type(error).__name__, message=str(error))
++    result['status'] = ('stage28_audited_pending_root_qualification' if result['all28_stages_audited'] else
++                        'independent_stage28_failed' if result['stage28_error'] else 'outer_failed_or_inconsistent')
+     return result
+ 
+ 
+-def append_catalog(old, idle_ref, terminal_ref, tool, owners, units, delta, catalog_shape):
+-    require(len(old['runs']) == 162, 'exact retained r5 predecessor has 162 rows')
++def append_catalog(old, idle_ref, terminal_ref, tool, owners, units, delta, catalog_shape, expected_rows):
++    require(type(expected_rows) is int and expected_rows > 0 and len(old['runs']) == expected_rows,
++            'exact bound predecessor row count required')
+     catalog_shape(old)
+     result = copy.deepcopy(old)
+     result.update(current_handoff=idle_ref, runs=copy.deepcopy(old['runs']) + [dict(
+@@ -185,14 +222,15 @@
+     request_raw, request_identity = stable_source(request_ref, CAP); request = json.loads(request_raw)
+     require(set(request) == {'schema', 'binding', 'root_live', 'admission', 'running_handoff',
+         'external_tool_result', 'observer_source', 'ack_source', 'outputs'}
+-        and request['schema'] == 'qwen35_package_r5_post_exit_request_v1', 'exact explicit request required')
++        and request['schema'] == 'qwen35_writer_pair_post_exit_request_v1', 'exact explicit request required')
+     require(request['observer_source']['path'] == str(SELF) == str(Path(__file__).resolve())
+             and ROOT not in SELF.parents, 'separately reviewed external observer path required')
+     source_refs = [request['observer_source'], request['ack_source']]
+     source_before = {r['path']: stable_source(r)[1] for r in source_refs}
+     sys.path[:0] = [str(Q), str(ROOT)]
+-    from qwen35_package_serial_runtime_v7 import io, contract, adapter, history, wiring, final_audit
+-    from prepare_qwen35_package_serial_candidate_v6 import catalog_shape
++    from qwen35_writer_pair_serial_runtime_v2 import io, contract, adapter, history, wiring
++    import qwen35_writer_pair_post_audit_v1 as final_audit
++    from prepare_qwen35_writer_pair_candidate_v1 import catalog_shape
+     from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+     observed_metadata = {}
+     def read(r, cap=CAP):
+@@ -207,7 +245,9 @@
+     require(binding['passed'] is True and binding['full_source_history_resolution_passed'] is True,
+             'successful exact root binding required')
+     spec = read(spec_ref, 64 * 2**20); contract.validate_spec(spec, read(review_ref, 64 * 2**20), spec_ref)
+-    require(spec['run_name'] == 'pkg-r5-20261112', 'explicit r5 run required')
++    require(binding['schema'] == 'qwen35_writer_pair_root_concrete_binding_v1', 'explicit root writer binding required')
++    require(all(spec['source_sha256'].get(r['path']) == r['sha256'] for r in source_refs),
++            'observer and ACK must be pinned before actual runtime admission')
+     control = contract.control_root(spec); admission = read(request['admission'])
+     require(io.ref(control / 'admission.json') == request['admission'], 'exact owned admission path')
+     adapter.admit_shape(admission, spec, spec_ref, review_ref)
+@@ -246,7 +286,10 @@
+     active_scope_failure = read(active_failure_ref) if active_failure_ref is not None else None
+     failure_logs = []
+     if terminal_missing:
+-        for path in (control / 'coordinator.log', control / 'shared-build' / 'phase.log'):
++        require((control / 'coordinator.log').is_file(), 'original coordinator failure log must be retained')
++        for path in (control / 'coordinator.log', control / 'baseline-build' / 'phase.log',
++                     control / 'candidate-build' / 'phase.log'):
++            if not os.path.lexists(path): continue
+             log_ref = io.ref(path)
+             raw, _ = stable_source(log_ref, CAP)
+             require(raw, 'retain actual nonempty failure logs')
+@@ -297,7 +340,7 @@
+         require(not gap, 'completed scientific stages must remain a contiguous real prefix')
+         r = io.ref(path); value = read(r)
+         require(value['index'] == index and (value['arm'], value['stage']) == (arm, stage)
+-                and value['case'] == spec['case'] and value['completed'] is True, 'authentic completed prefix entry')
++                and value['writer_cases'] == spec['writer_cases'] and value['completed'] is True, 'authentic completed prefix entry')
+         read(value['result']); prefix.append(r)
+     frozen = [(request_ref, request_identity), *[(r, source_before[r['path']]) for r in source_refs]]
+     def sources_unchanged():
+@@ -307,13 +350,15 @@
+     # This observer never starts services. On any failed proof it publishes no
+     # idle/catalog; releasing its own audit lease is not a drain-success claim.
+     try:
+-        def guard():
+-            lock.check(); require(latest.latest_handoff() == running_observation, 'unknown later handoff')
++        freshness = FreshnessGuard(lock, running_observation)
++        def guard(force=False):
++            freshness(force=force)
+             require(not terminal_missing or not os.path.lexists(terminal_path), 'missing original terminal appeared during independent recovery')
+             require(all(io.identity(path) == identity for path, identity in observed_metadata.items()),
+                     'authenticated input metadata changed during audit')
+             require(not any(n.split('.')[0] in ('torch', 'torch_neuronx', 'numpy', 'neuronxcc', 'vllm', 'transformers') for n in sys.modules), 'no native imports in observer')
+             return dict(admitted=True, exclusive=True)
++        guard(force=True)
+         observations = collect_scope(dict(runtime_spec=spec, units=contract.units(spec['run_name']).values()),
+             request['admission'], coordinator, owners, adapter.declared_services, adapter.properties, process, guard)
+         source_pins = {r['path']: r['sha256'] for r in source_refs}
+@@ -322,15 +367,15 @@
+             spec=spec_ref, admission=request['admission'], outer_owner=admission['outer_owner'], tool=wanted,
+             exit_code=tool['exit_code'], completed=True, observation_source='actual_external_tool_result',
+             observed_unix_ns=external['observed_unix_ns'])
+-        guard(); sources_unchanged(); external_ref = io.once(Path(outputs['external_tool_exit']), external_value)
++        guard(force=True); sources_unchanged(); external_ref = io.once(Path(outputs['external_tool_exit']), external_value)
+         outcome = audit_outcome(tool, terminal, spec_ref, review_ref, external_ref, guard, final_audit.audit)
+-        # A stage25 error is independent of the real outer exit and is retained.
+-        guard(); sources_unchanged()
++        # A stage28 error is independent of the real outer exit and is retained.
++        guard(force=True); sources_unchanged()
+         process.active_heavy()
+         for owner in owners: process.gone(owner)
+         after = {r['path']: stable_source(r)[1] for r in source_refs}
+         require(after == source_before, 'external source identity changed after execution')
+-        value = dict(schema='qwen35_package_root_actual_exit_v1', reviewer='/root',
++        value = dict(schema='qwen35_writer_pair_root_actual_exit_v1', reviewer='/root',
+             observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(), actual_tool=tool,
+             actual_tool_exit_observed=True, external_tool_result=request['external_tool_result'], external_tool_exit=external_ref,
+             root_binding=request['binding'], root_live=request['root_live'], spec=spec_ref, review=review_ref,
+@@ -342,7 +387,7 @@
+             owners=owners, owners_gone=True, all_declared_units=sorted(contract.units(spec['run_name']).values()),
+             physically_drained=True, two_current_scope_observations=observations,
+             recorded_phase_evidence=phase_evidence, completed_stage_prefix=prefix, completed_stages=len(prefix),
+-            outcome=outcome, stage25=outcome['stage25'], source_composition=composition,
++            outcome=outcome, stage28=outcome['stage28'], source_composition=composition,
+             external_sources=source_refs, external_source_identities_before=source_before,
+             external_source_identities_after=after, auditor_request=request_ref,
+             audit_lock_identity=contract.LOCK_IDENTITY, full_model_qualified=False, new_speedup_claim=False)
+@@ -353,17 +398,21 @@
+             live_tool_sessions=[], active_heavy_units=[], goal_status='active', this_turn_classification='progress',
+             complete_current_serial_catalog=spec['current_serial_catalog'], complete_current_serial_catalog_next=outputs['catalog'],
+             publication_current_status_stale=True, new_speedup_claim=False)
+-        idle['qwen35_package_r5_current'] = dict(actual_exit=terminal_out, status=outcome['status'],
+-            completed_stages=len(prefix), all25_stages_audited=outcome['all25_stages_audited'],
++        idle['qwen35_writer_pair_current'] = dict(actual_exit=terminal_out, status=outcome['status'],
++            completed_stages=len(prefix), all28_stages_audited=outcome['all28_stages_audited'],
+             full_model_qualified=False, new_speedup_claim=False)
+         idle_ref = predicted(outputs['idle_handoff'], idle)
+         catalog = append_catalog(oldcat, idle_ref, terminal_out, tool, owners,
+-                                 contract.units(spec['run_name']).values(), delta, catalog_shape)
++                                 contract.units(spec['run_name']).values(), delta, catalog_shape, binding['catalog_rows'])
+         catalog_ref = predicted(outputs['catalog'], catalog)
+-        guard(); sources_unchanged(); io.loaded_local_sources(spec['source_sha256'])
++        guard(force=True); sources_unchanged(); io.loaded_local_sources(spec['source_sha256'])
++        guard(force=True)
+         require(io.once(Path(outputs['actual_exit']), value) == terminal_out, 'actual-exit publication hash')
++        guard(force=True)
+         require(io.once(Path(outputs['idle_handoff']), idle) == idle_ref, 'idle publication hash')
+         require(io.once(Path(outputs['catalog']), catalog) == catalog_ref, 'catalog publication hash')
++        # The newly published idle handoff is expected after the last original
++        # running-tip check; do not compare it with the old running observation.
+         sources_unchanged()
+     finally:
+         lock.release(True)
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_pair_serial_runtime_v2/final_audit.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_pair_post_audit_v1.py
+@@ -7,27 +7,67 @@
+ not choose a current binding, acquire a lock, load tensors or promote a result.
+ """
+ import hashlib
++import importlib
+ import os
+ from pathlib import Path
++import sys
+ 
+-from .contract import require, control_root, PHASES, LIMITS
+-from .io import read, ref, raw, once, process_api, storage, loaded_local_sources, host_source_bytes
+-from .history import Bundle, Authority
+-from .adapter import declared_services, admit_shape
+-from .budget import unchanged_inputs
+-from .wiring import STAGES, ARMS, manifest_sha, stage_receipt, check_build_seal
++from qwen35_writer_pair_serial_runtime_v2.contract import require, control_root, PHASES, LIMITS, PACKAGE
++from qwen35_writer_pair_serial_runtime_v2.io import read, ref, raw, once, process_api, storage, loaded_local_sources, host_source_bytes
++from qwen35_writer_pair_serial_runtime_v2.history import Authority
++from qwen35_writer_pair_audit_physical_v1 import Bundle
++from qwen35_writer_pair_serial_runtime_v2.adapter import declared_services, admit_shape
++from qwen35_writer_pair_serial_runtime_v2.budget import unchanged_inputs
++from qwen35_writer_pair_serial_runtime_v2.wiring import STAGES, ARMS, manifest_sha, stage_receipt, check_build_seal
++
++
++def bind_pure_package_sources(spec):
++    """Route the six pure stage28 package imports to the executed checkout.
++
++    Merely putting Q on sys.path does not make vllm_neuron importable under
++    plain python3. Never accept a previously loaded module from another
++    checkout, invoke plugin registration, import native code or load a model.
++    """
++    modules = {
++        'vllm_neuron': PACKAGE / 'vllm_neuron/__init__.py',
++        'vllm_neuron.models': PACKAGE / 'vllm_neuron/models/__init__.py',
++        'vllm_neuron.models.qwen35': PACKAGE / 'vllm_neuron/models/qwen35/__init__.py',
++        'vllm_neuron.models.qwen35.provenance': PACKAGE / 'vllm_neuron/models/qwen35/provenance.py',
++        'vllm_neuron.models.qwen35.identity': PACKAGE / 'vllm_neuron/models/qwen35/identity.py',
++        'vllm_neuron.models.qwen35.validation': PACKAGE / 'vllm_neuron/models/qwen35/validation.py',
++    }
++    for name, path in modules.items():
++        sha = spec['source_sha256'].get(str(path))
++        require(sha is not None and hashlib.sha256(host_source_bytes(str(path), sha)).hexdigest() == sha,
++                'all exact pure package sources must be bound before stage28 import')
++        if name in sys.modules:
++            require(Path(getattr(sys.modules[name], '__file__', '')).resolve() == path,
++                    'already-loaded package module belongs to a different checkout')
++    sys.path.insert(0, str(PACKAGE))
++    loaded = {}
++    for name, path in modules.items():
++        module = importlib.import_module(name)
++        require(Path(module.__file__).resolve() == path, 'stage28 pure package import escaped exact writer checkout')
++        sha = spec['source_sha256'][str(path)]
++        require(hashlib.sha256(host_source_bytes(str(path), sha)).hexdigest() == sha,
++                'pure package source changed during import')
++        loaded[name] = str(path)
++    return loaded
+ 
+ 
+ def audit(spec_ref, review_ref, external_tool_exit_ref, execution_guard):
+     require(callable(execution_guard), 'existing independent root guard required')
+-    def guard():
+-        value = execution_guard()
++    def guard(force=False):
++        value = execution_guard(force=force)
+         require(type(value) is dict and value.get('admitted') is True and value.get('exclusive') is True,
+                 'root must retain original serial audit authority')
+         return value
+-    guard()
++    guard(force=True)
+     bundle = Bundle(spec_ref, review_ref, guard).resolve()
++    guard(force=True)
+     spec = bundle.spec; root = Path(spec['output_root']); control = control_root(spec)
++    bind_pure_package_sources(spec)
++    guard(force=True)
+     admission_ref = ref(control / 'admission.json'); admission = read(admission_ref)
+     admit_shape(admission, spec, spec_ref, review_ref)
+     coordinator_ref = ref(control / 'coordinator-owner.json'); coordinator = read(coordinator_ref)
+@@ -71,6 +111,7 @@
+         require(code['stop_requested'] is api and code['child_returncode'] in ((0, -15) if api else (0,)), 'actual phase child exit failed')
+         process_api().gone(child)
+         require(phase_spec['unit'] in ends, 'phase terminal outside complete owned scope')
++    guard(force=True)
+     receipts = []
+     for index, (arm, stage) in enumerate(STAGES[:-1], 1):
+         receipt = ref(stage_receipt(spec, index)); value = read(receipt)
+@@ -82,6 +123,7 @@
+             and co_result['driver_result']['stage_receipts'] == receipts
+             and co_result['driver_result']['completed_stages'] == len(STAGES) - 1
+             and co_result['self_exit_claimed'] is False, 'actual coordinator result must bind the same complete 27-stage receipts')
++    guard(force=True)
+     # Re-run complete saved scientific metadata gates. Binary vectors/packets were
+     # checked in their real separately owned phases; stage25 does not reread them.
+     from qwen35_writer_pair_validation_v1.checks import check_model_metadata, original_validators
+@@ -103,18 +145,20 @@
+     for arm in ARMS:
+         check_build_seal(spec, arm); manifests[arm] = manifest_sha(spec, arm)
+     from qwen35_writer_pair_validation_v1.runtime import check_build_pair
+-    from .wiring import build_inventory
++    from qwen35_writer_pair_serial_runtime_v2.wiring import build_inventory
+     builds = check_build_pair(spec['writer_cases'], {arm: build_inventory(spec, arm) for arm in ARMS})
+-    from .qualification import check_geometry_qualification
++    from qwen35_writer_pair_serial_runtime_v2.qualification import check_geometry_qualification
+     geometry = check_geometry_qualification(spec)
+     for path, sha in spec['source_sha256'].items():
+         # Inherited complete source partitions are verified by Bundle.resolve;
+         # this exact smaller host closure is additionally rehashed here.
+         if path in bundle.host:
+             require(hashlib.sha256(host_source_bytes(path, sha)).hexdigest() == sha, 'executed package/source pin changed')
++    guard(force=True)
+     pair = bundle.physical_pair(Authority(bundle, guard, lambda: []))
++    guard(force=True)
+     stable_storage = storage(spec, terminal=True)
+-    bundle.unchanged(); loaded_local_sources(spec['source_sha256']); guard()
++    bundle.unchanged(); loaded_local_sources(spec['source_sha256']); guard(force=True)
+     result = dict(schema='qwen35_writer_pair_independent_final_audit_v1', reviewer='/root', actual_observer=auditor,
+         spec=spec_ref, admission=admission_ref, external_tool_exit=external_tool_exit_ref,
+         outer_terminal=terminal_ref, stage_receipts=receipts, actual_service_terminals=ends,
+@@ -122,8 +166,11 @@
+         sampler=sampler_gate, science=scientific, all_original_25_requirements_audited=True, all28_stages_audited=True,
+         full_model_qualified=False, independent_root_qualification_decision_required=True,
+         automatic_best_promotion=False, binary_contents_rehashed_here=False)
++    guard(force=True)
+     result_ref = once(root / 'independent-final-audit.json', result)
++    guard(force=True)
+     receipt = once(stage_receipt(spec, len(STAGES)), dict(index=len(STAGES), arm='external', stage=STAGES[-1][1], writer_cases=spec['writer_cases'],
+         result=result_ref, completed=True, full_model_qualified=False, independent_root_qualification_decision_required=True))
+     storage(spec, terminal=True)
++    guard(force=True)
+     return receipt
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_geometry_audit_physical_v5.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_pair_audit_physical_v1.py
+@@ -1,12 +1,8 @@
+-"""Future audit-only physical pass boundaries; no execution or IO on import.
+-
+-Original full-tree physical bodies and pair validators remain authoritative.
+-Only the complete pair collector's per-pass begin/end guards force discovery.
+-"""
++"""Writer audit-only complete physical pass boundaries; no live IO on import."""
+ import copy
+-from qwen35_package_preflight_history_v3 import History as OriginalHistory
+-from qwen35_sampler_runtime_history_v12 import LOCK_IDENTITY, require, process_api
+-
++from qwen35_writer_pair_serial_runtime_v2.history import Bundle as OriginalBundle
++from qwen35_writer_pair_serial_runtime_v2.contract import LOCK_IDENTITY, require
++from qwen35_writer_pair_serial_runtime_v2.io import process_api
+ 
+ def _collect_pair(done, guard, physical, read_properties, read_empty_group, *, known_units=None):
+     """Future admitted caller only; no invocation during source preparation.
+@@ -52,7 +48,6 @@
+     validate_pair(pair, required, done['owners'], done['lock_identity'], known_units=known)
+     return pair
+ 
+-
+ def collect_pair(done, guard, authority):
+     """Original current collector wiring to the boundary-aware exact pair body."""
+     from research import minicpm5_native_current_physical_v1 as original
+@@ -60,14 +55,13 @@
+     return _collect_pair(done, guard, lambda value, check: original.physical(value, check, authority),
+         original.p.properties, original.p.empty_group, known_units=done['complete_known_units'])
+ 
+-
+-class History(OriginalHistory):
+-    """Inherit full resolve/identities; change only physical collector import."""
++class Bundle(OriginalBundle):
+     def physical_pair(self, authority):
+-        import qwen35_geometry_audit_physical_v5 as physical
++        import qwen35_writer_pair_audit_physical_v1 as physical
+         from research import minicpm5_layer1_operator_recovered_completion_v2 as completed
+         from research.audit_minicpm5_layer1_operator_sdk_result_v3 import packed_physical
+-        self.guard(); pair = physical.collect_pair(self.scope, self.guard, authority)
++        self.guard(force=True); pair = physical.collect_pair(self.scope, self.guard, authority)
++        self.guard(force=True)
+         required = {row["unit"] for row in self.scope["nemotron"]["history"]["rows"]}
+         known = set(self.scope["complete_known_units"])
+         require(completed.physical.validate_pair(pair, required, self.scope["owners"], LOCK_IDENTITY,

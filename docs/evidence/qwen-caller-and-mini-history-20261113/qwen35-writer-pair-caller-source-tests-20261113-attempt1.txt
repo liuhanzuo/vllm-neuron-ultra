@@ -1,0 +1,100 @@
+test_all_eight_complete_layouts_all_slots_and_full_buffers_required (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_complete_geometry_metadata_fits_the_existing_reader_envelope (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_duplicate_mapping_rejected (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_false_passed_flag_rejected (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_host_input_mutation_rejected (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_int64_result_is_rejected (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_original_raw_failures_retained_candidate_raw_failures_rejected (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_small_prefix_cannot_masquerade_as_full_new_state (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_tail_and_persistent_state_cannot_be_omitted (qwen35_writer_pair_serial_runtime_v2.test_source.GeometryMetadata) ... ok
+test_actual_tool_session_identity_and_terminal_required (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_exact_predecessor_rows_required_and_retained (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_exit0_missing_terminal_rejected (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_failed_outer_never_invokes_stage28 (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_source_contains_complete_scope_and_all28_not_package25 (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_stage28_failure_preserved_independent_of_exit0 (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_successful_stage28_still_requires_root_qualification (test_prepare_qwen35_writer_pair_candidate_v1.Observer) ... ok
+test_all40000_synthetic_geometry_calls_checked_without_payload_reads (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ERROR
+test_both_writers_same_sampler_and_disjoint_paths_required (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_complete_candidate_preserves_history_and_never_authorizes (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ERROR
+test_dual_budget_cannot_reuse_single_arm_or_missing_cap (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_failed_or_unrecorded_geometry_rejected (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_geometry_source_crossing_and_missing_helper_rejected (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_identity_changed_at_final_recheck_rejected (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... FAIL
+test_incomplete_geometry_or_wrong_dtype_does_not_reach_budget (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ERROR
+test_old_catalog_prefix_and_sources_cannot_be_replaced (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_package_exit0_alone_is_insufficient (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... ok
+test_retained_metadata_cannot_be_overwritten (test_prepare_qwen35_writer_pair_candidate_v1.Preparation) ... FAIL
+
+======================================================================
+ERROR: test_all40000_synthetic_geometry_calls_checked_without_payload_reads (test_prepare_qwen35_writer_pair_candidate_v1.Preparation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 158, in test_all40000_synthetic_geometry_calls_checked_without_payload_reads
+    out=f.run(real_geometry=True);self.assertFalse(out['launch_authorized'])
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 131, in run
+    return p.prepare(self.request,self.read_metadata,self.read_source,self.identity,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_pair_candidate_v1.py", line 257, in prepare
+    require(all(p in pins for p in required), 'complete startup and history helper closure required')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v7.py", line 33, in require
+    raise ValueError(message)
+ValueError: complete startup and history helper closure required
+
+======================================================================
+ERROR: test_complete_candidate_preserves_history_and_never_authorizes (test_prepare_qwen35_writer_pair_candidate_v1.Preparation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 139, in test_complete_candidate_preserves_history_and_never_authorizes
+    f=Fixture(); out=f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 133, in run
+    return p.prepare(self.request,kwargs.get('read_metadata',self.read_metadata),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_pair_candidate_v1.py", line 257, in prepare
+    require(all(p in pins for p in required), 'complete startup and history helper closure required')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_package_serial_candidate_v7.py", line 33, in require
+    raise ValueError(message)
+ValueError: complete startup and history helper closure required
+
+======================================================================
+ERROR: test_incomplete_geometry_or_wrong_dtype_does_not_reach_budget (test_prepare_qwen35_writer_pair_candidate_v1.Preparation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 164, in test_incomplete_geometry_or_wrong_dtype_does_not_reach_budget
+    with self.assertRaises(ValueError):f.run(real_geometry=True)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 131, in run
+    return p.prepare(self.request,self.read_metadata,self.read_source,self.identity,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_pair_candidate_v1.py", line 239, in prepare
+    prerequisite_pins = completed_prerequisites(request, catalog, read)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/prepare_qwen35_writer_pair_candidate_v1.py", line 79, in completed_prerequisites
+    check_complete_geometry(reports)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_pair_validation_v1/geometry.py", line 219, in check_complete_geometry
+    require(report['layout'] == name and report['geometry'] == layout(name)
+KeyError: 'layout'
+
+======================================================================
+FAIL: test_identity_changed_at_final_recheck_rejected (test_prepare_qwen35_writer_pair_candidate_v1.Preparation)
+----------------------------------------------------------------------
+ValueError: complete startup and history helper closure required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 225, in test_identity_changed_at_final_recheck_rejected
+    with self.assertRaisesRegex(ValueError,'stat-only payload'):f.run(identity_only=identity)
+AssertionError: "stat-only payload" does not match "complete startup and history helper closure required"
+
+======================================================================
+FAIL: test_retained_metadata_cannot_be_overwritten (test_prepare_qwen35_writer_pair_candidate_v1.Preparation)
+----------------------------------------------------------------------
+ValueError: complete startup and history helper closure required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_prepare_qwen35_writer_pair_candidate_v1.py", line 229, in test_retained_metadata_cannot_be_overwritten
+    with self.assertRaisesRegex(ValueError,'cannot overwrite'):f.run()
+AssertionError: "cannot overwrite" does not match "complete startup and history helper closure required"
+
+----------------------------------------------------------------------
+Ran 27 tests in 5.216s
+
+FAILED (failures=2, errors=3)
