@@ -1,0 +1,199 @@
+"""Strict original storage policy with metadata-proven replacement retries.
+
+No zero-link/special/hardlinked object is ever counted as acceptable output.
+Only a declared mutable receipt or original compiler-volatile subtree may
+restart the whole scan after a zero-link observation and fresh path evidence.
+Every successful scan still counts only singleton ordinary regular files.
+"""
+import json
+import os
+from pathlib import Path
+import stat
+import time
+
+from qwen35_kv256_s16_pair_serial_v1.contract import (
+    ROOT, LAYOUTS, LIMITS, MIB, GIB, require, observed_stat, PublicationRace,
+    transient, current_layout)
+
+from qwen35_kv256_s16_pair_leaf_v1 import OUTPUT_CLASS_CAPS, FRESH_ARTIFACT_CAP, FRESH
+
+DIAGNOSTIC_BYTES = 8 * 1024
+RETRY_OBSERVATION_LIMIT = 8
+TERMINAL_DIAGNOSTIC_BYTES = 128 * 1024
+
+
+def bounded_detail(detail, cap=DIAGNOSTIC_BYTES):
+    encoded = json.dumps(detail, sort_keys=True, separators=(',', ':'), allow_nan=False)
+    require(len(encoded.encode('utf8')) <= cap, 'Complete storage diagnostic exceeds bounded metadata cap')
+    return encoded
+
+
+def snapshot(info):
+    if info is None:
+        return None
+    return {key: getattr(info, 'st_' + key) for key in
+            ('dev', 'ino', 'mode', 'nlink', 'uid', 'size', 'blocks', 'mtime_ns', 'ctime_ns')}
+
+
+def fresh_snapshot(path):
+    try:
+        return path.lstat(), None
+    except FileNotFoundError:
+        return None, 'missing'
+    except OSError as error:
+        return None, dict(type=type(error).__name__, errno=error.errno)
+
+
+def diagnostic(path, reason, before=None, fresh=None, fresh_error=None, scope=None):
+    return dict(path=str(path), reason=reason, before=snapshot(before), fresh=snapshot(fresh),
+                fresh_error=fresh_error, declared_scope=scope)
+
+
+def failure(message, detail, cap=DIAGNOSTIC_BYTES):
+    raise ValueError(message + ': ' + bounded_detail(detail, cap))
+
+
+def retry(detail):
+    error = PublicationRace(bounded_detail(detail))
+    error.scan_diagnostic = detail
+    raise error
+
+
+def publication_role(path, root):
+    parts = path.relative_to(root).parts
+    if len(parts) == 1 and parts[0] in ('current-layout.json', 'current-layout.json.tmp'):
+        return 'mutable_temporary' if parts[0].endswith('.tmp') else 'mutable_receipt'
+    if len(parts) == 2 and parts[0] in LAYOUTS and parts[1] in ('report.json', 'report.json.tmp'):
+        return 'mutable_temporary' if parts[1].endswith('.tmp') else 'mutable_receipt'
+    return None
+
+
+def file_cap(path):
+    return (FRESH_ARTIFACT_CAP if path.name == 'model.pt' else 16*MIB if path.name in ('report.json', 'report.json.tmp')
+            else 16*MIB if path.name == 'graph.hlo' else LIMITS['log_bytes'] if path.suffix == '.log' else GIB)
+
+
+def scan_stat(path, root, volatile):
+    """Keep inherited publication checks; never follow any output symlink."""
+    try:
+        info = observed_stat(path)
+    except PublicationRace as error:
+        fresh, missing = fresh_snapshot(path)
+        retry(diagnostic(path, 'inherited_publication_transition: ' + str(error),
+                         fresh=fresh, fresh_error=missing, scope='inherited_atomic_publisher'))
+    except (ValueError, RuntimeError) as error:
+        fresh, missing = fresh_snapshot(path)
+        failure('Inherited output metadata check failed', diagnostic(
+            path, str(error), fresh=fresh, fresh_error=missing))
+    if not (stat.S_ISREG(info.st_mode) and info.st_nlink == 0):
+        return info
+    role = publication_role(path, root)
+    scope = role or ('declared_compiler_volatile' if volatile else None)
+    if scope is None:
+        failure('Singleton regular output only', diagnostic(path, 'zero_link_outside_declared_transition', info))
+    device = root.stat().st_dev
+    if info.st_dev != device or info.st_size > file_cap(path):
+        failure('Original device/file cap required before retry', diagnostic(path, 'invalid_zero_link_metadata', info, scope=scope))
+    fresh, missing = fresh_snapshot(path)
+    detail = diagnostic(path, 'zero_link_requires_path_transition', info, fresh, missing, scope)
+    if fresh is None:
+        if missing == 'missing' and (volatile or role == 'mutable_temporary'):
+            detail['reason'] = 'declared_temporary_unlinked_during_stat'
+            retry(detail)
+        failure('Singleton regular output only', detail)
+    if (stat.S_ISREG(fresh.st_mode) and fresh.st_nlink == 1 and fresh.st_dev == device
+            and fresh.st_ino != info.st_ino and fresh.st_size <= file_cap(path)):
+        detail['reason'] = 'declared_path_replaced_by_new_singleton_inode'
+        retry(detail)
+    failure('Singleton regular output only', detail)
+
+
+def scan_once(root):
+    root = Path(root); entries = 0; totals = [0, 0]; by_layout = {name: [0, 0] for name in LAYOUTS}
+    classes = {name: [0, 0] for name in OUTPUT_CLASS_CAPS}
+    pending = [root] if root.exists() else []
+    while pending:
+        path = pending.pop(); relative = path.relative_to(root)
+        owner = relative.parts[0] if relative.parts and relative.parts[0] in LAYOUTS else None
+        volatile = owner is not None and len(relative.parts) > 1 and relative.parts[1] in ('tmp', 'cache', 'artifacts')
+        try: info = scan_stat(path, root, volatile)
+        except FileNotFoundError:
+            if volatile or transient(path):
+                retry(diagnostic(path, 'declared_compiler_temporary_disappeared', fresh_error='missing',
+                                 scope='declared_compiler_volatile' if volatile else 'inherited_atomic_temporary'))
+            raise
+        entries += 1; require(entries <= LIMITS['max_entries'], 'Bounded output entries')
+        if stat.S_ISLNK(info.st_mode) or info.st_dev != root.stat().st_dev:
+            failure('Ordinary same-volume output only', diagnostic(path, 'symlink_or_other_device', info))
+        allocated = info.st_blocks*512; logical = 0
+        if stat.S_ISDIR(info.st_mode):
+            try: pending.extend(path.iterdir())
+            except FileNotFoundError:
+                if volatile:
+                    retry(diagnostic(path, 'declared_compiler_directory_disappeared', info, fresh_error='missing',
+                                     scope='declared_compiler_volatile'))
+                raise
+        else:
+            if not (stat.S_ISREG(info.st_mode) and info.st_nlink == 1):
+                failure('Singleton regular output only', diagnostic(path, 'non_singleton_or_special', info))
+            require(info.st_size <= file_cap(path), 'Per-file output cap: ' + str(path)); logical = info.st_size
+        category = output_class(relative, stat.S_ISDIR(info.st_mode))
+        classes[category][0] += allocated; classes[category][1] += logical
+        totals[0] += allocated; totals[1] += logical
+        if owner:
+            by_layout[owner][0] += allocated; by_layout[owner][1] += logical
+    require(max(totals) <= 8*GIB, 'Total output including metadata, cache and logs <=8 GiB')
+    require(all(max(row) <= GIB for row in by_layout.values()), 'Each layout complete output <=1 GiB')
+    require(max(totals) <= GIB, 'Entire diagnostic including root metadata and directories <=1 GiB')
+    require(all(max(classes[key]) <= cap for key, cap in OUTPUT_CLASS_CAPS.items()),
+            'Raw/bitmap, fresh artifact and complete overhead class caps')
+    return dict(entries=entries, output_classes={key: dict(allocated_bytes=row[0], logical_bytes=row[1])
+        for key, row in classes.items()}, allocated_bytes=totals[0], logical_bytes=totals[1],
+        layouts={key: dict(allocated_bytes=row[0], logical_bytes=row[1]) for key, row in by_layout.items()})
+
+
+def scan_output(root):
+    observations = []
+    for attempt in range(8):
+        try:
+            result = scan_once(root)
+            if observations:
+                result['publication_retry_observations'] = observations
+            return result
+        except PublicationRace as error:
+            detail = getattr(error, 'scan_diagnostic', dict(reason=str(error), path=str(root)))
+            bounded_detail(detail)
+            observations.append(dict(attempt=attempt + 1, detail=detail))
+            require(len(observations) <= RETRY_OBSERVATION_LIMIT, 'At most eight complete retry observations')
+            if attempt == 7:
+                failure('Declared atomic/compiler output did not settle', dict(attempts=8, observations=observations),
+                        TERMINAL_DIAGNOSTIC_BYTES)
+            time.sleep(.01)
+
+
+def resources(spec, reserve=True):
+    root = Path(spec['output_root']); usage = scan_output(root); result = {}
+    require(Path('/mnt/nvme').is_mount() and ROOT.stat().st_dev != Path('/mnt/nvme').stat().st_dev
+        and root.parent.stat().st_dev == Path('/mnt/nvme').stat().st_dev, 'Actual distinct NVMe output volume')
+    for path, floor in ((ROOT, 28*GIB), (Path('/mnt/nvme'), 30*GIB)):
+        fs = os.statvfs(path); available = fs.f_bavail * fs.f_frsize
+        extra = 2*GIB + max(0, 8*GIB - usage['allocated_bytes']) if reserve and path == Path('/mnt/nvme') else 0
+        require(available >= floor + extra, 'Original floor plus remaining output reservation and headroom: ' + str(path))
+        result[str(path)] = available
+    available = int(next(line.split()[1] for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:'))) * 1024
+    require(available >= LIMITS['memory_available_floor_bytes'], 'Original memory available floor')
+    current_layout(root)
+    return dict(storage=usage, available_disk_bytes=result, available_memory_bytes=available)
+
+
+def output_class(relative, is_directory):
+    """Classify every object, including all directories and compiler intermediates."""
+    parts = relative.parts
+    if not is_directory:
+        if (len(parts) >= 4 and parts[:2] == (LAYOUTS[0], 'artifacts')
+                and parts[2] in ('inputs', 'calls') and relative.suffix in ('.raw', '.diffbits')):
+            return 'raw_and_bitmaps'
+        if (len(parts) == 5 and parts[:3] == (LAYOUTS[0], 'artifacts', 'graphs')
+                and parts[3] in {graph['name'] for graph in FRESH} and parts[4] == 'model.pt'):
+            return 'fresh_artifacts'
+    return 'all_other_outputs'

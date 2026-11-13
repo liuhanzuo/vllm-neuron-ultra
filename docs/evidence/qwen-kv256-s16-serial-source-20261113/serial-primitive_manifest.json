@@ -1,0 +1,101 @@
+{
+  "schema": "qwen35_kv256_s16_pair_primitive_manifest_v1",
+  "source_files": [
+    {
+      "bytes": 5975,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_bytes_v1.py",
+      "sha256": "a363ed9f2f71d4abe78205c648853ba1c59dd7d4b43f27619a17901efde4f1bf"
+    },
+    {
+      "bytes": 4388,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_s16_concat_control_v1.py",
+      "sha256": "23193ee3e039d3727f98ee0ecc2d2fdf17edaa8042aee3a4a1ca2101ab0be8ee"
+    },
+    {
+      "bytes": 12731,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_s16_pair_hlo_v1.py",
+      "sha256": "9f897d0d20bf3c216f3d52425fbea9395db7a4d8519df372d8e1c818819be560"
+    },
+    {
+      "bytes": 28849,
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_s16_pair_leaf_v1.py",
+      "sha256": "5459dd2585bdf78668c78fa722707b0bf730ae4c918b418a923944d42f9b22ac"
+    },
+    {
+      "bytes": 5085,
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-qwen-writer-20261112/vllm_neuron/models/qwen35/cache_writer.py",
+      "sha256": "7ad18c9dff829ea3649f6968bf51b7696902d19d6ac035e9a63f4752dd19b66a"
+    },
+    {
+      "bytes": 2052,
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-qwen-writer-20261112/vllm_neuron/models/qwen35/slot_cache_nki_predicated.py",
+      "sha256": "b2f0ef3a727409c9816dc9c5e77cfd13df3a1777f4cdc31c8ce3e8cd373eca7e"
+    },
+    {
+      "bytes": 11405,
+      "path": "/home/ubuntu/src/vllm-neuron-ultra-qwen-writer-20261112/vllm_neuron/models/qwen35/text_core.py",
+      "sha256": "3f0a966af288d87c55e72f5dd41b8f11f343b43d3c1f45385fa360d774aacdfb"
+    }
+  ],
+  "workload": {
+    "calls": 6,
+    "complete_owned_output_cap_bytes": 1073741824,
+    "dtype": "torch.bfloat16",
+    "fresh_processes": 1,
+    "full_geometry_qualified": false,
+    "full_model_qualified": false,
+    "graphs": [
+      {
+        "alias": 1,
+        "bucket": 256,
+        "name": "bf16_cat",
+        "operation": "bf16_cat",
+        "physical_output_order": [
+          "old",
+          "new"
+        ]
+      },
+      {
+        "alias": 1,
+        "bucket": 256,
+        "name": "s16_bitcast_cat",
+        "operation": "s16_bitcast_cat",
+        "physical_output_order": [
+          "old",
+          "new"
+        ]
+      }
+    ],
+    "max_live_graphs": 1,
+    "new_artifact_cap_bytes": 33554432,
+    "new_graphs": 2,
+    "new_speedup_claim": false,
+    "output_class_caps": {
+      "all_other_outputs": 197132288,
+      "fresh_artifacts": 134217728,
+      "raw_and_bitmaps": 742391808
+    },
+    "per_leaf_seconds": 900,
+    "profiles": [
+      "raw",
+      "finite",
+      "row_tagged_raw"
+    ],
+    "raw_capture_cap_bytes": 742391808,
+    "saved_graphs": 0,
+    "schema": "qwen35_kv256_s16_pair_workload_v1",
+    "slots": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "slots_dtype": "torch.int32",
+    "state_shape": [
+      4,
+      1,
+      4096,
+      256
+    ]
+  }
+}

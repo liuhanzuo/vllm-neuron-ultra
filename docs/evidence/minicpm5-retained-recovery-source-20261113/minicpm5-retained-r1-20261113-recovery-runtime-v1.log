@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_finalizer_v4.py", line 336, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_finalizer_v4.py", line 332, in main
+    print(json.dumps(publish_completed(dict(path=args.request,sha256=args.request_sha256))),flush=True)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_finalizer_v4.py", line 223, in publish_completed
+    rows=validate_interruption(interruption,recovery_request['original_request'],request,observation,spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_finalizer_v4.py", line 107, in validate_interruption
+    c.require(value['all_four_publication_paths_absent']==outputs,'Interrupted publication stopped before all four final outputs')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_contract_v1.py", line 32, in require
+    if not ok:raise ValueError(message)
+ValueError: Interrupted publication stopped before all four final outputs
