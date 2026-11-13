@@ -1,0 +1,131 @@
+{
+  "actual_outer_tool": {
+    "exit_code": 1,
+    "kind": "tool_session",
+    "session_id": 69990,
+    "terminal_chunk": "702edd"
+  },
+  "calls_returned": 18751,
+  "compiled_graphs": 16,
+  "first_failure_call_1based": 3751,
+  "first_failure_layout": "kv256",
+  "first_required_failure": {
+    "mapping_index": 0,
+    "mode": "persistent",
+    "passed": false,
+    "profile": "raw",
+    "proofs": {
+      "device_full_state": {
+        "actual_sha256": "ed6bc91123d8ffc49e028b2685f894ed7f6ed131fab83fefe75f6f9a70ac059d",
+        "bytes_compared": 8388608,
+        "expected_sha256": "585fbf90d9c212afe9be4e1620de1c21d0aaaee82186b012b926a80d34da71c4",
+        "identical": false
+      },
+      "full_new": {
+        "actual_sha256": "ed6bc91123d8ffc49e028b2685f894ed7f6ed131fab83fefe75f6f9a70ac059d",
+        "bytes_compared": 8388608,
+        "expected_sha256": "585fbf90d9c212afe9be4e1620de1c21d0aaaee82186b012b926a80d34da71c4",
+        "identical": false
+      },
+      "host_inputs_unchanged": [
+        true,
+        true
+      ],
+      "old": {
+        "actual_sha256": "585fbf90d9c212afe9be4e1620de1c21d0aaaee82186b012b926a80d34da71c4",
+        "bytes_compared": 8388608,
+        "expected_sha256": "585fbf90d9c212afe9be4e1620de1c21d0aaaee82186b012b926a80d34da71c4",
+        "identical": true
+      },
+      "tail": {
+        "actual_sha256": "a368a20c104d9fcbb16472a0773fed04943697b646d8a324e2f46859e06b8586",
+        "bytes_compared": 7864320,
+        "expected_sha256": "f8ccf07f1fd1ce156c8fd983f93a411179a19f78ee4998ec63bcdc8e062340b2",
+        "identical": false
+      }
+    },
+    "slots": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "variant": "nki_predicated_decode_v1"
+  },
+  "full_model_qualified": false,
+  "geometry_qualified": false,
+  "independent_audit": {
+    "session_id": 64490,
+    "status": "running"
+  },
+  "layouts": [
+    {
+      "actual_child_exit": 0,
+      "calls_returned": 5000,
+      "completed": true,
+      "graphs": 4,
+      "layout": "conv",
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r3-20261113/conv/report.json",
+        "sha256": "d36afba5ff540dfa05b485cb8d5e6849a60b6c0eaaff8415201808763ea3c7b3"
+      }
+    },
+    {
+      "actual_child_exit": 0,
+      "calls_returned": 5000,
+      "completed": true,
+      "graphs": 4,
+      "layout": "recurrent",
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r3-20261113/recurrent/report.json",
+        "sha256": "89b61b6143fc7349ac0051cd8275cc46df4c94ab0f15aab75aae024b9b651081"
+      }
+    },
+    {
+      "actual_child_exit": 0,
+      "calls_returned": 5000,
+      "completed": true,
+      "graphs": 4,
+      "layout": "kv128",
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r3-20261113/kv128/report.json",
+        "sha256": "18dfa81e073aeddb135296778280ae9ecade3210d24a92ce8dac2c761c003105"
+      }
+    },
+    {
+      "actual_child_exit": 1,
+      "calls_returned": 3751,
+      "completed": false,
+      "graphs": 4,
+      "layout": "kv256",
+      "report": {
+        "path": "/mnt/nvme/neuron-work/qwen35-writer-geometry-writer-r3-20261113/kv256/report.json",
+        "sha256": "2fbd42bcb95ea18ddfcd1c79509ecdb66f47cbea68c6f99410f8738c226ce209"
+      }
+    }
+  ],
+  "new_native_work_executed": false,
+  "new_speedup_claim": false,
+  "not_yet_proven": [
+    "Exact changed byte offsets/bit patterns were not captured in this report",
+    "No conclusion yet whether writer body, prefix-tail composition, graph alias lowering or runtime caused the change",
+    "Larger KV layouts were not executed"
+  ],
+  "observations": [
+    "All-inactive slots must preserve the full raw state",
+    "Pre-write old output matches the integer oracle and host inputs are unchanged",
+    "New full output equals observed post-call device-state digest but differs from expected",
+    "Untouched tail is also different",
+    "Standalone NKI completed both profiles; persistent torch_where completed both profiles while retaining its expected raw negative controls"
+  ],
+  "observed_at": "2026-11-13T02:13:30.992913+00:00",
+  "raw_payloads_reread": false,
+  "remaining_layouts": [
+    "kv512",
+    "kv1024",
+    "kv2048",
+    "kv4096"
+  ],
+  "reviewer": "/root",
+  "schema": "qwen35_geometry_r3_saved_first_failure_analysis_v1"
+}
