@@ -1,0 +1,52 @@
+{
+  "actual_directory_escape_or_deletion_observed": false,
+  "actual_native_compilation": false,
+  "analysis": {
+    "bytes": 14787,
+    "identity": {
+      "st_ctime_ns": 1794553137838402954,
+      "st_dev": 66306,
+      "st_ino": 8348379,
+      "st_mtime_ns": 1794553137838402954,
+      "st_size": 14787
+    },
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-build-storage-source-analysis-20261113-v2.md",
+    "sha256": "6c60544024832f4004641ad00947877085f26b79cd5327cae9d4d5ae9d420d9c"
+  },
+  "blockers": [],
+  "findings": [
+    "Original compile uses trace initialize_model_weights=False and save_sharded_checkpoint=False; load shard_checkpoint serialize_path=None. Specified Python TP checkpoint writer branches are skipped",
+    "No claim of zero shared-memory or other temporary file/allocator storage; full output bound unchanged",
+    "ModelBuilder selects LAZY/use_cache/create_subdirFalse; default max retries0 exception propagates on first attempt and preserves dedicated workdir",
+    "Configured LAZY retry recursion omits work_dir and falls back to hard-coded /tmp/USER; get_work_dir removes existing target in source/mock test only",
+    "EAGER nonzero return ignores exception retry-limit branch; separate behavior, not evidence of selected LAZY mode failure",
+    "Temporary HLO/NEFF copies and persistent cache/workdir/artifact allocations must be budgeted separately; TMPDIR alone does not redirect hard-coded retry fallback"
+  ],
+  "full_model_qualified": false,
+  "launch_authorized": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-13T07:01:51.580458+00:00",
+  "passed": true,
+  "resource_bound_reduced": false,
+  "reviewer": "/root",
+  "root_tests": {
+    "all_bytes_equal_author_result": true,
+    "count": 8,
+    "exit_code": 0,
+    "kind": "tool_call",
+    "result": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-compile-retry-workdir-root-tests-20261113-v2.json",
+      "sha256": "66858edd85f459a0a05a5311de956c4f11f71b14c9c55eeb2a8c7ffa57a72f54"
+    },
+    "terminal_chunk": "38e443"
+  },
+  "runtime_admitted": false,
+  "schema": "deepseek_build_storage_root_source_review_v1",
+  "sdk_modified": false,
+  "source_accepted": true,
+  "source_analysis": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-build-storage-source-analysis-20261113-v2.json",
+    "sha256": "9070bd97696212bb305b90de37f7dc82a937411c9759bb741434bed414ba660a"
+  },
+  "source_files_rehashed_and_stat_verified": 17
+}

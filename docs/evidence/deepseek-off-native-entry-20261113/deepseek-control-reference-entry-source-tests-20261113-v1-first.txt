@@ -1,0 +1,499 @@
+test_driver_and_partial_capture_failure_restore_inherited_forward (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_exact_original_loader_and_yarn_config_transform (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_existing_native_outputs_rejected_before_native_import (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+test_frozen_scientific_sources_and_no_new_scientific_loop (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_guard_before_native_import_and_before_checkpoint_load (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_guard_revocation_at_config_load_forward_or_finish_propagates (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_matching_device_failure_message_is_not_accepted_on_native_path (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_missing_raising_guard_is_rejected_before_import (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_original_leaf_and_scientific_loop_execute_all42_calls_and3024_records (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_original_parameter_count_untied_cpu_and_bf16_checks (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_original_source_pin_and_protocol_recheck_reject_change (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... test_own_forward_restored_on_success_and_failure (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_partial_forward_assignment_restored (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_preimported_native_packages_and_trace_rejected (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+test_symlink_outputs_and_ancestors_rejected (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+test_unexpected_residual_trace_rejected_after_restoration (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ERROR
+test_wrong_reference_overlapping_model_raw_and_old_namespace_rejected (test_deepseek_cold_control_reference_entry_v1.NativeEntry) ... ok
+
+======================================================================
+ERROR: test_driver_and_partial_capture_failure_restore_inherited_forward (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='loop_error')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 286, in test_driver_and_partial_capture_failure_restore_inherited_forward
+    with self.subTest(attr=attr),self.assertRaisesRegex(RuntimeError,'original failure'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_driver_and_partial_capture_failure_restore_inherited_forward (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='capture_error')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 286, in test_driver_and_partial_capture_failure_restore_inherited_forward
+    with self.subTest(attr=attr),self.assertRaisesRegex(RuntimeError,'original failure'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_exact_original_loader_and_yarn_config_transform (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 216, in test_exact_original_loader_and_yarn_config_transform
+    f=Fixture();f.run();self.assertEqual(len(f.load_calls),1)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame.<locals>.<lambda> at 0x7d593fa9a440>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 309, in test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame
+    with self.subTest(change=change),self.assertRaises(AssertionError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame.<locals>.<lambda> at 0x7d593fa9acb0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 309, in test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame
+    with self.subTest(change=change),self.assertRaises(AssertionError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame.<locals>.<lambda> at 0x7d593fa985e0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 309, in test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame
+    with self.subTest(change=change),self.assertRaises(AssertionError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame.<locals>.<lambda> at 0x7d593fa9a4d0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 309, in test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame
+    with self.subTest(change=change),self.assertRaises(AssertionError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame.<locals>.<lambda> at 0x7d593fa9a560>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 309, in test_full_native_manifest_rejects_missing_reordered_or_wrong_last_frame
+    with self.subTest(change=change),self.assertRaises(AssertionError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_before_native_import_and_before_checkpoint_load (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 228, in test_guard_before_native_import_and_before_checkpoint_load
+    with self.subTest(count=count),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_before_native_import_and_before_checkpoint_load (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (count=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 228, in test_guard_before_native_import_and_before_checkpoint_load
+    with self.subTest(count=count),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_revocation_at_config_load_forward_or_finish_propagates (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (point='config')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 273, in test_guard_revocation_at_config_load_forward_or_finish_propagates
+    with self.subTest(point=point),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_revocation_at_config_load_forward_or_finish_propagates (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (point='load')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 273, in test_guard_revocation_at_config_load_forward_or_finish_propagates
+    with self.subTest(point=point),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_revocation_at_config_load_forward_or_finish_propagates (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (point='forward')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 273, in test_guard_revocation_at_config_load_forward_or_finish_propagates
+    with self.subTest(point=point),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_guard_revocation_at_config_load_forward_or_finish_propagates (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (point='finish')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 273, in test_guard_revocation_at_config_load_forward_or_finish_propagates
+    with self.subTest(point=point),self.assertRaisesRegex(RuntimeError,'ownership lost'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (key='missing_keys')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 258, in test_incomplete_checkpoint_load_and_loader_failure_propagate
+    with self.subTest(key=key),self.assertRaisesRegex(ValueError,'checkpoint load'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (key='unexpected_keys')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 258, in test_incomplete_checkpoint_load_and_loader_failure_propagate
+    with self.subTest(key=key),self.assertRaisesRegex(ValueError,'checkpoint load'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (key='mismatched_keys')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 258, in test_incomplete_checkpoint_load_and_loader_failure_propagate
+    with self.subTest(key=key),self.assertRaisesRegex(ValueError,'checkpoint load'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (key='error_msgs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 258, in test_incomplete_checkpoint_load_and_loader_failure_propagate
+    with self.subTest(key=key),self.assertRaisesRegex(ValueError,'checkpoint load'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_incomplete_checkpoint_load_and_loader_failure_propagate (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 261, in test_incomplete_checkpoint_load_and_loader_failure_propagate
+    with self.assertRaisesRegex(RuntimeError,'loader failure'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_matching_device_failure_message_is_not_accepted_on_native_path (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 280, in test_matching_device_failure_message_is_not_accepted_on_native_path
+    with self.assertRaises(SystemExit):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f9b7be0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f9b7e20>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f9b7f40>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc040>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc0d0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc160>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc1f0>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc280>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_native_report_requires_complete_finite_source_revision_criteria_and42 (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (change=<function NativeEntry.test_native_report_requires_complete_finite_source_revision_criteria_and42.<locals>.<lambda> at 0x7d593f8dc310>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 320, in test_native_report_requires_complete_finite_source_revision_criteria_and42
+    with self.subTest(change=change),self.assertRaises(ValueError):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_leaf_and_scientific_loop_execute_all42_calls_and3024_records (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 204, in test_original_leaf_and_scientific_loop_execute_all42_calls_and3024_records
+    f=Fixture();out=f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_parameter_count_untied_cpu_and_bf16_checks (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='count')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 267, in test_original_parameter_count_untied_cpu_and_bf16_checks
+    with self.subTest(attr=attr),self.assertRaisesRegex(ValueError,reason):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_parameter_count_untied_cpu_and_bf16_checks (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='tied')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 267, in test_original_parameter_count_untied_cpu_and_bf16_checks
+    with self.subTest(attr=attr),self.assertRaisesRegex(ValueError,reason):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_parameter_count_untied_cpu_and_bf16_checks (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='placement')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 267, in test_original_parameter_count_untied_cpu_and_bf16_checks
+    with self.subTest(attr=attr),self.assertRaisesRegex(ValueError,reason):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_parameter_count_untied_cpu_and_bf16_checks (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (attr='dtype')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 267, in test_original_parameter_count_untied_cpu_and_bf16_checks
+    with self.subTest(attr=attr),self.assertRaisesRegex(ValueError,reason):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_source_pin_and_protocol_recheck_reject_change (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (kind='native')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 252, in test_original_source_pin_and_protocol_recheck_reject_change
+    with self.subTest(kind=kind),self.assertRaisesRegex(ValueError,'native source'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_source_pin_and_protocol_recheck_reject_change (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (kind='first_protocol')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 252, in test_original_source_pin_and_protocol_recheck_reject_change
+    with self.subTest(kind=kind),self.assertRaisesRegex(ValueError,'native source'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_original_source_pin_and_protocol_recheck_reject_change (test_deepseek_cold_control_reference_entry_v1.NativeEntry) (kind='second_protocol')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 252, in test_original_source_pin_and_protocol_recheck_reject_change
+    with self.subTest(kind=kind),self.assertRaisesRegex(ValueError,'native source'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_own_forward_restored_on_success_and_failure (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 295, in test_own_forward_restored_on_success_and_failure
+    else:f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_partial_forward_assignment_restored (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 300, in test_partial_forward_assignment_restored
+    with self.assertRaisesRegex(RuntimeError,'partially installed'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+======================================================================
+ERROR: test_unexpected_residual_trace_rejected_after_restoration (test_deepseek_cold_control_reference_entry_v1.NativeEntry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 325, in test_unexpected_residual_trace_rejected_after_restoration
+    with self.assertRaisesRegex(ValueError,'residual native observer trace'):f.run()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/test_deepseek_cold_control_reference_entry_v1.py", line 195, in run
+    return entry.run(self.dest,self.ref,self.raw,self.guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/deepseek_cold_control_reference_entry_v1.py", line 73, in run
+    native_source_sha256 = hashlib.sha256(Path(hf.__file__).read_bytes()).hexdigest()
+TypeError: Fixture.read_bytes() missing 1 required positional argument: 'path'
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.214s
+
+FAILED (errors=40)
+AUDIT_GUARD: source/in-memory fixtures only; frozen full42 loop executed with fake tensors; no native/model/payload/proc/lock

@@ -1,6 +1,6 @@
 # Trn1 已测模型提速总表（2026-11-12）
 
-2026-11-13 [DeepSeek 对照入口](deepseek-off-device-entry-20261113.md)与 [MiniCPM5 归档工具修复](minicpm5-retirement-resolve-cycle-20261113.md)完成源码审查，分别通过主任务及独立审查各 18／62 项测试。设备实测或实际归档仍待完成；这些测试没有产生新的模型提速倍数。
+2026-11-13 [DeepSeek 原生／设备对照入口](deepseek-off-device-entry-20261113.md)分别通过作者与主任务各 20／18 项隔离测试，[SDK 编译存储分析](deepseek-capture-storage-20261113.md)通过各 8 项模拟控制；[MiniCPM5 归档工具修复](minicpm5-retirement-resolve-cycle-20261113.md)通过各 62 项测试。实际模型验证或归档仍待完成；这些工作没有产生新的模型提速倍数。
 
 2026-11-13 [KV256 保存前缀逐字节复核完成](qwen-kv256-partial-byte-audit-20261113.md)：15/24 次调用、42 项比较完整重现，定位到特殊 BF16 位模式变化；原诊断因磁盘预留检查停止，修复仍待设备验证，没有新增整模型提速倍数。
 

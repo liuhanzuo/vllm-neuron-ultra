@@ -1,0 +1,596 @@
+{
+  "actual_compilation": false,
+  "actual_current_process_or_lock_inspection": false,
+  "actual_deletion": false,
+  "actual_native_imports": false,
+  "actual_runtime_metadata_or_payload_read": false,
+  "actual_tmp_writes": false,
+  "cases": {
+    "default_zero_eager_nonzero_still_recurses": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "EAGER",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        },
+        {
+          "execution_mode": "EAGER",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        }
+      ],
+      "copies": [
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "EAGER",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 0,
+      "result": [
+        true,
+        1
+      ],
+      "uploads": [
+        "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff"
+      ]
+    },
+    "default_zero_first_success": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        }
+      ],
+      "copies": [
+        [
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 0,
+      "result": [
+        true,
+        0
+      ],
+      "uploads": [
+        "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff"
+      ]
+    },
+    "default_zero_lazy_exception_no_retry": {
+      "cached_error": "synthetic",
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        }
+      ],
+      "copies": [],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": {
+        "returncode": 1,
+        "stderr": "synthetic"
+      },
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 0,
+      "result": null,
+      "uploads": []
+    },
+    "enabled_eager_nonzero_retry": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "EAGER",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        },
+        {
+          "execution_mode": "EAGER",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        }
+      ],
+      "copies": [
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "EAGER",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 2,
+      "result": [
+        true,
+        1
+      ],
+      "uploads": [
+        "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff"
+      ]
+    },
+    "enabled_lazy_exception_retry": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        },
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        }
+      ],
+      "copies": [
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 2,
+      "result": [
+        true,
+        1
+      ],
+      "uploads": [
+        "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff"
+      ]
+    },
+    "enabled_lazy_exhausted_exception_retry": {
+      "cached_error": "synthetic",
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        },
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        },
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        }
+      ],
+      "copies": [],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": {
+        "returncode": 1,
+        "stderr": "synthetic"
+      },
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 2,
+      "result": null,
+      "uploads": []
+    },
+    "enabled_lazy_existing_fallback_removal": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket"
+        },
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir"
+        }
+      ],
+      "copies": [
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [
+        "/tmp/source-test-user/neuroncc_compile_workdir"
+      ],
+      "maximum_retries": 2,
+      "result": [
+        true,
+        1
+      ],
+      "uploads": [
+        "/tmp/source-test-user/neuroncc_compile_workdir/model.MODULE_SOURCE_TEST.neff"
+      ]
+    },
+    "enabled_lazy_subdirectory_retry": {
+      "cached_error": null,
+      "calls": [
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/dedicated-capture-work/bucket/source-test-uuid/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/dedicated-capture-work/bucket/source-test-uuid/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/dedicated-capture-work/bucket/source-test-uuid"
+        },
+        {
+          "execution_mode": "LAZY",
+          "input_file": "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/model.MODULE_SOURCE_TEST.hlo_module.pb",
+          "options": {
+            "dump": null,
+            "framework": "XLA"
+          },
+          "output_file": "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/model.MODULE_SOURCE_TEST.neff",
+          "work_dir": "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid"
+        }
+      ],
+      "copies": [
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/model.MODULE_SOURCE_TEST.neff",
+          "/temporary-output/model.neff"
+        ]
+      ],
+      "downloads": [
+        [
+          "hlo",
+          "/dedicated-capture-work/bucket/source-test-uuid/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/dedicated-capture-work/bucket/source-test-uuid/compile_flags.MODULE_SOURCE_TEST.json"
+        ],
+        [
+          "hlo",
+          "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/model.MODULE_SOURCE_TEST.hlo_module.pb"
+        ],
+        [
+          "flags",
+          "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/compile_flags.MODULE_SOURCE_TEST.json"
+        ]
+      ],
+      "error": null,
+      "execution_mode": "LAZY",
+      "fake_directories": [
+        [
+          "/dedicated-capture-work/bucket/source-test-uuid",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ],
+        [
+          "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid",
+          {
+            "exist_ok": true,
+            "parents": true
+          }
+        ]
+      ],
+      "fake_removals": [],
+      "maximum_retries": 2,
+      "result": [
+        true,
+        1
+      ],
+      "uploads": [
+        "/tmp/source-test-user/neuroncc_compile_workdir/source-test-uuid/model.MODULE_SOURCE_TEST.neff"
+      ]
+    }
+  },
+  "checks": 8,
+  "extracted_functions": [
+    "get_work_dir",
+    "compile_cache_entry"
+  ],
+  "new_speedup_claim": false,
+  "original_function_bodies_unchanged": true,
+  "passed": true,
+  "retry_default_verified_from_source_ast": 0,
+  "runtime_retry_environment_inspected": false,
+  "schema": "deepseek_compile_retry_source_reproduction_v2",
+  "source": {
+    "path": "/home/ubuntu/venvs/vllm_neuron/lib/python3.10/site-packages/libneuronxla/neuron_cc_wrapper.py",
+    "sha256": "33218bc87806d18277a47a2a7c5d9e7ddc78314d00f27c86816d2ec3731c961f"
+  }
+}
