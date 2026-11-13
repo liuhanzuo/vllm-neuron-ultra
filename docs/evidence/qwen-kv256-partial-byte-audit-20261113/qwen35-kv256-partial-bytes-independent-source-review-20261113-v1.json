@@ -1,0 +1,80 @@
+{
+  "schema": "qwen35_kv256_partial_bytes_independent_source_review_v1",
+  "reviewer": "/root/qwen_package_dve_assets_20261113",
+  "reviewed_source": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/audit_qwen35_kv256_partial_bytes_root_20261113_v1.py",
+    "sha256": "e2fc6aec3514f53b85196cca0d81c55cbbacbf71a9bdc82cc4ed8ac90a64b1c8"
+  },
+  "accepted": false,
+  "scope": "Source-only and extracted AST synthetic tests. No real raw, report, actual-exit, idle, lock or History read or operation.",
+  "synthetic_probe": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/check_qwen35_partial_bytes_independent_20261113_v1.py",
+    "sha256": "214146cf482ed30ffaf1553e24267c75a2bb4e152f3d9dea2be57c7e88f3359e",
+    "tool_chunk": "58d7e4",
+    "exit_code": 0
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "blocking",
+      "lines": [
+        65,
+        70,
+        174
+      ],
+      "finding": "Publication guard can skip latest_handoff and active_heavy checks inside the 0.5-second throttle interval.",
+      "reproduced": true,
+      "fix": "Add force parameter and perform forced latest/idle/lock/heavy check immediately before publication, after constructing result."
+    },
+    {
+      "id": "F2",
+      "priority": "blocking",
+      "lines": [
+        54,
+        57,
+        176
+      ],
+      "finding": "Self source is skipped at entry and hashed only after computation; receipt can identify a replacement source that was never executed. Only three imported pure sources are checked at entry, with no end check of executed analysis closure/spec/primitive manifest.",
+      "reproduced": false,
+      "evidence": "Direct source and dependency inspection.",
+      "fix": "Freeze separate analysis self/source closure references before analysis, verify unchanged before publication, and bind original spec/manifest identities without retrofitting analysis into original execution spec."
+    },
+    {
+      "id": "F3",
+      "priority": "fix",
+      "lines": [
+        112,
+        114,
+        171
+      ],
+      "finding": "Repeated capture replaces stored identity when path/hash/bytes match; same-byte file replacement is accepted and final stability check uses the replacement identity.",
+      "reproduced": true,
+      "fix": "Keep first-seen identity and reject repeat reference or identity changes."
+    },
+    {
+      "id": "F4",
+      "priority": "fix",
+      "lines": [
+        138,
+        139
+      ],
+      "finding": "Empty host checks and nonboolean truthy entries pass the unchanged-host-input predicate.",
+      "reproduced": true,
+      "fix": "Require actual call_returned is True, exact bool list of length 2 for alias or 3 for standalone, all True, and no changed captures."
+    }
+  ],
+  "source_findings_without_defect": [
+    "Exact ordered 15-call prefix is enforced through validate_prefix plus completeness check.",
+    "42 comparisons follow 12 saved-control calls and 3 cat-only calls; complete payload and full bitmap comparison are recomputed.",
+    "Old oracle is row 0 repeated four times, while new and state use full original cache.",
+    "Alias output physical order is checked against original helper; alias0 remains outside this saved prefix.",
+    "Unreferenced raw/bitmap files are disclosed as unanalyzed; missing calls remain unknown.",
+    "Diagnostic completion, geometry qualification, full-model qualification and new speedup claims remain false."
+  ],
+  "additional_hardening": [
+    "Check guard within bounded unreferenced inventory traversal, reject symlink directories and preserve inventory metadata identities if claiming stable inventory."
+  ],
+  "actual_experiment_executed": false,
+  "actual_results_audited": false,
+  "new_speedup_claim": false
+}

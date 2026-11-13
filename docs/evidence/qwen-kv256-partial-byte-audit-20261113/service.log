@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 462, in <module>
+    if __name__ == '__main__': raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 459, in main
+    return (supervisor if args.mode == 'supervisor' else layout)(reference(dict(path=args.binding,sha256=args.binding_sha256)))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 267, in supervisor
+    summaries = run_layouts(spec, binding_ref, owner, guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 227, in run_layouts
+    native = capture_layout(entry_argv('layout', binding_ref, work), environment(work), work,
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 186, in capture_layout
+    bounded()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 174, in bounded
+    guard(); require(time.monotonic() - started < 900, 'Per-layout wall deadline includes launch, compile, calls and drain')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py", line 257, in guard
+    check_environment(root); check_group(own['cgroup'].removeprefix('0::')); resources(spec)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/contract.py", line 173, in resources
+    return storage.resources(spec, reserve=reserve)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/storage.py", line 181, in resources
+    require(available >= floor + extra, 'Original floor plus remaining output reservation and headroom: ' + str(path))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_pair_protocol_v1.py", line 73, in require
+    raise ValueError(message)
+ValueError: Original floor plus remaining output reservation and headroom: /mnt/nvme

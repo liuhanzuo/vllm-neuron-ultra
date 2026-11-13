@@ -1,0 +1,151 @@
+{
+  "actual_external_tool_exit_pending": true,
+  "admission": {
+    "path": "/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/admission.json",
+    "sha256": "f26beda708bef892f5e36d31d507a1a8a3b324b4d1374f9f7a499d514116fa67"
+  },
+  "automatic_successor": false,
+  "complete_owned_unit_terminals": [
+    {
+      "cleanup_complete": true,
+      "exit_observed": true,
+      "group_observations": [
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-kvdiag-r2-20261113-kv256-alias-diag.service"
+        },
+        {
+          "absent": true,
+          "group": "/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-kvdiag-r2-20261113-kv256-alias-diag.service"
+        }
+      ],
+      "observed_unix_ns": 1794541443378818535,
+      "process_owner": {
+        "argv": [
+          "/home/ubuntu/venvs/vllm_neuron/bin/python",
+          "-I",
+          "-B",
+          "-X",
+          "pycache_prefix=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/bytecode-never-created",
+          "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py",
+          "--mode",
+          "supervisor",
+          "--binding",
+          "/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/admission.json",
+          "--binding-sha256",
+          "f26beda708bef892f5e36d31d507a1a8a3b324b4d1374f9f7a499d514116fa67"
+        ],
+        "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/trn1-qwen35-sampler-kvdiag-r2-20261113-kv256-alias-diag.service",
+        "pid": 1943320,
+        "ppid": 1583,
+        "start_ticks": "432109877"
+      },
+      "properties": {
+        "ActiveState": "failed",
+        "After": "-.mount app.slice basic.target",
+        "BindsTo": "",
+        "ControlGroup": "",
+        "ControlPID": "0",
+        "Environment": "",
+        "ExecMainCode": "1",
+        "ExecMainPID": "1943320",
+        "ExecMainStatus": "1",
+        "ExecStart": "{ path=/usr/bin/env ; argv[]=/usr/bin/env -i DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus HF_HOME=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/cache/hf HF_HUB_OFFLINE=1 HOME=/home/ubuntu LANG=C.UTF-8 MKL_NUM_THREADS=1 NEURON_COMPILE_CACHE_URL=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/cache/neuron NEURON_LOGICAL_NC_CONFIG=1 NEURON_RT_VISIBLE_CORES=0 NUMEXPR_NUM_THREADS=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PATH=/home/ubuntu/venvs/vllm_neuron/bin:/opt/aws/neuron/bin:/usr/local/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 PYTHONOPTIMIZE=0 PYTHONPYCACHEPREFIX=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/bytecode-never-created TMPDIR=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/tmp TOKENIZERS_PARALLELISM=false TORCHINDUCTOR_CACHE_DIR=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/cache/torch TORCHINDUCTOR_COMPILE_THREADS=1 TRANSFORMERS_OFFLINE=1 XDG_CACHE_HOME=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/cache XDG_RUNTIME_DIR=/run/user/1000 /home/ubuntu/venvs/vllm_neuron/bin/python -I -B -X pycache_prefix=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/bytecode-never-created /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py --mode supervisor --binding /mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/admission.json --binding-sha256 f26beda708bef892f5e36d31d507a1a8a3b324b4d1374f9f7a499d514116fa67 ; ignore_errors=no ; start_time=[Fri 2026-11-13 03:29:50 UTC] ; stop_time=[Fri 2026-11-13 03:44:02 UTC] ; pid=1943320 ; code=exited ; status=1 }",
+        "ExecStopPost": "",
+        "Id": "trn1-qwen35-sampler-kvdiag-r2-20261113-kv256-alias-diag.service",
+        "InvocationID": "6a9f4794ea3f4d2ead76b85b00ab5dff",
+        "Job": "",
+        "KillMode": "control-group",
+        "LimitFSIZE": "1073741824",
+        "LoadState": "loaded",
+        "MainPID": "0",
+        "MemoryHigh": "5368709120",
+        "MemoryMax": "6442450944",
+        "MemorySwapMax": "0",
+        "RemainAfterExit": "yes",
+        "Result": "exit-code",
+        "RuntimeMaxUSec": "2h",
+        "SendSIGKILL": "yes",
+        "StandardError": "inherit",
+        "StandardOutput": "append",
+        "SubState": "failed",
+        "TasksMax": "256",
+        "TimeoutStopUSec": "15s",
+        "WorkingDirectory": "/home/ubuntu/experiments/trn1-latest-models-20261031"
+      },
+      "remaining_processes": [],
+      "server_owner": {
+        "invocation_id": "6a9f4794ea3f4d2ead76b85b00ab5dff",
+        "pid": 1943320,
+        "start_ticks": 432109877,
+        "unit": "trn1-qwen35-sampler-kvdiag-r2-20261113-kv256-alias-diag"
+      },
+      "systemd_exit_status": {
+        "ExecMainCode": 1,
+        "ExecMainStatus": 1,
+        "Result": "exit-code"
+      },
+      "unacknowledged_terminal": null
+    }
+  ],
+  "failed": true,
+  "failure": {
+    "message": "Actual preflight service failed",
+    "type": "ValueError"
+  },
+  "full_model_qualified": false,
+  "outer_owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-I",
+      "-B",
+      "-X",
+      "pycache_prefix=/mnt/nvme/neuron-work/qwen35-kv256-alias-diagnostic-kvdiag-r2-20261113/bytecode-never-created",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_kv256_alias_diagnostic_serial_v1/run.py",
+      "--mode",
+      "outer",
+      "--spec",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-r2-20261113-spec.json",
+      "--spec-sha256",
+      "f7e061c056e298fc9041e54a6d23908c3364de842b78cb4f25b7a632e28d96ac",
+      "--review",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35-kv256-alias-diagnostic-r2-20261113-review.json",
+      "--review-sha256",
+      "5e705f58fa39c8777811995021cf12d876b34aec2448c035d89d96f138d8be28"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 1935109,
+    "ppid": 2480035,
+    "start_ticks": "432076144"
+  },
+  "result_present": false,
+  "schema": "qwen35_kv256_alias_diagnostic_outer_terminal_v1",
+  "self_exit_claimed": false,
+  "storage": {
+    "allocated_bytes": 476770304,
+    "entries": 162,
+    "layouts": {
+      "kv256_alias_diag": {
+        "allocated_bytes": 475217920,
+        "logical_bytes": 475018259
+      }
+    },
+    "logical_bytes": 476537565,
+    "output_classes": {
+      "all_other_outputs": {
+        "allocated_bytes": 2306048,
+        "logical_bytes": 2083055
+      },
+      "fresh_artifacts": {
+        "allocated_bytes": 17018880,
+        "logical_bytes": 17013214
+      },
+      "raw_and_bitmaps": {
+        "allocated_bytes": 457445376,
+        "logical_bytes": 457441296
+      }
+    }
+  },
+  "storage_error": null,
+  "whole_owned_scope_drained": true
+}
