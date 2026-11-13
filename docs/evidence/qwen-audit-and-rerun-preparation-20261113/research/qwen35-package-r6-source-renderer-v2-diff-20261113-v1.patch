@@ -1,0 +1,52 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/render_qwen35_package_r6_root_helpers_source_v1.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/render_qwen35_package_r6_root_helpers_source_v2.py
+@@ -1,4 +1,4 @@
+-"""Pure source renderer for root-reviewed r6 helpers; no IO or executable CLI.
++"""Pure r6 source renderer v2: dated serial bindings; no IO or executable CLI.
+ 
+ Caller supplies authenticated predecessor bytes and explicit current root
+ bindings only after real catalog/idle publication. Returned bytes are review
+@@ -6,6 +6,7 @@
+ """
+ import ast
+ import copy
++from datetime import date
+ import hashlib
+ import json
+ from pathlib import PurePosixPath as Path
+@@ -44,6 +45,14 @@
+             'canonical root metadata path and SHA required')
+ 
+ 
++def calendar_date(text):
++    """Only canonical YYYYMMDD calendar dates from the original run onward."""
++    require(type(text) is str and re.fullmatch('[0-9]{8}',text),'canonical YYYYMMDD date required')
++    value=date(int(text[:4]),int(text[4:6]),int(text[6:]))
++    require(value>=date(2026,11,12),'serial binding date predates original r6 namespace')
++    return value
++
++
+ def successor_metadata(budget, inputs):
+     """Named future paths only. All inherited identities await actual recheck."""
+     future_budget=copy.deepcopy(budget); future_inputs=copy.deepcopy(inputs)
+@@ -75,13 +84,15 @@
+     require(type(bindings) is dict and set(bindings)=={'catalog','idle','running_handoff','catalog_rows'},
+             'explicit actual root binding slots required')
+     for key in ('catalog','idle'):reference(bindings[key])
+-    match=re.fullmatch(r'minicpm5-operator-post-r2-serial-workloads-root-catalog-20261112-v([0-9]+)\.json',Path(bindings['catalog']['path']).name)
+-    require(match and int(match[1])>=117,'post-r5 complete catalog required')
+-    idle_match=re.fullmatch(r'continuation-handoff-20261112-v([0-9]+)-[a-z0-9-]+\.json',Path(bindings['idle']['path']).name)
++    match=re.fullmatch(r'minicpm5-operator-post-r2-serial-workloads-root-catalog-([0-9]{8})-v([0-9]+)\.json',Path(bindings['catalog']['path']).name)
++    require(match and int(match[2])>=117,'post-r5 complete catalog required')
++    idle_match=re.fullmatch(r'continuation-handoff-([0-9]{8})-v([0-9]+)-[a-z0-9-]+\.json',Path(bindings['idle']['path']).name)
+     running=Path(bindings['running_handoff'])
+-    run_match=re.fullmatch(r'continuation-handoff-20261112-v([0-9]+)-qwen35-package-full-r6-running\.json',running.name)
+-    require(idle_match and int(idle_match[1])>=594 and run_match and int(run_match[1])>int(idle_match[1]) and
++    run_match=re.fullmatch(r'continuation-handoff-([0-9]{8})-v([0-9]+)-qwen35-package-full-r6-running\.json',running.name)
++    require(idle_match and int(idle_match[2])>=594 and run_match and int(run_match[2])>int(idle_match[2]) and
+             running.parent==Q and str(running)==bindings['running_handoff'],'explicit fresh r6 running handoff required')
++    catalog_date,idle_date,running_date=(calendar_date(value[1]) for value in (match,idle_match,run_match))
++    require(running_date>=max(catalog_date,idle_date),'running handoff date cannot precede selected catalog or idle')
+     rows=bindings['catalog_rows']
+     require(type(rows) is int and rows>=164,'complete actual post-geometry catalog row count required')
+     budget,inputs=successor_metadata(json.loads(predecessors['budget']),json.loads(predecessors['stat-inputs']))

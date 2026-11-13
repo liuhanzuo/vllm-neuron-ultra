@@ -1,0 +1,129 @@
+--- /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_serial_v3/audit.py
++++ /home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_writer_geometry_audit_v4.py
+@@ -5,12 +5,15 @@
+ the original lock, reads output payloads or changes the current catalog.
+ """
+ import argparse
++import copy
+ import datetime
+ import hashlib
+ import json
++import math
+ import os
+ from pathlib import Path
+ import sys
++import time
+ 
+ Q = Path(__file__).resolve().parents[1]
+ sys.path[:0] = [str(Q), str(Q.parent)]
+@@ -27,6 +30,35 @@
+ def latest_handoff():
+     from research import minicpm5_layer1_operator_sdk_runtime_completion_v4 as latest
+     return latest.latest_handoff()
++
++
++
++class FreshnessGuard:
++    """Original lock on every call; complete handoff scan on bounded cadence.
++
++    Cadence is evaluated at guard boundaries, as in the accepted outer runtime.
++    A long blocking operation is followed by a due or explicitly forced check.
++    No timer thread, file cache, source omission or alternate identity is used.
++    """
++    def __init__(self, lock, expected):
++        require(type(expected) is dict and set(expected) == {'path', 'identity'}
++                and type(expected['path']) is str and type(expected['identity']) is dict,
++                'Exact original running ACK observation required')
++        self.lock, self.expected = lock, copy.deepcopy(expected)
++        self.last_full_started = None
++        self.last_clock = None
++
++    def __call__(self, force=False):
++        self.lock.check()
++        require(type(force) is bool, 'Explicit full-freshness boundary')
++        now = time.monotonic()
++        require(type(now) in (float, int) and math.isfinite(now)
++                and (self.last_clock is None or now >= self.last_clock), 'Monotonic freshness clock')
++        self.last_clock = now
++        if force or self.last_full_started is None or now - self.last_full_started >= .5:
++            require(latest_handoff() == self.expected, 'Running binding changed during audit')
++            # Record start, so a slow full scan cannot extend the next interval.
++            self.last_full_started = now
+ 
+ 
+ def observe_layouts(root, owner, actual, terminal, guard):
+@@ -121,7 +153,8 @@
+     ends = {terminal_unit(t): t for t in terminal['complete_owned_unit_terminals']}
+     require(set(ends) == set(admission['units'].values()), 'Every declared unit terminal retained')
+     return dict(root=root, admission_ref=admission_ref, admission=admission, terminal_ref=terminal_ref,
+-                terminal=terminal, running_ref=running_ref, running=running, owner_ref=owner_ref, owner=owner, ends=ends)
++                terminal=terminal, running_ref=running_ref, running=running, owner_ref=owner_ref, owner=owner, ends=ends,
++                running_observation=ack['running']['observation'])
+ 
+ 
+ def predicted(path, value):
+@@ -140,28 +173,31 @@
+     require(not exit_path.exists() and not qualification_path.exists(), 'Fresh independent audit outputs')
+     lock = RetainedLock(); lock.acquire()
+     try:
+-        def guard():
+-            lock.check()
+-            require(latest_handoff()['path'] == saved['running_ref']['path'], 'Running binding changed during audit')
++        guard = FreshnessGuard(lock, saved['running_observation'])
++        guard(force=True)
+         history = History(spec, spec_ref, review_ref, stage.names(spec), guard).resolve()
++        guard(force=True)
+         retained = observe_layouts(root, owner, actual, terminal, guard)
++        guard(force=True)
+         owners = [admission['outer_owner'], owner['process'], *retained['owners']]
+         p = process_api(); auditor = p.proc(os.getpid())
+         require(auditor is not None and auditor not in owners, 'Independent post-exit audit process')
+         observations = []
+         for _ in range(2):
+-            guard(); p.active_heavy()
++            guard(force=True); p.active_heavy()
+             for current in owners: p.gone(current)
+             observed = {}
+             for unit, ended in saved['ends'].items():
+                 props = stage.properties(unit); require(p.terminal(props), 'Actual current unit terminal')
+                 verify_current_terminal(ended, props, p)
+                 observed[unit] = dict(properties=props, recursive_group=p.empty_group(p.GROUP_PREFIX + unit + '.service'))
++            guard(force=True)
+             observations.append(observed)
+         require(observations[0] == observations[1], 'Two stable independent complete drains')
+         reconciliation = stage.reconcile(terminal, saved['running'], actual,
+             actual_owner_gone=True, actual_service_drained=True)
+         layouts, reports = retained['layouts'], retained['reports']
++        guard(force=True)
+         if reconciliation['passed']:
+             result = read(ref(root / 'supervisor-result.json'))
+             stage.audit_results(root, result)
+@@ -171,10 +207,12 @@
+             require(terminal.get('storage_error') is None and terminal['storage'] is not None, 'Successful terminal storage proof')
+         else:
+             require(terminal['failed'] is True, 'Failed actual outer exit remains failed')
++        guard(force=True)
+         full_history = history.physical_pair(Authority(history, guard, lambda: []))
++        guard(force=True)
+         usage, storage_error, storage_exception = stage.terminal_storage(root, None)
+         require(not reconciliation['passed'] or storage_error is None, 'New storage failure prevents qualification')
+-        history.unchanged(); stage.loaded_sources(spec['source_sha256']); guard()
++        history.unchanged(); stage.loaded_sources(spec['source_sha256']); guard(force=True)
+         sources = protocol.verify_sources()
+         value = dict(schema='qwen35_writer_geometry_root_actual_exit_v1', reviewer='/root',
+             observed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(), actual_tool=actual,
+@@ -197,9 +235,14 @@
+                 passed=True, blockers=[], reports=reports, actual_exit=actual_exit,
+                 source_sha256=sources, full_model_qualified=False)
+             qualification_ref = predicted(qualification_path, qualified)
++        guard(force=True)
+         require(once(exit_path, value) == actual_exit, 'Exact actual-exit publication')
++        guard(force=True)
+         if qualified is not None:
++            guard(force=True)
+             require(once(qualification_path, qualified) == qualification_ref, 'Exact independent qualification publication')
++            guard(force=True)
++        guard(force=True)
+         return dict(actual_exit=actual_exit, qualification=qualification_ref if qualified is not None else None,
+                     passed=reconciliation['passed'], catalog_append_by_root_required=True, full_model_qualified=False)
+     finally:

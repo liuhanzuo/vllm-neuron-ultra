@@ -1,5 +1,7 @@
 # Trn1 已测模型提速总表（2026-11-12）
 
+2026-11-13 [审计与重跑准备](qwen-audit-and-rerun-preparation-20261113.md)完成源码复核，当前独立审计尚未结束；本轮未增加模型提速倍数。
+
 最新[SDK 资源修复及 writer 验证进展](qwen-sdk-assets-geometry-20261112.md)保留 writer 实际中断前的 7,865 次比较；完整矩阵未通过，尚未增加任何整模型提速倍数。
 
 新增的[Qwen 缓存算子完整矩阵及计时](qwen-integer-reference-matrix-20261112.md)单独列示：相对新整数参考路径为 1.671×～3.965×，整模型收益仍待验证。Qwen 独立包 r5 的真实编译边界和链接清单见[实际终止记录](qwen-package-r5-actual-link-failure-20261112.md)，没有新增整模型倍数。下方模型倍数保持各自原有基线与资格范围。
