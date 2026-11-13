@@ -1,0 +1,56 @@
+{
+  "author_tests": {
+    "final_actual_tool_chunk": "1dd1e0",
+    "final_count": 25,
+    "final_exit_code": 0,
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-cold-serial-tests-actual-exit-20261113-v1.json",
+    "sha256": "242826c3b19b067a21d2e90c15713adefd70dcb1fd9f8e05b065a297083211cf"
+  },
+  "blockers": [
+    {
+      "evidence": "bootstrap.authenticate_running and runtime.outer reuse qwen35_sampler_runtime_history_v12 expected_running/check_running; exact original AST probe preserves running=False/active_serial=None while adding live session",
+      "issue": "Running handoff inherits idle flags and Qwen-specific execution schema",
+      "required": "Independent DeepSeek running contract with true running/active_serial and actual owner/tool/catalog; retain all history and no fake idle between phases"
+    },
+    {
+      "evidence": "Initial hash map covers original artifact model.pt/config and cold outputs; fixed model paths/config checks/parameter counts and loaded Python source checks do not hash official HF shards/index/tokenizer/config",
+      "issue": "Complete original checkpoint and configuration files not authenticated",
+      "required": "Explicit complete logical-to-physical original checkpoint manifest, full physical hashes before native load, and later identity checks; preserve exact immutable shared/symlink semantics"
+    }
+  ],
+  "full_seven_phase_execution_available": false,
+  "full_static_closure_rehashed": false,
+  "new_speedup_claim": false,
+  "observed_at": "2026-11-13T07:45:34.422586+00:00",
+  "original_sources_preserved": true,
+  "passed": false,
+  "reviewer": "/root",
+  "root_repeated_full_tests": false,
+  "runtime_admitted": false,
+  "safety_boundary": "v1 already rejects before reading bindings/lock/History/services because loaded-layout producer absent; no actual mislabelled run occurred",
+  "schema": "deepseek_cold_serial_root_source_review_v1",
+  "source_accepted": false,
+  "source_delivery": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/deepseek-cold-serial-source-delivery-20261113-v1.json",
+    "sha256": "e6b2bf70a438094a7d2e37df234510d558c84778c19a4a7c11bb78f123501dcc"
+  },
+  "source_files_rehashed": 16,
+  "source_inspection_chunks": [
+    "a3b765",
+    "05ada1",
+    "18e2fd",
+    "c5764c"
+  ],
+  "successor_requested": true,
+  "synthetic_running_probe": {
+    "active_serial": null,
+    "current_binding_created": false,
+    "executed_original_AST": true,
+    "live_sessions_present": true,
+    "running": false,
+    "source": {
+      "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v12.py",
+      "sha256": "85e410019f74032c9751653a96a3431ce6225b030b6e954d6236c7b1b86b9fde"
+    }
+  }
+}

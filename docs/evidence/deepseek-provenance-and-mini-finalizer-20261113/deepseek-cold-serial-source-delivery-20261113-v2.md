@@ -1,0 +1,45 @@
+# DeepSeek cold serial v2 — lifecycle and complete original-file provenance
+
+This SOURCE ONLY successor addresses the two concrete issues in the root's rejected v1 review. The frozen Qwen, Mini, DeepSeek leaves and `deepseek_cold_serial_v1` remain unchanged. **Execution is still blocked before any binding read, lock, full History, model-file read or service start because the actual loaded-weight / TP-layout / graph-weight-ABI release gate remains absent.** No actual model, compiler, service or historical replay was run.
+
+## What v1 covered, and what it did not
+
+V1 independently hashed the original compiled `model.pt`, original `neuron_config.json`, and complete original cold-diagnostic input reports/raw logits/manifests. The unchanged leaves checked fixed model paths, model class, BF16, parameter count, untied head, complete loader missing/unexpected-key results, and the frozen Neuron configuration plus exact capture-only changes. `Observer.full` checked historical metadata identities and loaded local Python sources.
+
+Those checks **did not authenticate the full original HF checkpoint shards, original HF configuration, all tokenizer/index inputs or the exact official-to-Neuron-view sharing relations**. A successful loader and a root review boolean do not replace that byte proof. This was a real v1 integration gap; v1's broad source/weight admission language was insufficient.
+
+V1 also reused Qwen's running renderer. Starting from a complete idle handoff, that renderer copied `running=False` and `active_serial=None` while adding live tool/unit fields. Root independently reproduced the contradiction. V2 replaces that renderer and both its parent and bootstrap consumers.
+
+## Complete DeepSeek running state
+
+`render_deepseek_cold_serial_v2.py` authenticates exact frozen predecessor source hashes. It mechanically derives `lifecycle_shape.py` from the accepted Mini v2 `active_descriptor` and entire execution/deepcopy/update publication body, adapting the namespace and coordinator identity type. The predecessor history remains a complete deep copy.
+
+The result uses `deepseek_cold_serial_running_v2`, explicitly sets `running=True`, supplies a concrete DeepSeek `active_serial`, and records `deepseek_cold_serial_current_execution`. It binds the actual externally observed tool session, original outer owner, independently acknowledged coordinator PID/start/argv/cgroup/invocation, full current catalog, admission, spec/review, all declared phase units and the full checkpoint-byte proof. Initial admission requires a genuinely idle predecessor with `running=False`, `active_serial=None` and empty live tool/unit lists.
+
+The owning coordinator remains the active serial job throughout the seven declared phases. Individual phase supervisor/child ownership and release/exit/drain evidence remain in their original exact phase records. Phase completion and the outer's terminal receipt do not publish an idle handoff. `require_external_exit` requires the matching actual external tool terminal plus independent parent absence and complete drain, and still returns `idle_publication_authorized=False`: full final catalog/History reconciliation remains external work. The new running package contains no idle publisher.
+
+`bootstrap.authenticate_running` and `runtime.outer` both use the DeepSeek renderer/validator. They no longer use the Qwen current-execution field. The complete real Service and Phase bodies are byte-identical to v1; their inherited internal receipt schema strings remain provenance rather than model identity.
+
+## Explicit original checkpoint/config manifest and actual byte proof
+
+The v2 spec/review must bind `original_checkpoint_manifest`. Both this manifest and its complete original source-file authority must also be in the full source/input pin map. Their contents are not selected or generated in this delivery.
+
+`checkpoint.py` requires the exact original repository and revision, official model directory, and original YaRN loader-view directory. A hash-bound `deepseek_original_source_file_hashes_v1` authority supplies every original file's expected complete SHA256 and byte length. The actual complete official file inventory must equal that authority, so missing tokenizer/config/index/generation metadata or shard files cannot be hidden. Only the ordinary official HF `.cache` metadata directory is excluded from inference files; undeclared model subdirectories or special files fail.
+
+The manifest explicitly describes every logical file as regular, hardlink or symlink, its entire lstat identity, the exact physical file and, for a symlink, its exact raw target. Every unique physical inode declares its full original digest/extent and **all** actual hardlink paths. The declared count must equal the inode's `st_nlink`; every declared path must have that exact inode identity. A symlink is allowed only as one explicitly declared edge to a declared authenticated physical alias, with no unreviewed symlink ancestry. Unknown aliases or shared links fail. This preserves genuine immutable sharing without broadly permitting arbitrary links or incorrectly requiring all weights to have `nlink==1`.
+
+Under the original retained serial lease, the owning parent hashes **every byte of each unique physical inode once**, using a nofollow open, matching fstat identity, exact bounded extent, and unchanged identity after the full read. The streaming guard runs throughout. Metadata identities come from a single stat snapshot. The original/view configurations are then compared as complete decoded objects: only the frozen `model_type` and `architectures` registration changes are allowed. The complete unchanged index must retain the original BF16 parameter byte count; all its shard files are required in both roots. The view's complete file set and unchanged shard/index/tokenizer content are verified against the frozen view-construction behavior.
+
+Only after those actual checks can the parent write `original-checkpoint-provenance.json`, bound into its admission. The proof includes every unique physical file digest, extent and full identity, total bytes, the complete logical-manifest hash, and exact metadata coverage. Fresh coordinator/supervisor/leaf processes authenticate that parent-produced proof before native imports, reject boolean/partial substitutes, and check every immutable directory/file/link identity. Phase boundaries force these checks; periodic checks use the declared resource cadence. They do **not** repeatedly rehash all original weights or resolve full History in the .1-second loop.
+
+This is **file provenance**, not proof that Neuron's loaded physical tensor layout or graph-weight ABI is semantically equivalent. The proof keeps `loaded_weight_layout_proven=False`, `graph_weight_ABI_proven=False`, model qualification false and speedup claims false. Actual original manifest/authority values, feasible resource budgets, live ownership and the missing loaded-layout producer remain future admission prerequisites; the unconditional pre-cost refusal is preserved.
+
+## Isolated checks and unchanged requirements
+
+Only successor tests ran; the 25 frozen v1 tests were not rerun. The final successor suite has **21 passing tests**, actual tool `f24cf7`, exit 0, no session. It covers real-idle transition and complete inherited history, wrong owner/nonidle rejection, old contradictory ACK rejection, actual-exit prerequisites, full-byte mismatch/truncation/growth, genuine symlink/hardlink sharing, missing files, changed alias/inode/configuration, missing source authority, partial parent proof, nofollow streaming with a shared inode, atomic stat identity, cadence versus full hashing, mechanical source derivation and the retained pre-cost block.
+
+All data and process facts are synthetic. The audit hook prohibits native imports, actual process/lock/network operations, runtime JSON/payload/weight/graph reads and test-process writes. The first 18-test run (`b66cb0`, exit 1) exposed a fixture-isolation error: a direct `latest` import traversed old History imports and attempted to open historical Nemotron JSON. The audit hook rejected that open before content was read. The fixture was corrected to supply the entire `research`/`latest` boundary in memory; the hook was not weakened. The corrected 18-test run (`e61370`) and 20-test run (`377d99`) passed. All logs are retained.
+
+The seven full scientific phases, 126 logits, 9,072 KV tensors, 144 states, original 14 cold failures, 47,150,344,192 raw two-arm bytes, original precision/model dimensions, long2041/93, slot reuse, partial/inactive recovery, quality96 and matched HTTP requirements remain unchanged. Neither full raw equality nor any new model speedup has been measured here.
+
+The companion delivery records the added source delta and exact inherited frozen source-closure reference. It does not reclassify the prior rejected v1 as accepted and does not replace the complete current runtime source/History review. Root must independently review this successor. No GitHub, Feishu or continuation publication was performed.

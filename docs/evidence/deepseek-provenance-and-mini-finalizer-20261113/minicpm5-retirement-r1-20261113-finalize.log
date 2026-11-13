@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 360, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 356, in main
+    else:result=(acknowledge if args.mode=='ack'else finalize)(dict(path=args.request,sha256=args.request_sha256))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 297, in finalize
+    pair=history.physical_pair(Authority(history,guard,lambda:[]));guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v12.py", line 99, in physical_pair
+    self.guard(); pair = physical.collect_pair(self.scope, self.guard, authority)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_current_physical_v1.py", line 26, in collect_pair
+    return physical_evidence.collect_pair(done,guard,lambda value,check:physical(value,check,authority),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_sdk_physical_evidence_v3.py", line 301, in collect_pair
+    tree = deepcopy(physical(done, guard))
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_current_physical_v1.py", line 26, in <lambda>
+    return physical_evidence.collect_pair(done,guard,lambda value,check:physical(value,check,authority),
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_current_physical_v1.py", line 8, in physical
+    guard();old=prior.physical(done['_original_done'],guard,authority)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_batch_layout_physical_v1.py", line 7, in physical
+    guard();proof=nemotron.physical(done['nemotron'],guard,authority)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_recovered_r12_physical_v1.py", line 17, in physical
+    inherited = startup.physical_drain(done['catalog'], spec=spec, authority=authority); guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_startup_drain_physical_v1.py", line 43, in physical_drain
+    extra=successor.physical(spec,metadata.load,low,authority)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_native_r12_completion_physical_v1.py", line 14, in physical
+    guard();done=metadata(read,guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/nemotron9b_r12_completion_v1.py", line 86, in metadata
+    previous=r11.metadata_completed(R11_EXIT,R11_RELEASE,guard)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/nemotron9b_r12_r11_metadata_v1.py", line 44, in metadata_completed
+    for path in sorted(c.glob('*.json')):reader.path(path)
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_after_nemotron_package_v2.py", line 61, in path
+    self.guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/qwen35_sampler_runtime_history_v12.py", line 121, in check
+    self.guard()
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_caller_v2.py", line 286, in guard
+    lock.check();c.require(not stopped[0]and time.monotonic()-start<7200,'Finite independent retirement finalizer')
+  File "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_replay_contract_v1.py", line 32, in require
+    if not ok:raise ValueError(message)
+ValueError: Finite independent retirement finalizer
