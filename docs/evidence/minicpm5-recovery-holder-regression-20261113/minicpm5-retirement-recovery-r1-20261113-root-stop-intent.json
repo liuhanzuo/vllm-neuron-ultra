@@ -1,0 +1,37 @@
+{
+  "actual_exit_pending": true,
+  "actual_start": {
+    "path": "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-recovery-r1-20261113-actual-start.json",
+    "sha256": "84e945abf05f87f3157f68570e8bbc9cd3a674aeb8b46fb39d758fb8bd64a6cb"
+  },
+  "actual_tool": {
+    "actual_exit_observed": false,
+    "kind": "tool_session",
+    "session_id": 78279
+  },
+  "deadline_expiry_claimed": false,
+  "model_or_raw_replay_touched": false,
+  "observed_at": "2026-11-13T08:31:29.444265+00:00",
+  "owner": {
+    "argv": [
+      "/home/ubuntu/venvs/vllm_neuron/bin/python",
+      "-B",
+      "-u",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5_retained_retirement_recovery_v2.py",
+      "--request",
+      "/home/ubuntu/experiments/trn1-latest-models-20261031/research/minicpm5-retirement-recovery-r1-20261113-request.json",
+      "--request-sha256",
+      "fb594358448c6841bd3f706fbd706ce6e6a3851354723f9032c4b09bb14997d3"
+    ],
+    "cgroup": "0::/user.slice/user-1000.slice/session-56.scope",
+    "pid": 2140413,
+    "ppid": 2032614,
+    "start_ticks": "433852811"
+  },
+  "reason": "Source-confirmed new performance regression: periodic full global guard(True) inadvertently forces all-UID holder scan at each0.5s cycle, bypassing original10s holder cadence. Stop before publication, preserve every old and new file; source-only successor separates forced hashing from forced holders.",
+  "reviewer": "/root",
+  "schema": "minicpm5_retirement_recovery_root_cooperative_stop_v1",
+  "signal": "SIGTERM",
+  "signal_target": "Only exact root-owned recovery parent; installed handler sets cooperative stop flag; helper foreground drainage retained",
+  "unrelated_processes_signalled": false
+}
