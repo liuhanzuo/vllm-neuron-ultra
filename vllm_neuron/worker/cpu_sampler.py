@@ -18,6 +18,32 @@ _MAX_TOP_K = 64
 _CDF_MARGIN = 1e-4
 
 
+def _top_candidates(logits: torch.Tensor, k: torch.Tensor, count: int):
+    """Use block maxima to skip low scores in large contiguous vocabularies."""
+    batch, width = logits.shape
+    block_size = 64
+    if width < 65536 or width % block_size or not logits.is_contiguous():
+        return logits.topk(count, dim=-1, sorted=True)
+
+    blocks = logits.view(batch, -1, block_size)
+    maxima, block_ids = blocks.amax(dim=-1).topk(_MAX_TOP_K + 1, dim=-1)
+    selected = block_ids[:, :-1]
+    candidates = blocks.gather(
+        1, selected.unsqueeze(-1).expand(-1, -1, block_size)).flatten(1)
+    values, positions = candidates.topk(count, dim=-1)
+    indices = (selected.gather(1, positions // block_size) * block_size
+               + positions % block_size)
+
+    # A strict bound preserves all kth-place ties. An unordered (NaN)
+    # comparison also takes the original path.
+    kth = values.gather(1, (k.long() - 1).unsqueeze(1)).squeeze(1)
+    uncertain = ~(kth > maxima[:, -1])
+    if uncertain.any():
+        rows = uncertain.nonzero(as_tuple=True)[0]
+        values[rows], indices[rows] = logits[rows].topk(count, dim=-1)
+    return values, indices
+
+
 def _shortlist(
     logits: torch.Tensor,
     k: torch.Tensor,
@@ -32,7 +58,7 @@ def _shortlist(
     """
     width = logits.shape[1]
     count = min(_CANDIDATE_CAP + 1, width)
-    values, indices = logits.topk(count, dim=-1, sorted=True)
+    values, indices = _top_candidates(logits, k, count)
     result = []
     for row in range(logits.shape[0]):
         threshold = values[row, int(k[row]) - 1]

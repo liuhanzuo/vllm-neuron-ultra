@@ -97,6 +97,28 @@ def test_kth_ties_are_retained(monkeypatch):
     assert set(ids.tolist()) == {0, 1, 2}
 
 
+def test_block_shortlist_ties_across_excluded_blocks(monkeypatch):
+    logits = torch.full((3, 131072), -10.)
+    # Row 0 concentrates every eligible token in one block. Row 1 spans
+    # more blocks than the initial selection. Row 2 exceeds the tie cap.
+    logits[0, 64:73] = 3.
+    logits[1, :80 * 64:64] = 3.
+    logits[2, :130 * 64:64] = 3.
+    k = torch.tensor([3, 2, 1], dtype=torch.int32)
+    assert assert_compact_distribution(monkeypatch, logits, k, None) == 2
+    candidates = _shortlist(logits, k, None)
+    assert set(candidates[1][0].tolist()) == set(range(0, 80 * 64, 64))
+    assert candidates[2] == (None, None)
+
+
+def test_block_shortlist_preserves_nonfinite_fallback():
+    logits = torch.zeros(2, 131072)
+    logits[:, :64] = torch.arange(64)
+    logits[0, -1] = float("nan")
+    logits[1, -1] = float("inf")
+    assert _shortlist(logits, torch.tensor([40, 40]), None) == [(None, None)] * 2
+
+
 @pytest.mark.parametrize("case", ["many_ties", "nucleus_tie", "cdf_boundary",
                                   "nan", "positive_inf", "negative_inf"])
 def test_ambiguous_or_nonfinite_rows_use_reference(case):
